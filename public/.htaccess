@@ -13,11 +13,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
-
-    # RewriteEngine On
-    # RewriteCond %{HTTPS_HOST} ^naumanyasin.com [NC]
-    # RewriteRule ^(.*)$ https://www.naumanyasin.com/$1 [L,R=301]
-
+    
+    Redirect 301 / https://www.naumanyasin.com/
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
