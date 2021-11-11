@@ -130,10 +130,16 @@
                                 @isset($user)
                                 <p class="ml-3 mt-3 mt-5">
                                     @if($user->picture)
-                                        <img src="{{asset($user->picture)}}" alt="boy" class="profile-img" style="width: 40px;">
-
+                                            <?php
+                                                $path = $user->picture;
+                                            ?>
+                                            @if(file_exists( public_path($path) ))
+                                                <img src="{{asset($user->picture)}}" alt="boy" class="profile-img">
+                                            @else
+                                                <img src="../assets/images/ico/Square-white.jpg" alt="boy" class="profile-img">
+                                            @endif
                                     @else
-                                        <img src="../assets/images/ico/Square-white.jpg" alt="boy" style="width: 40px;">
+                                        <img src="../assets/images/ico/Square-white.jpg" alt="boy" class="profile-img">
                                     @endif
                                 </p>
                                 <p class="ml-3 mt-5 Welcome-text"> {{$user->first_name ?? ''}} {{$user->last_name ?? ''}}</p>

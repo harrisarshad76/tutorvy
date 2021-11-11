@@ -558,9 +558,17 @@
                     </a>
                     @auth
                         @if(Auth::user()->picture)
-                                <img class="profile-img dd"  aria-expanded="true" src="{{asset(Auth::user()->picture) }}" data-toggle="dropdown" alt="profile">
+                                <?php
+                                    $path = Auth::user()->picture;
+                                ?>
+                                @if(file_exists( public_path($path) ))
+                                    <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset(Auth::user()->picture) }}" data-toggle="dropdown" alt="profile">
+                                @else
+                                    <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                                    
+                                @endif
                         @else
-                        <img class="profile-img dd"  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                            <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                         @endif
                     @else
                         <img class="profile-img dd"  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">

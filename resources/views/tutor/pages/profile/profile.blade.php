@@ -19,8 +19,15 @@ width:22px;
                         <span style="position: absolute;right: 0;top:10px;">
                             <img src="{{asset('assets/images/ico/yellow-rank.png')}}" alt="yellow" class="w-50">
                         </span>
-                        @if ($tutor->picture)
-                            <img src="{{asset($tutor->picture)}}" alt="profile-image" class="profile-card-img" >
+                        @if($tutor->picture != null)  
+                            <?php
+                                $path = $tutor->picture;
+                            ?>
+                            @if(file_exists( public_path($path) ))
+                                <img src="{{asset($tutor->picture)}}" alt="profile-image" class="profile-card-img" >
+                            @else
+                                <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >  
+                            @endif
                         @else
                             <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >
                         @endif

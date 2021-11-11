@@ -53,6 +53,7 @@
                                 
                             </small>
                             <div class="col-md-12 mt-3">
+                                
                                 <img src="{{asset('admin/assets/img/ico/Square-white.jpg')}}"
                                 class="profile-responsive round-profile" />
                             </div>
