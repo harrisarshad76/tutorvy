@@ -136,7 +136,7 @@ class LoginController extends Controller
     public function redirectGoogle($id)
     {
         Session::put('c_id',$id);
-        return Socialite::driver('google')->asPopup()->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback()
