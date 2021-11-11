@@ -45,6 +45,11 @@ class GeneralController extends Controller
         return view('frontend.career');
     }
 
+    public function knowledge() {
+ 
+        return view('frontend.knowledge');
+    }
+
     public function university(Request $request)
     {
 
