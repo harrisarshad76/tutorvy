@@ -215,9 +215,18 @@
                                                         </div>
                                                         <div class="avatar-preview">
                                                             @if (Auth::user()->picture != null)
+                                                                <?php
+                                                                    $path = Auth::user()->picture;
+                                                                ?>
+                                                                @if(file_exists( public_path($path) ))
                                                                 <div id="imagePreview"
                                                                     style="background-image: url('{{ asset(Auth::user()->picture) }}');">
                                                                 </div>
+                                                                @else
+                                                                <div id="imagePreview"
+                                                                    style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                                </div>
+                                                                @endif
                                                             @else
                                                                 <div id="imagePreview"
                                                                     style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">

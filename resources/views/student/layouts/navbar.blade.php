@@ -246,8 +246,15 @@
                     </a>
                     @auth
                         @if(Auth::user()->picture)
+                            <?php
+                                $path = Auth::user()->picture;
+                            ?>
+                            @if(file_exists( public_path($path) ))
                                 <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset(Auth::user()->picture) }}" data-toggle="dropdown" alt="profile">
-                            
+                            @else
+                                <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                                
+                            @endif
                         @else
                             <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                         @endif

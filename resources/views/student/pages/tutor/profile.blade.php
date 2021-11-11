@@ -25,11 +25,19 @@ width:22px;
                         <span style="position: absolute;right: 0;top:10px;">
                             <img src="{{asset('assets/images/ico/yellow-rank.png')}}" alt="yellow" class="w-50">
                         </span>
-                        @if ($tutor->picture)
-                        <img src="{{asset($tutor->picture)}}" alt="profile-image" class="profile-card-img" >
+                        @if($tutor->picture)  
+                            <?php
+                                $path = $tutor->picture;
+                            ?>
+                            @if(file_exists( public_path($path) ))
+                                <img src="{{asset($tutor->picture)}}" alt="profile-image" class="profile-card-img" >
+                            @else
+                            <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >
+                            @endif
                         @else
-                        <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >
+                            <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >
                         @endif
+                     
                         <p class="heading-third mt-3">
                            {{$tutor->full_name}}
                            <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="This user is verified by the tutorvy authorities due to his sustained and appreciatable performance in the field" aria-hidden="true" viewBox="0 0 14 14"  role="img" style="width:16px;vertical-align: text-top;">
@@ -296,7 +304,14 @@ width:22px;
                                 <div class="col-md-4">
                                     <div class="card">
                                         @if($course->thumbnail != "")
-                                            <img src="{{asset($course->thumbnail)}}" alt="Avatar" style="width:100%">
+                                            <?php
+                                                $path = $course->thumbnail;
+                                            ?>
+                                            @if(file_exists( public_path($path) ))
+                                                <img src="{{asset($course->thumbnail)}}" alt="Avatar" style="width:100%">
+                                            @else
+                                            <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" style="width:100%">
+                                            @endif
                                         @else
                                             <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" style="width:100%">
                                         @endif
