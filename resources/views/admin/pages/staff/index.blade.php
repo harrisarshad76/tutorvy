@@ -209,13 +209,13 @@
                                         <td>
                                             <a type="button"  onclick="delRole({{ $role->id }})">
                                                     <img src="{{ asset('admin/assets/img/ico/delete-icon.png')}}" alt="delete-icon" data-toggle="modal"
-                                                        data-target="#exampleModalCenter">
+                                                        data-target="#exampleModalCenter" title="Delete Role ">
                                             </a>
                                             <a type="button" onclick="editRole({{ $role->id }})">
-                                                    <img src=" {{ asset('admin/assets/img/ico/edit-icon.png')}}" alt="edit-icon" class="ml-1">
+                                                    <img src=" {{ asset('admin/assets/img/ico/edit-icon.png')}}" alt="edit-icon" class="ml-2" title="Role Edit">
                                                 </a>
                                             <a href="{{url('admin/role-permission')}}/{{$role->id}}">
-                                                <img src=" {{ asset('admin/assets/images/ico/edit-icon.png')}}" alt="edit-icon" class="ml-1">
+                                                <img src=" {{ asset('admin/assets/img/ico/permission-icon.png')}}" alt="permission-icon" title="Role Permission" class="ml-1">
                                             </a>
                                             <!-- <button class="btn btn-danger" onclick="delRole({{ $role->id }})"> Delete </button> -->
                                         </td>

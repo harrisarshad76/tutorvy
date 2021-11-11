@@ -70,7 +70,7 @@
                                 </a>
                             </li>
                             <li class="mt-3">
-                                <a href="knowledge/knowledge.html">
+                                <a href="{{route('knowledge')}}">
                                     Knowledge base
                                 </a>
                             </li>
