@@ -7,6 +7,7 @@
     ;
 }
 
+
 /* bnutton toogle left onclick */
 
 .toogle {
@@ -21,22 +22,27 @@
     opacity: 0.51;
     ;
 }
-.cencel-btn-w{
+
+.cencel-btn-w {
     width: 190px;
 }
-.cencel-btn-wi{
+
+.cencel-btn-wi {
     width: 170px;
 }
-.schedule-btn-add{
+
+.schedule-btn-add {
     width: 200px !important;
 }
-.border-1{
+
+.border-1 {
     border-top: 1px solid #D6DBE2;
     border-bottom: 1px solid #D6DBE2;
 }
-.switch{
-position: relative;
-top: -3px;
+
+.switch {
+    position: relative;
+    top: -3px;
 }
 
 .nobooking-booking {
@@ -97,6 +103,7 @@ a:hover {
     font-size: 15 px;
 }
 
+
 /* deatail booking */
 
 .cencel-btn {
@@ -123,10 +130,12 @@ a:hover {
     cursor: pointer;
     transition: 0.6s;
 }
+
 .profile-header {
     background-color: white;
     border-radius: 8px;
 }
+
 .schedule-btn {
     background-color: #1173FF;
     border: 1px solid #1173FF;
@@ -136,6 +145,7 @@ a:hover {
     font-family: 'Poppins';
     border-radius: 4px;
 }
+
 
 /*  */
 
@@ -215,7 +225,8 @@ a:hover {
     cursor: pointer !important;
 }
 
-.table-image td, th {
+.table-image td,
+th {
     vertical-align: middle;
 }
 
@@ -251,6 +262,7 @@ th {
     border: none !important;
 }
 
+
 /* search */
 
 .input[type=text] {
@@ -283,12 +295,12 @@ th {
     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 }
 
+
 /* notification */
 
 .notification img {
     padding: 10px 0;
 }
-
 
 .notification-menu li {
     background-color: #ffffff;
@@ -331,6 +343,7 @@ th {
     pointer-events: none;
     color: #aaa;
 }
+
 
 /*  */
 
@@ -395,7 +408,7 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
 
 @media(max-width:768px) {
@@ -508,7 +521,8 @@ a[data-toggle="collapse"] {
     }
 }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
     .table {
         overflow: auto !important;
         white-space: nowrap !important;

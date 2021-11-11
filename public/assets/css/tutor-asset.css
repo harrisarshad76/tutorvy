@@ -528,7 +528,7 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
 
 
@@ -1836,7 +1836,7 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
 
 
@@ -2538,6 +2538,7 @@ select#paymentMethod option[value="others"] {
     font-size: 12px;
     text-align: center;
 }
+
 .bg-color-apporve2 {
     background-color: #ffea2f73;
     border-radius: 4px;
