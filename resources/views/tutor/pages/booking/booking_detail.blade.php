@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="mr-3 heading-first">
-                            < Booking Details </p>
+                             Booking Details </p>
                     </div>
 
                     @if(Session::has('success'))
@@ -57,10 +57,10 @@
                                     <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
                                         class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
                                         Booking</button>
-                                    <button type="button" data-toggle="modal" data-target="#exampleModalCente"
+                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                         class="schedule-btn" style="font-size: 12px;width: 150px;"> Re-schedule
                                         class
-                                    </button>
+                                    </button> -->
 
                                     @if ($booking->status == 0)
                                         <button type="button" data-toggle="modal" data-target="#approveModal"

@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li class="btn @if(\Request::path() === 'student/knowledge')  @endif w-100">
-                        <a href="{{route('student.settings')}}">
+                        <a href="{{route('knowledge')}}">
                             <img src="{{asset('assets/images/ico/book-ico.png')}}" alt="setting-ico" class=" mr-2">
                             Knowledge Base
                         </a>

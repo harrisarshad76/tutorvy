@@ -41,8 +41,8 @@
                                         </button>
                                         @if ($booking->status == 0)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCente"
-                                        class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> Re-schedule
-                                        class
+                                            class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> Re-schedule
+                                            class
                                         </button>
                                     @elseif($booking->status == 1)
 
