@@ -243,8 +243,10 @@ function list_tutors(){
             }
             let img = ``;
             if(tutors[i].picture != null){
-                console.log(tutors[i].picture)
-                img = `<img src="{{asset('`+tutors[i].picture+`')}}" alt="" class="profile-img " style="height:70px;width:70px;"`;
+                console.log(tutors[i].picture);
+
+                
+                img = `<img src="{{asset('`+tutors[i].picture+`')}}" alt="" class="profile-img " style="height:70px;width:70px;">`;
             }else{
                 img = `<img src="../assets/images/ico/Square-white.jpg" alt="" class="profile-img " style="height:70px;width:70px;">`;
             }

@@ -95,9 +95,6 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/booking',[AdminBookingController::class,'index'])->name('admin.booking');
     Route::get('/booking-details/{id}',[AdminBookingController::class,'bookingDetails'])->name('admin.bookingDetail');
 
-
-
-
     Route::get('/course',[CourseController::class,'index'])->name('admin.course');
     Route::get('/course-request/{id}',[CourseController::class,'courseRequest'])->name('admin.course-request');
     Route::get('/course-profile/{id}',[CourseController::class,'courseProfile'])->name('admin.course-profile');
