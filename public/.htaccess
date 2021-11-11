@@ -13,8 +13,9 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
-    
-    Redirect 301 / https://www.naumanyasin.com/
+
+    RewriteCond %{HTTP_HOST} ^naumanyasin.com$
+    RewriteRule (.*) http://www.naumanyasin.com/$1 [R=301,L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
