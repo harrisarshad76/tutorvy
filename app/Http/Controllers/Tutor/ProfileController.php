@@ -94,7 +94,7 @@ class ProfileController extends Controller
 
     public function updateProfileEdu($user_id ,Request $request) {
 
-        // dd($request->all());
+    //    return $request;
         $docs = [];
 
         if($request->hasFile('upload')){
@@ -108,7 +108,7 @@ class ProfileController extends Controller
         Education::where('user_id',$user_id)->delete();
 
         for($i=0; $i < count($request->degree); $i++){
-            Education::updateOrCreate([
+            Education::create([
                 "user_id" => $user_id,
                 "degree_id" => $request->degree[$i],
                 "subject_id" => $request->major[$i],
@@ -133,9 +133,11 @@ class ProfileController extends Controller
     }
 
     public function updateProfileProfession($user_id , Request $request) {
-
+       
+        Professional::where('user_id',$user_id)->delete();
+        
         for($i=0; $i < count($request->designation); $i++){
-            Professional::updateOrCreate([
+            Professional::create([
                 "user_id" => $user_id,
                 "designation" => $request->designation[$i],
                 "organization" => $request->organization[$i],
