@@ -111,7 +111,7 @@ hr {
     height:500px !important;
 }
 .h-200{
-    max-height:200px !important;
+    max-height:230px !important;
     min-height: 65px !important;
 }
    .container-police {
@@ -1052,7 +1052,7 @@ height:25px;
             </div>
         </div>
     </div>
- <!--Reschedule meeting-->default  <!-- Modal -->
+ <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content pt-4 pb-4">
@@ -1649,6 +1649,7 @@ connection.onmessage = function(event) {
     }
     if(event.data.call_ended === true){
         toastr.success("Tutor ended the class.");
+        $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
     }
     if(event.data.is_timer === true){
@@ -1790,6 +1791,7 @@ $("#endCallYes").click(function(){
     toastr.success("Class has Ended.");
     $("#endCall").modal("hide");
     $("#reviewModal").modal("show");
+    $(".content-wrapper").css("display",'none');
     
 })
 var conversationPanel = document.getElementById('conversation-panel');
@@ -2157,6 +2159,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
                 $('#reviewModal').modal("show");
+                $(".content-wrapper").css("display","none");
 
             });
             /* Javascript Timer ENd */
@@ -2164,6 +2167,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             if(today_date_seconds > class_end_seconds) {
                 $('#countdownExample .values').html("Class Time Over");
                 $('#reviewModal').modal("show");
+                $(".content-wrapper").css("display","none");
             }
 
 
@@ -2178,6 +2182,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 function addStreamStopListener(stream, callback) {
     stream.addEventListener('ended', function() {
         callback();
+        alert("check");
         callback = function() {};
     }, false);
 
@@ -2375,6 +2380,9 @@ function HmsToSeconds(hms) {
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
     return seconds;
+}
+if ($("#reviewModal").hasClass("show")) {
+  $(".content-wrapper").css("display","none");
 }
 </script>
 @endsection

@@ -141,6 +141,7 @@ a:hover {
     font-weight: 600;
 }
 
+
 /* .fade.show {
     background-color: #fff ;
 } */
@@ -407,7 +408,7 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
 
 @media(max-width:768px) {

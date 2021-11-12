@@ -152,7 +152,7 @@ hr {
     height:500px !important;
 }
 .h-200{
-    height:200px !important;
+    height:230px !important;
     min-height: 65px !important;
 }
    .container-police {
@@ -1466,6 +1466,8 @@ $("#endCallYes").click(function(){
         call_ended: true
     });
     $("#endCall").modal("hide");
+    $(".content-wrapper").css("display",'none');
+
     toastr.success("Class has Ended.");
 
     window.location.href="{{route('tutor.classroom')}}";
@@ -2062,10 +2064,6 @@ function copyToClipboard(elementId) {
     toastr.success("Link Copied Successfully");
 
 }
-
-
-
-
 /* Add New Board Section */
 
 
@@ -2092,6 +2090,9 @@ function HmsToSeconds(hms) {
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
     return seconds;
+}
+if ($("#reviewModal").hasClass("show")) {
+  $(".content-wrapper").css("display","none");
 }
 </script>
 

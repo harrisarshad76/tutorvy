@@ -563,6 +563,7 @@
 
     function showReviewModal(id) {
         $("#booking_id").val(id);
+        $(".content-wrapper").css("display","none");
         $("#reviewModal").modal('show');
     }
 </script>
