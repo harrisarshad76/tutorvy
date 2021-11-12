@@ -1294,11 +1294,6 @@ connection.onUserStatusChanged = function(event) {
             $("#other-videos").append(vhtml);
             $("#main-video").css("width","30%");
         }
-        else if ($('#other-videos').contents().length != 0){
-            let vhtml = ``;
-            $("#other-videos").html(vhtml);
-            $("#main-video").css("width","30%");
-        }
     });
 
     if (!names.length) {
