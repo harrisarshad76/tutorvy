@@ -53,10 +53,12 @@
                                     {{ $booking->subject->name }} Class
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
-
-                                    <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-                                        class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
-                                        Booking</button>
+                                    @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 )
+                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
+                                            Booking
+                                        </button>
+                                    @endif
                                     <!-- <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                         class="schedule-btn" style="font-size: 12px;width: 150px;"> Re-schedule
                                         class
