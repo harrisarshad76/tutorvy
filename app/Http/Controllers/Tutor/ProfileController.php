@@ -141,8 +141,8 @@ class ProfileController extends Controller
                 "user_id" => $user_id,
                 "designation" => $request->designation[$i],
                 "organization" => $request->organization[$i],
-                "start_date" => $request->degree_start[$i],
-                "end_date" => $request->degree_end[$i],
+                "start_date" => $request->start_date[$i],
+                "end_date" => $request->end_date[$i],
             ]);
         }
 
