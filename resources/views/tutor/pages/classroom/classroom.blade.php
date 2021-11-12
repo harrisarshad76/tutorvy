@@ -50,6 +50,8 @@
     border: none;
     padding: 0;
     border-radius: 3px;
+    position:absolute;
+    top:0;
 }
 
 
@@ -1292,6 +1294,11 @@ connection.onUserStatusChanged = function(event) {
             $("#other-videos").append(vhtml);
             $("#main-video").css("width","30%");
         }
+        else if ($('#other-videos').contents().length != 0){
+            let vhtml = ``;
+            $("#other-videos").html(vhtml);
+            $("#main-video").css("width","30%");
+        }
     });
 
     if (!names.length) {
@@ -1998,8 +2005,7 @@ $("#addNewBoard").click(function(){
         <a class="nav-item white-item nav-link board-nav active" id="nav-whiteboard-`+count+`" data-toggle="tab" href="#nav-home-`+count+`" role="tab" aria-controls="nav-profile" aria-selected="false">Board `+count+` <i class="pl-2 fa fa-times text-dark"></i></a>
     `;
     var tech = `
-            <div class="tab-pane fade show active whitePane" id="nav-home-`+count+`" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                      
+            <div class="tab-pane fade show active whitePane" id="nav-home-`+count+`" role="tabpanel" aria-labelledby="nav-home-tab">                                                    
                 <div class="row">
                     <div class="col-md-12 h-500 mb-5">
                         <div class="" id="widget-container" style=""></div>
