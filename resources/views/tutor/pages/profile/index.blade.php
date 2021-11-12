@@ -707,6 +707,7 @@
                                                 <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control"> -->
 
                                                 <select name="graduate_year[]" id="" class="yearpicker form-select">
+                                                <option value="{{$edu->year}}" disabled selected> {{$edu->year}}</option>
                                                     <option value="2000">2000</option>
                                                     <option value="2001">2001</option>
                                                     <option value="2002">2002</option>
@@ -801,7 +802,9 @@
                                                  <div class=" col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">Completion Date</label>
                                                     <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control" value="{{$edu->year}}"> -->
-                                                    <select name="graduate_year[]" id="" class="yearpicker form-select">
+                                                    <select name="graduate_year[]"  id="" class="yearpicker form-select">
+                                                        
+                                                        <option value="{{$edu->year}}" disabled selected> {{$edu->year}}</option>
                                                         <option value="2000">2000</option>
                                                         <option value="2001">2001</option>
                                                         <option value="2002">2002</option>
@@ -824,7 +827,7 @@
                                                         <option value="2019">2019</option>
                                                         <option value="2020">2020</option>
                                                         <option value="2021">2021</option>
-                                                        <option value="202s2">2022</option>
+                                                        <option value="2022">2022</option>
                                                         <option value="2023">2023</option>
                                                     </select>
                                                 </div>
@@ -894,6 +897,7 @@
                                                                 class="form-control" name="degree_start[]"
                                                                 placeholder="Starting date" value="" required> -->
                                                                 <select name="degree_start[]" id="" class="yearpicker form-select">
+                                                                    <option value="{{$edu->year}}" disabled selected> {{$edu->year}}</option>
                                                                     <option value="2000">2000</option>
                                                                     <option value="2001">2001</option>
                                                                     <option value="2002">2002</option>
@@ -999,7 +1003,8 @@
                                                                         value="{{ $profession->start_date ?? '' }}"
                                                                         class="form-control" name="degree_start[]"
                                                                         placeholder="Starting date" value="">-->
-                                                                        <select value="{{ $profession->start_date ?? '' }}" name="degree_start[]" class="yearpicker  form-select">
+                                                                        <select name="start_date[]" class="yearpicker  form-select">
+                                                                            <option value="{{$profession->start_date}}" selected disable>{{$profession->start_date}}</option>
                                                                             <option value="2000">2000</option>
                                                                             <option value="2001">2001</option>
                                                                             <option value="2002">2002</option>
@@ -1032,7 +1037,9 @@
                                                                     <!-- <input type="date" value="{{ $profession->end_date ?? '' }}"
                                                                         class="form-control" name="degree_end[]"
                                                                         placeholder="Ending Date" value="" id="kinEnd"> -->
-                                                                        <select value="{{ $profession->end_date ?? '' }}" name="degree_end[]" class="yearpicker form-select" id="proEnd">
+                                                                        <select  name="end_date[]" class="yearpicker form-select" id="proEnd">
+                                                                            <option value="{{$profession->end_date}}" selected disable>{{$profession->end_date}}</option>
+                                                                            
                                                                             <option value="2000">2000</option>
                                                                             <option value="2001">2001</option>
                                                                             <option value="2002">2002</option>
