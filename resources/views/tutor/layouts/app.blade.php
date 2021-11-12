@@ -262,40 +262,46 @@
                                 var notification = ``;
                                 if (obj.length == 0) {
                                     $('.show_notification_counts').text(0);
+                                    notification += `
+                                                        <li class="text-center">
+                                                            No more unread notifications
+                                                        </li>
+                                                            `;
+                                    $(".show_all_notifications").html(notification);
                                 } else {
                                     $('.show_notification_counts').text(obj.length);
-                                    for (var i = 0; i < obj.length; i++) {
-                                        let img = '';
+                                        for (var i = 0; i < obj.length; i++) {
+                                            let img = '';
 
-                                        if (obj[i].sender_pic != null) {
-                                            img =
-                                                `<img class="profile-img mt-2 w-100 p-0" src="{{ asset('`+obj[i].sender_pic+`') }}" alt="layer">`;
-                                        } else {
-                                            img =
-                                                `<img class="profile-img mt-2 w-100 p-0" src="{{ asset('assets/images/ico/Square-white.jpg') }}" alt="layer">`;
+                                            if (obj[i].sender_pic != null) {
+                                                img =
+                                                    `<img class="profile-img mt-2 w-100 p-0" src="{{ asset('`+obj[i].sender_pic+`') }}" alt="layer">`;
+                                            } else {
+                                                img =
+                                                    `<img class="profile-img mt-2 w-100 p-0" src="{{ asset('assets/images/ico/Square-white.jpg') }}" alt="layer">`;
+                                            }
+                                            notification += `
+                                                        <li>
+                                                            <a href="` + obj[i].slug + `" class="bgm">
+                                                                <div class="row">
+                                                                    <div class="col-md-2 pr-0 text-center">
+                                                                    ` + img + `
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <div class="head-1-noti">
+                                                                            <span class="notification-text6">
+                                                                                <strong>` + obj[i].noti_title + ` </strong>
+                                                                                ` + obj[i].noti_desc + `
+                                                                            </span>
+                                                                        </div>
+                                                                        <span class="notification-time">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                            `;
                                         }
-                                        notification += `
-                            <li>
-                                <a href="` + obj[i].slug + `" class="bgm">
-                                    <div class="row">
-                                        <div class="col-md-2 pr-0 text-center">
-                                        ` + img + `
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="head-1-noti">
-                                                <span class="notification-text6">
-                                                    <strong>` + obj[i].noti_title + ` </strong>
-                                                    ` + obj[i].noti_desc + `
-                                                </span>
-                                            </div>
-                                            <span class="notification-time">
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                                    `;
-                                    }
                                     $(".show_all_notifications").html(notification);
                                 }
 
@@ -308,7 +314,25 @@
                         }
                     });
                 }
-
+                function allRead(event){
+                    event.preventDefault();
+                        $.ajax({
+                            url: "{{ route('markAllRead') }}",
+                            type: "get",
+                            dataType: 'json',
+                            cache: false,
+                            async:false,
+                            success: function(data) {
+                                get_all_notifications();
+                                // $('.message-item').remove();
+                             
+                            },
+                            failure: function(errMsg) {
+                                console.log(errMsg);
+                            }
+                        });
+                        
+                    };
 
             </script>
 
