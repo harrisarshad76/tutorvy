@@ -77,13 +77,19 @@
                                         <div class="col-md-9">
                                             <div class="row image1 mt-3 ml-1">
                                                 <div class="col-md-1">
-                                                    @if ($booking->user->picture)
-                                                        <img src="{{ asset($booking->user->picture) }}" alt="boy"
-                                                            class="profile-img">
+                                                    @if($booking->user->picture)
+                                                        <?php
+                                                            $path = $booking->user->picture;
+                                                        ?>
+                                                        @if(file_exists( public_path($path) ))
+                                                            <img class="profile-img" src="{{ asset($booking->user->picture) }}" data-toggle="dropdown" alt="profile">
+                                                        @else
+                                                            <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">                                                                
+                                                        @endif
                                                     @else
-                                                        <img src="{{ asset('assets/images/ico/Square-white.jpg') }}"
-                                                            alt="boy" class="profile-img">
+                                                        <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                                                     @endif
+                                                   
                                                 </div>
                                                 <div class="col-md-10">
                                                     <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;"
