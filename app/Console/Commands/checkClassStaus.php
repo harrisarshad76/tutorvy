@@ -41,33 +41,101 @@ class checkClassStaus extends Command
      */
     public function handle() {
         
-        $bookings = DB::table("bookings")->where('status', 2)->where('class_date',date('Y-m-d'))->get();
-       
+        // $bookings = DB::table("bookings")->where('status', 2)->where('class_date',date('Y-m-d'))->get();
+        $bookings = DB::table("bookings")->where('status', 2)->get();
 
         foreach($bookings as $booking) {
             
+            $student = User::where('id',$booking->user_id)->first();
             $class = DB::table("classroom")->where('booking_id',$booking->id)->first();
             $class_log = DB::table("class_room_logs")->where('class_room_id',$class->id)->first();
 
-            if($booking->class_time != null) {
+            $bookingDate = $booking->class_date;
+            $date = Carbon::createFromFormat('Y-m-d', $bookingDate)->isPast();
+            $todayDate = Carbon::now()->format('Y-m-d');
+            
+            if($date == 1  && $todayDate != $bookingDate){
                 
-                $date = Carbon::create($booking->class_time );
+                if($class_log != '') {
+                    if($class_log->tutor_join_time != NULL){
+                        if($class_log->student_join_time == NULL) {
+                            DB::table("bookings")->where('id',$booking->id)->update([
+                                "status" => 5,
+                            ]);
+                        }
+                    }else{
+                        DB::table("bookings")->where('id',$booking->id)->update([
+                            "status" => 6,
+                        ]);
+                    }
 
-                // $time_check = $date->addMinutes(15);
-                $now = Carbon::create(Carbon::now());
-                // return $now->toDateTimeString();
-                // return Carbon::parse($now . '  America/Chicago')->tz('UTC');
-                // return $now;
-                // return $date->lte($now);
+                    // $admin = User::where('role',1)->first();
+                    // $notification = new NotifyController();
+                    // $sender_id = $booking->user_id;
+                    // $reciever_id = $reciever->id;
+                    // $slug = '-' ;
+                    // $type = 'cancel_class';
+                    // $data = 'data';
+                    // $title = 'Class Cancel';
+                    // $icon = 'fas fa-tag';
+                    // $class = 'btn-success';
+                    // $student_description = 'Class Cancelled Tutor is not available';
+                    // $tutor_description ='Class Cancelled you did not join on time';
+                    // $admin_description = 'Class Cancelled Tutor not join on time';
 
-                if($time_check->lte($now)) {
+                    // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
+                    // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
+                    // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
+
+
+                }else{
                     
-                    if($class_log != '') {
-                        
-                        if($class_log->tutor_join_time != NULL){
-                            if($class_log->student_join_time == NULL) {
+                    DB::table("bookings")->where('id',$booking->id)->update([
+                        "status" => 6,
+                    ]);
+                  
+                    // $admin = User::where('role',1)->first();
+                    // $notification = new NotifyController();
+                    // $sender_id = $booking->user_id;
+                    // $reciever_id = $reciever->id;
+                    // $slug = '-' ;
+                    // $type = 'cancel_class';
+                    // $data = 'data';
+                    // $title = 'Class Cancel';
+                    // $icon = 'fas fa-tag';
+                    // $class = 'btn-success';
+                    // $student_description = 'Class Cancelled your not available';
+                    // $tutor_description ='Class Cancelled Student did not join on time';
+                    // $admin_description = 'Class Cancelled Student did not join on time';
+
+                    // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
+                    // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
+                    // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
+
+
+                }
+            }else{
+    
+                $bookdt = $booking->class_date.' '.$booking->class_time;
+                $ldate = date('Y-m-d H:i');
+                
+                $datetime = Carbon::createFromFormat('Y-m-d H:i', $ldate);
+                $datetime->setTimezone($student->time_zone);
+
+                if($datetime->lte($bookdt)){
+
+                }else{
+                    if($datetime->diffInMinutes($bookdt) >= 15){
+                        if($class_log != '') {
+                            if($class_log->tutor_join_time != NULL){
+                                if($class_log->student_join_time == NULL) {
+                                    DB::table("bookings")->where('id',$booking->id)->update([
+                                        "status" => 5,
+                                    ]);
+                                }
+                            }else{
                                 DB::table("bookings")->where('id',$booking->id)->update([
-                                    "status" => 5,
+                                    "status" => 6,
                                 ]);
                             }
                         }else{
@@ -75,70 +143,11 @@ class checkClassStaus extends Command
                                 "status" => 6,
                             ]);
                         }
-
-                        // $admin = User::where('role',1)->first();
-                        // $notification = new NotifyController();
-                        // $sender_id = $booking->user_id;
-                        // $reciever_id = $reciever->id;
-                        // $slug = '-' ;
-                        // $type = 'cancel_class';
-                        // $data = 'data';
-                        // $title = 'Class Cancel';
-                        // $icon = 'fas fa-tag';
-                        // $class = 'btn-success';
-                        // $student_description = 'Class Cancelled Tutor is not available';
-                        // $tutor_description ='Class Cancelled you did not join on time';
-                        // $admin_description = 'Class Cancelled Tutor not join on time';
-
-                        // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
-                        // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
-                        // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
-
-
-                    }else{
-                        DB::table("bookings")->where('id',$booking->id)->update([
-                            "status" => 5,
-                        ]);
-                        DB::table("bookings")->where('id',$booking->id)->update([
-                            "status" => 6,
-                        ]);
-                        // $check_student = DB::table("class_room_logs")->where('student_join_time',NULL)->get();
-                        // if($check_student) {
-                        //     DB::table("bookings")->where('id',$booking->id)->update([
-                        //         "status" => 5,
-                        //     ]);
-
-
-                            // $admin = User::where('role',1)->first();
-                            // $notification = new NotifyController();
-                            // $sender_id = $booking->user_id;
-                            // $reciever_id = $reciever->id;
-                            // $slug = '-' ;
-                            // $type = 'cancel_class';
-                            // $data = 'data';
-                            // $title = 'Class Cancel';
-                            // $icon = 'fas fa-tag';
-                            // $class = 'btn-success';
-                            // $student_description = 'Class Cancelled your not available';
-                            // $tutor_description ='Class Cancelled Student did not join on time';
-                            // $admin_description = 'Class Cancelled Student did not join on time';
-    
-                            // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
-                            // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
-                            // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
-
-
-                        // }
-
-
                     }
-
-
-
-                }else{
-
                 }
+
             }
+
         }
 
     }
