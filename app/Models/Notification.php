@@ -100,10 +100,10 @@ class Notification extends Model
                 $new_arr = array();
                 for($k = 0; $k < sizeof($tokens_obj) ; $k++ ){
                     for($t = 0 ;$t<sizeof($exp_tkns);$t++){
-                        if($exp_tkns[$t] != $tokens_obj[$k]['token']){
+                        if($exp_tkns[$t] != $tokens_obj[$k]->token){
                             $fcm_data = array();
-                            $fcm_data['token'] = $tokens_obj[$k]['token'];
-                            $fcm_data['device'] = $tokens_obj[$k]['device'];
+                            $fcm_data['token'] = $tokens_obj[$k]->token;
+                            $fcm_data['device'] = $tokens_obj[$k]->token;
                             array_push($new_arr,$fcm_data);
                             continue 2;
                         }
