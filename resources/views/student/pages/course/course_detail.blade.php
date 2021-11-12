@@ -100,6 +100,7 @@
                                         <iframe width="100%" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY"
                                             style="border-radius: 8px;">
                                         </iframe>
+
                                     @elseif($course->thumbnail != null && $course->thumbnail != '')
                                         <img width="100%" height="345" src="{{ asset($course->thumbnail) }}"></img>
                                     @else
