@@ -141,6 +141,10 @@ class checkClassStaus extends Command
                                     "status" => 6,
                                 ]);
                             }
+                        }else{
+                            DB::table("bookings")->where('id',$booking->id)->update([
+                                "status" => 6,
+                            ]);
                         }
                     }else{
                         if($datetime->diffInMinutes($bookdt) >= 15){
