@@ -8,7 +8,7 @@ use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class NotifyController extends Controller
 {
 
@@ -44,9 +44,9 @@ class NotifyController extends Controller
     }
 
     public function markAllRead(){
-      $id = Auth::user()->id; 
-      $notification =  Notification::where('receiver_id', $id)->update(['read_at' => Carbon::now()]);
-
+    
+      $notification =  Notification::where('receiver_id', \Auth::user()->id)->update(['read_at' => Carbon::now()]);
+     
       $response['message'] = "Success Message";
       $response['status_code'] = 200;
       $response['success'] = true;
@@ -101,5 +101,4 @@ class NotifyController extends Controller
           $user->save();
       }
     }
-
 }

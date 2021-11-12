@@ -123,7 +123,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6" style="text-align: right;">
-                                        <a href="" class="notification-text2">
+                                        <a type="button" onclick="allRead(event)"  class="notification-text2">
                                             Mark all read
                                         </a>
                                     </div>
@@ -211,7 +211,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="" class="notification-text2">
+                                                <a type="button" onclick="allRead(event)"  class="notification-text2">
                                                     Mark all read
                                                 </a>
                                             </div>
