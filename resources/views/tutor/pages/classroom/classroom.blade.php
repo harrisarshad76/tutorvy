@@ -1474,7 +1474,7 @@ $("#endCallYes").click(function(){
 
     window.location.href="{{route('tutor.classroom')}}";
 
-})
+});
 var conversationPanel = document.getElementById('conversation-panel');
 
 function appendChatMessage(event, checkmark_id) {
@@ -1509,7 +1509,7 @@ function appendChatMessage(event, checkmark_id) {
 
     conversationPanel.scrollTop = conversationPanel.clientHeight;
     conversationPanel.scrollTop = conversationPanel.scrollHeight - conversationPanel.scrollTop;
-}
+};
 
 var keyPressTimer;
 var numberOfKeys = 0;
@@ -1615,7 +1615,7 @@ function getFileHTML(file) {
         `+attachName+``;
     }
     return attachment;
-}
+};
 
 function getFullName(userid) {
     var _userFullName = userid;
@@ -1623,7 +1623,7 @@ function getFullName(userid) {
         _userFullName = connection.peers[userid].extra.userFullName;
     }
     return _userFullName;
-}
+};
 
 connection.onFileEnd = function(file) {
     var html = getFileHTML(file);
@@ -1723,7 +1723,7 @@ function updateLabel(progress, label) {
     if (progress.position == -1) return;
     var position = +progress.position.toFixed(2).split('.')[1] || 100;
     label.innerHTML = position + '%';
-}
+};
 
 // if(!!params.password) {
 //     connection.password = params.password;
@@ -1888,7 +1888,7 @@ function addStreamStopListener(stream, callback) {
             callback = function() {};
         }, false);
     });
-}
+};
 
 function replaceTrack(videoTrack, screenTrackId) {
     if (!videoTrack) return;
@@ -1917,7 +1917,7 @@ function replaceTrack(videoTrack, screenTrackId) {
             }
         });
     });
-}
+};
 
 function replaceScreenTrack(stream) {
     stream.isScreen = true;
@@ -1962,7 +1962,7 @@ function replaceScreenTrack(stream) {
             height: $('#widget-container').height()
         });
     $('#screen-viewer').show();
-}
+};
 
 $('#btn-share-screen').click(function() {
     if(!window.tempStream) {
@@ -2014,7 +2014,7 @@ $("#addNewBoard").click(function(){
     $(".newWhite").append(tech);
     alert("New Board Added");
     count++;
-})
+});
 
 function saveClassLogs() {
 
@@ -2041,7 +2041,7 @@ function saveClassLogs() {
         }
     });
 
-}
+};
 function copyToClipboard(elementId) {
 
     // Create a "hidden" input
@@ -2064,7 +2064,7 @@ function copyToClipboard(elementId) {
 
     toastr.success("Link Copied Successfully");
 
-}
+};
 /* Add New Board Section */
 
 
@@ -2081,7 +2081,7 @@ function secondsToHms(secs) {
 
     var fin = h + ":" + m + ":" + s;
     return fin;
-}
+};
 
 // hms to seconds
 function HmsToSeconds(hms) {
@@ -2094,7 +2094,7 @@ function HmsToSeconds(hms) {
 }
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
-}
+};
 </script>
 
 
