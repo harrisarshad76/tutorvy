@@ -61,6 +61,8 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
 
+   
+
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
     Route::get('/tutor/{id}/subjects/',[TutorController::class,'subjects'])->name('admin.tutorSubjects');
@@ -356,6 +358,7 @@ Route::group(['prefix' => '/general','middleware' => ['auth']],function () {
 
     Route::post('/save-token',[NotifyController::class,'saveToken'])->name('general.save.token');
     Route::get('/get-notifications',[NotifyController::class,'getAllNotification'])->name('getNotification');
+    Route::get('/mark_all_read',[NotifyController::class,'markAllRead'])->name('markAllRead');
 
 });
 
