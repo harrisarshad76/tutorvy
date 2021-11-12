@@ -297,45 +297,48 @@ width:22px;
                     <p class="heading-second pt-3  mb-0">
                         Courses
                     </p>
-
                     <div class="row mb-5">
                         @foreach ($tutor->course as $course)
                             @if($course->status == 1 )
                                 <div class="col-md-4">
                                     <div class="card">
-                                        @if($course->thumbnail != "")
-                                            <?php
-                                                $path = $course->thumbnail;
-                                            ?>
-                                            @if(file_exists( public_path($path) ))
-                                                <img src="{{asset($course->thumbnail)}}" alt="Avatar" style="width:100%">
-                                            @else
-                                            <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" style="width:100%">
-                                            @endif
-                                        @else
-                                            <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" style="width:100%">
-                                        @endif
-                                        <div class="container-fluid mt-3">
+                                        <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <span class="che-text">
-                                                        {{$course->subject->name}}
-                                                    </span>
+                                                <div class="col-md-12 text-center">
+                                                    @if($course->thumbnail != "")
+                                                        <?php
+                                                            $path = $course->thumbnail;
+                                                        ?>
+                                                        @if(file_exists( public_path($path) ))
+                                                            <img src="{{asset($course->thumbnail)}}" alt="Avatar" class="border-round course_thumb">
+                                                        @else
+                                                        <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" class="border-round course_thumb">
+                                                        @endif
+                                                    @else
+                                                    <img src="{{asset('assets/images/ico/course.png')}}" alt="Avatar" class="border-round course_thumb">
+                                                    @endif
+                                                    <div class="container-fluid mt-3 mb-1 text-left">
+                                                        <div class="row">
+                                                            <div class="col-md-8 p-0">
+                                                                <span class="che-text">
+                                                                    {{$course->subject->name}}
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 p-0 text-right pt-2">
+                                                                <span class="dolar-text ">
+                                                                    ${{$course->basic_price}}
+                                                                </span>
+                                                            </div>
+                                                            <span class="heading-forth mt-3 p-0">
+                                                                    {{$course->title}}
+                                                            </span>
+                                                        </div>
+                                                        <a href="{{route('course.enroll',[$course->id])}}" class="mt-3 w-100 schedule-btn mb-3 text-center no-decor">
+                                                            Start Learning
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <span class="dolar-text ml-5">
-                                                        ${{$course->basic_price}}
-                                                    </span>
-                                                </div>
-                                                <span class="heading-forth ml-3 mt-3">
-                                                        {{$course->title}}
-                                                </span>
                                             </div>
-                                                <a href="{{route('course.enroll',[$course->id])}}" class="mt-3 w-100 schedule-btn mb-3 text-center no-decor">
-                                                    Start 
-                                                    Learning
-                                                </a>
-                                            <!-- <button class="mt-3 w-100 schedule-btn mb-3">Start learning</button> -->
                                         </div>
                                     </div>
                                 </div>

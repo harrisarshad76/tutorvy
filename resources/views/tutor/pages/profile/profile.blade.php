@@ -291,27 +291,34 @@ width:22px;
                     <div class="row mb-5">
                         @foreach ($tutor->course as $course)
                         <div class="col-md-4">
-                            <div class="card">
-                                <img src="{{asset($course->thumbnail)}}" alt="Avatar" style="width:100%">
-                                <div class="container-fluid mt-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <span class="che-text">
-                                                {{$course->subject->name}}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-4 text-right pt-2">
-                                            <span class="dolar-text ">
-                                                ${{$course->basic_price}}
-                                            </span>
-                                        </div>
-                                        <span class="heading-forth ml-3 mt-3">
-                                                {{$course->title}}
-                                        </span>
-                                    </div>
-                                    <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="mt-3 w-100 schedule-btn mb-3 text-center">Edit Course</a>
+                            <div class=" card">
+                                <div class="card-body">
+                                    <div class="row"> 
+                                        <div class=" col-md-12 text-center">
+                                            <img src="{{asset($course->thumbnail)}}" alt="Avatar" class="border-round course_thumb">
+                                            <div class="container-fluid mt-5 mb-3 text-left">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <span class="che-text">
+                                                            {{$course->subject->name}}
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-md-4 text-right pt-2">
+                                                        <span class="dolar-text ">
+                                                            ${{$course->basic_price}}
+                                                        </span>
+                                                    </div>
+                                                    <span class="heading-forth ml-3 mt-3">
+                                                            {{$course->title}}
+                                                    </span>
+                                                </div>
+                                                <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="mt-3 w-100 schedule-btn mb-3 text-center">Edit Course</a>
 
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                               
                             </div>
                         </div>
                         @endforeach
