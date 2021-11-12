@@ -2064,10 +2064,6 @@ function copyToClipboard(elementId) {
     toastr.success("Link Copied Successfully");
 
 }
-
-
-
-
 /* Add New Board Section */
 
 
