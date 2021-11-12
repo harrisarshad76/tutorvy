@@ -125,10 +125,13 @@ class checkClassStaus extends Command
                 if($datetime->lte($bookdt)){
 
                 }else{
-                    if($datetime->diffInMinutes($bookdt) >= 15){
+
+                    $booking_duration = $booking->duration * 60;
+
+                    if($datetime->diffInMinutes($bookdt) >= $booking_duration){
                         if($class_log != '') {
                             if($class_log->tutor_join_time != NULL){
-                                if($class_log->student_join_time == NULL) {
+                                if($class_log->student_join_time != NULL) {
                                     DB::table("bookings")->where('id',$booking->id)->update([
                                         "status" => 5,
                                     ]);
@@ -143,7 +146,29 @@ class checkClassStaus extends Command
                                 "status" => 6,
                             ]);
                         }
+                    }else{
+                        if($datetime->diffInMinutes($bookdt) >= 15){
+                            if($class_log != '') {
+                                if($class_log->tutor_join_time != NULL){
+                                    if($class_log->student_join_time == NULL) {
+                                        DB::table("bookings")->where('id',$booking->id)->update([
+                                            "status" => 5,
+                                        ]);
+                                    }
+                                }else{
+                                    DB::table("bookings")->where('id',$booking->id)->update([
+                                        "status" => 6,
+                                    ]);
+                                }
+                            }else{
+                                DB::table("bookings")->where('id',$booking->id)->update([
+                                    "status" => 6,
+                                ]);
+                            }
+                        }
                     }
+
+                    
                 }
 
             }
