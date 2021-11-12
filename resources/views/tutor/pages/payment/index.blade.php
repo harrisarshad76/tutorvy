@@ -39,7 +39,7 @@
                         <img src="../assets/images/ico/dollars.png" style="width: 45px;" class="mt-3">
                         <div class="">
                             <p class="heading-fifth mt-4" style="line-height: 0;">Total Earning</p>
-                            <p class="heading-first"> 00$</p>
+                            <p class="heading-first"> $00</p>
                         </div>
                     </div>
                 </div>
