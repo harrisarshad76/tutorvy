@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\General\NotifyController;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
 
 class checkClassStaus extends Command
 {
@@ -56,7 +57,6 @@ class checkClassStaus extends Command
             $todayDate = Carbon::now()->format('Y-m-d');
             
             $admin = User::where('role',1)->first();
-            $notification = new NotifyController();
             $student_id = $booking->user_id;
             $std_slug = URL::to('/') . '/student/booking-detail/'. $booking->id ;
             $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking->id ;
