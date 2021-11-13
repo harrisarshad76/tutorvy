@@ -32,7 +32,25 @@
                                 style="border-bottom: 1px solid #D6DBE2; display: inline-flex;">
                                 <p class="col-md-6 col-xs-12 class-ch"
                                     style="margin-top: 10px; text-align: left;color: #00132D;font-size: 22px;font-family: Poppins;font-weight: 500;">
-                                    {{$booking->subject->name}} Class</p>
+                                    {{$booking->subject->name}} Class
+
+                                    @if($booking->status == 0)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve2"> Pending</span>
+                                    @elseif($booking->status == 1)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve3"> Payment Pending</span>
+                                    @elseif($booking->status == 2)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve1"> Approved</span>
+                                    @elseif($booking->status == 3)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Tutor</span>
+                                    @elseif($booking->status == 4)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Student</span>
+                                    @elseif($booking->status == 5)
+                                        <span style="display:inline-flex ;" class="bg-success"> Delivered</span>
+                                    @elseif($booking->status == 6)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by System</span>
+                                    @endif
+                                
+                                </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
 
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
