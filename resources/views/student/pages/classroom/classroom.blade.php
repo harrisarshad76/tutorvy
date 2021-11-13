@@ -1463,14 +1463,14 @@ connection.DetectRTC.load(function() {
                 for(var v = 0 ; v < varr.length ; v++){
                     if(varr[v].deviceId != undefined){
                         
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video if')
                         connection.mediaConstraints.video = true;
                         connection.session.video = true;
                         $(".overlayCam").css("display","none");
                         $(".no-vc").show();
                         alert('attach true camera');
                     }else{
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video else')
                         // connection.dontCaptureUserMedia = true;
                         // connection.DetectRTC.isWebsiteHasWebcamPermissions
                         connection.mediaConstraints.video = false;
@@ -1495,6 +1495,8 @@ connection.DetectRTC.load(function() {
         $(".no-vc").hide();
         $(".overlayCam").css("display","block");
         // alert('attach Cam First');
+        connection.mediaConstraints.video = false;
+        connection.session.video = false;
     }
 
     if (connection.DetectRTC.hasSpeakers === false) { // checking for "false"
