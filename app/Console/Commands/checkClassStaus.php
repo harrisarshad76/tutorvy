@@ -82,9 +82,9 @@ class checkClassStaus extends Command
                             $tutor_description ='Class Delivered automatically as student unable to join.';
                             $admin_description = 'Class Delivered automatically as student unable to join at time.';
 
-                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic);
-                            $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic);
+                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                            $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                         }
                     }else{
@@ -97,9 +97,9 @@ class checkClassStaus extends Command
                         $tutor_description ='Class Cancelled you did not join on time.';
                         $admin_description = 'Class Cancelled Tutor not join on time';
 
-                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic);
-                        $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                        $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                     }
 
@@ -114,9 +114,9 @@ class checkClassStaus extends Command
                     $student_description = 'Class Cancelled Tutor is not available.';
                     $tutor_description ='Class Cancelled you did not join on time.';
                     $admin_description = 'Class Cancelled Tutor not join on time';
-                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic);
-                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                 }
             }else{
@@ -146,9 +146,9 @@ class checkClassStaus extends Command
                                     $tutor_description ='Class Delivered automatically as student unable to join.';
                                     $admin_description = 'Class Delivered automatically as student unable to join at time.';
 
-                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic);
-                                    $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic);
+                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                    $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                                 }
                             }else{
@@ -159,9 +159,9 @@ class checkClassStaus extends Command
                                 $student_description = 'Class Cancelled Tutor is not available.';
                                 $tutor_description ='Class Cancelled you did not join on time.';
                                 $admin_description = 'Class Cancelled Tutor not join on time';
-                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic);
-                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                             }
                         }else{
@@ -172,9 +172,9 @@ class checkClassStaus extends Command
                             $student_description = 'Class Cancelled Tutor is not available.';
                             $tutor_description ='Class Cancelled you did not join on time.';
                             $admin_description = 'Class Cancelled Tutor not join on time';
-                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic);
-                            $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                            $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                         }
                     }else{
@@ -190,9 +190,9 @@ class checkClassStaus extends Command
                                         $tutor_description ='Class Delivered automatically as student unable to join.';
                                         $admin_description = 'Class Delivered automatically as student unable to join at time.';
 
-                                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic);
-                                        $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic);
+                                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                        $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                                     }
                                 }else{
@@ -203,9 +203,9 @@ class checkClassStaus extends Command
                                     $student_description = 'Class Cancelled Tutor is not available.';
                                     $tutor_description ='Class Cancelled you did not join on time.';
                                     $admin_description = 'Class Cancelled Tutor not join on time';
-                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic);
-                                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                                 }
                             }else{
@@ -216,9 +216,9 @@ class checkClassStaus extends Command
                                 $student_description = 'Class Cancelled Tutor is not available.';
                                 $tutor_description ='Class Cancelled you did not join on time.';
                                 $admin_description = 'Class Cancelled Tutor not join on time';
-                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic);
-                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic);
+                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                             }
                         }
@@ -228,14 +228,14 @@ class checkClassStaus extends Command
         }
     }
 
-    public function sendNotification($reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic){
+    public function sendNotification($reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic,$booking_id){
 
         $admin = User::where('role',1)->first();
         $notification = new NotifyController();
         $reciever_id = $reciever_id;
-        $std_slug = URL::to('/') . '/student/booking-detail/'. $booking->id ;
-        $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking->id ;
-        $admin_slug = URL::to('/') . '/admin/booking-detail/'. $booking->id ;
+        $std_slug = URL::to('/') . '/student/booking-detail/'. $booking_id ;
+        $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking_id ;
+        $admin_slug = URL::to('/') . '/admin/booking-detail/'. $booking_id ;
 
         $type = 'cancel_class';
         $data = 'data';
