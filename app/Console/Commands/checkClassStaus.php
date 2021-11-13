@@ -78,6 +78,16 @@ class checkClassStaus extends Command
                             ]);
 
                             $title = 'Class Delievered Automatically!';
+                            $student_description = 'Class Delivered automatically by system.';
+                            $tutor_description ='Class Delivered automatically by system.';
+                            $admin_description = 'Class Delivered automatically by system.';
+
+                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                            $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
+                        }else if($class_log->student_join_time != NULL){
+                            $title = 'Class Delievered Automatically!';
                             $student_description = 'Class Delivered you did not joined.';
                             $tutor_description ='Class Delivered automatically as student unable to join.';
                             $admin_description = 'Class Delivered automatically as student unable to join at time.';
@@ -142,9 +152,9 @@ class checkClassStaus extends Command
                                     ]);
 
                                     $title = 'Class Delievered Automatically!';
-                                    $student_description = 'Class Delivered you did not joined.';
-                                    $tutor_description ='Class Delivered automatically as student unable to join.';
-                                    $admin_description = 'Class Delivered automatically as student unable to join at time.';
+                                    $student_description = 'Class Delivered automatically by system.';
+                                    $tutor_description ='Class Delivered automatically by system.';
+                                    $admin_description = 'Class Delivered automatically by system.';
 
                                     $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
                                     $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
@@ -186,27 +196,15 @@ class checkClassStaus extends Command
                                             "status" => 5,
                                         ]);
                                         $title = 'Class Delievered Automatically!';
-                                        $student_description = 'Class Delivered you did not joined.';
-                                        $tutor_description ='Class Delivered automatically as student unable to join.';
-                                        $admin_description = 'Class Delivered automatically as student unable to join at time.';
+                                        $student_description = 'Class Delivered automatically by system';
+                                        $tutor_description ='Class Delivered automatically by system.';
+                                        $admin_description = 'Class Delivered automatically by system';
 
                                         $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
                                         $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
                                         $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                                     }
-                                }else{
-                                    DB::table("bookings")->where('id',$booking->id)->update([
-                                        "status" => 6,
-                                    ]);
-                                    $title = 'Class Cancelled Automatically!';
-                                    $student_description = 'Class Cancelled Tutor is not available.';
-                                    $tutor_description ='Class Cancelled you did not join on time.';
-                                    $admin_description = 'Class Cancelled Tutor not join on time';
-                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
-                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
-                                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
-
                                 }
                             }else{
                                 DB::table("bookings")->where('id',$booking->id)->update([
@@ -215,7 +213,7 @@ class checkClassStaus extends Command
                                 $title = 'Class Cancelled Automatically!';
                                 $student_description = 'Class Cancelled Tutor is not available.';
                                 $tutor_description ='Class Cancelled you did not join on time.';
-                                $admin_description = 'Class Cancelled Tutor not join on time';
+                                $admin_description = 'Class Cancelled Tutor not joined on time';
                                 $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
                                 $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
                                 $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
