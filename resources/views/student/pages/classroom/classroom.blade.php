@@ -1338,6 +1338,7 @@ connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
 connection.extra.userFullName = fullName;
 
 connection.DetectRTC.load(function() {
+    console.log(connection.DetectRTC,"Kick");
     connection.onMediaError=function(error,constraints){
         console.log(error)
         if(error == 'NotReadableError: Could not start video source'){
