@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\General\NotifyController;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\URL;
 
 class checkClassStaus extends Command
 {
@@ -54,6 +56,18 @@ class checkClassStaus extends Command
             $date = Carbon::createFromFormat('Y-m-d', $bookingDate)->isPast();
             $todayDate = Carbon::now()->format('Y-m-d');
             
+            $admin = User::where('role',1)->first();
+            $student_id = $booking->user_id;
+            $std_slug = URL::to('/') . '/student/booking-detail/'. $booking->id ;
+            $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking->id ;
+            $admin_slug = URL::to('/') . '/admin/booking-detail/'. $booking->id ;
+
+            $type = 'cancel_class';
+            $data = 'data';
+            $icon = 'fas fa-tag';
+            $class = 'btn-success';
+            $pic = '';
+
             if($date == 1  && $todayDate != $bookingDate){
                 
                 if($class_log != '') {
@@ -62,30 +76,32 @@ class checkClassStaus extends Command
                             DB::table("bookings")->where('id',$booking->id)->update([
                                 "status" => 5,
                             ]);
+
+                            $title = 'Class Delievered Automatically!';
+                            $student_description = 'Class Delivered you did not joined.';
+                            $tutor_description ='Class Delivered automatically as student unable to join.';
+                            $admin_description = 'Class Delivered automatically as student unable to join at time.';
+
+                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                            $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                         }
                     }else{
                         DB::table("bookings")->where('id',$booking->id)->update([
                             "status" => 6,
                         ]);
+
+                        $title = 'Class Cancelled Automatically!';
+                        $student_description = 'Class Cancelled Tutor is not available.';
+                        $tutor_description ='Class Cancelled you did not join on time.';
+                        $admin_description = 'Class Cancelled Tutor not join on time';
+
+                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                        $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                     }
-
-                    // $admin = User::where('role',1)->first();
-                    // $notification = new NotifyController();
-                    // $sender_id = $booking->user_id;
-                    // $reciever_id = $reciever->id;
-                    // $slug = '-' ;
-                    // $type = 'cancel_class';
-                    // $data = 'data';
-                    // $title = 'Class Cancel';
-                    // $icon = 'fas fa-tag';
-                    // $class = 'btn-success';
-                    // $student_description = 'Class Cancelled Tutor is not available';
-                    // $tutor_description ='Class Cancelled you did not join on time';
-                    // $admin_description = 'Class Cancelled Tutor not join on time';
-
-                    // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
-                    // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
-                    // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
 
 
                 }else{
@@ -94,24 +110,13 @@ class checkClassStaus extends Command
                         "status" => 6,
                     ]);
                   
-                    // $admin = User::where('role',1)->first();
-                    // $notification = new NotifyController();
-                    // $sender_id = $booking->user_id;
-                    // $reciever_id = $reciever->id;
-                    // $slug = '-' ;
-                    // $type = 'cancel_class';
-                    // $data = 'data';
-                    // $title = 'Class Cancel';
-                    // $icon = 'fas fa-tag';
-                    // $class = 'btn-success';
-                    // $student_description = 'Class Cancelled your not available';
-                    // $tutor_description ='Class Cancelled Student did not join on time';
-                    // $admin_description = 'Class Cancelled Student did not join on time';
-
-                    // $notification->GeneralNotifi(0, $sender_id , $slug ,  $type , $data , $title , $icon , $class ,$student_description);
-                    // $notification->GeneralNotifi(0, $booking->booked_tutor , $slug ,  $type , $data , $title , $icon , $class ,$tutor_description);
-                    // $notification->GeneralNotifi(0, $admin->id , $slug ,  $type , $data , $title , $icon , $class ,$admin_description);
-
+                    $title = 'Class Cancelled Automatically!';
+                    $student_description = 'Class Cancelled Tutor is not available.';
+                    $tutor_description ='Class Cancelled you did not join on time.';
+                    $admin_description = 'Class Cancelled Tutor not join on time';
+                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
 
                 }
             }else{
@@ -135,16 +140,42 @@ class checkClassStaus extends Command
                                     DB::table("bookings")->where('id',$booking->id)->update([
                                         "status" => 5,
                                     ]);
+
+                                    $title = 'Class Delievered Automatically!';
+                                    $student_description = 'Class Delivered you did not joined.';
+                                    $tutor_description ='Class Delivered automatically as student unable to join.';
+                                    $admin_description = 'Class Delivered automatically as student unable to join at time.';
+
+                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                    $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                                 }
                             }else{
                                 DB::table("bookings")->where('id',$booking->id)->update([
                                     "status" => 6,
                                 ]);
+                                $title = 'Class Cancelled Automatically!';
+                                $student_description = 'Class Cancelled Tutor is not available.';
+                                $tutor_description ='Class Cancelled you did not join on time.';
+                                $admin_description = 'Class Cancelled Tutor not join on time';
+                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                             }
                         }else{
                             DB::table("bookings")->where('id',$booking->id)->update([
                                 "status" => 6,
                             ]);
+                            $title = 'Class Cancelled Automatically!';
+                            $student_description = 'Class Cancelled Tutor is not available.';
+                            $tutor_description ='Class Cancelled you did not join on time.';
+                            $admin_description = 'Class Cancelled Tutor not join on time';
+                            $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                            $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                            $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                         }
                     }else{
                         if($datetime->diffInMinutes($bookdt) >= 15){
@@ -154,26 +185,68 @@ class checkClassStaus extends Command
                                         DB::table("bookings")->where('id',$booking->id)->update([
                                             "status" => 5,
                                         ]);
+                                        $title = 'Class Delievered Automatically!';
+                                        $student_description = 'Class Delivered you did not joined.';
+                                        $tutor_description ='Class Delivered automatically as student unable to join.';
+                                        $admin_description = 'Class Delivered automatically as student unable to join at time.';
+
+                                        $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                        $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                        $this->sendNotification($admin->id , $admin_slug ,  $type  , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                                     }
                                 }else{
                                     DB::table("bookings")->where('id',$booking->id)->update([
                                         "status" => 6,
                                     ]);
+                                    $title = 'Class Cancelled Automatically!';
+                                    $student_description = 'Class Cancelled Tutor is not available.';
+                                    $tutor_description ='Class Cancelled you did not join on time.';
+                                    $admin_description = 'Class Cancelled Tutor not join on time';
+                                    $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                    $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                    $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                                 }
                             }else{
                                 DB::table("bookings")->where('id',$booking->id)->update([
                                     "status" => 6,
                                 ]);
+                                $title = 'Class Cancelled Automatically!';
+                                $student_description = 'Class Cancelled Tutor is not available.';
+                                $tutor_description ='Class Cancelled you did not join on time.';
+                                $admin_description = 'Class Cancelled Tutor not join on time';
+                                $this->sendNotification($student_id , $std_slug ,  $type , $title , $icon , $class ,$student_description,$pic,$booking->id);
+                                $this->sendNotification($booking->booked_tutor , $tutor_slug ,  $type , $title , $icon , $class ,$tutor_description,$pic,$booking->id);
+                                $this->sendNotification($admin->id , $admin_slug ,  $type , $title , $icon , $class ,$admin_description,$pic,$booking->id);
+
                             }
                         }
                     }
-
-                    
                 }
-
             }
-
         }
+    }
 
+    public function sendNotification($reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic,$booking_id){
+
+        $admin = User::where('role',1)->first();
+        $notification = new NotifyController();
+        $reciever_id = $reciever_id;
+        $std_slug = URL::to('/') . '/student/booking-detail/'. $booking_id ;
+        $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking_id ;
+        $admin_slug = URL::to('/') . '/admin/booking-detail/'. $booking_id ;
+
+        $type = 'cancel_class';
+        $data = 'data';
+        $title = 'Class Cancel';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $student_description = 'Class Cancelled Tutor is not available';
+        $tutor_description ='Class Cancelled you did not join on time';
+        $admin_description = 'Class Cancelled Tutor not join on time';
+
+        $notification->GeneralNotifi($reciever_id , $slug ,  $type , $title , $icon , $class ,$student_description,$pic);
+       
     }
 }
