@@ -922,7 +922,7 @@
                                                                     <option value="2023">2023</option>
                                                                 </select>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-6" id="proEnd">
                                                             <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
                                                             <!-- <input type="date" value=""
                                                                 class="form-control" name="degree_end[]"
@@ -955,6 +955,11 @@
                                                                     <option value="2023">2023</option>
                                                                 </select>
 
+                                                        </div>
+                                                        <div class="col-md-6 Cwork">
+                                                            <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
+
+                                                            <input type="text" value="Currently Working" disabled >
                                                         </div>
                                                         <div class="col-md-8 mt-2 mb-3">
                                                             <div class="custom-control custom-checkbox">
@@ -1030,12 +1035,12 @@
                                                                         </select>
 
                                                                 </div>
-                                                                <div class=" col-md-6">
+                                                                <div class=" col-md-6"  id="proEnd">
                                                                     <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
                                                                     <!-- <input type="date" value="{{ $profession->end_date ?? '' }}"
                                                                         class="form-control" name="degree_end[]"
                                                                         placeholder="Ending Date" value="" id="kinEnd"> -->
-                                                                        <select  name="degree_end[]" class="yearpicker form-select" id="proEnd">
+                                                                        <select  name="degree_end[]" class="yearpicker form-select">
                                                                             <option value="{{$profession->end_date}}" selected disable>{{$profession->end_date}}</option>
                                                                             
                                                                             <option value="2000">2000</option>
@@ -1063,11 +1068,16 @@
                                                                             <option value="2022">2022</option>
                                                                             <option value="2023">2023</option>
                                                                         </select>
+                                                                        
+                                                                </div>
+                                                                <div class="col-md-6 Cwork">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
+                                                                    <input type="text" value="Currently Working " disabled>
                                                                 </div>
                                                                 <div class="col-md-8 mt-2 mb-3">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" name="working" id="proWorking">
-                                                                        <label class="custom-control-label" for="working">Currently Working? </label>
+                                                                        <input type="checkbox" class="custom-control-input" name="proWorking" id="proWorking">
+                                                                        <label class="custom-control-label" for="proWorking">Currently Working? </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1243,6 +1253,7 @@
             if(url.indexOf(text) != -1){
                 $("#v-pills-Verification-tab").click();
             }
+            $(".Cwork").hide();
 
             $("#year").yearpicker({
                 year: {{ Auth::user()->year ?? '1990' }},
@@ -1252,30 +1263,36 @@
         });
         $("#working").change(function(){
             var checkBox = document.getElementById("working");
+            // if(checkBox.checked == true){
+            //     $("#kinEnd").attr("type","text");
+            //     $("#kinEnd").val("Currently Working");
+            //     $("#kinEnd").attr("disabled","disabled");
+            // }
+            // else{
+            //     $("#kinEnd").attr("type","date");
+            //     $("#kinEnd").removeAttr("disabled","disabled");
+            //     $("#kinEnd").val("Currently Working");  
+
+            // }
             if(checkBox.checked == true){
-                $("#kinEnd").attr("type","text");
-                $("#kinEnd").val("Currently Working");
-                $("#kinEnd").attr("disabled","disabled");
+                $("#proEnd").hide();
+                $(".Cwork").show();
             }
             else{
-                $("#kinEnd").attr("type","date");
-                $("#kinEnd").removeAttr("disabled","disabled");
-                $("#kinEnd").val("Currently Working");
-
-
+                $("#proEnd").show();
+                $(".Cwork").hide();
             }
         })
         $("#proWorking").change(function(){
-            var checkBox = document.getElementById("prWorking");
+            var checkBox = document.getElementById("proWorking");
             if(checkBox.checked == true){
-                $("#proEnd").attr("type","text");
-                $("#proEnd").val("Currently Working");
-                $("#proEnd").attr("disabled","disabled");
+                $("#proEnd").hide();
+                $(".Cwork").show();
+            
             }
             else{
-                $("#proEnd").attr("type","select");
-                $("#proEnd").removeAttr("disabled","disabled");
-                $("#proEnd").val("Currently Working");
+                $("#proEnd").show();
+                $(".Cwork").hide();
             }
         })
         $("#country_selector").countrySelect({
