@@ -1596,14 +1596,83 @@ $('.moreExperience').click(function() {
 
                 </div>
                 <div class="row my-3">
-                    <div class="input-text col-md-6">
+                    <!--<div class="input-text col-md-6">
                         <input type="" class="form-control" onfocus="(this.type='date')"  placeholder="Starting date" name="degree_start[` + count_field_2 + `]" placeholder="Starting date"
                         value="">
+
                     </div>
                     <div class="input-text col-md-6">
                         <input type="" class="form-control" onfocus="(this.type='date')"  placeholder="Starting date" name="degree_end[` + count_field_2 + `]" placeholder="Ending Date"
                         value="">
-                    </div>
+                    </div>-->
+                    <div class=" col-md-6">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Starting Year</label>
+                                                                        <!--<input type="date"
+                                                                        value="{{ $profession->start_date ?? '' }}"
+                                                                        class="form-control" name="degree_start[]"
+                                                                        placeholder="Starting date" value="">-->
+                                                                        <select name="degree_start[` + count_field_2 + `]" class="yearpicker  form-select">
+                                                                            <option value="2000">2000</option>
+                                                                            <option value="2001">2001</option>
+                                                                            <option value="2002">2002</option>
+                                                                            <option value="2003">2003</option>
+                                                                            <option value="2004">2004</option>
+                                                                            <option value="2005">2005</option>
+                                                                            <option value="2006">2006</option>
+                                                                            <option value="2007">2007</option>
+                                                                            <option value="2008">2008</option>
+                                                                            <option value="2009">2009</option>
+                                                                            <option value="2010">2010</option>
+                                                                            <option value="2011">2011</option>
+                                                                            <option value="2012">2012</option>
+                                                                            <option value="2013">2013</option>
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2023">2023</option>
+                                                                        </select>
+
+                                                                </div>
+                                                                <div class=" col-md-6"  id="proEnd">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
+                                                                    <!-- <input type="date" value="{{ $profession->end_date ?? '' }}"
+                                                                        class="form-control" name="degree_end[]"
+                                                                        placeholder="Ending Date" value="" id="kinEnd"> -->
+                                                                        <select  name="degree_end[` + count_field_2 + `]" class="yearpicker form-select">
+                                                                            
+                                                                            <option value="2000">2000</option>
+                                                                            <option value="2001">2001</option>
+                                                                            <option value="2002">2002</option>
+                                                                            <option value="2003">2003</option>
+                                                                            <option value="2004">2004</option>
+                                                                            <option value="2005">2005</option>
+                                                                            <option value="2006">2006</option>
+                                                                            <option value="2007">2007</option>
+                                                                            <option value="2008">2008</option>
+                                                                            <option value="2009">2009</option>
+                                                                            <option value="2010">2010</option>
+                                                                            <option value="2011">2011</option>
+                                                                            <option value="2012">2012</option>
+                                                                            <option value="2013">2013</option>
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2023">2023</option>
+                                                                        </select>
+                                                                        
+                                                                </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -1617,6 +1686,7 @@ $('.moreExperience').click(function() {
     <div>`;
     $('.results').append(html);
     $('.dropify').dropify();
+    $(".form-select").select2();
     // $(".form-select").select2();
 });
 
