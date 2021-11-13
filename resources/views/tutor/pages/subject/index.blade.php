@@ -140,12 +140,12 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <select name="" class="form-select form-control w-25 " id="">
+                                <!-- <select name="" class="form-select form-control w-25 " id="">
                                     <option value="">Select Particular Subject</option>
                                     @foreach ($subjects as $i => $subject)
                                         <option value="{{ $subject->id }}" onclick="getSubSubject({{ $subject->id }})">{{ $subject->name }}</option>
                                     @endforeach
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
