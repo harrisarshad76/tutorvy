@@ -137,12 +137,17 @@ class ProfileController extends Controller
         Professional::where('user_id',$user_id)->delete();
         
         for($i=0; $i < count($request->designation); $i++){
+            if($request->working == 'on'){
+                $endy = "2021";
+            }
+            else {   
+                $endy = $request->degree_end[$i];}   
             Professional::create([
                 "user_id" => $user_id,
                 "designation" => $request->designation[$i],
                 "organization" => $request->organization[$i],
-                "start_date" => $request->start_date[$i],
-                "end_date" => $request->end_date[$i],
+                "start_date" => $request->degree_start[$i],
+                "end_date" => $endy,
             ]);
         }
 
