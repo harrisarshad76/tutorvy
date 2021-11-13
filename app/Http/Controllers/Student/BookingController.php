@@ -67,7 +67,7 @@ class BookingController extends Controller
         $confirmed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(2)->get();
 
         $completed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(5)->get();
-        $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4])->get();
+        $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4,6])->get();
 
         $commission = DB::table("sys_settings")->first();
         $defaultPay = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('default',1)->first();

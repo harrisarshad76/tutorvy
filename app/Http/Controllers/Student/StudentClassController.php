@@ -23,7 +23,7 @@ class StudentClassController extends Controller
 
     public function index(){
 
-        $classes = Booking::with(['classroom','user','tutor','subject'])->where('user_id',Auth::user()->id)->where('status',2)->get();
+        $classes = Booking::with(['classroom','user','tutor','subject'])->where('user_id',Auth::user()->id)->whereIn('status',[2,5])->get();
 
         foreach($classes as $class) {
             date_default_timezone_set($class->user->time_zone);
