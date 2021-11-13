@@ -154,7 +154,7 @@ hr {
     height:500px !important;
 }
 .h-200{
-    height:230px !important;
+    height:220px !important;
     min-height: 65px !important;
 }
    .container-police {
@@ -1135,14 +1135,14 @@ connection.DetectRTC.load(function() {
                     connection.mediaConstraints.video = true;
                     connection.session.video = true;
                     // $(".overlayCam").css("display","none");
-                    alert('attach true camera');
+                    // alert('attach true camera');
                 }else{
                     console.log(connection.DetectRTC)
                     // connection.dontCaptureUserMedia = true;
                     // connection.DetectRTC.isWebsiteHasWebcamPermissions
                     connection.mediaConstraints.video = false;
                     connection.session.video = false;
-                    alert('no camera')
+                    // alert('no camera')
                     // connection.dontCaptureUserMedia = true;
                     
                     // connection.mediaConstraints.video = true;
@@ -2012,7 +2012,7 @@ $("#addNewBoard").click(function(){
     $(".whitePane").removeClass("show");
     $(".newTabs").prepend(techno);
     $(".newWhite").append(tech);
-    alert("New Board Added");
+    // alert("New Board Added");
     count++;
 });
 

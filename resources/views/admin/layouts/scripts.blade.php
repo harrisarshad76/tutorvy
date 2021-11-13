@@ -422,7 +422,7 @@
                                 img = `<img class="profile-img w-100 p-0 mt-2" src="{{asset('assets/images/ico/Square-white.jpg')}}" alt="layer">`;
                             }
                         notification +=`
-                        <li >
+                        <li>
                             <a href="`+obj[i].slug+`" class="bgm">
                                 <div class="row">
                                     <div class="col-md-2 pr-0 text-center">

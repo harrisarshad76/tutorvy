@@ -1468,7 +1468,7 @@ connection.DetectRTC.load(function() {
                         connection.session.video = true;
                         $(".overlayCam").css("display","none");
                         $(".no-vc").show();
-                        alert('attach true camera');
+                        // alert('attach true camera');
                     }else{
                         console.log(connection.DetectRTC)
                         // connection.dontCaptureUserMedia = true;
@@ -1733,7 +1733,7 @@ $(".no-vc").click(function(){
                     $(".overlayCam").css("display","none");
                    
                   
-                    alert('attach true 2 camera');
+                    // alert('attach true 2 camera');
                     var localStream = connection.attachStreams[0];
     
                     localStream.mute('video');
@@ -1759,10 +1759,10 @@ $(".no-vc").click(function(){
         }
 
     }else if (connection.DetectRTC.hasWebcam === false) {
-        alert("No Blovk");
+        // alert("No Blovk");
         $(".no-vc").hide();
         $(".overlayCam").css("display","block");
-        alert('attach Cam First');
+        // alert('attach Cam First');
     }
 });
 $(".vc").click(function(){
@@ -2079,7 +2079,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     //         });
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
-            alert('in join')
+            // alert('in join')
             
             if (error) {
                 console.log(error)
@@ -2182,7 +2182,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 function addStreamStopListener(stream, callback) {
     stream.addEventListener('ended', function() {
         callback();
-        alert("check");
+        // alert("check");
         callback = function() {};
     }, false);
 
