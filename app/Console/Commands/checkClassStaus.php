@@ -232,8 +232,7 @@ class checkClassStaus extends Command
 
         $admin = User::where('role',1)->first();
         $notification = new NotifyController();
-        $student_id = $booking->user_id;
-        $reciever_id = $reciever->id;
+        $reciever_id = $reciever_id;
         $std_slug = URL::to('/') . '/student/booking-detail/'. $booking->id ;
         $tutor_slug = URL::to('/') . '/tutor/booking-detail/'. $booking->id ;
         $admin_slug = URL::to('/') . '/admin/booking-detail/'. $booking->id ;
@@ -247,9 +246,7 @@ class checkClassStaus extends Command
         $tutor_description ='Class Cancelled you did not join on time';
         $admin_description = 'Class Cancelled Tutor not join on time';
 
-        $notification->GeneralNotifi($student_id , $slug ,  $type , $title , $icon , $class ,$student_description,$pic);
-        $notification->GeneralNotifi($booking->booked_tutor , $slug ,  $type  , $title , $icon , $class ,$tutor_description,$pic);
-        $notification->GeneralNotifi($admin->id , $slug ,  $type  , $title , $icon , $class ,$admin_description,$pic);
-
+        $notification->GeneralNotifi($reciever_id , $slug ,  $type , $title , $icon , $class ,$student_description,$pic);
+       
     }
 }
