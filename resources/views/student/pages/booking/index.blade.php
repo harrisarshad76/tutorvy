@@ -157,7 +157,7 @@
                                                                     </span>
                                                                     @elseif($booking->status == 6)
                                                                     <span class="bg-color-apporve">
-                                                                        Cancelled
+                                                                        Cancelled by system
                                                                     </span>
                                                                     @elseif($booking->status == 5)
                                                                     <span class="bg-color-apporve1">
@@ -548,18 +548,22 @@
                                                                     </span>
                                                                 @elseif($booking->status == 3)
                                                                     <span class="bg-color-apporve">
-                                                                        Cancelled
+                                                                        Cancelled by Tutor
                                                                     </span>
                                                                 @elseif($booking->status == 4)
                                                                     <span class="bg-color-apporve">
-                                                                        Cancelled
+                                                                        Cancelled by Student
+                                                                    </span>
+                                                                    @elseif($booking->status == 4)
+                                                                    <span class="bg-color-apporve">
+                                                                        Cancelled by System
                                                                     </span>
                                                                 @endif
                                                             </td>
                                                             <td class="pt-3 pb-3" style="text-align: center; " >
-                                                                <a class="cencel-btn mr-2" onclick >
+                                                                <!-- <a class="cencel-btn mr-2" onclick >
                                                                     Pay Now
-                                                                </a>
+                                                                </a> -->
                                                                 <a href="{{route('student.booking-detail',[$booking->id])}}"  class="schedule-btn">
 
                                                                         View details

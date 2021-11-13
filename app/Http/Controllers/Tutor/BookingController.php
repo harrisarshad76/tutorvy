@@ -89,7 +89,7 @@ class BookingController extends Controller
         $pending = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->whereIn('status',[0,1])->get();
         $confirmed = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->status(2)->get();
         $completed = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->status(5)->get();
-        $cancelled = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->whereIn('status',[3,4])->get();
+        $cancelled = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->whereIn('status',[3,4,6])->get();
         // dd($pending->toArray());
         return view('tutor.pages.booking.index',compact('all','pending','confirmed','completed','cancelled'));
     }

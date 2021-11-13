@@ -175,7 +175,7 @@
                                                             <td class="pt-3">
 
                                                                 @if ($class->status == 1)
-                                                                    <span class="bg-color-apporve3">
+                                                                    <span class="bg-color-apporve">
                                                                         Payment Pending
                                                                     </span>
                                                                 @elseif($class->status == 2)
@@ -183,8 +183,12 @@
                                                                         Approved
                                                                     </span>
                                                                 @elseif($class->status == 0)
-                                                                    <span class="bg-color-apporve">
+                                                                    <span class="bg-color-apporve2">
                                                                         Pending
+                                                                    </span>
+                                                                @elseif ($class->status == 5)
+                                                                    <span class="bg-color-apporve3">
+                                                                        Delivered
                                                                     </span>
                                                                 @endif
                                                             </td>
@@ -205,6 +209,12 @@
                                                                         class="text-center">
                                                                 @endif
                                                             </td>
+                                                            @if ($class->status == 5)
+                                                                <td style="text-align: center;padding-top:14px;">
+                                                                    <button class="schedule-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review
+                                                                    </button>
+                                                                </td>
+                                                                @endif
                                                             <td style="text-align: center;padding-top:14px;">
                                                                 <button class="cencel-btn" type="button"> View details
                                                                 </button>
@@ -272,7 +282,7 @@
 
                                                             <td style="text-align: center;padding-top:14px;">
                                                                 <a type="button"
-                                                                    onclick="showReviewModal('{{ $class->id }}')"
+                                                                    onclick="showReviewModal('{{ $class->booking_id }}')"
                                                                     class="cencel-btn">
                                                                     Review
                                                                 </a>
@@ -413,6 +423,7 @@
                             timer: 2500
                         });
                         $("#reviewModal").modal('hide');
+                        location.reload();
                     } else {
                         toastr.error(response.message, {
                             position: 'top-end',
