@@ -67,6 +67,7 @@ class NotifyController extends Controller
          
           if ($entry === false) {
             if($user->role == 1){
+              $fcm_array = array();
               $fcm_data = array();
               $fcm_data['token'] = $request->token;
               $fcm_data['device'] = 'Windows';
