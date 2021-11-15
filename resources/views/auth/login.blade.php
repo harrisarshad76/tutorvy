@@ -237,11 +237,11 @@
                                 Continue with Facebook
                                 </a>
                             </div>
-                            <div class="Apple">
-                                <!-- <img class="mr-3" src="../assets/images/ico/apple.png" alt="apple"> -->
+                            <!-- <div class="Apple">
+                                <img class="mr-3" src="../assets/images/ico/apple.png" alt="apple">
                                 <i class="fa fa-apple fa-lg mr-2" aria-hidden="true"></i>
                                 Continue with Apple
-                            </div>
+                            </div> -->
                             <div class="Policy-text" style="display: flex;">
                                 <p class="by-text">
                                     Protected by reCAPTCHA and subject to the Google</p>
