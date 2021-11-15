@@ -178,9 +178,16 @@
                                                                         </div>
                                                                         <div class="col-md-2">
                                                                             @if(Auth::user()->status == 2)
-                                                                                <a href="{{ route('tutor.test', [$subject->id]) }}">
-                                                                                    <p class="view-bookings mb-0">Add</p>
-                                                                                </a>
+                                                                                <?php
+                                                                                    $ter = Auth::user()->assessment->where('subject_id',$subject->id)->first();
+                                                                                ?>
+                                                                                @if($ter == "")
+                                                                                    <a href="{{ route('tutor.test', [$subject->id]) }}">
+                                                                                        <p class="view-bookings mb-0">Add</p>
+                                                                                    </a>
+                                                                                @else
+                                                                                    
+                                                                                @endif
                                                                             @else
                                                                                 <a onclick="showMessage()">
                                                                                     <p class="view-bookings mb-0">Add</p>
