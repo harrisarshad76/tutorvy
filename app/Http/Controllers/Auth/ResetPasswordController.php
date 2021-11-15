@@ -45,13 +45,14 @@ class ResetPasswordController extends Controller
 
         if($user){
             Session::put('changepass',$user->id);
-            Session::put('otp',rand(1000,9999));
-            $sendOtp = (new SendOtp($request->email))->delay(Carbon::now()->addSeconds(3));
+            $code = rand(1000,9999);
+            Session::put('otp',$code);
+            $sendOtp = (new SendOtp($request->email,$code))->delay(Carbon::now()->addSeconds(3));
             dispatch($sendOtp);
 
             return view('auth.otp');
         }
-
+        $request->session()->flash('error','Wrong email address');
     }
     public function checkOtp(Request $request)
     {
@@ -82,10 +83,11 @@ class ResetPasswordController extends Controller
     public function resendOtp()
     {
         //regenerate code
-        Session::put('otp',rand(1000,9999));
+        $code = rand(1000,9999);
+        Session::put('otp',$code);
 
         $email = User::find(Session::get('changepass'))->email;
-        $sendOtp = (new SendOtp($email))->delay(now()->addSeconds(3));
+        $sendOtp = (new SendOtp($email,$code))->delay(now()->addSeconds(3));
         dispatch($sendOtp);
 
         return response("New otp has been sended",200);

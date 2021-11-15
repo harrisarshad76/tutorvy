@@ -358,57 +358,6 @@
                                         </div>
                                         @endif
 
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <img src="{{asset ('assets/images/payment-icon/masterCard_logo_512.png')}}" alt="">
-                                                        <span class="payment-menu dropdown d-flex">
-                                                            <a class=" d-flex" href="#" data-toggle="dropdown" aria-expanded="true">
-                                                                <img src="{{asset ('assets/images/payment-icon/menu_dots.png')}}" alt="">
-                                                            </a>
-                                                            <ul class="dropdown-menu  " >
-                                                                <li>
-                                                                    <a tabindex="-1" class="" href="">
-                                                                        Delete
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </span>
-                                                        <span class="round">
-                                                            <input type="checkbox" id="checkbox2" />
-                                                            <label for="checkbox2"></label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <img src="{{asset ('assets/images/payment-icon/masterCard_logo_512.png')}}" alt="">
-                                                        <span class="payment-menu dropdown d-flex">
-                                                            <a class=" d-flex" href="#" data-toggle="dropdown" aria-expanded="true">
-                                                                <img src="{{asset ('assets/images/payment-icon/menu_dots.png')}}" alt="">
-                                                            </a>
-                                                            <ul class="dropdown-menu  " >
-                                                                <li>
-                                                                    <a tabindex="-1" class="" href="">
-                                                                        Delete
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </span>
-                                                        <span class="round">
-                                                            <input type="checkbox" id="checkbox3" />
-                                                            <label for="checkbox3"></label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 

@@ -68,12 +68,13 @@ class PaymentController extends Controller
     {
 
         DB::table('payment_methods')->insert([
-            'user_id' => Auth::user()->id,
-            'email' => $request->email,
-            'method' => 'paypal',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+                    'user_id' => Auth::user()->id,
+                    'email' => $request->email,
+                    'method' => 'paypal',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
         ]);
+
 
         return redirect()->back()->with('success','Your Paypal account successfully added');
 
