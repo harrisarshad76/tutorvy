@@ -52,11 +52,12 @@
                                 
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
-
-                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-                                        class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
-                                        Booking
-                                        </button>
+                                        @if ($booking->status != 3 && $booking->status != 4 && $booking->status != 6)
+                                            <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
+                                            Booking
+                                            </button>
+                                        @endif
                                         @if ($booking->status == 0)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                             class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> Re-schedule
@@ -226,9 +227,10 @@
                                             </p>
                                         </div>
                                         <div class="ml-4 mr-4">
-                                            <form action="{{route('student.booking.reschedule',[$booking->id])}}" method="post">
+                                            <form id ="res-task">
                                                 @csrf
                                                 <div style="display: flex;">
+                                                <input type="hidden" value="{{$booking->id}}" name="loId">
                                                     <input id="today2" name="date" class="inputtype mb-2" style="width: 170px;"
                                                         type="date">
                                                     <input type="time" name="time" class="inputtype ml-5 mb-2" class="times"
@@ -269,10 +271,10 @@
                                             <p style="font-size: 15px;color: #00132D;font-family: Poppins;font-weight: 400;line-height: 1.4;"
                                                 class="ml-5 mr-5">
                                                 @if($booking->status == 2)
-                                                Are you sure you want to cancel booking ? it will cost
-                                                ${{$booking->service_fee ?? 0}} for cancelling</p>
+                                                    Are you sure you want to cancel booking ? it will cost
+                                                    ${{$booking->service_fee ?? 0}} for cancelling</p>
                                                 @elseif ($booking->status == 0 || $booking->status == 1)
-                                                Are you sure you want to cancel booking ?
+                                                    Are you sure you want to cancel booking ?
                                                 @endif
                                         </div>
                                     </div>

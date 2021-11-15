@@ -373,10 +373,10 @@
                                     <p style="font-size: 15px;color: #00132D;font-family: Poppins;font-weight: 400;line-height: 1.4;"
                                         class="ml-5 mr-5">
                                         {{-- @if($booking->status == 2)
-                                        Are you sure you want to cancel booking ? it will cost
-                                        ${{$booking->service_fee ?? 0}} for cancelling
+                                            Are you sure you want to cancel booking ? it will cost
+                                            ${{$booking->service_fee ?? 0}} for cancelling
                                         @elseif ($booking->status == 0 || $booking->status == 1) --}}
-                                        Are you sure you want to cancel booking ?
+                                            Are you sure you want to cancel booking ?
                                         {{-- @endif --}}
                                     </p>
                                 </div>

@@ -210,7 +210,7 @@ class BookingController extends Controller
 
         }else{
 
-            $booking->status = 4;
+            $booking->status = 3;
             $booking->save();
 
             return redirect()->route('tutor.booking')->with('success', 'Booking has been cancelled successfully!');

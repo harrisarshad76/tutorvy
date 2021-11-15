@@ -554,7 +554,7 @@
                                                                     <span class="bg-color-apporve">
                                                                         Cancelled by Student
                                                                     </span>
-                                                                    @elseif($booking->status == 4)
+                                                                    @elseif($booking->status == 6)
                                                                     <span class="bg-color-apporve">
                                                                         Cancelled by System
                                                                     </span>

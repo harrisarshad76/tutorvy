@@ -110,7 +110,7 @@
                             </div>
                         @endforeach
                     </div>
-                    @if(Auth::user()->assessment->count() != 0)
+                    @if(Auth::user()->assessment->where('status','0')->count() != 0)
                         <p class="heading-third mt-3 mb-0">Pending Subjects</p>
                         <div class="row">
                             @foreach (Auth::user()->assessment->where('status',0) as $teach)
@@ -140,12 +140,12 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <!-- <select name="" class="form-select form-control w-25 " id="">
+                                <select name="" class="form-select form-control w-25 " id="">
                                     <option value="">Select Particular Subject</option>
-                                    @foreach ($subjects as $i => $subject)
+                                    @foreach ($main_sub as $subject)
                                         <option value="{{ $subject->id }}" onclick="getSubSubject({{ $subject->id }})">{{ $subject->name }}</option>
                                     @endforeach
-                                </select> -->
+                                </select>
                             </div>
                         </div>
 

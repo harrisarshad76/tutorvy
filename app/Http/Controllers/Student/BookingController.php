@@ -856,18 +856,23 @@ class BookingController extends Controller
         ]);
     }
 
-    public function rescheduleBooking(Request $request,$id){
+    public function rescheduleBooking(Request $request){
+// return $request;
+        $booking = Booking::where('id',$request->loId)->first();
 
-        $booking = Booking::find($id);
 
         $booking->class_date = $request->date;
         $booking->class_time = $request->time;
         $booking->reschedule_note = $request->note;
         $booking->save();
+        return response()->json([
+            "message" => "Meeting Rescheduled Successfully",
+            "status_code" => 200,
+            "success" => true,
+        ]);
+        // Session::flash('success','You have successfully reschedule this booking');
 
-        \Session::flash('success','You have successfully reschedule this booking');
-
-        return redirect()->back();
+        // return redirect()->back();
     }
 
     public function checkDefaultPaymentMethod()
