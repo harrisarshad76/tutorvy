@@ -71,11 +71,19 @@ class NotifyController extends Controller
               $fcm_data = array();
               $fcm_data['token'] = $request->token;
               $fcm_data['device'] = 'Windows';
-              array_push($fcm_array, $fcm_data);
-              $user->token = $fcm_data;
-              $user->token_updated_at = date('Y-m-d h:m:s');                
-              $user->is_token_updated = 1;
-              $user->save();
+              if($request->token == ''){
+                $user->token = null;
+                $user->token_updated_at = date('Y-m-d h:m:s');                
+                $user->is_token_updated = 1;
+                $user->save();
+              }else{
+                array_push($fcm_array, $fcm_data);
+                $user->token = $fcm_data;
+                $user->token_updated_at = date('Y-m-d h:m:s');                
+                $user->is_token_updated = 1;
+                $user->save();
+              }
+              
             }else{
               $fcm_data = array();
               $fcm_data['token'] = $request->token;

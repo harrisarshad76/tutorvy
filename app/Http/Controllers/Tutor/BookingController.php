@@ -206,12 +206,45 @@ class BookingController extends Controller
                     $booking->status = 3;
                     $booking->save();
                 }
-            return redirect()->route('tutor.bookings')->with('success', '$'.$refundedSale->amount->total.' amount has been detucted from your account successfully!');
+
+                $admin = User::where('role',1)->first();
+                $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+                $notification = new NotifyController();
+                $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+                $type = 'booking_cancelled';
+                $title = 'Booking Cancelled';
+                $icon = 'fas fa-tag';
+                $class = 'btn-success';
+                $desc = $name . 'Cancelled the booking. ';
+                $pic = Auth::User()->picture;
+                $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+                // send to admin
+                $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+                $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
+
+                return redirect()->route('tutor.bookings')->with('success', '$'.$refundedSale->amount->total.' amount has been detucted from your account successfully!');
 
             }else{
 
                 $booking->status = 3;
                 $booking->save();
+
+                $admin = User::where('role',1)->first();
+                $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+                $notification = new NotifyController();
+                $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+                $type = 'booking_cancelled';
+                $title = 'Booking Cancelled';
+                $icon = 'fas fa-tag';
+                $class = 'btn-success';
+                $desc = $name . 'Cancelled the booking. ';
+                $pic = Auth::User()->picture;
+                $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+                // send to admin
+                $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+                $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
 
                 return redirect()->route('tutor.booking')->with('success', 'Booking has been cancelled successfully!');
             }
