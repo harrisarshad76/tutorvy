@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\URL;
+use App\Models\Admin\Subject;
+use DB;
 
 class LoginController extends Controller
 {
@@ -77,6 +79,7 @@ class LoginController extends Controller
                         User::where('id',Auth::user()->id)->update(["time_zone" => $request->time_zone]);
                     }
 
+                    
                     return redirect()->route('tutor.dashboard');
                 }
                 if($request->role == 3){
@@ -97,6 +100,44 @@ class LoginController extends Controller
                     if($value != ''){
                         return redirect()->route('student.book-now',[$value]);
                     }
+
+                    if(isset($_COOKIE['s_link'])){
+                        $value = $_COOKIE['s_link'];
+                        \Cookie::queue(\Cookie::forget('s_link'));
+
+                    }
+                    if($value != ''){
+
+                        $subject = $value;
+          
+                        $query = DB::table('users')
+                        ->select('view_tutors_data.*')
+                        ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
+                        ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
+                        ->where('users.role',2)
+                        ->where('users.status',2)
+                        ->where('view_tutors_data.subject_names','!=',null);
+                        $query->where(function($query2) use ($subject)
+                        {
+                            if($subject != null && $subject != ''){
+                                $query2->where('teachs.subject_id', $subject);
+                            }
+                            
+                        });
+
+                        $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
+
+                        foreach($available_tutors as $tutor) {
+                            $tutor->is_favourite = DB::table("fav_tutors")->where("user_id",Auth::user()->id)->where("tutor_id",$tutor->id)->first();
+                            // $tutor->tutor_subject_rate = DB::table("subject_plans")->where("user_id",$tutor->id)->min('rate');
+                        }
+
+                        $subjects = Subject::all();
+                        $locations = DB::table('search_locations')->get();
+                        return redirect()->route('student.tutor')->with(['available_tutors'=> $available_tutors, 'subjects' => $subjects, 'locations' => $locations ]);
+                        
+                    }
+
 
                     if(Session::get('redirectUrlCourse')){
                         return redirect()->route('student.course-details',[Session::get('redirectUrlCourse')]);

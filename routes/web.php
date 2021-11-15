@@ -402,11 +402,14 @@ Route::get('/subjects-all/{id}',[GeneralController::class,'displaySub'])->name('
 // Route::get('/',[GeneralController::class,'home']);
 
 Route::get('/widget',[FrontTutorController::class,'widgetTech'])->name('whiteBoard.canvas');
+Route::get('/student',[FrontTutorController::class,'subjects']);
+
+
 // Route::get('/widget',[FrontTutorController::class,'widgetTech'])->name('whiteBoard.canvas');
 Route::view('/role','role');
 Route::get('/register_role',[GeneralController  ::class,'loginOnRole'])->name('register.role');
 Route::view('/tutor','frontend.tutor');
-Route::view('/student','frontend.student');
+// Route::view('/student','frontend.student');
 //Route::view('/subject','frontend.subject');
 Route::get('/subject',[GeneralController  ::class,'subjects']);
 // Route::view('/course','frontend.course');
