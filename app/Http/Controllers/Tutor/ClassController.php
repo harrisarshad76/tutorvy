@@ -73,10 +73,32 @@ class ClassController extends Controller
         $notification->GeneralNotifi( $reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic);
 
         return response()->json([
-            "message" => "Classroom logs saved",
+            "message" => "Classroom logs saved.",
             "status_code" => 200,
             "success" => true,
         ]);
+
+    }
+
+    public function endClass(Request $request){
+
+        $booking = Booking::where('id',$request->id)->first();
+        if($booking){
+            $booking->status = 5;
+            $booking->save();
+
+            return response()->json([
+                "message" => "Class Delivered.",
+                "status_code" => 200,
+                "success" => true,
+            ]);
+        }else{
+            return response()->json([
+                "message" => "Something went wrong.",
+                "status_code" => 500,
+                "success" => false,
+            ]);
+        }
 
     }
 }

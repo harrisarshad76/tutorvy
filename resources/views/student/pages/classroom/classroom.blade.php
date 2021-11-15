@@ -1255,6 +1255,8 @@ var timer = new Timer();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
+
+console.log(connection.socket)
 // var class_duration = 20;
 $("#join_now").click(function(){
                 $(".tech_weck").removeClass("tech_weck-none");
@@ -1341,6 +1343,8 @@ connection.DetectRTC.load(function() {
     console.log(connection.DetectRTC,"Kick");
     connection.onMediaError=function(error,constraints){
         console.log(error)
+        console.log(constraints)
+
         if(error == 'NotReadableError: Could not start video source'){
             alert('Unable to get camera. Please check camera is not used by any other program or and refresh the page again to start the class.')
             $("#join_now").hide();
@@ -1464,14 +1468,14 @@ connection.DetectRTC.load(function() {
                 for(var v = 0 ; v < varr.length ; v++){
                     if(varr[v].deviceId != undefined){
                         
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video if')
                         connection.mediaConstraints.video = true;
                         connection.session.video = true;
                         $(".overlayCam").css("display","none");
                         $(".no-vc").show();
                         // alert('attach true camera');
                     }else{
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video else')
                         // connection.dontCaptureUserMedia = true;
                         // connection.DetectRTC.isWebsiteHasWebcamPermissions
                         connection.mediaConstraints.video = false;
@@ -1496,6 +1500,8 @@ connection.DetectRTC.load(function() {
         $(".no-vc").hide();
         $(".overlayCam").css("display","block");
         // alert('attach Cam First');
+        connection.mediaConstraints.video = false;
+        connection.session.video = false;
     }
 
     if (connection.DetectRTC.hasSpeakers === false) { // checking for "false"
@@ -2113,46 +2119,46 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             }
             var ter = "";
             var class_date = $("#class_date").val();
-                var class_time = $("#class_time").val();
-                var class_total_duration = $("#class_total_duration").val();
+            var class_time = $("#class_time").val();
+            var class_total_duration = $("#class_total_duration").val();
 
-                var bookings = new Date(class_date + ' ' + class_time);
-                var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
+            var bookings = new Date(class_date + ' ' + class_time);
+            var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
 
-                var today_date = new Date();
-                var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
+            var today_date = new Date();
+            var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
 
 
-                var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
-                var create_class_end_date = new Date(class_date + ' ' + class_end);
-                var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
+            var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
+            var create_class_end_date = new Date(class_date + ' ' + class_end);
+            var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
 
-                var remain_seconds = class_end_seconds - today_date_seconds;
+            var remain_seconds = class_end_seconds - today_date_seconds;
 
-                /** Javascript Timer */
-                timer.start({countdown: true, startValues: {seconds: remain_seconds}});
+            /** Javascript Timer */
+            timer.start({countdown: true, startValues: {seconds: remain_seconds}});
 
+            $('#countdownExample .values').html(timer.getTimeValues().toString());
+
+            timer.addEventListener('secondsUpdated', function (e) {
                 $('#countdownExample .values').html(timer.getTimeValues().toString());
+                ter = $('.values').text();
+                if( ter < deadline ){
+                    $(".blink").css("background","#dc3545");
+                    $(".Text-reck").text("Class will end in Five minutes sharp.");
+                }
+                else if( ter == resced || ter < resced && ter > deadline ){
+                    $(".blink").css("background","#ffc107");
+                    let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
+                    $(".Text-reck").html(html);
+                }
+                else if( ter > resced ){
+                    $(".blink").css("background","#28a745");
+                    $(".Text-reck").text("Class will ends in: ");
 
-                timer.addEventListener('secondsUpdated', function (e) {
-                    $('#countdownExample .values').html(timer.getTimeValues().toString());
-                    ter = $('.values').text();
-                    if( ter < deadline ){
-                        $(".blink").css("background","#dc3545");
-                        $(".Text-reck").text("Class will end in Five minutes sharp.");
-                    }
-                    else if( ter == resced || ter < resced && ter > deadline ){
-                        $(".blink").css("background","#ffc107");
-                        let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
-                        $(".Text-reck").html(html);
-                    }
-                    else if( ter > resced ){
-                        $(".blink").css("background","#28a745");
-                        $(".Text-reck").text("Class will ends in: ");
-
-                    }
-                    
-                });
+                }
+                
+            });
 
                 // var deadline = '00:05:00'; 
                 // var resced = '00:15:00';               
@@ -2385,5 +2391,39 @@ function HmsToSeconds(hms) {
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
 }
+
+$(".s_status").change(function(){
+    if($(this).prop("checked") == true){
+        if(!window.tempStream) {
+        alert('Screen sharing is not enabled.');
+        return;
+    }
+
+    $('#btn-share-screen').hide();
+
+    if(navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else if(navigator.getDisplayMedia) {
+        navigator.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else {
+        alert('getDisplayMedia API is not available in this browser.');
+    }
+    }else{
+       //run code
+       alert('unchecked')
+
+    }
+});
+
 </script>
 @endsection

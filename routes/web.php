@@ -240,6 +240,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::get('/call',[TutorSettingController::class,'call'])->name('tutor.call');
     Route::get('/class/{class_room_id}',[TutorSettingController::class,'start_class'])->name('tutor.start_class');
     Route::post('/save-class-logs',[ClassController::class,'saveClassLogs'])->name('tutor.class.logs');
+    Route::post('/end-class',[ClassController::class,'endClass'])->name('tutor.class.end');
 
     Route::get('/whiteBoard',[TutorSettingController::class,'whiteBoard'])->name('tutor.whiteBoard');
 
