@@ -240,6 +240,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::get('/call',[TutorSettingController::class,'call'])->name('tutor.call');
     Route::get('/class/{class_room_id}',[TutorSettingController::class,'start_class'])->name('tutor.start_class');
     Route::post('/save-class-logs',[ClassController::class,'saveClassLogs'])->name('tutor.class.logs');
+    Route::post('/end-class',[ClassController::class,'endClass'])->name('tutor.class.end');
 
     Route::get('/whiteBoard',[TutorSettingController::class,'whiteBoard'])->name('tutor.whiteBoard');
 
@@ -275,8 +276,8 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::get('/booking-detail/{id}',[StudentBookingController::class,'bookingDetail'])->name('student.booking-detail');
     Route::get('/booking/{id}/tutor',[StudentBookingController::class,'directBooking'])->name('student.direct.booking');
 
-    Route::post('/cancelBooking/{id}',[StudentBookingController::class,'cancelBooking'])->name('student.booking.cancel');
-    Route::post('/rescheduleBooking/{id}',[StudentBookingController::class,'rescheduleBooking'])->name('student.booking.reschedule');
+    Route::post('/cancelBooking',[StudentBookingController::class,'cancelBooking'])->name('student.booking.cancel');
+    Route::post('/rescheduleBooking',[StudentBookingController::class,'rescheduleBooking'])->name('student.booking.reschedule');
 
     Route::post('/booking/payment/{id}',[StudentBookingController::class,'bookingPayment'])->name('student.booking.payment');
     Route::get('/booking/paymentstatus',[StudentBookingController::class,'getPaymentStatus'])->name('student.paymentstatus');

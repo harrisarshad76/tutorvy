@@ -1030,9 +1030,12 @@ var fullName = '{{$booking->tutor->first_name}} {{$booking->tutor->last_name}}';
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
+var class_id = {{$booking->id}};
+
 // var class_duration = 20;
 var timer = new Timer();
 
+// connection.socket.to('3mdzdzm1a5d').emit("private message", "sdfsdfsdf")
 
 
 (function() {
@@ -1731,138 +1734,112 @@ function updateLabel(progress, label) {
 
 designer.appendTo(document.getElementById('widget-container'), function() {
     // if (params.open === true || params.open === 'true') {
-            var tempStreamCanvas = document.getElementById('temp-stream-canvas');
-            var tempStream = tempStreamCanvas.captureStream();
-            tempStream.isScreen = true;
-            tempStream.streamid = tempStream.id;
-            tempStream.type = 'local';
-            connection.attachStreams.push(tempStream);
-            window.tempStream = tempStream;
+    var tempStreamCanvas = document.getElementById('temp-stream-canvas');
+    var tempStream = tempStreamCanvas.captureStream();
+    tempStream.isScreen = true;
+    tempStream.streamid = tempStream.id;
+    tempStream.type = 'local';
+    connection.attachStreams.push(tempStream);
+    window.tempStream = tempStream;
 
-            connection.extra.roomOwner = true;
-            connection.openOrJoin(roomid, function(isRoomOpened, roomid, error) {
-                if (error) {
-                    if (error === connection.errors.ROOM_NOT_AVAILABLE) {
-                        alert('Someone already created this room. Please either join or create a separate room.');
-                        return;
-                    }
-                    alert(error);
-                }
+    connection.extra.roomOwner = true;
 
-                var class_date = $("#class_date").val();
-                var class_time = $("#class_time").val();
-                var class_total_duration = $("#class_total_duration").val();
+    connection.openOrJoin(roomid, function(isRoomOpened, roomid, error) {
+        if (error) {
+            if (error === connection.errors.ROOM_NOT_AVAILABLE) {
+                alert('Someone already created this room. Please either join or create a separate room.');
+                return;
+            }
+            alert(error);
+        }
 
-                var bookings = new Date(class_date + ' ' + class_time);
-                var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
+        var class_date = $("#class_date").val();
+        var class_time = $("#class_time").val();
+        var class_total_duration = $("#class_total_duration").val();
 
-                var today_date = new Date();
-                var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
+        var bookings = new Date(class_date + ' ' + class_time);
+        var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
+
+        var today_date = new Date();
+        var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
 
 
-                var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
-                var create_class_end_date = new Date(class_date + ' ' + class_end);
-                var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
+        var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
+        var create_class_end_date = new Date(class_date + ' ' + class_end);
+        var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
 
-                var remain_seconds = class_end_seconds - today_date_seconds;
+        var remain_seconds = class_end_seconds - today_date_seconds;
 
-                /** Javascript Timer */
-                timer.start({countdown: true, startValues: {seconds: remain_seconds}});
+        /** Javascript Timer */
+        timer.start({countdown: true, startValues: {seconds: remain_seconds}});
 
-                $('#countdownExample .values').html(timer.getTimeValues().toString());
-                // timer.addEventListener('secondsUpdated', function (e) {
+        $('#countdownExample .values').html(timer.getTimeValues().toString());
+        // timer.addEventListener('secondsUpdated', function (e) {
 
-                //     var ter = $('.values').text();
-                    
-                //     if( ter < deadline ){
-                        
-                //         $(".values").css("color","#dc3545");
-                //         // $(".Text-reck").text("Class will end in Five minutes sharp.");
-                //     }
-                //     else if( ter == resced || ter < resced && ter > deadline){
-                //         $(".values").css("color","#ffc107");
-                //         // let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
-                //         // $(".Text-reck").html(html);
-                //     }
-                //     else if( ter >= resced ){
-                //         $(".values").css("color","#28a745");
-                //         // $(".Text-reck").text("Class will ends in: ");
-
-                //     }
-
-                //     $('#countdownExample .values').html(timer.getTimeValues().toString());
-                // });
-                timer.addEventListener('secondsUpdated', function (e) {
-                    $('#countdownExample .values').html(timer.getTimeValues().toString());
-                    ter = $('.values').text();
-                    if( ter < deadline ){
-                        $(".blink").css("background","#dc3545");
-                        $(".Text-reck").text("Class will end in Five minutes sharp.");
-                    }
-                    else if( ter == resced || ter < resced && ter > deadline ){
-                        $(".blink").css("background","#ffc107");
-                        let html = `<p class="mb-0">Want to reschedule another class? Its the time! </p>`
-                        $(".Text-reck").html(html);
-                    }
-                    else if( ter > resced ){
-                        $(".blink").css("background","#28a745");
-                        $(".Text-reck").text("Class will ends in: ");
-
-                    }
-                    
-                });
-
-                timer.addEventListener('targetAchieved', function (e) {
-                    $('#endCall').modal("show");
-                });
-                /* Javascript Timer ENd */
-
-                if(today_date_seconds > class_end_seconds) {
-                    $('#countdownExample .values').html("Class Time Over");
-                    $('#endCall').modal("show");
-                }
-
-                // start timer here
-                var video = document.getElementById('main-video');
-        video.setAttribute('data-streamid', event.streamid);
-                saveClassLogs();
-                connection.socket.on('disconnect', function() {
-                    location.reload();
-                });
-            });
-    // } else {
-        // connection.join(roomid, function(isRoomJoined, roomid, error) {
+        //     var ter = $('.values').text();
             
-        //     if (error) {
-        //         if (error === connection.errors.ROOM_NOT_AVAILABLE) {
-        //             alert('This room does not exist. Please either create it or wait for moderator to enter in the room.');
-        //             return;
-        //         }
-        //         if (error === connection.errors.ROOM_FULL) {
-        //             alert('Room is full.');
-        //             return;
-        //         }
-        //         if (error === connection.errors.INVALID_PASSWORD) {
-        //             connection.password = prompt('Please enter room password.') || '';
-        //             if(!connection.password.length) {
-        //                 alert('Invalid password.');
-        //                 return;
-        //             }
-        //             connection.join(roomid, function(isRoomJoined, roomid, error) {
-        //                 if(error) {
-        //                     alert(error);
-        //                 }
-        //             });
-        //             return;
-        //         }
-        //         alert(error);
+        //     if( ter < deadline ){
+                
+        //         $(".values").css("color","#dc3545");
+        //         // $(".Text-reck").text("Class will end in Five minutes sharp.");
+        //     }
+        //     else if( ter == resced || ter < resced && ter > deadline){
+        //         $(".values").css("color","#ffc107");
+        //         // let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
+        //         // $(".Text-reck").html(html);
+        //     }
+        //     else if( ter >= resced ){
+        //         $(".values").css("color","#28a745");
+        //         // $(".Text-reck").text("Class will ends in: ");
+
         //     }
 
-        //     connection.socket.on('disconnect', function() {
-        //         location.reload();
-        //     });
+        //     $('#countdownExample .values').html(timer.getTimeValues().toString());
         // });
-    // }
+        timer.addEventListener('secondsUpdated', function (e) {
+            $('#countdownExample .values').html(timer.getTimeValues().toString());
+            ter = $('.values').text();
+            if( ter < deadline ){
+                $(".blink").css("background","#dc3545");
+                $(".Text-reck").text("Class will end in Five minutes sharp.");
+            }
+            else if( ter == resced || ter < resced && ter > deadline ){
+                $(".blink").css("background","#ffc107");
+                let html = `<p class="mb-0">Want to reschedule another class? Its the time! </p>`
+                $(".Text-reck").html(html);
+            }
+            else if( ter > resced ){
+                $(".blink").css("background","#28a745");
+                $(".Text-reck").text("Class will ends in: ");
+
+            }
+            
+        });
+
+        timer.addEventListener('targetAchieved', function (e) {
+          
+            endclass();
+            // $('#endCall').modal("show");
+          
+        });
+        /* Javascript Timer ENd */
+
+        if(today_date_seconds > class_end_seconds) {
+            $('#countdownExample .values').html("Class Time Over");
+            // $('#endCall').modal("show");
+            endclass();
+          
+        }
+
+        // start timer here
+        var video = document.getElementById('main-video');
+        video.setAttribute('data-streamid', event.streamid);
+            saveClassLogs();
+            connection.socket.on('disconnect', function() {
+                location.reload();
+        });
+    });
+    
 });
 
 function addStreamStopListener(stream, callback) {
@@ -1973,14 +1950,14 @@ $('#btn-share-screen').click(function() {
     $('#btn-share-screen').hide();
 
     if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
+        navigator.mediaDevices.getDisplayMedia(mediaConstraints).then(stream => {
             replaceScreenTrack(stream);
         }, error => {
             alert('Please make sure to use Edge 17 or higher.');
         });
     }
     else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(screen_constraints).then(stream => {
+        navigator.getDisplayMedia(mediaConstraints).then(stream => {
             replaceScreenTrack(stream);
         }, error => {
             alert('Please make sure to use Edge 17 or higher.');
@@ -2095,6 +2072,71 @@ function HmsToSeconds(hms) {
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
 };
+
+$(".s_status").change(function(){
+    if($(this).prop("checked") == true){
+        if(!window.tempStream) {
+        alert('Screen sharing is not enabled.');
+        return;
+    }
+
+    $('#btn-share-screen').hide();
+
+    if(navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(mediaConstraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else if(navigator.getDisplayMedia) {
+        navigator.getDisplayMedia(mediaConstraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else {
+        alert('getDisplayMedia API is not available in this browser.');
+    }
+    }else{
+       //run code
+       alert('unchecked')
+
+    }
+});
+
+function endclass(){
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{route('tutor.class.end')}}",
+        type: "POST",
+        data:{id:class_id},
+        success:function(response){
+            console.log(response);
+            if(response.status_code == 200){
+                toastr.success(response.message,{
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500
+            });
+            setInterval(function(){
+                        window.location.href = "{{ route('tutor.booking') }}";
+                    }, 1500);
+            }
+            
+        },
+        error:function(e) {
+            console.log(e)
+        }
+    });
+
+}
+
 </script>
 
 

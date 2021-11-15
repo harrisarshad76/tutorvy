@@ -15,16 +15,17 @@ class SendOtp implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $email;
+    public $email,$otp;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct($email,$otp)
     {
         $this->email = $email;
+        $this->otp = $otp;
     }
 
     /**
@@ -34,6 +35,6 @@ class SendOtp implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new SendOtpMail);
+        Mail::to($this->email)->send(new SendOtpMail($this->otp));
     }
 }

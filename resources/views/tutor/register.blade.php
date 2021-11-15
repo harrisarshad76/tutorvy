@@ -244,8 +244,8 @@
                     </div>
 
                 </div>
-                <div class="col-md-6 card mb-5">
-                    <p class="mt-5 ml-3 heading-first">Create a tutor account</p>
+                <div class="col-md-6 card ">
+                    <p class="mt-4 ml-3 heading-first">Create a tutor account</p>
                     <p class="ml-3 heading-sixth">Already have an account?
                         <a href="{{ route('login') }}" class="text-primary" style="text-decoration:none">
                             Sign in
@@ -304,15 +304,15 @@
                                 </ul>
                             </div> -->
                             <form action="{{ url('register') }}" method="post" id="register"
-                                enctype="multipart/form-data" onsubmit="return false">
+                                enctype="multipart/form-data" onsubmit="return false" autocomplete="off">
                                 @csrf
                                 <input type="hidden" name="role" value="2">
                                 <input type="hidden" name="region" id="region">
                                 <input type="hidden" name="time_zone" id="time_zone">
-                                <div class="tab-content mt-5">
+                                <div class="tab-content">
                                     <div role="tabpanel" class="border-right tab-pane active" id="step-1">
                                         <div class="col-md-12">
-                                            <p class="heading-third mt-3">Personal information</p>
+                                            <p class="heading-third ">Personal information</p>
                                             @if (Session::has('error'))
                                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-12px">
@@ -352,7 +352,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="input-text col-md-12 m-0  mt-4 mb-3 d-block">
+                                                <div class="input-text col-md-12 m-0 mt-3 d-block">
                                                 <input type="email"
                                                     class="form-control  @error('email') is-invalid @enderror"
                                                     name="email" placeholder="Email Address"
@@ -406,25 +406,32 @@
                                                 <div class="col-md-12 text-right">
 
                                                     <div class="social-Icon ">
-                                                            <div class="Google">
-                                                                <a href="{{route('social.google',[2])}}">
-                                                                    <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
-                                                                    Continue with Google
-                                                                </a>
-                                                            </div>
-                                                            <div class="facebook">
-                                                                <a href="{{route('social.facebook',[2])}}">
-                                                                    <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
-                                                                     <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
+                                                            <div class="row mt-4">
+                                                                <div class="col-md-6">
+                                                                    <div class="Google">
+                                                                        <a href="{{route('social.google',[2])}}">
+                                                                            <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
+                                                                            Continue with Google
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="facebook">
+                                                                        <a href="{{route('social.facebook',[2])}}">
+                                                                            <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
+                                                                            <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
 
-                                                                    Continue with Facebook
-                                                                </a>
+                                                                            Continue with Facebook
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="Apple">
-                                                                <!-- <img class="mr-3" src="{{asset('assets/images/ico/apple.png')}}" alt="apple"> -->
+                                                            
+                                                            
+                                                            <!-- <div class="Apple">
                                                                 <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
                                                                 Continue with Apple
-                                                            </div>
+                                                            </div> -->
                                                             <div class="Policy-text" style="display: flex;">
                                                                 <p class="by-text">
                                                                     Protected by reCAPTCHA and subject to the Google</p>

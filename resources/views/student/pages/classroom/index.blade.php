@@ -209,16 +209,18 @@
                                                                         class="text-center">
                                                                 @endif
                                                             </td>
-                                                            @if ($class->status == 5)
+                                                            @if ($class->status = 5)
                                                                 <td style="text-align: center;padding-top:14px;">
-                                                                    <button class="schedule-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review
+                                                                    <button class="cencel-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review
                                                                     </button>
                                                                 </td>
-                                                                @endif
-                                                            <td style="text-align: center;padding-top:14px;">
-                                                                <button class="cencel-btn" type="button"> View details
-                                                                </button>
-                                                            </td>
+                                                            @elseif($class->status == 5 )
+                                                                <td style="text-align: center;padding-top:14px;">
+                                                                    <button class="schedule-btn" type="button"> View details
+                                                                    </button>
+                                                                </td>
+                                                            @endif
+                                                          
 
                                                         </tr>
                                                     @endforeach
@@ -281,11 +283,20 @@
 
 
                                                             <td style="text-align: center;padding-top:14px;">
-                                                                <a type="button"
-                                                                    onclick="showReviewModal('{{ $class->booking_id }}')"
-                                                                    class="cencel-btn">
-                                                                    Review
-                                                                </a>
+                                                                @if ($class->status != 5)
+                                                                    <a type="button"
+                                                                        onclick="showReviewModal('{{ $class->booking_id }}')"
+                                                                        class="cencel-btn">
+                                                                        Review
+                                                                    </a>
+                                                                @elseif  ($class->status == 5)
+                                                                    <a type="button"
+                                                                            class="schedule-btn">
+                                                                            View Details
+                                                                        </a>
+                                                                @endif
+                                                               
+                                                                
                                                             </td>
                                                         </tr>
                                                     @endforeach

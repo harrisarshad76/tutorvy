@@ -41,13 +41,23 @@ class SettingController extends Controller
 
     public function paymentMethod(Request $request)
     {
-        DB::table('payment_methods')->insert([
-            'user_id' => Auth::user()->id,
-            'email' => $request->email,
-            'method' => $request->payment_type,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        $setting = DB::table('payment_methods')->where('user_id',Auth::user()->id)->get();
+
+        if($setting->whereIn('method',$request->payment_type)->count() == 0){
+            DB::table('payment_methods')->insert([
+                'user_id' => Auth::user()->id,
+                'email' => $request->email,
+                'method' => $request->payment_type,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+
+        if($setting->count() == 1){
+            DB::table('payment_methods')->where('user_id',Auth::user()->id)->update([
+                'default' => 1,
+            ]);
+        }
 
         return redirect()->back();
     }

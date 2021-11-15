@@ -157,64 +157,64 @@ class BookingController extends Controller
     }
 
     public function cancelBooking(Request $request,$id)
-    {
-        $booking = Booking::find($id);
+        {
+            $booking = Booking::find($id);
 
-        $refund_amount = $booking->price + $booking->service_fee;
-        $saleId = $booking->payment->first()->sale_id ?? '';
+            $refund_amount = $booking->price + $booking->service_fee;
+            $saleId = $booking->payment->first()->sale_id ?? '';
 
-        if($saleId){
+            if($saleId){
 
-            $paymentValue =  (string) round($refund_amount,2);
+                $paymentValue =  (string) round($refund_amount,2);
 
-            // ### Refund amount
-            // Includes both the refunded amount (to Payer)
-            // and refunded fee (to Payee). Use the $amt->details
-            // field to mention fees refund details.
-            $amt = new Amount();
-            $amt->setCurrency('USD')
-                ->setTotal($paymentValue);
+                // ### Refund amount
+                // Includes both the refunded amount (to Payer)
+                // and refunded fee (to Payee). Use the $amt->details
+                // field to mention fees refund details.
+                $amt = new Amount();
+                $amt->setCurrency('USD')
+                    ->setTotal($paymentValue);
 
-            // ### Refund object
-            $refundRequest = new RefundRequest();
-            $refundRequest->setAmount($amt);
+                // ### Refund object
+                $refundRequest = new RefundRequest();
+                $refundRequest->setAmount($amt);
 
-            // ###Sale
-            // A sale transaction.
-            // Create a Sale object with the
-            // given sale transaction id.
-            $sale = new Sale();
-            $sale->setId($saleId);
-            try {
-                $refundedSale = $sale->refundSale($refundRequest, $this->_api_context);
-            } catch (\Exception $ex) {
-                dd($ex);
-                exit(1);
-            }
+                // ###Sale
+                // A sale transaction.
+                // Create a Sale object with the
+                // given sale transaction id.
+                $sale = new Sale();
+                $sale->setId($saleId);
+                try {
+                    $refundedSale = $sale->refundSale($refundRequest, $this->_api_context);
+                } catch (\Exception $ex) {
+                    dd($ex);
+                    exit(1);
+                }
 
-            if($refundedSale->state == 'completed'){
+                if($refundedSale->state == 'completed'){
 
-                Payments::create([
-                    'user_id' => Auth::user()->id,
-                    'type' => 'payment_refund',
-                    'transaction_id' => $booking->payment->first()->transaction_id,
-                    'sale_id' => $refundedSale->sale_id ?? '',
-                    'amount'  => $refundedSale->amount->total,
-                    'method'  => 'paypal'
-                ]);
+                    Payments::create([
+                        'user_id' => Auth::user()->id,
+                        'type' => 'payment_refund',
+                        'transaction_id' => $booking->payment->first()->transaction_id,
+                        'sale_id' => $refundedSale->sale_id ?? '',
+                        'amount'  => $refundedSale->amount->total,
+                        'method'  => 'paypal'
+                    ]);
+
+                    $booking->status = 3;
+                    $booking->save();
+                }
+            return redirect()->route('tutor.bookings')->with('success', '$'.$refundedSale->amount->total.' amount has been detucted from your account successfully!');
+
+            }else{
 
                 $booking->status = 3;
                 $booking->save();
+
+                return redirect()->route('tutor.booking')->with('success', 'Booking has been cancelled successfully!');
             }
-         return redirect()->route('tutor.bookings')->with('success', '$'.$refundedSale->amount->total.' amount has been refunded to your account successfully!');
-
-        }else{
-
-            $booking->status = 4;
-            $booking->save();
-
-            return redirect()->route('tutor.booking')->with('success', 'Booking has been cancelled successfully!');
-        }
 
 
         }

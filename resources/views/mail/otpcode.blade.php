@@ -16,7 +16,7 @@
         <img src="http://www.tutorvy.com/assets/images/logo/logo.png" alt="">
     </h1>
     <h2 style="text-align:center;">Verification Code</h2>
-    <h1 style="text-align:center;">{{Session::get('otp')}}</h1>
+    <h1 style="text-align:center;">{{ $data }}</h1>
     <h4 style="text-align:center;">
         Here is your OTP verification Code
     </h4 style="text-align:center;">

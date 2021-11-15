@@ -428,9 +428,9 @@
                                             </div> -->
 
                                             <!-- city dropdwon -->
-                                            <div class="row mt-3">
+                                            <!-- <div class="row mt-3">
 
-                                                <!-- <div class="input-text col-md-6">
+                                                <div class="input-text col-md-6">
                                                     <div class="autocomplete " style="width:300px;">
                                                         <input id="myInput" type="" name="city" placeholder="City" value="{{$user->city ?? ''}}">
                                                     </div>
@@ -444,10 +444,10 @@
                                                             country here...</label>
                                                     </div>
 
-                                                </div> -->
+                                                </div>
 
                                                 <div class="container mt-3">
-                                                    <!-- <div class=" row">
+                                                    <div class=" row">
                                                         <div class="input-text col-md-6">
                                                             <select id="selection" name="security"
                                                                 onchange="changeplh()"
@@ -463,8 +463,8 @@
                                                                 value="{{ $user->cnic_security ?? '' }}">
                                                         </div>
 
-                                                    </div> -->
-                                                    <!-- <div class="row ">
+                                                    </div>
+                                                    <div class="row ">
                                                         <div class="col-md-6 d-block">
                                                             <input type="" name="language" id="lang" hidden>
                                                             <select class="form-select form-select-lg mb-3"
@@ -491,9 +491,9 @@
                                                             </div>
                                                         </div>
 
-                                                    </div> -->
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         
                                         <div class="col-md-12 text-right ">
@@ -515,27 +515,37 @@
                                                                             {{ Session::get('error') }}
                                                                         </div>
                                                                     @endif
+                                                                    <div class="row mt-4" >
+                                                                        <!-- <div class="col-md-12 text-center">
+                                                                                <p>OR</p>
+                                                                        </div> -->
+                                                                        <div class="col-md-6">
+                                                                            <div class="Google">
+                                                                                <a href="{{route('social.google',[3])}}">
+                                                                                    <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
+                                                                                    Continue with Google
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="facebook">
+                                                                                <a href="{{route('social.facebook',[3])}}">
+                                                                                    <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
 
-                                                                    <div class="Google">
-                                                                        <a href="{{route('social.google',[3])}}">
-                                                                            <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
-                                                                            Continue with Google
-                                                                        </a>
+                                                                                    <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
+                                                                                    Continue with Facebook
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="facebook">
-                                                                        <a href="{{route('social.facebook',[3])}}">
-                                                                            <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
-
-                                                                            <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
-                                                                            Continue with Facebook
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="Apple">
+                                                                    
+                                                                   
+                                                                    <!-- <div class="Apple">
                                                                         <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
 
-                                                                        <!-- <img class="mr-3" src="{{asset('assets/images/ico/apple.png')}}" alt="apple"> -->
+                                                                      
                                                                         Continue with Apple
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="Policy-text" style="display: flex;">
                                                                         <p class="by-text">
                                                                             Protected by reCAPTCHA and subject to the Google</p>
