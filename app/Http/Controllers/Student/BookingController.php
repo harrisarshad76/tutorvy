@@ -115,7 +115,7 @@ class BookingController extends Controller
         $to_time = date("H:i", strtotime("$from_time"."+".$request->duration."hours"));
 
         DB::enableQueryLog();
-        $booking = DB::select("select * from `bookings` where booked_tutor = ? && class_date = ? && class_time BETWEEN ? AND ? && `class_booked_till` BETWEEN ? AND ?", [
+        $booking = DB::select("select * from `bookings` where booked_tutor = ? && class_date = ? && class_time BETWEEN ? AND ? or `class_booked_till` BETWEEN ? AND ?", [
             $request->tutor_id,
             $class_date,
             $from_time,
@@ -123,7 +123,8 @@ class BookingController extends Controller
             $from_time,
             $to_time
         ]);
-        // dd(DB::getQueryLog());
+
+
         $bookings = collect($booking);
 
         if($bookings->count() <= 0){
