@@ -458,13 +458,17 @@
                                                                         <span class="bg-color-apporve">
                                                                             Cancelled
                                                                         </span>
+                                                                    @elseif($booking->status == 5)
+                                                                        <span class="bg-color-apporve">
+                                                                            Dlivered
+                                                                        </span>
 
                                                                     @endif
                                                                 </td>
                                                                 <td class="pt-3 pb-3" style="text-align: center; " >
-                                                                    <a class="cencel-btn mr-2" data-toggle="modal" data-target="#payModel" >
+                                                                    <!-- <a class="cencel-btn mr-2" data-toggle="modal" data-target="#payModel" >
                                                                         Pay Now
-                                                                    </a>
+                                                                    </a> -->
                                                                     <a href="{{route('student.booking-detail',[$booking->id])}}"  class="schedule-btn">
 
                                                                             View details

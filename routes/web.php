@@ -276,7 +276,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::get('/booking-detail/{id}',[StudentBookingController::class,'bookingDetail'])->name('student.booking-detail');
     Route::get('/booking/{id}/tutor',[StudentBookingController::class,'directBooking'])->name('student.direct.booking');
 
-    Route::post('/cancelBooking/{id}',[StudentBookingController::class,'cancelBooking'])->name('student.booking.cancel');
+    Route::post('/cancelBooking',[StudentBookingController::class,'cancelBooking'])->name('student.booking.cancel');
     Route::post('/rescheduleBooking',[StudentBookingController::class,'rescheduleBooking'])->name('student.booking.reschedule');
 
     Route::post('/booking/payment/{id}',[StudentBookingController::class,'bookingPayment'])->name('student.booking.payment');

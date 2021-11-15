@@ -279,4 +279,49 @@ $( '#res-task' ).on( 'submit', function(e) {
 
 
 });
+
+$( '#cancel-task' ).on( 'submit', function(e) {
+    event.preventDefault();
+
+        $.ajax({
+            url: "{{route('student.booking.cancel')}}",
+            type:'post',
+            data:new FormData( this ),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                // console.log(response);
+                if(response.status_code == 200) {
+                    toastr.success(response.message,{
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    $("#exampleModalCenter").modal('hide');
+                    location.reload();
+
+                } else if(response.status == 400) {
+                        toastr.error(response.message,{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+
+                }
+            },
+            error:function(e){
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+
+
+});
 </script>

@@ -88,7 +88,7 @@ class ClassController extends Controller
             $booking->save();
 
             return response()->json([
-                "message" => "Class Delivered.",
+                "message" => "Class Delivered! Thank You for using Tutorvy",
                 "status_code" => 200,
                 "success" => true,
             ]);

@@ -1817,8 +1817,10 @@ designer.appendTo(document.getElementById('widget-container'), function() {
         });
 
         timer.addEventListener('targetAchieved', function (e) {
+          
             endclass();
             // $('#endCall').modal("show");
+          
         });
         /* Javascript Timer ENd */
 
@@ -1826,6 +1828,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             $('#countdownExample .values').html("Class Time Over");
             // $('#endCall').modal("show");
             endclass();
+          
         }
 
         // start timer here
@@ -2115,8 +2118,17 @@ function endclass(){
         success:function(response){
             console.log(response);
             if(response.status_code == 200){
-
+                toastr.success(response.message,{
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500
+            });
+            setInterval(function(){
+                        window.location.href = "{{ route('tutor.booking') }}";
+                    }, 1500);
             }
+            
         },
         error:function(e) {
             console.log(e)

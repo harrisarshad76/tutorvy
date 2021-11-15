@@ -281,8 +281,9 @@
                                 </div>
                             </div>
                             <div style="text-align: center;" class="mt-2 mb-2">
-                                <form action="{{route('student.booking.cancel',[$booking->id])}}" method="post">
+                                <form id="cancel-task">
                                     @csrf
+                                    <input type="hidden" name="idid" value={{$booking->id}}" >
                                     <button type="submit" class="cencel-btn" style="width: 130px;">Yes, Cancel</button>
                                     &nbsp;&nbsp;
                                     <button type="button" class="schedule-btn" data-dismiss="modal"
