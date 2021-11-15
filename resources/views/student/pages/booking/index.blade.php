@@ -460,7 +460,7 @@
                                                                         </span>
                                                                     @elseif($booking->status == 5)
                                                                         <span class="bg-color-apporve">
-                                                                            Dlivered
+                                                                            Completed
                                                                         </span>
 
                                                                     @endif
