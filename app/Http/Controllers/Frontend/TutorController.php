@@ -133,4 +133,9 @@ class TutorController extends Controller
         return view('tutor.pages.classroom.widget');
     }
 
+    public function subjects(){
+        $subjects = Subject::all();
+        return view('frontend.student',compact('subjects'));
+    }
+
 }
