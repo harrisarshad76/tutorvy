@@ -510,7 +510,7 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
 
 

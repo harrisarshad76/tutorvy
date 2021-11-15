@@ -50,6 +50,8 @@
     border: none;
     padding: 0;
     border-radius: 3px;
+    position:absolute;
+    top:0;
 }
 
 
@@ -152,7 +154,7 @@ hr {
     height:500px !important;
 }
 .h-200{
-    height:200px !important;
+    height:220px !important;
     min-height: 65px !important;
 }
    .container-police {
@@ -1133,14 +1135,14 @@ connection.DetectRTC.load(function() {
                     connection.mediaConstraints.video = true;
                     connection.session.video = true;
                     // $(".overlayCam").css("display","none");
-                    alert('attach true camera');
+                    // alert('attach true camera');
                 }else{
                     console.log(connection.DetectRTC)
                     // connection.dontCaptureUserMedia = true;
                     // connection.DetectRTC.isWebsiteHasWebcamPermissions
                     connection.mediaConstraints.video = false;
                     connection.session.video = false;
-                    alert('no camera')
+                    // alert('no camera')
                     // connection.dontCaptureUserMedia = true;
                     
                     // connection.mediaConstraints.video = true;
@@ -1466,11 +1468,13 @@ $("#endCallYes").click(function(){
         call_ended: true
     });
     $("#endCall").modal("hide");
+    $(".content-wrapper").css("display",'none');
+
     toastr.success("Class has Ended.");
 
     window.location.href="{{route('tutor.classroom')}}";
 
-})
+});
 var conversationPanel = document.getElementById('conversation-panel');
 
 function appendChatMessage(event, checkmark_id) {
@@ -1505,7 +1509,7 @@ function appendChatMessage(event, checkmark_id) {
 
     conversationPanel.scrollTop = conversationPanel.clientHeight;
     conversationPanel.scrollTop = conversationPanel.scrollHeight - conversationPanel.scrollTop;
-}
+};
 
 var keyPressTimer;
 var numberOfKeys = 0;
@@ -1611,7 +1615,7 @@ function getFileHTML(file) {
         `+attachName+``;
     }
     return attachment;
-}
+};
 
 function getFullName(userid) {
     var _userFullName = userid;
@@ -1619,7 +1623,7 @@ function getFullName(userid) {
         _userFullName = connection.peers[userid].extra.userFullName;
     }
     return _userFullName;
-}
+};
 
 connection.onFileEnd = function(file) {
     var html = getFileHTML(file);
@@ -1719,7 +1723,7 @@ function updateLabel(progress, label) {
     if (progress.position == -1) return;
     var position = +progress.position.toFixed(2).split('.')[1] || 100;
     label.innerHTML = position + '%';
-}
+};
 
 // if(!!params.password) {
 //     connection.password = params.password;
@@ -1884,7 +1888,7 @@ function addStreamStopListener(stream, callback) {
             callback = function() {};
         }, false);
     });
-}
+};
 
 function replaceTrack(videoTrack, screenTrackId) {
     if (!videoTrack) return;
@@ -1913,7 +1917,7 @@ function replaceTrack(videoTrack, screenTrackId) {
             }
         });
     });
-}
+};
 
 function replaceScreenTrack(stream) {
     stream.isScreen = true;
@@ -1958,7 +1962,7 @@ function replaceScreenTrack(stream) {
             height: $('#widget-container').height()
         });
     $('#screen-viewer').show();
-}
+};
 
 $('#btn-share-screen').click(function() {
     if(!window.tempStream) {
@@ -1996,8 +2000,7 @@ $("#addNewBoard").click(function(){
         <a class="nav-item white-item nav-link board-nav active" id="nav-whiteboard-`+count+`" data-toggle="tab" href="#nav-home-`+count+`" role="tab" aria-controls="nav-profile" aria-selected="false">Board `+count+` <i class="pl-2 fa fa-times text-dark"></i></a>
     `;
     var tech = `
-            <div class="tab-pane fade show active whitePane" id="nav-home-`+count+`" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                      
+            <div class="tab-pane fade show active whitePane" id="nav-home-`+count+`" role="tabpanel" aria-labelledby="nav-home-tab">                                                    
                 <div class="row">
                     <div class="col-md-12 h-500 mb-5">
                         <div class="" id="widget-container" style=""></div>
@@ -2009,9 +2012,9 @@ $("#addNewBoard").click(function(){
     $(".whitePane").removeClass("show");
     $(".newTabs").prepend(techno);
     $(".newWhite").append(tech);
-    alert("New Board Added");
+    // alert("New Board Added");
     count++;
-})
+});
 
 function saveClassLogs() {
 
@@ -2038,7 +2041,7 @@ function saveClassLogs() {
         }
     });
 
-}
+};
 function copyToClipboard(elementId) {
 
     // Create a "hidden" input
@@ -2061,11 +2064,7 @@ function copyToClipboard(elementId) {
 
     toastr.success("Link Copied Successfully");
 
-}
-
-
-
-
+};
 /* Add New Board Section */
 
 
@@ -2082,7 +2081,7 @@ function secondsToHms(secs) {
 
     var fin = h + ":" + m + ":" + s;
     return fin;
-}
+};
 
 // hms to seconds
 function HmsToSeconds(hms) {
@@ -2093,6 +2092,9 @@ function HmsToSeconds(hms) {
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
     return seconds;
 }
+if ($("#reviewModal").hasClass("show")) {
+  $(".content-wrapper").css("display","none");
+};
 </script>
 
 

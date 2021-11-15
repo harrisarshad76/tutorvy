@@ -290,7 +290,7 @@
                                                     </a>
                                                 </span>
                                                 <span class="col-md-6">
-                                                    <a href="" class="view-bookings">
+                                                    <a onclick="allRead(event)" class="view-bookings" style="cursor:pointer;">
                                                         Mark all read
                                                     </a>
                                                 </span>
@@ -464,7 +464,7 @@
                                                 </a>
                                             </span>
                                             <span class="col-md-6 text-right">
-                                                <a href="" class="view-bookings">
+                                                <a onclick="allRead(event)" class="view-bookings" style="cursor:pointer;">
                                                     Mark all read
                                                 </a>
                                             </span>

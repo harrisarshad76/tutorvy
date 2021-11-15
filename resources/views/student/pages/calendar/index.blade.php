@@ -144,7 +144,7 @@
     var today = new Date;
 
     for(var i= 0; i < bookings.length; i++) {
-        bookings[i].title = 'Class Start at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
+        bookings[i].title = 'Class Start at' + moment(bookings[i].titles , 'hh:mm').format('LT');
     }
 
     var data = bookings;

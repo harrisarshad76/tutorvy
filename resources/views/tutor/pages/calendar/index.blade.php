@@ -103,7 +103,25 @@
         var today = new Date;
 
         for(var i= 0; i < bookings.length; i++) {
-            bookings[i].title = 'Class Start at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
+            var previous = bookings[i].start;
+            var todayDate = moment(today).format('YYYY-MM-DD');
+            // console.log(bookings[i].start , "Bookings Check");
+            // console.log(moment(today).format('YYYY-MM-DD'),"TOday");
+            
+            if(previous > todayDate){
+                bookings[i].title = 'Class will Start at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
+                // console.log("Previous is coming");
+               
+            }
+            else if(previous < todayDate){
+                // console.log("Previous is gone");
+                bookings[i].title = 'Class ends at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
+            }
+            else if(previous = todayDate){
+                // console.log("Previous is today");
+                bookings[i].title = 'Class Start at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
+            }
+            // bookings[i].title = 'Class Start at ' + moment(bookings[i].titles , 'hh:mm').format('LT');
         }
 
         var data = bookings;
@@ -125,7 +143,7 @@
             },
             events: data,
             select:function(start, end ,allday) {
-                
+              
             },
             eventClick: function(info) {
 
@@ -143,7 +161,7 @@
 
         calendar.render();
         });
-
+     
     </script>
 @endsection
   

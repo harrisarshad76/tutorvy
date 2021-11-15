@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li class="btn @if(\Request::path() === 'student/knowledge')  @endif w-100">
-                        <a href="{{route('student.settings')}}">
+                        <a href="{{route('knowledge')}}">
                             <img src="{{asset('assets/images/ico/book-ico.png')}}" alt="setting-ico" class=" mr-2">
                             Knowledge Base
                         </a>
@@ -123,7 +123,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6" style="text-align: right;">
-                                        <a href="" class="notification-text2">
+                                        <a type="button" onclick="allRead(event)"  class="notification-text2">
                                             Mark all read
                                         </a>
                                     </div>
@@ -211,7 +211,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="" class="notification-text2">
+                                                <a type="button" onclick="allRead(event)"  class="notification-text2">
                                                     Mark all read
                                                 </a>
                                             </div>
@@ -246,8 +246,15 @@
                     </a>
                     @auth
                         @if(Auth::user()->picture)
+                            <?php
+                                $path = Auth::user()->picture;
+                            ?>
+                            @if(file_exists( public_path($path) ))
                                 <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset(Auth::user()->picture) }}" data-toggle="dropdown" alt="profile">
-                            
+                            @else
+                                <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                                
+                            @endif
                         @else
                             <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                         @endif

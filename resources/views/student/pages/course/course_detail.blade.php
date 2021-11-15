@@ -100,6 +100,7 @@
                                         <iframe width="100%" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY"
                                             style="border-radius: 8px;">
                                         </iframe>
+
                                     @elseif($course->thumbnail != null && $course->thumbnail != '')
                                         <img width="100%" height="345" src="{{ asset($course->thumbnail) }}"></img>
                                     @else
@@ -232,12 +233,13 @@
                                                                         ${{ $course->basic_price ?? 0 }}
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 ">
-                                                                    <button class="schedule-btn w-100 mt-4"
-                                                                        data-toggle="modal" data-target="#payModel"
-                                                                        onclick="pay_now({{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy
-                                                                        Now</button>
-                                                                </div>
+                                                                    <div class="col-md-12 ">
+                                                                        <button class="schedule-btn w-100 mt-4"
+                                                                            data-toggle="modal" data-target="#payModel"
+                                                                            onclick="pay_now({{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy
+                                                                            Now</button>
+                                                                    </div>
+                                                              
                                                             </div>
                                                         </div>
                                                     </div>

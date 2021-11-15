@@ -27,7 +27,8 @@
 
       /*Progress Bar STyle */
       .leftSeat p{
-         font-size:16px;
+        font-size: 15px;
+    padding-top: 6px;
      }
      .progress{
         width: 51px !important;
@@ -320,7 +321,7 @@
                                             <p class="mt-2">Next batch is starting from {{date('d M, Y', strtotime($course->basic_start_time))}}</p>
                                         </div>
                                         <div class="col-md-4 text-center">
-                                            <div class="progress blue">
+                                            <div class="progress blue m-0">
                                                 <span class="progress-left">
                                                     <span class="progress-bar"></span>
                                                 </span>
@@ -383,7 +384,7 @@
                                     <p class="mt-2">Next batch is starting from {{date('d M, Y', strtotime($course->basic_start_time))}}</p>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <div class="progress blue">
+                                        <div class="progress blue m-0">
                                             <span class="progress-left">
                                                 <span class="progress-bar"></span>
                                             </span>
@@ -449,7 +450,7 @@
                                     <p class="mt-2">Next batch is starting from {{date('d M, Y', strtotime($course->start_date))}}</p>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <div class="progress blue">
+                                        <div class="progress blue m-0">
                                             <span class="progress-left">
                                                 <span class="progress-bar"></span>
                                             </span>

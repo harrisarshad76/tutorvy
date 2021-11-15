@@ -308,6 +308,12 @@ function get_all_notifications() {
                 var notification = ``;
                 if (obj.length == 0) {
                     $('.show_notification_counts').text(0);
+                    notification += `
+                                                        <li class="text-center">
+                                                            No more unread notifications
+                                                        </li>
+                                                            `;
+                                    $(".show_all_notifications").html(notification);
                 } else {
                     $('.show_notification_counts').text(obj.length);
                     for (var i = 0; i < obj.length; i++) {
@@ -356,6 +362,27 @@ function get_all_notifications() {
         }
     });
 }
+
+function allRead(event){
+    event.preventDefault();
+        $.ajax({
+            url: "{{ route('markAllRead') }}",
+            type: "get",
+            dataType: 'json',
+            cache: false,
+            async:false,
+            success: function(data) {
+                get_all_notifications();
+                // $('.message-item').remove();
+                
+            },
+            failure: function(errMsg) {
+                console.log(errMsg);
+            }
+        });
+        
+    };
+
 
 function langshort(opt) {
     var val = opt.options[opt.selectedIndex].innerHTML;

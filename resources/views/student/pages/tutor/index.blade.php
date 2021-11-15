@@ -387,7 +387,14 @@
                                                     <div class="col-md-2 col-6 pr-0 div-center">
                                                         <a href="{{route('student.tutor.show',[$tutor->id])}}">
                                                             @if($tutor->picture != null)
-                                                                <img src="{{asset($tutor->picture)}}" alt="" class="profile-img " style="height:70px; width:70px;">
+                                                                <?php
+                                                                    $path = $tutor->picture;
+                                                                ?>
+                                                                @if(file_exists( public_path($path) ))
+                                                                    <img src="{{asset($tutor->picture)}}" alt="" class="profile-img " style="height:70px; width:70px;">
+                                                                @else
+                                                                    <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="" class="profile-img " style="height:70px; width:70px;">   
+                                                                @endif
                                                             @else
                                                                 <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="" class="profile-img " style="height:70px; width:70px;">
                                                             @endif

@@ -7,6 +7,7 @@
     ;
 }
 
+
 /* bnutton toogle left onclick */
 
 .toogle {
@@ -49,28 +50,33 @@
     padding-right: 280px;
     position: relative;
 }
-.input-paragraph-1{
+
+.input-paragraph-1 {
     width: 100%;
     padding: 15px;
     border: none;
     border: 1px solid #D6DBE2;
-    padding-right: 280px; 
+    padding-right: 280px;
     margin-bottom: 20px;
     border-radius: 8px;
 }
-.input-paragraph-1:focus{
+
+.input-paragraph-1:focus {
     outline: none;
     border-color: #1173FF;
 }
+
 .schedule-btn-float {
     position: absolute;
     right: 50px;
     bottom: 25px;
     width: 100px !important;
 }
-.schedule-btn-add{
+
+.schedule-btn-add {
     width: 160px !important;
 }
+
 .input-paragraph:focus {
     outline: none !important;
 }
@@ -79,7 +85,6 @@
     position: absolute;
     bottom: 30px;
     right: 220px;
-
 }
 
 .repeat-image-2 {
@@ -97,12 +102,14 @@
     outline: none;
     border-color: #1173FF;
 }
-.card-1{
+
+.card-1 {
     border: 1px solid #D6DBE2;
     height: 600px;
     /* height: auto 100px; */
     border-radius: 8px;
 }
+
 .input-icons i {
     position: absolute;
 }
@@ -141,6 +148,7 @@ a:hover {
     border-radius: 4px;
     font-size: 15 px;
 }
+
 
 /* deatail booking */
 
@@ -183,6 +191,7 @@ a:hover {
     font-family: 'Poppins';
     border-radius: 4px;
 }
+
 
 /*  */
 
@@ -262,7 +271,8 @@ a:hover {
     cursor: pointer !important;
 }
 
-.table-image td, th {
+.table-image td,
+th {
     vertical-align: middle;
 }
 
@@ -298,6 +308,7 @@ th {
     border: none !important;
 }
 
+
 /* search */
 
 .input[type=text] {
@@ -329,6 +340,7 @@ th {
 .bg-custom-2 {
     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 }
+
 
 /* notification */
 
@@ -421,6 +433,7 @@ th {
     border-radius: 4px;
 }
 
+
 /*  */
 
 @-webkit-keyframes INDENT {
@@ -470,37 +483,33 @@ th {
         text-indent: 0;
     }
 }
+
 .file-attach[type="file"] {
     height: 0;
     overflow: hidden;
     width: 0;
-  }
-  
-  .file-attach[type="file"] + label {
+}
+
+.file-attach[type="file"]+label {
     border: none;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     display: inline-block;
-      font-family: 'Rubik', sans-serif;
-      font-size: inherit;
+    font-family: 'Rubik', sans-serif;
+    font-size: inherit;
     font-weight: 500;
     margin-bottom: 1rem;
     outline: none;
     padding: 0px;
-
     transition: all 0.3s;
     vertical-align: middle;
-    
-  }  
-.form-border{
-
-border: 1px solid #B7D0F3;
-border-radius: 8px;
-
-
 }
 
+.form-border {
+    border: 1px solid #B7D0F3;
+    border-radius: 8px;
+}
 
 a[data-toggle="collapse"] {
     position: relative
@@ -515,33 +524,35 @@ a[data-toggle="collapse"] {
 }
 
 .content-wrapper {
-    padding: 15px
+    padding: 15px 25px;
 }
-.textarea-ticket{
-    width: 100% ;
+
+.textarea-ticket {
+    width: 100%;
     min-height: 150px;
     max-height: 150px;
-border:0px;
-
-
+    border: 0px;
 }
-.bg-sky{
+
+.bg-sky {
     background-color: #EEF5FF;
-
 }
-.rd-8{
+
+.rd-8 {
     border-radius: 8px !important;
 }
-.divided-line{
+
+.divided-line {
     width: 100%;
     border-bottom: 1px solid #D6DBE2;
     margin-bottom: 10px;
 }
 
-.textarea-ticket:focus{
+.textarea-ticket:focus {
     outline: none;
     border-color: #1173FF !important;
 }
+
 @media(max-width:768px) {
     #sidebar {
         margin-left: -250px;
@@ -652,7 +663,8 @@ border:0px;
     }
 }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
     .table {
         overflow: auto !important;
         white-space: nowrap !important;

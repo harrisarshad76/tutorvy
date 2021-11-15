@@ -167,6 +167,7 @@
     
      ::-webkit-scrollbar {
         width: 4px;
+        height: 7px;
     }
     /* Track */
     
@@ -509,7 +510,7 @@
     }
     
     .content-wrapper {
-        padding: 15px
+        padding: 15px 25px;
     }
     /* side support section css */
     

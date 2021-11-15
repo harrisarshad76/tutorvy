@@ -473,10 +473,23 @@
                                                         <label for="imageUpload"></label>
                                                     </div>
                                                     <div class="avatar-preview">
-                                                        @if(Auth::user()->picture != null)
-                                                            <div id="imagePreview" style="background-image: url('{{asset(Auth::user()->picture)}}');"> </div>
+                                                        @if (Auth::user()->picture != null)
+                                                            <?php
+                                                                $path = Auth::user()->picture;
+                                                            ?>
+                                                            @if(file_exists( public_path($path) ))
+                                                            <div id="imagePreview"
+                                                                style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                            </div>
+                                                            @else
+                                                            <div id="imagePreview"
+                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                            </div>
+                                                            @endif
                                                         @else
-                                                        <div id="imagePreview" style="background-image: url({{asset('assets/images/ico/porfile-main.png')}});"> </div>
+                                                            <div id="imagePreview"
+                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                            </div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -788,7 +801,9 @@
                                                  <div class=" col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">Completion Date</label>
                                                     <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control" value="{{$edu->year}}"> -->
-                                                    <select name="graduate_year[]" id="" class="yearpicker form-select">
+                                                    <select name="graduate_year[]"  id="" class="yearpicker form-select">
+                                                        
+                                                        <option value="{{$edu->year}}" disabled selected> {{$edu->year}}</option>
                                                         <option value="2000">2000</option>
                                                         <option value="2001">2001</option>
                                                         <option value="2002">2002</option>
@@ -811,7 +826,7 @@
                                                         <option value="2019">2019</option>
                                                         <option value="2020">2020</option>
                                                         <option value="2021">2021</option>
-                                                        <option value="202s2">2022</option>
+                                                        <option value="2022">2022</option>
                                                         <option value="2023">2023</option>
                                                     </select>
                                                 </div>
@@ -903,11 +918,11 @@
                                                                     <option value="2019">2019</option>
                                                                     <option value="2020">2020</option>
                                                                     <option value="2021">2021</option>
-                                                                    <option value="202s2">2022</option>
+                                                                    <option value="2022">2022</option>
                                                                     <option value="2023">2023</option>
                                                                 </select>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-6" id="proEnd">
                                                             <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
                                                             <!-- <input type="date" value=""
                                                                 class="form-control" name="degree_end[]"
@@ -936,10 +951,15 @@
                                                                     <option value="2019">2019</option>
                                                                     <option value="2020">2020</option>
                                                                     <option value="2021">2021</option>
-                                                                    <option value="202s2">2022</option>
+                                                                    <option value="2022">2022</option>
                                                                     <option value="2023">2023</option>
                                                                 </select>
 
+                                                        </div>
+                                                        <div class="col-md-6 Cwork">
+                                                            <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
+
+                                                            <input type="text" value="Currently Working" disabled >
                                                         </div>
                                                         <div class="col-md-8 mt-2 mb-3">
                                                             <div class="custom-control custom-checkbox">
@@ -986,7 +1006,8 @@
                                                                         value="{{ $profession->start_date ?? '' }}"
                                                                         class="form-control" name="degree_start[]"
                                                                         placeholder="Starting date" value="">-->
-                                                                        <select value="{{ $profession->start_date ?? '' }}" name="degree_start[]" class="yearpicker  form-select">
+                                                                        <select name="degree_start[]" class="yearpicker  form-select">
+                                                                            <option value="{{$profession->start_date}}" selected disable>{{$profession->start_date}}</option>
                                                                             <option value="2000">2000</option>
                                                                             <option value="2001">2001</option>
                                                                             <option value="2002">2002</option>
@@ -1009,17 +1030,19 @@
                                                                             <option value="2019">2019</option>
                                                                             <option value="2020">2020</option>
                                                                             <option value="2021">2021</option>
-                                                                            <option value="202s2">2022</option>
+                                                                            <option value="2022">2022</option>
                                                                             <option value="2023">2023</option>
                                                                         </select>
 
                                                                 </div>
-                                                                <div class=" col-md-6">
+                                                                <div class=" col-md-6"  id="proEnd">
                                                                     <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
                                                                     <!-- <input type="date" value="{{ $profession->end_date ?? '' }}"
                                                                         class="form-control" name="degree_end[]"
                                                                         placeholder="Ending Date" value="" id="kinEnd"> -->
-                                                                        <select value="{{ $profession->end_date ?? '' }}" name="degree_end[]" class="yearpicker form-select" id="proEnd">
+                                                                        <select  name="degree_end[]" class="yearpicker form-select">
+                                                                            <option value="{{$profession->end_date}}" selected disable>{{$profession->end_date}}</option>
+                                                                            
                                                                             <option value="2000">2000</option>
                                                                             <option value="2001">2001</option>
                                                                             <option value="2002">2002</option>
@@ -1042,14 +1065,19 @@
                                                                             <option value="2019">2019</option>
                                                                             <option value="2020">2020</option>
                                                                             <option value="2021">2021</option>
-                                                                            <option value="202s2">2022</option>
+                                                                            <option value="2022">2022</option>
                                                                             <option value="2023">2023</option>
                                                                         </select>
+                                                                        
+                                                                </div>
+                                                                <div class="col-md-6 Cwork">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
+                                                                    <input type="text" value="Currently Working " disabled>
                                                                 </div>
                                                                 <div class="col-md-8 mt-2 mb-3">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" name="working" id="proWorking">
-                                                                        <label class="custom-control-label" for="working">Currently Working? </label>
+                                                                        <input type="checkbox" class="custom-control-input" name="proWorking" id="proWorking">
+                                                                        <label class="custom-control-label" for="proWorking">Currently Working? </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1225,6 +1253,7 @@
             if(url.indexOf(text) != -1){
                 $("#v-pills-Verification-tab").click();
             }
+            $(".Cwork").hide();
 
             $("#year").yearpicker({
                 year: {{ Auth::user()->year ?? '1990' }},
@@ -1234,30 +1263,36 @@
         });
         $("#working").change(function(){
             var checkBox = document.getElementById("working");
+            // if(checkBox.checked == true){
+            //     $("#kinEnd").attr("type","text");
+            //     $("#kinEnd").val("Currently Working");
+            //     $("#kinEnd").attr("disabled","disabled");
+            // }
+            // else{
+            //     $("#kinEnd").attr("type","date");
+            //     $("#kinEnd").removeAttr("disabled","disabled");
+            //     $("#kinEnd").val("Currently Working");  
+
+            // }
             if(checkBox.checked == true){
-                $("#kinEnd").attr("type","text");
-                $("#kinEnd").val("Currently Working");
-                $("#kinEnd").attr("disabled","disabled");
+                $("#proEnd").hide();
+                $(".Cwork").show();
             }
             else{
-                $("#kinEnd").attr("type","date");
-                $("#kinEnd").removeAttr("disabled","disabled");
-                $("#kinEnd").val("Currently Working");
-
-
+                $("#proEnd").show();
+                $(".Cwork").hide();
             }
         })
         $("#proWorking").change(function(){
-            var checkBox = document.getElementById("prWorking");
+            var checkBox = document.getElementById("proWorking");
             if(checkBox.checked == true){
-                $("#proEnd").attr("type","text");
-                $("#proEnd").val("Currently Working");
-                $("#proEnd").attr("disabled","disabled");
+                $("#proEnd").hide();
+                $(".Cwork").show();
+            
             }
             else{
-                $("#proEnd").attr("type","select");
-                $("#proEnd").removeAttr("disabled","disabled");
-                $("#proEnd").val("Currently Working");
+                $("#proEnd").show();
+                $(".Cwork").hide();
             }
         })
         $("#country_selector").countrySelect({

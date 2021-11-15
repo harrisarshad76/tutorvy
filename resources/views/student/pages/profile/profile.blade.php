@@ -143,7 +143,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div class=" text-center">
-                                <img src="{{asset($student->picture)}}" class="profile-card-img" class="w-50">
+                                @if($student->picture != null)  
+                                    <?php
+                                        $path = $student->picture;
+                                    ?>
+                                    @if(file_exists( public_path($path) ))
+                                        <img src="{{asset($student->picture)}}" class="profile-card-img" class="w-50">
+                                    @else
+                                        <img src="{{asset('assets/images/ico/Square-white.jpg')}}" class="profile-card-img" class="w-50">  
+                                    @endif
+                                @else
+                                    <img src="{{asset('assets/images/ico/Square-white.jpg')}}" class="profile-card-img" class="w-50">
+                                @endif
                                 <p class="heading-third mt-3">{{$student->first_name}} {{$student->last_name}}</p>
                                 <p class="paragraph-text1 mt-0" style="line-height: 0;">Student</p>
                                 <a href="{{route('student.profile')}}" class="schedule-btn w-100 mt-3 decoration-none">Edit Profile</a>

@@ -332,6 +332,7 @@
                                         <div class="col-md-12">
                                             <hr>
                                         </div>
+<<<<<<< HEAD
 
                                         @if ($paypal_payment != null)
                                         <div class="col-md-4">
@@ -358,6 +359,75 @@
                                         </div>
                                         @endif
 
+=======
+                                        <div class="col-md-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                        <img class=" w-50" src="{{asset ('assets/images/payment-icon/Payoneer_logo.png')}}" alt="">
+
+                                                            
+                                                            <span class="payment-menu dropdown d-flex">
+                                                                <a class=" d-flex" href="#" data-toggle="dropdown"
+                                                                    aria-expanded="true">
+                                                                    <img src="{{ asset('assets/images/payment-icon/menu_dots.png') }}"
+                                                                        alt="">
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        <a tabindex="-1" class="" href="">
+                                                                            Edit
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a tabindex=" -1" class="" href="">
+                                                                            Delete
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </span>
+                                                            <span class=" round">
+                                                                <input type="radio" name="payment" onclick="defaultMethod(this.value)" value="" id="checkbox1"  />
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @if ($paypal_payment != null)
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <img src="{{ asset('assets/images/payment-icon/paypal_logo_512.png') }}"
+                                                                alt="">
+                                                            <span class="payment-menu dropdown d-flex">
+                                                                <a class=" d-flex" href="#" data-toggle="dropdown"
+                                                                    aria-expanded="true">
+                                                                    <img src="{{ asset('assets/images/payment-icon/menu_dots.png') }}"
+                                                                        alt="">
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        <a tabindex="-1" class="" href="">
+                                                                            Edit
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a tabindex=" -1" class="" href="">
+                                                                            Delete
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </span>
+                                                            <span class=" round">
+                                                                <input type="radio" name="payment" onclick="defaultMethod(this.value)" value="" id="checkbox1" />
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+>>>>>>> 9c8334dec80c5e05f9a9a584d8a5a8966ba8545d
                                     </div>
                                 </div>
 

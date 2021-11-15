@@ -111,7 +111,7 @@ hr {
     height:500px !important;
 }
 .h-200{
-    max-height:200px !important;
+    max-height:230px !important;
     min-height: 65px !important;
 }
    .container-police {
@@ -1052,7 +1052,7 @@ height:25px;
             </div>
         </div>
     </div>
- <!--Reschedule meeting-->default  <!-- Modal -->
+ <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content pt-4 pb-4">
@@ -1338,8 +1338,11 @@ connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
 connection.extra.userFullName = fullName;
 
 connection.DetectRTC.load(function() {
+    console.log(connection.DetectRTC,"Kick");
     connection.onMediaError=function(error,constraints){
         console.log(error)
+        console.log(constraints)
+
         if(error == 'NotReadableError: Could not start video source'){
             alert('Unable to get camera. Please check camera is not used by any other program or and refresh the page again to start the class.')
             $("#join_now").hide();
@@ -1463,14 +1466,14 @@ connection.DetectRTC.load(function() {
                 for(var v = 0 ; v < varr.length ; v++){
                     if(varr[v].deviceId != undefined){
                         
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video if')
                         connection.mediaConstraints.video = true;
                         connection.session.video = true;
                         $(".overlayCam").css("display","none");
                         $(".no-vc").show();
-                        alert('attach true camera');
+                        // alert('attach true camera');
                     }else{
-                        console.log(connection.DetectRTC)
+                        console.log(connection.DetectRTC+'in video else')
                         // connection.dontCaptureUserMedia = true;
                         // connection.DetectRTC.isWebsiteHasWebcamPermissions
                         connection.mediaConstraints.video = false;
@@ -1495,6 +1498,8 @@ connection.DetectRTC.load(function() {
         $(".no-vc").hide();
         $(".overlayCam").css("display","block");
         // alert('attach Cam First');
+        connection.mediaConstraints.video = false;
+        connection.session.video = false;
     }
 
     if (connection.DetectRTC.hasSpeakers === false) { // checking for "false"
@@ -1649,6 +1654,7 @@ connection.onmessage = function(event) {
     }
     if(event.data.call_ended === true){
         toastr.success("Tutor ended the class.");
+        $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
     }
     if(event.data.is_timer === true){
@@ -1732,7 +1738,7 @@ $(".no-vc").click(function(){
                     $(".overlayCam").css("display","none");
                    
                   
-                    alert('attach true 2 camera');
+                    // alert('attach true 2 camera');
                     var localStream = connection.attachStreams[0];
     
                     localStream.mute('video');
@@ -1758,10 +1764,10 @@ $(".no-vc").click(function(){
         }
 
     }else if (connection.DetectRTC.hasWebcam === false) {
-        alert("No Blovk");
+        // alert("No Blovk");
         $(".no-vc").hide();
         $(".overlayCam").css("display","block");
-        alert('attach Cam First');
+        // alert('attach Cam First');
     }
 });
 $(".vc").click(function(){
@@ -1790,6 +1796,7 @@ $("#endCallYes").click(function(){
     toastr.success("Class has Ended.");
     $("#endCall").modal("hide");
     $("#reviewModal").modal("show");
+    $(".content-wrapper").css("display",'none');
     
 })
 var conversationPanel = document.getElementById('conversation-panel');
@@ -2077,7 +2084,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     //         });
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
-            alert('in join')
+            // alert('in join')
             
             if (error) {
                 console.log(error)
@@ -2157,6 +2164,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
                 $('#reviewModal').modal("show");
+                $(".content-wrapper").css("display","none");
 
             });
             /* Javascript Timer ENd */
@@ -2164,6 +2172,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             if(today_date_seconds > class_end_seconds) {
                 $('#countdownExample .values').html("Class Time Over");
                 $('#reviewModal').modal("show");
+                $(".content-wrapper").css("display","none");
             }
 
 
@@ -2178,6 +2187,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 function addStreamStopListener(stream, callback) {
     stream.addEventListener('ended', function() {
         callback();
+        // alert("check");
         callback = function() {};
     }, false);
 
@@ -2375,6 +2385,9 @@ function HmsToSeconds(hms) {
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
     return seconds;
+}
+if ($("#reviewModal").hasClass("show")) {
+  $(".content-wrapper").css("display","none");
 }
 </script>
 @endsection

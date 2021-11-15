@@ -134,3 +134,13 @@
     height: auto !important;
     margin-top: 0 !important;
 }
+
+.border-round {
+    border-radius: 5px;
+}
+
+.course_thumb {
+    max-width: 100%;
+    height: 165px;
+    border-radius: 9px;
+}

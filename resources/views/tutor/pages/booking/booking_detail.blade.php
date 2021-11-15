@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="mr-3 heading-first">
-                            < Booking Details </p>
+                             Booking Details </p>
                     </div>
 
                     @if(Session::has('success'))
@@ -50,17 +50,37 @@
                                 style="border-bottom: 1px solid #D6DBE2; display: inline-flex;">
                                 <p class="col-md-6 col-xs-12 class-ch"
                                     style="margin-top: 10px; text-align: left;color: #00132D;font-size: 22px;font-family: Poppins;font-weight: 500;">
-                                    {{ $booking->subject->name }} Class
+                                    {{ $booking->subject->name }} Class   
+                                    
+                                    @if($booking->status == 0)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve3"> Pending</span>
+                                    @elseif($booking->status == 1)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve3"> Payment Pending</span>
+                                    @elseif($booking->status == 2)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve1"> Approved</span>
+                                    @elseif($booking->status == 3)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Tutor</span>
+                                    @elseif($booking->status == 4)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Student</span>
+                                    @elseif($booking->status == 5)
+                                        <span style="display:inline-flex ;" class="bg-success"> Delivered</span>
+                                    @elseif($booking->status == 6)
+                                        <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by System</span>
+                                    @endif
+
+
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
-
-                                    <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-                                        class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
-                                        Booking</button>
-                                    <button type="button" data-toggle="modal" data-target="#exampleModalCente"
+                                    @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 )
+                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
+                                            Booking
+                                        </button>
+                                    @endif
+                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                         class="schedule-btn" style="font-size: 12px;width: 150px;"> Re-schedule
                                         class
-                                    </button>
+                                    </button> -->
 
                                     @if ($booking->status == 0)
                                         <button type="button" data-toggle="modal" data-target="#approveModal"
@@ -75,13 +95,19 @@
                                         <div class="col-md-9">
                                             <div class="row image1 mt-3 ml-1">
                                                 <div class="col-md-1">
-                                                    @if ($booking->user->picture)
-                                                        <img src="{{ asset($booking->user->picture) }}" alt="boy"
-                                                            class="profile-img">
+                                                    @if($booking->user->picture)
+                                                        <?php
+                                                            $path = $booking->user->picture;
+                                                        ?>
+                                                        @if(file_exists( public_path($path) ))
+                                                            <img class="profile-img" src="{{ asset($booking->user->picture) }}" data-toggle="dropdown" alt="profile">
+                                                        @else
+                                                            <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">                                                                
+                                                        @endif
                                                     @else
-                                                        <img src="{{ asset('assets/images/ico/Square-white.jpg') }}"
-                                                            alt="boy" class="profile-img">
+                                                        <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                                                     @endif
+                                                   
                                                 </div>
                                                 <div class="col-md-10">
                                                     <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;"

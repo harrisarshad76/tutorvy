@@ -746,7 +746,8 @@
     font-weight: 500;
 }
 
-.bg-color-apporve {
+
+/* .bg-color-apporve {
     background-color: #FFD9D8;
     border-radius: 4px;
 }
@@ -756,7 +757,7 @@
     border-radius: 4px;
     position: relative;
     left: 5px;
-    /* height: 50px !important; */
+    height: 50px !important;
 }
 
 .bg-color-apporve3 {
@@ -764,7 +765,43 @@
     border-radius: 4px;
     position: relative !important;
     left: 10px !important;
-    /* height: 50px !important; */
+    height: 50px !important;
+} */
+
+.bg-color-apporve {
+    background-color: #FFD9D8;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
+.bg-color-apporve2 {
+    background-color: #ffea2f73;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
+.bg-color-apporve1 {
+    background-color: #E2F6ED;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
+.bg-color-apporve3 {
+    background-color: #E9F2FF;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
 }
 
 .border-left-1 {
@@ -871,4 +908,101 @@
 
 .active-rank {
     background: #6E7988;
+}
+
+
+/*Attach Files*/
+
+.fileName {
+    position: absolute;
+    padding-right: 19px;
+    top: 7px;
+    font-size: 11px;
+    display: none;
+    color: #fff;
+}
+
+.downFile {
+    position: absolute;
+    top: 32px;
+    right: 74px;
+    border-radius: 50%;
+    color: green;
+    padding: 2px 7px;
+    border: 1px solid #fff;
+    display: none;
+}
+
+.downFile i {
+    color: #fff;
+    font-size: 14px;
+}
+
+.downFile:hover {
+    background: green;
+    border: 1px solid #E6E7E8;
+}
+
+.downFile:hover i {
+    color: #fff;
+}
+
+.borderOne {
+    text-align: center;
+    /* width: 100%; */
+    height: 94px;
+    background: #fbfbfb;
+    border: 1px solid #E6E7E8;
+    transition: 0.3s ease;
+}
+
+.borderOne:hover .downFile {
+    display: block;
+}
+
+.borderOne:hover .fileName,
+.borderOne:hover .overlayAttach {
+    display: block;
+}
+
+.borderOne img {
+    width: 100%;
+    height: 100%;
+}
+
+.xlIcon {
+    width: 41px;
+}
+
+.imgIcon {
+    width: 48px;
+}
+
+.overlayAttach {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    right: 15px;
+    left: 15px;
+    bottom: 0;
+    display: none;
+}
+
+.card__corner {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+    z-index: 2;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: #E6E7E8;
+}
+
+.card .card__corner .card__corner-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1.5em 1.5em 0 0;
+    border-color: #E6E7E8 #fff #fff #fff;
 }

@@ -61,6 +61,8 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
 
+   
+
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
     Route::get('/tutor/{id}/subjects/',[TutorController::class,'subjects'])->name('admin.tutorSubjects');
@@ -94,9 +96,6 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/classroom',[ClassroomController::class,'index'])->name('admin.classroom');
     Route::get('/booking',[AdminBookingController::class,'index'])->name('admin.booking');
     Route::get('/booking-details/{id}',[AdminBookingController::class,'bookingDetails'])->name('admin.bookingDetail');
-
-
-
 
     Route::get('/course',[CourseController::class,'index'])->name('admin.course');
     Route::get('/course-request/{id}',[CourseController::class,'courseRequest'])->name('admin.course-request');
@@ -359,6 +358,7 @@ Route::group(['prefix' => '/general','middleware' => ['auth']],function () {
 
     Route::post('/save-token',[NotifyController::class,'saveToken'])->name('general.save.token');
     Route::get('/get-notifications',[NotifyController::class,'getAllNotification'])->name('getNotification');
+    Route::get('/mark_all_read',[NotifyController::class,'markAllRead'])->name('markAllRead');
 
 });
 
@@ -421,6 +421,7 @@ Route::get('/tutor-profile/{id}',[FrontTutorController::class,'profileTutor'])->
 // Blog
 Route::get('/blog',[GeneralController::class,'blog'])->name('blog');
 Route::get('/career',[GeneralController::class,'career'])->name('career');
+Route::get('/knowledge',[GeneralController::class,'knowledge'])->name('knowledge');
 /*
 |--------------------------------------------------------------------------
 | Ajax Calls Routes

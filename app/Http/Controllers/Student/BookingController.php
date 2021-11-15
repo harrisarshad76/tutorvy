@@ -67,7 +67,7 @@ class BookingController extends Controller
         $confirmed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(2)->get();
 
         $completed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(5)->get();
-        $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4])->get();
+        $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4,6])->get();
 
         $commission = DB::table("sys_settings")->first();
         $defaultPay = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('default',1)->first();
@@ -802,9 +802,9 @@ class BookingController extends Controller
 
         $this->skrilRequest = new SkrillRequest();
         $this->skrilRequest->pay_to_email = 'skrill_user_test2@smart2pay.com';
-        $this->skrilRequest->return_url =  request()->getHost().'student/skrlpayment-complete';
-        $this->skrilRequest->cancel_url =  request()->getHost().'student/bookings';
-        $this->skrilRequest->logo_url = 'https://tutorvydev.naumanyasin.com/assets/images/logo/logo.png';
+        $this->skrilRequest->return_url =  URL::route('skrill.payment.complete');
+        $this->skrilRequest->cancel_url =  URL::route('student.bookings');
+        $this->skrilRequest->logo_url = 'https://naumanyasin.com/assets/images/logo/logo.png';
         $this->skrilRequest->pay_from_email = $payerEmail->email ?? '';
         $this->skrilRequest->transaction_id = 'SKRL-'.rand();
         $this->skrilRequest->amount = $total_price;
