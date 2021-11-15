@@ -63,7 +63,7 @@
                                     @elseif($booking->status == 4)
                                         <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Student</span>
                                     @elseif($booking->status == 5)
-                                        <span style="display:inline-flex ;" class="bg-success"> Delivered</span>
+                                        <span style="display:inline-flex ;" class="bg-color-apporve1"> Delivered</span>
                                     @elseif($booking->status == 6)
                                         <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by System</span>
                                     @endif
