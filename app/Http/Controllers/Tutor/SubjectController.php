@@ -23,6 +23,10 @@ class SubjectController extends Controller
 
         $subjects = Subject::where('category_id',1)->get();
         $main_sub = SubjectCategory::all();
+        // $subjects = DB::table("subjects")
+        // ->join('assessments', 'subjects.id', '!=', 'assessments.subject_id', 'left outer')
+        // ->get();
+        // return Auth::user()->teach;
         return view('tutor.pages.subject.index',compact('subjects','main_sub'));
     }
 
@@ -40,6 +44,7 @@ class SubjectController extends Controller
 
     public function displaySub($id){
         $subjects = Subject::where('category_id',$id)->get();
+
         return response()->json($subjects);
     }
 }
