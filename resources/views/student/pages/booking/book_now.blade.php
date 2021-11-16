@@ -160,7 +160,9 @@
                     </div>
                     <div class="row mt-3">
                         <div class="input-text col-md-4">
-                            <input type="" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required>
+                            <!-- <input type="" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required> -->
+                        
+                            <input id="classDate" class="form-control"  name="date"  placeholder="Class Date">
                         </div>
                         <div class="input-text col-md-4">
                             <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required>
@@ -242,7 +244,7 @@
     </div>
 </section>
 @endsection
-
 @section('scripts')
+
 @include('js_files.student.bookingJs')
 @endsection

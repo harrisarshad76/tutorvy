@@ -127,9 +127,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
     @include('firebase')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
+
 
     </script>
         <!--Plugin JavaScript file-->
@@ -182,7 +184,7 @@
           /* Table Sorting */
 
           $("th").append('<i class="ml-1 fa fa-sort"></i>');
-            $("th:last-child").css("color",'white');
+             $("th:last-child").css("color",'white');
 
             const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 

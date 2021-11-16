@@ -201,7 +201,8 @@
 
                     /* Table Sorting */
                     $("th").append('<i class="ml-1 fa fa-sort"></i>');
-                    $("th:last-child").css("color", 'white');
+                    // $("th:last-child").css("color", 'white');
+                    $(".get").find("th:last-child").css("color",'red !important;');
 
                     const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 

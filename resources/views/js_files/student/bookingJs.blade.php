@@ -10,10 +10,6 @@ $(document).ready(function() {
 
 
 
-    var date = new Date();
-    $("#current_date").val(date);
-})
-
 $( '#book_tutor_form' ).on( 'submit', function(e) {
     event.preventDefault();
 

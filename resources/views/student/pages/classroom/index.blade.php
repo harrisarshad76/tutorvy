@@ -290,8 +290,7 @@
                                                                         Review Now
                                                                     </a>
                                                                 @else 
-                                                                    <a
-                                                                            class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}">
+                                                                    <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}">
                                                                             View Details
                                                                         </a>
                                                                 @endif
