@@ -30,7 +30,7 @@
                         <div class="card">
                             <div class="card-header bg-white pb-0"
                                 style="border-bottom: 1px solid #D6DBE2; display: inline-flex;">
-                                <p class="col-md-6 col-xs-12 class-ch"
+                                <p class="col-md-8 col-xs-12 class-ch"
                                     style="margin-top: 10px; text-align: left;color: #00132D;font-size: 22px;font-family: Poppins;font-weight: 500;">
                                     {{$booking->subject->name}} Class
 
@@ -51,7 +51,7 @@
                                     @endif
                                 
                                 </p>
-                                <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
+                                <p style="text-align: right;" class="col-md-4 col-xs-12 class-btn-center">
                                         @if ($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
                                             <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
                                             class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
