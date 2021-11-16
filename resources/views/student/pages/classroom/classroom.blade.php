@@ -1052,6 +1052,60 @@ height:25px;
             </div>
         </div>
     </div>
+
+    <!-- End Call Modal -->
+<div class="modal fade " id="callEndConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor wants to end the class. Please make sure if you don't need anything then end the class. Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <button type="button" class="btn-general " id="endCallYes2">End Call</button>
+                <button type="button" class="btn-outline-general " data-dismiss="modal"> Not Yet </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="calllDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Click below to report or book another tutor! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.tutor')}}" class="btn-outline-general"> Find New Tutor </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="tutorDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Kindly wait for 15 minutes before quiting! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.bookings')}}" class="btn-outline-general"> Reschedule Meeting  </a>
+            </div>
+        </div>
+    </div>
+</div>
  <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1613,9 +1667,10 @@ connection.onopen = function(event) {
 var usersLeft = {};
 connection.onleave = function(event) {
     toastr.success("Tutor Disconnected. Please wait...");
-console.log(event.extra)
-timer.pause();
-   
+    $("#callDisconnectModal").modal("show");
+    console.log(event.extra)
+    // timer.pause();
+    
 };
 
 connection.onclose = connection.onerror  = function(event) {
@@ -1625,7 +1680,6 @@ console.log(event)
 };
 
 connection.onmessage = function(event) {
-    console.log(event)
 
     if(event.data.showMainVideo) {
         // $('#main-video').show();
@@ -1658,6 +1712,11 @@ connection.onmessage = function(event) {
         toastr.success("Tutor ended the class.");
         $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
+    }
+    if(event.data.call_confirmation === true){
+        // toastr.success("Tutor ended the class.");
+        // $(".content-wrapper").css("display","none !important");
+        $("#callEndConfirmationModal").modal("show");
     }
     if(event.data.is_timer === true){
         console.log(event.data.time_value)
@@ -1800,7 +1859,17 @@ $("#endCallYes").click(function(){
     $("#reviewModal").modal("show");
     $(".content-wrapper").css("display",'none');
     
-})
+});
+$("#endCallYes2").click(function(){
+    connection.send({
+        call_ended: true
+    });
+    toastr.success("Class has Ended.");
+    $("#callEndConfirmationModal").modal("hide");
+    $("#reviewModal").modal("show");
+    $(".content-wrapper").css("display",'none');
+    
+});
 var conversationPanel = document.getElementById('conversation-panel');
 
 function appendChatMessage(event, checkmark_id) {

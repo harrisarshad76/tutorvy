@@ -52,23 +52,28 @@
                                 
                                 </p>
                                 <p style="text-align: right;" class="col-md-4 col-xs-12 class-btn-center">
-                                        @if ($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
-                                            <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-                                            class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
-                                            Booking
-                                            </button>
-                                        @endif
-                                        @if ($booking->status == 0)
+                                    @if ($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
+                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                                        class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
+                                        Booking
+                                        </button>
+                                    @endif
+                                    @if ($booking->status == 0)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                             class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> Re-schedule
                                             class
                                         </button>
+                                    @elseif($booking->status == 2)
+
+                                        <a  href="{{route('student.classroom')}}"
+                                        class="schedule-btn no-decor"  style="font-size: 12px;width: 150px; text-align:center;padding: 15px;"> Go to Classroom
+                                        </a>
                                     @elseif($booking->status == 1)
 
                                         <button type="button" onclick="pay_now({{$booking->id}})"
                                         class="schedule-btn" style="font-size: 12px;width: 150px;"> Pay Now
                                         </button>
-                                    @endif
+                                        @endif
                                 </p>
                             </div>
                             <div class="card-body">
