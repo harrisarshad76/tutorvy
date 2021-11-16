@@ -1073,11 +1073,11 @@
                 top   = ($(window).height() / 2) - (600 / 2);
 
             $('#btn-facebook').click(function () {
-                window.open("{{route('social.facebook',[2])}}", "popupWindow", "width=500,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500 + ",top=" + 200);
+                window.open("{{route('social.facebook',[2])}}", "self", "width=500,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500 + ",top=" + 200);
             });
 
             $('#btn-google').click(function () {
-                window.open("{{route('social.google',[2])}}", "popupWindow", "width=500,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500 + ",top=" + 200);
+                window.open("{{route('social.google',[2])}}", "self", "width=500,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500 + ",top=" + 200);
             });
 
             for (var i = 1; i <= 31; i++) {
