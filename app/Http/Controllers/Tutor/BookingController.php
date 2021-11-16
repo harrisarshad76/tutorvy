@@ -215,7 +215,7 @@ class BookingController extends Controller
                 $title = 'Booking Cancelled';
                 $icon = 'fas fa-tag';
                 $class = 'btn-success';
-                $desc = $name . 'Cancelled the booking. ';
+                $desc = $name . ' Cancelled the booking. ';
                 $pic = Auth::User()->picture;
                 $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
@@ -238,7 +238,7 @@ class BookingController extends Controller
                 $title = 'Booking Cancelled';
                 $icon = 'fas fa-tag';
                 $class = 'btn-success';
-                $desc = $name . 'Cancelled the booking. ';
+                $desc = $name . ' Cancelled the booking. ';
                 $pic = Auth::User()->picture;
                 $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
