@@ -1064,18 +1064,15 @@ height:25px;
                 </button>
             </div>
             <div class="modal-body text-center ">
-                <button type="button" class="btn-general " id="endCallYes">End Call</button>
+                <button type="button" class="btn-general " id="endCallYes2">End Call</button>
                 <button type="button" class="btn-outline-general " data-dismiss="modal"> Not Yet </button>
             </div>
         </div>
     </div>
 </div>
 
- <!--Reschedule meeting--> 
-
-
 <!--No Tutor Call Modal -->
-<div class="modal fade " id="callDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade " id="clDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -1092,7 +1089,24 @@ height:25px;
     </div>
 </div>
 
- <!-- Modal -->
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="callDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Kindly wait for 15 minutes before quiting! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.bookings')}}" class="btn-outline-general"> Reschedule Meeting  </a>
+            </div>
+        </div>
+    </div>
+</div>
+ <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content pt-4 pb-4">
@@ -1653,9 +1667,10 @@ connection.onopen = function(event) {
 var usersLeft = {};
 connection.onleave = function(event) {
     toastr.success("Tutor Disconnected. Please wait...");
-console.log(event.extra)
-timer.pause();
-   
+    $("#callDisconnectModal").modal("show");
+    console.log(event.extra)
+    // timer.pause();
+    
 };
 
 connection.onclose = connection.onerror  = function(event) {
@@ -1844,7 +1859,17 @@ $("#endCallYes").click(function(){
     $("#reviewModal").modal("show");
     $(".content-wrapper").css("display",'none');
     
-})
+});
+$("#endCallYes2").click(function(){
+    connection.send({
+        call_ended: true
+    });
+    toastr.success("Class has Ended.");
+    $("#callEndConfirmationModal").modal("hide");
+    $("#reviewModal").modal("show");
+    $(".content-wrapper").css("display",'none');
+    
+});
 var conversationPanel = document.getElementById('conversation-panel');
 
 function appendChatMessage(event, checkmark_id) {
