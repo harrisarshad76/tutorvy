@@ -928,7 +928,7 @@ height:25px;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Do you want to end the call?</h5>
+                <h5 class="modal-title">Please wait while we are confirming from student.</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -998,9 +998,7 @@ height:25px;
        $(".vc").hide();
        $(".no-vc").show();
    });
-   $(".no-ph").click(function(){
-        $("#endCall").modal("show");
-    });
+   
     $("#conCam").click(function(){
         $(".overlayCam").css("display","none");
     })
@@ -1216,7 +1214,19 @@ $("#join_now").click(function (){
                 /* Javascript Timer ENd */
     }
 });
-
+$(".no-ph").click(function(){
+    // $("#endCall").modal("show");
+    // toastr.success("Student has ended the call!");
+    toastr.success('Please wait while we are confirming from student if he needs anything else.', {
+        position: 'top-end',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 4500,
+    });
+    connection.send({
+        call_confirmation: true
+    });
+});
 // On mute Screen End
 
 /// make this room public
@@ -1818,7 +1828,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 
         timer.addEventListener('targetAchieved', function (e) {
           
-            endclass();
+            // endclass();
             // $('#endCall').modal("show");
           
         });
@@ -1827,7 +1837,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
         if(today_date_seconds > class_end_seconds) {
             $('#countdownExample .values').html("Class Time Over");
             // $('#endCall').modal("show");
-            endclass();
+            // endclass();
           
         }
 

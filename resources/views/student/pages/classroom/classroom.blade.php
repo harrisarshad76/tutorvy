@@ -1052,6 +1052,24 @@ height:25px;
             </div>
         </div>
     </div>
+
+    <!-- End Call Modal -->
+<div class="modal fade " id="callEndConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor wants to end the class. Please make sure if you don't need anything then end the class. Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <button type="button" class="btn-general " id="endCallYes">End Call</button>
+                <button type="button" class="btn-outline-general " data-dismiss="modal"> Not Yet </button>
+            </div>
+        </div>
+    </div>
+</div>
  <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1625,7 +1643,6 @@ console.log(event)
 };
 
 connection.onmessage = function(event) {
-    console.log(event)
 
     if(event.data.showMainVideo) {
         // $('#main-video').show();
@@ -1658,6 +1675,11 @@ connection.onmessage = function(event) {
         toastr.success("Tutor ended the class.");
         $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
+    }
+    if(event.data.call_confirmation === true){
+        // toastr.success("Tutor ended the class.");
+        // $(".content-wrapper").css("display","none !important");
+        $("#callEndConfirmationModal").modal("show");
     }
     if(event.data.is_timer === true){
         console.log(event.data.time_value)
