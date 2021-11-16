@@ -8,6 +8,7 @@
     background-image: url('../../admin/assets/img/backgrounds/background-bottom.png');
     background-repeat: no-repeat;
     background-position-y: bottom;
+    height: 750px;
 }
 
 .board {

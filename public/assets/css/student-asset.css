@@ -245,6 +245,11 @@
     .bg-custom-2 {
         background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     }
+    
+    .bg-price {
+        background: #ebf4ff;
+        border-radius: 9px;
+    }
     /* notification css*/
     
     .notification {

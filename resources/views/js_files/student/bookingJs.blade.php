@@ -10,11 +10,7 @@ $(document).ready(function() {
 
 
 
-    var date = new Date();
-    $("#current_date").val(date);
-})
-
-$( '#book_tutor_form' ).on( 'submit', function(e) {
+    $( '#book_tutor_form' ).on( 'submit', function(e) {
     event.preventDefault();
 
     $('#tutor_id').val("{{$t_id ?? '' }}");
@@ -83,10 +79,7 @@ $( '#book_tutor_form' ).on( 'submit', function(e) {
     }
 
 
-});
-
-//
-$(document).ready(function() {
+    });
 
 
     $("#tutor_subjects").on('change', function() {

@@ -5,6 +5,7 @@
 </style>
   <!-- top Fixed navbar End -->
   <div class="content-wrapper " style="overflow: hidden;">
+  <input type="hidden" id="timeZone" value="{{Auth::user()->time_zone}}">
     <section id="homesection" >
         <!-- dashborad home -->
         <div class="container-fluid m-0 p-0">
@@ -629,4 +630,31 @@
 @endsection
 @section('scripts')
 @include('js_files.student.dashboardJS')
+<script>
+
+    var checkTimeZone = $("#timeZone").val(); 
+    checkTimeZone.length == 0 ? saveTimeZone() : '';
+            
+    function saveTimeZone() {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        var date = new Date();
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            url: "{{route('student.timeZone')}}",
+            type: "POST",
+            data: {zone: timezone , date :date},
+            success:function(response){
+            },
+            error:function(e){
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
+    
+</script>
 @endsection

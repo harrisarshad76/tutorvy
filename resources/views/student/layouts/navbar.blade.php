@@ -113,7 +113,7 @@
                 <li>
                     <div class="notification mt-2 ml-3">
                         <img src="{{asset('assets/images/ico/Notification.png') }}" alt="notifiaction">
-                        <span class="notification-text show_notification_counts"> 0 </span>
+                        <span class=" show_notification_counts"></span>
                         <ul class="notification-menu">
                             <li class="">
                                 <div class="row nav-row">
@@ -201,7 +201,7 @@
                         <div class="col-xs-2 pull-right">
                             <div class="notification">
                                 <img src="{{asset('assets/images/ico/Notification.png') }}" alt="notification-ico">
-                                <span class="notification-text show_notification_counts"> 0 </span>
+                                <span class=" show_notification_counts"></span>
                                 <ul class="notification-menu">
                                     <li class="">
                                         <div class="row nav-row">

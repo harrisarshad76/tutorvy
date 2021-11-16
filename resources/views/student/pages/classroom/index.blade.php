@@ -199,7 +199,7 @@
                                                                         data-review="{{$class->is_reviewed}}" data-duration="{{$class->duration}}"
                                                                         data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
                                                                         id="class_time_{{$class->id}}" data-date="{{$class->class_date}}"
-                                                                        class="badge current_time badge-pill text-white font-weight-normal bg-success mt-3">
+                                                                        class="badge current_time badge-pill text-white font-weight-normal bg-success mt-2">
 
                                                                         {{ $class->class_date }} {{ $class->class_time }}
 
@@ -209,15 +209,15 @@
                                                                         class="text-center">
                                                                 @endif
                                                             </td>
-                                                            @if ($class->status = 5)
+                                                            @if ($class->status == 5 && $class->is_reviewed == 0)
                                                                 <td style="text-align: center;padding-top:14px;">
-                                                                    <button class="cencel-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review
+                                                                    <button class="cencel-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review Now
                                                                     </button>
                                                                 </td>
-                                                            @elseif($class->status == 5 )
+                                                            @else
                                                                 <td style="text-align: center;padding-top:14px;">
-                                                                    <button class="schedule-btn" type="button"> View details
-                                                                    </button>
+                                                                    <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}"> View details
+                                                                </a>
                                                                 </td>
                                                             @endif
                                                           
@@ -283,15 +283,14 @@
 
 
                                                             <td style="text-align: center;padding-top:14px;">
-                                                                @if ($class->status != 5)
+                                                                @if ($class->status == 5 && $class->is_reviewed == 0)
                                                                     <a type="button"
                                                                         onclick="showReviewModal('{{ $class->booking_id }}')"
                                                                         class="cencel-btn">
-                                                                        Review
+                                                                        Review Now
                                                                     </a>
-                                                                @elseif  ($class->status == 5)
-                                                                    <a type="button"
-                                                                            class="schedule-btn">
+                                                                @else 
+                                                                    <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}">
                                                                             View Details
                                                                         </a>
                                                                 @endif

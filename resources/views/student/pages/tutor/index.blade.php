@@ -127,7 +127,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#ratingDiv" aria-expanded="true" aria-controls="ratingDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#ratingDiv" aria-controls="ratingDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                     Rating <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -256,7 +256,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#availableDiv" aria-expanded="true" aria-controls="availableDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#availableDiv" aria-expanded="false" aria-controls="availableDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                 Availability <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -551,12 +551,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                   
                                 </div>
 
                             </div>
                         </div>
                         @endforeach
                     @endif
+                    
                         </div>
                     </div>
                 </div>
