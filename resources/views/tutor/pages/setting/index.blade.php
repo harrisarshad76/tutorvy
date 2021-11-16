@@ -456,46 +456,51 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Monday
-                                                </div>
-                                                <div class="col-md-4">
+                                        <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
+                                            @foreach($days as $day)
+                                                <div class="col-md-12 pt-3">
                                                     <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
+                                                        <div class="col-md-2 dayName"> {{$day['day']}} </div>
+                                                        <input type="hidden" name="day[]" value="{{$day['day']}}">
+                                                        <div class="col-md-4">
+                                                            <div class="row">
+                                                                <div class="col-md-4 pt-1">
+                                                                From:
+                                                                </div>
+                                                                <div class="col-md-8 ">
+                                                                    <input type="time" name="from[]" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4 pt-1">
+                                                                To:
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="time" name="to[]" class="form-control mt-1">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
+                                                        <div class="col-md-2 dayName">
+                                                            <select name="slot_length[]" class="form-control" id="">
+                                                                @foreach($slots as $slot)
+                                                                    <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
+                                                                @endforeach
+                                                                
+                                                            </select>
                                                         </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
+                                                        <div class="col-md-2 dayName">
+                                                            <input type="number" name="booking_slot[]" class="form-control">
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
+                                                        <div class="col-md-2 dayCheck text-center">
+                                                            <input type="checkbox" class="" name="day_off[]">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
+                                            @endforeach
 
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
+                                            <button type="submit" class="btn btn-primary" id="slot_save"> Save </button>
+                                            <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
+                                        </form>
 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 pt-3">
+                                        <!-- <div class="col-md-12 pt-3">
                                             <div class="row">
                                                 <div class="col-md-2 dayName">
                                                     Tuesday
@@ -728,7 +733,7 @@
 
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
 
                                     </div>
@@ -744,14 +749,67 @@
 
 @include('Modals.paymentModal')
 
+@endsection
 
+@section('scripts')
 <script>
     $(document).ready(function(){
         $(".get").find("th:last-child").css("color",'red');
 
+        $("#tutorSlotForm").submit(function(e) {
+        e.preventDefault();
+
+            var action = $(this).attr('action');
+            var method = $(this).attr('method');
+            var form = new FormData(this);
+            $.ajax({
+                url: action,
+                type:method,
+                data:form,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend:function(data) {
+                    $("#slot_save").hide();
+                    $("#slot_loader").show();
+                },
+                success:function(response){
+                    if(response.status_code == 200 && response.success == true) {
+                        toastr.success(response.message,{
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }else{
+                        toastr.error(response.message,{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                },
+                complete:function(data) {
+                    $("#slot_save").show();
+                    $("#slot_loader").hide();
+                },
+                error:function(e) {
+                    $("#slot_save").show();
+                    $("#slot_loader").hide();
+                    toastr.error('Something Went Wrong',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            });
+
+        });
+
     });
-    function delPayMethod(id)
-    {
+    function delPayMethod(id) {
         $.ajax({
             url: "{{route('del.payment')}}",
             type:"POST",
@@ -776,8 +834,10 @@
                 },
             });
     }
-</script>
 
+    
+    
+</script>
 @endsection
 
 
