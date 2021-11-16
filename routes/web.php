@@ -171,6 +171,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 
     // remove
     Route::post('/testing',[TutorSettingController::class,'testing'])->name('tutor.testing');
+    Route::post('/save_time_zone',[TutorSettingController::class,'saveTimeZone'])->name('tutor.timeZone');
 
     Route::get('/dashboard',[TutorHomeController::class,'index'])->name('tutor.dashboard');
     Route::get('/booking',[BookingController::class,'index'])->name('tutor.booking');
@@ -339,6 +340,9 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::get('/course-details/{id}',[StudentSettingController::class,'courseDetails'])->name('student.course-details');
     Route::get('/courses',[StudentSettingController::class,'courses'])->name('student.courses');
     /*Course  End*/
+
+
+    Route::post('/save_time_zone',[StudentProfileController::class,'saveTimeZone'])->name('student.timeZone');
 
 
 });
