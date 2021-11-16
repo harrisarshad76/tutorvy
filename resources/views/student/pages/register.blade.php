@@ -346,14 +346,30 @@
                                                     placeholder="Password" id="password">
                                                     <!-- <label for="" id="password_error" class="text-red"><strong> This field is required </strong>  </label> -->
                                                     <small id="passTech">
-                                                            Field should have at least:
-                                                            <ul>
+                                                            <!-- Field should have at least: -->
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-6">
+                                                                    <ul>
+                                                                        <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
+                                                                        <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
+                                                                        <li id="numeric"><i class="fa fa-times"></i> One numeric value</li>
+                                                                      
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <ul>
+                                                                        <li id="special_character"><i class="fa fa-times"></i> One special character</li>
+                                                                        <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <ul>
                                                                 <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
                                                                 <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
                                                                 <li id="numeric"><i class="fa fa-times"></i> One numeric value</li>
                                                                 <li id="special_character"><i class="fa fa-times"></i> One special character</li>
                                                                 <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
-                                                            </ul>
+                                                            </ul> -->
                                                         </small>
                                                     <span for="" id="password_error" class="invalid-feedback" role="alert">
                                                         <strong> This field is required </strong>
@@ -496,7 +512,7 @@
                                             </div> -->
                                         </div>
                                         
-                                        <div class="col-md-12 text-right ">
+                                        <div class="col-md-12 text-right mt-3">
 
                                                             <button id="finish"  type="submit"
                                                                 class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
@@ -715,8 +731,17 @@
                 });
                 $("#teach_error").hide();
                 $(".text-red").hide();
+                
+                $("#password").focus(function(e){
+                    $("#passTech").show("slow");
+                });
+
+                $("#password").focusout(function(e){
+                    $("#passTech").hide("slow");
+                });
 
                 $("#password").keyup(function(e) {
+                    
                     var capital_leters = new RegExp('[A-Z]');
                     var lower_leters = new RegExp('[a-z]');
                     var numeric = new RegExp('[0-9]');

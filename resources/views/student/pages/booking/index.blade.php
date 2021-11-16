@@ -465,7 +465,7 @@
 
                                                                     @endif
                                                                 </td>
-                                                                <td class="pt-3 pb-3" style="text-align: center; " >
+                                                                <td class="pt-2 pb-3" style="text-align: center; " >
                                                                     <!-- <a class="cencel-btn mr-2" data-toggle="modal" data-target="#payModel" >
                                                                         Pay Now
                                                                     </a> -->
@@ -564,7 +564,7 @@
                                                                     </span>
                                                                 @endif
                                                             </td>
-                                                            <td class="pt-3 pb-3" style="text-align: center; " >
+                                                            <td class="pt-2 pb-3" style="text-align: center; " >
                                                                 <!-- <a class="cencel-btn mr-2" onclick >
                                                                     Pay Now
                                                                 </a> -->

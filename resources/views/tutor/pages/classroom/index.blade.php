@@ -46,7 +46,7 @@
                                 href="#nav-profile" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">
                                 Delivered Classes
-                                <span class="counter-text bg-success"> {{$delivered_classess}} </span>
+                                <span class="counter-text bg-success">{{count($deli_classes)}}</span>
 
                             </a>
                         </div>
@@ -130,11 +130,11 @@
                                                                     </span>     
 
                                                                     <div id="join_class_{{$class->id}}" class="text-center">
+                                                                    </div> 
                                                                     @endif
                                                                 </td>
-                                                                <td style="text-align: center;">
-                                                                    <button class="cencel-btn" type="button"> View details </button>
-                                                                </div>                                                                    
+                                                                <td class="pt-4" style="text-align: center;">
+                                                                    <a class="cencel-btn" href="{{route('tutor.booking.detail',[$class->id])}}"> View details </a>                                                            
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -167,7 +167,7 @@
                                                         <th scope="col">Topic</th>
                                                         <th scope="col">Time</th>
                                                         <th scope="col">Duration</th>
-                                                        <th scope="col">Payment</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col"></th>
                                                     </tr>
                                                 </thead>
@@ -208,8 +208,8 @@
                                                                   
                                                                     </td>
 
-                                                                    <td style="text-align: center;">
-                                                                        <button class="cencel-btn" type="button"> View details </button>
+                                                                    <td class="pt-4"  style="text-align: center;">
+                                                                        <a class="cencel-btn"  href="{{route('tutor.booking.detail',[$class->id])}}"> View details </a>
                                                                     </td>
                                                                 </tr>
                                                             @endif
