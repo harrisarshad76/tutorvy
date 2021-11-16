@@ -5,7 +5,7 @@
 
 <!-- top Fixed navbar End -->
 <div class="content-wrapper " style="overflow: hidden;">
-    <input type="text" id="timeZone" value="{{Auth::user()->time_zone}}">
+    <input type="hidden" id="timeZone" value="{{Auth::user()->time_zone}}">
     <section id="homesection" style="">
         <!-- dashborad home -->
         <div class="container-fluid ">
