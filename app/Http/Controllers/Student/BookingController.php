@@ -84,6 +84,7 @@ class BookingController extends Controller
     public function bookingDetail($id){
 
         $booking = Booking::with(['tutor','user','subject'])->where('id',$id)->first();
+        // return $booking;
         return view('student.pages.booking.booking_detail',compact('booking'));
     }
     public function bookingNew(Request $request){

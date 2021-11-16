@@ -376,14 +376,30 @@
                                                     placeholder="Password" id="password">
                                                     <!-- <label for="" id="password_error" class="text-red"><strong> This field is required </strong>  </label> -->
                                                     <small id="passTech">
-                                                            Field should have at least:
+                                                            <!-- Field should have at least:
                                                             <ul>
                                                                 <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
                                                                 <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
                                                                 <li id="numeric"><i class="fa fa-times"></i> One numeric value</li>
                                                                 <li id="special_character"><i class="fa fa-times"></i> One special character</li>
                                                                 <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
-                                                            </ul>
+                                                            </ul> -->
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-6">
+                                                                    <ul>
+                                                                        <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
+                                                                        <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
+                                                                        <li id="numeric"><i class="fa fa-times"></i> One numeric value</li>
+                                                                      
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <ul>
+                                                                        <li id="special_character"><i class="fa fa-times"></i> One special character</li>
+                                                                        <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
                                                         </small>
                                                     <span for="" id="password_error" class="invalid-feedback" role="alert">
                                                         <strong> This field is required </strong>  
@@ -1272,6 +1288,13 @@
                 $(".text-red").hide();
                  /* Password STrength */
 
+                 $("#password").focus(function(e){
+                    $("#passTech").show("slow");
+                });
+
+                $("#password").focusout(function(e){
+                    $("#passTech").hide("slow");
+                });
 
            $("#password").keyup(function(e) {
                     var capital_leters = new RegExp('[A-Z]');

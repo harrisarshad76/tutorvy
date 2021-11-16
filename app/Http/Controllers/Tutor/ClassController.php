@@ -42,8 +42,13 @@ class ClassController extends Controller
         ->leftJoin('bookings', 'classroom.booking_id', '=', 'bookings.id')
         ->where('user_id',Auth::user()->id)
         ->count();
-        
-        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess'));
+
+
+        $deli_classes = Booking::with(['classroom','user','tutor','subject','booking_payment'])
+        ->where('booked_tutor',Auth::user()->id)
+        ->whereIn('status',[5])->get();
+
+        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes'));
     }
 
     public function saveClassLogs(Request $request) {
