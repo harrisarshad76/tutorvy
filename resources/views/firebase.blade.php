@@ -55,8 +55,21 @@ messaging.onMessage((payload) => {
             });
         }
 
+        if (type == "booking_rescheduled") {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+
+            toastr.success(title + '<br>' + redirect, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
         if (type == "booking_cancelled") {
-            toastr.success(title + '<br>' + body, {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+            
+            toastr.success(title + '<br>' + redirect, {
                 position: 'top-end',
                 icon: 'success',
                 showConfirmButton: false,
@@ -166,8 +179,22 @@ messaging.onMessage((payload) => {
                 timer: notification_time,
             });
         }
+
+        if (type == "booking_rescheduled") {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+
+            toastr.success(title + '<br>' + redirect, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
         if (type == "booking_cancelled") {
-            toastr.success(title + '<br>' + body, {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+
+            toastr.success(title + '<br>' + redirect, {
                 position: 'top-end',
                 icon: 'success',
                 showConfirmButton: false,
@@ -323,9 +350,22 @@ messaging.onMessage((payload) => {
                 timer: notification_time,
             });
         }
+        
+        if (type == "booking_rescheduled") {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+
+            toastr.success(title + '<br>' + redirect, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
 
         if (type == "booking_cancelled") {
-            toastr.success(title + '<br>' + body, {
+            let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
+
+            toastr.success(title + '<br>' + redirect, {
                 position: 'top-end',
                 icon: 'success',
                 showConfirmButton: false,
