@@ -1070,7 +1070,29 @@ height:25px;
         </div>
     </div>
 </div>
- <!--Reschedule meeting--> <!-- Modal -->
+
+ <!--Reschedule meeting--> 
+
+
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="callDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Click below to report or book another tutor! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.tutor')}}" class="btn-outline-general"> Find New Tutor </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content pt-4 pb-4">
