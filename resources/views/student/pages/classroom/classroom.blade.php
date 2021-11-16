@@ -1072,7 +1072,7 @@ height:25px;
 </div>
 
 <!--No Tutor Call Modal -->
-<div class="modal fade " id="clDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade " id="calllDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -1090,7 +1090,7 @@ height:25px;
 </div>
 
 <!--No Tutor Call Modal -->
-<div class="modal fade " id="callDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade " id="tutorDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
