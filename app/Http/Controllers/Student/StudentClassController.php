@@ -46,10 +46,7 @@ class StudentClassController extends Controller
             "is_reviewed" => 1,
             "status" => 5,
         ]);
-
-
-
-
+        
         return response()->json([
             "message" => "Rating Saved Successfully",
             "status_code" => 200,
