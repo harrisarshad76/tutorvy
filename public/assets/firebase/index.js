@@ -161,7 +161,6 @@ messaging.onMessage((payload) => {
         }
 
         if (type == "booking_cancelled") {
-            alert()
             toastr.success(title + '<br>' + body, {
                 position: 'top-end',
                 icon: 'success',

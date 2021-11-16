@@ -55,6 +55,15 @@ messaging.onMessage((payload) => {
             });
         }
 
+        if (type == "booking_cancelled") {
+            toastr.success(title + '<br>' + body, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
         if (type == "support_ticket") {
             let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
             toastr.success(title + '<br>' + redirect, {
@@ -151,6 +160,14 @@ messaging.onMessage((payload) => {
 
         if (type == "tutor_profile_verfication") {
             toastr.success(title + '<br>' + redirect, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+        if (type == "booking_cancelled") {
+            toastr.success(title + '<br>' + body, {
                 position: 'top-end',
                 icon: 'success',
                 showConfirmButton: false,
@@ -299,6 +316,15 @@ messaging.onMessage((payload) => {
         $('.show_notification_counts').text(unread_count);
 
         if(type == "class_started"){
+            toastr.success(title + '<br>' + body, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
+        if (type == "booking_cancelled") {
             toastr.success(title + '<br>' + body, {
                 position: 'top-end',
                 icon: 'success',
