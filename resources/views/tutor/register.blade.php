@@ -417,7 +417,7 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="facebook">
-                                                                        <a href="{{route('social.facebook',[2])}}">
+                                                                        <a id="btn-facebook">
                                                                             <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
                                                                             <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
 
@@ -1052,6 +1052,12 @@
         <script src="{{ asset('assets/js/dropify.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.validate.js') }} "></script>
         <script>
+
+            $('#btn-facebook').click(function () {
+                alert()
+                window.open("{{route('social.facebook',[2])}}", "popupWindow", "width=500,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500 + ",top=" + 200);
+            });
+
             for (var i = 1; i <= 31; i++) {
                 $("#day").append("<option value='" + i + "'" + (i == {{ $user->day ?? 1 }} ? 'selected' : '') + ">" + i +
                     "</option>");
