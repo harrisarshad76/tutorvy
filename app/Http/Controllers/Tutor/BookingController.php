@@ -215,7 +215,7 @@ class BookingController extends Controller
                 $title = 'Booking Cancelled';
                 $icon = 'fas fa-tag';
                 $class = 'btn-success';
-                $desc = $name . 'Cancelled the booking. ';
+                $desc = $name . ' Cancelled the booking. ';
                 $pic = Auth::User()->picture;
                 $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
@@ -238,9 +238,9 @@ class BookingController extends Controller
                 $title = 'Booking Cancelled';
                 $icon = 'fas fa-tag';
                 $class = 'btn-success';
-                $desc = $name . 'Cancelled the booking. ';
+                $desc = $name . ' Cancelled the booking. ';
                 $pic = Auth::User()->picture;
-                $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
+                $notification->GeneralNotifi($booking->user_id ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
                 // send to admin
                 $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
@@ -260,6 +260,22 @@ class BookingController extends Controller
         $booking->class_time = $request->time;
         $booking->reschedule_note = $request->note;
         $booking->save();
+
+        $admin = User::where('role',1)->first();
+        $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+        $notification = new NotifyController();
+        $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+        $type = 'booking_rescheduled';
+        $title = 'Booking Rescheduled';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $desc = $name . ' Rescheduled the booking.';
+        $pic = Auth::User()->picture;
+        $notification->GeneralNotifi($booking->user_id ,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+        // send to admin
+        $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+        $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
 
         \Session::flash('success','You have successfully reschedule this booking');
         return redirect()->back();
