@@ -15,6 +15,18 @@
     top: 0;
     width: auto;
 }
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
 </style>
  <!-- top Fixed navbar End -->
  <section>
@@ -141,7 +153,33 @@
                             <input type="text" class="form-control " hidden name="tutor_id" id="tutor_id"
                                 value="{{$t_id}}">
                         </div>
-                    </div><div class="row mt-3">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label for=""><b> Class Date </b></label>
+                            <!-- <input type="date" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required> -->
+                            <input type="date" class="form-control" name="date"   placeholder="Class Date" required>
+                        
+                            <!-- <input id="classDate" class="form-control"  name="date"  placeholder="Class Date"> -->
+                        </div>
+                        <div class=" col-md-4">
+                            <label for=""><b> Class Time </b></label>
+                            <!-- <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required> -->
+                            <input type="time" class="form-control" name="time" placeholder="Class Time" required>
+                        </div>
+                        <div class=" col-md-4">
+                            <label for=""><b> Class Duration </b></label>
+                            <select name="duration" class="form-control form-select" id="">
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hour</option>
+                                <option value="3">3 Hour</option>
+                                <option value="4">4 Hour</option>
+                                <option value="5">5 Hour</option>
+                            </select>
+                            <!-- <input type="number" min="1" max="24" class="form-control" name="duration" placeholder="Class Duration (in hours)" required> -->
+                        </div>
+                    </div>
+                    <div class="row mt-3">
                         <div class="input-text col-md-12">
                             <input type="text"class="form-control " name="question"
                                 placeholder="What is the Question?" value="" required>
@@ -158,19 +196,7 @@
                             <input type="file" class="form-control dropify" name="upload" id="" >
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="input-text col-md-4">
-                            <!-- <input type="" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required> -->
-                        
-                            <input id="classDate" class="form-control"  name="date"  placeholder="Class Date">
-                        </div>
-                        <div class="input-text col-md-4">
-                            <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required>
-                        </div>
-                        <div class="input-text col-md-4">
-                            <input type="number" min="1" max="24" class="form-control" name="duration" placeholder="Class Duration (in hours)" required>
-                        </div>
-                    </div>
+                   
                     <div class="row mt-3">
                         <div class="col-12" >
 
