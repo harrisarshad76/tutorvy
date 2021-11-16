@@ -430,14 +430,13 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="tab-pane fade chee" id="v-pills-Slots" role="tabpanel"
                                     aria-labelledby="v-pills-Slots-tab">
                                     <div class="row">
                                         <div class="col-md-12 mb-4">
                                             <h3>Slots</h3>
                                         </div>
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-2">
                                                    <b> Day of Week</b>
@@ -455,50 +454,122 @@
                                                 <b>Day Off</b> 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
-                                            @foreach($days as $day)
-                                                <div class="col-md-12 pt-3">
-                                                    <div class="row">
-                                                        <div class="col-md-2 dayName"> {{$day['day']}} </div>
-                                                        <input type="hidden" name="day[]" value="{{$day['day']}}">
-                                                        <div class="col-md-4">
-                                                            <div class="row">
-                                                                <div class="col-md-4 pt-1">
-                                                                From:
-                                                                </div>
-                                                                <div class="col-md-8 ">
-                                                                    <input type="time" name="from[]" class="form-control">
-                                                                </div>
-                                                                <div class="col-md-4 pt-1">
-                                                                To:
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <input type="time" name="to[]" class="form-control mt-1">
+                                        </div> -->
+                                        <div class="col-md-12">
+                                            <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
+                                                <div id="accordion">
+
+                                                @foreach($days as $day)
+                                                    <!-- <div class="col-md-12 pt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-2 dayName"> {{$day['day']}} </div>
+                                                            <input type="hidden" name="day[]" value="{{$day['day']}}">
+                                                            <div class="col-md-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 pt-1">
+                                                                    From:
+                                                                    </div>
+                                                                    <div class="col-md-8 ">
+                                                                        <input type="time" name="from[]" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-4 pt-1">
+                                                                    To:
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="time" name="to[]" class="form-control mt-1">
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-2 dayName">
+                                                                <select name="slot_length[]" class="form-control" id="">
+                                                                    @foreach($slots as $slot)
+                                                                        <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
+                                                                    @endforeach
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2 dayName">
+                                                                <input type="number" name="booking_slot[]" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-2 dayCheck text-center">
+                                                                <input type="checkbox" class="" name="day_off[]">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-2 dayName">
-                                                            <select name="slot_length[]" class="form-control" id="">
-                                                                @foreach($slots as $slot)
-                                                                    <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
-                                                                @endforeach
+                                                    </div> -->
+                                                    <div class="card">
+                                                        <div class="card-header" id="{{$day['day']}}" data-toggle="collapse" data-target="#day_{{$day['day']}}" aria-expanded="false" aria-controls="day_{{$day['day']}}">
+                                                            <h5 class="mb-0" >
+                                                            
+                                                                    {{$day['day']}}
+                                                            
+                                                            </h5>
+                                                        </div>
+
+                                                        <div id="day_{{$day['day']}}" class="collapse " aria-labelledby="{{$day['day']}}" data-parent="#accordion">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 text-center">
+                                                                        <b>Working Time</b>
+                                                                    </div>
+                                                                    <div class="col-md-3  text-center">
+                                                                        <b>Slot Length</b>
+                                                                    </div>
+                                                                    <div class="col-md-3  text-center">
+                                                                        <b>Bookings per Slot</b>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center">
+                                                                    <b>Day Off</b> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-3">
+                                                                    <div class="col-md-4">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 pt-1">
+                                                                            From:
+                                                                            </div>
+                                                                            <div class="col-md-8 ">
+                                                                                <input type="time" name="from[]" class="form-control">
+                                                                            </div>
+                                                                            <div class="col-md-4 pt-1">
+                                                                            To:
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="time" name="to[]" class="form-control mt-1">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3 dayName">
+                                                                        <select name="slot_length[]" class="form-control" id="">
+                                                                            @foreach($slots as $slot)
+                                                                                <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
+                                                                            @endforeach
+                                                                            
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-3 dayName">
+                                                                        <input type="number" name="booking_slot[]" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-2 dayCheck text-center">
+                                                                        <input type="checkbox" class="" name="day_off[]">
+                                                                    </div>
+                                                                   
+                                                                    <div class="col-md-12 mt-3">
+                                                                        <a href="#newFields" id="addMoreFields">Add More +</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="newFields" class="row mt-3">    
+                                                                </div>
                                                                 
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 dayName">
-                                                            <input type="number" name="booking_slot[]" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-2 dayCheck text-center">
-                                                            <input type="checkbox" class="" name="day_off[]">
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                @endforeach
                                                 </div>
-                                            @endforeach
-
-                                            <button type="submit" class="btn btn-primary" id="slot_save"> Save </button>
-                                            <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
-                                        </form>
+                                                <button type="submit" class="btn btn-primary" id="slot_save"> Save </button>
+                                                <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
+                                            </form>
+                                        </div>
+                                       
 
                                         <!-- <div class="col-md-12 pt-3">
                                             <div class="row">
@@ -835,6 +906,48 @@
             });
     }
 
+
+    $("#addMoreFields").click(function(){
+        var html = "";
+
+        html = ` <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-4 pt-1">
+                    From:
+                </div>
+                <div class="col-md-8 ">
+                    <input type="time" name="from[]" class="form-control">
+                </div>
+                <div class="col-md-4 pt-1">
+                     To:
+                </div>
+                <div class="col-md-8">
+                    <input type="time" name="to[]" class="form-control mt-1">
+                </div>
+                    </div>
+                </div>
+                <div class="col-md-3 dayName">
+                    <select name="slot_length[]" class="form-control" id="">
+                        @foreach($slots as $slot)
+                            <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
+                        @endforeach
+                        
+                    </select>
+                </div>
+                <div class="col-md-3 dayName">
+                    <input type="number" name="booking_slot[]" class="form-control">
+                </div>
+                <div class="col-md-2 dayCheck text-center">
+                <input type="checkbox" class="" name="day_off[]">
+              
+            </div>
+            <div class="col-md-12 text-right"><a href="#" class="text-danger" > Remove Fields </a></div>`;
+        $("#newFields").append(html);
+
+
+
+
+    })
     
     
 </script>
