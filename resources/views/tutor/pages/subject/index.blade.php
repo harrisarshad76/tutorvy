@@ -140,13 +140,13 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <!-- <select name="" class="form-select form-control w-25 " id="">
+                                <select name="" class="form-select form-control w-25 " id="">
                                     <option value="">Select Particular Subject</option>
-                                    @foreach ($main_sub as $subject)
+                                    @foreach ($subjects as $subject)
                                         <option value="{{ $subject->id }}" onclick="getSubSubject({{ $subject->id }})">{{ $subject->name }}</option>
                                     @endforeach
-                                </select> -->
-                                <input type="search" class="form-control" placeholder="Search Subject">
+                                </select>
+                                <!-- <input type="search" class="form-control" placeholder="Search Subject"> -->
                             </div>
                         </div>
 
