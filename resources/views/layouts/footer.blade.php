@@ -12,7 +12,7 @@
                     <!--Column1-->
                     <div class="footer-pad">
                         <h2 style="line-height: 0.9;">Learn anytime,</h2>
-                        <a class="text-work" style="font-size: 33px;color: #1173FF;">
+                        <a class="text-work" style="">
                             anywhere
                         </a>
                         <address>
@@ -33,7 +33,7 @@
                     <!--Column1-->
                     <div class="footer-pad footer-pad-mobile">
                         <h2 style="line-height: 0.9;">Learn anytime,</h2>
-                        <a class="text-work" style="font-size: 33px;color: #1173FF;">
+                        <a class="text-work" >
                             anywhere
                         </a>
                         <address>

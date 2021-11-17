@@ -204,6 +204,13 @@
     font-weight: 500;
 }
 
+footer .text-work {
+    font-size: 33px;
+    color: #1173FF;
+    font-family: "Poppins";
+    font-weight: 600;
+}
+
 .text-work {
     color: #1173FF;
     font-size: 48px;
