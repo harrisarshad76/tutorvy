@@ -372,8 +372,9 @@ class BookingController extends Controller
                 try {
                     $refundedSale = $sale->refundSale($refundRequest, $this->_api_context);
                 } catch (\Exception $ex) {
-                    dd($ex);
-                    exit(1);
+
+                    return redirect()->back()->with('error','Something went wrong!');
+
                 }
 
                 if($refundedSale->state == 'completed'){

@@ -16,8 +16,24 @@
                         <p class="heading-first ml-3 mr-3">Booking Details</p>
                     </div>
                 </div>
+
+
+
+
+
+
             </a>
+            @if (Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show bg-danger" role="alert">
+                    <strong>Error!</strong> {{Session::get('error')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+
+            @endif
+
             <div class="container-fluid">
+
+
             @php
 
             $tz = get_local_time();
@@ -49,7 +65,7 @@
                                     @elseif($booking->status == 6)
                                         <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by System</span>
                                     @endif
-                                
+
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
 
@@ -408,6 +424,8 @@
                 </div>
             </div>
         </div>
+
+
     </section>
 </div>
 @endsection

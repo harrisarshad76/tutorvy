@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
     <title>Login-Pages</title>
     <!-- CSS only -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -212,6 +213,8 @@
 </head>
 
 <body>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
     <section id="body">
@@ -495,7 +498,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-12 text-right ">
 
                                                             <button id="finish"  type="submit"
@@ -516,12 +519,15 @@
                                                                         </div>
                                                                     @endif
 
-                                                                    <div class="Google">
-                                                                        <a href="{{route('social.google',[3])}}">
+
+                                                                    {{-- <div class="Google" id="sign-in-or-out-button">
+
                                                                             <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
                                                                             Continue with Google
-                                                                        </a>
-                                                                    </div>
+
+                                                                    </div> --}}
+                                                                    <div class="g-signin2" data-onsuccess="onSignIn" data-width="510" data-height="40"></div>
+
                                                                     <div class="facebook">
                                                                         <a href="{{route('social.facebook',[3])}}">
                                                                             <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
@@ -530,12 +536,14 @@
                                                                             Continue with Facebook
                                                                         </a>
                                                                     </div>
+
                                                                     <div class="Apple">
                                                                         <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
 
                                                                         <!-- <img class="mr-3" src="{{asset('assets/images/ico/apple.png')}}" alt="apple"> -->
                                                                         Continue with Apple
                                                                     </div>
+
                                                                     <div class="Policy-text" style="display: flex;">
                                                                         <p class="by-text">
                                                                             Protected by reCAPTCHA and subject to the Google</p>
@@ -665,6 +673,36 @@
         </div>
 
     </section>
+        <script>
+
+
+
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+                var lastName = profile.getName().split(' ').slice(-1).join(' ');
+
+                $.ajax({
+                    url: "{{route('social.google',[2])}}",
+                    dataType: "json",
+                    type: "Post",
+                    async: true,
+                    data: {
+                        first_name:firstName,
+                        last_name:lastName,
+                        email:profile.getEmail(),
+                        picture:profile.getImageUrl(),
+                        provider:'google',
+                        role: ''
+                    },
+                    success: function (data) {
+
+                    },
+
+                });
+            }
+
+        </script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -681,6 +719,7 @@
         <script src="{{ asset('assets/js/jquery.validate.js') }} "></script>
         <script></script>
         <script>
+
 
             $(document).ready(function() {
 
@@ -837,16 +876,16 @@
                     // }
                 });
 
-            $("#country_selector").countrySelect({
-                defaultCountry: "{{ $user->country_short ?? '' }}",
-                preferredCountries: ['ca', 'gb', 'us', 'pk']
-            });
+                $("#country_selector").countrySelect({
+                    defaultCountry: "{{ $user->country_short ?? '' }}",
+                    preferredCountries: ['ca', 'gb', 'us', 'pk']
+                });
 
-            $("#country_selector").on('change', function() {
-                var short = $(this).countrySelect("getSelectedCountryData");
-                $("#country_short").val(short.iso2);
+                $("#country_selector").on('change', function() {
+                    var short = $(this).countrySelect("getSelectedCountryData");
+                    $("#country_short").val(short.iso2);
+                });
             });
-        });
 
             // var languages_list = {...};
             (function() {

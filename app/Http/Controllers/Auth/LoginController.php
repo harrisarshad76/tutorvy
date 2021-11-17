@@ -291,4 +291,9 @@ class LoginController extends Controller
         Session::flush();
         return redirect('/');
     }
+
+    public function googleLoggin(Request $request)
+    {
+        dd($request->all());
+    }
 }
