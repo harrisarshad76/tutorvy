@@ -21,10 +21,9 @@ class SubjectController extends Controller
 
     public function index(){
 
-        // $subjects = Subject::where('category_id',1)->get();
         $main_sub = SubjectCategory::all();
        
-       $user_id = \Auth::user()->id;
+        $user_id = \Auth::user()->id;
         $subjects = DB::select( DB::raw(" SELECT subjects.* FROM subjects WHERE NOT EXISTS 
             (SELECT * 
              FROM assessments 
