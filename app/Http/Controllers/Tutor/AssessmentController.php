@@ -25,6 +25,9 @@ class AssessmentController extends Controller
 
     public function store(Request $request) {
 
+
+        $check_assess = Assessment::where('user_id',Auth::user()->id)->where()->first();
+
         $assessment = Assessment::create([
             'user_id' =>  Auth::user()->id,
             'subject_id' => $request->subject,
