@@ -142,7 +142,7 @@
                             <div class="col-md-3">
                                 <select name="subjects-list" class="form-select form-control w-25 " id="subjects-list">
                                     <option value="">Select Particular Subject</option>
-                                    @foreach ($subjects as $subject)
+                                    @foreach ($all_subjects as $subject)
                                         <option value="{{ $subject->id }}" data-myval="{{$subject->cat_id}}">{{ $subject->name }}</option>
                                     @endforeach
                                 </select>

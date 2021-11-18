@@ -26,6 +26,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     @include('firebase');
 
@@ -39,6 +40,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $('.table').DataTable();
 
         get_all_notifications();
 

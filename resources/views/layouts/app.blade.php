@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
+
     <title>Tutorvy</title>
 
     <!-- CSRF Token -->
@@ -30,6 +32,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.css')}}"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <style>
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -61,6 +64,9 @@
         @include('layouts.footer')
     </section>
 <script>
+
+
+
     $(document).ready(function(){
         $(".input-subject").select2();
         $(".form-select").select2();
