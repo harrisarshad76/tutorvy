@@ -79,7 +79,7 @@ class LoginController extends Controller
                         User::where('id',Auth::user()->id)->update(["time_zone" => $request->time_zone]);
                     }
 
-                    
+
                     return redirect()->route('tutor.dashboard');
                 }
                 if($request->role == 3){
@@ -109,7 +109,7 @@ class LoginController extends Controller
                     if($value != ''){
 
                         $subject = $value;
-          
+
                         $query = DB::table('users')
                         ->select('view_tutors_data.*')
                         ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
@@ -122,7 +122,7 @@ class LoginController extends Controller
                             if($subject != null && $subject != ''){
                                 $query2->where('teachs.subject_id', $subject);
                             }
-                            
+
                         });
 
                         $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
@@ -135,7 +135,7 @@ class LoginController extends Controller
                         $subjects = Subject::all();
                         $locations = DB::table('search_locations')->get();
                         return redirect()->route('student.tutor')->with(['available_tutors'=> $available_tutors, 'subjects' => $subjects, 'locations' => $locations ]);
-                        
+
                     }
 
 
@@ -249,11 +249,11 @@ class LoginController extends Controller
         Auth::login($data);
 
         if($data->role == 2){
-            return redirect()->route('tutor.dashboard');
+            return response(['status' => 200,'url'=>'tutor/dashboard']);
         }
 
         if($data->role == 3){
-            return redirect()->route('student.dashboard');
+            return response(['status' => 200,'url'=>'student/dashboard']);
         }
 
         if(!$data->role){
@@ -276,8 +276,8 @@ class LoginController extends Controller
             }
             if(!$user){
                $user = User::create([
-                    'first_name' => $data['given_name'],
-                    'last_name' => $data['family_name'],
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
                     'email' => $data['email'],
                     'picture' => $data['picture'],
                     'provider' => 'google',
@@ -331,5 +331,39 @@ class LoginController extends Controller
         Auth::logout();
         Session::flush();
         return redirect('/');
+    }
+
+    public function googleLoggin(Request $request)
+    {
+
+        $c_id = $request->role;
+
+        $data = $this->_registerOrLogin($request->all(),$c_id);
+
+        if($data == false || $data == ''){
+
+            if($c_id == 2) {
+                return redirect()->route('tutor.register')->with('error','Unable to login with this email.');
+            }else if($c_id == 3) {
+                return redirect()->route('student.register')->with('error','Unable to login with this email.');
+            }else if($c_id == 0) {
+                return redirect()->route('login')->with('error','Google account is not attached with any account.');
+            }else{
+                return redirect()->to('/');
+            }
+            // return redirect()->back()->with('error','Unable to login with this email.');
+        }
+        Auth::login($data);
+
+        if($data->role == 2){
+            return response(['status' => 200,'url'=>'/tutor/dashboard']);
+        }
+
+        if($data->role == 3){
+            return response(['status' => 200,'url'=>'/student/dashboard']);
+        }
+        if(!$data->role){
+            return redirect('role');
+        }
     }
 }

@@ -1,17 +1,19 @@
 @extends('tutor.layouts.app')
 <style>
     .nav {
-    width: auto !important;
-    padding: 0 !important;
-     margin-left: 0 !important;
-}
+        width: auto !important;
+        padding: 0 !important;
+        margin-left: 0 !important;
+    }
+
     .nav-pills .nav-link.active,
     .nav-pills .show>.nav-link {
         color: #fff;
         background-color: #007bff !important;
         border-bottom: 0;
     }
-    .nav-pills .nav-link:hover{
+
+    .nav-pills .nav-link:hover {
         background-color: #E2F0FF !important;
         color: #007bff;
     }
@@ -24,49 +26,51 @@
 </style>
 @section('content')
 
-<section>
-    <div class="content-wrapper " style="overflow: hidden;">
-        <!--section start  -->
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-md-12">
+    <section>
+        <div class="content-wrapper " style="overflow: hidden;">
+            <!--section start  -->
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-md-12">
                         <p class="mr-3 heading-first"> Settings </p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="row">
 
-                <div class="col-md-12 mb-1 ">
-                    @if(session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fa fa-info" aria-hidden="true"></i>
-                        {{session('error')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @elseif(session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fa fa-info" aria-hidden="true"></i>
-                        {{session('success')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
-                    <div class=" card  bg-toast infoCard">
-
-                        <div class="card-body row">
-                            <div class="col-md-1 text-center">
+                    <div class="col-md-12 mb-1 ">
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <i class="fa fa-info" aria-hidden="true"></i>
+                                {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="col-md-11">
-                                <small>
-                                  Update your settings to get secured and optimised as much as you can<a href="#">Learn More</a>
-                                </small>
-                                <a href="#" class="cross"  onclick="hideCard()">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </a>
+                        @elseif(session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        <div class=" card  bg-toast infoCard">
 
+                            <div class="card-body row">
+                                <div class="col-md-1 text-center">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-11">
+                                    <small>
+                                        Update your settings to get secured and optimised as much as you can<a
+                                            href="#">Learn More</a>
+                                    </small>
+                                    <a href="#" class="cross" onclick="hideCard()">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,155 +99,160 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="tab-content" id="v-pills-tabContent chang_photo">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="tab-content" id="v-pills-tabContent chang_photo">
 
-                                <!-- <div class="tab-pane fade {{session()->has('key') ? '' : 'active show'}} chee" id="v-pills-General" role="tabpanel"
-                                    aria-labelledby="v-pills-General-tab">
+                                    <!-- <div class="tab-pane fade {{ session()->has('key') ? '' : 'active show' }} chee" id="v-pills-General" role="tabpanel"
+                                        aria-labelledby="v-pills-General-tab">
 
-                                    <form action="{{ route('tutor.profile.update', [Auth::user()->id]) }}" method="Post"
-                                        enctype="multipart/form-data" id="personal">
-                                        @csrf
+                                        <form action="{{ route('tutor.profile.update', [Auth::user()->id]) }}" method="Post"
+                                            enctype="multipart/form-data" id="personal">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4">
+                                                    <h3>General</h3>
+                                                </div>
+                                                <div class="col-md-12 font-light">
+                                                    Change email address
+                                                </div>
+                                                <div class="col-sm-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <small class="">Name</small>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" value="" class="form-control"
+                                                                        placeholder="First Name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <input type="text" value="" class="form-control"
+                                                                        placeholder=" Last Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <small class="">Email Address</small>
+                                                        <div class="form-group">
+                                                            <input type="email" value="" class="form-control"
+                                                                placeholder="yourname@yourdomain.com">
+                                                        </div>
+                                                        <small class=" ">Phone number</small>
+                                                        <div class="form-group">
+                                                            <input type="number" value="" class="form-control"
+                                                                placeholder="03XX XXXXXXXX">
+                                                        </div>
+                                                        <small class=" ">Address</small>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <input type="text" value="" class="form-control"
+                                                                    placeholder="City">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <div class="form-item">
+                                                                    <input id="country_selector" class="form-control" name="country" type="">
+                                                                    <input id="country_short" class="form-control" name="country_short" type="" hidden>
+                                                                    <label for="country_selector" style="display:none;">Select a
+                                                                        country here...</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="float-right">
+                                                            <button class="schedule-btn">Save changes</button>
+                                                        </div>
+
+                                                    </div>
+                                            </div>
+                                        </form>
+                                    </div> -->
+
+                                    <div class="tab-pane fade {{ session()->has('key') ? '' : 'active show' }} chee"
+                                        id="v-pills-Security" role="tabpanel" aria-labelledby="v-pills-Security-tab">
                                         <div class="row">
                                             <div class="col-md-12 mb-4">
-                                                <h3>General</h3>
+                                                <h3>Security</h3>
                                             </div>
+
                                             <div class="col-md-12 font-light">
-                                                Change email address
+                                                Change password
                                             </div>
                                             <div class="col-sm-6">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <small class="">Name</small>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <input type="text" value="" class="form-control"
-                                                                    placeholder="First Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                        <div class="form-group">
-                                                                <input type="text" value="" class="form-control"
-                                                                    placeholder=" Last Name">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <small class="">Email Address</small>
-                                                    <div class="form-group">
-                                                        <input type="email" value="" class="form-control"
-                                                            placeholder="yourname@yourdomain.com">
-                                                    </div>
-                                                    <small class=" ">Phone number</small>
-                                                    <div class="form-group">
-                                                        <input type="number" value="" class="form-control"
-                                                            placeholder="03XX XXXXXXXX">
-                                                    </div>
-                                                    <small class=" ">Address</small>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" value="" class="form-control"
-                                                                placeholder="City">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <div class="form-item">
-                                                                <input id="country_selector" class="form-control" name="country" type="">
-                                                                <input id="country_short" class="form-control" name="country_short" type="" hidden>
-                                                                <label for="country_selector" style="display:none;">Select a
-                                                                    country here...</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="float-right">
-                                                        <button class="schedule-btn">Save changes</button>
-                                                    </div>
-
-                                                </div>
-                                        </div>
-                                    </form>
-                                </div> -->
-
-                                <div class="tab-pane fade {{session()->has('key') ? '' : 'active show'}} chee" id="v-pills-Security" role="tabpanel"
-                                    aria-labelledby="v-pills-Security-tab">
-                                    <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <h3>Security</h3>
-                                    </div>
-
-                                    <div class="col-md-12 font-light">
-                                            Change password
-                                    </div>
-                                        <div class="col-sm-6">
-                                            <form action="{{route('tutor.change.password')}}" method="POST">
-                                                @csrf
-                                                <small>Current Password</small>
-                                                <div class="form-group pass_show">
-                                                    <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror"
-                                                        placeholder=" ***********" >
+                                                <form action="{{ route('tutor.change.password') }}" method="POST">
+                                                    @csrf
+                                                    <small>Current Password</small>
+                                                    <div class="form-group pass_show">
+                                                        <input type="password" name="current_password"
+                                                            class="form-control @error('current_password') is-invalid @enderror"
+                                                            placeholder=" ***********">
                                                         @error('current_password')
                                                             <span class="small text-danger">{{ $message }}</span>
                                                         @enderror
-                                                </div>
+                                                    </div>
 
-                                                <small>New Password</small>
-                                                <div class="form-group pass_show">
-                                                    <input type="password" name="new_password" class="form-control"
-                                                        placeholder="***********">
+                                                    <small>New Password</small>
+                                                    <div class="form-group pass_show">
+                                                        <input type="password" name="new_password" class="form-control"
+                                                            placeholder="***********">
                                                         @error('new_password')
-                                                        <span class="small text-danger">{{ $message }}</span>
+                                                            <span class="small text-danger">{{ $message }}</span>
                                                         @enderror
-                                                </div>
+                                                    </div>
 
-                                                <small >Re-enter new password</small>
-                                                <div class="form-group pass_show">
-                                                    <input type="password" name="new_confirm_password" class="form-control"
-                                                        placeholder="***********">
+                                                    <small>Re-enter new password</small>
+                                                    <div class="form-group pass_show">
+                                                        <input type="password" name="new_confirm_password"
+                                                            class="form-control" placeholder="***********">
                                                         @error('new_confirm_password')
-                                                        <span class="small text-danger">{{ $message }}</span>
+                                                            <span class="small text-danger">{{ $message }}</span>
                                                         @enderror
-                                                </div>
-                                                <div class="float-right">
-                                                    <button type="submit" class="schedule-btn">Save changes</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="float-right">
+                                                        <button type="submit" class="schedule-btn">Save changes</button>
+                                                    </div>
 
-                                                <span id='lippButton'></span>
+                                                    <span id='lippButton'></span>
 
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="tab-pane fade chee" id="v-pills-Payment" role="tabpanel"
-                                    aria-labelledby="v-pills-Payment-tab">
-                                    <div class="row">
-                                        <div class="col-md-12 mb-4">
-                                            <h3>Payments</h3>
+                                    <div class="tab-pane fade chee" id="v-pills-Payment" role="tabpanel"
+                                        aria-labelledby="v-pills-Payment-tab">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-4">
+                                                <h3>Payments</h3>
+                                            </div>
                                         </div>
-                                    </div>
 
                                         <div class="row">
                                             <div class="col-md-2 text-center">
-                                                <img class="mt-4" src="{{asset ('assets/images/payment-icon/paypal_logo_512.png')}}" alt="">
+                                                <img class="mt-4"
+                                                    src="{{ asset('assets/images/payment-icon/paypal_logo_512.png') }}"
+                                                    alt="">
                                             </div>
                                             <div class="col-md-8">
                                                 <h5>Paypal</h5>
                                                 <hr>
                                                 <p>Additional activation and maintainance fees charged by Paypal.
-                                                    <a href="https://www.paypal.com/us/webapps/mpp/account-selection">Don't have a Paypal account?</a>
+                                                    <a href="https://www.paypal.com/us/webapps/mpp/account-selection">Don't
+                                                        have a Paypal account?</a>
                                                 </p>
 
                                             </div>
                                             <div class="col-md-2 text-center">
                                                 @if ($paypal_payment != null)
-                                                <button type="button" class="btn btn-secondary mt-4" disabled>Set Up</button>
+                                                    <button type="button" class="btn btn-secondary mt-4" disabled>Set
+                                                        Up</button>
                                                 @else
-                                                <button type="button" data-toggle="modal" data-target="#paypalModel" class="btn btn-primary mt-4">Set Up</button>
+                                                    <button type="button" data-toggle="modal" data-target="#paypalModel"
+                                                        class="btn btn-primary mt-4">Set Up</button>
                                                 @endif
                                             </div>
                                         </div>
@@ -251,13 +260,17 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-2 text-center">
-                                                <img class="mt-4 w-100" src="{{asset ('assets/images/payment-icon/Payoneer_logo.png')}}" alt="">
+                                                <img class="mt-4 w-100"
+                                                    src="{{ asset('assets/images/payment-icon/Payoneer_logo.png') }}"
+                                                    alt="">
                                             </div>
                                             <div class="col-md-8">
                                                 <h5>Payoneer</h5>
                                                 <hr>
                                                 <p>Additional activation and maintainance fees charged by Paypal.
-                                                    <a href="https://payouts.payoneer.com/partners/or.aspx?pid=YOYIZC74IO2s4KZQp7tgsw%3d%3d&web_interaction=website_traffic">Don't have a Payoneer account?</a>
+                                                    <a
+                                                        href="https://payouts.payoneer.com/partners/or.aspx?pid=YOYIZC74IO2s4KZQp7tgsw%3d%3d&web_interaction=website_traffic">Don't
+                                                        have a Payoneer account?</a>
                                                 </p>
 
                                             </div>
@@ -272,9 +285,9 @@
 
 
                                         {{-- <div class="row"> --}}
-                                    {{-- <div class="col-sm-6"> --}}
-                                            {{-- <small>Payment Methods</small> --}}
-                                            {{-- <div class="form-group  mt-1">
+                                        {{-- <div class="col-sm-6"> --}}
+                                        {{-- <small>Payment Methods</small> --}}
+                                        {{-- <div class="form-group  mt-1">
                                                 <select name="" id="paymentMethod" class="form-control" id="">
                                                     <option value="Paypal"> <p> <i class="fa fa-plus"></i> Paypal  </p></option>
                                                     <option value="Payoneer">Payoneer</option>
@@ -337,96 +350,125 @@
 
                                         {{-- </div> --}}
 
-                                    {{-- </div> --}}
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <hr>
-                                        </div>
+                                        {{-- </div> --}}
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
 
-                                        @if ($paypal_payment != null)
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <img src="{{asset ('assets/images/payment-icon/paypal_logo_512.png')}}" alt="">
-                                                        <span class="payment-menu dropdown d-flex">
-                                                            <a class=" d-flex" href="#" data-toggle="dropdown" aria-expanded="true">
-                                                                <img src="{{asset ('assets/images/payment-icon/menu_dots.png')}}" alt="">
-                                                            </a>
-                                                            <ul class="dropdown-menu  " >
-                                                                <li>
-                                                                    <a id="paypal_btn" onclick="delPayMethod({{$paypal_payment->id}})">
-                                                                        Delete
+
+                                            @if ($paypal_payment != null)
+                                                <div class="col-md-4">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="text-center">
+                                                                <img src="{{ asset('assets/images/payment-icon/paypal_logo_512.png') }}"
+                                                                    alt="">
+                                                                <span class="payment-menu dropdown d-flex">
+                                                                    <a class=" d-flex" href="#"
+                                                                        data-toggle="dropdown" aria-expanded="true">
+                                                                        <img src="{{ asset('assets/images/payment-icon/menu_dots.png') }}"
+                                                                            alt="">
                                                                     </a>
-                                                                </li>
-                                                            </ul>
-                                                        </span>
-
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            <a tabindex="-1" class=""
+                                                                                href="">
+                                                                                Edit
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a tabindex=" -1" class=""
+                                                                                href="">
+                                                                                Delete
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                                <span class=" round">
+                                                                    <input type="radio" name="payment"
+                                                                        onclick="defaultMethod(this.value)" value=""
+                                                                        id="checkbox1" />
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
+
                                         </div>
                                         @endif
 
                                     </div>
-                                </div>
 
-                                <div class="tab-pane fade chee" id="v-pills-Notifications" role="tabpanel"
-                                    aria-labelledby="v-pills-Notification-tab">
-                                    <div class="row">
-                                        <div class="col-md-12 mb-4">
-                                            <h3>Notification</h3>
-                                        </div>
-                                        <div class="col-6">
-                                            @if(session()->has('error'))
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                {{session('error')}}
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                    <div class="tab-pane fade chee" id="v-pills-Notifications" role="tabpanel"
+                                        aria-labelledby="v-pills-Notification-tab">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-4">
+                                                <h3>Notification</h3>
                                             </div>
-                                            @elseif(session()->has('success'))
-                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                {{session('success')}}
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                            <div class="col-6">
+                                                @if (session()->has('error'))
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                        role="alert">
+                                                        {{ session('error') }}
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                @elseif(session()->has('success'))
+                                                    <div class="alert alert-success alert-dismissible fade show"
+                                                        role="alert">
+                                                        {{ session('success') }}
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            @endif
-                                        </div>
 
-                                        <div class="col-md-12 font-light">
+                                            <div class="col-md-12 font-light">
                                                 Manage Notifications
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <form action="{{route('tutor.change.password')}}" method="POST">
-                                                @csrf
-                                                <div class="row mt-3">
-                                                    <div class="col-md-12 mt-1">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" name="booking" id="booking">
-                                                            <label class="custom-control-label" for="booking">Get Booking Notification on your Email Address</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <form action="{{ route('tutor.change.password') }}" method="POST">
+                                                    @csrf
+                                                    <div class="row mt-3">
+                                                        <div class="col-md-12 mt-1">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="booking" id="booking">
+                                                                <label class="custom-control-label" for="booking">Get
+                                                                    Booking Notification on your Email Address</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 mt-1">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="verification" id="verification">
+                                                                <label class="custom-control-label" for="verification">Get
+                                                                    Verification Notification on your Email Address</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 mt-1">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="assessment" id="assessment">
+                                                                <label class="custom-control-label" for="assessment">Get
+                                                                    Assessment Notification on your Email Address</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 mt-3 text-right">
+                                                            <button type="submit" class="schedule-btn">Save
+                                                                changes</button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 mt-1">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" name="verification" id="verification">
-                                                            <label class="custom-control-label" for="verification">Get Verification Notification on your Email Address</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 mt-1">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" name="assessment" id="assessment">
-                                                            <label class="custom-control-label" for="assessment">Get Assessment Notification on your Email Address</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 mt-3 text-right">
-                                                        <button type="submit" class="schedule-btn">Save changes</button>
-                                                    </div>
-                                                </div>
 
 
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -451,7 +493,7 @@
                                                     <b>Bookings per Slot</b>
                                                 </div>
                                                 <div class="col-md-2 text-center">
-                                                <b>Day Off</b> 
+                                                <b>Day Off</b>
                                                 </div>
                                             </div>
                                         </div> -->
@@ -485,7 +527,7 @@
                                                                     @foreach($slots as $slot)
                                                                         <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
                                                                     @endforeach
-                                                                    
+
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-2 dayName">
@@ -499,9 +541,9 @@
                                                     <div class="card">
                                                         <div class="card-header" id="{{$day['day']}}" data-toggle="collapse" data-target="#day_{{$day['day']}}" aria-expanded="false" aria-controls="day_{{$day['day']}}">
                                                             <h5 class="mb-0" >
-                                                            
+
                                                                     {{$day['day']}}
-                                                            
+
                                                             </h5>
                                                         </div>
 
@@ -518,7 +560,7 @@
                                                                         <b>Bookings per Slot</b>
                                                                     </div>
                                                                     <div class="col-md-2 text-center">
-                                                                    <b>Day Off</b> 
+                                                                    <b>Day Off</b>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mt-3">
@@ -543,7 +585,7 @@
                                                                             @foreach($slots as $slot)
                                                                                 <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
                                                                             @endforeach
-                                                                            
+
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-md-3 dayName">
@@ -552,14 +594,14 @@
                                                                     <div class="col-md-2 dayCheck text-center">
                                                                         <input type="checkbox" class="" name="day_off[]">
                                                                     </div>
-                                                                   
+
                                                                     <div class="col-md-12 mt-3">
                                                                         <a href="#newFields" id="addMoreFields">Add More +</a>
                                                                     </div>
                                                                 </div>
-                                                                <div id="newFields" class="row mt-3">    
+                                                                <div id="newFields" class="row mt-3">
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -569,7 +611,7 @@
                                                 <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
                                             </form>
                                         </div>
-                                       
+
 
                                         <!-- <div class="col-md-12 pt-3">
                                             <div class="row">
@@ -900,58 +942,35 @@
                         window.location.href = "{{ route('tutor.settings') }}";
                     }, 1500);
 
+    @include('Modals.paymentModal')
+
+
+    <script>
+        function delPayMethod(id) {
+            $.ajax({
+                url: "{{ route('del.payment') }}",
+                type: "POST",
+                data: {
+                    id: id,
+                },
+                success: function(data) {
+                    if (data == "success") {
+                        toastr.success('Payment Method Deleted Successfully!', {
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+
+                        setInterval(function() {
+                            window.location.href = "{{ route('tutor.settings') }}";
+                        }, 1500);
+
 
                     }
                 },
             });
-    }
+        }
+    </script>
 
-
-    $("#addMoreFields").click(function(){
-        var html = "";
-
-        html = ` <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4 pt-1">
-                    From:
-                </div>
-                <div class="col-md-8 ">
-                    <input type="time" name="from[]" class="form-control">
-                </div>
-                <div class="col-md-4 pt-1">
-                     To:
-                </div>
-                <div class="col-md-8">
-                    <input type="time" name="to[]" class="form-control mt-1">
-                </div>
-                    </div>
-                </div>
-                <div class="col-md-3 dayName">
-                    <select name="slot_length[]" class="form-control" id="">
-                        @foreach($slots as $slot)
-                            <option value="{{$slot['value']}}"> {{$slot['value']}} </option>
-                        @endforeach
-                        
-                    </select>
-                </div>
-                <div class="col-md-3 dayName">
-                    <input type="number" name="booking_slot[]" class="form-control">
-                </div>
-                <div class="col-md-2 dayCheck text-center">
-                <input type="checkbox" class="" name="day_off[]">
-              
-            </div>
-            <div class="col-md-12 text-right"><a href="#" class="text-danger" > Remove Fields </a></div>`;
-        $("#newFields").append(html);
-
-
-
-
-    })
-    
-    
-</script>
 @endsection
-
-
-
