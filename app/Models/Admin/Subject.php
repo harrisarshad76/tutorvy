@@ -25,7 +25,7 @@ class Subject extends Model
         'slug',
         'status',
     ];
-    protected $appends = ['cat_name'];
+    protected $appends = ['cat_name','cat_id'];
 
 
     public function subCategory(){
@@ -61,6 +61,14 @@ class Subject extends Model
         $category = SubjectCategory::where('id',$id)->first();
 
         return $category->name;
+    }
+
+    public function getCatIdAttribute()
+    {
+        $id = $this->category_id;
+        $category = SubjectCategory::where('id',$id)->first();
+
+        return $category->id;
     }
 
 }

@@ -21,7 +21,7 @@ class SubjectController extends Controller
 
     public function index(){
 
-        $subjects = Subject::where('category_id',1)->get();
+        $subjects = Subject::all();
         $main_sub = SubjectCategory::all();
         // $subjects = DB::table("subjects")
         // ->join('assessments', 'subjects.id', '!=', 'assessments.subject_id', 'left outer')
