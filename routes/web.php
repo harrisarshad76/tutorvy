@@ -61,7 +61,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
 
-   
+
 
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
@@ -384,10 +384,9 @@ Route::post('/attachment/send', [ChatController::class,'sendAttachment']);
 
 Auth::routes(['verify' => true]);
 //Google
-Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
+Route::post('/google/loggin/{id}', [LoginController::class,'googleLoggin'])->name('social.google');
 Route::get('/login/google/callback', [LoginController::class,'handleGoogleCallback']);
 // Facebook
-
 Route::get('/facebook/redirect/{c_id?}', [LoginController::class,'redirectFacebook'])->name('social.facebook');
 Route::get('/login/facebook/callback', [LoginController::class,'handleFacebookCallback']);
 
