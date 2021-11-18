@@ -42,8 +42,13 @@ class ClassController extends Controller
         ->leftJoin('bookings', 'classroom.booking_id', '=', 'bookings.id')
         ->where('user_id',Auth::user()->id)
         ->count();
-        
-        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess'));
+
+
+        $deli_classes = Booking::with(['classroom','user','tutor','subject','booking_payment'])
+        ->where('booked_tutor',Auth::user()->id)
+        ->whereIn('status',[5])->get();
+
+        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes'));
     }
 
     public function saveClassLogs(Request $request) {
@@ -73,10 +78,32 @@ class ClassController extends Controller
         $notification->GeneralNotifi( $reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic);
 
         return response()->json([
-            "message" => "Classroom logs saved",
+            "message" => "Classroom logs saved.",
             "status_code" => 200,
             "success" => true,
         ]);
+
+    }
+
+    public function endClass(Request $request){
+
+        $booking = Booking::where('id',$request->id)->first();
+        if($booking){
+            $booking->status = 5;
+            $booking->save();
+
+            return response()->json([
+                "message" => "Class Delivered! Thank You for using Tutorvy",
+                "status_code" => 200,
+                "success" => true,
+            ]);
+        }else{
+            return response()->json([
+                "message" => "Something went wrong.",
+                "status_code" => 500,
+                "success" => false,
+            ]);
+        }
 
     }
 }

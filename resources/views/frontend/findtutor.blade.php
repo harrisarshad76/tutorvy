@@ -433,11 +433,19 @@
                                                         <div class="row">
                                                             <div class="col-md-2 col-6 pr-0 div-center">
                                                                 <a href="{{route('student.tutor.show',[$tutor->id])}}">
-                                                                    @if($tutor->picture != null)
-                                                                        <img src="{{asset($tutor->picture)}}" alt="" class="profile-img findTutor-img" style="">
+                                                                    @if($tutor->picture)
+                                                                        <?php
+                                                                            $path = $tutor->picture;
+                                                                        ?>
+                                                                        @if(file_exists( public_path($path) ))
+                                                                            <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset($tutor->picture)}}" data-toggle="dropdown" alt="profile">
+                                                                        @else
+                                                                            <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                                                                            
+                                                                        @endif
                                                                     @else
-                                                                        <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="" class="profile-img findTutor-img" style="">
-                                                                    @endif                                                        
+                                                                        <img class="profile-img profile-img2 dd "  aria-expanded="true" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
+                                                                    @endif
                                                                 </a>
                                                             
                                                             </div>

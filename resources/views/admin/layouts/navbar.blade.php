@@ -279,7 +279,7 @@
                             <div class="col-xs-2 pull-right">
                                 <div class="notification">
                                     <img src="{{ asset('/admin/assets/img/ico/Notification.png')}}" alt="notification-ico">
-                                    <span class="notification-text show_notification_counts"> 0 </span>
+                                    <span class=" show_notification_counts"></span>
                                     <ul class="notification-menu navbarNav-1 mt-1">
                                         <li class="container-fluid">
                                             <div class="row nav-row">
@@ -453,7 +453,7 @@
                         <div class="col-xs-2 pull-right">
                             <div class="notification mr-4">
                                 <img src="{{ asset('/admin/assets/img/ico/Notification.svg')}}" alt="notification-ico">
-                                <span class="notification-text show_notification_counts"> 0 </span>
+                                <span class=" show_notification_counts"></span>
                                 <ul class="notification-menu navbarNav-1 mt-1">
                                     <li class="container-fluid mb-0 pb-0">
                                         <div class="row nav-row">

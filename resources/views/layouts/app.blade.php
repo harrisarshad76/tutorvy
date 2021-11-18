@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
+
     <title>Tutorvy</title>
 
     <!-- CSRF Token -->
@@ -28,6 +30,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.css')}}"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <style>
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -59,46 +62,55 @@
         @include('layouts.footer')
     </section>
 <script>
+
+
+
     $(document).ready(function(){
         $(".input-subject").select2();
         $(".form-select").select2();
-
+        $("#subjects").select2();
     })
     function getSubSubject(id){
 
-for(var i=0; i<= $(".tablinks").length; i++){
-    $(".tablinks").removeClass('active')
-}
-
-$("#defaultOpen_"+id).addClass('active')
-
-$.ajax({
-    url: "{{url('subjects-all')}}"+"/"+id,
-    type:"get",
-    success:function(response){
-        $("#subSubjects").html('')
-        if(response){
-        for(var i=0; i<=response.length; i++){
-            var html = `<div class="col-md-4">
-                                    <a href="#"  class="">
-                                    `+response[i].name+`
-                                    </a>
-                                </div>`
-
-                $('#subSubjects').append(html)
-            }
-
+        for(var i=0; i<= $(".tablinks").length; i++){
+            $(".tablinks").removeClass('active')
         }
-    },
-    error:function(e) {
-        console.log(e);
 
-    }
-});
+        $("#defaultOpen_"+id).addClass('active')
+
+        $.ajax({
+            url: "{{url('subjects-all')}}"+"/"+id,
+            type:"get",
+            success:function(response){
+                $("#subSubjects").html('')
+                if(response){
+                for(var i=0; i<=response.length; i++){
+                    var html = `<div class="col-md-4">
+                                            <a href="#"  class="">
+                                            `+response[i].name+`
+                                            </a>
+                                        </div>`
+
+                        $('#subSubjects').append(html)
+                    }
+
+                }
+            },
+            error:function(e) {
+                console.log(e);
+
+            }
+        });
 
 
 
 }
+
+$("#subjects").change(function() {
+    let id = $("#subjects").val();
+    document.cookie = 's_link' + "=" + id + ";" + 60 + ";";
+    location.href = '{{route('student.tutor',['+id+'])}}';
+});
 
 </script>
     <!-- <div class="modal fade support_modal show" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="support-modal" style="padding-right: 7px; display: block;">

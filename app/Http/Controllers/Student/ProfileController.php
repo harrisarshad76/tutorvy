@@ -205,4 +205,19 @@ class ProfileController extends Controller
             "success" => true,
         ]);
     }
+
+
+    public function saveTimeZone(Request $request) {
+
+        $region =  substr($request->date ,25,50);
+        User::where('id',Auth::user()->id)->update([
+            "time_zone" => $request->zone,
+            "region" => $region,
+        ]);
+        return response()->json([
+            'status_code'=> 200,
+            'message' => 'TimeZone Saved Successfully',
+            'success' => true,
+        ]);
+    }
 }

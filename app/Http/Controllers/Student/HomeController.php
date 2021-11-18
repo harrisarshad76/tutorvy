@@ -54,7 +54,6 @@ class HomeController extends Controller
             ->where('std_subj' , '!=', NULL)
             ->where('std_learn' , '!=', NULL)
             ->count();
-        
         return view('student.pages.index',compact('upcoming_bookings','today_bookings','new_bookings','delivered_count','upcoming_count','pending_count','subject_count','user','categories','favorite_tutors','education_profile'));
     }
 

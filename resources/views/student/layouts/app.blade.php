@@ -127,9 +127,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
     @include('firebase')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
+
 
     </script>
         <!--Plugin JavaScript file-->
@@ -161,9 +163,9 @@
         $(".js-range-slider").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 1000,
+            max: 100,
             from: 0,
-            to: 200,
+            to: 20,
             grid: true,
             prefix: "$"
         });
@@ -182,7 +184,7 @@
           /* Table Sorting */
 
           $("th").append('<i class="ml-1 fa fa-sort"></i>');
-            $("th:last-child").css("color",'white');
+             $("th:last-child").css("color",'white');
 
             const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 
@@ -307,6 +309,8 @@ function get_all_notifications() {
             if (response.status_code == 200 && response.success == true) {
                 var notification = ``;
                 if (obj.length == 0) {
+                    $('.show_notification_counts').css("display","none");
+                    
                     $('.show_notification_counts').text(0);
                     notification += `
                                                         <li class="text-center">
@@ -315,6 +319,7 @@ function get_all_notifications() {
                                                             `;
                                     $(".show_all_notifications").html(notification);
                 } else {
+                    $(".show_notification_counts").addClass("notification-text");
                     $('.show_notification_counts').text(obj.length);
                     for (var i = 0; i < obj.length; i++) {
                         let img = '';

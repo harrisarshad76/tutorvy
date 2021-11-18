@@ -92,14 +92,14 @@
                     <p class="heading-third mb-0">My Subjects</p>
                     <div class="row">
                         @foreach (Auth::user()->teach as $teach)
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card-deck">
                                     <div class="card h-auto card-shadow p-0">
                                         <div class="card-body ">
                                             <span
                                                 class="badge badge-pill badge-approve mt-1 text-white">Approved</span>
                                             <div class="row">
-                                                <div class="col-md-9">
+                                                <div class="col-md-12">
                                                     <p class="heading-fifth mr-3 pt-2 mb-0 ">
                                                         {{ $teach->subject->name }}</p>
                                                 </div>
@@ -110,22 +110,22 @@
                             </div>
                         @endforeach
                     </div>
-                    @if(Auth::user()->assessment->count() != 0)
+                    @if(Auth::user()->assessment->where('status','0')->count() != 0)
                         <p class="heading-third mt-3 mb-0">Pending Subjects</p>
                         <div class="row">
                             @foreach (Auth::user()->assessment->where('status',0) as $teach)
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="card-deck">
                                         <div class="card h-auto card-shadow p-0">
                                             <div class="card-body ">
                                                 <span
                                                     class="badge badge-pill badge-new mt-1 text-white">Pending</span>
                                                 <div class="row">
-                                                    <div class="col-md-9">
+                                                    <div class="col-md-10">
                                                         <p class="heading-fifth mr-3 pt-2 mb-0 ">
                                                             {{ $teach->subject->name }}</p>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <a href="{{route('tutor.remove.subject',[$teach->subject->id])}}" class="float-right mt-2 text-danger text-decoration-none">Remove</a>
                                                     </div>
                                                 </div>
@@ -139,13 +139,14 @@
                         <p class="heading-third mt-3">Add subjects</p>
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <!-- <select name="" class="form-select form-control w-25 " id="">
                                     <option value="">Select Particular Subject</option>
-                                    @foreach ($subjects as $i => $subject)
+                                    @foreach ($main_sub as $subject)
                                         <option value="{{ $subject->id }}" onclick="getSubSubject({{ $subject->id }})">{{ $subject->name }}</option>
                                     @endforeach
                                 </select> -->
+                                <input type="search" class="form-control" placeholder="Search Subject">
                             </div>
                         </div>
 
@@ -159,27 +160,34 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="col-md-10">
-                                <div id="subjects">
+                            <div class="col-md-10 pt-4">
+                                <div id="subjects" style="height:500px;overflow-y:auto;overflow-x:hidden;">
                                     <div id="1">
                                         <div class="row" id="subSubjects">
                                             @foreach ($subjects as $i => $subject)
                                                 @if ((Auth::user()->teach[$i]->subject_id ?? null) != $subject->id)
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-5">
                                                         <div class="card-deck">
                                                             <div class="card h-auto card-shadow p-0">
                                                                 <div class="card-body ">
                                                                     <div class="row">
-                                                                        <div class="col-md-9">
+                                                                        <div class="col-md-10">
                                                                             <p class="heading-fifth mr-3 pt-2 mb-0 ">
                                                                                 {{ $subject->name }}
                                                                             </p>
                                                                         </div>
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-md-2">
                                                                             @if(Auth::user()->status == 2)
-                                                                                <a href="{{ route('tutor.test', [$subject->id]) }}">
-                                                                                    <p class="view-bookings mb-0">Add</p>
-                                                                                </a>
+                                                                                <?php
+                                                                                    $ter = Auth::user()->assessment->where('subject_id',$subject->id)->first();
+                                                                                ?>
+                                                                                @if($ter == "")
+                                                                                    <a href="{{ route('tutor.test', [$subject->id]) }}">
+                                                                                        <p class="view-bookings mb-0">Add</p>
+                                                                                    </a>
+                                                                                @else
+                                                                                    
+                                                                                @endif
                                                                             @else
                                                                                 <a onclick="showMessage()">
                                                                                     <p class="view-bookings mb-0">Add</p>

@@ -19,6 +19,7 @@ use App\Models\Admin\tktCat;
 use App\Models\Admin\supportTkts;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\TutorSlots;
 use Illuminate\Support\Facades\URL;
 
 class SettingController extends Controller
@@ -30,10 +31,27 @@ class SettingController extends Controller
     public function index(){
 
         $user = User::where('id',\Auth::user()->id)->first();
-        $paypal_payment = DB::table('payment_methods')->where('user_id',Auth::user()->id)
-                            ->where('method','paypal')->first();
+        $paypal_payment = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('method','paypal')->first();
 
-        return view('tutor.pages.setting.index',compact('user','paypal_payment'));
+        $slots = array(
+          array("value" => "1 Hours"),
+          array("value" => "2 Hours"),
+          array("value" => "3 Hours"),
+          array("value" => "4 Hours"),
+          array("value" => "5 Hours"),
+        );
+
+        $days = array(
+            array("id" => 1 , "day" => "Monday"),
+            array("id" => 2 , "day" => "Tuesday"),
+            array("id" => 3 , "day" => "Wednesday"),
+            array("id" => 4 , "day" => "Thursday"),
+            array("id" => 5 , "day" => "Friday"),
+            array("id" => 6 , "day" => "Saturday"),
+            array("id" => 7 , "day" => "Sunday"),
+        );
+
+        return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots'));
     }
 
     protected function validator(array $request)
@@ -212,6 +230,56 @@ class SettingController extends Controller
             'success' => true,
             'data' => $data,
         ]);
-
     }
+
+    public function saveTimeZone(Request $request) {
+
+        $region =  substr($request->date ,25,50);
+        User::where('id',Auth::user()->id)->update([
+            "time_zone" => $request->zone,
+            "region" => $region,
+        ]);
+        return response()->json([
+            'status_code'=> 200,
+            'message' => 'TimeZone Saved Successfully',
+            'success' => true,
+        ]);
+    }
+
+
+    public function saveSlots(Request $request) {
+       
+        $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
+
+        if($slots == 0 ) {
+            for($i = 0; $i < count($request->day); $i++) {
+                TutorSlots::create([
+                    'user_id' => Auth::user()->id , 
+                    'day' => $request->day[$i] ,
+                    'wrk_from' => ($request->from[$i] ?? NULL) ,
+                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'slot_length' => ($request->slot_length[$i] ?? NULL),
+                    'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
+                    'day_off' => ($request->day_off[$i] ?? NULL),
+                ]);
+            }
+        }else{
+            TutorSlots::where('user_id',Auth::user()->id)->delete();
+            for($i = 0; $i < count($request->day); $i++) {
+                TutorSlots::create([
+                    'user_id' => Auth::user()->id , 
+                    'day' => $request->day[$i] ,
+                    'wrk_from' => ($request->from[$i] ?? NULL) ,
+                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'slot_length' => ($request->slot_length[$i] ?? NULL),
+                    'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
+                    'day_off' => ($request->day_off[$i] ?? NULL),
+                ]);
+            }
+        }
+
+        return "success";
+    }
+
+
 }

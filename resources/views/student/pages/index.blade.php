@@ -5,6 +5,7 @@
 </style>
   <!-- top Fixed navbar End -->
   <div class="content-wrapper " style="overflow: hidden;">
+  <input type="hidden" id="timeZone" value="{{Auth::user()->time_zone}}">
     <section id="homesection" >
         <!-- dashborad home -->
         <div class="container-fluid m-0 p-0">
@@ -37,40 +38,42 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <div class="card mt-0">
-                                <div class="card-body">
-                                    
-                                    <p class="mb-2 ">Profile Strength: <strong class="text-success">
-                                        @php 
-                                            $default = 10;
-                                            $default = Auth::user()->profile_completed == 1 ? ($default + 40) :  $default;
-                                            $default = Auth::user()->picture != null ? ($default + 20) : $default;
-                                            $default = $education_profile > 0 ? ($default + 30) : $default;
-                                            echo $default .'%';
-                                        @endphp         
-                                    </strong>
-                                    <small class="pull-right"><a href="{{route('student.profile')}}"> View Profile </a></small>
-                                </p>
-                                    <div class="progress">
-                                        <div class="bg-dead bg-levelTwo" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="bg-dead {{$default >= 30  ? 'bg-levelThree' : ''}} ml-1" role="progressbar" style="width: 15%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="bg-dead {{$default >= 30  ? 'bg-levelThree' : ''}} ml-1" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="bg-dead {{$default >= 60 ? 'bg-levelFour' : '' }} ml-1" role="progressbar" style="width: 15%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="bg-dead {{$default >= 80 ? 'bg-levelFive' : ''}} ml-1" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="bg-dead {{$default > 90 ? 'bg-levelFive' : ''}} ml-1" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="text-mute mt-1 mb-0"> <i class="fa fa-check text-success"></i> Tutors with complete profile tends to have more students than the other tutors.</p>
-                                    <p class="text-mute mb-0"> <i class="fa fa-check text-success"></i> Tutors with complete profile get verified sooner than others.</p>
-                                    <p class="text-mute mb-0"> <i class="fa fa-check text-success"></i> Complete profile helps a tutor to earn more.</p>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    @if($user->profile_completed == 0)
 
-                    @if($default > 90) 
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="card mt-0">
+                                    <div class="card-body">
+                                        
+                                        <p class="mb-2 ">Profile Strength: <strong class="text-success">
+                                            @php 
+                                                $default = 10;
+                                                $default = Auth::user()->profile_completed == 1 ? ($default + 40) :  $default;
+                                                $default = Auth::user()->picture != null ? ($default + 20) : $default;
+                                                $default = $education_profile > 0 ? ($default + 30) : $default;
+                                                echo $default .'%';
+                                            @endphp         
+                                        </strong>
+                                        <small class="pull-right"><a href="{{route('student.profile')}}"> View Profile </a></small>
+                                    </p>
+                                        <div class="progress">
+                                            <div class="bg-dead bg-levelTwo" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="bg-dead {{$default >= 30  ? 'bg-levelThree' : ''}} ml-1" role="progressbar" style="width: 15%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="bg-dead {{$default >= 30  ? 'bg-levelThree' : ''}} ml-1" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="bg-dead {{$default >= 60 ? 'bg-levelFour' : '' }} ml-1" role="progressbar" style="width: 15%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="bg-dead {{$default >= 80 ? 'bg-levelFive' : ''}} ml-1" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="bg-dead {{$default > 90 ? 'bg-levelFive' : ''}} ml-1" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <p class="text-mute mt-1 mb-0"> <i class="fa fa-check text-success"></i> Tutors with complete profile tends to have more students than the other tutors.</p>
+                                        <p class="text-mute mb-0"> <i class="fa fa-check text-success"></i> Tutors with complete profile get verified sooner than others.</p>
+                                        <p class="text-mute mb-0"> <i class="fa fa-check text-success"></i> Complete profile helps a tutor to earn more.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    @endif
+                    @if($user->profile_completed == 1) 
                         <div class="bg-homeimage2 ">
                             <div class="row">
                                 <div class="col-md-7 text-white pl-4">
@@ -80,7 +83,7 @@
                                         </h2>
                                         <p >
                                             Register yourself on Tutorvy and learn or teach anything from
-                                            anywhere.
+                                            anywhere. 
                                         </p>
                                         <a href=""class="text-white ">
                                             Learn More
@@ -627,4 +630,31 @@
 @endsection
 @section('scripts')
 @include('js_files.student.dashboardJS')
+<script>
+
+    var checkTimeZone = $("#timeZone").val(); 
+    checkTimeZone.length == 0 ? saveTimeZone() : '';
+            
+    function saveTimeZone() {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        var date = new Date();
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            url: "{{route('student.timeZone')}}",
+            type: "POST",
+            data: {zone: timezone , date :date},
+            success:function(response){
+            },
+            error:function(e){
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
+    
+</script>
 @endsection

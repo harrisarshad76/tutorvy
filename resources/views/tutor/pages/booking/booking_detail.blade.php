@@ -63,7 +63,7 @@
                                     @elseif($booking->status == 4)
                                         <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by Student</span>
                                     @elseif($booking->status == 5)
-                                        <span style="display:inline-flex ;" class="bg-success"> Delivered</span>
+                                        <span style="display:inline-flex ;" class="bg-color-apporve1"> Delivered</span>
                                     @elseif($booking->status == 6)
                                         <span style="display:inline-flex ;" class="bg-color-apporve"> Cancelled by System</span>
                                     @endif
@@ -71,7 +71,7 @@
 
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
-                                    @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 )
+                                    @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
                                             class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
                                             Booking
@@ -89,7 +89,7 @@
                                     @endif
                                 </p>
                             </div>
-                            <card class="body">
+                            <!-- <card class="body">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-9">
@@ -113,7 +113,7 @@
                                                     <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;"
                                                         class=" mt-1 mb-0"> {{ $booking->user->full_name }} </p>
                                                     <p style="font-size: 12px;">
-                                                        Tutor</p>
+                                                    {{ $booking->user->tagline }}</p>
                                                 </div>
 
                                             </div>
@@ -162,54 +162,7 @@
                                                     Attachments</p>
 
                                                 <div class="row">
-                                                    <!-- <div class="col-md-3 col-sm-12 card bg-light mb-3"
-                                                            style="">
-                                                            <div class="container-fluid m-0 p-0">
-                                                                <div class="text-home mt-3" style="display: flex;">
-                                                                    <p>
-                                                                        <input style="display: none;" type="file"
-                                                                            id="fileinput" />
-                                                                        <img src="{{ asset($booking->attachments) }}"
-                                                                            alt="word" width="100" height="100">
-                                                                    </p>
-                                                                    <p class="ml-3 mr-3">
-                                                                        Image</p>
-                                                                </div>
-                                                                <div class="text-home mt-3" style="display: flex;">
-                                                                    <p>
-                                                                        <input style="display: none;" type="file"
-                                                                            id="fileinput" />
-                                                                        <img src="{{ asset($booking->attachments) }}"
-                                                                            alt="word">
-                                                                    </p>
-                                                                    <p class="ml-3 mr-3">
-                                                                        Word Files</p>
-                                                                </div>
-                                                                <div class="iconside">
-                                                                    <img src="{{ asset('assets/images/ico/download.png') }}" alt="o"
-                                                                        id='btnLoad' value='download'
-                                                                        onclick='downloadFile();'
-                                                                        style="width: 30px;position: absolute;top: 10px;right: 10px;">
-                                                                </div>
-                                                            </div>
-                                                        </div> &nbsp;&nbsp;
-                                                        <div class="col-md-3 col-xs-12 bg-light  card mb-3"
-                                                            style="">
-                                                            <div class="container-fluid m-0 p-0">
-                                                                <div class="text-home mt-3" style="display: flex;">
-                                                                    <p><img src="{{ asset('assets/images/ico/pptx.png') }}" alt="ga">
-                                                                    </p>
-                                                                    <p class="ml-3 mr-3">
-                                                                        PPTX Files</p>
-                                                                </div>
-
-                                                                <div class="iconside">
-                                                                    <img src="{{ asset('assets/images/ico/download.png') }}" alt="ag"
-                                                                        style="width: 30px;position: absolute;top: 10px;right: 10px;">
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                    @if ($booking->attachments)
+                                                     @if ($booking->attachments)
                                                         <div class="col-md-2 mt-1 mb-3">
                                                             <div class="card__corner">
                                                                 <div class="card__corner-triangle"></div>
@@ -217,7 +170,6 @@
                                                             <div class="borderOne">
                                                                 <span class="overlayAttach"></span>
                                                                 <img src="{{ asset($booking->attachments) }}" alt="">
-                                                                <!-- <span class="fileName">FileNameProplus.png</span> -->
                                                                 <a href="{{ asset($booking->attachments) }}"
                                                                     class="downFile"><i
                                                                         class="fa fa-download"></i></a>
@@ -233,8 +185,171 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4"></div>
+
                                     </div>
-                                </div>
+                                </div> -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row col-md-12 image1 mt-3 ">
+
+                                                <div class="col-md-1 text-center">
+                                                     @if ($booking->user->picture)
+                                                        <img src="{{asset($booking->user->picture)}}" alt="profile-image"  class="profile-img" >
+                                                    @else
+                                                        <img src="{{asset ('assets/images/ico/Square-white.jpg')}}"  alt="profile-image" class=" profile-img" >
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-10">
+                                                        <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;"
+                                                            class=" mt-1 mb-0"> {{$booking->user->full_name}} </p>
+                                                        <p style="font-size: 12px;">
+                                                        Student</p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="text1"
+                                                    style="color: #00132D;font-size: 15px;font-family: Poppins;font-weight: 500;line-height: 2;">
+                                                    {{$booking->question}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="text2"
+                                                    style="color: #00132D;font-size: 14px;font-family: Poppins;font-weight: 400;">
+                                                    {{$booking->brief}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="mt-4">
+                                                    <div class="text3" style="display: flex;">
+                                                        <span>
+                                                            <img class="book-details" src="{{ asset('assets/images/ico/Group 4689.png') }}" alt="gros">
+                                                            <span class="schedule">
+                                                                Schedule Date:
+                                                            </span>
+                                                            <span class="time-details">
+                                                                {{$booking->class_date}}
+                                                            </span>
+                                                        </span>
+                                                        <span class="ml-3">
+                                                            <img class="book-details"
+                                                                src="{{ asset('assets/images/ico/Group 4689.png') }}" alt="gros">
+                                                            <span class="schedule">
+
+                                                                Schedule Time:
+                                                            </span>
+                                                            <span class="time-details">
+                                                                {{$time}}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 mt-3">
+                                                <p
+                                                    style="color: #00132D;font-size: 16px;font-family: Poppins;font-weight: 500;">
+                                                    Attachments</p>
+                                                <div class="row">
+                                                    @if($booking->attachments)
+                                                        <div class="col-md-3 mt-1 mb-3">
+                                                            <div class="card__corner">
+                                                                <div class="card__corner-triangle"></div>
+                                                            </div>
+                                                            <div class="borderOne">
+                                                                <span class="overlayAttach"></span>
+                                                                <img src="{{ asset($booking->attachments) }}" alt="">
+                                                                <!-- <span class="fileName">FileNameProplus.png</span> -->
+                                                                <a href="{{asset($booking->attachments)}}" class="downFile"><i class="fa fa-download"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-md-12">
+                                                            <p>No attachments found</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if($booking->is_reviewed == 1)
+                                            <div class="col-md-3 bg-price ">
+                                                
+                                                <div class="row ">
+                                                    <div class="col-md-12">
+                                                        <div class="row image1 mt-3 ">
+
+                                                            <div class="col-md-2 text-center">
+                                                                @if ($booking->tutor->picture)
+                                                                    <img src="{{asset($booking->tutor->picture)}}" alt="profile-image"  class="profile-img" >
+                                                                @else
+                                                                    <img src="{{asset ('assets/images/ico/Square-white.jpg')}}"  alt="profile-image" class=" profile-img" >
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                    <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;"
+                                                                        class=" mt-1 mb-0"> {{$booking->tutor->first_name}} {{$booking->tutor->last_name}} </p>
+                                                                    <p style="font-size: 12px;">
+                                                                    {{$booking->tutor->tagline}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h4>Reviews</h4>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="star-icos">
+                                                        @if($booking->rating == 1)
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                            @elseif($booking->rating == 2)
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                            @elseif($booking->rating == 3)
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked  ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                            @elseif($booking->rating == 4)
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked  ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                                <span class="fa fa-star  ml-1"></span>
+                                                            @elseif($booking->rating == 5)
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked  ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                                <span class="fa fa-star checked ml-1"></span>
+                                                            @endif
+                                                        </div>
+                                                    
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <p>
+                                                        {{$booking->student_review}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-3"></div>
+                                        @endif
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -373,10 +488,10 @@
                                     <p style="font-size: 15px;color: #00132D;font-family: Poppins;font-weight: 400;line-height: 1.4;"
                                         class="ml-5 mr-5">
                                         {{-- @if($booking->status == 2)
-                                        Are you sure you want to cancel booking ? it will cost
-                                        ${{$booking->service_fee ?? 0}} for cancelling
+                                            Are you sure you want to cancel booking ? it will cost
+                                            ${{$booking->service_fee ?? 0}} for cancelling
                                         @elseif ($booking->status == 0 || $booking->status == 1) --}}
-                                        Are you sure you want to cancel booking ?
+                                            Are you sure you want to cancel booking ?
                                         {{-- @endif --}}
                                     </p>
                                 </div>

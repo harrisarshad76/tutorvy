@@ -1052,6 +1052,60 @@ height:25px;
             </div>
         </div>
     </div>
+
+    <!-- End Call Modal -->
+<div class="modal fade " id="callEndConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor wants to end the class. Please make sure if you don't need anything then end the class. Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <button type="button" class="btn-general " id="endCallYes2">End Call</button>
+                <button type="button" class="btn-outline-general " data-dismiss="modal"> Not Yet </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="calllDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Click below to report or book another tutor! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.tutor')}}" class="btn-outline-general"> Find New Tutor </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--No Tutor Call Modal -->
+<div class="modal fade " id="tutorDisconnectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tutor has not arrived yet! Kindly wait for 15 minutes before quiting! Thanks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <a href="{{route('student.history')}}" class="btn-general "> Report Tutor </a>
+                <a href="{{route('student.bookings')}}" class="btn-outline-general"> Reschedule Meeting  </a>
+            </div>
+        </div>
+    </div>
+</div>
  <!--Reschedule meeting--> <!-- Modal -->
             <div class="modal " id="resced" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1255,6 +1309,8 @@ var timer = new Timer();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
+
+console.log(connection.socket)
 // var class_duration = 20;
 $("#join_now").click(function(){
                 $(".tech_weck").removeClass("tech_weck-none");
@@ -1611,9 +1667,10 @@ connection.onopen = function(event) {
 var usersLeft = {};
 connection.onleave = function(event) {
     toastr.success("Tutor Disconnected. Please wait...");
-console.log(event.extra)
-timer.pause();
-   
+    $("#callDisconnectModal").modal("show");
+    console.log(event.extra)
+    // timer.pause();
+    
 };
 
 connection.onclose = connection.onerror  = function(event) {
@@ -1623,7 +1680,6 @@ console.log(event)
 };
 
 connection.onmessage = function(event) {
-    console.log(event)
 
     if(event.data.showMainVideo) {
         // $('#main-video').show();
@@ -1656,6 +1712,11 @@ connection.onmessage = function(event) {
         toastr.success("Tutor ended the class.");
         $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
+    }
+    if(event.data.call_confirmation === true){
+        // toastr.success("Tutor ended the class.");
+        // $(".content-wrapper").css("display","none !important");
+        $("#callEndConfirmationModal").modal("show");
     }
     if(event.data.is_timer === true){
         console.log(event.data.time_value)
@@ -1798,7 +1859,17 @@ $("#endCallYes").click(function(){
     $("#reviewModal").modal("show");
     $(".content-wrapper").css("display",'none');
     
-})
+});
+$("#endCallYes2").click(function(){
+    connection.send({
+        call_ended: true
+    });
+    toastr.success("Class has Ended.");
+    $("#callEndConfirmationModal").modal("hide");
+    $("#reviewModal").modal("show");
+    $(".content-wrapper").css("display",'none');
+    
+});
 var conversationPanel = document.getElementById('conversation-panel');
 
 function appendChatMessage(event, checkmark_id) {
@@ -2117,46 +2188,46 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             }
             var ter = "";
             var class_date = $("#class_date").val();
-                var class_time = $("#class_time").val();
-                var class_total_duration = $("#class_total_duration").val();
+            var class_time = $("#class_time").val();
+            var class_total_duration = $("#class_total_duration").val();
 
-                var bookings = new Date(class_date + ' ' + class_time);
-                var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
+            var bookings = new Date(class_date + ' ' + class_time);
+            var booking_seconds = HmsToSeconds(moment(bookings).format('HH:mm:ss')) ;
 
-                var today_date = new Date();
-                var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
+            var today_date = new Date();
+            var today_date_seconds = HmsToSeconds(moment(today_date).format('HH:mm:ss'));
 
 
-                var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
-                var create_class_end_date = new Date(class_date + ' ' + class_end);
-                var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
+            var class_end = moment(bookings).add(class_total_duration,'h').format("HH:mm:ss");
+            var create_class_end_date = new Date(class_date + ' ' + class_end);
+            var class_end_seconds = HmsToSeconds(moment(create_class_end_date).format('HH:mm:ss'));
 
-                var remain_seconds = class_end_seconds - today_date_seconds;
+            var remain_seconds = class_end_seconds - today_date_seconds;
 
-                /** Javascript Timer */
-                timer.start({countdown: true, startValues: {seconds: remain_seconds}});
+            /** Javascript Timer */
+            timer.start({countdown: true, startValues: {seconds: remain_seconds}});
 
+            $('#countdownExample .values').html(timer.getTimeValues().toString());
+
+            timer.addEventListener('secondsUpdated', function (e) {
                 $('#countdownExample .values').html(timer.getTimeValues().toString());
+                ter = $('.values').text();
+                if( ter < deadline ){
+                    $(".blink").css("background","#dc3545");
+                    $(".Text-reck").text("Class will end in Five minutes sharp.");
+                }
+                else if( ter == resced || ter < resced && ter > deadline ){
+                    $(".blink").css("background","#ffc107");
+                    let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
+                    $(".Text-reck").html(html);
+                }
+                else if( ter > resced ){
+                    $(".blink").css("background","#28a745");
+                    $(".Text-reck").text("Class will ends in: ");
 
-                timer.addEventListener('secondsUpdated', function (e) {
-                    $('#countdownExample .values').html(timer.getTimeValues().toString());
-                    ter = $('.values').text();
-                    if( ter < deadline ){
-                        $(".blink").css("background","#dc3545");
-                        $(".Text-reck").text("Class will end in Five minutes sharp.");
-                    }
-                    else if( ter == resced || ter < resced && ter > deadline ){
-                        $(".blink").css("background","#ffc107");
-                        let html = `<p class="mb-0">Do you want to reschedule another class? <a href="">Yes</a> or  <a href="">No</a> </p>`
-                        $(".Text-reck").html(html);
-                    }
-                    else if( ter > resced ){
-                        $(".blink").css("background","#28a745");
-                        $(".Text-reck").text("Class will ends in: ");
-
-                    }
-                    
-                });
+                }
+                
+            });
 
                 // var deadline = '00:05:00'; 
                 // var resced = '00:15:00';               
@@ -2389,5 +2460,39 @@ function HmsToSeconds(hms) {
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
 }
+
+$(".s_status").change(function(){
+    if($(this).prop("checked") == true){
+        if(!window.tempStream) {
+        alert('Screen sharing is not enabled.');
+        return;
+    }
+
+    $('#btn-share-screen').hide();
+
+    if(navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else if(navigator.getDisplayMedia) {
+        navigator.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else {
+        alert('getDisplayMedia API is not available in this browser.');
+    }
+    }else{
+       //run code
+       alert('unchecked')
+
+    }
+});
+
 </script>
 @endsection

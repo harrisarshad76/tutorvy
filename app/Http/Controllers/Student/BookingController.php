@@ -84,6 +84,7 @@ class BookingController extends Controller
     public function bookingDetail($id){
 
         $booking = Booking::with(['tutor','user','subject'])->where('id',$id)->first();
+        // return $booking;
         return view('student.pages.booking.booking_detail',compact('booking'));
     }
     public function bookingNew(Request $request){
@@ -858,18 +859,40 @@ class BookingController extends Controller
         ]);
     }
 
-    public function rescheduleBooking(Request $request,$id){
+    public function rescheduleBooking(Request $request){
+// return $request;
+        $booking = Booking::where('id',$request->loId)->first();
 
-        $booking = Booking::find($id);
 
         $booking->class_date = $request->date;
         $booking->class_time = $request->time;
         $booking->reschedule_note = $request->note;
         $booking->save();
 
-        \Session::flash('success','You have successfully reschedule this booking');
+        $admin = User::where('role',1)->first();
+        $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+        $notification = new NotifyController();
+        $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+        $type = 'booking_rescheduled';
+        $title = 'Booking Rescheduled';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $desc = $name . ' Rescheduled the booking.';
+        $pic = Auth::User()->picture;
+        $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
-        return redirect()->back();
+        // send to admin
+        $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+        $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
+
+        return response()->json([
+            "message" => "Meeting Rescheduled Successfully",
+            "status_code" => 200,
+            "success" => true,
+        ]);
+        // Session::flash('success','You have successfully reschedule this booking');
+
+        // return redirect()->back();
     }
 
     public function checkDefaultPaymentMethod()
@@ -882,6 +905,113 @@ class BookingController extends Controller
     }
 
 
+    public function cancelBooking(Request $request)
+    {
+        $booking = Booking::where('id',$request->idid)->first();
+        $refund_amount = $booking->price;
+        $saleId = Payments::where('type_id',$booking->id)->first()->sale_id ?? '';
+
+        if($saleId){
+
+            $paymentValue =  (string) round($refund_amount,2); ;
+
+            // ### Refund amount
+            // Includes both the refunded amount (to Payer)
+            // and refunded fee (to Payee). Use the $amt->details
+            // field to mention fees refund details.
+            $amt = new Amount();
+            $amt->setCurrency('USD')
+                ->setTotal($paymentValue);
+
+            // ### Refund object
+            $refundRequest = new RefundRequest();
+            $refundRequest->setAmount($amt);
+
+            // ###Sale
+            // A sale transaction.
+            // Create a Sale object with the
+            // given sale transaction id.
+            $sale = new Sale();
+            $sale->setId($saleId);
+            try {
+                $refundedSale = $sale->refundSale($refundRequest, $this->_api_context);
+            } catch (\Exception $ex) {
+                dd($ex);
+                exit(1);
+            }
+
+            if($refundedSale->state == 'completed'){
+
+                Payments::create([
+                    'user_id' => Auth::user()->id,
+                    'type' => 'payment_refund',
+                    'transaction_id' => $booking->payment->first()->transaction_id,
+                    'sale_id' => $refundedSale->sale_id ?? '',
+                    'amount'  => $refundedSale->amount->total,
+                    'method'  => 'paypal'
+                ]);
+
+                $booking->status = 4;
+                $booking->save();
+            }
+                // return redirect()->route('student.bookings')->with('success', '$'.$refundedSale->amount->total.' amount has been refunded to your account successfully!');
+
+            $admin = User::where('role',1)->first();
+            $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $notification = new NotifyController();
+            $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+            $type = 'booking_cancelled';
+            $title = 'Booking Cancelled';
+            $icon = 'fas fa-tag';
+            $class = 'btn-success';
+            $desc = $name . ' Cancelled the booking. ';
+            $pic = Auth::User()->picture;
+            $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+            // send to admin
+            $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+            $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
+
+
+            return response()->json([
+
+                "message" => `$`.$refundedSale->amount->total.` amount has been refunded to your account successfully!`,
+                "status_code" => 200,
+                "success" => true,
+            ]);
+
+
+        }else{
+
+            $booking->status = 4;
+            $booking->save();
+
+            $admin = User::where('role',1)->first();
+            $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $notification = new NotifyController();
+            $slug = URL::to('/') . '/tutor/booking-detail/' . $booking->id;
+            $type = 'booking_cancelled';
+            $title = 'Booking Cancelled';
+            $icon = 'fas fa-tag';
+            $class = 'btn-success';
+            $desc = $name . ' Cancelled the booking. ';
+            $pic = Auth::User()->picture;
+            $notification->GeneralNotifi($booking->booked_tutor ,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+            // send to admin
+            $admin_slug = URL::to('/') . '/admin/booking-detail/' . $booking->id;
+            $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
+
+            // return redirect()->route('student.bookings')->with('success', 'Booking has been successfully!');
+            return response()->json([
+
+                "message" => 'Booking has been Cancelled successfully!',
+                "status_code" => 200,
+                "success" => true,
+            ]);
+        }
+
+    }
 
 }
 

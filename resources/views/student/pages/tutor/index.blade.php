@@ -90,7 +90,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#rateDiv" aria-expanded="true" aria-controls="rateDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#rateDiv" aria-expanded="false" aria-controls="rateDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                     Price <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -127,7 +127,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#ratingDiv" aria-expanded="true" aria-controls="ratingDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#ratingDiv" aria-controls="ratingDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                     Rating <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -199,7 +199,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#langDiv" aria-expanded="true" aria-controls="langDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#langDiv" aria-expanded="false" aria-controls="langDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                     Language <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -219,7 +219,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#genderDiv" aria-expanded="true" aria-controls="genderDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#genderDiv" aria-expanded="false" aria-controls="genderDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                 Gender <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -256,7 +256,7 @@
                                 <div class="col-md-12">
                                     <div id="accordion">
                                         <div class=" ">
-                                            <a href="#" class="" data-toggle="collapse" data-target="#availableDiv" aria-expanded="true" aria-controls="availableDiv">
+                                            <a href="#" class="" data-toggle="collapse" data-target="#availableDiv" aria-expanded="false" aria-controls="availableDiv">
                                                 <div class="tutorFilterHead" id="headingOne">
                                                 Availability <span class="pull-right"><i class="fa fa-chevron-down"></i></span>
                                                 </div>
@@ -551,12 +551,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                   
                                 </div>
 
                             </div>
                         </div>
                         @endforeach
                     @endif
+                    
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@ $(document).ready(function() {
                 $("#subSubjects").html('')
                 if(response){
                 for(var i=0; i<=response.length; i++){
-                    var html = `<div class="col-md-4">
+                    var html = `<div class="col-md-5">
                                     <div class="card-deck">
                                         <div class="card h-auto card-shadow p-0">
                                             <div class="card-body ">

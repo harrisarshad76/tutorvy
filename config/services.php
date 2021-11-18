@@ -36,6 +36,7 @@ return [
         'redirect'      => env('GOOGLE_REDIRECT_URL')
     ],
     'facebook' => [
+        'app_id'        => env('FACEBOOK_APP_ID'),
         'client_id'     => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect'      => env('FACEBOOK_REDIRECT_URL')

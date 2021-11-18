@@ -18,8 +18,14 @@
                             There are many variations of passages available, but <br />
                             the majority have suffered alteration in some form.</p>
                         <div class="input-text input-text-main mt-5 d-flex">
-                            <input data-aos="zoom-in-up" type="text"
-                                placeholder="What subject do you need help with?">
+                            <!-- <input data-aos="zoom-in-up" type="text"
+                                placeholder="What subject do you need help with?"> -->
+                                <select name="subjects" id="subjects" class="form-select form-control">
+                                    <option selected >What subject do you need help with?</option>
+                                    @foreach ($subjects as $subject)
+                                    <option value="{{$subject->id}}"> {{$subject->name}}</option>
+                                    @endforeach
+                                </select>
                             <input type="submit" value="Search">
                         </div>
                     </div>
@@ -48,7 +54,13 @@
                             There are many variations of passages available, but
                             the majority have suffered alteration in some form.</p>
                         <div class="input-text input-text-main mt-5 d-flex">
-                            <input type="text" placeholder="What subject do you need help with?">
+                            <!-- <input type="text" placeholder="What subject do you need help with?"> -->
+                            <select name="subjects" class="form-select form-control" id="subjects">
+                                <option value="">Search Subject</option>
+                                @foreach ($subjects as $subject)
+                                <option value="{{$subject->id}}"> {{$subject->name}}</option>
+                                @endforeach
+                            </select>
                             <input type="submit" value="Search">
                         </div>
                     </div>

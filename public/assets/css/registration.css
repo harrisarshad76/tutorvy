@@ -8,6 +8,7 @@
     background-image: url('../../admin/assets/img/backgrounds/background-bottom.png');
     background-repeat: no-repeat;
     background-position-y: bottom;
+    height: 750px;
 }
 
 .board {
@@ -239,7 +240,7 @@ body {
 }
 
 .card {
-    margin-top: 50px;
+    margin-top: 40px;
     border: #00000005;
     border-radius: 8px;
 }
@@ -309,7 +310,7 @@ body {
 }
 
 .Google {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
     background-color: #C94131;
     color: #fff;

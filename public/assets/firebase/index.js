@@ -106,6 +106,15 @@ messaging.onMessage((payload) => {
             });
         }
 
+        if (type == "booking_cancelled") {
+            toastr.success(title + '<br>' + body, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
 
         let img = '';
         var current_url = window.location.pathname;
@@ -144,6 +153,15 @@ messaging.onMessage((payload) => {
 
         if (type == "tutor_profile_verfication") {
             toastr.success(title + '<br>' + redirect, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+        }
+
+        if (type == "booking_cancelled") {
+            toastr.success(title + '<br>' + body, {
                 position: 'top-end',
                 icon: 'success',
                 showConfirmButton: false,
@@ -309,6 +327,15 @@ messaging.onMessage((payload) => {
                 $('.action_button').html(pay_now_btn);
                 $("#nav-contact-tab").click();
             }
+        }
+
+        if (type == "booking_cancelled") {
+            toastr.success(title + '<br>' + body, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
         }
 
         if (type == "class_booking") {

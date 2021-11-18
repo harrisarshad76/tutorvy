@@ -16,9 +16,9 @@ $(document).ready(function(){
     $(".js-range-slider").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 1000,
-            from: 200,
-            to: 500,
+            max: 100,
+            from: 0,
+            to: 20,
             grid: true,
             prefix: "$"
         });
