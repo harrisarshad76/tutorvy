@@ -389,6 +389,11 @@
                                                 class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
                                                     Join 
                                             </button> -->
+                                            <div class="col-md-12 text-right mt-3 pr-0">
+                                                    <!-- <button id="finish" type="submit" class="schedule-btn  ">
+                                                            Join Now
+                                                    </button>
+                                                </div> -->
                                             <button id="finish"  type="submit"
                                                 class="schedule-btn  nextBtn">
                                                     Join Now
