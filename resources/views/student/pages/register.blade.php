@@ -385,86 +385,92 @@
                                                 @enderror
                                             </div>
 
-                                        </div>
-
-                                        <div class="col-md-12 text-right mt-3">
                                             <!-- <button id="finish"  type="submit"
                                                 class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
                                                     Join 
                                             </button> -->
                                             <button id="finish"  type="submit"
-                                                class="schedule-btn  ">
+                                                class="schedule-btn  nextBtn">
                                                     Join Now
                                             </button>
                                         </div>
 
-                                        <div class="col-md-12 text-right">
+                                        <!-- <div class="col-md-12 text-right">
 
                                             <div class="social-Icon">
-                                                    @if (Session::has('error'))
-                                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                            {{ Session::get('error') }}
-                                                        </div>
-                                                    @endif
-                                                    <div class="row mt-4" >
-                                                        <!-- <div class="col-md-12 text-center">
-                                                                <p>OR</p>
-                                                        </div> -->
-                                                        <div class="col-md-6">
-                                                            <div class="Google">
-                                                                <a href="{{route('social.google',[3])}}">
-                                                                    <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
-                                                                    Continue with Google
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="facebook">
-                                                                <a href="{{route('social.facebook',[3])}}">
-                                                                    <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
-
-                                                                    <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
-                                                                    Continue with Facebook
-                                                                </a>
-                                                            </div>
+                                                @if (Session::has('error'))
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        {{ Session::get('error') }}
+                                                    </div>
+                                                @endif
+                                                <div class="row mt-4" >
+                                                   
+                                                    <div class="col-md-6">
+                                                        <div class="Google">
+                                                            <a href="{{route('social.google',[3])}}">
+                                                                <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
+                                                                Continue with Google
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                    
-                                                    
-                                                    <!-- <div class="Apple">
-                                                        <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
-
-                                                        
-                                                        Continue with Apple
-                                                    </div> -->
-                                                    <div class="Policy-text" style="display: flex;">
-                                                        <p class="text-left">
-                                                            Protected by reCAPTCHA and subject to the Google
-                                                            <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
-                                                        
-                                                        </p>
-                                                        <!-- <p class="Privacy-text">
-                                                            Privacy
-                                                        </p> -->
+                                                    <div class="col-md-6">
+                                                        <div class="facebook">
+                                                            <a href="{{route('social.facebook',[3])}}">
+                                                                <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
+                                                                Continue with Facebook
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                    <!-- <div class="" style="display: flex;">
-                                                        <p class="policy-text1">
-                                                            Policy and
-                                                        </p>
-                                                        <p class="Privacy-text">
-                                                            Terms of Service.
-                                                        </p>
-                                                    </div> -->
                                                 </div>
+                                                <div class="Policy-text" style="display: flex;">
+                                                    <p class="text-left">
+                                                        Protected by reCAPTCHA and subject to the Google
+                                                        <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                    
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-md-12 text-right">
+                                            <div class="social-Icon">
+                                                @if (Session::has('error'))
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                        role="alert">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        {{ Session::get('error') }}
+                                                    </div>
+                                                @endif
+                                                <div class="row mt-4">
+
+                                                    <div class="col-md-6">
+                                                        <div class="g-signin2 mt-3 text-center"
+                                                            data-onsuccess="onSignIn" data-width="250" data-height="40">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mt-4">
+                                                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="Policy-text" style="display: flex;">
+                                                    <p class="text-left">
+                                                        Protected by reCAPTCHA and subject to the Google
+                                                        <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                    
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- <div role="tabpanel" class="tab-pane border-right" id="step-2"
-                                        style="padding-bottom: 100px;background-color: white;">
-                                        <div class="col-md-12 ">
-                                            <p class="heading-third mt-3">Educational information </p>
+                                        <!-- <div role="tabpanel" class="tab-pane border-right" id="step-2"
+                                            style="padding-bottom: 100px;background-color: white;">
+                                            <div class="col-md-12 ">
+                                                <p class="heading-third mt-3">Educational information </p>
                                                 <div class=" customer_records mt-5">
                                                     <div class="row">
                                                         <div class="input-text col-md-12">
@@ -487,59 +493,9 @@
 
                                                             </select>
                                                         </div>
-
-                                            <button id="finish" type="submit"
-                                                class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
-                                                &nbsp; Join &nbsp;
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-12 text-right">
-
-                                            <div class="social-Icon">
-                                                @if (Session::has('error'))
-                                                    <div class="alert alert-danger alert-dismissible fade show"
-                                                        role="alert">
-                                                        <button type="button" class="close"
-                                                            data-dismiss="alert" aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </button>
-                                                        {{ Session::get('error') }}
-                                                    </div>
-                                                @endif
-                                                <div class="row mt-4">
-
-                                                    <div class="col-md-6">
-                                                        <div class="g-signin2 mt-3 text-center"
-                                                            data-onsuccess="onSignIn" data-width="250" data-height="40">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 mt-4">
-                                                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="Policy-text" style="display: flex;">
-                                                    <p class="by-text">
-                                                        Protected by reCAPTCHA and subject to the Google</p>
-                                                    <p class="Privacy-text">
-                                                        Privacy
-                                                    </p>
-                                                </div>
-                                                <div class="" style="display: flex;">
-                                                    <p class="policy-text1">
-                                                        Policy and
-                                                    </p>
-                                                    <p class="Privacy-text">
-                                                        Terms of Service.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-
-
+                                        </div>-->
+                                        
+                                    </div>
                                 </div>
                             </form>
                         </div>

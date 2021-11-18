@@ -475,27 +475,12 @@
                                                                 <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
                                                             </div>
                                                         </div>
-
-
-                                                        <!-- <div class="Apple">
-                                                                <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
-                                                                Continue with Apple
-                                                            </div> -->
-                                                            <div class="Policy-text" style="display: flex;">
+                                                        <div class="Policy-text" style="display: flex;">
                                                             <p  class="text-left">
-                                                                            Protected by reCAPTCHA and subject to the Google
-                                                                            <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
-                                                                        
-                                                                        </p>
-                                                            </div>
-                                                            <!-- <div class="" style="display: flex;">
-                                                                <p class="policy-text1">
-                                                                    Policy and
-                                                                </p>
-                                                                <p class="Privacy-text">
-                                                                    Terms of Service.
-                                                                </p>
-                                                            </div> -->
+                                                                        Protected by reCAPTCHA and subject to the Google
+                                                                        <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                                    
+                                                                    </p>
                                                         </div>
                                                     </div>
                                                 </div>
