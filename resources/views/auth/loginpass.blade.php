@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- style css -->
     <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/global-login.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
@@ -47,7 +48,7 @@
                             Register yourself on Tutorvy and learn or teach anything <br />
                             from anywhere.
                         </div>
-                        <div style="margin-top: 70px;">
+                        <div style="margin-top: 70px;" class="nav-hide">
                             <img src="../assets/images/login-image/loginImage.png" alt="login" style="width: 90%;">
                         </div>
                     </div>

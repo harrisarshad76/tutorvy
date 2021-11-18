@@ -176,6 +176,9 @@
     font-family: "Poppins";
     font-weight: 600;
     color: #00132D;
+    left: 16px;
+    top: 51px;
+    position: absolute;
 }
 
 .number-2 {
@@ -190,6 +193,11 @@
     font-family: "Poppins";
     font-weight: 400;
     color: #00132D;
+}
+
+.tex {
+    font-size: 60px;
+    opacity: 0.15;
 }
 
 .line-image {
@@ -808,10 +816,10 @@
         position: relative;
         top: 20px;
     }
-    .main-bg-height {
+    /* .main-bg-height {
         height: 280px !important;
         text-align: center !important;
-    }
+    } */
     /* .how-mobile-section {
         height: 120px !important;
     } */
@@ -870,7 +878,7 @@
 
 @media screen and (max-width: 600px) {
     .main-bg-height {
-        display: none;
+        display: none !important;
     }
     .main-bg-height-show {
         display: block;

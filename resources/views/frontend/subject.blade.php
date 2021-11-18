@@ -41,7 +41,7 @@
                         </select>
                         <!-- <input type="text" class="input-subject" placeholder="Subject category"> 
                         <input type="submit" class="input-submite input-submite1" value="Search">-->
-               
+                        <button class="input-submite" style="width:auto !important; margin-top:5px;"> Search</button>
                    
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div id="subjects">
+                <div id="subject">
                     <div id="1">
                         <div class="row book-luli" id="subSubjects">
                             @foreach ($subjects as $i => $subject)
@@ -103,23 +103,29 @@
                                             There are many variations of passages available, but
                                             the majority have suffered alteration in some form.
                                         </span>
-                                        <div class="container mt-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="input-text text-mobile-sub  pt-3 pb-3 input-subs"
-                                                        >
-                                                        <input type="text" class="card-input ml-3"
+                                        <div class="mt-4">
+                                            <div class="row input-subs">
+                                                <div class="col-md-4">
+                                                    <div class="input-text text-mobile-sub  pt-3">
+                                                        <input type="text" class="card-input "
                                                             placeholder="Enter your name">
-                                                        <input type="text" class="card-input ml-4 mr-3"
-                                                            placeholder="Enter your email">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="input-text text-mobile-sub input-subs"
-                                                       >
-                                                        <input type="text" class="card-input ml-3"
-                                                            placeholder="Are you a">
-                                                        <input type="text" class="card-input ml-4 mr-3"
+                                                <div class="col-md-6">
+                                                    <div class="input-text text-mobile-sub  pt-3">
+                                                        <input type="text" class="card-input "
+                                                            placeholder="Enter your name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-text text-mobile-sub  pt-3">
+                                                        <input type="text" class="card-input "
+                                                            placeholder="Are You a?">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-text text-mobile-sub  pt-3">
+                                                        <input type="text" class="card-input "
                                                             placeholder="Subject name">
                                                     </div>
                                                 </div>

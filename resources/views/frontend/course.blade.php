@@ -239,7 +239,7 @@
                     </p>
                 </div>
             </div>
-            <div class=" row">
+            <!-- <div class=" row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 col-12 bg-subject">
                     <div class="mobile-input row" style="justify-content:center;">
@@ -248,17 +248,29 @@
                                 <option value="#">Select Subjects</option>
                             </select>
                         </div>
-                        <div class="col-md-3 col-4 col-sm-4">
-                            <input type="submit" class="input-submite w-100" value="Find a course">
-
+                        <div class="col-md-3 col-12 text-center col-sm-4">
+                            <button class="input-submite" style="width:auto !important; margin-top:5px;"> Find a course</button>
                         </div>
-                        <!-- <input type="text" class="input-subject" placeholder="Choose subjects"> -->
-
                     </div>
-
                 </div>
                 <div class="col-md-2"></div>
+            </div> -->
+            <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 col-12 bg-subject bg-subject1">
+                <div class="mobile-view-input">
+                  
+                        <select name="" class="input-subject" id="">
+                            <option value="">Find a Course</option>
+
+                        </select>
+                        <button class="input-submite" style="width:auto !important; margin-top:5px;"> Search</button>
+                   
+                </div>
+
             </div>
+            <div class="col-md-3"></div>
+        </div>
             <div class=" row mt-3">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 col-12 bg-subject bdl">
@@ -270,7 +282,7 @@
                 @if($courses)
                     @foreach ($courses as $course)
                         @if($course->status == 1)
-                            <div class="col-md-3 mb-5">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">

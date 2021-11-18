@@ -217,7 +217,7 @@
     <section id="body">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 nav-hide">
+                <div class="col-md-6">
                     <div class="" style="position: sticky;top: 10%;">
                         <div class="login-logo">
                             <a href="{{ url('/') }}">
@@ -232,7 +232,7 @@
 
                             Register yourself on Tutorvy and learn or teach anything <br /> from anywhere.
                         </div>
-                        <div style="margin-top: 70px;">
+                        <div style="margin-top: 70px;" class="  nav-hide">
                             <img src="../assets/images/login-image/loginImage.png" style="width: 90%;">
                         </div>
                     </div>
@@ -514,71 +514,78 @@
                                         
                                         <div class="col-md-12 text-right mt-3">
 
-                                                            <button id="finish"  type="submit"
-                                                                class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
-                                                                &nbsp; Join &nbsp;
+                                            <!-- <button id="finish"  type="submit"
+                                                class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
+                                                    Join 
+                                            </button> -->
+                                            <button id="finish"  type="submit"
+                                                class="schedule-btn  ">
+                                                    Join Now
+                                            </button>
+                                        </div>
+
+                                        <div class="col-md-12 text-right">
+
+                                            <div class="social-Icon">
+                                                    @if (Session::has('error'))
+                                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
                                                             </button>
+                                                            {{ Session::get('error') }}
                                                         </div>
-
-                                                        <div class="col-md-12 text-right">
-
-                                                            <div class="social-Icon">
-                                                                    @if (Session::has('error'))
-                                                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                                <span aria-hidden="true">×</span>
-                                                                            </button>
-                                                                            {{ Session::get('error') }}
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="row mt-4" >
-                                                                        <!-- <div class="col-md-12 text-center">
-                                                                                <p>OR</p>
-                                                                        </div> -->
-                                                                        <div class="col-md-6">
-                                                                            <div class="Google">
-                                                                                <a href="{{route('social.google',[3])}}">
-                                                                                    <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
-                                                                                    Continue with Google
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <div class="facebook">
-                                                                                <a href="{{route('social.facebook',[3])}}">
-                                                                                    <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
-
-                                                                                    <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
-                                                                                    Continue with Facebook
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                   
-                                                                    <!-- <div class="Apple">
-                                                                        <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
-
-                                                                      
-                                                                        Continue with Apple
-                                                                    </div> -->
-                                                                    <div class="Policy-text" style="display: flex;">
-                                                                        <p class="by-text">
-                                                                            Protected by reCAPTCHA and subject to the Google</p>
-                                                                        <p class="Privacy-text">
-                                                                            Privacy
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="" style="display: flex;">
-                                                                        <p class="policy-text1">
-                                                                            Policy and
-                                                                        </p>
-                                                                        <p class="Privacy-text">
-                                                                            Terms of Service.
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
+                                                    @endif
+                                                    <div class="row mt-4" >
+                                                        <!-- <div class="col-md-12 text-center">
+                                                                <p>OR</p>
+                                                        </div> -->
+                                                        <div class="col-md-6">
+                                                            <div class="Google">
+                                                                <a href="{{route('social.google',[3])}}">
+                                                                    <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
+                                                                    Continue with Google
+                                                                </a>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <div class="facebook">
+                                                                <a href="{{route('social.facebook',[3])}}">
+                                                                    <i class="fa fa-facebook  fa-lg mr-2" aria-hidden="true"></i>
+
+                                                                    <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
+                                                                    Continue with Facebook
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- <div class="Apple">
+                                                        <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
+
+                                                        
+                                                        Continue with Apple
+                                                    </div> -->
+                                                    <div class="Policy-text" style="display: flex;">
+                                                        <p class="text-left">
+                                                            Protected by reCAPTCHA and subject to the Google
+                                                            <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                        
+                                                        </p>
+                                                        <!-- <p class="Privacy-text">
+                                                            Privacy
+                                                        </p> -->
+                                                    </div>
+                                                    <!-- <div class="" style="display: flex;">
+                                                        <p class="policy-text1">
+                                                            Policy and
+                                                        </p>
+                                                        <p class="Privacy-text">
+                                                            Terms of Service.
+                                                        </p>
+                                                    </div> -->
+                                                </div>
+                                        </div>
                                     </div>
                                     <!-- <div role="tabpanel" class="tab-pane border-right" id="step-2"
                                         style="padding-bottom: 100px;background-color: white;">
