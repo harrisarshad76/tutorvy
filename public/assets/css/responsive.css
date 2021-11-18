@@ -15,6 +15,13 @@
         .tilt-logo {
             margin-top: 110px;
         }
+        .hash-icon {
+            top: 102px;
+            left: 115px;
+        }
+        .input-subs input {
+            width: auto;
+        }
     }
     
     @media screen and (max-width: 768px) {
@@ -72,6 +79,10 @@
             font-size: 25px;
             color: #1173FF !important;
         }
+        .hash-icon {
+            top: 30px;
+            left: 50px;
+        }
     }
     
     @media screen and (max-width: 425px) {
@@ -95,5 +106,15 @@
         }
         .text-sectiom-tow {
             margin-left: 15px;
+        }
+        .gPicture {
+            display: none;
+        }
+    }
+    
+    @media screen and (max-width: 320px) {
+        .time {
+            font-size: 25px;
+            line-height: 1;
         }
     }
