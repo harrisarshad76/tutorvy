@@ -9,22 +9,25 @@
                     </div>
                     <div class="card-body chatbox p-0">
                         <ul class="list-group list-group-flush">
+                            
                           @foreach($users as $user)
 
                           @if($user->id !== auth()->id())
                           @php
-                              $not_seen= App\Models\General\Message::where('user_id',$user->id)->where('receiver_id',auth()->id())->where('is_seen',false)->get() ?? null
-
+                            $not_seen= App\Models\General\Message::where('user_id',$user->id)->where('receiver_id',auth()->id())->where('is_seen',false)->get() ?? null
                           @endphp
                                 <a wire:click="getUser({{$user->id}})"  class="text-dark link">
                                     <li class="list-group-item">
                                         <img class="img-fluid avatar" src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png">
-                                        @if($user->is_online==true)
+                                      
+                                        @if($user->is_active == 'yes')
 
-                                         <i class="fa fa-circle text-success online-icon">
+                                         <i class="fa fa-circle text-success online-icon"></i>
+                                         @else
+                                         <i class="fa fa-circle text-danger online-icon"></i>
                                             @endif
                                              
-                                         </i> {{$user->first_name}} {{$user->last_name}}
+                                          {{$user->first_name}} {{$user->last_name}}
                                        @if(filled($not_seen))
                                             <div class="badge badge-success rounded"> {{ $not_seen->count()}} </div>
                                             @endif
