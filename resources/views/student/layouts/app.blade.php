@@ -14,6 +14,8 @@
     <!--favicon --->
     <link href="{{ asset('assets/images/ico/side-icons.png') }}" rel="icon">
     <!-- bootstrap link -->
+    @livewireStyles
+
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <!-- fonawsome -->
     <link href="{{ asset('assets/css/fontawesome.min.css') }}" rel="stylesheet">
@@ -402,7 +404,7 @@ function hideCard() {
 
 
 </script>
-
+@livewireScripts
 
 </body>
 

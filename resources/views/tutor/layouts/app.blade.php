@@ -11,6 +11,7 @@
     <!--favicon --->
     <link href="{{ asset('assets/images/ico/side-icons.png') }}" rel="icon">
     <!-- bootstrap link -->
+    @livewireStyles
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/calender.css') }}" rel="stylesheet">
 
@@ -144,7 +145,7 @@
 
             <!-- custom js -->
 
-            <script src="{{ asset('js/app.js') }}"></script>
+            <!-- <script src="{{ asset('js/app.js') }}"></script> -->
             <!-- jquery  -->
             <script src="{{ asset('/admin/assets/js/jquery.js') }}"></script>
             <script src="{{ asset('/admin/assets/js/jquery-ui.js') }}"></script>
@@ -343,6 +344,8 @@
                     };
 
             </script>
+            
+@livewireScripts
 
 </body>
 
