@@ -429,6 +429,7 @@
                                     <div class="col-md-1">
                                         <img class="avatar mt-2 mb-2 "
                                             src="{{asset('assets/images/notifiaction/tick-ico.png') }}" alt="Layer">
+
                                     </div>
                                     <div class="col-md-9">
                                         <div class="notification-flex">
@@ -545,6 +546,7 @@
                 <a class="nav-link" href="{{ route('tutor.chat')}}">
                     <img src="{{asset('assets/images/ico/email.png') }}" alt="img-email"
                         style="width: 20px;cursor: pointer !important;">
+                        <span class=" show_message_counts notification-text"></span>
                 </a>
             </li>
             <li class="nav-item profile-name1" id="imageDropdowns">
