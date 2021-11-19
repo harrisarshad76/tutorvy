@@ -99,9 +99,12 @@
                                             <span
                                                 class="badge badge-pill badge-approve mt-1 text-white">Approved</span>
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-10">
                                                     <p class="heading-fifth mr-3 pt-2 mb-0 ">
                                                         {{ $teach->subject->name }}</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a  type="button" onclick="showTutorPlans('{{$teach->sub_name}}','{{$teach->user_id}}','{{$teach->subject_id}}')">Edit</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,8 +220,91 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="priceModal" tabindex="-1" role="dialog"
+        aria-labelledby="priceModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header text-center">
+                </div> -->
+                <div class="modal-body h-auto  card-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <img  src="{{asset('admin/assets/img/ico/dollars.png')}}" />
+                        </div>
+                        <div class="col-md-12 text-center mt-3">
+                            <h3 id="subject_title"> </h3>
+                        </div>
+                    </div>
+                    <div id="show_plans"></div>
+                </div>
+                <div class="modal-footer ">
+                    <div class="row">
+                        <div class="col-md-12">
+                             <button class="cencel-btn btn" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button class="schedule-btn btn" data-dismiss="modal">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     @include('js_files.tutor.subjectJs')
+    <script>
+         function showTutorPlans(subject_title , user_id , subject_id) {
+        $.ajax({
+            url: "{{route('tutor.plans')}}",
+            type:"POST",
+            data:{
+            user_id:user_id,
+            subject_id:subject_id,
+            },
+            success:function(response){
+
+            var data = ``;
+            if(response.status_code == 200) {
+
+                for(var i =0; i < response.tutor_plans.length; i++) {
+
+                data +=`
+                    <div class="row mt-3 ">
+                        <div class="col-md-6">
+                            <p class="pt-3"> `+ (response.tutor_plans[i].experty_title != null ? response.tutor_plans[i].experty_title : '-') +` </p>
+                        </div>
+                        <div class="text-right col-md-6 ">
+                            <div class="input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" id="preElementary_rate" name="preElementary_rate" value="`+response.tutor_plans[i].rate+`">
+                            </div>
+                        </div>
+                    </div>`
+
+                }
+                $("#subject_title").text(subject_title);
+                $("#show_plans").html(data);
+                $("#priceModal").modal('show');
+
+            }else{
+
+                toastr.error( response.message,{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+
+            }
+            },
+        });
+
+  }
+    </script>
 @endsection

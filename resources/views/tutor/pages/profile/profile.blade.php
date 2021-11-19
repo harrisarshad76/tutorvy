@@ -378,47 +378,47 @@ width:22px;
 @section('scripts')
 <script>
      function showTutorPlans(subject_title , user_id , subject_id) {
-    $.ajax({
-        url: "{{route('tutor.plans')}}",
-        type:"POST",
-        data:{
-          user_id:user_id,
-          subject_id:subject_id,
-        },
-        success:function(response){
+        $.ajax({
+            url: "{{route('tutor.plans')}}",
+            type:"POST",
+            data:{
+            user_id:user_id,
+            subject_id:subject_id,
+            },
+            success:function(response){
 
-          var data = ``;
-          if(response.status_code == 200) {
+            var data = ``;
+            if(response.status_code == 200) {
 
-            for(var i =0; i < response.tutor_plans.length; i++) {
+                for(var i =0; i < response.tutor_plans.length; i++) {
 
-              data +=`
-                <div class="row mt-3 ">
-                    <div class="col-md-6">
-                        <p> `+ (response.tutor_plans[i].experty_title != null ? response.tutor_plans[i].experty_title : '-') +` </p>
-                    </div>
-                    <div class="text-right col-md-6 ">
-                        <p> $`+response.tutor_plans[i].rate+` </p>
-                    </div>
-                </div>`
+                data +=`
+                    <div class="row mt-3 ">
+                        <div class="col-md-6">
+                            <p> `+ (response.tutor_plans[i].experty_title != null ? response.tutor_plans[i].experty_title : '-') +` </p>
+                        </div>
+                        <div class="text-right col-md-6 ">
+                            <p> $`+response.tutor_plans[i].rate+` </p>
+                        </div>
+                    </div>`
+
+                }
+                $("#subject_title").text(subject_title);
+                $("#show_plans").html(data);
+                $("#planModal").modal('show');
+
+            }else{
+
+                toastr.error( response.message,{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
 
             }
-            $("#subject_title").text(subject_title);
-            $("#show_plans").html(data);
-            $("#planModal").modal('show');
-
-          }else{
-
-            toastr.error( response.message,{
-                position: 'top-end',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 2500
-            });
-
-          }
-        },
-    });
+            },
+        });
 
   }
 </script>
