@@ -55,7 +55,7 @@ class GenChatController extends Controller
         $class = 'btn-success';
         $desc = Auth::User()->first_name.' texted you.';
         $pic = Auth::User()->picture;
-        $notification->GeneralNotifi($request->user,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
+        $notification->GeneralNotifi($request->user,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$request->msg);
 
 
         return response()->json([
