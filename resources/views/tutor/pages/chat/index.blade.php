@@ -2,6 +2,9 @@
 
 @section('content')
     <style>
+        .box-main {
+            height: 550px;
+        }
         .chatLeft:hover {
             text-decoration: none;
         }
@@ -27,18 +30,19 @@
         }
 
         .sendRight {
-            right: 28px;
+            right: 12px;
             position: absolute;
-            top: 8px;
+            top: 2px;
             color: #00132D;
-            font-size: 20px;
+            font-size: 21px;
         }
 
         .sendLeft {
-            left: 48px;
+            left: 27px;
             position: absolute;
             z-index: 3;
             color: #00132D;
+            top:1px;
         }
 
         .sendLeft i {
@@ -49,7 +53,7 @@
             height: 365px;
             padding-left: 0px;
             padding-right: 0;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         .headIcon {
@@ -67,13 +71,24 @@
         .sender {
             float: right;
         }
+        .reciever {
+            float: left;
+            display:grid;
+        }
 
         .reciever p,
         .sender p {
-            width: 219px;
-            border: 1px solid #6EAAFF;
+            min-width: 219px;
+            border: 1px solid ;
+            border-color: #D3D8DF;
+
             border-radius: 5px;
             padding: 5px;
+            max-width:509px;
+        }
+        .reciever p{
+            border: 1px solid;
+            border-color:#6EAAFF;
         }
 
         .reciever p:hover,
@@ -88,8 +103,8 @@
         }
 
         .dull {
-            position: absolute;
-            right: 2%;
+            
+            
             color: #BCC0C7;
         }
 
@@ -154,8 +169,8 @@
             white-space: nowrap;
             position: absolute;
             top: 0;
-            left: 93px;
-            right: 24px;
+            left: 67px;
+            right: 43px;
             padding: 6px 0;
         }
 
@@ -164,7 +179,10 @@
             left: 5px;
             /* top: -10px; */
         }
-
+        .dot{
+            padding-top: 1px;
+    padding-left: 6px;
+        }
     </style>
 
     <div class="content content-wrapper " style="width: 100%;background-color: #FBFBFB !important;">
@@ -194,8 +212,8 @@
                     </div>
                 </div>
                 <div class="col-md-3" style="background-color: #F2F3F4;">
-                    <div class="box-main pt-3 pb-3">
-                        <div class="input-box">
+                    <div class="box-main pt-3 pb-3 pr-3">
+                        <div class="input-box mr-0">
                             <input type="" placeholder="Search messeges">
                             <a href="#">
                                 <i class="fa fa-search search-box-icon"></i>
@@ -203,19 +221,17 @@
                             </a>
                         </div>
                         <div class="line-box"></div>
-                        @foreach ($students as $student)
                             <a href="#" class="chatLeft" id="chatClient_1"
-                                onclick="selectUser(`{{ $student->id }}`)">
+                                onclick="selectUser(``)">
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
-                                    <span class="activeDot" id="activeDot_{{ $student->id }}"></span>
+                                    <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
 
                                         <div class="row">
                                             <div class="col-9">
-                                                <p class="name-client">{{ $student->first_name }}
-                                                    {{ $student->last_name }}</p>
+                                                <p class="name-client">Student Name</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="time-chat">11:25</p>
@@ -223,23 +239,22 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_{{ $student->id }}">It is a long
+                                                <p class="massage-client" id="recent_msg_">It is a long
                                                     distae... </p>
 
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="dot pl-2 " id="unseen_msg_cnt_{{ $student->id }}">2
+                                                <span class="dot  " id="unseen_msg_cnt_">2
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
-                        @endforeach
                     </div>
 
                 </div>
-                <div class="col-md-9  chatSet" style="">
+                <div class="col-md-9  chatSet" style="display:none;">
                     <nav class="chatHead navbars navbar-light bg-white m-0 p-0 pl-3 pr-3 row">
                         <div class="col-md-6 col-6">
                             <a class="navbar-brand pb-0" href="#">
@@ -276,7 +291,63 @@
                     </nav>
                     <div class="line-box2"></div>
 
-                    <div class="row chatArea p-5 bg-white" id="chatArea">
+                    <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
+                                    <div class="col-md-12">
+                                        <div class="sender">
+                                            <small>From Azad Chaiwala </small>
+                                            <p class="senderText mb-0">d </p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="reciever">
+                                           <small>From Me</small>
+                                            <p class="senderText mb-0">Reply</p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="sender">
+                                            <small>From Azad Chaiwala </small>
+                                            <p class="senderText mb-0">d </p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="reciever">
+                                           <small>From Me</small>
+                                            <p class="senderText mb-0">Reply</p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="sender">
+                                            <small>From Azad Chaiwala </small>
+                                            <p class="senderText mb-0">d </p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="reciever">
+                                           <small>From Me</small>
+                                            <p class="senderText mb-0">Reply</p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="sender">
+                                            <small>From Azad Chaiwala </small>
+                                            <p class="senderText mb-0">d </p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="reciever">
+                                           <small>From Me</small>
+                                            <p class="senderText mb-0">Reply</p>
+                                            <small class="dull">1min ago</small>
+                                        </div>
+                                    </div>
 
 
                     </div>
@@ -291,7 +362,7 @@
                             </div>
                             <div class="row">
 
-                                <div class="col-md-12 col-8">
+                                <div class="col-md-12 col-8 p-0">
 
                                     <form id="chat_form" action="{{ route('store.text') }}">
                                         <a href="" class="sendLeft" type="button">
@@ -320,4 +391,16 @@
         </div>
     </div>
 
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function(){
+      
+    });
+    $("#chatClient_1").click(function(){
+        $(this).find(".img-chats").css("background","#ffffff");
+        $(".chatSet").css("display","block");
+        $(".chatDefault").css("display","none");
+    })
+</script>
 @endsection

@@ -130,6 +130,9 @@ class ChatController extends Controller
     }
 
 
-
+    public function chatNew()
+    {
+        return view('tutor.pages.chat.index');
+    }
 
 }
