@@ -59,7 +59,7 @@
                                                             @if(file_exists( public_path($path) ))
                                                                 <img class="profile-img" src="{{asset(Auth::user()->picture)}}" data-toggle="dropdown" alt="profile">
                                                             @else
-                                                                <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">                                                                
+                                                                <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
                                                             @endif
                                                         @else
                                                             <img class="profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" data-toggle="dropdown" alt="profile">
@@ -93,7 +93,7 @@
                                                             <form id="form" action="{{route('logout')}}" onclick="preventDefault()" method="post">
                                                                 @csrf
                                                             </form>
-                                                            <a tabindex="-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('form').submit();">
+                                                            <a tabindex="-1" href="javascript:void(0)" onclick="event.preventDefault();  document.getElementById('form').submit();">
                                                                 Signout
                                                             </a>
                                                         </li>

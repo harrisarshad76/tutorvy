@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
+
     <title>Login-Pages</title>
     <!-- CSS only -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -39,6 +41,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0rc.0/dist/js/select2.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
     <style>
@@ -77,14 +80,17 @@
 
         .is-invalid {
             color: red;
-            border-color:red;
+            border-color: red;
         }
-        ul{
-            padding-left:20px;
+
+        ul {
+            padding-left: 20px;
         }
-        ul li{
+
+        ul li {
             list-style-type: none;
         }
+
         ul.bs-autocomplete-menu {
             position: absolute;
             top: 0;
@@ -197,28 +203,34 @@
                 transform: rotate(360deg);
             }
         }
-.form-check-input{
-    height:auto !important;
-    width:auto !important;
-}
-.form-check-label{
-    margin-left:20px;
-}
-.stat{
+
+        .form-check-input {
+            height: auto !important;
+            width: auto !important;
+        }
+
+        .form-check-label {
+            margin-left: 20px;
+        }
+
+        .stat {
             border: 1px solid transparent;
             transition: 0.3s all ease;
 
         }
-        .stat:hover{
+
+        .stat:hover {
             border: 1px solid #007bff;
-            color:#007bff;
+            color: #007bff;
         }
+
     </style>
 
 </head>
 
 <body>
-
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId={{env('FACEBOOK_APP_ID')}}&autoLogAppEvents=1" nonce="i0UN3OzF"></script>
 
     <section id="body">
         <div class="container">
@@ -236,7 +248,7 @@
                         </div>
                         <div class="Register mt-4">
 
-                        Register yourself on Tutorvy and teach anything <br /> from anywhere.
+                            Register yourself on Tutorvy and teach anything <br /> from anywhere.
                         </div>
                         <div style="margin-top: 70px;">
                             <img src="../assets/images/login-image/loginImage.png" style="width: 90%;">
@@ -254,9 +266,13 @@
 
                     <div class="row mt-5">
                         <div class="col-md-12 mb-3 mt-3">
-                            <div class="nav nav-pills text-center border" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link  w-50 stat" id="v-pills-General-tab" href="{{route('student.register')}}" role="tab"  aria-selected="false">As a Student</a>
-                                <a class="nav-link w-50 stat active" id="v-pills-Security-tab" href="{{route('register')}}" role="tab" aria-selected="true">As a Teacher</a>
+                            <div class="nav nav-pills text-center border" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <a class="nav-link  w-50 stat" id="v-pills-General-tab"
+                                    href="{{ route('student.register') }}" role="tab" aria-selected="false">As a
+                                    Student</a>
+                                <a class="nav-link w-50 stat active" id="v-pills-Security-tab"
+                                    href="{{ route('register') }}" role="tab" aria-selected="true">As a Teacher</a>
                             </div>
                         </div>
                         <div class="col-md-12 stu_reg">
@@ -314,8 +330,10 @@
                                         <div class="col-md-12">
                                             <p class="heading-third ">Personal information</p>
                                             @if (Session::has('error'))
-                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-12px">
+                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                    role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close" style="margin-top:-12px">
                                                         <span aria-hidden="true">×</span>
                                                     </button>
                                                     {{ Session::get('error') }}
@@ -325,11 +343,12 @@
                                                 <div class="input-text col-md-6 d-block">
                                                     <input type="" class="form-control csd" name="first_name"
                                                         placeholder="First Name"
-                                                        value="{{ $user->first_name ?? '' }}" id="fname" style="text-transform: capitalize;">
-                                                        <span for="" id="fname_error" class="invalid-feedback" role="alert">
-                                                            <strong> This field is required </strong>  
-                                                        </span>
-                                                        <!-- <label for="" id="fname_error" class="text-red"><strong> This field is required </strong>  </label> -->
+                                                        value="{{ $user->first_name ?? '' }}" id="fname"
+                                                        style="text-transform: capitalize;">
+                                                    <span for="" id="fname_error" class="invalid-feedback" role="alert">
+                                                        <strong> This field is required </strong>
+                                                    </span>
+                                                    <!-- <label for="" id="fname_error" class="text-red"><strong> This field is required </strong>  </label> -->
                                                     {{-- @error('first_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{$message}}</strong>
@@ -341,10 +360,11 @@
                                                     <input type=""
                                                         class="form-control @error('last_name') is-invalid @enderror"
                                                         name="last_name" placeholder="Last Name"
-                                                        value="{{ $user->last_name ?? '' }}" id="lname" style="text-transform: capitalize;">
-                                                        <span for="" id="lname_error" class="invalid-feedback" role="alert">
-                                                            <strong> This field is required </strong>  
-                                                        </span>
+                                                        value="{{ $user->last_name ?? '' }}" id="lname"
+                                                        style="text-transform: capitalize;">
+                                                    <span for="" id="lname_error" class="invalid-feedback" role="alert">
+                                                        <strong> This field is required </strong>
+                                                    </span>
                                                     @error('last_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -353,17 +373,20 @@
                                                 </div>
 
                                                 <div class="input-text col-md-12 m-0 mt-3 d-block">
-                                                <input type="email"
-                                                    class="form-control  @error('email') is-invalid @enderror"
-                                                    name="email" placeholder="Email Address"
-                                                    value="{{ $user->email ?? '' }}" id="email">
+                                                    <input type="email"
+                                                        class="form-control  @error('email') is-invalid @enderror"
+                                                        name="email" placeholder="Email Address"
+                                                        value="{{ $user->email ?? '' }}" id="email">
                                                     <span for="" id="email_error" class="invalid-feedback" role="alert">
-                                                        <strong> This field is required </strong>  
+                                                        <strong> This field is required </strong>
                                                     </span>
-                                                    <span for="" id="email_error_duplicate" class="invalid-feedback" role="alert">
-                                                        <strong> This email already exists.  <a href="{{ route('login') }}" class="text-primary" style="text-decoration:none">Log in?</a> </strong>  
+                                                    <span for="" id="email_error_duplicate" class="invalid-feedback"
+                                                        role="alert">
+                                                        <strong> This email already exists. <a
+                                                                href="{{ route('login') }}" class="text-primary"
+                                                                style="text-decoration:none">Log in?</a> </strong>
                                                     </span>
-                                                        <!-- <label for="" id="email_error" class="text-red"><strong> This field is required </strong>  </label> -->
+                                                    <!-- <label for="" id="email_error" class="text-red"><strong> This field is required </strong>  </label> -->
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -373,10 +396,10 @@
 
                                                 <div class="input-text col-md-12 m-0  mt-3  d-block">
                                                     <input type="password" name="password" class="form-control "
-                                                    placeholder="Password" id="password">
+                                                        placeholder="Password" id="password">
                                                     <!-- <label for="" id="password_error" class="text-red"><strong> This field is required </strong>  </label> -->
                                                     <small id="passTech">
-                                                            <!-- Field should have at least:
+                                                        <!-- Field should have at least:
                                                             <ul>
                                                                 <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
                                                                 <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
@@ -384,90 +407,86 @@
                                                                 <li id="special_character"><i class="fa fa-times"></i> One special character</li>
                                                                 <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
                                                             </ul> -->
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-6">
-                                                                    <ul>
-                                                                        <li id="capital_letter"><i class="fa fa-times"></i> One uppercase letter</li>
-                                                                        <li id="lower_letter"><i class="fa fa-times"></i> One lowercase letter</li>
-                                                                        <li id="numeric"><i class="fa fa-times"></i> One numeric value</li>
-                                                                      
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <ul>
-                                                                        <li id="special_character"><i class="fa fa-times"></i> One special character</li>
-                                                                        <li id="min_character"><i class="fa fa-times"></i> 8 characters</li>
-                                                                    </ul>
-                                                                </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-6">
+                                                                <ul>
+                                                                    <li id="capital_letter"><i
+                                                                            class="fa fa-times"></i> One uppercase
+                                                                        letter</li>
+                                                                    <li id="lower_letter"><i class="fa fa-times"></i>
+                                                                        One lowercase letter</li>
+                                                                    <li id="numeric"><i class="fa fa-times"></i> One
+                                                                        numeric value</li>
+
+                                                                </ul>
                                                             </div>
-                                                        </small>
-                                                    <span for="" id="password_error" class="invalid-feedback" role="alert">
-                                                        <strong> This field is required </strong>  
+                                                            <div class="col-md-6">
+                                                                <ul>
+                                                                    <li id="special_character"><i
+                                                                            class="fa fa-times"></i> One special
+                                                                        character</li>
+                                                                    <li id="min_character"><i
+                                                                            class="fa fa-times"></i> 8 characters
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </small>
+                                                    <span for="" id="password_error" class="invalid-feedback"
+                                                        role="alert">
+                                                        <strong> This field is required </strong>
                                                     </span>
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
-                                                            <strong>{{$message}}</strong>
+                                                            <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
-                                               
+
                                                 <div class="col-md-12 text-right mt-3">
 
-                                                    <button id="finish" type="submit"
+                                                    <!-- <button id="finish" type="submit"
                                                         class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
                                                         &nbsp; Join &nbsp;
+                                                    </button> -->
+                                                    <button id="finish"  type="submit"
+                                                        class="schedule-btn  ">
+                                                            Join Now
                                                     </button>
                                                 </div>
 
                                                 <div class="col-md-12 text-right">
 
                                                     <div class="social-Icon ">
-                                                            <div class="row mt-4">
-                                                                <div class="col-md-6">
-                                                                    <div class="Google">
-                                                                        <a href="{{route('social.google',[2])}}">
-                                                                            <img class="mr-3" src="{{asset('assets/images/ico/google.png')}}" alt="google">
-                                                                            Continue with Google
-                                                                        </a>
-                                                                    </div>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-6">
+                                                                <div class="g-signin2 mt-3 text-center"
+                                                                    data-onsuccess="onSignIn"
+                                                                    data-width="250"
+                                                                    data-text="signin_with"
+                                                                    data-shape="rectangular"
+                                                                    data-height="40"
+                                                                    data-logo_alignment="center"
+                                                                    onclick="checkLogin()">
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="facebook">
-                                                                        <a href="{{route('social.facebook',[2])}}">
-                                                                            <!-- <img class="mr-3" src="{{asset('assets/images/ico/facebook(1).png')}}" alt="facebook"> -->
-                                                                            <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
 
-                                                                            Continue with Facebook
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
                                                             </div>
-                                                            
-                                                            
-                                                            <!-- <div class="Apple">
-                                                                <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
-                                                                Continue with Apple
-                                                            </div> -->
-                                                            <div class="Policy-text" style="display: flex;">
-                                                                <p class="by-text">
-                                                                    Protected by reCAPTCHA and subject to the Google</p>
-                                                                <p class="Privacy-text">
-                                                                    Privacy
-                                                                </p>
-                                                            </div>
-                                                            <div class="" style="display: flex;">
-                                                                <p class="policy-text1">
-                                                                    Policy and
-                                                                </p>
-                                                                <p class="Privacy-text">
-                                                                    Terms of Service.
-                                                                </p>
+                                                            <div class="col-md-6 mt-3">
+                                                                <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
                                                             </div>
                                                         </div>
+                                                        <div class="Policy-text" style="display: flex;">
+                                                            <p  class="text-left">
+                                                                        Protected by reCAPTCHA and subject to the Google
+                                                                        <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                                    
+                                                                    </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            
-                                           
+
+
 
                                             <!-- <p class="heading-fifth">Date of Birth</p>
                                             <div class="row mt-4 mb-3">
@@ -504,13 +523,13 @@
                                                     <input id="phone" name="phone" type="tel"
                                                         value="{{ $user->phone ?? '' }}" placeholder="Phone Number">
                                                         <span for="" id="phone_error"  class="invalid-feedback" role="alert">
-                                                            <strong> This field is required </strong>  
+                                                            <strong> This field is required </strong>
                                                         </span>
                                                         <label for="" id="phone_error" class="text-red"><strong> This field is required </strong>  </label>
                                                     @error('phone')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
                                                     @enderror
                                                     <script src="{{ asset('assets/js/intlTelInput.js') }}"></script>
                                                     <script>
@@ -527,7 +546,7 @@
                                                 <div class="input-text col-md-12 mb-2 d-block">
                                                     <input type="" name="address"
                                                         class="form-control  "
-                                                        placeholder="Address" id="address"> 
+                                                        placeholder="Address" id="address">
                                                 </div>
                                                 <div class="input-text col-md-6 mt-2 ">
                                                     <div class="autocomplete mt-1" style="width:300px;">
@@ -544,7 +563,7 @@
                                                     </div>
 
                                                 </div> -->
-                                                <!-- <div class="container mt-3">
+                                            <!-- <div class="container mt-3">
                                                     <div class=" row">
                                                         <div class="input-text col-md-6">
                                                             <select id="selection" name="security"
@@ -564,7 +583,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <!-- <div class="container mt-3">
+                                            <!-- <div class="container mt-3">
                                                     <div class="row">
                                                         <div class="col-md-6 d-block">
                                                             <input type="" name="language" id="lang" hidden>
@@ -574,7 +593,7 @@
                                                                     <option value="" disable="" selected> Preffered Language</option>
                                                             </select>
                                                             <span for="" id="language_error" class="invalid-feedback" role="alert">
-                                                                <strong> This field is required </strong>  
+                                                                <strong> This field is required </strong>
                                                             </span>
                                                         </div>
                                                         <div class="col-md-6 d-block">
@@ -588,21 +607,21 @@
                                                             </select>
                                                             <label for="" id="gender_error" class="text-red"><strong> This field is required </strong>  </label>
                                                             <span for="" id="gender_error" class="invalid-feedback" role="alert">
-                                                                <strong> This field is required </strong>  
+                                                                <strong> This field is required </strong>
                                                             </span>
                                                         </div>
                                                     </div>
 
                                                 </div> -->
 
-                                                <div class="container form-group mt-3">
-                                                    <div class="row">
-                                                        <!-- <div class="col-md-12">
+                                            <div class="container form-group mt-3">
+                                                <div class="row">
+                                                    <!-- <div class="col-md-12">
                                                             <textarea class="form-control" name="bio"
                                                             id="exampleFormControlTextarea1" rows="5"
                                                             placeholder="Tell us about yourself that you want students to see?">{{ $user->bio ?? '' }}</textarea>
                                                         </div> -->
-                                                        <!-- <div class="col-md-12 text-right mt-3">
+                                                    <!-- <div class="col-md-12 text-right mt-3">
                                                             <input type="submit"
                                                                 class="btn btn-registration btn-lg cencel-btn nextBtn pull-right ml-5"
                                                                 value=" Save for Later">
@@ -612,89 +631,138 @@
                                                                 &nbsp; Save &nbsp;
                                                             </button>
                                                         </div> -->
-                                                    </div>
                                                 </div>
-                                              
                                             </div>
+
                                         </div>
                                     </div>
-                                    <!-- <div role="tabpanel" class="tab-pane border-right" id="step-2"
+                                </div>
+                                <!-- <div role="tabpanel" class="tab-pane border-right" id="step-2"
                                         style="padding-bottom: 100px;background-color: white;">
                                         <div class="col-md-12 ">
                                             <p class="heading-third mt-3">Educational information </p>
                                             @isset($user)
-                                                @forelse ($user->education as $i => $education)
-                                                    <div class=" customer_records mt-5">
-                                                        <div class="row">
-                                                            <div class="input-text col-md-6">
-                                                                <select name="degree[]" onchange="checkLevel(this)"
-                                                                    class="form-select form-select-lg mb-3">
-                                                                    @foreach ($degrees as $degree)
-                                                                        <option level="{{ $degree->level }}"
-                                                                            value="{{ $degree->id }}" @if ($education->degree_id == $degree->id) selected @endif>
-                                                                            {{ $degree->name }}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                    @forelse ($user->education as $i => $education)
+                                                        <div class=" customer_records mt-5">
+                                                            <div class="row">
+                                                                <div class="input-text col-md-6">
+                                                                    <select name="degree[]" onchange="checkLevel(this)"
+                                                                        class="form-select form-select-lg mb-3">
+                                                                        @foreach ($degrees as $degree)
+                                                                            <option level="{{ $degree->level }}"
+                                                                                value="{{ $degree->id }}" @if ($education->degree_id == $degree->id) selected @endif>
+                                                                                {{ $degree->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-text col-md-6">
+                                                                    <select name="major[]"
+                                                                        class="form-select form-select-lg mb-3">
+                                                                        @foreach ($subjects as $subject)
+                                                                            <option value="{{ $subject->id }}" @if ($subject->id == $education->subject_id) selected @endif>
+                                                                                {{ $subject->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="input-text col-md-6">
+                                                                    <input type="hidden" name="institute[]"
+                                                                        id="inst_id_{{ $i }}"
+                                                                        value="{{ $education->institute_id }}">
+
+                                                                    <input class="form-control bs-autocomplete"
+                                                                        id="{{ $i }}"
+                                                                        placeholder="University"
+                                                                        value="{{ $education->institute->name ?? '' }}"
+                                                                        data-hidden_field_id="city-code" data-item_id="id"
+                                                                        data-item_label="name" autocomplete="off">
+                                                                </div>
+                                                                <div class="input-text col-md-6">
+                                                                    <input type="date" name="graduate_year[]"
+                                                                        class=" yearpicker form-control" id="grad-yea"
+                                                                        value="{{ $education->year ?? '' }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-12">
+                                                                    <input hidden name="exist_img[]" value="{{ $education->docs }}">
+                                                                    <input type="file" class="dropify" name="upload[]" id=""
+                                                                        data-default-file="{{ asset($education->docs) }}">
+                                                                </div>
                                                             </div>
 
-                                                            <div class="input-text col-md-6">
-                                                                <select name="major[]"
-                                                                    class="form-select form-select-lg mb-3">
-                                                                    @foreach ($subjects as $subject)
-                                                                        <option value="{{ $subject->id }}" @if ($subject->id == $education->subject_id) selected @endif>
-                                                                            {{ $subject->name }}</option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                            </div>
                                                         </div>
-                                                        <div class="row mt-3">
-                                                            <div class="input-text col-md-6">
-                                                                <input type="hidden" name="institute[]"
-                                                                    id="inst_id_{{ $i }}"
-                                                                    value="{{ $education->institute_id }}">
-
-                                                                <input class="form-control bs-autocomplete"
-                                                                    id="{{ $i }}"
-                                                                    placeholder="University"
-                                                                    value="{{ $education->institute->name ?? ''}}"
-                                                                    data-hidden_field_id="city-code" data-item_id="id"
-                                                                    data-item_label="name" autocomplete="off">
-                                                            </div>
-                                                            <div class="input-text col-md-6">
-                                                                <input type="date" name="graduate_year[]"
-                                                                    class=" yearpicker form-control" id="grad-yea"
-                                                                    value="{{ $education->year ?? '' }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-3">
-                                                            <div class="col-md-12">
-                                                                <input hidden name="exist_img[]" value="{{$education->docs}}">
-                                                                <input type="file" class="dropify" name="upload[]" id=""
-                                                                    data-default-file="{{ asset($education->docs) }}">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <hr />
+                                                        <hr />
                                                 @empty
+                                                        <div class=" customer_records mt-5">
+                                                            <div class="row">
+                                                                <div class="input-text col-md-6">
+                                                                    <select name="degree[]" onchange="checkLevel(this)"
+                                                                        class="form-select form-select-lg mb-3">
+                                                                        <option value="0" selected>Degree</option>
+                                                                        @foreach ($degrees as $degree)
+                                                                            <option level="{{ $degree->level }}"
+                                                                                value="{{ $degree->id }}">
+                                                                                {{ $degree->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-text col-md-6">
+                                                                    <select name="major[]"
+                                                                        class="form-select form-select-lg mb-3">
+                                                                        <option value="0" selected>Major</option>
+                                                                        @foreach ($subjects as $subject)
+                                                                            <option value="{{ $subject->id }}">
+                                                                                {{ $subject->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="input-text col-md-6">
+                                                                    <input type="hidden" name="institute[]" id="inst_id_0"
+                                                                        value="">
+                                                                    <input class="form-control bs-autocomplete" id="ac-demo"
+                                                                        placeholder="University"
+                                                                        data-item_label="name" autocomplete="off">
+
+                                                                </div>
+                                                                <div class="input-text col-md-6">
+                                                                    <input type="date" name="graduate_year[]"
+                                                                        class=" yearpicker form-control" id="grad-yea">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-12">
+                                                                    <input type="file" class="dropify" name="upload[]" id="">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <hr />
+                                                    @endforelse
+                                            @else
                                                     <div class=" customer_records mt-5">
                                                         <div class="row">
                                                             <div class="input-text col-md-6">
-                                                                <select name="degree[]" onchange="checkLevel(this)"
-                                                                    class="form-select form-select-lg mb-3">
+                                                                <select name="degree[]" class="form-select form-select-lg mb-3"
+                                                                    onchange="checkLevel(this)">
                                                                     <option value="0" selected>Degree</option>
                                                                     @foreach ($degrees as $degree)
-                                                                        <option level="{{ $degree->level }}"
-                                                                            value="{{ $degree->id }}">
+                                                                        <option value="{{ $degree->id }}">
                                                                             {{ $degree->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
 
                                                             <div class="input-text col-md-6">
-                                                                <select name="major[]"
-                                                                    class="form-select form-select-lg mb-3">
+                                                                <select name="major[]" class="form-select form-select-lg mb-3">
                                                                     <option value="0" selected>Major</option>
                                                                     @foreach ($subjects as $subject)
                                                                         <option value="{{ $subject->id }}">
@@ -706,12 +774,12 @@
                                                         </div>
                                                         <div class="row mt-3">
                                                             <div class="input-text col-md-6">
-                                                                <input type="hidden" name="institute[]" id="inst_id_0"
-                                                                    value="">
+                                                                <input type="hidden" name="institute[]" id="inst_id" value="">
+
                                                                 <input class="form-control bs-autocomplete" id="ac-demo"
                                                                     placeholder="University"
+                                                                    data-source="demo_source.php" data-item_id="inst_id"
                                                                     data-item_label="name" autocomplete="off">
-
                                                             </div>
                                                             <div class="input-text col-md-6">
                                                                 <input type="date" name="graduate_year[]"
@@ -723,59 +791,10 @@
                                                             <div class="col-md-12">
                                                                 <input type="file" class="dropify" name="upload[]" id="">
                                                             </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                     <hr />
-                                                @endforelse
-                                            @else
-                                                <div class=" customer_records mt-5">
-                                                    <div class="row">
-                                                        <div class="input-text col-md-6">
-                                                            <select name="degree[]" class="form-select form-select-lg mb-3"
-                                                                onchange="checkLevel(this)">
-                                                                <option value="0" selected>Degree</option>
-                                                                @foreach ($degrees as $degree)
-                                                                    <option value="{{ $degree->id }}">
-                                                                        {{ $degree->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="input-text col-md-6">
-                                                            <select name="major[]" class="form-select form-select-lg mb-3">
-                                                                <option value="0" selected>Major</option>
-                                                                @foreach ($subjects as $subject)
-                                                                    <option value="{{ $subject->id }}">
-                                                                        {{ $subject->name }}</option>
-                                                                @endforeach
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3">
-                                                        <div class="input-text col-md-6">
-                                                            <input type="hidden" name="institute[]" id="inst_id" value="">
-
-                                                            <input class="form-control bs-autocomplete" id="ac-demo"
-                                                                placeholder="University"
-                                                                data-source="demo_source.php" data-item_id="inst_id"
-                                                                data-item_label="name" autocomplete="off">
-                                                        </div>
-                                                        <div class="input-text col-md-6">
-                                                            <input type="date" name="graduate_year[]"
-                                                                class=" yearpicker form-control" id="grad-yea">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row mt-3">
-                                                        <div class="col-md-12">
-                                                            <input type="file" class="dropify" name="upload[]" id="">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <hr />
                                             @endisset
                                             <a class="extra-fields-customer cust_link" href="#">+
                                                 Add more degrees
@@ -799,58 +818,93 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <!-- <div role="tabpanel" class="tab-pane border-right" id="step-3"
+                                <!-- <div role="tabpanel" class="tab-pane border-right" id="step-3"
                                         style="padding-bottom: 100px;background-color: white;">
                                         <div class="col-md-12">
                                             <p class="heading-third mt-3">Professional information</p>
                                             <div class="wrapper mt-5">
                                                 <div class="container">
                                                     @isset($user)
-                                                        @forelse ($user->professional as $profession)
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="element">
-                                                                        <div class="row">
-                                                                            <div class="input-text col-md-6">
-                                                                                <input name="designation[]"
-                                                                                    class="form-control"
-                                                                                    placeholder="Designation: Senior Developer at Google"
-                                                                                    value="{{ $profession->designation }}">
+                                                            @forelse ($user->professional as $profession)
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="element">
+                                                                            <div class="row">
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input name="designation[]"
+                                                                                        class="form-control"
+                                                                                        placeholder="Designation: Senior Developer at Google"
+                                                                                        value="{{ $profession->designation }}">
+                                                                                </div>
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input name="organization[]"
+                                                                                        class="form-control"
+                                                                                        placeholder="Organization"
+                                                                                        value="{{ $profession->organization }}">
+                                                                                </div>
+
                                                                             </div>
-                                                                            <div class="input-text col-md-6">
-                                                                                <input name="organization[]"
-                                                                                    class="form-control"
-                                                                                    placeholder="Organization"
-                                                                                    value="{{ $profession->organization }}">
+                                                                            <div class="row my-3">
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input  class="form-control"
+                                                                                        name="degree_start[]"
+                                                                                        placeholder="Starting date" onfocus="(this.type='date')"
+                                                                                        value="{{ $profession->start_date ?? '' }}">
+                                                                                </div>
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input class="form-control"
+                                                                                        name="degree_end[]" onfocus="(this.type='date')"
+                                                                                        placeholder="Ending Date"
+                                                                                        value="{{ $profession->end_date ?? '' }}">
+                                                                                </div>
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="row my-3">
-                                                                            <div class="input-text col-md-6">
-                                                                                <input  class="form-control"
-                                                                                    name="degree_start[]"
-                                                                                    placeholder="Starting date" onfocus="(this.type='date')"
-                                                                                    value="{{ $profession->start_date ?? '' }}">
-                                                                            </div>
-                                                                            <div class="input-text col-md-6">
-                                                                                <input class="form-control"
-                                                                                    name="degree_end[]" onfocus="(this.type='date')"
-                                                                                    placeholder="Ending Date"
-                                                                                    value="{{ $profession->end_date ?? '' }}">
-                                                                            </div>
-                                                                        </div>
-
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                         @empty
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="element">
+                                                                            <div class="row">
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input name="designation[]"
+                                                                                        class="form-control"
+                                                                                        title="Designation: Senior Developer at Google"
+                                                                                        placeholder="Designation">
+                                                                                </div>
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input name="organization[]"
+                                                                                        class="form-control"
+                                                                                        title="Organization Like Google"
+                                                                                        placeholder="Organization">
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row my-3">
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input  onfocus="(this.type='date')" class="form-control"
+                                                                                        name="degree_start[]"
+                                                                                        placeholder="Starting date" value="">
+                                                                                </div>
+                                                                                <div class="input-text col-md-6">
+                                                                                    <input  onfocus="(this.type='date')" class="form-control"
+                                                                                        name="degree_end[]"
+                                                                                        placeholder="Ending Date" value="">
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforelse
+                                                    @else
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="element">
                                                                         <div class="row">
                                                                             <div class="input-text col-md-6">
-                                                                                <input name="designation[]"
-                                                                                    class="form-control"
+                                                                                <input name="designation[]" class="form-control"
                                                                                     title="Designation: Senior Developer at Google"
                                                                                     placeholder="Designation">
                                                                             </div>
@@ -859,7 +913,6 @@
                                                                                     class="form-control"
                                                                                     title="Organization Like Google"
                                                                                     placeholder="Organization">
-
                                                                             </div>
                                                                         </div>
                                                                         <div class="row my-3">
@@ -869,7 +922,7 @@
                                                                                     placeholder="Starting date" value="">
                                                                             </div>
                                                                             <div class="input-text col-md-6">
-                                                                                <input  onfocus="(this.type='date')" class="form-control"
+                                                                                <input onfocus="(this.type='date')" class="form-control"
                                                                                     name="degree_end[]"
                                                                                     placeholder="Ending Date" value="">
                                                                             </div>
@@ -878,40 +931,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @endforelse
-                                                    @else
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="element">
-                                                                    <div class="row">
-                                                                        <div class="input-text col-md-6">
-                                                                            <input name="designation[]" class="form-control"
-                                                                                title="Designation: Senior Developer at Google"
-                                                                                placeholder="Designation">
-                                                                        </div>
-                                                                        <div class="input-text col-md-6">
-                                                                            <input name="organization[]"
-                                                                                class="form-control"
-                                                                                title="Organization Like Google"
-                                                                                placeholder="Organization">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row my-3">
-                                                                        <div class="input-text col-md-6">
-                                                                            <input  onfocus="(this.type='date')" class="form-control"
-                                                                                name="degree_start[]"
-                                                                                placeholder="Starting date" value="">
-                                                                        </div>
-                                                                        <div class="input-text col-md-6">
-                                                                            <input onfocus="(this.type='date')" class="form-control"
-                                                                                name="degree_end[]"
-                                                                                placeholder="Ending Date" value="">
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     @endisset
 
 
@@ -940,14 +959,14 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <script>
-                                        // $(document).ready(function() {
-                                        //     $(".clone").click(function() {
-                                        //         $(".remove").css("visibility", "visible");
-                                        //     });
-                                        // });
-                                    </script>
-                                    <!-- <div role="tabpanel" class="tab-pane border-right" id="step-4"
+                                <script>
+                                    // $(document).ready(function() {
+                                    //     $(".clone").click(function() {
+                                    //         $(".remove").css("visibility", "visible");
+                                    //     });
+                                    // });
+                                </script>
+                                <!-- <div role="tabpanel" class="tab-pane border-right" id="step-4"
                                         style="background-color: white;">
                                         <div class="container-fluid">
                                             <div class="row">
@@ -977,26 +996,26 @@
                                                         @endforeach
                                                     </select>
                                                     <span for="" id="teach_error" class="invalid-feedback" role="alert">
-                                                        <strong> This field is required </strong>  
+                                                        <strong> This field is required </strong>
                                                     </span>
                                                     @error('teach')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
                                                     @enderror
                                                 </div>
                                                 <div class="input-text col-md-6">
-                                                    
+
                                                     <select name="student_grade"
                                                         class="form-select form-select-lg mb-3" id="levels">
                                                         <option value="" disabled selected>School</option>
-                                                    
+
                                                             <option value="1">Pre Elementary School</option>
                                                             <option value="2">Elementary School</option>
                                                             <option value="3">Secondary School</option>
                                                             <option value="4">High School</option>
                                                             <option value="5"> Post Secondary</option>
-                                                    
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -1042,9 +1061,8 @@
                                         </div>
                                     </div> -->
 
-                                </div>
-                            </form>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1053,6 +1071,52 @@
         </div>
         </div>
         </div>
+        </div>
+        <script>
+
+            function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                    });
+                }
+            window.onload = function() {
+                signOut();
+            };
+
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+                var lastName = profile.getName().split(' ').slice(-1).join(' ');
+
+                $.ajax({
+                    url: "{{ route('social.google', [2]) }}",
+                    dataType: "json",
+                    type: "Post",
+                    async: true,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: profile.getEmail(),
+                        picture: profile.getImageUrl(),
+                        provider: 'google',
+                        role: 2
+                    },
+                    success: function(data) {
+                        if(data.status == 200){
+                            window.location.href = window.location.origin+data.url
+                        }
+                    },
+
+                });
+                console.log(profile.getName())
+            }
+
+
+
+        </script>
+
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -1076,24 +1140,22 @@
             $("#finish").on('click', function() {
                 $(this).attr('name', 'finish');
             });
-            $("#policies").change(function(){
-                    if($(this).prop("checked") == true){
-                       $(this).val("on");
-                    }
-                    else if($(this).prop("checked") == false){
-                        $(this).val("off");
-                    }
+            $("#policies").change(function() {
+                if ($(this).prop("checked") == true) {
+                    $(this).val("on");
+                } else if ($(this).prop("checked") == false) {
+                    $(this).val("off");
+                }
             });
-            $("#email_market").change(function(){
-                    if($(this).prop("checked") == true){
-                       $(this).val("on");
-                    }
-                    else if($(this).prop("checked") == false){
-                        $(this).val("off");
-                    }
+            $("#email_market").change(function() {
+                if ($(this).prop("checked") == true) {
+                    $(this).val("on");
+                } else if ($(this).prop("checked") == false) {
+                    $(this).val("off");
+                }
             });
             $(document).ready(function() {
-                
+
                 var date = new Date();
                 $("#region").val(date);
                 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -1132,270 +1194,120 @@
                 // document.getElementById('languages-list').innerHTML = option;
             })();
 
-            $('.extra-fields-customer').click(function() {
-                count_field = document.querySelectorAll(".customer_records").length;
-
-                var html = `<div class=" customer_records mt-5" id="record_` + count_field + `">
-                <div class="row">
-                    <div class="input-text col-md-6">
-                        <select name="degree[` + count_field + `]" onchange="checkLevel(this)" onchange="checkLevel(this)" class="form-select form-select-lg mb-3">
-                            <option  selected="">Degree</option>
-                            @foreach ($degrees as $degree)
-                                <option value="{{ $degree->id }}">{{ $degree->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="input-text col-md-6">
-                        <select name="major[` + count_field + `]" class="form-select form-select-lg mb-3">
-                            <option value="0" selected="">Major</option>
-                            @foreach ($subjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="input-text col-md-6">
-
-                        <input type="hidden" name="institute[` + count_field + `]" id="inst_id_` + count_field + `" value="">
-
-                        <input class="form-control bs-autocomplete" id="ac-demo"
-                            placeholder="University"
-                            data-source="demo_source.php"
-                            data-hidden_field_id="city-code" data-item_id="id"
-                            data-item_label="name" autocomplete="off">
-
-                    </div>
-                    <div class="input-text col-md-6">
-                        <input type="date" name="graduate_year[` + count_field + `]" class=" yearpicker form-control" id="grad-yea">
-                    </div>
-
-                </div>
-                <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="file" class="dropify" name="upload[` + count_field + `]" id="">
-                </div>
-                <div class="col-md-12 mt-3">
-                    <a href="#" class="removeFields" onclick="removeFields(` + count_field + `)"> Remove Fields</a>
-                </div>
-                </div>
-
-                </div>`;
-                $('.customer_records_dynamic').append(html);
-                $('.dropify').dropify();
-                // $(".form-select").select2();
-                (function() {
-                    "use strict";
-                    var cities = @json($institutes);
-
-                    $('.bs-autocomplete').each(function() {
-                        var _this = $(this),
-                            _data = _this.data(),
-                            _hidden_field = $('#' + _data.hidden_field_id);
-
-                        _this.after(
-                                '<div class="bs-autocomplete-feedback form-control-feedback"><div class="loader">Loading...</div></div>'
-                            )
-                            .parent('.form-group').addClass('has-feedback');
-
-                        var feedback_icon = _this.next('.bs-autocomplete-feedback');
-                        feedback_icon.hide();
-
-                        _this.autocomplete({
-                                minLength: 2,
-                                autoFocus: true,
-
-                                source: function(request, response) {
-                                    var _regexp = new RegExp(request.term, 'i');
-                                    var data = cities.filter(function(item) {
-                                        return item.name.match(_regexp);
-                                    });
-                                    response(data);
-                                },
-
-                                search: function() {
-                                    feedback_icon.show();
-                                    _hidden_field.val('');
-                                },
-
-                                response: function() {
-                                    feedback_icon.hide();
-                                },
-
-                                focus: function(event, ui) {
-                                    _this.val(ui.item[_data.item_label]);
-                                    event.preventDefault();
-                                },
-
-                                select: function(event, ui) {
-                                    _this.val(ui.item[_data.item_label]);
-                                    _hidden_field.val(ui.item[_data.item_id]);
-                                    event.preventDefault();
-                                    $("#inst_id_" + count_field + "").val(ui.item.id)
-                                    console.log(event)
-                                }
-                            })
-                            .data('ui-autocomplete')._renderItem = function(ul, item) {
-                                return $('<li></li>')
-                                    .data("item.autocomplete", item)
-                                    .append('<a>' + item[_data.item_label] + '</a>')
-                                    .appendTo(ul);
-                            };
-                        // end autocomplete
-                    });
-                })();
-            });
-            $("#register").validate({
-                rules: {
-                    // compound rule
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        required: true,
-                    },
-                    first_name: {
-                        required: true
-                    },
-                    last_name: {
-                        required: true
-                    },
-                    // phone: {
-                    //     required: true
-                    // },
-                    // gender: {
-                    //     required: true
-                    // },
-                    // phone: {
-                    //     required: true
-                    // },
-                    
-                },
-                messages: {
-                    email: {
-                        required: "We need your email address to contact you",
-                        email: "Your email address must be in the format of name@domain.com"
-                    }
-                }
-            });
-
             $(document).ready(function() {
                 $(".dropify").dropify();
                 $(".form-select").select2();
                 $(".text-red").hide();
-                 /* Password STrength */
+                /* Password STrength */
 
-                 $("#password").focus(function(e){
+                $("#password").focus(function(e) {
                     $("#passTech").show("slow");
                 });
 
-                $("#password").focusout(function(e){
+                $("#password").focusout(function(e) {
                     $("#passTech").hide("slow");
                 });
 
-           $("#password").keyup(function(e) {
+                $("#password").keyup(function(e) {
                     var capital_leters = new RegExp('[A-Z]');
                     var lower_leters = new RegExp('[a-z]');
                     var numeric = new RegExp('[0-9]');
                     var special = /[_~\-!@#\$%\^&\*\(\)]+$/;
                     var password = $(this).val();
 
-                    if(password.match(capital_leters)) {
-                        $("#capital_letter").css('color','green');
+                    if (password.match(capital_leters)) {
+                        $("#capital_letter").css('color', 'green');
                         $("#capital_letter").find(".fa").removeClass("fa-times");
                         $("#capital_letter").find(".fa").addClass("fa-check");
                         $('#register').removeAttr('onsubmit');
-                    }else{
-                        $("#capital_letter").css('color','red');
+                    } else {
+                        $("#capital_letter").css('color', 'red');
                         $("#capital_letter").find(".fa").removeClass("fa-check");
                         $("#capital_letter").find(".fa").addClass("fa-times");
                         var attr = $('#register').attr('onsubmit');
 
                         if (typeof attr !== 'undefined' && attr !== false) {
                             $('#register').removeAttr('onsubmit');
-                        }else{
-                            $('#register').attr('onsubmit','return false');
+                        } else {
+                            $('#register').attr('onsubmit', 'return false');
                         }
                     }
 
-                    if(password.match(lower_leters)) {
-                        $("#lower_letter").css('color','green');
-                         $("#lower_letter").find(".fa").removeClass("fa-times");
+                    if (password.match(lower_leters)) {
+                        $("#lower_letter").css('color', 'green');
+                        $("#lower_letter").find(".fa").removeClass("fa-times");
                         $("#lower_letter").find(".fa").addClass("fa-check");
                         $('#register').removeAttr('onsubmit');
-                    }else{
-                        $("#lower_letter").css('color','red');
-                         $("#lower_letter").find(".fa").addClass("fa-times");
+                    } else {
+                        $("#lower_letter").css('color', 'red');
+                        $("#lower_letter").find(".fa").addClass("fa-times");
                         $("#lower_letter").find(".fa").removeClass("fa-check");
                         var attr = $('#register').attr('onsubmit');
 
                         if (typeof attr !== 'undefined' && attr !== false) {
                             $('#register').removeAttr('onsubmit');
-                        }else{
-                            $('#register').attr('onsubmit','return false');
+                        } else {
+                            $('#register').attr('onsubmit', 'return false');
                         }
                     }
 
-                    if(password.match(numeric)) {
-                        $("#numeric").css('color','green');
-                         $("#numeric").find(".fa").removeClass("fa-times");
+                    if (password.match(numeric)) {
+                        $("#numeric").css('color', 'green');
+                        $("#numeric").find(".fa").removeClass("fa-times");
                         $("#numeric").find(".fa").addClass("fa-check");
                         $('#register').removeAttr('onsubmit');
-                    }else{
-                        $("#numeric").css('color','red');
-                         $("#numeric").find(".fa").addClass("fa-times");
+                    } else {
+                        $("#numeric").css('color', 'red');
+                        $("#numeric").find(".fa").addClass("fa-times");
                         $("#numeric").find(".fa").removeClass("fa-check");
                         var attr = $('#register').attr('onsubmit');
 
                         if (typeof attr !== 'undefined' && attr !== false) {
                             $('#register').removeAttr('onsubmit');
-                        }else{
-                            $('#register').attr('onsubmit','return false');
+                        } else {
+                            $('#register').attr('onsubmit', 'return false');
                         }
                     }
 
-                    if(password.length > 8) {
-                        $("#min_character").css('color','green');
-                         $("#min_character").find(".fa").removeClass("fa-times");
+                    if (password.length > 8) {
+                        $("#min_character").css('color', 'green');
+                        $("#min_character").find(".fa").removeClass("fa-times");
                         $("#min_character").find(".fa").addClass("fa-check");
                         $('#register').removeAttr('onsubmit');
-                    }else{
-                        $("#min_character").css('color','red');
-                         $("#min_character").find(".fa").addClass("fa-times");
+                    } else {
+                        $("#min_character").css('color', 'red');
+                        $("#min_character").find(".fa").addClass("fa-times");
                         $("#min_character").find(".fa").removeClass("fa-check");
                         var attr = $('#register').attr('onsubmit');
 
                         if (typeof attr !== 'undefined' && attr !== false) {
                             $('#register').removeAttr('onsubmit');
-                        }else{
-                            $('#register').attr('onsubmit','return false');
+                        } else {
+                            $('#register').attr('onsubmit', 'return false');
                         }
                     }
 
                     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
-                    if(format.test(password)) {
-                        $("#special_character").css('color','green');
-                         $("#special_character").find(".fa").removeClass("fa-times");
+                    if (format.test(password)) {
+                        $("#special_character").css('color', 'green');
+                        $("#special_character").find(".fa").removeClass("fa-times");
                         $("#special_character").find(".fa").addClass("fa-check");
                         $('#register').removeAttr('onsubmit');
-                    }else{
-                        $("#special_character").css('color','red');
-                         $("#special_character").find(".fa").addClass("fa-times");
+                    } else {
+                        $("#special_character").css('color', 'red');
+                        $("#special_character").find(".fa").addClass("fa-times");
                         $("#special_character").find(".fa").removeClass("fa-check");
                         var attr = $('#register').attr('onsubmit');
 
                         if (typeof attr !== 'undefined' && attr !== false) {
                             $('#register').removeAttr('onsubmit');
-                        }else{
-                            $('#register').attr('onsubmit','return false');
+                        } else {
+                            $('#register').attr('onsubmit', 'return false');
                         }
                     }
 
-                    console.log(password , "password");
+                    console.log(password, "password");
 
                     // var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
                     // var ter = $(this).val();
@@ -1407,7 +1319,7 @@
                     //     // $("#password").removeClass("is-invalid");
                     //     // $("#password").addClass("valid");
                     //     // $('#register').removeAttr('onsubmit');
-                        
+
                     // }else{
                     //     var attr = $('#register').attr('onsubmit');
 
@@ -1427,148 +1339,8 @@
                     //     return false;
                     // }
                 });
-/* Password Strength End  */
+                /* Password Strength End  */
             });
-
-            function university() {
-
-                $.ajax({
-                    url: "{{ route('uni.name') }}",
-                    data: {
-                        name: code
-                    },
-                    success: function(result) {
-                        for (var i = 0; i < result.length; i++) {
-                            $("#instiuteList").append("<option value=" + result[i].id + ">" + result[i].name +
-                                "</option>")
-                        }
-                    }
-                });
-
-
-            }
-
-            // function checkLevel(opt) {
-            //     var level = opt.options[opt.selectedIndex].getAttribute('level');
-
-            //     if (level == 1) {
-            //         $("#levels").html("<option value='1'>Basic</option>");
-            //     }
-            //     if (level == 2) {
-            //         $("#levels").html("<option value='1'>Basic</option><option value='2'>Intermediate</option>");
-            //     }
-            //     if (level == 3) {
-            //         $("#levels").html(
-            //             "<option value='1'>Basic</option><option value='2'>Intermediate</option><option value='3'>Expert</option>"
-            //         );
-            //     }
-            // }
-
-            function langshort(opt) {
-                var val = opt.options[opt.selectedIndex].innerHTML;
-                $("#lang").val(val)
-            }
-
-            (function() {
-                "use strict";
-                var cities = @json($institutes);
-
-                $('.bs-autocomplete').each(function() {
-                    var _this = $(this),
-                        _data = _this.data(),
-                        _hidden_field = $('#' + _data.hidden_field_id);
-
-                    _this.after(
-                            '<div class="bs-autocomplete-feedback form-control-feedback"><div class="loader">Loading...</div></div>'
-                        )
-                        .parent('.form-group').addClass('has-feedback');
-
-                    var feedback_icon = _this.next('.bs-autocomplete-feedback');
-                    feedback_icon.hide();
-
-                    _this.autocomplete({
-                            minLength: 2,
-                            autoFocus: true,
-
-                            source: function(request, response) {
-                                var _regexp = new RegExp(request.term, 'i');
-                                var data = cities.filter(function(item) {
-                                    return item.name.match(_regexp);
-                                });
-                                response(data);
-                            },
-
-                            search: function() {
-                                feedback_icon.show();
-                                _hidden_field.val('');
-                            },
-
-                            response: function() {
-                                feedback_icon.hide();
-                            },
-
-                            focus: function(event, ui) {
-                                _this.val(ui.item[_data.item_label]);
-                                event.preventDefault();
-                            },
-
-                            select: function(event, ui) {
-                                _this.val(ui.item[_data.item_label]);
-                                _hidden_field.val(ui.item[_data.item_id]);
-                                event.preventDefault();
-                                $("#inst_id").val(ui.item.id)
-
-                            }
-                        })
-                        .data('ui-autocomplete')._renderItem = function(ul, item) {
-                            return $('<li></li>')
-                                .data("item.autocomplete", item)
-                                .append('<a>' + item[_data.item_label] + '</a>')
-                                .appendTo(ul);
-                        };
-                    // end autocomplete
-                });
-            })();
-
-
-            $("#finish").click(function(){
-                    var x = $("#teacher").val();
-                    if(x == null){
-                        $("#teach_error").show();
-                        $("#teach_error").focus();
-                    }
-                    else{
-                        $("#teach_error").hide();
-                        $("#finish").attr("type","submit");
-                    }
-            });
-            $("#email").focusout(function(){
-                let email = $(this).val();
-                // alert(email);
-                $.ajax({
-                    url: "{{ route('validate.email') }}",
-                    data: {
-                        email: email
-                    },
-                    success: function(result) {
-                        if(result == "Trust me"){
-                            $("#email_error_duplicate").show();
-                            $("#email_error_duplicate").focus();
-                            $("#email").addClass("is-invalid");
-                            $("#email_error").hide();
-                            isValid = false;
-                        }
-                        else{
-                            $("#email_error_duplicate").hide();
-                            $("#email").removeClass("is-invalid");
-                            isValid = true;
-
-                        }
-                    }
-                });  
-                  
-            });
-          
         </script>
     </section>
 </body>

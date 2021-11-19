@@ -1,0 +1,120 @@
+    /* Welcome Page */
+    
+    @media screen and (max-width: 1024px) {
+        .where-text-home {
+            line-height: 1;
+            font-size: 50px;
+        }
+        .Learn-text,
+        .Learn-texts {
+            font-size: 40px;
+        }
+        .top-home-img {
+            margin-top: 50px;
+        }
+        .tilt-logo {
+            margin-top: 110px;
+        }
+        .hash-icon {
+            top: 102px;
+            left: 115px;
+        }
+        .input-subs input {
+            width: auto;
+        }
+    }
+    
+    @media screen and (max-width: 768px) {
+        .where-text-home {
+            line-height: 1;
+            font-size: 30px;
+        }
+        .Learn-text,
+        .Learn-texts {
+            font-size: 25px;
+        }
+        /* .top-home-img {
+        margin-top: 129px;
+    } */
+        .number-1 {
+            font-size: 16px;
+            top: 35px;
+        }
+        .tex {
+            font-size: 40px;
+            opacity: 0.15;
+        }
+        .tab button {
+            border: transparent;
+            outline: transparent;
+            color: #CADBF5;
+            background-color: transparent;
+            font-family: "Poppins";
+            cursor: pointer;
+            display: block;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 15px;
+            padding: 10 px 1 px;
+        }
+        .where-texts {
+            font-size: 30px;
+            color: #1173FF;
+            font-family: 'poppins';
+            font-weight: 500;
+            line-height: 0.5;
+        }
+        .text-sectiom-tow {
+            margin-left: 44px;
+            margin-top: 150px;
+        }
+        .mibile-image {
+            position: absolute;
+            top: 85px;
+        }
+        .mibile-image span {
+            font-size: 34px;
+        }
+        footer .text-work {
+            font-size: 25px;
+            color: #1173FF !important;
+        }
+        .hash-icon {
+            top: 30px;
+            left: 50px;
+        }
+    }
+    
+    @media screen and (max-width: 425px) {
+        .tilt-logo {
+            margin-top: 15px;
+        }
+        .where-text {
+            position: relative;
+            top: -94px;
+            font-size: 30px;
+        }
+        .number-1 {
+            font-size: 16px;
+            top: 5px;
+            left: -22px;
+            margin-left: 0;
+        }
+        .tex {
+            font-size: 40px;
+            margin-left: 19px;
+        }
+        .text-sectiom-tow {
+            margin-left: 15px;
+        }
+        .gPicture {
+            display: none;
+        }
+    }
+    
+    @media screen and (max-width: 320px) {
+        .time {
+            font-size: 25px;
+            line-height: 1;
+        }
+    }

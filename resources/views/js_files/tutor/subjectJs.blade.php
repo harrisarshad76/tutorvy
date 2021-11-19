@@ -74,4 +74,38 @@ $(document).ready(function() {
 
     }
 
+$('#subjects-list').on("change", function(e) {
+
+    let subject = $("#subjects-list").val();
+    let text = $(this).find(':selected').text();
+    var a = $(this).find(':selected').attr('data-myval');
+    $('.tablinks').removeClass('active');
+    $('#defaultOpen_'+a).addClass('active')
+    $('#subSubjects').html('');
+
+    var html = `<div class="col-md-5">
+                    <div class="card-deck">
+                        <div class="card h-auto card-shadow p-0">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <p class="heading-fifth mr-3 pt-2 mb-0 ">
+                                            `+text+`
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                    <a href="{{ url('tutor/assessment/') }}`+`/`+subject+`">
+                                        <p class="view-bookings mb-0">Add</p>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+
+                $('#subSubjects').append(html)
+
+});
 </script>

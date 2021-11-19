@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/home.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/dropify.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <style>
         .bgm{
             text-decoration:none !important;

@@ -13,10 +13,10 @@
                     More beyond
                     the limitations of
                 </p>
-                <p class="where-text-home" style="line-height: 0.5;">
+                <p class="where-text-home" >
                     e-learning
                 </p>
-                <p class="there-text there-text-main mt-5">
+                <p class="there-text there-text-main mt-4">
                     There are many variations of passages available, but <br />
                     the majority have suffered alteration in some form.</p>
                 <div class=" input-text-button-1 input-text-main mt-4">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-12 mt-0 top-home-img" data-aos="fade-left" data-aos-anchor="#example-anchor"
+        <div class="col-md-6 col-12  top-home-img" data-aos="fade-left" data-aos-anchor="#example-anchor"
             data-aos-offset="100" data-aos-duration="1000" class="text-sectiom-one">
             <div class="image-section-image ">
                 <div class="object">
@@ -125,37 +125,37 @@
             </div>
             <div class="row mt-4" data-aos-anchor="#example-anchor" data-aos-offset="500"
                 data-aos-duration="1000">
-                <div class="col-md-6 text-xs-center">
+                <div class="col-md-6 ">
                     <div class="">
-                        <span class="number-1 " style="font-size: 60px;opacity: 0.15;">1</span>
-                        <span class="number-1 number-3" style="position: relative;left: -27px;top: 10px;">Expert
+                        <span class=" tex" style="">1</span>
+                        <span class="number-1 number-3" style="">Expert
                             tutors</span>
                         <p class="number-2">There are many variations of passages available, but the
                             majority have suffered alteration in some form.</p>
                     </div>
                 </div>
-                <div class="col-md-6 text-xs-center">
-                    <div class="ml-3">
-                        <span class="number-1" style="font-size: 60px;opacity: 0.15;">2</span>
-                        <span class="number-1 number-3" style="position: relative;left: -42px;top: 10px;">Learn
+                <div class="col-md-6 ">
+                    <div class="">
+                        <span class=" tex" style="">2</span>
+                        <span class="number-1 number-3" style="">Learn
                             anytime</span>
                         <p class="number-2">There are many variations of passages available, but the
                             majority have suffered alteration in some form.</p>
                     </div>
                 </div>
-                <div class="col-md-6 text-xs-center">
+                <div class="col-md-6 ">
                     <div class="">
-                        <span class="number-1" style="font-size: 60px;opacity: 0.15;">3</span>
-                        <span class="number-1 number-3" style="position: relative;left: -39px;top: 10px;">Expert
+                        <span class=" tex" style="">3</span>
+                        <span class="number-1 number-3" style="">Expert
                             tutors</span>
                         <p class="number-2">There are many variations of passages available, but the
                             majority have suffered alteration in some form.</p>
                     </div>
                 </div>
-                <div class="col-md-6 text-xs-center">
-                    <div class="ml-3">
-                        <span class="number-1" style="font-size: 60px;opacity: 0.15;">4</span>
-                        <span class="number-1 number-3" style="position: relative;left: -44px;top: 10px;">Learn
+                <div class="col-md-6 ">
+                    <div class="">
+                        <span class=" tex" style="">4</span>
+                        <span class="number-1 number-3" style="">Learn
                             anytime</span>
                         <p class="number-2">There are many variations of passages available, but the
                             majority have suffered alteration in some form.</p>
@@ -365,11 +365,11 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div id="subjects">
+            <div id="subject">
                 <div id="1">
                     <div class="row book-luli" id="subSubjects">
                         @foreach ($subjects as $i => $subject)
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-6 col-sm-6">
                                     <a href="#"  class="">
                                         {{ $subject->name }}
                                     </a>        
@@ -840,7 +840,7 @@
                     Courses taught by
                 </p>
                 <p class="where-texts course-text Learn-texts-mobile font-size font-weight800"
-                    style="line-height: 0.5;">
+                    style="">
                     top tutors
                 </p>
                 <p class="there-text there-text-left mt-4">
@@ -848,7 +848,7 @@
                     the majority have suffered alteration in some form.</p>
                 <div class="input-text-1 input-text-center mt-4">
                     <a href="{{ url('course') }}">
-                        <input type="submit" value="View all courses" class="w-50">
+                        <input type="submit" value="View all courses">
                     </a>
                 </div>
             </div>
@@ -869,7 +869,7 @@
         <div class="col-md-10 mt-5 ">
             <!-- <br /> -->
             <div class="mibile-image pt-4">
-                <br />
+               
                 <span class="font-weight800 font-size mobile-down">
                     Download
                     <span class="app-text">
@@ -899,6 +899,7 @@
             </div>
         </div>
     </div>
+   
 </div>
 <!-- our happy -->
 <div class="container mt-5" data-aos="fade-up" data-aos-duration="1000">
@@ -924,7 +925,7 @@
 <div class="container-fluid mt-5 carousel-hide">
     <div class="container-fluid">
         <div class="row m-0 p-0" style="overflow: hidden;">
-            <div class="col-md-4 col-12 mb-3 train ">
+            <div class="col-lg-4 col-md-6 col-12 mb-3 train ">
                 <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
                         <img src="assets/images/card-profile.png" height="50px" alt="card-profile">

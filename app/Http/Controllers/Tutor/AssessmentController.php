@@ -25,6 +25,16 @@ class AssessmentController extends Controller
 
     public function store(Request $request) {
 
+
+        $check_assess = Assessment::where('user_id',Auth::user()->id)->where('subject_id',$request->subject)->first();
+        if($check_assess){
+            return response()->json([
+                "status_code" => 401,
+                "success" => true,
+                "message" => "Request already exist."
+            ]);
+        }
+
         $assessment = Assessment::create([
             'user_id' =>  Auth::user()->id,
             'subject_id' => $request->subject,
@@ -103,6 +113,7 @@ class AssessmentController extends Controller
         return response()->json([
             "status_code" => 200,
             "success" => true,
+            "message" => "Request completed"
         ]);
     }
 }

@@ -21,13 +21,19 @@ class SubjectController extends Controller
 
     public function index(){
 
-        $subjects = Subject::where('category_id',1)->get();
         $main_sub = SubjectCategory::all();
-        // $subjects = DB::table("subjects")
-        // ->join('assessments', 'subjects.id', '!=', 'assessments.subject_id', 'left outer')
-        // ->get();
+        $all_subjects = Subject::all();
+        $user_id = \Auth::user()->id;
+        $subjects = DB::select( DB::raw(" SELECT subjects.* , subject_categories.id as cat_id FROM subjects
+        LEFT JOIN subject_categories ON subject_categories.id = subjects.category_id
+        WHERE NOT EXISTS 
+            (SELECT * 
+             FROM assessments 
+             WHERE subjects.id = assessments.subject_id && assessments.user_id = '$user_id') && subjects.category_id = 1") );
+        // return $subjects;
+        // SELECT subjects.* FROM subjects LEFT JOIN teachs ON subjects.id = teachs.subject_id WHERE teachs.subject_id IS NULL
         // return Auth::user()->teach;
-        return view('tutor.pages.subject.index',compact('subjects','main_sub'));
+        return view('tutor.pages.subject.index',compact('subjects','main_sub','all_subjects'));
     }
 
     public function destroy($id)
@@ -43,8 +49,13 @@ class SubjectController extends Controller
     }
 
     public function displaySub($id){
-        $subjects = Subject::where('category_id',$id)->get();
+        // $subjects = Subject::where('category_id',$id)->get();
+       $user_id = \Auth::user()->id;
 
+        $subjects = DB::select( DB::raw(" SELECT subjects.* FROM subjects WHERE NOT EXISTS 
+        (SELECT * 
+         FROM assessments 
+         WHERE subjects.id = assessments.subject_id && assessments.user_id = '$user_id') && subjects.category_id = '$id'") );
         return response()->json($subjects);
     }
 }

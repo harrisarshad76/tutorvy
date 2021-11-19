@@ -38,6 +38,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Styles -->
 
@@ -176,6 +177,8 @@
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
             <!-- <script src="{{ asset('assets/firebase/index.js') . '?ver=' . rand() }}"></script> -->
             @include('firebase')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -189,8 +192,9 @@
             @yield('js')
             <script>
                 $(document).ready(function() {
-                    // $('.table').DataTable();
+                    $('.table').DataTable();
                     get_all_notifications();
+                    $('.table').DataTable();
 
                     $(".dropify").dropify();
                     $('.js-multiSelect').select2();
@@ -201,24 +205,24 @@
                     });
 
                     /* Table Sorting */
-                    $("th").append('<i class="ml-1 fa fa-sort"></i>');
+                    // $("th").append('<i class="ml-1 fa fa-sort"></i>');
                     // $("th:last-child").css("color", 'white');
-                    $(".get").find("th:last-child").css("color",'red !important;');
+                    // $(".get").find("th:last-child").css("color",'red !important;');
 
-                    const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+                    // const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 
-                    const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-                        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-                    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+                    // const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+                    //     v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+                    // )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
 
                     // do the work...
-                    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-                        const table = th.closest('table');
-                        Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-                            .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this
-                                .asc))
-                            .forEach(tr => table.appendChild(tr));
-                    })));
+                    // document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+                    //     const table = th.closest('table');
+                    //     Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+                    //         .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this
+                    //             .asc))
+                    //         .forEach(tr => table.appendChild(tr));
+                    // })));
                     $(function() {
                         $('[data-toggle="tooltip"]').tooltip()
                     });
