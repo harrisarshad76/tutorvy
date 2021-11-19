@@ -131,9 +131,16 @@
     });
 
     function selectUser(id,name){
+
+        // alert(name);
+        $(".chatDefault").css("display","none");
+        $('.chatSet').css("display","block");
+        $("#clientName").text(name);
+        $(".chatArea").attr("id","chatArea_"+id);
         tt_id = id;
         tt_n = name;
-        $('#name_main').text(name)
+
+        // $('.name-client').text(name)
         let url = "{{route('user.chat', ':id')}}";
         url = url.replace(':id', id);
 

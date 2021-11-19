@@ -311,7 +311,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 chatDefault">
-                    <img src="http://www.tutorvy.com/assets/images/comming/coming-soon.png" alt="">
+                    <img src="http://www.tutorvy.com/assets/images/comming/coming-soon.png" alt="" class="w-100">
                 </div>
             </div>
         </div>
