@@ -53,9 +53,6 @@ class CreateUsersTable extends Migration
             $table->integer('is_token_updated')->nullable();
             $table->integer('profile_completed')->default(0)->comment('0-not-general profile not completed,1-general profile completed');
             
-            $table->integer('is_online')->default(0);
-            $table->string('last_activity')->nullable();
-            
             $table->rememberToken();
             $table->timestamps();
         });

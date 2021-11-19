@@ -23,7 +23,23 @@ class GenChatController extends Controller
             'recipient_id' => $request->user,
             'content' => $request->content
         ]);
-        event(new NewMessage($message,Auth::user()->id));
+
+        if(request()->has('file')){
+            $filename = request('file')->store('chat','public');
+            $message = Message::create([
+                'sender_id' => auth()->id(),
+                'recipient_id' => $request->contact_id,
+                'content' => '',
+                'attachments' => $filename
+            ]);
+        }else{
+            $message = Message::create([
+                'sender_id' => auth()->id(),
+                'recipient_id' => $request->contact_id,
+                'content' => $request->text
+            ]);
+        }
+
         return response()->json([
             'status' => 200,
             $message
