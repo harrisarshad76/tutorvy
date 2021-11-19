@@ -59,22 +59,24 @@ class Notification extends Model
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($body)
-                            ->setSound('default')
-                            ->setClickAction($slug);
+        
 
         $dataBuilder = new PayloadDataBuilder();
         if($type == 'chat-message'){
+            $notificationBuilder->setBody($msg)
+                            ->setSound('default');
             $dataBuilder->addData([
                 'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
                 'unread_msg_count' => Message::where('is_seen',0)->where('receiver_id',$user_id)->count(),
                 'rec_msg_count' => Message::where('is_seen',0)->where('user_id',\Auth::user()->id)->where('receiver_id',$user_id)->count(),
                 'type' => $type,
                 'msg_type' => $msg_type,
-                'msg' => $msg,
                 'receiver_id' => $user_id,
             ]);
         }else{
+            $notificationBuilder->setBody($body)
+                            ->setSound('default')
+                            ->setClickAction($slug);
             $dataBuilder->addData([
                 'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
                 'type' => $type,
