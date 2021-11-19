@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class NotifyController extends Controller
 {
 
-    public function GeneralNotifi($receiver,$slug,$type,$title,$icon,$class,$desc,$pic){
+    public function GeneralNotifi($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg){
 
         $notify = new Notification;
         $notify->receiver_id = $receiver;
@@ -23,10 +23,12 @@ class NotifyController extends Controller
         $notify->btn_class = $class;
         $notify->noti_desc = $desc;
         $notify->sender_pic = $pic;
+        $notify->msg_type = $msg_type;
+        $notify->msg = $msg;
   
         if($notify->save()){
           // $notify->toMultiDevice($receiver,$title,$desc, $type ,$slug ,$icon,$class);
-          $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic);
+          $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
 
         }
     }
