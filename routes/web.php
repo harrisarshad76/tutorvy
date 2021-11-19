@@ -185,7 +185,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::post('/get-booking',[BookingController::class,'getBookingDetail'])->name('tutor.getBookingDetail');
 
 
-    Route::get('/chat',[ChatController::class,'index'])->name('tutor.chat');
+    Route::get('/chat',[GenChatController::class,'index'])->name('tutor.chat');
     Route::get('/chatNew',[ChatController::class,'chatNew'])->name('tutor.chatNew');
     Route::get('/classroom',[ClassController::class,'index'])->name('tutor.classroom');
     Route::get('/calendar',[CalendarController::class,'index'])->name('tutor.calendar');
@@ -268,7 +268,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 Route::group(['prefix' => '/student','middleware' => ['auth','student']],function () {
 
     Route::get('/dashboard',[StudentHomeController::class,'index'])->name('student.dashboard');
-    Route::get('/chat',[ChatController::class,'index'])->name('student.chat');
+    Route::get('/chat',[GenChatController::class,'index'])->name('student.chat');
 
     //Bookings
     Route::get('/bookings',[StudentBookingController::class,'index'])->name('student.bookings');

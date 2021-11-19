@@ -8,6 +8,7 @@ use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
 use LaravelFCM\Facades\FCM;
 use App\Models\User;
+use App\Models\General\Message;
 
 class Notification extends Model
 {
@@ -65,6 +66,7 @@ class Notification extends Model
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData([
             'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
+            'unread_msg_count' => Message::where('is_seen',NULL)->where('receiver_id',$user_id)->count(),
             'type' => $type,
             'slug' => $slug,
             'icon' => $icon,
