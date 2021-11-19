@@ -43,7 +43,22 @@
     <!-- Styles -->
 
     @include('tutor.layouts.css')
+    <style>
+        .dataTables_length{
+            display:none;
+        }
+        .dataTables_wrapper{
+            margin-top:10px;
+        }
+        table.dataTable.no-footer {
+                border-bottom: none;
+                margin-bottom:20px;
 
+            }
+            table .table-bordered .dataTable .no-footer{
+                    margin-bottom:20px;
+            }
+    </style>
 </head>
 
 <body>
