@@ -317,6 +317,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::post('/change-password',[StudentSettingController::class,'change_password']);
 
     Route::get('/profile',[StudentProfileController::class,'index'])->name('student.profile');
+    Route::get('/subSubject',[StudentProfileController::class,'subSubject'])->name('student.subSubject');
     Route::get('/profile-view/{id}',[StudentProfileController::class,'profile'])->name('student.profileView');
     Route::post('/tutor-plans',[StudentProfileController::class,'showTutorPlans'])->name('student.tutor.plans');
 

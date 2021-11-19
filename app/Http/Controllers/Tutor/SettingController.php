@@ -164,8 +164,9 @@ class SettingController extends Controller
     }
 
     public function getAllCategories() {
-        $data = tktCat::all();
+        // $data = tktCat::all();
 
+        $data = DB::table('tkt_cat')->get();
         return response()->json([
             "status_code" => 200,
             "categories" => $data,
