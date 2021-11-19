@@ -232,7 +232,7 @@
 
                                         <div class="row">
                                             <div class="col-9">
-                                                <p class="name-client">{{$user->first_name}} {{$user->last_name}}</p>
+                                                <p id="name_main" class="name-client">{{$user->first_name}} {{$user->last_name}}</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="time-chat">11:25</p>

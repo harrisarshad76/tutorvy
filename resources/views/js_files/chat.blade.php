@@ -133,7 +133,7 @@
     function selectUser(id,name){
         tt_id = id;
         tt_n = name;
-        $('.name-client').text(name)
+        $('#name_main').text(name)
         let url = "{{route('user.chat', ':id')}}";
         url = url.replace(':id', id);
 
