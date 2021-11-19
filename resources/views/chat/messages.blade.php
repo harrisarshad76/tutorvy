@@ -313,7 +313,7 @@
                                         <a class="sendLeft" type="button">
                                             <i class="fa fa-paperclip rightChatIcon"></i>
                                         </a>
-                                        <input type="search" id="msg" class="w-100" alt="message">
+                                        <input type="text" id="msg" class="w-100 msg" alt="message">
                                         <button  class="sendRight" type="submit">
                                             <i class="fa fa-paper-plane f-19"></i>
                                         </button>
