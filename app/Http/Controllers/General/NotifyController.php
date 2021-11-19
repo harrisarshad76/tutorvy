@@ -13,11 +13,11 @@ class NotifyController extends Controller
 {
 
     public function GeneralNotifi($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg){
-
+        $notify = new Notification;
         if($type == 'chat-message'){
           $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
         }else{
-          $notify = new Notification;
+          
           $notify->receiver_id = $receiver;
           $notify->slug = $slug;
           $notify->noti_type = $type;
