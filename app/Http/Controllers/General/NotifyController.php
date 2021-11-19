@@ -14,23 +14,28 @@ class NotifyController extends Controller
 
     public function GeneralNotifi($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg){
 
-        $notify = new Notification;
-        $notify->receiver_id = $receiver;
-        $notify->slug = $slug;
-        $notify->noti_type = $type;
-        $notify->noti_title = $title;
-        $notify->noti_icon = $icon;
-        $notify->btn_class = $class;
-        $notify->noti_desc = $desc;
-        $notify->sender_pic = $pic;
-        $notify->msg_type = $msg_type;
-        $notify->msg = $msg;
-  
-        if($notify->save()){
-          // $notify->toMultiDevice($receiver,$title,$desc, $type ,$slug ,$icon,$class);
+        if($type == 'chat-message'){
           $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
-
+        }else{
+          $notify = new Notification;
+          $notify->receiver_id = $receiver;
+          $notify->slug = $slug;
+          $notify->noti_type = $type;
+          $notify->noti_title = $title;
+          $notify->noti_icon = $icon;
+          $notify->btn_class = $class;
+          $notify->noti_desc = $desc;
+          $notify->sender_pic = $pic;
+          $notify->msg_type = $msg_type;
+          $notify->msg = $msg;
+    
+          if($notify->save()){
+            // $notify->toMultiDevice($receiver,$title,$desc, $type ,$slug ,$icon,$class);
+            $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
+  
+          }
         }
+        
     }
 
     function getAllNotification(Request $request) {
