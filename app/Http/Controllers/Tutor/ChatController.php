@@ -21,7 +21,7 @@ class ChatController extends Controller
     
     public function index(){
         $students = User::where('role',3)->where('status',1)->get();
-        return view('tutor.pages.chat.index',compact('students'));
+        return view('tutor.pages.chat.messages',compact('students'));
     }
 
     public function sendMessage(Request $request){
