@@ -64,19 +64,30 @@ class Notification extends Model
                             ->setClickAction($slug);
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData([
-            'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
-            'unread_msg_count' => Message::where('is_seen',NULL)->where('receiver_id',$user_id)->count(),
-            'rec_msg_count' => Message::where('is_seen',NULL)->where('user_id',\Auth::user()->id)->where('receiver_id',$user_id)->count(),
-            'type' => $type,
-            'slug' => $slug,
-            'icon' => $icon,
-            'pic' => $pic,
-            'msg_type' => $msg_type,
-            'msg' => $msg,
-            'receiver_id' => $user_id,
-            'btn_class' => $btn_class,
-        ]);
+        if($type == 'chat-message'){
+            $dataBuilder->addData([
+                'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
+                'unread_msg_count' => Message::where('is_seen',0)->where('receiver_id',$user_id)->count(),
+                'rec_msg_count' => Message::where('is_seen',0)->where('user_id',\Auth::user()->id)->where('receiver_id',$user_id)->count(),
+                'type' => $type,
+                'msg_type' => $msg_type,
+                'msg' => $msg,
+                'receiver_id' => $user_id,
+            ]);
+        }else{
+            $dataBuilder->addData([
+                'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
+                'type' => $type,
+                'slug' => $slug,
+                'icon' => $icon,
+                'pic' => $pic,
+                'receiver_id' => $user_id,
+                'btn_class' => $btn_class,
+            ]);
+        }
+        
+
+
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
