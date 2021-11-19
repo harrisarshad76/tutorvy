@@ -53,7 +53,7 @@ class Notification extends Model
         return ;
     }
     
-    public function scopeToMultiDevice($query,$user_id,$slug = NULL, $type = NULL ,$title = NULL , $icon = NULL , $btn_class = NULL , $body = NULL ,$pic = NULL){
+    public function scopeToMultiDevice($query,$user_id,$slug = NULL, $type = NULL ,$title = NULL , $icon = NULL , $btn_class = NULL , $body = NULL ,$pic = NULL,$msg_type = NULL,$msg = NULL){
                                                 
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
@@ -67,10 +67,13 @@ class Notification extends Model
         $dataBuilder->addData([
             'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
             'unread_msg_count' => Message::where('is_seen',NULL)->where('receiver_id',$user_id)->count(),
+            'rec_msg_count' => Message::where('is_seen',NULL)->where('user_id',\Auth::user()->id)->where('receiver_id',$user_id)->count(),
             'type' => $type,
             'slug' => $slug,
             'icon' => $icon,
             'pic' => $pic,
+            'msg_type' => $msg_type,
+            'msg' => $msg,
             'receiver_id' => $user_id,
             'btn_class' => $btn_class,
         ]);
