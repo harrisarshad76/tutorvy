@@ -413,7 +413,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <select name="std_subj"
-                                                                class="form-select form-select-lg mb-3 w-100">
+                                                                class="form-select form-select-lg mb-3 w-100" id="main_ssub">
                                                                 <option value="" disabled selected>Main Subject</option>
                                                                 @foreach ($subject_cat as $subject)
                                                                     <option value="{{ $subject->id }}"
@@ -425,8 +425,9 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="std_learn"
-                                                                class="form-select form-select-lg mb-3 w-100">
+                                                                class="form-select form-select-lg  mb-3 w-100" id="sub-ssub">
                                                                 <option value="" disabled selected>Sub-Subject</option>
+                                                                
                                                                 @foreach ($subjects as $subject)
                                                                     <option value="{{ $subject->id }}"
                                                                         {{ Auth::user()->std_learn == $subject->id ? 'selected' : '' }}>
@@ -654,5 +655,42 @@
                 });
             })();
         });
+
+        $("#main_ssub").change(function(){
+            var conceptName = $('#main_ssub').find(":selected").val();
+           
+            getSubSub(conceptName);
+
+        })
+        function getSubSub(id){
+            
+            $.ajax({
+                url: "{{route('student.subSubject')}}",
+                type:"GET",
+                data: {
+                    id:id,
+                },
+                success:function(response){
+                    console.log(response.data.length,'response');
+                    $("#sub-ssub").html('');
+                    for(var i=0; i<=response.data.length; i++){
+                        
+                        var html = `<option value="`+response.data[i].id+`">
+                            `+response.data[i].name+`
+                        </option>`;
+
+                        $("#sub-ssub").append(html);
+                    }
+                },
+                error:function(e) {
+                    toastr.error('Something went wrong',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            });
+        }
     </script>
 @endsection

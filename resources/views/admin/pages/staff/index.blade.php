@@ -64,13 +64,13 @@
                                         <td class="pt-3 alex-name-2">
                                             <div class="container">
                                                 <div class="row">
-                                                    <div class="col-md-2 m-0 p-0">
+                                                    <!-- <div class="col-md-2 m-0 p-0">
                                                         <span class="alex-name">
                                                             <img class="mt-1 img-whidth-table"
                                                                 src="{{ asset('admin/assets/img/ico/profile-boy.svg')}}" alt="std-icon" />
                                                         </span>
-                                                    </div>
-                                                    <div class="col-md-10  alex-21">
+                                                    </div> -->
+                                                    <div class="col-md-12  alex-21">
                                                         <span class="alex-name">{{ $staff->name }}</span>
                                                     </div>
                                                 </div>

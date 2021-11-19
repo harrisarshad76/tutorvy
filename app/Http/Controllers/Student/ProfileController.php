@@ -220,4 +220,15 @@ class ProfileController extends Controller
             'success' => true,
         ]);
     }
+    public function subSubject(Request $request) {
+        $subjects = Subject::where('category_id',$request->id)->get();
+     
+        return response()->json([
+            'status_code'=> 200,
+            'message' => 'TimeZone Saved Successfully',
+            'success' => true,
+            'data' => $subjects,
+         ]);
+    }
+
 }
