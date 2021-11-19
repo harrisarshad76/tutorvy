@@ -186,6 +186,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 
 
     Route::get('/chat',[ChatController::class,'index'])->name('tutor.chat');
+    Route::get('/chatNew',[ChatController::class,'chatNew'])->name('tutor.chatNew');
     Route::get('/classroom',[ClassController::class,'index'])->name('tutor.classroom');
     Route::get('/calendar',[CalendarController::class,'index'])->name('tutor.calendar');
     Route::get('/support-ticket',[HistoryController::class,'index'])->name('tutor.history');
@@ -317,6 +318,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::post('/change-password',[StudentSettingController::class,'change_password']);
 
     Route::get('/profile',[StudentProfileController::class,'index'])->name('student.profile');
+    Route::get('/subSubject',[StudentProfileController::class,'subSubject'])->name('student.subSubject');
     Route::get('/profile-view/{id}',[StudentProfileController::class,'profile'])->name('student.profileView');
     Route::post('/tutor-plans',[StudentProfileController::class,'showTutorPlans'])->name('student.tutor.plans');
 

@@ -13,7 +13,7 @@ class tktCat extends Model
 
     protected $fillable = [
         'id',
-        'title',
+        'title'
     ];
 
 }

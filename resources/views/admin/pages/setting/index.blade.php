@@ -6,6 +6,9 @@
  .dropify-wrapper {
     height: 86px !important;
 }
+.tab .active{
+    text-align:left;
+}
 </style>
 @section('content')
   <!--section start  -->
@@ -34,11 +37,11 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <div class="tab p-0">
+                            <div class="tab p-0 w-100 text-left">
                                 <button class="tablinks nav-link active " onclick="openCity(event, 'tab1')"
                                     id="defaultOpen">General</button>
                                 <button class="tablinks nav-link" onclick="openCity(event, 'tab2')">Security</button>
-                                <button class="tablinks nav-link" onclick="openCity(event, 'tab3')">Payment</button>
+                                <!-- <button class="tablinks nav-link" onclick="openCity(event, 'tab3')">Payment</button> -->
                                 <button class="tablinks nav-link" onclick="openCity(event, 'tab4')">System</button>
                             </div>
 
@@ -164,7 +167,7 @@
                                         </div>
                                 </div>
 
-                                <div id="tab3" class="tabcontent">
+                                <!-- <div id="tab3" class="tabcontent">
                                     <div class="row">
                                         <div class="col-md-12 mb-4">
                                             <h3>Payment</h3>
@@ -178,22 +181,6 @@
                                                     <option value="Sadapay">Sadapay</option>
                                                     <option value="Zippa">Zippa</option>
                                                 </select>
-                                                <!-- <div class="dropdown d-flex ">
-                                                    <a class=" d-flex form-control" href="#" data-toggle="dropdown" aria-expanded="true">David </a>
-                                                    <ul class="dropdown-menu  " style="width:100%;">
-                                                        <li>
-                                                            <a tabindex="-1" class="" href="">
-                                                                <img src="{{asset ('assets/images/payment-icon/paypal.png')}}" alt="">
-                                                                Paypal
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a tabindex="-1" class="" href="#">
-                                                                Help
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
                                             </div>
                                             <small>Credit Card Number</small>
                                             <div class="form-group ">
@@ -312,7 +299,7 @@
                                     <div class="row mb-3">
 
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div id="tab4" class="tabcontent">
                                     <div class="row">

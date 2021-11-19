@@ -461,23 +461,23 @@ $("#thumbnail").change(
                     var height = this.height;
                     var width = this.width;
                     if (height > 500 || width > 800) {
-                        alert("Height and Width must not exceed 100px.");
+                        // toastr.warning("Height and Width must not exceed 100px.");
                         $("#fileUpload").val("");
                         return false;
                     }
                     $("#fileUpload").val();
 
-                    alert("Uploaded image has valid Height and Width.");
+                    // alert("Uploaded image has valid Height and Width.");
                     return true;
                 };
 
             }
         } else {
-            alert("This browser does not support HTML5.");
+            // toastr.warning("This browser does not support HTML5.");
             return false;
         }
     } else {
-        alert("Please select a valid Image file.");
+        // toastr.warning("Please select a valid Image file.");
         return false;
     }
 }
