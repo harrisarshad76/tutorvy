@@ -108,7 +108,7 @@
     $( '#chat_form' ).on( 'submit', function(e) {
 
         event.preventDefault();
-        let msg = $("input[id=msg]").val();
+        let msg = $(".msg").val();
         let receiver = tt_id;
         // let _token   = $('meta[name="csrf_token"]').attr('content');
 
@@ -123,7 +123,7 @@
             // console.log(response);
             if(response.status == 200) {
 
-                $("#msg").val('');
+                $(".msg").val('');
 
             }
             },

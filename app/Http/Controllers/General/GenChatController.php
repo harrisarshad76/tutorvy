@@ -22,6 +22,8 @@ class GenChatController extends Controller
     }
     public function sendMessage(Request $request){
 
+        $msg_type = '';
+
         if(request()->has('file')){
             $filename = request('file')->store('chat','public');
             $message = Message::create([
@@ -30,6 +32,8 @@ class GenChatController extends Controller
                 'message' => $filename,
                 'type'=>'file',
             ]);
+            $msg_type = 'file';
+
         }else{
             $message = Message::create([
                 'user_id' => auth()->id(),
@@ -37,17 +41,21 @@ class GenChatController extends Controller
                 'type'=>'text',
                 'message' => $request->msg
             ]);
+            $msg_type = 'text';
+
         }
 
         $notification = new NotifyController();
         $slug = '';
         $type = 'chat-message';
+        $msg_type = 'chat-message';
+        $msg = $request->msg;
         $title = 'Message';
         $icon = 'fas fa-tag';
         $class = 'btn-success';
         $desc = Auth::User()->first_name.' texted you.';
         $pic = Auth::User()->picture;
-        $notification->GeneralNotifi($request->user,$slug,$type,$title,$icon,$class,$desc,$pic);
+        $notification->GeneralNotifi($request->user,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$request->msg);
 
 
         return response()->json([
