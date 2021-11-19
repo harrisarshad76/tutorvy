@@ -15,15 +15,41 @@ class GenChatController extends Controller
     /**
      *  Return Student Chat view
      */
-
+    public function index()
+    {
+        $users = User::where('role',3)->get();
+        return view('chat.messages',compact('users'));
+    }
     public function sendMessage(Request $request){
 
-        $message = Message::create([
-            'sender_id' => auth()->id(),
-            'recipient_id' => $request->user,
-            'content' => $request->content
-        ]);
-        event(new NewMessage($message,Auth::user()->id));
+        if(request()->has('file')){
+            $filename = request('file')->store('chat','public');
+            $message = Message::create([
+                'user_id' => auth()->id(),
+                'receiver_id' => $request->user,
+                'message' => $filename,
+                'type'=>'file',
+            ]);
+        }else{
+            $message = Message::create([
+                'user_id' => auth()->id(),
+                'receiver_id' => $request->user,
+                'type'=>'text',
+                'message' => $request->msg
+            ]);
+        }
+
+        $notification = new NotifyController();
+        $slug = '';
+        $type = 'chat-message';
+        $title = 'Message';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $desc = Auth::User()->first_name.' texted you.';
+        $pic = Auth::User()->picture;
+        $notification->GeneralNotifi($request->user,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+
         return response()->json([
             'status' => 200,
             $message

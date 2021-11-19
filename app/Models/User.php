@@ -219,10 +219,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function messages_between($user)
     {
 
-        return Message::where(['sender_id' => $this->id, 'recipient_id' => $user->id])
+        return Message::where(['user_id' => $this->id, 'receiver_id' => $user->id])
             ->orWhere(function ($q) use ($user) {
-                $q->where('sender_id', $user->id);
-                $q->where('recipient_id', $this->id);
+                $q->where('user_id', $user->id);
+                $q->where('receiver_id', $this->id);
             })
             ->orderBy('id', 'ASC')->get();
     }

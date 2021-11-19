@@ -11,7 +11,6 @@
     <!--favicon --->
     <link href="{{ asset('assets/images/ico/side-icons.png') }}" rel="icon">
     <!-- bootstrap link -->
-    @livewireStyles
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/calender.css') }}" rel="stylesheet">
 
@@ -359,8 +358,6 @@
                     };
 
             </script>
-            
-@livewireScripts
 
 </body>
 
