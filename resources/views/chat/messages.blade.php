@@ -354,14 +354,16 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center ">
-                   <h5></h5>
-                   <input type="file" class="dropify"  data-default-file="@Model.MemberImage" data-height="220" multiple>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
-                    <button type="button" class="btn-general " id="endCallYes"> Send </button>
-                </div>
+                <form id="fileSendForm" enctype="multipart/form-data">
+                    <div class="modal-body text-center ">
+                    <h5></h5>
+                    <input type="file" name="file" class="dropify"  >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
+                        <button type="submit" class="btn-general " id="filesend"> Send </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
