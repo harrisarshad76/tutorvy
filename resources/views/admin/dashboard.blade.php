@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 <style>
-    
+
 svg:not(:root) {
     overflow: hidden;
     width: 100%;
@@ -142,7 +142,9 @@ svg:not(:root) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="chart"></div>
+                                        {{-- <div id="chart"></div> --}}
+                                        {!! $chart->container() !!}
+
                                     </div>
                                 </div>
                             </div>
@@ -151,64 +153,42 @@ svg:not(:root) {
                 </div>
                 <div class="col-md-3">
                     <!-- notification -->
-                    <div class="row ">    
+                    <div class="row ">
                         <div class="col-md-6">
                             <h2 class="mt-3 "> Notifications </h2>
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right">
-                                <a href="#" class="btn view-bookings"> View All</a>
+                                <a href="{{route('getNotification')}}" class="btn view-bookings"> View All</a>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin ">
+                                        @forelse ($notifications as $not)
                                         <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
                                             <div class=" col-md-9 pl-2 m-0 p-0 ">
                                                 <span class="notification-text-home">
-                                                    Marina Hurst
+                                                   {{$not->noti_desc}}
                                                 </span>
-                                                <span class="paragraph-text">
-                                                    request for a
-                                                </span>
+
                                             </div>
                                             <div class="col-md-3 m-0 p-0">
                                                 <span class="heading-sixth row time-top float-right mr-2">
-                                                    10 min ago
+                                                    {{time_elapsed_string($not->created_at)}}
                                                 </span>
                                             </div>
                                         </div>
+                                        @empty
                                         <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
-                                            <div class=" col-md-9 pl-2 m-0 p-0 ">
-                                                <span class="notification-text-home">
-                                                    Marina Hurst
-                                                </span>
-                                                <span class="paragraph-text">
-                                                    request for a
-                                                </span>
-                                            </div>
-                                            <div class="col-md-3 m-0 p-0">
-                                                <span class="heading-sixth row time-top float-right mr-2">
-                                                    10 min ago
+                                            <div class=" col-md-12 pl-2 m-0 p-0 ">
+                                                <span class="notification-text-home text-center">
+                                                   Notifications not found
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
-                                            <div class=" col-md-9 pl-2 m-0 p-0 ">
-                                                <span class="notification-text-home">
-                                                    Marina Hurst
-                                                </span>
-                                                <span class="paragraph-text">
-                                                    request for a
-                                                </span>
-                                            </div>
-                                            <div class="col-md-3 m-0 p-0">
-                                                <span class="heading-sixth row time-top float-right mr-2">
-                                                    10 min ago
-                                                </span>
-                                            </div>
-                                        </div>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +226,7 @@ svg:not(:root) {
                         </div>
                     </div>
                 </div>
-               
+
             </div>
             <div class="row ml-1 mr-1">
                 <div class="col-md-12">
@@ -355,10 +335,10 @@ svg:not(:root) {
                                                         </td>
                                                         <td class="pt-4">{{$request->subject_name}}</td>
                                                         <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                                                                                
+
                                                         <td class="pt-4">---</td>
                                                         <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                        <td class="pt-4"> 
+                                                        <td class="pt-4">
                                                             @if($request->assessment_status == 0 && $request->status == 2)
                                                                 <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                             @else
@@ -386,11 +366,11 @@ svg:not(:root) {
                                                         </td>
                                                         <td class="pt-4">{{$request->subject_name}}</td>
                                                         <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                                    
-                                                        
+
+
                                                         <td class="pt-4">---</td>
                                                         <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                        <td class="pt-4"> 
+                                                        <td class="pt-4">
                                                             @if($request->assessment_status == 0 && $request->status == 2)
                                                                 <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                             @else
@@ -421,7 +401,7 @@ svg:not(:root) {
 
                                                         <td class="pt-4">---</td>
                                                         <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                        <td class="pt-4"> 
+                                                        <td class="pt-4">
                                                             @if($request->assessment_status == 0 && $request->status == 2)
                                                                 <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                             @else
@@ -515,7 +495,7 @@ svg:not(:root) {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row ">
                                 <div class="col-md-12">
                                     <table class="table table-borderless">
@@ -593,7 +573,7 @@ svg:not(:root) {
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-body">                            
+                        <div class="card-body">
                             <div class="row ">
                                 <div class="col-md-12">
                                     <table class="table table-borderless">
@@ -813,7 +793,7 @@ svg:not(:root) {
                     </div>
                     <div class="col-md-3">
                         <!-- notification -->
-                        <div class="row ">    
+                        <div class="row ">
                             <div class="col-md-6">
                                 <h2 class="mt-3 "> Notifications </h2>
                             </div>
@@ -908,7 +888,7 @@ svg:not(:root) {
                             </div>
                         </div>
                     </div>
-                
+
                 </div>
                 <div class="row ml-1 mr-1">
                     <div class="col-md-12">
@@ -1017,10 +997,10 @@ svg:not(:root) {
                                                             </td>
                                                             <td class="pt-4">{{$request->subject_name}}</td>
                                                             <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                                                                                    
+
                                                             <td class="pt-4">---</td>
                                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                            <td class="pt-4"> 
+                                                            <td class="pt-4">
                                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                                 @else
@@ -1048,11 +1028,11 @@ svg:not(:root) {
                                                             </td>
                                                             <td class="pt-4">{{$request->subject_name}}</td>
                                                             <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                                        
-                                                            
+
+
                                                             <td class="pt-4">---</td>
                                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                            <td class="pt-4"> 
+                                                            <td class="pt-4">
                                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                                 @else
@@ -1083,7 +1063,7 @@ svg:not(:root) {
 
                                                             <td class="pt-4">---</td>
                                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                                            <td class="pt-4"> 
+                                                            <td class="pt-4">
                                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                                 @else
@@ -1177,7 +1157,7 @@ svg:not(:root) {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row ">
                                     <div class="col-md-12">
                                         <table class="table table-borderless">
@@ -1255,7 +1235,7 @@ svg:not(:root) {
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-body">                            
+                            <div class="card-body">
                                 <div class="row ">
                                     <div class="col-md-12">
                                         <table class="table table-borderless">
@@ -1477,4 +1457,8 @@ svg:not(:root) {
             </div>
         </div>
     </div>
+
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }}
+
 @endsection
