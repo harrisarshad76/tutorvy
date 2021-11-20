@@ -239,66 +239,66 @@
         };
 
 
-        var options = {
-            series: [
-                {
-                    name: 'Tutor',
-                    data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 60
-                    })
-                },
-                {
-                    name: 'Student',
-                    data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 20
-                    })
-                },
-                {
-                    name: 'Institute',
-                    data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 15
-                    })
-                }
-            ],
-            chart: {
-                type: 'area',
-                //   height: 'auto',
-                height: '240vh',
-                stacked: true,
-                events: {
-                    selection: function (chart, e) {
-                        console.log(new Date(e.xaxis.min))
-                    }
-                },
-            },
-            colors: ['#008FFB', '#00E396', '#CED4DC'],
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    opacityFrom: 0.6,
-                    opacityTo: 0.8,
-                }
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'left'
-            },
-            xaxis: {
-                type: 'datetime'
-            },
-        };
+        // var options = {
+        //     series: [
+        //         {
+        //             name: 'Tutor',
+        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+        //                 min: 10,
+        //                 max: 60
+        //             })
+        //         },
+        //         {
+        //             name: 'Student',
+        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+        //                 min: 10,
+        //                 max: 20
+        //             })
+        //         },
+        //         {
+        //             name: 'Institute',
+        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+        //                 min: 10,
+        //                 max: 15
+        //             })
+        //         }
+        //     ],
+        //     chart: {
+        //         type: 'area',
+        //         //   height: 'auto',
+        //         height: '240vh',
+        //         stacked: true,
+        //         events: {
+        //             selection: function (chart, e) {
+        //                 console.log(e)
+        //             }
+        //         },
+        //     },
+        //     colors: ['#008FFB', '#00E396', '#CED4DC'],
+        //     dataLabels: {
+        //         enabled: false
+        //     },
+        //     stroke: {
+        //         curve: 'smooth'
+        //     },
+        //     fill: {
+        //         type: 'gradient',
+        //         gradient: {
+        //             opacityFrom: 0.6,
+        //             opacityTo: 0.8,
+        //         }
+        //     },
+        //     legend: {
+        //         position: 'top',
+        //         horizontalAlign: 'left'
+        //     },
+        //     xaxis: {
+        //         type: 'datetime'
+        //     },
+        // };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        // var chart = new ApexCharts(document.querySelector("#chart"), options);
+        // chart.render();
 
         var options = {
             series: [{
@@ -391,7 +391,7 @@
             document.getElementById("defaultOpen").click();
         }
 
-       
+
     });
 
 
@@ -436,7 +436,7 @@
                                     <div class="col-md-10">
                                         <div class="head-1-noti">
                                             <span class="notification-text6">
-                                                <strong>` +obj[i].noti_title+ ` </strong> 
+                                                <strong>` +obj[i].noti_title+ ` </strong>
                                                 `+obj[i].noti_desc+`
                                             </span>
                                         </div>
@@ -444,13 +444,13 @@
                                         </span>
                                     </div>
                                 </div>
-                            </a>    
+                            </a>
                         </li>`;
                         }
                         $(".show_all_notifications").html(notification);
                     }
                 }else{
-                    
+
                 }
             },
             error:function(e) {
@@ -471,13 +471,13 @@
                             success: function(data) {
                                 get_all_notifications();
                                 // $('.message-item').remove();
-                             
+
                             },
                             failure: function(errMsg) {
                                 console.log(errMsg);
                             }
                         });
-                        
+
                     };
 
 

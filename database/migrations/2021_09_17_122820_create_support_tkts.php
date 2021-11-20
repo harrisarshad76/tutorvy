@@ -16,6 +16,7 @@ class CreateSupportTkts extends Migration
         Schema::create('support_tkts', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
+            $table->integer('assign_to')->nullable();
             $table->integer('cat_id')->nullable();
             $table->text('message')->nullable();
             $table->string('ticket_no')->nullable();
