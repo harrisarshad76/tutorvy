@@ -244,7 +244,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk->message != null ? $contact->last_talk->message : "Say Hi to "}} </p>
+                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk != null ? $contact->last_talk->message : "Say Hi to "}} </p>
 
                                             </div>
                                             <div class="col-md-3">
