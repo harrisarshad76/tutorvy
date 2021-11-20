@@ -135,7 +135,7 @@ $(document).ready(function(){
 
                 var message = `<p class="senderText mb-0">` + msg + ` </p>`;
                             
-                let html = `<div class="col-md-12">
+                let html = `<div class="col-md-12 mt-3">
                                 <div class="sender">
                                     <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
                                     `+message+`
@@ -176,7 +176,7 @@ $(document).ready(function(){
                     message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
                 }
                  
-                let html = `<div class="col-md-12">
+                let html = `<div class="col-md-12 mt-3">
                                 <div class="sender">
                                     <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
                                     `+message+`
@@ -192,9 +192,7 @@ $(document).ready(function(){
             },
         });
     });
-
     function selectUser(id,name){
-
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
@@ -215,6 +213,7 @@ $(document).ready(function(){
             type:"get",
 
             success:function(response){
+                $(".chatArea").animate({ scrollTop: $(document).height() }, 1000);
                 $auth = "{{Auth::user()->id}}";
                 var attachment = '';
                 $('#chatArea_'+id).html('');
@@ -242,7 +241,7 @@ $(document).ready(function(){
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
                             }
-                        let msg = `<div class="col-md-12">
+                        let msg = `<div class="col-md-12 mt-3">
                                         <div class="sender">
                                             <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
                                             `+attachment+`
@@ -263,7 +262,7 @@ $(document).ready(function(){
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
                             }
-                        let msg = `<div class="col-md-12">
+                        let msg = `<div class="col-md-12 mt-3">
                                         <div class="col-md-12 ">
                                             <div class="reciever">
                                                 <small>From `+name+`</small>

@@ -413,7 +413,8 @@ function favourite_tutor(id,type) {
 
 
 function chat(id){
-    var url = "{{url('student/contact/tutor')}}"+'/'+id
-    window.location.href = url
+    $("#tutorModal").modal("show");
+    // var url = "{{url('student/contact/tutor')}}"+'/'+id
+    // window.location.href = url
 }
 </script>

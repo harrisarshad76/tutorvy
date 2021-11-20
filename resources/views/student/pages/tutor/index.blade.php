@@ -566,6 +566,41 @@
         </div>
     </section>
 </div>
+<div class="modal fade" id="tutorModal" tabindex="-1" role="dialog"
+    aria-labelledby="tutorModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+            </div>
+            <div class="modal-body h-auto  card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <img  src="{{asset('assets/images/tutor.png')}}" />
+                    </div>
+                    <div class="col-md-12 text-center mt-3">
+                        <h3> Send Message </h3>
+                        <p>Type your queries here to let the tutor know what's the main reason of your contact</p>
+                    </div>
+                    <div class="col-md-12 text-center mt-2">
+                        <textarea name="" class="form-control" id="" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <div class="row">
+                    <div class="col-md-12">
+                    <button class="cencel-btn " data-dismiss="modal">
+                            Cancel Message
+                        </button>
+                        <button class="schedule-btn  " >
+                            Send Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 

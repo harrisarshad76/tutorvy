@@ -70,15 +70,19 @@
 
         .sender {
             float: right;
+            display:grid;
+
         }
         .reciever {
             float: left;
+            display:grid;
         }
 
         .reciever p,
         .sender p,
-        .img-style {
-            min-width: 219px;
+        .img-style,
+        .reciever-img-style {
+            min-width: 301px;
             border: 1px solid ;
             border-color: #D3D8DF;
             display:block;
@@ -107,10 +111,10 @@
         }
 
         .recDull {
-            position: absolute;
-            left: 34%;
-            color: #BCC0C7;
-        }
+    position: absolute;
+    left: 28%;
+    color: #BCC0C7;
+}
 
         .dull {
             
@@ -132,7 +136,7 @@
             color: #00132D;
             position: absolute;
             top: 30px;
-            left: 45%;
+            left: 40%;
             /* display: none; */
         }
 
@@ -140,7 +144,7 @@
             color: #00132D;
             position: absolute;
             top: 28%;
-            right: 45%;
+            right: 40%;
         }
 
         .textMenu2 i,
