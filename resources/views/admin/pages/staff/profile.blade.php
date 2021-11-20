@@ -31,7 +31,7 @@
                         <div class="col-md-12 text-center profile-image-1">
                             <img src="{{ asset('admin/assets/img/ico/porfile-main.svg')}}" class="w-50 profile-responsive" />
                             <p class="heading-fifth mt-3 email-text-2">{{ $staff->name }} </p>
-                            <p class="heading-sixth-1 mt-0 email-text-1">{{ $staff->role }}</p>
+                            <p class="heading-sixth-1 mt-0 email-text-1">{{ $staff->role == 4 ? "Staff Member" : '' }}</p>
                             <a href="">
                                 <p class="text-primary email-text">{{ $staff->email }} </p>
                             </a>
@@ -109,22 +109,7 @@
                                         <a href="" class="btn schedule-btn">View</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="pt-4">01</td>
-                                    <td class="pt-4">Ticket no</td>
-                                    <td class="text-center pt-4">03 Sep, 2021</td>
-                                    <td class="pt-4"> 9 AM
-                                    </td>
-                                    <td class="pt-4">
-                                        Harram
-                                    </td>
-                                    <td class="pt-4">
-                                        <span class="pending-text-1">Pendding</span>
-                                    </td>
-                                    <td class="pt-3 text-right">
-                                        <a href="" class="btn schedule-btn">View</a>
-                                    </td>
-                                </tr>
+
 
                             </tbody>
                         </table>

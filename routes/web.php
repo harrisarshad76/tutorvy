@@ -125,6 +125,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/staff',[StaffController::class,'index'])->name('admin.staff');
     Route::post('/staff/insert',[StaffController::class,'insertStaff'])->name('admin.insertStaff');
     Route::get('/staff/profile/{id}',[StaffController::class,'staffProfile'])->name('admin.staffProfile');
+    Route::get('/staff/profile/{id}/tasks',[StaffController::class,'alltasks'])->name('admin.staff.tasks');
 
     Route::get('/role-permission/{id}',[StaffController::class,'rolePermission'])->name('admin.role.permission');
     Route::post('/role-permission-store',[StaffController::class,'saveRolePermission'])->name('admin.save.permission');

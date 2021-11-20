@@ -45,7 +45,12 @@ class HomeController extends Controller
         ->paginate(5);
 
         $activity_logs = Activitylogs::paginate(5);
-        $tickets = supportTkts::with(['category','tkt_created_by'])->get();
+        if(Auth::user()->role == 1):
+            $tickets = supportTkts::with(['category','tkt_created_by'])->get();
+        else:
+            $tickets = supportTkts::with(['category','tkt_created_by'])->where('assign_to',Auth::id())->get();
+        endif;
+
         $notifications = Notification::where('read_at','!=',null)->orderBy('id','desc')->take(3)->get();
         $chart = $chart->build();
 
