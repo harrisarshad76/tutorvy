@@ -211,7 +211,7 @@ var course = null;
 
 function assignCourseModal(user_id) {
      $("#assignModal").modal('show');
-     course = user_id
+     course = user_id;
 }
 
  function assign(id) {

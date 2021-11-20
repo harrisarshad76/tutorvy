@@ -320,7 +320,7 @@
                                 <div class="col-md-12 col-8 p-0">
 
                                     <form id="chat_form" >
-                                        <button class="sendLeft" type="button">
+                                        <button class="sendLeft" onclick="sendFileModal()" type="button">
                                             <i class="fa fa-paperclip rightChatIcon"></i>
                                         </button>
                                         <input type="search" id="msg" class="w-100" alt="message">
@@ -344,23 +344,46 @@
 
         </div>
     </div>
-
+        <!-- Send File Modal -->
+    <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="fileSendForm" enctype="multipart/form-data">
+                    <div class="modal-body text-center ">
+                    <h5></h5>
+                    <input type="file" name="file" class="dropify"  >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
+                        <button type="submit" class="btn-general " id="filesend"> Send </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Send File Modal -->
 @endsection
 @section('scripts')
 
-<!-- <script>
-    $(document).ready(function(){
+<script>
+    // $(document).ready(function(){
       
-    });
-    $(".emojionearea-editor"). (function(){
-        alert();
-    })
-    $(".chatLeft").click(function(){
-        $(this).find(".img-chats").css("background","#ffffff");
-        $(".chatSet").css("display","block");
-        $(".chatDefault").css("display","none");
-    });
-</script>-->
+    // });
+    // $(".emojionearea-editor"). (function(){
+    //     alert();
+    // })
+    // $(".chatLeft").click(function(){
+    //     $(this).find(".img-chats").css("background","#ffffff");
+    //     $(".chatSet").css("display","block");
+    //     $(".chatDefault").css("display","none");
+    // });
+</script>
 @include('js_files.chat')
 
 @endsection

@@ -130,6 +130,33 @@
         });
     });
 
+    $( '#fileSendForm' ).on( 'submit', function(e) {
+
+        event.preventDefault();
+        let msg = $(".msg").val();
+        let receiver = tt_id;
+        // let _token   = $('meta[name="csrf_token"]').attr('content');
+        var formData = new FormData($(this)[0]);
+        formData.append('user', receiver);
+        $.ajax({
+            url: "{{route('store.text')}}",
+            type:"POST",
+            data:formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            enctype:'multipart/form-data',
+            success:function(response){
+            // console.log(response);
+            if(response.status == 200) {
+
+                $(".msg").val('');
+
+            }
+            },
+        });
+    });
+
     function selectUser(id,name){
 
         // alert(name);
@@ -191,6 +218,9 @@
 
 
 
+    }
+    function sendFileModal(){
+        $("#sendFileCall").modal("show");
     }
 
 </script>

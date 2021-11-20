@@ -681,7 +681,6 @@ height:25px;
                         </div>
                     </div>
                 </div>
-                <button onclick="callOffModal()"> Click Me Please</button>
             </div>
             <div class="row callDiv mt-4 mr-2 ml-2" >
                 <div class="col-md-8 text-center rounded bg-dark ">
