@@ -73,24 +73,33 @@
         }
         .reciever {
             float: left;
-            display:grid;
         }
 
         .reciever p,
-        .sender p {
+        .sender p,
+        .img-style {
             min-width: 219px;
             border: 1px solid ;
             border-color: #D3D8DF;
-
+            display:block;
             border-radius: 5px;
             padding: 5px;
             max-width:509px;
+            
         }
-        .reciever p{
+        .sender p,
+        .img-style{
+            width: 400px;
+        }
+        .reciever-img-style{
+            width: 400px;
+        }
+        .reciever-img-style, .reciever p{
             border: 1px solid;
             border-color:#6EAAFF;
         }
 
+        .img-style:hover,
         .reciever p:hover,
         .sender p:hover {
             cursor: pointer;
@@ -121,9 +130,9 @@
         .textMenu2 {
             color: #00132D;
             position: absolute;
-            top: 28%;
+            top: 30px;
             left: 45%;
-            display: none;
+            /* display: none; */
         }
 
         .textMenu {
@@ -226,11 +235,15 @@
                         </div>
                         <div class="line-box"></div>
                         @foreach($users as $contact)
+                            <?php
+                           
+                            
+                            ?>
                             <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
                                 onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
-                                    <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
+                                    <img src="{{asset($contact->user->picture)}}" class="leftImg ml-1" id="img_{{$contact->user->id}}">
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
 
@@ -265,7 +278,7 @@
                             <a class="navbar-brand pb-0" href="#">
                                 <div class="container-fluid m-0 p-0 img-chats">
 
-                                    <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}">
+                                    <img  id="clientPic">
 
                                     <div class="img-chat">
                                         <div class="row">
@@ -296,7 +309,7 @@
                     </nav>
                     <div class="line-box2"></div>
 
-                    <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
+                    <div class="row chatArea ml-1 pb-2 mr-1" id="">
                         <div class='text-center col-md-12 mb-3'>
                             <small>
                                 Your all communications will be monitored for maintaining quality, will not share your personal information. 
