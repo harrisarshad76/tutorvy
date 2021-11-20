@@ -192,5 +192,8 @@
 
 
     }
+    function sendFileModal(){
+        $("#sendFileCall").modal("show");
+    }
 
 </script>
