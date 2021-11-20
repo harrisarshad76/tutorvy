@@ -119,7 +119,7 @@
                 });
 
                 $(document).ready(function() {
-                    $('.table').DataTable();
+                    // $('.table').DataTable();
                     get_all_notifications();
                     $(".mk").hide();
                     $(".vc").hide();

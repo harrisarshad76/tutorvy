@@ -298,7 +298,14 @@
                     <div class="line-box2"></div>
 
                     <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
-                          
+                        <div class='text-center col-md-12 mb-3'>
+                            <small>
+                                Your all communications will be monitored for maintaining quality, will not share your personal information. 
+                            </small>
+                            <small>
+                                <a href="#">View Privacy Policy</a>
+                            </small>
+                        </div>
                     </div>
                     <div class="container-fluid mb-3">
                         <div class="search-type ">
@@ -341,16 +348,22 @@
 
 @endsection
 @section('scripts')
-<!-- <script>
-    $(document).ready(function(){
-      
+<script>
+   $(document).ready(function(){
+    alert();
+
+      $(".emojionearea-editor").attr("id","msg");
+      $(".emojionearea-editor").css("background","red !important");
     });
+    $(".emojionearea-editor"). (function(){
+        alert();
+    })
     $(".chatLeft").click(function(){
         $(this).find(".img-chats").css("background","#ffffff");
         $(".chatSet").css("display","block");
         $(".chatDefault").css("display","none");
     });
-</script> -->
+</script>
 @include('js_files.chat')
 
 @endsection
