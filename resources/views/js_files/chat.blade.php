@@ -171,6 +171,7 @@ $(document).ready(function(){
             if(response.status == 200) {
                 var message = '';
                 $('#sendFileCall').modal('hide');
+                $('.dropify-clear').click();
                 if (response.message.message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                     message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
                 }
