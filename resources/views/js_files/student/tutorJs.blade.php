@@ -1,5 +1,7 @@
 <script>
 
+let tt_id;
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -414,7 +416,32 @@ function favourite_tutor(id,type) {
 
 function chat(id){
     $("#tutorModal").modal("show");
-    // var url = "{{url('student/contact/tutor')}}"+'/'+id
-    // window.location.href = url
+    tt_id = id;
 }
+
+$( '#chat_form' ).on( 'submit', function(e) {
+    $('.emojionearea-editor').html();
+    event.preventDefault();
+
+    let msg =  $('.emojionearea-editor').html();;
+    
+    let receiver = tt_id;
+
+    $.ajax({
+        url: "{{route('store.text')}}",
+        type:"POST",
+        data:{
+            msg:msg,
+            user:receiver
+        },
+        success:function(response){
+        // console.log(response);
+            if(response.status == 200) {
+                $('.emojionearea-editor').html('');
+                $('#tutorModal').modal('hide');
+            }
+        },
+    });
+});
+
 </script>

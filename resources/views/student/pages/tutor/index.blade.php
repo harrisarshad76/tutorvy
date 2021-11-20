@@ -572,32 +572,34 @@
         <div class="modal-content">
             <div class="modal-header text-center">
             </div>
-            <div class="modal-body h-auto  card-body">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <img  src="{{asset('assets/images/tutor.png')}}" />
-                    </div>
-                    <div class="col-md-12 text-center mt-3">
-                        <h3> Send Message </h3>
-                        <p>Type your queries here to let the tutor know what's the main reason of your contact</p>
-                    </div>
-                    <div class="col-md-12 text-center mt-2">
-                        <textarea name="" class="form-control" id="" cols="30" rows="5"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer ">
-                <div class="row">
-                    <div class="col-md-12">
-                    <button class="cencel-btn " data-dismiss="modal">
-                            Cancel Message
-                        </button>
-                        <button class="schedule-btn  " >
-                            Send Message
-                        </button>
+            <form id="chat_form" >
+                <div class="modal-body h-auto  card-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <img  src="{{asset('assets/images/tutor.png')}}" />
+                        </div>
+                        <div class="col-md-12 text-center mt-3">
+                            <h3> Send Message </h3>
+                            <p>Type your queries here to let the tutor know what's the main reason of your contact</p>
+                        </div>
+                        <div class="col-md-12 text-center mt-2">
+                            <textarea name="msg" class="form-control" id="msg" cols="30" rows="5"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="cencel-btn" data-dismiss="modal">
+                                Cancel Message
+                            </button>
+                            <button class="schedule-btn " type="submit">
+                                Send Message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
