@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 <style>
-    
+
 svg:not(:root) {
     overflow: hidden;
     width: 20px;
@@ -122,6 +122,7 @@ svg:not(:root) {
                                     <tbody>
                                         <!-- staff table data -->
                                         @foreach($subjects as $subject)
+
                                         <tr>
                                             <td class="pt-4">
                                                 <span id="sub-cat_{{ $subject->category_id }}">{{$subject->cat_name}}</span>
@@ -130,13 +131,13 @@ svg:not(:root) {
                                                 <span class="sub-name_{{ $subject->id }}">{{ $subject->name }}</span>
                                             </td>
                                             <td class="pt-4">
-                                                0
+                                               {{$subject->teach->count()}}
                                             </td>
                                             <td class="pt-4">
-                                                0
+                                                {{$subject->booking->count()}}
                                             </td>
                                             <td class="pt-4">
-                                                0
+                                                {{$subject->course->count()}}
                                             </td>
                                             <td class="pt-4">
                                                 <div class="container">
@@ -162,14 +163,14 @@ svg:not(:root) {
                                             </td>
                                         </tr>
                                         @endforeach
-                                    
+
                                         <!-- end data -->
                                     </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -190,7 +191,7 @@ svg:not(:root) {
                         <li class="page-item"><a class="page-link" href="{{$subjects->url(1)}}">1</a></li>
                             @endif
                         <li class="page-item"><a class="page-link page-link-1" href="#">{{$subjects->currentPage()}}</a></li>
-                        
+
                         @if($subjects->hasPages())
                             <li class="page-item"><a class="page-link " href="#">.....</a></li>
 
@@ -286,7 +287,7 @@ svg:not(:root) {
                         </div>
                     </div>
                 </form>
-               
+
             </div>
         </div>
     </div>
@@ -340,7 +341,7 @@ svg:not(:root) {
                         </div>
                     </div>
                 </form>
-                   
+
             </div>
         </div>
     </div>
@@ -350,6 +351,6 @@ svg:not(:root) {
 @endsection
 <!-- Extra js to perfome function using ajax. -->
 @section('js')
-  
+
 @include('js_files.admin.subjectjs')
 @endsection

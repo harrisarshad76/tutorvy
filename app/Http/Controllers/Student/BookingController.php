@@ -178,10 +178,10 @@ class BookingController extends Controller
             $pic = Auth::user()->picture;
 
             // tutor notification
-            $notification->GeneralNotifi($request->tutor_id ,$slug,$type,$title,$icon,$class,$desc,$pic);
+            $notification->GeneralNotifi($request->tutor_id,$slug,$type,$title,$icon,$class,$desc,$pic);
 
             // admin notification
-            $notification->GeneralNotifi($reciever->id ,$slug,$type,$title,$icon,$class,$desc,$pic);
+            $notification->GeneralNotifi($reciever->id,$slug,$type,$title,$icon,$class,$desc,$pic);
 
 
             // timezone

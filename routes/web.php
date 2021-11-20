@@ -61,7 +61,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
 
-   
+
 
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
@@ -86,12 +86,14 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::post('tutor/tutor-verfication',[TutorController::class,'tutorVerification'])->name('admin.tutor.verification');
     Route::post('tutor/change-tutor-status',[TutorController::class,'tutorStatus'])->name('admin.tutor.status');
+    Route::post('assignTutor',[TutorController::class,'assignTutor'])->name('admin.tutor.assign');
 
 
     Route::get('/student',[StudentController::class,'index'])->name('admin.student');
     Route::get('/student/profile/{id}',[StudentController::class,'profile'])->name('admin.studentProfile');
     Route::post('student/change-student-status',[StudentController::class,'studentStatus'])->name('admin.studentStatus');
     Route::post('student/delete-student',[StudentController::class,'deleteStudent'])->name('admin.deleteStudent');
+    Route::post('assignStudent',[StudentController::class,'assignStudent'])->name('admin.assign.student');
 
     Route::get('/classroom',[ClassroomController::class,'index'])->name('admin.classroom');
     Route::get('/booking',[AdminBookingController::class,'index'])->name('admin.booking');
@@ -157,6 +159,115 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/category',[SupportController::class,'category'])->name('admin.category');
     Route::post('/save-category',[SupportController::class,'saveCategory'])->name('admin.save.category');
     Route::post('/delete-category',[SupportController::class,'deleteCategory'])->name('admin.delete.category');
+
+
+
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Staff Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::group(['prefix' => '/staff','middleware' => ['auth','staff']],function () {
+
+    Route::get('/dashboard',[HomeController::class,'index'])->name('staff.dashboard');
+    Route::get('/tutor',[TutorController::class,'index'])->name('staff.tutor');
+    Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('staff.tutorProfile');
+    Route::get('/tutor/{id}/subjects/',[TutorController::class,'subjects'])->name('staff.tutorSubjects');
+
+    Route::post('/tutor-plans',[TutorController::class,'showTutorPlans'])->name('staff.tutor.plans');
+
+    Route::get('tutor/request/{id}/{assess_id?}',[TutorController::class,'tutorRequest'])->name('staff.tutorRequest');
+    Route::get('tutor/assessment/{assessment_id}',[TutorController::class,'tutorAssessment'])->name('staff.tutotAssessment');
+
+    Route::get('tutor/get-assessment',[TutorController::class,'getTutorAssessment'])->name('staff.getTutotAssessment');
+
+    Route::get('/tutor-request/{id}',[TutorController::class,'tutor_course_Request'])->name('staff.tutor-request');
+    Route::get('/tutor-profile',[TutorController::class,'tutor_course_profile'])->name('staff.tutor-profile');
+    Route::get('/tutor-class',[TutorController::class,'tutor_subject_class'])->name('staff.tutor-class');
+    Route::get('/all-tutor-req',[TutorController::class,'all_tutor_req'])->name('staff.all-tutor-req');
+    Route::get('/all-tutors',[TutorController::class,'all_tutors'])->name('staff.all-tutors');
+
+
+    Route::post('tutor/verify-assessment',[TutorController::class,'verifyAssessment'])->name('staff.verifyAssessment');
+    Route::post('tutor/verify-tutor',[TutorController::class,'verifyTutor'])->name('staff.verifyTutor');
+
+    Route::post('tutor/tutor-verfication',[TutorController::class,'tutorVerification'])->name('staff.tutor.verification');
+    Route::post('tutor/change-tutor-status',[TutorController::class,'tutorStatus'])->name('staff.tutor.status');
+
+
+    Route::get('/student',[StudentController::class,'index'])->name('staff.student');
+    Route::get('/student/profile/{id}',[StudentController::class,'profile'])->name('staff.studentProfile');
+    Route::post('student/change-student-status',[StudentController::class,'studentStatus'])->name('staff.studentStatus');
+    Route::post('student/delete-student',[StudentController::class,'deleteStudent'])->name('staff.deleteStudent');
+
+    Route::get('/classroom',[ClassroomController::class,'index'])->name('staff.classroom');
+    Route::get('/booking',[staffBookingController::class,'index'])->name('staff.booking');
+    Route::get('/booking-details/{id}',[staffBookingController::class,'bookingDetails'])->name('staff.bookingDetail');
+
+    Route::get('/course',[CourseController::class,'index'])->name('staff.course');
+    Route::get('/course-request/{id}',[CourseController::class,'courseRequest'])->name('staff.course-request');
+    Route::get('/course-profile/{id}',[CourseController::class,'courseProfile'])->name('staff.course-profile');
+    Route::get('/course-edit',[CourseController::class,'editCourseProfile'])->name('staff.course-edit');
+    Route::post('course/change-course-status',[CourseController::class,'courseStatus'])->name('staff.courseStatus');
+    Route::post('course/delete-course',[CourseController::class,'deleteCourse'])->name('staff.deleteCourse');
+
+
+    Route::get('/subject',[SubjectController::class,'index'])->name('staff.subject');
+    Route::post('/subject/insert-subject',[SubjectController::class,'insertSubject'])->name('staff.insertSubject');
+    Route::post('/subject/update-subject',[SubjectController::class,'updateSubject'])->name('staff.updateSubject');
+    Route::post('/subject/delete-subject',[SubjectController::class,'deleteSubject'])->name('staff.deleteSubject');
+
+
+
+    Route::get('/website',[WebsiteController::class,'index'])->name('staff.website');
+    Route::get('/report',[ReportController::class,'index'])->name('staff.report');
+    Route::get('/integration',[IntegrationController::class,'index'])->name('staff.integration');
+    Route::post('/save-payal',[IntegrationController::class,'savePaypalDetails']);
+    Route::post('/verify-integration',[IntegrationController::class,'verfiyIntegration']);
+    Route::post('/integration-status',[IntegrationController::class,'changeIntegrationStatus']);
+
+    Route::get('/staff',[StaffController::class,'index'])->name('staff.staff');
+    Route::post('/staff/insert',[StaffController::class,'insertStaff'])->name('staff.insertStaff');
+    Route::get('/staff/profile/{id}',[StaffController::class,'staffProfile'])->name('staff.staffProfile');
+
+    Route::get('/role-permission/{id}',[StaffController::class,'rolePermission'])->name('staff.role.permission');
+    Route::post('/role-permission-store',[StaffController::class,'saveRolePermission'])->name('staff.save.permission');
+
+    Route::get('/role',[StaffController::class,'role'])->name('staff.role');
+    Route::post('/role/insert-role',[StaffController::class,'insertRole'])->name('staff.insertRole');
+    Route::post('/role/delete-role',[StaffController::class,'deleteRole'])->name('staff.deleteRole');
+    Route::post('/role/update-role',[StaffController::class,'updateRole'])->name('staff.updateRole');
+
+
+
+    Route::get('/knowledge',[KnowledgeController::class,'index'])->name('staff.knowledge');
+    Route::get('/support',[SupportController::class,'index'])->name('staff.support');
+
+    Route::get('/ticket/{id}',[SupportController::class,'ticket'])->name('staff.ticket');
+
+    Route::get('/ticket-reply',[SupportController::class,'ticketReply'])->name('staff.ticketReply');
+    Route::post('/ticket-chat',[SupportController::class,'ticketChat'])->name('staff.ticketChat');
+    Route::post('/assignTicket',[SupportController::class,'assignTicket'])->name('staff.assign.ticket');
+
+    Route::get('/setting',[SettingController::class,'index'])->name('staff.setting');
+
+    Route::get('/activity-logs',[SettingController::class,'activityLogs'])->name('staff.activity.logs');
+
+    Route::post('/save-profile',[SettingController::class,'saveProfile'])->name('staff.profile');
+
+    Route::post('/change-password',[SettingController::class,'changePassword'])->name('staff.change.password');
+    Route::post('/save-system-etting',[SettingController::class,'saveSystemSetting'])->name('staff.save.system-setting');
+    // Route to get all subjects form api call
+
+    Route::get('/api_subjects',[SubjectController::class,'getSubjectsFromApi']);
+
+    Route::get('/category',[SupportController::class,'category'])->name('staff.category');
+    Route::post('/save-category',[SupportController::class,'saveCategory'])->name('staff.save.category');
+    Route::post('/delete-category',[SupportController::class,'deleteCategory'])->name('staff.delete.category');
 
 
 

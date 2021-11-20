@@ -31,13 +31,13 @@ class TutorController extends Controller
 
         $staff_members = User::whereNotIn('role', [1,2,3])->get();
         $approved_tutors = User::with(['education','professional','teach'])->where('role',2)->whereIn('status',[2])->paginate(15);
-        
+
         $tutor_assessments = Assessment::get();
 
         $new_requests = DB::table('users')
             ->select('users.*','assessments.id as assessment_id','assessments.status as assessment_status','subjects.name as subject_name')
             ->leftJoin('assessments', 'users.id', '=', 'assessments.user_id')
-            ->leftJoin('subjects', 'subjects.id', '=', 'assessments.subject_id')    
+            ->leftJoin('subjects', 'subjects.id', '=', 'assessments.subject_id')
             // ->where('assessments.status','!=',1)
             ->where('users.role',2)
             ->whereIn('users.status', [0, 1, 2])
@@ -92,7 +92,7 @@ class TutorController extends Controller
 
         $tutor = User::with(['teach'])->where('id',$id)->where('role',2)->first();
         $pending_subjects = Assessment::where('user_id',$id)->where('status',0)->get();
-        
+
         return view('admin.pages.tutors.tutor_subjects',compact('tutor','pending_subjects'));
     }
 
@@ -102,14 +102,14 @@ class TutorController extends Controller
         $tutor_assessment =  Assessment::where('id',$assess_id)->first();
 
         $documents = DB::table("user_files")->where('user_id',$id)->get();
-        
+
         return view('admin.pages.tutors.request',compact('tutor','tutor_assessment','documents'));
     }
 
     public function tutorAssessment($assessment_id){
 
         $test = Assessment::where('id',$assessment_id)->first();
-      
+
         return view('admin.pages.tutors.tutor_test',compact('test'));
     }
 
@@ -179,7 +179,7 @@ class TutorController extends Controller
     }
 
     public function tutorVerification(Request $request) {
-        
+
         $tutor = User::where('id', $request->id)->first();
 
         $tutor->status = $request->status;
@@ -235,7 +235,7 @@ class TutorController extends Controller
     }
 
     public function tutor_Request($id) {
-        
+
         // return view('admin.pages.tutors.tutor_req');
         $course = Course::with('outline')->where('status',0)->where('id',$id)->first();
 
@@ -247,8 +247,6 @@ class TutorController extends Controller
         return view('admin.pages.courses.course_profile');
 
     }
-
-
     // show tutor plans
     public function showTutorPlans(Request $request) {
         $plans = subjectPlans::where("user_id", $request->user_id)->where("subject_id",$request->subject_id)->get();
@@ -260,14 +258,12 @@ class TutorController extends Controller
         ]);
     }
 
-
-
     public function getTutorAssessment(Request $request) {
 
         $assessment = DB::table('users')
         ->select('users.*','assessments.id as assessment_id','assessments.status as assessment_status','subjects.name as subject_name')
         ->leftJoin('assessments', 'users.id', '=', 'assessments.user_id')
-        ->leftJoin('subjects', 'subjects.id', '=', 'assessments.subject_id')    
+        ->leftJoin('subjects', 'subjects.id', '=', 'assessments.subject_id')
         // ->where('assessments.status','!=',1)
         ->where('users.role',2)
         ->whereIn('users.status', [0, 1, 2])
@@ -277,6 +273,39 @@ class TutorController extends Controller
             "tutor_assessment" => $assessment,
             "status_code" => 200,
             "success" => true,
+        ]);
+    }
+
+    public function assignTutor(Request $request)
+    {
+        // dd($request->all());
+        $user = User::find($request->tutor);
+        User::where('id',$request->tutor)->update([
+            'assign_to' => $request->staff
+        ]);
+
+                // dd($user);
+
+        $message = $user->first_name.' '.$user->last_name. ' has been assigned to '.User::find($request->staff)->first_name.' '.User::find($request->staff)->last_name;
+        $notify_msg = $user->first_name.' '.$user->last_name.' user is assigned to you';
+
+
+        $notification = new NotifyController();
+        $reciever_id = $request->user_id;
+        $slug = URL::to('/') . '/tutor/subjects';
+        $type = 'tutor_assigned';
+        $data = 'data';
+        $title = 'Tutor Assigned';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $desc = $notify_msg ;
+        $pic = Auth::user()->picture;
+
+        $notification->GeneralNotifi( $reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic);
+
+        return response()->json([
+            'status'=>'200',
+            'message' => $message
         ]);
     }
 }

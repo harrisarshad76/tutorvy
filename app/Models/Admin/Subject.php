@@ -42,7 +42,7 @@ class Subject extends Model
     }
     public function teach()
     {
-        return $this->hasMany(Teach::class);
+        return $this->hasMany(Teach::class,'subject_id','id');
     }
     public function assessment(){
         return $this->hasMany(Assessment::class);
