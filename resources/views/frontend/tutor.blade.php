@@ -254,7 +254,7 @@
                 <!-- <br /> -->
                 <div class="mibile-image pt-4">
                     <br />
-                    <span class="ml-5 mobile-down">
+                    <span class=" mobile-down">
                         Download
                         <span class="app-text">
                             the app

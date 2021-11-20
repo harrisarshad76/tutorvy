@@ -180,9 +180,9 @@
                                                             </tr>
                                                             @endforeach
                                                         @else
-                                                            <tr>
+                                                          
                                                                 <td>No Booking Found</td>
-                                                            </tr>
+                                                          
                                                         @endif
                                                     </tbody>
                                                 </table>
@@ -276,9 +276,9 @@
                                                                 </tr>
                                                             @endforeach
                                                         @else
-                                                        <tr>
+                                                     
                                                             <td>No Booking Found</td>
-                                                        </tr>
+                                                       
                                                     @endif
 
                                                     </tbody>
@@ -374,9 +374,9 @@
                                                             </tr>
                                                         @endforeach
                                                     @else
-                                                        <tr>
+                                                       
                                                             <td>No Booking Found</td>
-                                                        </tr>
+                                                    
                                                     @endif
 
                                                     </tbody>
@@ -402,7 +402,6 @@
                                                         <th scope="col">
                                                                 Status
                                                             </th>
-                                                        <th scope="col">Review</th>
                                                         <!-- <th scope="col"></th> -->
                                                         <th scope="col"></th>
                                                     </tr>
@@ -477,9 +476,9 @@
                                                             </tr>
                                                         @endforeach
                                                     @else
-                                                        <tr>
+                                                     
                                                             <td>No Booking Found</td>
-                                                        </tr>
+                                                        
                                                     @endif
                                                 </tbody>
                                             </table>
@@ -503,7 +502,6 @@
                                                     <th scope="col">
                                                             Status
                                                         </th>
-                                                    <th scope="col">Review</th>
                                                     <!-- <th scope="col"></th> -->
                                                     <th scope="col"></th>
                                                 </tr>
@@ -576,9 +574,9 @@
                                                         </tr>
                                                     @endforeach
                                                 @else
-                                                    <tr>
+                                                 
                                                         <td>No Booking Found</td>
-                                                    </tr>
+                                                 
                                                 @endif
                                             </tbody>
                                         </table>

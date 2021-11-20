@@ -16,6 +16,7 @@
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.7",
         "obydul/laraskrill": "^1.1",
         "paypal/rest-api-sdk-php": "^1.14",
         "pusher/pusher-php-server": "~3.0",
@@ -53,7 +54,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -74,4 +76,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+    
 }

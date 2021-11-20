@@ -180,6 +180,27 @@ messaging.onMessage((payload) => {
             });
         }
 
+        if (type == "chat-message") {
+            $('.show_message_counts').text(unread_msg_count);
+
+            toastr.success(title, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+
+            var url = window.location.href;
+            var origin = window.location.origin
+            var custom_url = origin + '/tutor/chat';
+
+            if(url == custom_url) {
+                var url = slug.replace(/[^0-9]/gi, '');
+                
+            }
+
+        }
+
         if (type == "booking_rescheduled") {
             let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
 
@@ -349,6 +370,25 @@ messaging.onMessage((payload) => {
                 showConfirmButton: false,
                 timer: notification_time,
             });
+        }
+
+        if (type == "chat-message") {
+            $('.show_message_counts').text(unread_msg_count);
+
+            toastr.success(title, {
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: notification_time,
+            });
+
+            var url = window.location.href;
+            var origin = window.location.origin
+            var custom_url = origin + '/student/chat';
+
+            if(url == custom_url) {
+                var url = slug.replace(/[^0-9]/gi, '');
+            }
         }
         
         if (type == "booking_rescheduled") {

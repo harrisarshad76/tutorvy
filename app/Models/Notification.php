@@ -8,6 +8,7 @@ use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
 use LaravelFCM\Facades\FCM;
 use App\Models\User;
+use App\Models\General\Message;
 
 class Notification extends Model
 {
@@ -52,26 +53,45 @@ class Notification extends Model
         return ;
     }
     
-    public function scopeToMultiDevice($query,$user_id,$slug = NULL, $type = NULL ,$title = NULL , $icon = NULL , $btn_class = NULL , $body = NULL ,$pic = NULL){
+    public function scopeToMultiDevice($query,$user_id,$slug = NULL, $type = NULL ,$title = NULL , $icon = NULL , $btn_class = NULL , $body = NULL ,$pic = NULL,$msg_type = NULL,$msg = NULL){
                                                 
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($body)
-                            ->setSound('default')
-                            ->setClickAction($slug);
+        
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData([
-            'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
-            'type' => $type,
-            'slug' => $slug,
-            'icon' => $icon,
-            'pic' => $pic,
-            'receiver_id' => $user_id,
-            'btn_class' => $btn_class,
-        ]);
+        if($type == 'chat-message'){
+            $notificationBuilder->setBody($msg)
+                            ->setSound('default')
+                            ->setClickAction($slug);
+            $dataBuilder->addData([
+                'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
+                'unread_msg_count' => Message::where('is_seen',0)->where('receiver_id',$user_id)->count(),
+                'rec_msg_count' => Message::where('is_seen',0)->where('user_id',\Auth::user()->id)->where('receiver_id',$user_id)->count(),
+                'type' => $type,
+                'msg_type' => $msg_type,
+                'msg' => $msg,
+                'receiver_id' => $user_id,
+            ]);
+        }else{
+            $notificationBuilder->setBody($body)
+                            ->setSound('default')
+                            ->setClickAction($slug);
+            $dataBuilder->addData([
+                'unread_count' => Notification::where('read_at',NULL)->where('receiver_id',$user_id)->count(),
+                'type' => $type,
+                'slug' => $slug,
+                'icon' => $icon,
+                'pic' => $pic,
+                'receiver_id' => $user_id,
+                'btn_class' => $btn_class,
+            ]);
+        }
+        
+
+
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();

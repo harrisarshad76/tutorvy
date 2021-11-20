@@ -23,6 +23,7 @@
     <!-- fonawsome -->
     <link href="{{ asset('assets/css/fontawesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/modal.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
 
     <!--toggle Eye for tutor and student-->
     <style>
@@ -118,7 +119,7 @@
                             Register yourself on Tutorvy and learn or teach anything <br />
                             from anywhere.
                         </div>
-                        <div style="margin-top: 70px;">
+                        <div style="margin-top: 70px;" class="gPicture">
                             <img src="../assets/images/login-image/loginImage.png" alt="login" style="width: 90%;">
                         </div>
                     </div>
@@ -200,7 +201,8 @@
                                                         </span>
                                                 @endisset
                                             @endif
-                                            <input type="submit" class="submit schedule-btn w-25 mt-3 float-right" value="Submit">
+                                            <!-- <input type="submit" class="submit schedule-btn w-25 mt-3 float-right" value="Submit"> -->
+                                            <button type="submit" class="submit schedule-btn mt-3 float-right">Submit</button>
                                     </div>
                                     @if(isset($user))
 
@@ -244,19 +246,21 @@
                             </div> -->
                             <div class="Policy-text" style="display: flex;">
                                 <p class="by-text">
-                                    Protected by reCAPTCHA and subject to the Google</p>
-                                <p class="Privacy-text">
+                                    Protected by reCAPTCHA and subject to the Google
+                                    <a href="#">Privacy Policy</a> and <a href="#">Terms and Condition</a>
+                                <!-- <span class="Privacy-text">
                                     Privacy
+                                </span> -->
                                 </p>
                             </div>
-                            <div class="" style="display: flex;">
+                            <!-- <div class="" style="display: flex;">
                                 <p class="policy-text1">
                                     Policy and
                                 </p>
                                 <P class="Privacy-text">
                                     Terms of Service.
                                 </P>
-                            </div>
+                            </div> -->
                         </div>
                         @else
                         <div class="row mt-5">

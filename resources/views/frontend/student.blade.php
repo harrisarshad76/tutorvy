@@ -17,7 +17,7 @@
                         <p class="there-text there-text-main mt-5">
                             There are many variations of passages available, but <br />
                             the majority have suffered alteration in some form.</p>
-                        <div class="input-text input-text-main mt-5 d-flex">
+                        <div class="input-text input-text-main mt-5 d-flex" style="overflow:hidden;">
                             <!-- <input data-aos="zoom-in-up" type="text"
                                 placeholder="What subject do you need help with?"> -->
                                 <select name="subjects" id="subjects" class="form-select form-control">
@@ -26,7 +26,7 @@
                                     <option value="{{$subject->id}}"> {{$subject->name}}</option>
                                     @endforeach
                                 </select>
-                            <input type="submit" value="Search">
+                            <!-- <input type="submit" value="Search"> -->
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
                 <!-- <br /> -->
                 <div class="mibile-image pt-4">
                     <br />
-                    <span class="ml-5 mobile-down">
+                    <span class="mobile-down">
                         Download
                         <span class="app-text">
                             the app

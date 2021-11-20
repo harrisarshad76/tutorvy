@@ -20,7 +20,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('chat.index');
+        return view('chat.messages');
     }
 
     public function contactTutor($id)
@@ -130,6 +130,9 @@ class ChatController extends Controller
     }
 
 
-
+    public function chatNew()
+    {
+        return view('tutor.pages.chat.index');
+    }
 
 }

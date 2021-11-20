@@ -11,6 +11,8 @@
     </script>
 <script type="text/javascript">
     let tt_id;
+    let tt_n;
+
 
     // Channel to get active users status and leaving users status
 
@@ -35,73 +37,78 @@
 
     // Channel to send & listen message
 
-    Echo.join(`App.User.{{Auth::user()->id}}`).here( users => {
+    // Echo.join(`App.User.{{Auth::user()->id}}`).here( users => {
 
-    })
-    .listen('NewMessage', (event) => {
-        console.log(event)
-        // if (this.chatWith && event.message.sender_id == this.chatWith.id) {
-            // User A , B , C -- if B send to A # B -> A
-            // it will appear that C and B send the same message to A # B -> A & C -> A
-            // this if statement avoid this # only B -> A
-            if("{{Auth::user()->id}}" == event.message.sender_id){
-                let msg = `<div class="col-md-12">
-                                <div class="sender">
-                                    <small>From Smith</small>
-                                    <p class="senderText mb-0">`+event.message.content+` </p>
-                                    <small class="dull">1min ago</small>
-                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
-                                </div>
-                            </div>`;
+    // })
+    // .listen('NewMessage', (event) => {
+    //     console.log(event)
+    //     // if (this.chatWith && event.message.sender_id == this.chatWith.id) {
+    //         // User A , B , C -- if B send to A # B -> A
+    //         // it will appear that C and B send the same message to A # B -> A & C -> A
+    //         // this if statement avoid this # only B -> A
+    //         if("{{Auth::user()->id}}" == event.message.sender_id){
+    //             let msg = `<div class="col-md-12">
+    //                             <div class="sender">
+    //                                 <small>From Smith</small>
+    //                                 <p class="senderText mb-0">`+event.message.content+` </p>
+    //                                 <small class="dull">1min ago</small>
+    //                                 <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+    //                             </div>
+    //                         </div>`;
 
-                $('#chatArea').append(msg);
-            }else{
-                let msg = `<div class="col-md-12">
-                                <div class="col-md-12 ">
-                                    <div class="reciever">
-                                        <small>From Smith</small>
-                                        <p class="senderText mb-0">`+event.message.content+`</p>
-                                        <small class="recDull">1min ago</small>
-                                        <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
-                                    </div>
-                                </div>
-                            </div>    `;
-                $('#chatArea').append(msg);
+    //             $('#chatArea').append(msg);
+    //         }else{
+    //             let msg = `<div class="col-md-12">
+    //                             <div class="col-md-12 ">
+    //                                 <div class="reciever">
+    //                                     <small>From Smith</small>
+    //                                     <p class="senderText mb-0">`+event.message.content+`</p>
+    //                                     <small class="recDull">1min ago</small>
+    //                                     <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
+    //                                 </div>
+    //                             </div>
+    //                         </div>    `;
+    //             $('#chatArea').append(msg);
 
-            }
-            incrementUnseenMessagesCount(event.message.sender_id)
+    //         }
+    //         incrementUnseenMessagesCount(event.message.sender_id)
 
-        // }
-                // this.incrementUnseenMessagesCount(event.message.sender_id)
-                // this.fireNotification()
-     }).listenForWhisper('typing', user => {
+    //     // }
+    //             // this.incrementUnseenMessagesCount(event.message.sender_id)
+    //             // this.fireNotification()
+    //  }).listenForWhisper('typing', user => {
 
-        this.typingUser = user;
-        if(this.typingUser){
-            $('#typingUser').html(this.typingUser + ' is typing...')
-        }else{
-            $('#typingUser').html('')
+    //     this.typingUser = user;
+    //     if(this.typingUser){
+    //         $('#typingUser').html(this.typingUser + ' is typing...')
+    //     }else{
+    //         $('#typingUser').html('')
+    //     }
+
+    //     setTimeout(() => {
+    //         this.typingUser =  null;
+
+    //     }, 1500);
+    // })
+
+    // function sendTypingEvent(){
+    //     if($('#msg').val() != ''){
+    //         Echo.join(`App.User.`+tt_id).whisper('typing', '{{Auth::user()->first_name}} {{Auth::user()->last_name}}');
+    //     }else{
+    //         Echo.join(`App.User.`+tt_id).whisper('typing', '');
+    //     }
+    // }
+    window.onkeyup = function(e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            $('.sendRight').click();
         }
-
-        setTimeout(() => {
-            this.typingUser =  null;
-
-        }, 1500);
-    })
-
-    function sendTypingEvent(){
-        if($('#msg').val() != ''){
-            Echo.join(`App.User.`+tt_id).whisper('typing', '{{Auth::user()->first_name}} {{Auth::user()->last_name}}');
-        }else{
-            Echo.join(`App.User.`+tt_id).whisper('typing', '');
-        }
-    }
+    };
 
     $( '#chat_form' ).on( 'submit', function(e) {
 
         event.preventDefault();
-
-        let msg = $("input[id=msg]").val();
+        let msg = $(".msg").val();
         let receiver = tt_id;
         // let _token   = $('meta[name="csrf_token"]').attr('content');
 
@@ -116,16 +123,24 @@
             // console.log(response);
             if(response.status == 200) {
 
-                $("#msg").val('');
-                sendTypingEvent()
+                $(".msg").val('');
 
             }
             },
         });
     });
 
-    function selectUser(id){
+    function selectUser(id,name){
+
+        // alert(name);
+        $(".chatDefault").css("display","none");
+        $('.chatSet').css("display","block");
+        $("#clientName").text(name);
+        $(".chatArea").attr("id","chatArea_"+id);
         tt_id = id;
+        tt_n = name;
+
+        // $('.name-client').text(name)
         let url = "{{route('user.chat', ':id')}}";
         url = url.replace(':id', id);
 
@@ -137,12 +152,12 @@
                 $auth = "{{Auth::user()->id}}";
                 $('#chatArea').html('');
                 for(let i = 0 ; i<response.length;i++){
-                    if("{{Auth::user()->id}}" == response[i].sender_id){
+                    if("{{Auth::user()->id}}" == response[i].user_id){
 
                         let msg = `<div class="col-md-12">
                                         <div class="sender">
-                                            <small>From Smith</small>
-                                            <p class="senderText mb-0">`+response[i].content+` </p>
+                                            <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
+                                            <p class="senderText mb-0">`+response[i].message+` </p>
                                             <small class="dull">1min ago</small>
                                             <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
                                         </div>
@@ -155,8 +170,8 @@
                         let msg = `<div class="col-md-12">
                                         <div class="col-md-12 ">
                                             <div class="reciever">
-                                                <small>From Smith</small>
-                                                <p class="senderText mb-0">`+response[i].content+`</p>
+                                                <small>From `+name+`</small>
+                                                <p class="senderText mb-0">`+response[i].message+`</p>
                                                 <small class="recDull">1min ago</small>
                                                 <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
                                             </div>

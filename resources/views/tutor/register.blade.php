@@ -445,9 +445,13 @@
 
                                                 <div class="col-md-12 text-right mt-3">
 
-                                                    <button id="finish" type="submit"
+                                                    <!-- <button id="finish" type="submit"
                                                         class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
                                                         &nbsp; Join &nbsp;
+                                                    </button> -->
+                                                    <button id="finish"  type="submit"
+                                                        class="schedule-btn  ">
+                                                            Join Now
                                                     </button>
                                                 </div>
 
@@ -471,26 +475,12 @@
                                                                 <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
                                                             </div>
                                                         </div>
-
-
-                                                        <!-- <div class="Apple">
-                                                                <i class="fa fa-apple  fa-lg mr-2" aria-hidden="true"></i>
-                                                                Continue with Apple
-                                                            </div> -->
                                                         <div class="Policy-text" style="display: flex;">
-                                                            <p class="by-text">
-                                                                Protected by reCAPTCHA and subject to the Google</p>
-                                                            <p class="Privacy-text">
-                                                                Privacy
-                                                            </p>
-                                                        </div>
-                                                        <div class="" style="display: flex;">
-                                                            <p class="policy-text1">
-                                                                Policy and
-                                                            </p>
-                                                            <p class="Privacy-text">
-                                                                Terms of Service.
-                                                            </p>
+                                                            <p  class="text-left">
+                                                                        Protected by reCAPTCHA and subject to the Google
+                                                                        <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
+                                                                    
+                                                                    </p>
                                                         </div>
                                                     </div>
                                                 </div>

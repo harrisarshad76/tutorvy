@@ -50,7 +50,7 @@
         }
 
         .chatArea {
-            height: 365px;
+            height: 470px;
             padding-left: 0px;
             padding-right: 0;
             overflow-y: auto;
@@ -183,11 +183,15 @@
             padding-top: 1px;
     padding-left: 6px;
         }
+        #chat_form button{
+            border:none;
+            background:none;
+        }
     </style>
 
     <div class="content content-wrapper " style="width: 100%;background-color: #FBFBFB !important;">
         <div class="container-fluid">
-            <p class="heading-first ml-4 ">Inbox</p>
+            <p class="heading-first ml-4 ">Inbox </p>
             <div id="react"></div>
             <div class="row">
                 <div class="col-md-12 mb-1 ">
@@ -221,8 +225,9 @@
                             </a>
                         </div>
                         <div class="line-box"></div>
-                            <a href="#" class="chatLeft" id="chatClient_1"
-                                onclick="selectUser(``)">
+                        @foreach($users as $user)
+                            <a type="button" class="chatLeft w-100" id="chatClient_{{$user->first_name}}"
+                                onclick='selectUser(`{{$user->id}}`,`{{$user->first_name}} {{$user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
@@ -231,7 +236,7 @@
 
                                         <div class="row">
                                             <div class="col-9">
-                                                <p class="name-client">Student Name</p>
+                                                <p id="name_main" class="name-client">{{$user->first_name}} {{$user->last_name}}</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="time-chat">11:25</p>
@@ -251,6 +256,7 @@
                                     </div>
                                 </div>
                             </a>
+                        @endforeach
                     </div>
 
                 </div>
@@ -265,7 +271,7 @@
                                     <div class="img-chat">
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="name-client">Harram Laraib </p>
+                                                <p class="name-client" id="clientName"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -292,64 +298,7 @@
                     <div class="line-box2"></div>
 
                     <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
-                                    <div class="col-md-12">
-                                        <div class="sender">
-                                            <small>From Azad Chaiwala </small>
-                                            <p class="senderText mb-0">d </p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="reciever">
-                                           <small>From Me</small>
-                                            <p class="senderText mb-0">Reply</p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="sender">
-                                            <small>From Azad Chaiwala </small>
-                                            <p class="senderText mb-0">d </p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="reciever">
-                                           <small>From Me</small>
-                                            <p class="senderText mb-0">Reply</p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="sender">
-                                            <small>From Azad Chaiwala </small>
-                                            <p class="senderText mb-0">d </p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="reciever">
-                                           <small>From Me</small>
-                                            <p class="senderText mb-0">Reply</p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="sender">
-                                            <small>From Azad Chaiwala </small>
-                                            <p class="senderText mb-0">d </p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="reciever">
-                                           <small>From Me</small>
-                                            <p class="senderText mb-0">Reply</p>
-                                            <small class="dull">1min ago</small>
-                                        </div>
-                                    </div>
-
-
+                          
                     </div>
                     <div class="container-fluid mb-3">
                         <div class="search-type ">
@@ -364,15 +313,14 @@
 
                                 <div class="col-md-12 col-8 p-0">
 
-                                    <form id="chat_form" action="{{ route('store.text') }}">
-                                        <a href="" class="sendLeft" type="button">
+                                    <form id="chat_form" >
+                                        <button class="sendLeft" type="button">
                                             <i class="fa fa-paperclip rightChatIcon"></i>
-                                        </a>
-                                        <input type="search" id="msg" class="w-100" alt="message"
-                                            onKeyUp="sendTypingEvent()">
-                                        <a href="" class="sendRight" type="submit">
+                                        </button>
+                                        <input type="search" id="msg" class="w-100" alt="message">
+                                        <button  class="sendRight" type="submit">
                                             <i class="fa fa-paper-plane f-19"></i>
-                                        </a>
+                                        </button>
                                     </form>
                                     <!-- <img src="../assets/img/ico/Icon material-send.png" style="position: relative;left: -35px;height: 25px;margin-top: 10px;"> -->
                                 </div>
@@ -384,7 +332,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 chatDefault">
-                    <img src="http://www.tutorvy.com/assets/images/comming/coming-soon.png" alt="">
+                    <img src="http://www.tutorvy.com/assets/images/comming/coming-soon.png" alt="" class="w-100">
                 </div>
             </div>
 
@@ -393,14 +341,16 @@
 
 @endsection
 @section('scripts')
-<script>
+<!-- <script>
     $(document).ready(function(){
       
     });
-    $("#chatClient_1").click(function(){
+    $(".chatLeft").click(function(){
         $(this).find(".img-chats").css("background","#ffffff");
         $(".chatSet").css("display","block");
         $(".chatDefault").css("display","none");
-    })
-</script>
+    });
+</script> -->
+@include('js_files.chat')
+
 @endsection

@@ -29,11 +29,27 @@
     <link rel="stylesheet" href="{{ asset('assets/css/home.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/dropify.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <style>
         .bgm{
             text-decoration:none !important;
             color:black !important;
         }
+        .dataTables_length{
+            display:none;
+        }
+        .dataTables_wrapper{
+            margin-top:10px;
+        }
+        table.dataTable.no-footer {
+                border-bottom: none;
+                margin-bottom:20px;
+
+            }
+            table .table-bordered .dataTable .no-footer{
+                    margin-bottom:20px;
+            }
     </style>
 
 </head>

@@ -5,6 +5,9 @@
     #languages-list .select2 .select2-container .-container--default .select2-container--below{
         width:100% !important;
     }
+    .section-main-std {
+    margin-top: 90px !important;
+}
 </style>
     <link href="{{ asset('assets/css/booknow.css') }}" rel="stylesheet">
 <section class="section-main section-main-std mt-5 pb-5">
@@ -32,17 +35,17 @@
             
                 <div class="col-md-2"></div>
                     <div class="col-md-8 bg-subject">
-                        <div class="">
                             <select name="subject" id="subject" class="input-subject">
                                 <option value="">Select Subject</option>
                                 @foreach($subjects as $subject)
                                 <option value="{{$subject->name}}" {{ ( $sub == $subject->name) ? 'selected' : '' }} >{{$subject->name}}</option>
                                 @endforeach
                             </select>
-                            <input type="submit" class="input-submite w-25" value="Find a Tutor">
-                        </div>
+                            <button class="input-submite" style="width:auto !important; margin-top:5px;"> Find a tutor</button>
                     </div>
-                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        
+                    </div>
                 </div>
            
         </div>
@@ -422,16 +425,16 @@
                                 </div>
                             @else
                                 @foreach ($tutors as $i => $tutor)
-                                <div class="card mt-3">
+                                <div class="card mt-3 card-sow">
                                     <div class="card-body">
                                         
                                         <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-12" >
 
                                                 <div class="row">
-                                                    <div class="col-md-9">
+                                                    <div class="col-md-9 col-12">
                                                         <div class="row">
-                                                            <div class="col-md-2 col-6 pr-0 div-center">
+                                                            <div class="col-md-2 col-2 pr-0 div-center">
                                                                 <a href="{{route('student.tutor.show',[$tutor->id])}}">
                                                                     @if($tutor->picture)
                                                                         <?php
@@ -449,7 +452,7 @@
                                                                 </a>
                                                             
                                                             </div>
-                                                            <div class="col-md-4 col-6 pr-0">
+                                                            <div class="col-md-4 col-10 pr-0">
                                                                 <a href="{{route('student.tutor.show',[$tutor->id])}}" class="decoration-none"><h3 class="mb-0">{{$tutor->first_name}} {{$tutor->last_name}}</h3></a>
                                                                 <p class="mb-0"><img src="../assets/images/ico/red-icon.png" alt="" class="">  {{$tutor->designation ?? '---'}}</p>
                                                                 <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">{{ $tutor->city != NULL ? $tutor->city.' , ' : '---' }} {{ $tutor->country != NULL ? $tutor->country: '---' }}</p>
@@ -513,7 +516,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mt-4">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4 col-6">
                                                         @php
 
                                                             $sub = explode(',',$tutor->subject_names);
@@ -539,13 +542,13 @@
                                                             @endfor
                                                         </p>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4 col-6">
                                                         <p class="mb-2">Languages</p>
                                                         <p>
                                                             <span class="info-1 info lingo">{{$tutor->lang_short ?? ''}}</span>
                                                         </p>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4 col-6">
                                                     <p class="mb-2">Education</p>
                                                         @php
                                                             $inst = explode(',',$tutor->insti_names);

@@ -61,7 +61,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/dashboard',[HomeController::class,'index'])->name('admin.dashboard');
 
-
+   
 
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
@@ -187,7 +187,8 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::post('/get-booking',[BookingController::class,'getBookingDetail'])->name('tutor.getBookingDetail');
 
 
-    Route::get('/chat',[ChatController::class,'index'])->name('tutor.chat');
+    Route::get('/chat',[GenChatController::class,'index'])->name('tutor.chat');
+    Route::get('/chatNew',[ChatController::class,'chatNew'])->name('tutor.chatNew');
     Route::get('/classroom',[ClassController::class,'index'])->name('tutor.classroom');
     Route::get('/calendar',[CalendarController::class,'index'])->name('tutor.calendar');
     Route::get('/support-ticket',[HistoryController::class,'index'])->name('tutor.history');
@@ -269,7 +270,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 Route::group(['prefix' => '/student','middleware' => ['auth','student']],function () {
 
     Route::get('/dashboard',[StudentHomeController::class,'index'])->name('student.dashboard');
-    Route::get('/chat',[ChatController::class,'index'])->name('student.chat');
+    Route::get('/chat',[GenChatController::class,'index'])->name('student.chat');
 
     //Bookings
     Route::get('/bookings',[StudentBookingController::class,'index'])->name('student.bookings');
@@ -319,6 +320,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::post('/change-password',[StudentSettingController::class,'change_password']);
 
     Route::get('/profile',[StudentProfileController::class,'index'])->name('student.profile');
+    Route::get('/subSubject',[StudentProfileController::class,'subSubject'])->name('student.subSubject');
     Route::get('/profile-view/{id}',[StudentProfileController::class,'profile'])->name('student.profileView');
     Route::post('/tutor-plans',[StudentProfileController::class,'showTutorPlans'])->name('student.tutor.plans');
 
@@ -386,9 +388,10 @@ Route::post('/attachment/send', [ChatController::class,'sendAttachment']);
 
 Auth::routes(['verify' => true]);
 //Google
-Route::post('/google/loggin/{id}', [LoginController::class,'googleLoggin'])->name('social.google');
+Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
 Route::get('/login/google/callback', [LoginController::class,'handleGoogleCallback']);
 // Facebook
+
 Route::get('/facebook/redirect/{c_id?}', [LoginController::class,'redirectFacebook'])->name('social.facebook');
 Route::get('/login/facebook/callback', [LoginController::class,'handleFacebookCallback']);
 

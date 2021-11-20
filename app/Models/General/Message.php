@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Models\General;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-/**
- * @property mixed recipient_id
- */
 class Message extends Model
 {
-    protected $fillable = ['sender_id','recipient_id','content','seen','attachments'];
+    use HasFactory;
+    protected $fillable=['message','user_id','receiver_id','type','is_seen'];
+    public function user()
+    {
+    	return $this->belongsTo(User::class);
+    }
 }
