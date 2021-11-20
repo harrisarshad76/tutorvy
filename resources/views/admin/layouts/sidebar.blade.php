@@ -101,89 +101,89 @@
                 @else
                     @foreach(Session('permisssions') as $permission)
                         @if($permission->menu_title == "Dashboard")
-                            <li class="btn @if(\Request::path() === 'admin/dashboard') active @endif w-100">
-                                <a href="{{route('admin.dashboard')}}" data-toggle="" aria-expanded="false">
+                            <li class="btn @if(\Request::path() === 'staff/dashboard') active @endif w-100">
+                                <a href="{{route('staff.dashboard')}}" data-toggle="" aria-expanded="false">
                                     <img src="{{ asset('/admin/assets/img/sidebar/dash-icon.svg')}}" alt="dash-icon" class=" mr-2"> Dashboard
                                 </a>
                             </li>
                         @elseif($permission->menu_title == "Tutor")
-                            <li class="btn @if(\Request::path() === 'admin/tutor') active @endif w-100">
-                                <a href="{{route('admin.tutor')}}" role="button" class="btn-manage">
+                            <li class="btn @if(\Request::path() === 'staff/tutor') active @endif w-100">
+                                <a href="{{route('staff.tutor')}}" role="button" class="btn-manage">
                                     <img src="{{ asset('/admin/assets/img/sidebar/tutor.svg')}}" alt="user-icon" class=" mr-2"> Tutor
                                 </a>
                             </li>
                         @elseif($permission->menu_title == "Student")
-                            <li class="btn @if(\Request::path() === 'admin/student') active @endif w-100">
-                                <a href="{{route('admin.student')}}" class="btn-manage">
+                            <li class="btn @if(\Request::path() === 'staff/student') active @endif w-100">
+                                <a href="{{route('staff.student')}}" class="btn-manage">
                                     <img src="{{ asset('/admin/assets/img/sidebar/students.svg')}}" alt="user-icon" class=" mr-2"> Student
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Courses")
-                            <li class="btn @if(\Request::path() === 'admin/course') active @endif w-100">
-                                <a href="{{route('admin.course')}}">
+                            <li class="btn @if(\Request::path() === 'staff/course') active @endif w-100">
+                                <a href="{{route('staff.course')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/manage-icon.svg')}}" alt="class-ico" class=" mr-2"> Courses
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Subject")
-                            <li class="btn @if(\Request::path() === 'admin/subject') active @endif w-100">
-                                <a href="{{route('admin.subject')}}">
+                            <li class="btn @if(\Request::path() === 'staff/subject') active @endif w-100">
+                                <a href="{{route('staff.subject')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/course-icon.png')}}" alt="class-ico" class=" mr-2"> Subject
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Webiste")
-                            <li class="btn @if(\Request::path() === 'admin/website') active @endif w-100">
-                                <a href="{{route('admin.website')}}">
+                            <li class="btn @if(\Request::path() === 'staff/website') active @endif w-100">
+                                <a href="{{route('staff.website')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/website.svg')}}" alt="class-ico" class=" mr-2"> Webiste
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Reports")
-                            <li class="btn @if(\Request::path() === 'admin/report') active @endif w-100">
-                                <a href="{{route('admin.report')}}">
+                            <li class="btn @if(\Request::path() === 'staff/report') active @endif w-100">
+                                <a href="{{route('staff.report')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/report-icon.svg')}}" alt="class-ico" class=" mr-2"> Reports
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Integrations")
-                            <li class="btn @if(\Request::path() === 'admin/integration') active @endif w-100">
-                                <a href="{{route('admin.integration')}}">
+                            <li class="btn @if(\Request::path() === 'staff/integration') active @endif w-100">
+                                <a href="{{route('staff.integration')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/intergration-icon.svg')}}" alt="class-ico" class=" mr-2">
                                     Integrations
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Staff Members")
-                            <li class="btn @if(\Request::path() === 'admin/staff') active @endif w-100">
-                                <a href="{{route('admin.staff')}}">
+                            <li class="btn @if(\Request::path() === 'staff/staff') active @endif w-100">
+                                <a href="{{route('staff.staff')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/staff-icon.svg')}}" alt="class-ico" class=" mr-2"> Staff Members
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Knowledge Base")
-                            <li class="btn @if(\Request::path() === 'admin/knowledge') active @endif w-100">
-                                <a href="{{route('admin.knowledge')}}">
+                            <li class="btn @if(\Request::path() === 'staff/knowledge') active @endif w-100">
+                                <a href="{{route('staff.knowledge')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/knowledge-icon.svg')}}" alt="class-ico" class=" mr-2"> Knowledge
                                     Base
                                 </a>
                             </li>
-                            
+
                             @elseif($permission->menu_title == "Support")
-                            <li class="btn @if(\Request::path() === 'admin/support') active @endif w-100">
-                                <a href="{{route('admin.support')}}">
+                            <li class="btn @if(\Request::path() === 'staff/support') active @endif w-100">
+                                <a href="{{route('staff.support')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/support-icon.svg')}}" alt="class-ico" class=" mr-2"> Support
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Activity Logs")
-                            <li class="btn @if(\Request::path() === 'admin/activity-logs') active @endif w-100">
-                                <a href="{{route('admin.activity.logs')}}">
+                            <li class="btn @if(\Request::path() === 'staff/activity-logs') active @endif w-100">
+                                <a href="{{route('staff.activity.logs')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/support-icon.svg')}}" alt="class-ico" class=" mr-2"> Activity Logs
                                 </a>
                             </li>
                             @elseif($permission->menu_title == "Settings")
-                            <li class="btn @if(\Request::path() === 'admin/setting') active @endif w-100">
-                                <a href="{{route('admin.setting')}}">
+                            <li class="btn @if(\Request::path() === 'staff/setting') active @endif w-100">
+                                <a href="{{route('staff.setting')}}">
                                     <img src="{{ asset('/admin/assets/img/sidebar/setting-icon.png')}}" alt="class-ico" class=" mr-2"> Settings
                                 </a>
                             </li>
-                        
+
                         @endif
-                        
+
                     @endforeach
                 @endif
             </ul>

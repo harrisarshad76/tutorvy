@@ -14,7 +14,12 @@ class SupportController extends Controller
 {
     public function index()
     {
-        $tickets = supportTkts::with(['category','tkt_created_by'])->get();
+        if(Auth::user()->role == 1):
+            $tickets = supportTkts::with(['category','tkt_created_by'])->get();
+        else:
+            $tickets = supportTkts::with(['category','tkt_created_by'])->where('assign_to',Auth::id())->get();
+        endif;
+
         return view('admin.pages.support.index',compact('tickets'));
     }
     public function category()

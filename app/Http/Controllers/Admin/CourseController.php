@@ -27,11 +27,16 @@ class CourseController extends Controller
 
     public function index()
     {
-        $approved_courses = Course::whereIn('status',[0,2])->get();
-        $requested_courses = Course::where('status',1)->get();
+        if(Auth::user()->role == 1):
+            $approved_courses = Course::whereIn('status',[0,2])->get();
+            $requested_courses = Course::where('status',0)->get();
+        else:
+            $approved_courses = Course::whereIn('status',[0,2])->where('assign_to',Auth::id())->get();
+            $requested_courses = Course::where('status',0)->where('assign_to',Auth::id())->get();
+        endif;
+
 
         $staff_members = User::whereNotIn('role', [1,2,3])->get();
-
 
         return view('admin.pages.courses.index',compact('approved_courses','requested_courses','staff_members'));
     }
@@ -115,6 +120,8 @@ class CourseController extends Controller
     {
         $course = Course::with('outline')->where('status',1)->where('id',$id)->first();
         // Basic Classes
+
+
         $basic_classes = array();
 
         $cr_bs_dys = json_decode($course->basic_days);
@@ -122,6 +129,7 @@ class CourseController extends Controller
         $cr_bs_clo = json_decode($course->basic_class_overview,true);
         $cr_bs_cst = json_decode($course->basic_class_start_time,true);
         $cr_bs_cet = json_decode($course->basic_class_end_time,true);
+
 
         for($i = 0 ; $i < sizeof($cr_bs_dys) ; $i++){
             $class = new ClassTable();
