@@ -84,6 +84,7 @@
             display:block;
             border-radius: 5px;
             padding: 5px;
+            word-break:break-all;
             max-width:509px;
             
         }
@@ -257,7 +258,19 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk->message != null ? $contact->last_talk->message : "Say Hi to "}} </p>
+                                                <p class="massage-client" id="recent_msg_">
+                                                    @if($contact->last_talk->message != null)
+                                                        @if($contact->last_talk->type == 'file')
+                                                            <i class="fa fa-picture-o"></i> image
+                                                        @else
+                                                            <?php
+                                                                $string = $contact->last_talk->message;
+                                                                echo substr($string, 0, 22);
+                                                            ?>
+                                                        @endif
+                                                    @else
+                                                        Say Hi to 
+                                                    @endif </p>
 
                                             </div>
                                             <div class="col-md-3">
