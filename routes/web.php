@@ -482,6 +482,7 @@ Route::group(['prefix' => '/general','middleware' => ['auth']],function () {
     Route::post('/save-token',[NotifyController::class,'saveToken'])->name('general.save.token');
     Route::get('/get-notifications',[NotifyController::class,'getAllNotification'])->name('getNotification');
     Route::get('/mark_all_read',[NotifyController::class,'markAllRead'])->name('markAllRead');
+    Route::get('/mark_all_seen/{id}',[GenChatController::class,'markAllSeen'])->name('markAllSeen');
 
 });
 
