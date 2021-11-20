@@ -5,8 +5,7 @@ namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Events\NewMessage;
-use App\Events\CallSignal;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use App\Models\General\Message;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +16,26 @@ class GenChatController extends Controller
      */
     public function index()
     {
-        $users = User::where('role',3)->get();
+        $users = Contact::with('user')->get();
+        // return $users;
         return view('chat.messages',compact('users'));
     }
     public function sendMessage(Request $request){
 
         $msg_type = '';
 
+        $contact = Contact::where('contact_id',$request->user)->first();
+
+        if($contact){
+
+        }else{
+
+            $new_contact = new Contact();
+            $new_contact->user_id = \Auth::user()->id;
+            $new_contact->contact_id = $request->user;
+            $new_contact->save();
+            
+        }
         if(request()->has('file')){
             $filename = request('file')->store('chat','public');
             $message = Message::create([

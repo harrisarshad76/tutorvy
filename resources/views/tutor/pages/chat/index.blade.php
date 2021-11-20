@@ -395,8 +395,11 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
-      
+      $(".emojionearea-editor").attr("id","msg");
     });
+    $(".emojionearea-editor").change(function(){
+        alert();
+    })
     $("#chatClient_1").click(function(){
         $(this).find(".img-chats").css("background","#ffffff");
         $(".chatSet").css("display","block");

@@ -1,4 +1,4 @@
-@extends('tutor.layouts.app')
+@extends(Auth::user()->role == 2 ? 'tutor.layouts.app' : 'student.layouts.app' )
 
 @section('content')
     <style>
@@ -225,9 +225,9 @@
                             </a>
                         </div>
                         <div class="line-box"></div>
-                        @foreach($users as $user)
-                            <a type="button" class="chatLeft w-100" id="chatClient_{{$user->first_name}}"
-                                onclick='selectUser(`{{$user->id}}`,`{{$user->first_name}} {{$user->last_name}}`)' >
+                        @foreach($users as $contact)
+                            <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
+                                onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
@@ -236,7 +236,7 @@
 
                                         <div class="row">
                                             <div class="col-9">
-                                                <p id="name_main" class="name-client">{{$user->first_name}} {{$user->last_name}}</p>
+                                                <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="time-chat">11:25</p>
@@ -244,12 +244,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">It is a long
-                                                    distae... </p>
+                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk->message != null ? $contact->last_talk->message : "Say Hi to "}} </p>
 
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="dot  " id="unseen_msg_cnt_">2
+                                                <span class="dot  " id="unseen_msg_cnt_">{{$contact->unread_count}}
                                                 </span>
                                             </div>
                                         </div>
@@ -298,7 +297,14 @@
                     <div class="line-box2"></div>
 
                     <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
-                          
+                        <div class='text-center col-md-12 mb-3'>
+                            <small>
+                                Your all communications will be monitored for maintaining quality, will not share your personal information. 
+                            </small>
+                            <small>
+                                <a href="#">View Privacy Policy</a>
+                            </small>
+                        </div>
                     </div>
                     <div class="container-fluid mb-3">
                         <div class="search-type ">
@@ -314,7 +320,7 @@
                                 <div class="col-md-12 col-8 p-0">
 
                                     <form id="chat_form" >
-                                        <button class="sendLeft" type="button">
+                                        <button class="sendLeft" onclick="sendFileModal()" type="button">
                                             <i class="fa fa-paperclip rightChatIcon"></i>
                                         </button>
                                         <input type="search" id="msg" class="w-100" alt="message">
@@ -338,19 +344,44 @@
 
         </div>
     </div>
-
+        <!-- Send File Modal -->
+    <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center ">
+                   <h5></h5>
+                   <input type="file" class="dropify"  data-default-file="@Model.MemberImage" data-height="220" multiple>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
+                    <button type="button" class="btn-general " id="endCallYes"> Send </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Send File Modal -->
 @endsection
 @section('scripts')
-<!-- <script>
-    $(document).ready(function(){
+
+<script>
+    // $(document).ready(function(){
       
-    });
-    $(".chatLeft").click(function(){
-        $(this).find(".img-chats").css("background","#ffffff");
-        $(".chatSet").css("display","block");
-        $(".chatDefault").css("display","none");
-    });
-</script> -->
+    // });
+    // $(".emojionearea-editor"). (function(){
+    //     alert();
+    // })
+    // $(".chatLeft").click(function(){
+    //     $(this).find(".img-chats").css("background","#ffffff");
+    //     $(".chatSet").css("display","block");
+    //     $(".chatDefault").css("display","none");
+    // });
+</script>
 @include('js_files.chat')
 
 @endsection

@@ -150,7 +150,7 @@
 
             success:function(response){
                 $auth = "{{Auth::user()->id}}";
-                $('#chatArea').html('');
+                $('#chatArea_'+id).html('');
                 for(let i = 0 ; i<response.length;i++){
                     if("{{Auth::user()->id}}" == response[i].user_id){
 
@@ -163,7 +163,7 @@
                                         </div>
                                     </div>`;
 
-                        $('#chatArea').append(msg);
+                        $('#chatArea_'+id).append(msg);
 
                     }else{
 
@@ -177,7 +177,7 @@
                                             </div>
                                         </div>
                                     </div>    `;
-                        $('#chatArea').append(msg);
+                        $('#chatArea_'+id).append(msg);
 
                     }
 
@@ -191,6 +191,9 @@
 
 
 
+    }
+    function sendFileModal(){
+        $("#sendFileCall").modal("show");
     }
 
 </script>

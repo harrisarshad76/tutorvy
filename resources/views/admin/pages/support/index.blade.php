@@ -48,7 +48,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form>
+                                    <!-- <form>
                                         <div class="row border-bottom pb-2 ml-1 -mr-1">
                                             <div class="col-md-11">
                                                 <div class="row">
@@ -107,7 +107,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                    </form>
+                                    </form> -->
                                     <table class="table table-borderless mt-3">
                                         <thead>
                                             <tr

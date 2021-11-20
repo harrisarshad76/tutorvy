@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\General\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -26,13 +27,13 @@ class NotifyController extends Controller
           $notify->btn_class = $class;
           $notify->noti_desc = $desc;
           $notify->sender_pic = $pic;
-          $notify->msg_type = $msg_type;
-          $notify->msg = $msg;
-
+          // $notify->msg_type = $msg_type;
+          // $notify->msg = $msg;
+    
           if($notify->save()){
             // $notify->toMultiDevice($receiver,$title,$desc, $type ,$slug ,$icon,$class);
-            $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
-
+            $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic);
+  
           }
         }
 
@@ -41,11 +42,15 @@ class NotifyController extends Controller
     function getAllNotification(Request $request) {
 
       $notifications = Notification::orderBy('id','desc')->where('receiver_id',\Auth::user()->id)->where('read_at',NULL)->get();
+      $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
+      
 
       $response['message'] = 'Notification List';
       $response['status_code'] = 200;
       $response['success'] = true;
       $response['data'] = $notifications;
+      $response['unread_msg_count'] = $unread_msg_count;
+      
 
       return response()->json($response);
     }

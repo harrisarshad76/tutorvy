@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <!-- <form>
                             <div class="row border-bottom pb-2 ml-1 mr-1">
                                 <div class="col-md-11">
                                     <div class="row">
@@ -88,7 +88,7 @@
                                         </select>
                                     </div>
                                 </div>
-                        </form>
+                        </form> -->
                         <div class="row mt-4 ">
                             <div class="col-md-12">
                                 <!-- start table -->
@@ -177,7 +177,7 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- all courses -->
-                        <form>
+                        <!-- <form>
                             <div class="row border-bottom pb-2 ml-1 -mr-1">
                                 <div class="col-md-11">
                                     <div class="row">
@@ -236,7 +236,7 @@
                                         </select>
                                     </div>
                                 </div>
-                        </form>
+                        </form> -->
                         <!-- start table -->
                         <table class="table table-borderless">
                             <thead>
