@@ -67,114 +67,119 @@
             <!-- Main-->
             @yield('content')
 
-
         <div>
 
     </div>
-            <!-- custom js -->
-            <script src="{{ asset('js/app.js') }}"></script>
+     <!-- custom js -->
+     <script src="{{ asset('js/app.js') }}"></script>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
-            <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-            <script src="{{ asset('assets/js/mobile.js') }}"></script>
-            <script src="{{ asset('assets/js/history.js') }}"></script>
-            <script src="{{ asset('assets/js/subject.js') }}"></script>
-            <script src="{{ asset('assets/js/languages.js') }}"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+     <script src="{{ asset('assets/js/mobile.js') }}"></script>
+     <script src="{{ asset('assets/js/history.js') }}"></script>
+     <script src="{{ asset('assets/js/subject.js') }}"></script>
+     <script src="{{ asset('assets/js/languages.js') }}"></script>
 
-            <script src="{{ asset('assets/js/homePage.js') }}"></script>
-            <script src="{{ asset('assets/js/registration.js') }}"></script>
-            <script src="{{ asset('assets/js/dropify.js') }}"></script>
-            <script src="{{ asset('assets/js/multiselect.js') }}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
-            <script src="{{ asset('assets/js/jquery.validate.js') }}"></script>
-            <script src="{{ asset('assets/js/countrySelect.js') }}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.2.7/emojionearea.min.js"></script>
+     <script src="{{ asset('assets/js/homePage.js') }}"></script>
+     <script src="{{ asset('assets/js/registration.js') }}"></script>
+     <script src="{{ asset('assets/js/dropify.js')}}"></script>
+     <script src="{{ asset('assets/js/multiselect.js')}}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
+     <script src="{{ asset('assets/js/jquery.validate.js')}}"></script>
+     <script src="{{ asset('assets/js/countrySelect.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.2.7/emojionearea.min.js"></script>
 
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
-            <!-- <script src="{{ asset('assets/firebase/index.js') . '?ver=' . rand() }}"></script> -->
-            @include('firebase')
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
-            <script src="{{ asset('assets/js/ion.rangeSlider.js') }}"></script>
-
-            @yield('scripts')
-
-            <script>
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $(document).ready(function() {
-                    // $('.table').DataTable();
-                    get_all_notifications();
-                    $(".mk").hide();
-                    $(".vc").hide();
-                    $(".dropify").dropify();
-                    $('.js-multiSelect').select2();
-                    $('.accSelect2').select2();
-                    $('.form-select').select2();
-                    $(".js-range-slider").ionRangeSlider({
-                        type: "double",
-                        min: 0,
-                        max: 100,
-                        from: 0,
-                        to: 20,
-                        grid: true,
-                        prefix: "$"
-                    });
-                    $(".age-range-slider").ionRangeSlider({
-                        type: "double",
-                        min: 18,
-                        max: 70,
-                        from: 18,
-                        to: 70,
-                        grid: true,
-                    });
-                    $("#msg").emojioneArea({
-                        pickerPosition: "top",
-                        saveEmojisAs: "shortname"
-                    });
-                    
-                    /* Table Sorting */
-
-                    // $("th").append('<i class="ml-1 fa fa-sort"></i>');
-                    // $("th:last-child").css("color", 'white');
-
-                    // const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-                    // const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-                    //     v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-                    // )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-                    // // do the work...
-                    // document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-                    //     const table = th.closest('table');
-                    //     Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-                    //         .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this
-                    //             .asc))
-                    //         .forEach(tr => table.appendChild(tr));
-                    // })));
+    <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
+    @include('firebase')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
-                    /* Table Sorting */
+    </script>
+        <!--Plugin JavaScript file-->
+        <script src="{{ asset('assets/js/ion.rangeSlider.js')}}"></script>
 
-                    $(function() {
-                        $('[data-toggle="tooltip"]').tooltip()
-                    })
+     @yield('scripts')
+     @include('js_files.student.supportJs')
+     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    $(document).ready(function(){
+        $('.table').DataTable();
+        get_all_notifications();
+        $(".mk").hide();
+        $(".vc").hide();
+        $(".dropify").dropify();
+        $('.js-multiSelect').select2();
+        $('.accSelect2').select2();
+        $('.form-select').select2();
+        // $("#year").yearpicker({
+        //         year: {{$user->year ?? '1990'}},
+        //         startYear: 1950,
+        //         endYear: 2050,
+        //     });
+        $(".js-range-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 100,
+            from: 0,
+            to: 20,
+            grid: true,
+            prefix: "$"
+        });
+        $(".age-range-slider").ionRangeSlider({
+            type: "double",
+            min: 18,
+            max: 70,
+            from: 18,
+            to: 70,
+            grid: true,
+        });
+        $("#msg").emojioneArea({
+                pickerPosition: "top",
+                saveEmojisAs:"shortname"
+            });
+          /* Table Sorting */
+
+        //   $("th").append('<i class="ml-1 fa fa-sort"></i>');
+        //      $("th:last-child").css("color",'white');
+
+        //     const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+        //     const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+        //         v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+        //         )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+        //     document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+        //         const table = th.closest('table');
+        //         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+        //             .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        //             .forEach(tr => table.appendChild(tr) );
+        //     })));
+
+
+            /* Table Sorting */
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+                })
 
 
 

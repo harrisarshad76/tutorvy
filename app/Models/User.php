@@ -59,6 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'status',
         'rating',
+        'assign_to',
         'rank',
         'policies',
         'email_market',

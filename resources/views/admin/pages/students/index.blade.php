@@ -143,7 +143,7 @@
                                                     <a type="button" onclick="deleteStudent({{$student->id}})">
                                                         <img src="{{ asset('admin/assets/img/ico/delete-icon.png')}}" alt="delete-icon" >
                                                     </a>
-                                                
+
                                                     <a href="edit-student.html">
                                                         <img src=" {{ asset('admin/assets/img/ico/edit-icon.png')}}" alt="delete-icon" class="ml-1">
                                                     </a>
@@ -157,8 +157,11 @@
                                                     <a href="{{ route('admin.studentProfile',[ $student->id]) }}" class="cencel-btn btn mr-2">
                                                         View
                                                     </a>
-                                                    <button class="schedule-btn" data-toggle="modal"
-                                                        data-target="#exampleModalCenters">Assign</button>
+                                                    @if ($student->assign_to != null)
+                                                        <button class="btn schedule-btn" disabled>Assigned</button>
+                                                        @else
+                                                        <button class="schedule-btn" onclick="assignStudentModal({{$student->id}})">Assign</button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -179,10 +182,10 @@
                                         <li class="page-item"><a class="page-link" href="{{$students->url(1)}}">1</a></li>
                                             @endif
                                         <li class="page-item"><a class="page-link page-link-1" href="#">{{$students->currentPage()}}</a></li>
-                                        
+
                                         @if($students->hasPages())
                                             <li class="page-item"><a class="page-link " href="#">.....</a></li>
-                
+
                                             <li class="page-item"><a class="page-link" href="{{$students->url($students->lastPage())}}"> {{$students->lastPage()}} </a></li>
                                             <li class="page-item">
                                                 <a class="page-link" href="{{$students->nextPageUrl()}}">
@@ -209,7 +212,7 @@
 
     <div class="container-fluid">
         <div class="pt-3 mt-3 container-bg ml-1 mr-1">
-            
+
         </div>
     </div>
     <!-- deleet Modal -->
@@ -234,7 +237,7 @@
         </div>
     </div>
     <!-- assgin modal -->
-    <div class="modal fade" id="exampleModalCenters" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -243,113 +246,28 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-serach">
-                        <input class="w-100" type="search" placeholder="Search members" />
+                        <input class="w-100" id="search" type="search" placeholder="Search members" />
                         <img class="serach-icon" src="../assets/img/ico/Search.png" />
                     </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.svg"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
+                    @foreach($staff_members as $staff)
+                    <div class="container mt-4" id="record">
                         <div class="row">
                             <div class="col-md-6 col-6">
                                 <span class="alex-name">
-                                    <img src="../assets/img/ico/profile-boy.png" alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
+                                    <img src="{{asset($staff->picture)}}"
+                                        alt="std-icon" />
+                                    </span>
+                                <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
                             </div>
                             <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
+
+                                <button class="schedule-btn assgin-text" onclick="assign({{$staff->id}})">Assign</button>
+
                             </div>
                         </div>
                     </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="../assets/img/ico/profile-boy.png"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">Harram</span>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Assign</button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
 
             </div>
@@ -372,7 +290,7 @@
                         </p>
 
                         <button type="button" class="cencel-btn w-25" data-dismiss="modal">Cancel</button>
-                        
+
                             <button class="schedule-btn w-25" id="Yes" >Yes</button>
                     </div>
                 </div>

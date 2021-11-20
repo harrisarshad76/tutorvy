@@ -134,10 +134,10 @@
                                             </td>
                                             <td class="pt-4">{{$request->subject_name}}</td>
                                             <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                                                                       
+
                                             <td class="pt-4">---</td>
                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4"> 
+                                            <td class="pt-4">
                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                 @else
@@ -154,9 +154,11 @@
                                                 </a>
                                             </td>
                                             <td class="pt-3 text-right">
-                                                <button class="schedule-btn"  data-toggle="modal"
-                                                    data-target="#exampleModalCenter">Assign</button>
-                                            </td>
+                                                @if ($request->assign_to != null)
+                                                <button class="btn schedule-btn" disabled>Assigned</button>
+                                                @else
+                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                @endif                                            </td>
                                         </tr>
                                         @elseif($request->status == 0)
                                         <tr>
@@ -169,11 +171,11 @@
                                             </td>
                                             <td class="pt-4">{{$request->subject_name}}</td>
                                             <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-                                           
-                                            
+
+
                                             <td class="pt-4">---</td>
                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4"> 
+                                            <td class="pt-4">
                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                 @else
@@ -190,8 +192,11 @@
                                                 </a>
                                             </td>
                                             <td class="pt-3 text-right">
-                                                <button class="schedule-btn"  data-toggle="modal"
-                                                    data-target="#exampleModalCenter">Assign</button>
+                                                @if ($request->assign_to != null)
+                                                <button class="btn schedule-btn" disabled>Assigned</button>
+                                                @else
+                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                @endif
                                             </td>
                                         </tr>
                                         @elseif($request->status == 1)
@@ -208,7 +213,7 @@
 
                                             <td class="pt-4">---</td>
                                             <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4"> 
+                                            <td class="pt-4">
                                                 @if($request->assessment_status == 0 && $request->status == 2)
                                                     <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
                                                 @else
@@ -225,14 +230,16 @@
                                                 </a>
                                             </td>
                                             <td class="pt-3 text-right">
-                                                <button class="schedule-btn"  data-toggle="modal"
-                                                    data-target="#exampleModalCenter">Assign</button>
-                                            </td>
+                                                @if ($request->assign_to != null)
+                                                <button class="btn schedule-btn" disabled>Assigned</button>
+                                                @else
+                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                @endif                                            </td>
                                         </tr>
                                         @endif
-                                        
+
                                     @endforeach
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -250,10 +257,10 @@
                                     <li class="page-item"><a class="page-link" href="{{$new_requests->url(1)}}">1</a></li>
                                         @endif
                                     <li class="page-item"><a class="page-link page-link-1" href="#">{{$new_requests->currentPage()}}</a></li>
-                                    
+
                                     @if($new_requests->hasPages())
                                         <li class="page-item"><a class="page-link " href="#">.....</a></li>
-            
+
                                         <li class="page-item"><a class="page-link" href="{{$new_requests->url($new_requests->lastPage())}}"> {{$new_requests->lastPage()}} </a></li>
                                         <li class="page-item">
                                             <a class="page-link" href="{{$new_requests->nextPageUrl()}}">
@@ -382,7 +389,7 @@
                                     <p> No Data found. </p>
                                 @else
                                 @foreach($approved_tutors as $tutor)
-                                            
+
                                     <tr>
                                         <td class="pt-4">
                                             {{ $tutor->first_name }} {{ $tutor->last_name }}
@@ -395,7 +402,7 @@
                                         <td class="pt-4">{{$tutor->address}}</td>
                                         <td class="pt-4">{{$tutor->availability != NULL ? $tutor->availability : '---'}}</td>
                                         <td class="pt-4">{{$tutor->hourly_rate}}</td>
-                                        <td class="pt-4"> 
+                                        <td class="pt-4">
                                             @if( $tutor->status == 0)
                                                 <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
                                             @elseif( $tutor->status == 1)
@@ -421,12 +428,12 @@
                                                 View
                                             </a>
                                         </td>
-                                        
+
                                     </tr>
-                                    
+
                                 @endforeach
                                 @endif
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -444,10 +451,10 @@
                                 <li class="page-item"><a class="page-link" href="{{$approved_tutors->url(1)}}">1</a></li>
                                     @endif
                                 <li class="page-item"><a class="page-link page-link-1" href="#">{{$approved_tutors->currentPage()}}</a></li>
-                                
+
                                 @if($approved_tutors->hasPages())
                                     <li class="page-item"><a class="page-link " href="#">.....</a></li>
-        
+
                                     <li class="page-item"><a class="page-link" href="{{$approved_tutors->url($approved_tutors->lastPage())}}"> {{$approved_tutors->lastPage()}} </a></li>
                                     <li class="page-item">
                                         <a class="page-link" href="{{$approved_tutors->nextPageUrl()}}">
@@ -479,19 +486,25 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-serach">
-                        <input class="w-100" type="search" placeholder="Search members" />
+                        <input class="w-100" id="search" type="search" placeholder="Search members" />
                         <img class="serach-icon" src="{{ asset('admin/assets/img/ico/Search.png')}}" />
                     </div>
-                    @foreach($staff_members as $member)
-                    <div class="container mt-4">
+                    @foreach($staff_members as $staff)
+                    <div class="container mt-4" id="record">
                         <div class="row">
                             <div class="col-md-6 col-6">
-                                <span class="alex-name"><img src="{{ asset('admin/assets/img/ico/profile-boy.svg')}}"
-                                        alt="std-icon" /></span>
-                                <span class="pl-2 alex-names">{{$member->name}}</span>
+                                <span class="alex-name">
+                                    <img src="{{asset($staff->picture)}}"
+                                        alt="std-icon" />
+                                    </span>
+                                <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
                             </div>
                             <div class="col-md-6 col-6">
-                                <button class="schedule-btn assgin-text" onclick="assignStaff(`{{$member->id}}`)" >Assign</button>
+                                @if ($staff->id == $tutor->id)
+                                <button class="btn schedule-btn assgin-text" disabled>Assigned</button>
+                                @else
+                                <button class="schedule-btn assgin-text" onclick="assign({{$staff->id}})">Assign</button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -503,6 +516,6 @@
 @endsection
 
 <!-- Extra js to perfome function using ajax. -->
-@section('js') 
+@section('js')
 @include('js_files.admin.tutor')
 @endsection

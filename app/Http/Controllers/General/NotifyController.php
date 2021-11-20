@@ -18,7 +18,7 @@ class NotifyController extends Controller
         if($type == 'chat-message'){
           $notify->toMultiDevice($receiver,$slug,$type,$title,$icon,$class,$desc,$pic,$msg_type,$msg);
         }else{
-          
+
           $notify->receiver_id = $receiver;
           $notify->slug = $slug;
           $notify->noti_type = $type;
@@ -36,27 +36,29 @@ class NotifyController extends Controller
   
           }
         }
-        
+
     }
 
     function getAllNotification(Request $request) {
-      
+
       $notifications = Notification::orderBy('id','desc')->where('receiver_id',\Auth::user()->id)->where('read_at',NULL)->get();
       $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
       
+
       $response['message'] = 'Notification List';
       $response['status_code'] = 200;
       $response['success'] = true;
       $response['data'] = $notifications;
       $response['unread_msg_count'] = $unread_msg_count;
       
+
       return response()->json($response);
     }
 
     public function markAllRead(){
-    
+
       $notification =  Notification::where('receiver_id', \Auth::user()->id)->update(['read_at' => Carbon::now()]);
-     
+
       $response['message'] = "Success Message";
       $response['status_code'] = 200;
       $response['success'] = true;
@@ -74,7 +76,7 @@ class NotifyController extends Controller
               return $e->token == $token;
           }));
           Session::put('unnid',$token);
-         
+
           if ($entry === false) {
             if($user->role == 1){
               $fcm_array = array();
@@ -83,28 +85,28 @@ class NotifyController extends Controller
               $fcm_data['device'] = 'Windows';
               if($request->token == ''){
                 $user->token = null;
-                $user->token_updated_at = date('Y-m-d h:m:s');                
+                $user->token_updated_at = date('Y-m-d h:m:s');
                 $user->is_token_updated = 1;
                 $user->save();
               }else{
                 array_push($fcm_array, $fcm_data);
                 $user->token = $fcm_data;
-                $user->token_updated_at = date('Y-m-d h:m:s');                
+                $user->token_updated_at = date('Y-m-d h:m:s');
                 $user->is_token_updated = 1;
                 $user->save();
               }
-              
+
             }else{
               $fcm_data = array();
               $fcm_data['token'] = $request->token;
               $fcm_data['device'] = 'Windows';
               array_push($fcm_array, $fcm_data);
               $user->token = $fcm_array;
-              $user->token_updated_at = date('Y-m-d h:m:s');                
+              $user->token_updated_at = date('Y-m-d h:m:s');
               $user->is_token_updated = 1;
               $user->save();
             }
-              
+
           }
       }else{
           Session::put('unnid',$request->token);
@@ -113,7 +115,7 @@ class NotifyController extends Controller
           $fcm_array = array();
           $fcm_data['token'] = $request->token;
           $fcm_data['device'] = 'Windows';
-          array_push($fcm_array, $fcm_data);            
+          array_push($fcm_array, $fcm_data);
           $user->token = json_encode($fcm_array);
           $user->token_updated_at = date('Y-m-d h:m:s');
           $user->is_token_updated = 1;

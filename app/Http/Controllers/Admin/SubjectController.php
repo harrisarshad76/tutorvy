@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Admin\Subject;
 use App\Models\Admin\SubjectCategory;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -26,9 +27,7 @@ class SubjectController extends Controller
     {
         $subjects = Subject::paginate(15);
         $categories = SubjectCategory::get();
-        // $subjectList = Subject::paginate(15);
 
-    
         return view('admin.pages.subjects.index',compact('subjects','categories'));
     }
 
@@ -62,9 +61,9 @@ class SubjectController extends Controller
             'message' => 'Subject Added.'
         ]);
 
-    
+
     }
-    
+
     public function deleteSubject(Request $request){
 
 
@@ -77,7 +76,7 @@ class SubjectController extends Controller
             'message' => 'Subject Deleted.'
         ]);
 
-    
+
     }
 
     public function updateSubject(Request $request){
@@ -85,7 +84,7 @@ class SubjectController extends Controller
         $subject = Subject::where('id',$request->id)->update([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            
+
         ]);
 
         return response()->json([
@@ -93,7 +92,7 @@ class SubjectController extends Controller
             'message' => 'Subject Updated.'
         ]);
 
-    
+
     }
 
 
