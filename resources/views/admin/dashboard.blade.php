@@ -165,8 +165,8 @@ svg:not(:root) {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin ">
-                                        @forelse ($notifications as $not)
+                                    <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " id="dashNotif">
+                                        {{-- @forelse ($notifications as $not)
                                         <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
                                             <div class=" col-md-9 pl-2 m-0 p-0 ">
                                                 <span class="notification-text-home">
@@ -188,7 +188,7 @@ svg:not(:root) {
                                                 </span>
                                             </div>
                                         </div>
-                                        @endforelse
+                                        @endforelse --}}
                                     </div>
                                 </div>
                             </div>

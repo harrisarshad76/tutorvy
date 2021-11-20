@@ -9,7 +9,7 @@
 
 
   });
-// Admin Course Script Blade 
+// Admin Course Script Blade
 $(".c_status").click(function(){
   var id = $(this).attr("val_id");
   var st = $(this).attr("val_st");
@@ -38,7 +38,7 @@ $(".c_status").click(function(){
                   icon: 'success',
                   showConfirmButton: false,
                   timer: 2500
-              }) 
+              })
 
               // if(status == 3){
               //   $('#rejectCourseModal').modal('hide');
@@ -50,8 +50,8 @@ $(".c_status").click(function(){
               //     window.location.href = "{{ url()->previous() }}";
               //   }, 1500);
               // }
-              
-              
+
+
             }
           },
           error:function(e) {
@@ -84,7 +84,7 @@ $(".c_status").click(function(){
                   icon: 'success',
                   showConfirmButton: false,
                   timer: 2500
-              }) 
+              })
 
               // if(status == 3){
               //   $('#rejectCourseModal').modal('hide');
@@ -96,8 +96,8 @@ $(".c_status").click(function(){
               //     window.location.href = "{{ url()->previous() }}";
               //   }, 1500);
               // }
-              
-              
+
+
             }
           },
           error:function(e) {
@@ -134,7 +134,7 @@ function deleteCourse(id){
                   icon: 'success',
                   showConfirmButton: false,
                   timer: 2500
-              }) 
+              })
               $("#deleteCourseModal").modal('hide');
               setInterval(function(){
                   window.location.reload();
@@ -186,7 +186,7 @@ function deleteCourse(id){
 //                 icon: 'success',
 //                 showConfirmButton: false,
 //                 timer: 2500
-//             }) 
+//             })
 
 //             if(status == 2){
 //               $('#rejectCourseModal').modal('hide');
@@ -198,12 +198,78 @@ function deleteCourse(id){
 //                 window.location.href = "{{ url()->previous() }}";
 //               }, 1500);
 //             }
-            
-            
+
+
 //           }
 //         },
 //     });
 
 // }
+
+
+var course = null;
+
+function assignCourseModal(user_id) {
+     $("#assignModal").modal('show');
+     course = user_id
+}
+
+ function assign(id) {
+
+     $.ajax({
+         url: "{{ route('admin.assign.course') }}",
+         type: "POST",
+         data: {
+             _token: "{{ csrf_token() }}",
+             course: course,
+             staff:id
+         },
+
+         beforeSend: function(data) {
+             $("#assignModal").modal('hide');
+         },
+         success: function(response) {
+             if (response.status == 200) {
+                 toastr.success(response.message, {
+                     position: 'top-end',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     timer: 2500
+                 });
+
+                 setInterval(function() {}, 1500);
+
+             } else if (response.status == 400) {
+                 toastr.error(response.message, {
+                     position: 'top-end',
+                     icon: 'error',
+                     showConfirmButton: false,
+                     timer: 2500
+                 });
+
+                 setInterval(function() {}, 1500);
+             }
+         },
+         error: function(e) {
+             toastr.error('Something Went Wrong', {
+                 position: 'top-end',
+                 icon: 'error',
+                 showConfirmButton: false,
+                 timer: 2500
+             });
+         }
+     });
+
+ }
+ //filter
+ $(document).ready(function() {
+     $("#search").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#record div").filter(function() {
+             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+     });
+ });
+
 
 </script>

@@ -21,7 +21,7 @@
                                     style="margin-top: 10px; text-align: left;color: #00132D;font-size: 22px;font-family: Poppins;font-weight: 500;">
                                     {{$booking->subject->name}} Class
 
-                                    
+
                                     @if($booking->status == 0)
                                         <span style="display:inline-flex ;" class="bg-color-apporve3"> Pending</span>
                                     @elseif($booking->status == 1)
@@ -108,7 +108,9 @@
                                                             <span class="overlayAttach"></span>
                                                             <img src="{{ asset($booking->attachments) }}" alt="">
                                                             <!-- <span class="fileName">FileNameProplus.png</span> -->
-                                                            <a href="{{asset($booking->attachments)}}" class="downFile"><i class="fa fa-download"></i></a>
+                                                            <a href="{{asset($booking->attachments)}}" class="downFile" download>
+                                                                <i class="fa fa-download"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 @else
@@ -120,7 +122,7 @@
                                     </div>
                                         @if($booking->is_reviewed == 1)
                                             <div class="col-md-3 bg-sky ">
-                                                
+
                                                 <div class="row mt-3">
                                                     <div class="col-md-12">
                                                         <div class="row image1 mt-3 ">
@@ -144,7 +146,7 @@
                                                     <div class="col-md-12">
                                                         <h4>Reviews</h4>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-12">
                                                         <div class="star-icos">
                                                         @if($booking->rating == 1)
@@ -179,7 +181,7 @@
                                                                 <span class="fa fa-star checked ml-1"></span>
                                                             @endif
                                                         </div>
-                                                    
+
                                                     </div>
 
                                                     <div class="col-md-12">
@@ -192,9 +194,9 @@
                                         @else
                                             <div class="col-md-3"></div>
                                         @endif
-                                   
+
                                 </div>
-                      
+
                             </div>
                         </div>
                     </div>

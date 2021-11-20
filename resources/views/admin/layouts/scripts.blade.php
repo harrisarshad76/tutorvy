@@ -403,17 +403,28 @@
             success:function(response){
                 var obj = response.data;
                 if(response.status_code == 200 && response.success == true) {
+                    console.log(obj)
                     var notification = ``;
+                    var notificationDash = ``;
                     if(obj.length == 0){
                     $('.show_notification_counts').css("display","none");
 
                         $('.show_notification_counts').text(0);
                         notification += `
-                                                        <li class="text-center">
-                                                            No more unread notifications
-                                                        </li>
-                                                            `;
-                                    $(".show_all_notifications").html(notification);
+                                            <li class="text-center">
+                                                No more unread notifications
+                                            </li>`;
+                        notificationDash += `
+                        <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
+                                            <div class=" col-md-12 pl-2 m-0 p-0 ">
+                                                <span class="notification-text-home text-center">
+                                                   Notifications not found
+                                                </span>
+                                            </div>
+                                        </div>`;
+
+                        $(".show_all_notifications").html(notification);
+                        $("#dashNotif").html(notificationDash);
                     }else{
                         $(".show_notification_counts").addClass("notification-text");
                         $('.show_notification_counts').text(obj.length);
@@ -446,8 +457,25 @@
                                 </div>
                             </a>
                         </li>`;
+
+                        notificationDash +=`
+                            <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
+                                <div class=" col-md-9 pl-2 m-0 p-0 ">
+                                    <span class="notification-text-home">
+                                        `+obj[i].noti_desc+`
+                                    </span>
+
+                                </div>
+                                <div class="col-md-3 m-0 p-0">
+                                    <span class="heading-sixth row time-top float-right mr-2">
+                                        `+ getTimeInterval(new Date(obj[i].created_at)); +`
+                                    </span>
+                                </div>
+                            </div>`;
                         }
                         $(".show_all_notifications").html(notification);
+                        $("#dashNotif").html(notificationDash);
+
                     }
                 }else{
 
@@ -461,24 +489,24 @@
 
 
     function allRead(event){
-                    event.preventDefault();
-                        $.ajax({
-                            url: "{{ route('markAllRead') }}",
-                            type: "get",
-                            dataType: 'json',
-                            cache: false,
-                            async:false,
-                            success: function(data) {
-                                get_all_notifications();
-                                // $('.message-item').remove();
+        event.preventDefault();
+            $.ajax({
+                url: "{{ route('markAllRead') }}",
+                type: "get",
+                dataType: 'json',
+                cache: false,
+                async:false,
+                success: function(data) {
+                    get_all_notifications();
+                    // $('.message-item').remove();
 
-                            },
-                            failure: function(errMsg) {
-                                console.log(errMsg);
-                            }
-                        });
+                },
+                failure: function(errMsg) {
+                    console.log(errMsg);
+                }
+            });
 
-                    };
+    };
 
 
 
@@ -509,4 +537,31 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+    function getTimeInterval(date) {
+        let seconds = Math.floor((Date.now() - date) / 1000);
+        let unit = "second";
+        let direction = "ago";
+        if (seconds < 0) {
+            seconds = -seconds;
+            direction = "from now";
+        }
+        let value = seconds;
+        if (seconds >= 31536000) {
+            value = Math.floor(seconds / 31536000);
+            unit = "year";
+        } else if (seconds >= 86400) {
+            value = Math.floor(seconds / 86400);
+            unit = "day";
+        } else if (seconds >= 3600) {
+            value = Math.floor(seconds / 3600);
+            unit = "hour";
+        } else if (seconds >= 60) {
+            value = Math.floor(seconds / 60);
+            unit = "minute";
+        }
+        if (value != 1)
+            unit = unit + "s";
+        return value + " " + unit + " " + direction;
+        }
     </script>
