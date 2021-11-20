@@ -77,6 +77,14 @@ class GenChatController extends Controller
 
     }
 
+    public function markAllSeen($id){
+        $chatts = Message::where('is_seen',0)->where('user_id',$id)->Where('receiver_id',Auth::user()->id)->update(['is_seen' => 1]);
+        return response()->json([
+            'status' => 200,
+            'success' => true
+        ]);
+    }
+
     public function chatContact()
     {
         $chatts = Message::where('sender_id',Auth::user()->id)->orWhere('recipient_id',Auth::user()->id)->get();

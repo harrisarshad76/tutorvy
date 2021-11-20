@@ -167,6 +167,7 @@ $(document).ready(function(){
 
     function selectUser(id,name){
 
+        allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
         $(".chatDefault").css("display","none");
@@ -259,6 +260,27 @@ $(document).ready(function(){
 
 
     }
+
+    function allSeen(id){
+        event.preventDefault();
+        let url = "{{route('markAllSeen', ':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: 'json',
+            cache: false,
+            async:false,
+            success: function(data) {
+                // $('.message-item').remove();
+                
+            },
+            failure: function(errMsg) {
+                console.log(errMsg);
+            }
+        });
+            
+    };
     function sendFileModal(){
         $("#sendFileCall").modal("show");
     }
