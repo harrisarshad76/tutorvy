@@ -273,7 +273,8 @@ $(document).ready(function(){
             async:false,
             success: function(data) {
                 // $('.message-item').remove();
-                
+                $(".unread_co").removeClass("dot");
+                $(".unread_co").html("");
             },
             failure: function(errMsg) {
                 console.log(errMsg);

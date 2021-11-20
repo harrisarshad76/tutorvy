@@ -85,16 +85,16 @@
             border-radius: 5px;
             padding: 5px;
             word-break:break-all;
-            max-width:509px;
+            max-width:300px;
             
         }
-        .sender p,
+        /* .sender p,
         .img-style{
             width: 400px;
         }
         .reciever-img-style{
             width: 400px;
-        }
+        } */
         .reciever-img-style, .reciever p{
             border: 1px solid;
             border-color:#6EAAFF;
@@ -197,6 +197,12 @@
             border:none;
             background:none;
         }
+        .massage-client .emojioneemoji{
+            width:15px;
+            height:15px;
+            margin-top:0;
+        }
+      
     </style>
 
     <div class="content content-wrapper " style="width: 100%;background-color: #FBFBFB !important;">
@@ -258,11 +264,29 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">
-                                                    @if($contact->last_talk->message != null)
+                                                <p class="massage-client mt-0" id="recent_msg_">
+                                                            
+                                                    @if($contact->last_talk != null)
+                                                            <?php
+                                                                function startsWith ($string, $startString)
+                                                                {
+                                                                    $len = strlen($startString);
+                                                                    return (substr($string, 0, $len) === $startString);
+                                                                }
+                                                                if(startsWith($contact->last_talk->message,"<"))
+                                                                    $red = "True";
+                                                                else
+                                                                     $red = "False";
+                                                            ?>
                                                         @if($contact->last_talk->type == 'file')
                                                             <i class="fa fa-picture-o"></i> image
-                                                        @else
+                                                        @elseif($contact->last_talk->type == 'text' && $red == 'True')
+                                                            <?php
+                                                                $string = $contact->last_talk->message;
+                                                                // echo $contact->last_talk->message;
+                                                                echo substr($string, 0,237);
+                                                            ?>
+                                                        @elseif($contact->last_talk->type == 'text' && $red == 'False')
                                                             <?php
                                                                 $string = $contact->last_talk->message;
                                                                 echo substr($string, 0, 22);
@@ -274,8 +298,17 @@
 
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="dot  " id="unseen_msg_cnt_">{{$contact->unread_count}}
-                                                </span>
+                                                @if($contact->unread_count == 0)
+                                                    <span class="unread_co"  id="unseen_msg_cnt_">
+                                                        
+                                                    </span>
+                                                @else
+                                                     <span class="dot unread_co"  id="unseen_msg_cnt_">
+                                                        {{$contact->unread_count}}
+                                                    </span>
+                                                @endif
+                                               
+
                                             </div>
                                         </div>
                                     </div>
