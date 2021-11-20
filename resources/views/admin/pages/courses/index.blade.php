@@ -137,17 +137,17 @@
                                                 </div>
                                             </td>
                                             <td class="pt-3 d-flex">
-                                                <a  class="btn cencel-btn w-50 mr-2" href="{{route('admin.course-request',[$course->id])}}">
+                                                <a type="button"  class="btn cencel-btn w-50 mr-2" href="{{route('admin.course-request',[$course->id])}}">
                                                     View
                                                 </a>
 
-                                                @if ($course->assign_to != null)
+                                                @if (Auth::user()->role == 1)
+                                                    @if ($course->assign_to != null)
                                                     <button class="btn schedule-btn" disabled>Assigned</button>
-                                                @else
+                                                    @else
                                                     <button class="schedule-btn" onclick="assignCourseModal({{$course->id}})">Assign</button>
+                                                    @endif
                                                 @endif
-
-
                                             </td>
                                         </tr>
                                         <?php
