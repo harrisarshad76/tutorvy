@@ -225,9 +225,9 @@
                             </a>
                         </div>
                         <div class="line-box"></div>
-                        @foreach($users as $user)
-                            <a type="button" class="chatLeft w-100" id="chatClient_{{$user->first_name}}"
-                                onclick='selectUser(`{{$user->id}}`,`{{$user->first_name}} {{$user->last_name}}`)' >
+                        @foreach($users as $contact)
+                            <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
+                                onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
@@ -236,7 +236,7 @@
 
                                         <div class="row">
                                             <div class="col-9">
-                                                <p id="name_main" class="name-client">{{$user->first_name}} {{$user->last_name}}</p>
+                                                <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="time-chat">11:25</p>
@@ -244,12 +244,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">It is a long
-                                                    distae... </p>
+                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk->message != null ? $contact->last_talk->message : "Say Hi to "}} </p>
 
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="dot  " id="unseen_msg_cnt_">2
+                                                <span class="dot  " id="unseen_msg_cnt_">{{$contact->unread_count}}
                                                 </span>
                                             </div>
                                         </div>
@@ -341,6 +340,7 @@
 
 @endsection
 @section('scripts')
+
 <!-- <script>
     $(document).ready(function(){
       
