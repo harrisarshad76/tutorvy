@@ -1,4 +1,4 @@
-@extends('tutor.layouts.app')
+@extends(Auth::user()->role == 2 ? 'tutor.layouts.app' : 'student.layouts.app' )
 
 @section('content')
     <style>
@@ -360,7 +360,7 @@
         $(".chatSet").css("display","block");
         $(".chatDefault").css("display","none");
     });
-</script>
+</script>-->
 @include('js_files.chat')
 
 @endsection
