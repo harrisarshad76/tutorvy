@@ -77,7 +77,7 @@ class GenChatController extends Controller
 
         return response()->json([
             'status' => 200,
-            $message
+            'message' => $message
         ]);
 
     }

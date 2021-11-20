@@ -131,8 +131,20 @@ $(document).ready(function(){
             // console.log(response);
             if(response.status == 200) {
                 $(".emojionearea-editor").html('');
-                $(".msg").val('');
+                
 
+                var message = `<p class="senderText mb-0">` + msg + ` </p>`;
+                            
+                let html = `<div class="col-md-12">
+                                <div class="sender">
+                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
+                                    `+message+`
+                                    <small class="dull">1min ago</small>
+                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+tt_id).append(html);
+                $(".msg").val('');
             }
             },
         });
@@ -155,9 +167,24 @@ $(document).ready(function(){
             cache: false,
             enctype:'multipart/form-data',
             success:function(response){
-            // console.log(response);
+            
             if(response.status == 200) {
-
+                var message = '';
+                $('#sendFileCall').modal('hide');
+                if (response.message.message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                    message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
+                }
+                 
+                let html = `<div class="col-md-12">
+                                <div class="sender">
+                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
+                                    `+message+`
+                                    <small class="dull">1min ago</small>
+                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+tt_id).append(html);
+                
                 $(".msg").val('');
 
             }
