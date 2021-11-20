@@ -10,6 +10,13 @@
         });
     </script>
 <script type="text/javascript">
+$(document).ready(function(){
+  
+  
+    $("#msg").focus(function(){
+        alert();
+    });
+});  
     let tt_id;
     let tt_n;
 
@@ -106,9 +113,10 @@
     };
 
     $( '#chat_form' ).on( 'submit', function(e) {
-
+       $('.emojionearea-editor').html();
         event.preventDefault();
-        let msg = $(".msg").val();
+        let msg =  $('.emojionearea-editor').html();
+        
         let receiver = tt_id;
         // let _token   = $('meta[name="csrf_token"]').attr('content');
 
@@ -122,9 +130,21 @@
             success:function(response){
             // console.log(response);
             if(response.status == 200) {
+                $(".emojionearea-editor").html('');
+                
 
+                var message = `<p class="senderText mb-0">` + msg + ` </p>`;
+                            
+                let html = `<div class="col-md-12 mt-3">
+                                <div class="sender">
+                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
+                                    `+message+`
+                                    <small class="dull">1min ago</small>
+                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+tt_id).append(html);
                 $(".msg").val('');
-
             }
             },
         });
@@ -147,22 +167,39 @@
             cache: false,
             enctype:'multipart/form-data',
             success:function(response){
-            // console.log(response);
+            
             if(response.status == 200) {
-
+                var message = '';
+                $('#sendFileCall').modal('hide');
+                $('.dropify-clear').click();
+                if (response.message.message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                    message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
+                }
+                 
+                let html = `<div class="col-md-12 mt-3">
+                                <div class="sender">
+                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
+                                    `+message+`
+                                    <small class="dull">1min ago</small>
+                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+tt_id).append(html);
+                
                 $(".msg").val('');
 
             }
             },
         });
     });
-
     function selectUser(id,name){
-
+        allSeen(id);
         // alert(name);
+        var pic = $("#img_"+id).attr('src');
         $(".chatDefault").css("display","none");
         $('.chatSet').css("display","block");
         $("#clientName").text(name);
+        $("#clientPic").attr('src',pic);
         $(".chatArea").attr("id","chatArea_"+id);
         tt_id = id;
         tt_n = name;
@@ -176,15 +213,38 @@
             type:"get",
 
             success:function(response){
+                $(".chatArea").animate({ scrollTop: $(document).height() }, 1000);
                 $auth = "{{Auth::user()->id}}";
+                var attachment = '';
                 $('#chatArea_'+id).html('');
                 for(let i = 0 ; i<response.length;i++){
-                    if("{{Auth::user()->id}}" == response[i].user_id){
+                    var attachment = '';
+                        // if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        //     attachment += `<img  crossOrigin="anonymous" src="` + response[i].message + `">
+                        //     `;
+                        // }
+                        //  else if (response[i].message.match(/\.wav|\.mp3/gi)) {
+                        //     attachment += `<audio class="senderText mb-0" src="` + response[i].message + `" controls></audio>
+                        //     `;
+                        // } else if (response[i].message.match(/\.pdf|\.js|\.txt|\.sh/gi)) {
+                        //     attachment += `<iframe class="inline-iframe senderText mb-0" src="` + response[i].message + `"></iframe></a>
+                        //     `;
+                        // }
 
-                        let msg = `<div class="col-md-12">
+                    if("{{Auth::user()->id}}" == response[i].user_id){
+                      var type = response[i].type;
+                      if(type == 'file'){
+                        if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                            attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                            }
+                        }
+                        else{
+                            attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
+                            }
+                        let msg = `<div class="col-md-12 mt-3">
                                         <div class="sender">
                                             <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
-                                            <p class="senderText mb-0">`+response[i].message+` </p>
+                                            `+attachment+`
                                             <small class="dull">1min ago</small>
                                             <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
                                         </div>
@@ -193,12 +253,20 @@
                         $('#chatArea_'+id).append(msg);
 
                     }else{
-
-                        let msg = `<div class="col-md-12">
+                        var type = response[i].type;
+                      if(type == 'file'){
+                        if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                            attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                            }
+                        }
+                        else{
+                            attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
+                            }
+                        let msg = `<div class="col-md-12 mt-3">
                                         <div class="col-md-12 ">
                                             <div class="reciever">
                                                 <small>From `+name+`</small>
-                                                <p class="senderText mb-0">`+response[i].message+`</p>
+                                                `+attachment+`
                                                 <small class="recDull">1min ago</small>
                                                 <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
                                             </div>
@@ -219,6 +287,28 @@
 
 
     }
+
+    function allSeen(id){
+        event.preventDefault();
+        let url = "{{route('markAllSeen', ':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: 'json',
+            cache: false,
+            async:false,
+            success: function(data) {
+                // $('.message-item').remove();
+                $(".unread_co").removeClass("dot");
+                $(".unread_co").html("");
+            },
+            failure: function(errMsg) {
+                console.log(errMsg);
+            }
+        });
+            
+    };
     function sendFileModal(){
         $("#sendFileCall").modal("show");
     }

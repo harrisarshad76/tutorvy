@@ -16,7 +16,7 @@ class GenChatController extends Controller
      */
     public function index()
     {
-        $users = Contact::with('user')->get();
+        $users = Contact::with('user')->where('user_id',\Auth::user()->id)->get();
         // return $users;
         return view('chat.messages',compact('users'));
     }
@@ -33,6 +33,11 @@ class GenChatController extends Controller
             $new_contact = new Contact();
             $new_contact->user_id = \Auth::user()->id;
             $new_contact->contact_id = $request->user;
+            $new_contact->save();
+
+            $new_contact = new Contact();
+            $new_contact->user_id = $request->user;
+            $new_contact->contact_id = \Auth::user()->id;
             $new_contact->save();
             
         }
@@ -72,9 +77,32 @@ class GenChatController extends Controller
 
         return response()->json([
             'status' => 200,
-            $message
+            'message' => $message
         ]);
 
+    }
+
+    public function contactTutor($id)
+    {
+        $new_contact = new Contact();
+        $new_contact->user_id = \Auth::user()->id;
+        $new_contact->contact_id = $id;
+        $new_contact->save();
+
+        $new_contact = new Contact();
+        $new_contact->user_id = $id;
+        $new_contact->contact_id = \Auth::user()->id;
+        $new_contact->save();
+        $redirect = (Auth::user()->role == 3) ? 'student.chat' : 'tutor.chat' ;
+        return redirect()->route($redirect);
+    }
+
+    public function markAllSeen($id){
+        $chatts = Message::where('is_seen',0)->where('user_id',$id)->Where('receiver_id',Auth::user()->id)->update(['is_seen' => 1]);
+        return response()->json([
+            'status' => 200,
+            'success' => true
+        ]);
     }
 
     public function chatContact()
