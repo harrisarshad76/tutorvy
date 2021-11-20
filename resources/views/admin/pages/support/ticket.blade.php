@@ -57,7 +57,7 @@
                                                 @if($replies->sender_id != Auth::user()->id)
                                                     <div class="col-md-12 ">
                                                         <div class="sender">
-                                                            <small>From {{$replies->sender->first_name}}</small>  
+                                                            <small>From {{$replies->sender->first_name}}</small>
                                                             <p class="mb-0">
                                                                 {{$replies->text}}
                                                             </p>
@@ -77,12 +77,12 @@
                                                                 1min ago
                                                             </small>
                                                         </div>
-                                                    
+
                                                     </div>
                                                 @endif
                                             @endforeach
                                         </div>
-                                        
+
                                     </div>
                                     <div class="container-fluid  m-0 p-0">
                                         <span class="heading-fifth-1 mb-3">Reply</span>
@@ -130,9 +130,9 @@
                                                     <div class="">
                                                         <span class="pending-text-1 float-right">
                                                             @if($ticket->status == 0)
-                                                                Pending 
+                                                                Pending
                                                             @else
-                                                                - 
+                                                                -
                                                             @endif
                                                         </span>
                                                     </div>
@@ -196,7 +196,7 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     <div class="">
-                                                        <span class="heading-fifth"> 
+                                                        <span class="heading-fifth">
                                                             @if($ticket->tkt_created_by != null && $ticket->tkt_created_by != "" && $ticket->tkt_created_by != [])
                                                                 <span> {{$ticket->tkt_created_by->first_name}} {{$ticket->tkt_created_by->last_name}} </span>
                                                             @else
@@ -247,113 +247,27 @@
                         </div>
                         <div class="modal-body">
                             <div class="input-serach">
-                                <input class="w-100" type="search" placeholder="Search members" />
+                                <input class="w-100" id="search" type="search" placeholder="Search members" />
                                 <img class="serach-icon" src="../assets/img/ico/Search.png" />
                             </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
+
+                            @foreach ($staffs as $staff)
+                            <div class="container mt-4" id="record">
                                 <div class="row">
                                     <div class="col-md-6 col-6">
                                         <span class="alex-name">
-                                            <img src="../assets/img/ico/std-icon.png" alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
+                                            <img src="{{asset($staff->picture)}}"
+                                                alt="std-icon" />
+                                            </span>
+                                        <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
                                     </div>
                                     <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
+                                        <button class="schedule-btn assgin-text" onclick="assign({{$staff->id}})">Assign</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row">
-                                    <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="../assets/img/ico/std-icon.png"
-                                                alt="std-icon" /></span>
-                                        <span class="pl-2 alex-names">Harram</span>
-                                    </div>
-                                    <div class="col-md-6 col-6">
-                                        <button class="schedule-btn assgin-text" data-toggle="modal"
-                                            data-target="#assignModal">Assign</button>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
 
                     </div>
@@ -384,7 +298,7 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    
+
 
                 }
                 let html = `<div class="col-md-12 ">
@@ -397,7 +311,7 @@
                                         1min ago
                                     </small>
                                 </div>
-                            
+
                             </div>`;
                     $(".ticketChat").append(html);
 
@@ -412,5 +326,63 @@
             }
         });
       })
+
+      function assign(id) {
+
+        $.ajax({
+            url: "{{route('admin.assign.ticket')}}",
+            type:"POST",
+            data:{
+                    _token:"{{csrf_token()}}",
+                    user:id,
+                    ticket_id:"{{$ticket->ticket_no}}"
+                },
+
+            beforeSend:function(data) {
+                $("#assignModal").modal('hide');
+            },
+            success:function(response){
+                if(response.status == 200) {
+                    toastr.success(response.message,{
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+
+                    setInterval(function(){}, 1500);
+
+                } else if(response.status == 400) {
+                        toastr.error(response.message,{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+
+                    setInterval(function(){}, 1500);
+                }
+            },
+            error:function(e){
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+
+      }
+      //filter
+      $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+                $("#record div").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
   </script>
 @endsection

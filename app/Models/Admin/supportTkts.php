@@ -14,7 +14,8 @@ class supportTkts extends Model
 
     protected $fillable = [
         'id',
-    'user_id',
+        'user_id',
+        'assign_to',
         'cat_id',
         'message',
         'ticket_no',

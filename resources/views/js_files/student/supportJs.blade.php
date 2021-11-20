@@ -1,13 +1,15 @@
 <script>
-    $(document).ready(function() {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        get_all_categories();
 
+        window.onload = function() {
+            get_all_categories();
+        };
 
         // save support form
         $('.supportForm').submit(function(e) {
@@ -56,7 +58,7 @@
             });
 
         });
-    });
+
 
 
     function get_all_categories() {

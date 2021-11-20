@@ -9,7 +9,7 @@ use App\Models\General\TicketChat;
 use App\Models\Admin\supportTkts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User;
 class SupportController extends Controller
 {
     public function index()
@@ -26,10 +26,10 @@ class SupportController extends Controller
     public function ticket($id) {
         $ticket = supportTkts::where('ticket_no',$id)->with(['category','tkt_created_by'])->first();
         $ticket_replies = TicketChat::with(['sender','receiver'])->where('ticket_id',$ticket->id)->get();
-        // dd($ticket_replies);
+        $staffs = User::where('role',4)->get();
         $idAdmin = Auth::user()->id;
 
-        return view('admin.pages.support.ticket',compact('ticket','idAdmin','ticket_replies'));
+        return view('admin.pages.support.ticket',compact('ticket','idAdmin','ticket_replies','staffs'));
     }
     public function ticketReply()
     {
@@ -46,7 +46,7 @@ class SupportController extends Controller
             tktCat::where('id',$request->id)->update(["title" => $request->title]);
             $message = 'Updated';
         }
-        
+
         return response()->json([
             'status_code'=> 200,
             'message' => 'Category '.$message.' Successfully',
@@ -66,7 +66,7 @@ class SupportController extends Controller
         ]);
     }
     public function ticketChat(Request $request){
-        
+
         $data = $request->all();
         TicketChat::create($data);
         return response()->json([
@@ -74,6 +74,21 @@ class SupportController extends Controller
             'message' => 'Message Sent Successfully',
             'success' => true,
             'data' => $data,
+        ]);
+
+    }
+
+    public function assignTicket(Request $request)
+    {
+        $ticket = supportTkts::where('ticket_no',$request->ticket_id)->update([
+                        "assign_to" => $request->user
+                    ]);
+        $user = User::where('id',$request->user)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'message' => 'Ticket has been successfully assigned to '.$user->first_name.''.$user->last_name ,
+            'success' => true,
         ]);
 
     }
