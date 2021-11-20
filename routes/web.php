@@ -423,7 +423,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::get('/tutor',[StudentTutorController::class,'index'])->name('student.tutor');
     Route::get('/viewtutor/{id}',[StudentTutorController::class,'show'])->name('student.tutor.show');
     Route::post('/tutorfilter',[StudentTutorController::class,'filterTutor'])->name('student.tutor.filter');
-    Route::get('/contact/tutor/{id}', [ChatController::class,'contactTutor']);
+    Route::get('/contact/tutor/{id}', [GenChatController::class,'contactTutor']);
 
     Route::get('/settings',[StudentSettingController::class,'index'])->name('student.settings');
     Route::post('student-paymentmethod',[StudentSettingController::class,'paymentMethod'])->name('student.paymentmethod');

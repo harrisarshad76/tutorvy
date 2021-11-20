@@ -250,7 +250,16 @@
                                 onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
-                                    <img src="{{asset($contact->user->picture)}}" class="leftImg ml-1" id="img_{{$contact->user->id}}">
+                                    @if($contact->user->picture)
+                                        <?php
+                                            $path = Auth::user()->picture;
+                                        ?>
+                                        @if(file_exists( public_path($path) ))
+                                            <img src="{{asset($contact->user->picture)}}" class="profile-img leftImg ml-1" id="img_{{$contact->user->id}}">
+                                        @else
+                                            <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
+                                        @endif
+                                    @endif    
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
 
@@ -324,7 +333,7 @@
                             <a class="navbar-brand pb-0" href="#">
                                 <div class="container-fluid m-0 p-0 img-chats">
 
-                                    <img  id="clientPic">
+                                    <img  id="clientPic" class="profile-img">
 
                                     <div class="img-chat">
                                         <div class="row">
