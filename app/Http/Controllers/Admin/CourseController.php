@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\General\ClassTable;
 use App\Http\Controllers\General\GeneralController;
-
+use App\Http\Controllers\General\NotifyController;
+use App\Models\User;
+use Illuminate\Support\Facades\URL;
 
 class CourseController extends Controller
 {
@@ -28,9 +30,10 @@ class CourseController extends Controller
         $approved_courses = Course::whereIn('status',[0,2])->get();
         $requested_courses = Course::where('status',1)->get();
 
-       
+        $staff_members = User::whereNotIn('role', [1,2,3])->get();
 
-        return view('admin.pages.courses.index',compact('approved_courses','requested_courses'));
+
+        return view('admin.pages.courses.index',compact('approved_courses','requested_courses','staff_members'));
     }
     public function courseRequest($id)
     {
@@ -76,8 +79,8 @@ class CourseController extends Controller
 
                 array_push($standard_classes,$class);
             }
-           
-            
+
+
         }
         $course->standard_classes = $standard_classes;
         // Advance Classes
@@ -97,13 +100,13 @@ class CourseController extends Controller
                 $class->et_time = $cr_ad_cet[$cr_ad_dys[$i]];
                 $class->title = $cr_ad_clt[$cr_ad_dys[$i]];
                 $class->overview = $cr_ad_clo[$cr_ad_dys[$i]];
-    
+
                 array_push($advance_classes,$class);
             }
-           
-            
+
+
         }
-       
+
         $course->advance_classes = $advance_classes;
         // return $course;
         return view('admin.pages.courses.course_req',compact('course'));
@@ -151,8 +154,8 @@ class CourseController extends Controller
 
                 array_push($standard_classes,$class);
             }
-           
-            
+
+
         }
         $course->standard_classes = $standard_classes;
         // Advance Classes
@@ -172,13 +175,13 @@ class CourseController extends Controller
                 $class->et_time = $cr_ad_cet[$cr_ad_dys[$i]];
                 $class->title = $cr_ad_clt[$cr_ad_dys[$i]];
                 $class->overview = $cr_ad_clo[$cr_ad_dys[$i]];
-    
+
                 array_push($advance_classes,$class);
             }
-           
-            
+
+
         }
-       
+
         $course->advance_classes = $advance_classes;
         // return $course;
         return view('admin.pages.courses.course_profile',compact('course'));
@@ -232,5 +235,38 @@ class CourseController extends Controller
             'message' => 'Course Deleted successfully'
         ]);
 
+    }
+
+    public function assignCourse(Request $request)
+    {
+        // dd($request->all());
+        $user = User::find($request->satff);
+        Course::where('id',$request->course)->update([
+            'assign_to' => $request->staff
+        ]);
+
+                // dd($user);
+
+        $message = 'Course has been assigned to '.User::find($request->staff)->first_name.' '.User::find($request->staff)->last_name;
+        $notify_msg = 'Course is assigned to you';
+
+
+        $notification = new NotifyController();
+        $reciever_id = $request->user_id;
+        $slug = URL::to('/') . '/tutor/subjects';
+        $type = 'tutor_assigned';
+        $data = 'data';
+        $title = 'Tutor Assigned';
+        $icon = 'fas fa-tag';
+        $class = 'btn-success';
+        $desc = $notify_msg ;
+        $pic = Auth::user()->picture;
+
+        $notification->GeneralNotifi( $reciever_id , $slug ,  $type , $title , $icon , $class ,$desc,$pic);
+
+        return response()->json([
+            'status'=>'200',
+            'message' => $message
+        ]);
     }
 }

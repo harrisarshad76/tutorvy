@@ -105,6 +105,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/course-edit',[CourseController::class,'editCourseProfile'])->name('admin.course-edit');
     Route::post('course/change-course-status',[CourseController::class,'courseStatus'])->name('admin.courseStatus');
     Route::post('course/delete-course',[CourseController::class,'deleteCourse'])->name('admin.deleteCourse');
+    Route::post('assignCourse',[CourseController::class,'assignCourse'])->name('admin.assign.course');
 
 
     Route::get('/subject',[SubjectController::class,'index'])->name('admin.subject');
