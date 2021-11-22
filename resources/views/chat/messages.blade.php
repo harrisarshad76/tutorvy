@@ -277,6 +277,8 @@
                                         @else
                                             <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
                                         @endif
+                                    @else
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
                                     @endif    
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">

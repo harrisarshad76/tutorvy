@@ -83,6 +83,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::post('tutor/verify-assessment',[TutorController::class,'verifyAssessment'])->name('admin.verifyAssessment');
     Route::post('tutor/verify-tutor',[TutorController::class,'verifyTutor'])->name('admin.verifyTutor');
+    Route::get('tutor/activitylog/{id}',[TutorController::class,'activitylog'])->name('admin.tutor.activitylog');
 
     Route::post('tutor/tutor-verfication',[TutorController::class,'tutorVerification'])->name('admin.tutor.verification');
     Route::post('tutor/change-tutor-status',[TutorController::class,'tutorStatus'])->name('admin.tutor.status');
@@ -94,6 +95,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::post('student/change-student-status',[StudentController::class,'studentStatus'])->name('admin.studentStatus');
     Route::post('student/delete-student',[StudentController::class,'deleteStudent'])->name('admin.deleteStudent');
     Route::post('assignStudent',[StudentController::class,'assignStudent'])->name('admin.assign.student');
+    Route::get('student/activitylog/{id}',[StudentController::class,'activitylog'])->name('admin.student.activitylog');
 
     Route::get('/classroom',[ClassroomController::class,'index'])->name('admin.classroom');
     Route::get('/booking',[AdminBookingController::class,'index'])->name('admin.booking');
@@ -102,7 +104,8 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/course',[CourseController::class,'index'])->name('admin.course');
     Route::get('/course-request/{id}',[CourseController::class,'courseRequest'])->name('admin.course-request');
     Route::get('/course-profile/{id}',[CourseController::class,'courseProfile'])->name('admin.course-profile');
-    Route::get('/course-edit',[CourseController::class,'editCourseProfile'])->name('admin.course-edit');
+    Route::get('/course-edit/{id?}',[CourseController::class,'editCourseProfile'])->name('admin.course-edit');
+    Route::post('/courseUpdate',[CourseController::class,'update'])->name('admin.course.update');
     Route::post('course/change-course-status',[CourseController::class,'courseStatus'])->name('admin.courseStatus');
     Route::post('course/delete-course',[CourseController::class,'deleteCourse'])->name('admin.deleteCourse');
     Route::post('assignCourse',[CourseController::class,'assignCourse'])->name('admin.assign.course');
@@ -162,7 +165,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::post('/save-category',[SupportController::class,'saveCategory'])->name('admin.save.category');
     Route::post('/delete-category',[SupportController::class,'deleteCategory'])->name('admin.delete.category');
 
-
+    Route::get('graphData',[HomeController::class,'graphData'])->name('admin.dash.graph');
 
 
 });
@@ -503,7 +506,8 @@ Route::post('/attachment/send', [ChatController::class,'sendAttachment']);
 Auth::routes(['verify' => true]);
 //Google
 Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
-Route::get('/login/google/callback', [LoginController::class,'handleGoogleCallback']);
+// Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
+Route::post('/login/google', [LoginController::class,'googleLoggin'])->name('login.google');
 // Facebook
 
 Route::get('/facebook/redirect/{c_id?}', [LoginController::class,'redirectFacebook'])->name('social.facebook');

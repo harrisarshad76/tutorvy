@@ -387,7 +387,7 @@
 
                                             <!-- <button id="finish"  type="submit"
                                                 class="btn btn-lg btn-registration schedule-btn  nextBtn pull-right  ">
-                                                    Join 
+                                                    Join
                                             </button> -->
                                             <div class="col-md-12 text-right mt-3 pr-0">
                                                     <!-- <button id="finish" type="submit" class="schedule-btn  ">
@@ -412,7 +412,7 @@
                                                     </div>
                                                 @endif
                                                 <div class="row mt-4" >
-                                                   
+
                                                     <div class="col-md-6">
                                                         <div class="Google">
                                                             <a href="{{route('social.google',[3])}}">
@@ -434,7 +434,7 @@
                                                     <p class="text-left">
                                                         Protected by reCAPTCHA and subject to the Google
                                                         <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
-                                                    
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -458,7 +458,7 @@
                                                             data-onsuccess="onSignIn" data-width="250" data-height="40">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-4">
+                                                    <div class="col-md-6 mt-3">
                                                         <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
                                                     </div>
                                                 </div>
@@ -466,7 +466,7 @@
                                                     <p class="text-left">
                                                         Protected by reCAPTCHA and subject to the Google
                                                         <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
-                                                    
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -499,7 +499,7 @@
                                                             </select>
                                                         </div>
                                         </div>-->
-                                        
+
                                     </div>
                                 </div>
                             </form>
@@ -520,16 +520,21 @@
             console.log('User signed out.');
             });
         }
+
         window.onload = function() {
-            signOut();
-        };
+                signOut();
+            }
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
             var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
+            if(profile){
+                    signOut();
+            }
+
             $.ajax({
-                url: "{{ route('social.google', [3]) }}",
+                url: "{{ route('login.google') }}",
                 dataType: "json",
                 type: "Post",
                 async: true,
