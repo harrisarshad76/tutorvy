@@ -116,7 +116,7 @@ svg:not(:root) {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h1 class="d-flex number-postion">{{$all_users}}
+                                        <h1 class="d-flex number-postion" id="users">{{$all_users}}
                                             <span class="heading-user">users</span>
                                         </h1>
                                         <span class="heading-fifth-2">
@@ -143,8 +143,8 @@ svg:not(:root) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {{-- <div id="chart"></div> --}}
-                                        {!! $chart->container() !!}
+                                        <div id="chart"></div>
+                                        {{-- {!! $chart->container() !!} --}}
 
                                     </div>
                                 </div>
@@ -165,9 +165,9 @@ svg:not(:root) {
                         </div>
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " id="dashNotif">
-                                        {{-- @forelse ($notifications as $not)
+                                <div class="card-body" id="dashNotif">
+{{--
+                                        @forelse ($notifications as $not)
                                         <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
                                             <div class=" col-md-9 pl-2 m-0 p-0 ">
                                                 <span class="notification-text-home">
@@ -190,7 +190,7 @@ svg:not(:root) {
                                             </div>
                                         </div>
                                         @endforelse --}}
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
