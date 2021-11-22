@@ -695,18 +695,18 @@
                                                         Wednesday
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <div class="row">
+                                                    <div class="row">
                                                             <div class="col-md-4 pt-1">
                                                             From:
                                                             </div>
                                                             <div class="col-md-8 ">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="from" class="form-control">
                                                             </div>
                                                             <div class="col-md-4 pt-1">
                                                             To:
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="to" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -739,13 +739,13 @@
                                                             From:
                                                             </div>
                                                             <div class="col-md-8 ">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="from" class="form-control">
                                                             </div>
                                                             <div class="col-md-4 pt-1">
                                                             To:
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="to" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -779,13 +779,13 @@
                                                             From:
                                                             </div>
                                                             <div class="col-md-8 ">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="from" class="form-control">
                                                             </div>
                                                             <div class="col-md-4 pt-1">
                                                             To:
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="to" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -818,13 +818,13 @@
                                                             From:
                                                             </div>
                                                             <div class="col-md-8 ">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="from" class="form-control">
                                                             </div>
                                                             <div class="col-md-4 pt-1">
                                                             To:
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="to" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -857,13 +857,13 @@
                                                             From:
                                                             </div>
                                                             <div class="col-md-8 ">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="from" class="form-control">
                                                             </div>
                                                             <div class="col-md-4 pt-1">
                                                             To:
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="time" class="form-control">
+                                                                <input type="time" name="to" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
