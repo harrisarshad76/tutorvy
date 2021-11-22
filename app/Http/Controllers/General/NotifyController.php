@@ -42,13 +42,13 @@ class NotifyController extends Controller
     function getAllNotification(Request $request) {
 
       $notifications = Notification::orderBy('id','desc')->where('receiver_id',Auth::user()->id)->where('read_at',NULL)->get();
-    //   $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
+      $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
 
       $response['message'] = 'Notification List';
       $response['status_code'] = 200;
       $response['success'] = true;
       $response['data'] = $notifications;
-    //   $response['unread_msg_count'] = $unread_msg_count;
+      $response['unread_msg_count'] = $unread_msg_count;
 
 
       return response()->json($response);

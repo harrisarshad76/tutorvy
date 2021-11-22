@@ -248,7 +248,6 @@ class SettingController extends Controller
         ]);
     }
 
-
     public function saveSlots(Request $request) {
        
         // return $request;
