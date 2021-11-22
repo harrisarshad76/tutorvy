@@ -51,7 +51,7 @@ class HomeController extends Controller
             $tickets = supportTkts::with(['category','tkt_created_by'])->where('assign_to',Auth::id())->get();
         endif;
 
-        $notifications = Notification::where('read_at','!=',null)->orderBy('id','desc')->take(3)->get();
+        $notifications = Notification::where('read_at',null)->orderBy('id','desc')->take(3)->get();
         $chart = $chart->build();
 
         return view('admin.dashboard',compact('tutors_count','students_count','all_users','new_requests','tickets','activity_logs','notifications','chart'));

@@ -320,7 +320,7 @@
     updateChart();
     setInterval(() => {
         updateChart();
-        get_all_notifications();
+        // get_all_notifications();
     }, 1000);
 
 
@@ -484,21 +484,25 @@
                         </li>`;
 
                         notificationDash +=`
+                        <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " >
                             <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
                                 <div class=" col-md-9 pl-2 m-0 p-0 ">
                                     <span class="notification-text-home">
                                         `+obj[i].noti_desc+`
                                     </span>
-
                                 </div>
                                 <div class="col-md-3 m-0 p-0">
                                     <span class="heading-sixth row time-top float-right mr-2">
-                                        `+ getTimeInterval(new Date(obj[i].created_at)); +`
+                                        `+ getTimeInterval(new Date(obj[i].created_at)) +`
                                     </span>
                                 </div>
-                            </div>`;
+                            </div>
+                        </div>`;
+
+
                         }
                         $(".show_all_notifications").html(notification);
+                        console.log(notificationDash)
                         $("#dashNotif").html(notificationDash);
 
                     }
