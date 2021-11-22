@@ -32,6 +32,7 @@ class SettingController extends Controller
 
         $user = User::where('id',\Auth::user()->id)->first();
         $paypal_payment = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('method','paypal')->first();
+        $user_slots = TutorSlots::where('user_id',Auth::user()->id)->get();
 
         $slots = array(
           array("value" => "1 Hours"),
@@ -51,7 +52,7 @@ class SettingController extends Controller
             array("id" => 7 , "day" => "Sunday"),
         );
 
-        return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots'));
+        return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots','user_slots'));
     }
 
     protected function validator(array $request)
@@ -250,8 +251,9 @@ class SettingController extends Controller
 
     public function saveSlots(Request $request) {
        
+        // return $request;
         $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
-
+        $message = '';
         if($slots == 0 ) {
             for($i = 0; $i < count($request->day); $i++) {
                 TutorSlots::create([
@@ -259,11 +261,12 @@ class SettingController extends Controller
                     'day' => $request->day[$i] ,
                     'wrk_from' => ($request->from[$i] ?? NULL) ,
                     'wrk_to' => ($request->to[$i] ?? NULL) ,
-                    'slot_length' => ($request->slot_length[$i] ?? NULL),
-                    'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
+                    // 'slot_length' => ($request->slot_length[$i] ?? NULL),
+                    // 'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
                     'day_off' => ($request->day_off[$i] ?? NULL),
                 ]);
             }
+            $message = 'Slots Added.';
         }else{
             TutorSlots::where('user_id',Auth::user()->id)->delete();
             for($i = 0; $i < count($request->day); $i++) {
@@ -272,14 +275,19 @@ class SettingController extends Controller
                     'day' => $request->day[$i] ,
                     'wrk_from' => ($request->from[$i] ?? NULL) ,
                     'wrk_to' => ($request->to[$i] ?? NULL) ,
-                    'slot_length' => ($request->slot_length[$i] ?? NULL),
-                    'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
+                    // 'slot_length' => ($request->slot_length[$i] ?? NULL),
+                    // 'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
                     'day_off' => ($request->day_off[$i] ?? NULL),
                 ]);
             }
-        }
+            $message = 'Slots Updated.';
 
-        return "success";
+        }
+        return response()->json([
+            'status_code'=> 200,
+            'message' => $message,
+            'success' => true,
+        ]);
     }
 
 
