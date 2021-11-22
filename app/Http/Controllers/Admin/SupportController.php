@@ -73,14 +73,34 @@ class SupportController extends Controller
     public function ticketChat(Request $request){
 
         $data = $request->all();
-        TicketChat::create($data);
+        if(request()->has('file')){
+            $filename = request('file')->store('ticket','public');
+            $type = 'file';
+            $message = TicketChat::create([
+                'sender_id' => auth()->id(),
+                'reciever_id' => $request->reciever_id,
+                'text' => $filename,
+                'type'=> $type,
+                'ticket_id'=>$request->ticket_id,
+            ]);
+            $msg_type = 'file';
+        }else{
+            $type = 'text';
+            $message = TicketChat::create([
+                'sender_id' => auth()->id(),
+                'reciever_id' => $request->reciever_id,
+                'text' => $request->text,
+                'type'=> $type,
+                'ticket_id'=>$request->ticket_id,
+            ]);
+            $msg_type = 'text';
+        }
         return response()->json([
-            'status_code'=> 200,
+            'status_code' => 200,
+            'message_type' => $msg_type,
             'message' => 'Message Sent Successfully',
-            'success' => true,
-            'data' => $data,
+            'success' => true
         ]);
-
     }
 
     public function assignTicket(Request $request)

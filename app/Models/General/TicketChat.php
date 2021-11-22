@@ -22,7 +22,8 @@ class TicketChat extends Model
         'sender_id',
         'reciever_id',
         'ticket_id',
-        'text'
+        'text',
+        'type'
     ];
 
     public function sender() {
