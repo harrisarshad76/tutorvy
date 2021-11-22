@@ -5,6 +5,14 @@
     .header h1 {
         margin-left: 70px;
     }
+    .dropify-wrapper{
+        display:none;
+    }
+
+    .img-style {
+   width: 301px;
+        
+    }
 </style>
 <div class="content-wrapper " style="overflow: hidden;">
     <section id="homesection" >
@@ -58,9 +66,14 @@
                                                     <div class="col-md-12 ">
                                                         <div class="sender">
                                                             <small>From {{$replies->sender->first_name}}</small>
-                                                            <p class="mb-0">
-                                                                {{$replies->text}}
-                                                            </p>
+                                                            @if($replies->type == "file")
+                                                                <p class="mb-0 text-center"><img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style"> </p>
+                                                            @else
+                                                                <p class="mb-0">
+                                                                    {{$replies->text}}
+                                                                </p>
+                                                            @endif
+                                                            
                                                             <small class="dull pull-right">
                                                                 1min ago
                                                             </small>
@@ -70,9 +83,13 @@
                                                     <div class="col-md-12 ">
                                                         <div class="reciever">
                                                             <small>From You</small>
-                                                            <p class="mb-0">
-                                                                {{$replies->text}}
-                                                            </p>
+                                                            @if($replies->type == "file")
+                                                                <p class="mb-0 text-center"><img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style"> </p>
+                                                            @else
+                                                                <p class="mb-0">
+                                                                    {{$replies->text}}
+                                                                </p>
+                                                            @endif
                                                             <small class="dull pull-right">
                                                                 1min ago
                                                             </small>
@@ -100,11 +117,11 @@
                                             </div>
                                             <div class="row p-1">
                                                 <div class="col-md-9 ">
-                                                    <input type="file" id="file" class="file-attach" />
+                                                    <!-- <input type="file" id="file" name="file" class="file-attach" />
                                                     <label for="file">
                                                         <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
-                                                    </label>
-                                                    <input type="file" id="file" accept=".jpg,.jpeg,.png" class="file-attach" />
+                                                    </label> -->
+                                                    <input type="file" id="file" class="dropify" name="file" accept=".jpg,.jpeg,.png" class="file-attach" />
                                                     <label for="file">
                                                         <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
                                                             alt="repeat" />
@@ -302,14 +319,12 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
-
-
-                }
-                let html = `<div class="col-md-12 ">
+                    if(response.message_type == file){
+                    let html = `<div class="col-md-12 ">
                                 <div class="reciever">
                                     <small>From You</small>
-                                    <p class="mb-0">
-                                        `+response.data.text+`
+                                    <p class="mb-0 text-center">
+                                        <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
                                     </p>
                                     <small class="dull pull-right">
                                         1min ago
@@ -317,8 +332,25 @@
                                 </div>
 
                             </div>`;
-                    $(".ticketChat").append(html);
+                        $(".ticketChat").append(html);
+                    }
+                    else{
+                        let html = `<div class="col-md-12">
+                                        <div class="reciever">
+                                            <small>From You</small>
+                                            <p class="mb-0">
+                                                `+response.data.text+`
+                                            </p>
+                                            <small class="dull pull-right">
+                                                1min ago
+                                            </small>
+                                        </div>
 
+                                    </div>`;
+                        $(".ticketChat").append(html);
+                    }
+
+                }
             },
             error:function(e){
                 toastr.error('Something Went Wrong',{

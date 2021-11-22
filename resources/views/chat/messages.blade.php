@@ -145,7 +145,7 @@
             position: absolute;
             top: 30px;
             left: 40%;
-            /* display: none; */
+            display: none;
         }
 
         .textMenu {
@@ -153,6 +153,7 @@
             position: absolute;
             top: 28%;
             right: 40%;
+            display:none;
         }
 
         .textMenu2 i,
@@ -330,8 +331,6 @@
                                                         {{$contact->unread_count}}
                                                     </span>
                                                 @endif
-                                               
-
                                             </div>
                                         </div>
                                     </div>
@@ -439,7 +438,7 @@
                 <form id="fileSendForm" enctype="multipart/form-data">
                     <div class="modal-body text-center ">
                     <h5></h5>
-                    <input type="file" name="file" class="dropify"  accept="image/*">
+                    <input type="file" name="file" class="dropify"  accept="image/*" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>

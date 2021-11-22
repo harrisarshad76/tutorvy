@@ -981,32 +981,6 @@
                     setInterval(function(){
                         window.location.href = "{{ route('tutor.settings') }}";
                     }, 1500);
-
-    @include('Modals.paymentModal')
-
-
-    <script>
-        function delPayMethod(id) {
-            $.ajax({
-                url: "{{ route('del.payment') }}",
-                type: "POST",
-                data: {
-                    id: id,
-                },
-                success: function(data) {
-                    if (data == "success") {
-                        toastr.success('Payment Method Deleted Successfully!', {
-                            position: 'top-end',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
-
-                        setInterval(function() {
-                            window.location.href = "{{ route('tutor.settings') }}";
-                        }, 1500);
-
-
                     }
                 },
             });
