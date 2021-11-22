@@ -97,7 +97,7 @@
                                                 <span class="progress-bar"></span>
                                             </span>
                                             <div class="progress-value">
-                                                <span>5</span>
+                                                <span>{{$course->seats}}</span>
                                                 <span>Seats Left</span>
                                             </div>
                                         </div>
@@ -209,20 +209,20 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <!-- <span class="heading-forth ml-2">Course outline</span> -->
-                    
+
                                                     <div id="main">
                                                         <!-- first -->
                                                         <div class="container-fluid m-0 p-0 border-bottom pb-3">
                                                             @foreach($course->outline as $outline)
-                                                                @if($outline->level == 1)   
+                                                                @if($outline->level == 1)
                                                                     @if($outline->title == '' && $outline->explain == '')
                                                                     <p>No Course Outline added.</p>
                                                                     @else
                                                                     <div class="accordion active" id="faq">
                                                                             <div class="card m-0 p-0">
-                                                                                
+
                                                                                     <div class="card-header" id="outlinehead{{$outline->id}}">
-                                                                                        <a href="#" 
+                                                                                        <a href="#"
                                                                                             class=" bg-color btn-header-link collapsed"
                                                                                             data-toggle="collapse" data-target="#outline{{$outline->id}}"
                                                                                             aria-expanded="true" aria-controls="outline{{$outline->id}}">
@@ -236,7 +236,7 @@
                                                                                             {{$outline->explain}}
                                                                                         </div>
                                                                                     </div>
-                                                                                
+
                                                                             </div>
                                                                         </div>
                                                                     @endif
@@ -313,7 +313,7 @@
                                                                     @else
                                                                     <td class="pt-4 pb-0">---</td>
                                                                     @endif
-                                
+
                                                                     @if($class->day == 3)
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
@@ -405,7 +405,7 @@
                                                                     @endif
                                                                 </tr>
                                                                 @endforeach
-                                
+
                                                             </tbody>
                                                     </table>
                                                 </div>
@@ -475,7 +475,7 @@
                                     </div>
                                 </div>
                                 <div class="panel" id="two-panel">
-                
+
                                     <div class="container-fluid ">
                                         <div class="panel-title">Course Outline</div>
                                         @if($course->standard_class_title == "null")
@@ -491,7 +491,7 @@
                                                     <div id="main">
                                                         <div class="container-fluid m-0 p-0 border-bottom pb-3">
                                                             @foreach($course->outline as $outline)
-                                                                @if($outline->level == 2) 
+                                                                @if($outline->level == 2)
                                                                     @if($outline->title == '' && $outline->explain == '')
                                                                         <p>No Course Outline added.</p>
                                                                     @else
@@ -590,7 +590,7 @@
                                                                 @else
                                                                 <td class="pt-4 pb-0">---</td>
                                                                 @endif
-                            
+
                                                                 @if($class->day == 3)
                                                                 <td class="m-0 p-0 pt-4">
                                                                     <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
@@ -682,7 +682,7 @@
                                                                 @endif
                                                             </tr>
                                                             @endforeach
-                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -750,10 +750,10 @@
                                             </div>
                                         @endif
                                     </div>
-                
+
                                 </div>
                                 <div class="panel" id="three-panel">
-                
+
                                     <div class="container-fluid ">
                                         <div class="panel-title">Course Outline</div>
                                         @if($course->advance_class_title == "null")
@@ -769,7 +769,7 @@
                                                     <div id="main">
                                                         <div class="container-fluid m-0 p-0 border-bottom pb-3">
                                                         @foreach($course->outline as $outline)
-                                                                @if($outline->level == 2) 
+                                                                @if($outline->level == 2)
                                                                     @if($outline->title == '' && $outline->explain == '')
                                                                         <p>No Course Outline added.</p>
                                                                     @else
@@ -868,7 +868,7 @@
                                                                 @else
                                                                 <td class="pt-4 pb-0">---</td>
                                                                 @endif
-                            
+
                                                                 @if($class->day == 3)
                                                                 <td class="m-0 p-0 pt-4">
                                                                     <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
@@ -960,7 +960,7 @@
                                                                 @endif
                                                             </tr>
                                                             @endforeach
-                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1033,9 +1033,9 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-        </div>  
+        </div>
         <!-- end section -->
                <!-- Modal reject-->
                <div class="modal fade" id="rejectCourseModal" tabindex="-1" role="dialog"
@@ -1061,5 +1061,5 @@
                         </div>
                     </div>
                 </div>
-    
+
 @endsection

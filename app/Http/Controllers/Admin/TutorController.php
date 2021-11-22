@@ -15,6 +15,8 @@ use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use App\Models\Activitylogs;
+use App\Models\Wallet;
 
 class TutorController extends Controller
 {
@@ -51,13 +53,13 @@ class TutorController extends Controller
 
         $tutor = User::with(['education','professional','teach'])->where('id',$id)->where('role',2)->where('status',2)->first();
 
-        foreach($tutor->teach as $subject) {
-            $subject->plans = subjectPlans::where("subject_id", $subject->subject_id)->where("user_id",$id)->select('experty_level','rate')->get();
-        }
+        // // dd($tutor);
+        // foreach($tutor->teach as $subject) {
+        //     $subject->plans = subjectPlans::where("subject_id", $subject->subject_id)->where("user_id",$id)->select('experty_level','rate')->get();
+        // }
 
         $total_classes = Booking::where('booked_tutor',$id)->where('status',5)->count();
         $total_pending_payments = Booking::where('booked_tutor',$id)->where('status',5)->sum('price');
-
 
         if(!$tutor){
             return redirect()->route('admin.tutor');
@@ -307,5 +309,11 @@ class TutorController extends Controller
             'status'=>'200',
             'message' => $message
         ]);
+    }
+
+    public function activitylog($id)
+    {
+        $activity_logs = Activitylogs::where('ref_id',$id)->paginate(15);
+        return view('admin.pages.tutors.activitylog',compact('activity_logs'));
     }
 }

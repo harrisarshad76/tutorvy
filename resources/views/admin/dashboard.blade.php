@@ -115,7 +115,7 @@ svg:not(:root) {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h1 class="d-flex number-postion">{{$all_users}}
+                                        <h1 class="d-flex number-postion" id="users">{{$all_users}}
                                             <span class="heading-user">users</span>
                                         </h1>
                                         <span class="heading-fifth-2">
@@ -142,8 +142,8 @@ svg:not(:root) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {{-- <div id="chart"></div> --}}
-                                        {!! $chart->container() !!}
+                                        <div id="chart"></div>
+                                        {{-- {!! $chart->container() !!} --}}
 
                                     </div>
                                 </div>

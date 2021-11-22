@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\General\NotifyController;
 use Illuminate\Support\Facades\URL;
+use App\Models\Activitylogs;
+use App\Models\Admin\supportTkts;
+use App\Models\Course;
+use App\Models\CourseEnrollment;
+
 class StudentController extends Controller
 {
      /*
@@ -32,7 +37,16 @@ class StudentController extends Controller
     public function profile($id){
 
         $student = User::where('role',3)->where('id',$id)->first();
-        return view('admin.pages.students.profile',compact('student'));
+
+        if(Auth::user()->role == 1):
+            $tickets = supportTkts::with(['category','tkt_created_by'])->get();
+        else:
+            $tickets = supportTkts::with(['category','tkt_created_by'])->where('assign_to',Auth::id())->get();
+        endif;
+
+
+
+        return view('admin.pages.students.profile',compact('student','tickets'));
 
     }
     public function studentStatus(Request $request){
@@ -76,8 +90,8 @@ class StudentController extends Controller
 
                 // dd($user);
 
-        $message = $user->first_name.' '.$user->last_name. ' has been assigned to '.User::find($request->staff)->first_name.' '.User::find($request->staff)->last_name;
-        $notify_msg = $user->first_name.' '.$user->last_name.' user is assigned to you';
+        $message = $user->name. ' has been assigned to '.User::find($request->staff)->name;
+        $notify_msg = $user->name.' user is assigned to you';
 
 
         $notification = new NotifyController();
@@ -97,6 +111,12 @@ class StudentController extends Controller
             'status'=>'200',
             'message' => $message
         ]);
+    }
+
+    public function activitylog($id)
+    {
+        $activity_logs = Activitylogs::where('ref_id',$id)->paginate(15);
+        return view('admin.pages.students.activitylog',compact('activity_logs'));
     }
 
 }

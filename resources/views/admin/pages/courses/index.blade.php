@@ -128,7 +128,7 @@
                                                                 class="mr-3 cursor-1"></a>
                                                         </div>
                                                         <div class="col-md-1">
-                                                            <a href="{{route('admin.course-edit')}}">
+                                                            <a href="{{route('admin.course-edit',[$course->id])}}">
                                                                 <img src="{{ asset('admin/assets/img/ico/edit-icon.svg') }}" alt="a"
                                                                     class="mr-2 cursor-1">
                                                             </a>
@@ -278,7 +278,7 @@
 
                                                     </div>
                                                     <div class="col-md-1">
-                                                        <a href="{{route('admin.course-edit')}}">
+                                                        <a href="{{route('admin.course-edit',[$course->id])}}">
                                                             <img src="{{ asset('admin/assets/img/ico/edit-icon.svg') }}" alt="a"
                                                                 class="mr-2 cursor-1">
                                                         </a>

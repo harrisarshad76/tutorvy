@@ -134,8 +134,8 @@
                                                 </td>
                                                 <td class="pt-4">01</td>
                                                 <td class="pt-4">{{ $student->address }}</td>
-                                                <td class="pt-4">01</td>
-                                                <td class="pt-4">10</td>
+                                                <td class="pt-4">{{$student->course->count()}}</td>
+                                                <td class="pt-4">{{$student->support->count()}}</td>
                                                 <td class="pt-4">
                                                     <span class="pending-text-1">{{$student->status_text}}</span>
                                                 </td>
@@ -257,7 +257,7 @@
                                     <img src="{{asset($staff->picture)}}"
                                         alt="std-icon" />
                                     </span>
-                                <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
+                                <span class="pl-2 alex-names">{{$staff->name}}</span>
                             </div>
                             <div class="col-md-6 col-6">
 

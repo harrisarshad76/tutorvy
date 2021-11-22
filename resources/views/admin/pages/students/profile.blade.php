@@ -41,7 +41,7 @@
                                 </label>
                             </div>
                         </div>
-                    <a href="activity.html" class="w-100 active-text-1 mt-4 btn">View activity log</a>
+                    <a href="{{route('admin.student.activitylog',[$student->id])}}" class="w-100 active-text-1 mt-4 btn">View activity log</a>
                 </div>
             </div>
             <!-- deleet Modal -->
@@ -121,7 +121,7 @@
                                 </p>
                                 </p>
                             </div>
-                    
+
                         </div>
                         <div class="row pb-3">
                             <div class="col-md-2">
@@ -205,7 +205,7 @@
             </div>
         </div>
         <div class="col-md-9">
-        
+
             <div class="container-fluid mt-3 bg-white pt-3 pb-3">
                 <div class="row">
                     <div class="col-md-12">
@@ -251,7 +251,7 @@
                                     <th scope="col">Duration </th>
                                     <th scope="col">Date</th>
                                     <th scope="col"></th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,13 +260,13 @@
                                     <td class="pt-4">Chemistry</td>
                                     <td class="pt-4">Harram Laraib</td>
                                     <td class="text-center pt-4">$50</td>
-                                    <td class="pt-4"> 
+                                    <td class="pt-4">
                                         1 hr 30 min
                                     </td>
                                     <td class="pt-4">
                                         3 sep, 2021
                                     </td>
-            
+
                                     <td class="pt-3 float-right">
                                         <a href="classdetails.html" class="schedule-btn btn">
                                             View
@@ -278,13 +278,13 @@
                                     <td class="pt-4">Chemistry</td>
                                     <td class="pt-4">Harram Laraib</td>
                                     <td class="text-center pt-4">$50</td>
-                                    <td class="pt-4"> 
+                                    <td class="pt-4">
                                         1 hr 30 min
                                     </td>
                                     <td class="pt-4">
                                         3 sep, 2021
                                     </td>
-            
+
                                     <td class="pt-3 float-right">
                                         <a href="classdetails.html" class="schedule-btn btn">
                                             View
@@ -296,13 +296,13 @@
                                     <td class="pt-4">Chemistry</td>
                                     <td class="pt-4">Harram Laraib</td>
                                     <td class="text-center pt-4">$50</td>
-                                    <td class="pt-4"> 
+                                    <td class="pt-4">
                                         1 hr 30 min
                                     </td>
                                     <td class="pt-4">
                                         3 sep, 2021
                                     </td>
-            
+
                                     <td class="pt-3 float-right">
                                         <a href="classdetails.html" class="schedule-btn btn">
                                             View
@@ -314,13 +314,13 @@
                                     <td class="pt-4">Chemistry</td>
                                     <td class="pt-4">Harram Laraib</td>
                                     <td class="text-center pt-4">$50</td>
-                                    <td class="pt-4"> 
+                                    <td class="pt-4">
                                         1 hr 30 min
                                     </td>
                                     <td class="pt-4">
                                         3 sep, 2021
                                     </td>
-            
+
                                     <td class="pt-3 float-right">
                                         <a href="classdetails.html" class="schedule-btn btn">
                                             View
@@ -333,13 +333,13 @@
                                     <td class="pt-4">Chemistry</td>
                                     <td class="pt-4">Harram Laraib</td>
                                     <td class="text-center pt-4">$50</td>
-                                    <td class="pt-4"> 
+                                    <td class="pt-4">
                                         1 hr 30 min
                                     </td>
                                     <td class="pt-4">
                                         3 sep, 2021
                                     </td>
-            
+
                                     <td class="pt-3 float-right">
                                         <a href="classdetails.html" class="schedule-btn btn">
                                             View
@@ -355,7 +355,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h3>
-                        Courses enrolled 
+                        Courses enrolled
                         </h3>
                     </div>
                     <div class="col-md-6">
@@ -380,7 +380,7 @@
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                         </tr>
-                                        
+
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -390,21 +390,21 @@
                                             How to create your online
                                             </td>
                                             <td class="text-center pt-4">Harram Laraib</td>
-                                            <td class="pt-4"> 
+                                            <td class="pt-4">
                                             <label class="switch"
                                             style="position: relative;left: -10px;width: 60px;">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
                                             </td>
-                
+
                                             <td class="pt-3 float-right">
                                                 <a href="course.html" class="schedule-btn btn">
                                                     View
                                                 </a>
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
                                         <td class="pt-4">01</td>
                                         <td class="pt-4">Chemistry</td>
@@ -412,14 +412,14 @@
                                             How to create your online
                                         </td>
                                         <td class="text-center pt-4">Harram Laraib</td>
-                                        <td class="pt-4"> 
+                                        <td class="pt-4">
                                             <label class="switch"
                                             style="position: relative;left: -10px;width: 60px;">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
                                         </td>
-                
+
                                         <td class="pt-3 float-right">
                                             <a href="course.html" class="schedule-btn btn">
                                                 View
@@ -433,14 +433,14 @@
                                             How to create your online
                                         </td>
                                         <td class="text-center pt-4">Harram Laraib</td>
-                                        <td class="pt-4"> 
+                                        <td class="pt-4">
                                             <label class="switch"
                                             style="position: relative;left: -10px;width: 60px;">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
                                         </td>
-                
+
                                         <td class="pt-3 float-right">
                                             <a href="course.html" class="schedule-btn btn">
                                                 View
@@ -452,24 +452,24 @@
                                         <td class="pt-4">Chemistry</td>
                                         <td class="pt-4">
                                             How to create your online
-                                            
+
                                         </td>
                                         <td class="text-center pt-4">Harram Laraib</td>
-                                        <td class="pt-4"> 
+                                        <td class="pt-4">
                                             <label class="switch"
                                             style="position: relative;left: -10px;width: 60px;">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
                                         </td>
-                
+
                                         <td class="pt-3 float-right">
                                             <a href="course.html" class="schedule-btn btn">
                                                 View
                                             </a>
                                         </td>
                                     </tr>
-                            
+
                                     </tbody>
                                 </table>
                             </div>
@@ -479,17 +479,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h3>
-                            Support tickets 
+                            Support tickets
                             </h3>
                         </div>
                         <div class="col-md-6">
                             <a href="ticket.html" class="view-bookings">
-                                View all support tickets 
+                                View all support tickets
                             </a>
                         </div>
                     </div>
                 </div>
-    
+
                         <div class="container-fluid bg-white mt-3 mb-3">
                             <div class="row">
                                 <div class="col-md-12">
@@ -503,7 +503,7 @@
                                                 <th scope="col">Status</th>
                                                 <th scope="col"></th>
                                             </tr>
-                                            
+
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -513,15 +513,15 @@
                                                 03, sep 2021
                                                 </td>
                                                 <td class="text-center pt-4">Harram</td>
-                                                <td class="pt-4"> 
+                                                <td class="pt-4">
                                             <span class="pending-text-1">pending</span>
 
                                                 </td>
-                    
+
                                                 <td class="pt-3 d-flex">
                                                 <a href="ticketpage.html" class="cencel-btn btn">
                                                     View
-                                                    </a> 
+                                                    </a>
                                                 <a href="ticket.html" class="schedule-btn ml-2 btn"  data-toggle="modal"
                                                 data-target="#exampleModalCenterd">
                                                     Assgin
@@ -535,13 +535,13 @@
                                                 03, sep 2021
                                             </td>
                                             <td class="text-center pt-4">Harram</td>
-                                            <td class="pt-4"> 
+                                            <td class="pt-4">
                                             <span class="pending-text-1">pending</span>
                                             </td>
                                             <td class="pt-3 d-flex">
                                                 <a href="ticket.html" class="cencel-btn btn">
                                                     View
-                                                    </a> 
+                                                    </a>
                                                 <a href="" class="schedule-btn ml-2 btn" data-toggle="modal"
                                                 data-target="#exampleModalCenterd">
                                                 Assgin
@@ -580,90 +580,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     </div>
                 </div>
             </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name">
-                            <img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}" alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 col-6">
-                        <span class="alex-name"><img src="{{ asset('/admin/assets/img/ico/profile-boy.png')}}"
-                                alt="std-icon" /></span>
-                        <span class="pl-2 alex-names">Harram</span>
-                    </div>
-                    <div class="col-md-6 col-6">
-                        <button class="schedule-btn assgin-text">Assign</button>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     </div>

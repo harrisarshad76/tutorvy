@@ -239,68 +239,93 @@
         };
 
 
-        // var options = {
-        //     series: [
-        //         {
-        //             name: 'Tutor',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 60
-        //             })
-        //         },
-        //         {
-        //             name: 'Student',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 20
-        //             })
-        //         },
-        //         {
-        //             name: 'Institute',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 15
-        //             })
-        //         }
-        //     ],
-        //     chart: {
-        //         type: 'area',
-        //         //   height: 'auto',
-        //         height: '240vh',
-        //         stacked: true,
-        //         events: {
-        //             selection: function (chart, e) {
-        //                 console.log(e)
-        //             }
-        //         },
-        //     },
-        //     colors: ['#008FFB', '#00E396', '#CED4DC'],
-        //     dataLabels: {
-        //         enabled: false
-        //     },
-        //     stroke: {
-        //         curve: 'smooth'
-        //     },
-        //     fill: {
-        //         type: 'gradient',
-        //         gradient: {
-        //             opacityFrom: 0.6,
-        //             opacityTo: 0.8,
-        //         }
-        //     },
-        //     legend: {
-        //         position: 'top',
-        //         horizontalAlign: 'left'
-        //     },
-        //     xaxis: {
-        //         type: 'datetime'
-        //     },
-        // };
-
-        // var chart = new ApexCharts(document.querySelector("#chart"), options);
-        // chart.render();
-
         var options = {
+            series: [],
+            chart: {
+                type: 'area',
+                //   height: 'auto',
+                height: '240vh',
+                stacked: true,
+                events: {
+                    selection: function (chart, e) {
+                        console.log(e,chart)
+                    }
+                },
+            },
+            colors: ['#008FFB', '#00E396', '#CED4DC'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    opacityFrom: 0.6,
+                    opacityTo: 0.8,
+                }
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left'
+            },
+            noData: {
+            text: 'Loading...'
+            },
+
+
+        };
+
+
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+
+        var updateChart = function() {
+                $.ajax({
+                url: "{{ route('admin.dash.graph') }}",
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    var user = data.tutor.length + data.student.length + data.staff.length
+                    chart.updateSeries([{
+                        name: 'Tutor',
+                        data: data.tutor
+                    },
+                    {
+                        name: 'Student',
+                        data: data.student
+                    },
+                    {
+                        name: 'Staff',
+                        data: data.staff
+                    }
+                    ])
+
+                    $("#users").html(data.users)
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+
+    updateChart();
+    setInterval(() => {
+        updateChart();
+        get_all_notifications();
+    }, 1000);
+
+
+
+        var options2 = {
             series: [{
                 name: 'Inflation',
                 data: [2.3, 3.1, 4.0, 10.1, 4.0,]
@@ -380,8 +405,8 @@
             }
         };
 
-        var chart = new ApexCharts(document.querySelector("#columnchart"), options);
-        chart.render();
+        var chart1 = new ApexCharts(document.querySelector("#columnchart"), options2);
+        chart1.render();
         // keypress modal js
         // get input field and add 'keyup' event listener
         let searchInput = document.querySelector('.search-input');
@@ -564,4 +589,6 @@
             unit = unit + "s";
         return value + " " + unit + " " + direction;
         }
+
+
     </script>
