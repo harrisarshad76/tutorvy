@@ -25,7 +25,7 @@ class StudentController extends Controller
     {
         $students = User::where('role',3)->paginate(15);
         $staff_members = User::whereNotIn('role', [1,2,3])->get();
-
+        
         return view('admin.pages.students.index',compact('students','staff_members'));
     }
 

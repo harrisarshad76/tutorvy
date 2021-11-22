@@ -493,11 +493,11 @@
                     <div class="container mt-4" id="record">
                         <div class="row">
                             <div class="col-md-6 col-6">
-                                <span class="alex-name">
+                                <!-- <span class="alex-name">
                                     <img src="{{asset($staff->picture)}}"
                                         alt="std-icon" />
-                                    </span>
-                                <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
+                                    </span> -->
+                                <span class="pl-2 alex-names">{{$staff->name}}</span>
                             </div>
                             <div class="col-md-6 col-6">
                                 @if ($staff->id == $tutor->id)

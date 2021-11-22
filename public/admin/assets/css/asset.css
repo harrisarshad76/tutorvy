@@ -117,6 +117,11 @@ body {
     font-weight: 500;
 }
 
+.dashNotif {
+    height: 200px;
+    overflow-y: auto;
+}
+
 .table tr th {
     border-bottom: 1px solid lightgray;
 }
