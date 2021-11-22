@@ -302,6 +302,16 @@ $(document).ready(function(){
                 // $('.message-item').remove();
                 $(".unread_co").removeClass("dot");
                 $(".unread_co").html("");
+
+                if(data.data == 0){
+                    $(".show_message_counts").css("display","none");
+                    $('.show_message_counts').text(0)
+                }
+                else{
+                    $(".show_message_counts").addClass("notification-text");
+                    $('.show_message_counts').text(data.data);
+                }
+
             },
             failure: function(errMsg) {
                 console.log(errMsg);
