@@ -1,6 +1,14 @@
 @extends(Auth::user()->role == 2 ? 'tutor.layouts.app' : 'student.layouts.app' )
 
 @section('content')
+<?php
+    function startsWith ($string, $startString)
+    {
+        $len = strlen($startString);
+        return (substr($string, 0, $len) === $startString);
+    }
+  
+?>
     <style>
         .box-main {
             height: 550px;
@@ -206,6 +214,11 @@
             height:15px;
             margin-top:0;
         }
+        .senderText img{
+            width: 20px;
+            height: auto;
+
+        }
       
     </style>
 
@@ -263,6 +276,8 @@
                                         @else
                                             <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
                                         @endif
+                                    @else
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
                                     @endif    
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
@@ -281,14 +296,9 @@
                                                             
                                                     @if($contact->last_talk != null)
                                                             <?php
-                                                                function startsWith ($string, $startString)
-                                                                {
-                                                                    $len = strlen($startString);
-                                                                    return (substr($string, 0, $len) === $startString);
-                                                                }
-                                                                if(startsWith($contact->last_talk->message,"<"))
-                                                                    $red = "True";
-                                                                else
+                                                                 if(startsWith($contact->last_talk->message,"<"))
+                                                                 $red = "True";
+                                                             else
                                                                      $red = "False";
                                                             ?>
                                                         @if($contact->last_talk->type == 'file')
@@ -429,7 +439,7 @@
                 <form id="fileSendForm" enctype="multipart/form-data">
                     <div class="modal-body text-center ">
                     <h5></h5>
-                    <input type="file" name="file" class="dropify"  >
+                    <input type="file" name="file" class="dropify"  accept="image/*">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>

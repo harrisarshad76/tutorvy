@@ -10,6 +10,7 @@ svg:not(:root) {
 .flex-1 {
     opacity: 0;
 }
+
 </style>
 @section('content')
 

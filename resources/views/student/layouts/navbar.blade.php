@@ -232,7 +232,7 @@
                 <a class="nav-link" href="{{ route('student.chat') }}">
                     <img src="{{asset('assets/images/ico/email.png') }}" alt="img-email"
                         style="width: 20px;cursor: pointer !important;">
-                        <span class=" show_message_counts notification-text"></span>
+                        <span class=" show_message_counts"></span>
                         
                 </a>
             </li>

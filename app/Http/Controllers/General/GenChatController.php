@@ -99,9 +99,12 @@ class GenChatController extends Controller
 
     public function markAllSeen($id){
         $chatts = Message::where('is_seen',0)->where('user_id',$id)->Where('receiver_id',Auth::user()->id)->update(['is_seen' => 1]);
+        $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
+        
         return response()->json([
             'status' => 200,
-            'success' => true
+            'success' => true,
+            'data' => $unread_msg_count
         ]);
     }
 
