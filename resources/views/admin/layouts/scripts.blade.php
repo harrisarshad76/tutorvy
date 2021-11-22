@@ -428,7 +428,7 @@
             success:function(response){
                 var obj = response.data;
                 if(response.status_code == 200 && response.success == true) {
-                    console.log(obj)
+                    var notif = obj.slice(0, 3)
                     var notification = ``;
                     var notificationDash = ``;
                     if(obj.length == 0){
@@ -482,27 +482,28 @@
                                 </div>
                             </a>
                         </li>`;
-
-                        notificationDash +=`
-                        <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " >
-                            <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
-                                <div class=" col-md-9 pl-2 m-0 p-0 ">
-                                    <span class="notification-text-home">
-                                        `+obj[i].noti_desc+`
-                                    </span>
-                                </div>
-                                <div class="col-md-3 m-0 p-0">
-                                    <span class="heading-sixth row time-top float-right mr-2">
-                                        `+ getTimeInterval(new Date(obj[i].created_at)) +`
-                                    </span>
-                                </div>
-                            </div>
-                        </div>`;
-
-
                         }
                         $(".show_all_notifications").html(notification);
-                        console.log(notificationDash)
+
+                        for(var i =0; i < notif.length; i++) {
+
+                            notificationDash +=`
+                            <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " >
+                                <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
+                                    <div class=" col-md-9 pl-2 m-0 p-0 ">
+                                        <span class="notification-text-home">
+                                            `+notif[i].noti_desc+`
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3 m-0 p-0">
+                                        <span class="heading-sixth row time-top float-right mr-2">
+                                            `+ getTimeInterval(new Date(notif[i].created_at)) +`
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>`;
+
+                        }
                         $("#dashNotif").html(notificationDash);
 
                     }
