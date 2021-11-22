@@ -31,6 +31,17 @@ class ChatController extends Controller
                         'content' => ''
                     ]);
         $redirect = (Auth::user()->role == 3) ? 'student.chat' : 'tutor.chat' ;
+
+        $new_contact = new Contact();
+        $new_contact->user_id = \Auth::user()->id;
+        $new_contact->contact_id = $request->user;
+        $new_contact->save();
+
+        $new_contact = new Contact();
+        $new_contact->user_id = $request->user;
+        $new_contact->contact_id = \Auth::user()->id;
+        $new_contact->save();
+
         return redirect()->route($redirect);
     }
 

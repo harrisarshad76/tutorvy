@@ -273,6 +273,14 @@
                         success: function(response) {
                             var obj = response.data;
                             // console.log(obj , "asd");
+                            if(response.unread_msg_count == 0){
+                                $(".show_message_counts").css("display","none");
+                                $('.show_message_counts').text(0)
+                            }
+                            else{
+                                $(".show_message_counts").addClass("notification-text");
+                                $('.show_message_counts').text(response.unread_msg_count);
+                            }
                             if (response.status_code == 200 && response.success == true) {
                                 var notification = ``;
                                 if (obj.length == 0) {
