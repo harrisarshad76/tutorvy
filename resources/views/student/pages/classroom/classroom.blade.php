@@ -1544,6 +1544,7 @@ height:25px;
    });
    $(".no-ph").click(function(){
         $("#endCall").modal("show");
+        callOnModal();
     });
     $("#reviewLater").click(function(){
         window.location.href="{{route('student.classroom')}}";
@@ -2085,6 +2086,8 @@ connection.onstream = function(event) {
         event.mediaElement.controls = false;
         var otherVideos = document.querySelector('#other-videos');
         otherVideos.appendChild(event.mediaElement);
+        callOnModal();
+
     }
 
     // connection.onUserStatusChanged(event);
@@ -2177,6 +2180,8 @@ $("#endCallYes").click(function(){
     toastr.success("Class has Ended.");
     $("#endCall").modal("hide");
     $("#reviewModal").modal("show");
+    callOnModal();
+
     $(".content-wrapper").css("display",'none');
     
 });
@@ -2187,6 +2192,8 @@ $("#endCallYes2").click(function(){
     toastr.success("Class has Ended.");
     $("#callEndConfirmationModal").modal("hide");
     $("#reviewModal").modal("show");
+    callOnModal();
+
     $(".content-wrapper").css("display",'none');
     
 });
@@ -2475,7 +2482,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     //         });
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
-            // alert('in join')
+            alert('in join')
             callOnModal();
             if (error) {
                 console.log(error)
@@ -2555,6 +2562,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
                 $('#reviewModal').modal("show");
+                callOnModal();
                 $(".content-wrapper").css("display","none");
 
             });
@@ -2815,9 +2823,9 @@ $(".s_status").change(function(){
     }
 });
 function callOnModal(){
+    alert("");
     $("#classOffModal").modal("hide");
-    
-}
+};
 function callOffModal(){
     $("#classOffModal").modal("show");
     var defaults = {}
