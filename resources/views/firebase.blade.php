@@ -194,10 +194,10 @@ var unread_msg_count = payload.data.unread_msg_count;
             var origin = window.location.origin
             var custom_url = origin + '/tutor/chat';
 
-            if(url == custom_url) {
-                var url = slug.replace(/[^0-9]/gi, '');
+            // if(url == custom_url) {
+            //     var url = slug.replace(/[^0-9]/gi, '');
                 
-            }
+            // }
 
         }
 
