@@ -2476,7 +2476,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
             // alert('in join')
-            
+            callOnModal();
             if (error) {
                 console.log(error)
                 if (error === connection.errors.ROOM_NOT_AVAILABLE) {
