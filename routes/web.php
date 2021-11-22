@@ -505,7 +505,8 @@ Route::post('/attachment/send', [ChatController::class,'sendAttachment']);
 Auth::routes(['verify' => true]);
 //Google
 Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
-Route::get('/login/google/callback', [LoginController::class,'handleGoogleCallback']);
+// Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
+Route::post('/login/google', [LoginController::class,'googleLoggin'])->name('login.google');
 // Facebook
 
 Route::get('/facebook/redirect/{c_id?}', [LoginController::class,'redirectFacebook'])->name('social.facebook');
