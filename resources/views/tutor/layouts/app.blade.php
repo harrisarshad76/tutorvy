@@ -277,6 +277,8 @@
                         dataType: 'json',
                         success: function(response) {
                             var obj = response.data;
+                            console.log(response , "asd");
+
                             // console.log(response.unread_msg_count , "asd");
                             if(response.unread_msg_count == 0){
                                 $(".show_message_counts").css("display","none");

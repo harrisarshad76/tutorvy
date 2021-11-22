@@ -58,8 +58,9 @@
         }
 
         .chatArea {
-            height: 470px;
+            height: 403px;
             padding-left: 0px;
+            margin-bottom: 8px;
             padding-right: 0;
             overflow-y: auto;
         }
@@ -91,7 +92,9 @@
         .img-style,
         .reciever-img-style {
             min-width: 301px;
-            border: 1px solid ;
+            /* border: 1px solid; */
+            border: none;
+            
             border-color: #D3D8DF;
             display:block;
             border-radius: 5px;
@@ -108,7 +111,9 @@
             width: 400px;
         } */
         .reciever-img-style, .reciever p{
-            border: 1px solid;
+            /* border: 1px solid; */
+            border: none;
+
             border-color:#6EAAFF;
         }
 
@@ -370,9 +375,9 @@
                             <a href="#">
                                 <i class="fa fa-search headIcon"></i>
                             </a>
-                            <a href="#">
+                            <!-- <a href="#">
                                 <i class="fa fa-ellipsis-v headIcon"></i>
-                            </a>
+                            </a> -->
                         </div>
                     </nav>
                     <div class="line-box2"></div>
