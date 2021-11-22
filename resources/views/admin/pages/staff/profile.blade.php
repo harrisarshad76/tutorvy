@@ -84,6 +84,7 @@
                                 <tr>
                                     <th scope="col" class="">Srno.</th>
                                     <th scope="col">Task</th>
+                                    <th scope="col">Type</th>
                                     <th scope="col">Assigned date </th>
                                     <th scope="col">Assigned time</th>
                                     <th scope="col">Assigned by</th>
@@ -93,152 +94,66 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="pt-4">01</td>
-                                    <td class="pt-4">Ticket no</td>
-                                    <td class="text-center pt-4">03 Sep, 2021</td>
-                                    <td class="pt-4"> 9 AM
-                                    </td>
-                                    <td class="pt-4">
-                                        Harram
-                                    </td>
-                                    <td class="pt-4">
-                                        <span class="paid-text-1">Sloved</span>
-                                    </td>
-                                    <td class="pt-3 text-right">
-                                        <a href="" class="btn schedule-btn">View</a>
-                                    </td>
-                                </tr>
-
-
+                                @foreach ($tasks as $i => $task)
+                                    <tr>
+                                        <td class="pt-4">{{$i+1}}</td>
+                                        <td class="pt-4">{{$task->ticket_no}}</td>
+                                        <td class="pt-4">{{$task->type}}</td>
+                                        <td class="text-center pt-4">{{date('d M , Y',strtotime($task->updated_at))}}</td>
+                                        <td class="pt-4"> {{date('h:i A',strtotime($task->updated_at))}}
+                                        </td>
+                                        <td class="pt-4">
+                                            Harram
+                                        </td>
+                                        <td class="pt-4">
+                                            <span class="paid-text-1">Sloved</span>
+                                        </td>
+                                        <td class="pt-3 text-right">
+                                            <a href="" class="btn schedule-btn">View</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <h3>Today</h3>
-            <div class="mt-3 container-fluid bg-white pt-3 pb-3">
-                <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                    <div class="col-md-1">
-                        <div class="">
-                            <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                        </div>
-                    </div>
-                    <div class="col-md-10 mt-1">
-                        <span class="heading-forth">Alexandra Felix</span>
-                        <span class="paragraph-text1">took a chemistry class with</span>
-                        <span class="heading-forth">
-                            Marina Hurst
-                        </span>
-                        <br />
-                        <p class="float-left view-bookings-2">10 min ago</p>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="view-bookings">View</div>
-                    </div>
-                </div>
-                <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                    <div class="col-md-1">
-                        <div class="">
-                            <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                        </div>
-                    </div>
-                    <div class="col-md-10 mt-1">
-                        <span class="heading-forth">Alexandra Felix</span>
-                        <span class="paragraph-text1">took a chemistry class with</span>
-                        <span class="heading-forth">
-                            Marina Hurst
-                        </span>
-                        <br />
-                        <p class="float-left view-bookings-2">10 min ago</p>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="view-bookings">View</div>
-                    </div>
-                </div>
-                <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                    <div class="col-md-1">
-                        <div class="">
-                            <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                        </div>
-                    </div>
-                    <div class="col-md-10 mt-1">
-                        <span class="heading-forth">Alexandra Felix</span>
-                        <span class="paragraph-text1">took a chemistry class with</span>
-                        <span class="heading-forth">
-                            Marina Hurst
-                        </span>
-                        <br />
-                        <p class="float-left view-bookings-2">10 min ago</p>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="view-bookings">View</div>
-                    </div>
-                </div>
+            <h3>Activity Logs</h3>
 
-                <h3>Yesterday</h3>
-                <div class="mt-3 container-fluid bg-white pt-3 pb-3">
-                    <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                        <div class="col-md-1">
-                            <div class="">
-                                <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                            </div>
-                        </div>
-                        <div class="col-md-10 mt-1">
-                            <span class="heading-forth">Alexandra Felix</span>
-                            <span class="paragraph-text1">took a chemistry class with</span>
-                            <span class="heading-forth">
-                                Marina Hurst
-                            </span>
-                            <br />
-                            <p class="float-left view-bookings-2">10 min ago</p>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="view-bookings">View</div>
-                        </div>
-                    </div>
-                    <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                        <div class="col-md-1">
-                            <div class="">
-                                <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                            </div>
-                        </div>
-                        <div class="col-md-10 mt-1">
-                            <span class="heading-forth">Alexandra Felix</span>
-                            <span class="paragraph-text1">took a chemistry class with</span>
-                            <span class="heading-forth">
-                                Marina Hurst
-                            </span>
-                            <br />
-                            <p class="float-left view-bookings-2">10 min ago</p>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="view-bookings">View</div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr class="border-bottom table-margin-top">
+                                        <th scope="col"> Sr no.</th>
+                                        <th scope="col"> Action </th>
+                                        <th scope="col"> User Agent</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="datashow">
+                                    @foreach($activity_logs as $logs)
+                                        <tr>
+                                            <td class="pt-4">
+                                                {{$loop->iteration}}
+                                            </td>
+                                            <td class="pt-4">
+                                                {!! $logs->action_perform !!}
+                                            </td>
+                                            <td class="pt-4">
+                                                {{$logs->user_agent}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="row border-bottom ml-2 mr-2 pb-3 mb-3">
-                        <div class="col-md-1">
-                            <div class="">
-                                <img src="{{ asset('admin/assets/img/ico/profile-teacher.svg')}}" alt="profile-image" />
-                            </div>
-                        </div>
-                        <div class="col-md-10 mt-1">
-                            <span class="heading-forth">Alexandra Felix</span>
-                            <span class="paragraph-text1">took a chemistry class with</span>
-                            <span class="heading-forth">
-                                Marina Hurst
-                            </span>
-                            <br />
-                            <p class="float-left view-bookings-2">10 min ago</p>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="view-bookings">View</div>
-                        </div>
-                    </div>
-                    <!-- student reviews -->
-
                 </div>
             </div>
+
+
         </div>
     </div>
 

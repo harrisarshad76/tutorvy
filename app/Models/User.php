@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Assessment;
 use App\Models\Role;
 use App\Models\Admin\Subject;
+use App\Models\Admin\supportTkts;
 use App\Models\General\Education;
 use App\Models\General\Professional;
 use App\Models\General\Teach;
@@ -132,6 +133,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Course::class);
     }
+    public function courseenroll()
+    {
+        return $this->hasMany(CourseEnrollment::class);
+    }
     public function review(){
         return $this->morphMany(Review::class,'reviewable');
     }
@@ -144,6 +149,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function wallet()
     {
         return $this->hasMany(Wallet::class);
+    }
+
+    public function support()
+    {
+        return $this->hasMany(supportTkts::class);
     }
 
     public function scopeCanJoinRoom($room_id)

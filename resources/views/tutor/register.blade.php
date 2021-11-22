@@ -479,7 +479,7 @@
                                                             <p  class="text-left">
                                                                         Protected by reCAPTCHA and subject to the Google
                                                                         <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>
-                                                                    
+
                                                                     </p>
                                                         </div>
                                                     </div>
@@ -1090,7 +1090,7 @@
                 var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
                 $.ajax({
-                    url: "{{ route('social.google', [2]) }}",
+                    url: "{{ route('login.google') }}",
                     dataType: "json",
                     type: "Post",
                     async: true,

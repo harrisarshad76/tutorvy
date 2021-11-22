@@ -239,68 +239,93 @@
         };
 
 
-        // var options = {
-        //     series: [
-        //         {
-        //             name: 'Tutor',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 60
-        //             })
-        //         },
-        //         {
-        //             name: 'Student',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 20
-        //             })
-        //         },
-        //         {
-        //             name: 'Institute',
-        //             data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-        //                 min: 10,
-        //                 max: 15
-        //             })
-        //         }
-        //     ],
-        //     chart: {
-        //         type: 'area',
-        //         //   height: 'auto',
-        //         height: '240vh',
-        //         stacked: true,
-        //         events: {
-        //             selection: function (chart, e) {
-        //                 console.log(e)
-        //             }
-        //         },
-        //     },
-        //     colors: ['#008FFB', '#00E396', '#CED4DC'],
-        //     dataLabels: {
-        //         enabled: false
-        //     },
-        //     stroke: {
-        //         curve: 'smooth'
-        //     },
-        //     fill: {
-        //         type: 'gradient',
-        //         gradient: {
-        //             opacityFrom: 0.6,
-        //             opacityTo: 0.8,
-        //         }
-        //     },
-        //     legend: {
-        //         position: 'top',
-        //         horizontalAlign: 'left'
-        //     },
-        //     xaxis: {
-        //         type: 'datetime'
-        //     },
-        // };
-
-        // var chart = new ApexCharts(document.querySelector("#chart"), options);
-        // chart.render();
-
         var options = {
+            series: [],
+            chart: {
+                type: 'area',
+                //   height: 'auto',
+                height: '240vh',
+                stacked: true,
+                events: {
+                    selection: function (chart, e) {
+                        console.log(e,chart)
+                    }
+                },
+            },
+            colors: ['#008FFB', '#00E396', '#CED4DC'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    opacityFrom: 0.6,
+                    opacityTo: 0.8,
+                }
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left'
+            },
+            noData: {
+            text: 'Loading...'
+            },
+
+
+        };
+
+
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+
+        var updateChart = function() {
+                $.ajax({
+                url: "{{ route('admin.dash.graph') }}",
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    var user = data.tutor.length + data.student.length + data.staff.length
+                    chart.updateSeries([{
+                        name: 'Tutor',
+                        data: data.tutor
+                    },
+                    {
+                        name: 'Student',
+                        data: data.student
+                    },
+                    {
+                        name: 'Staff',
+                        data: data.staff
+                    }
+                    ])
+
+                    $("#users").html(data.users)
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+
+    updateChart();
+    setInterval(() => {
+        updateChart();
+        // get_all_notifications();
+    }, 1000);
+
+
+
+        var options2 = {
             series: [{
                 name: 'Inflation',
                 data: [2.3, 3.1, 4.0, 10.1, 4.0,]
@@ -380,8 +405,8 @@
             }
         };
 
-        var chart = new ApexCharts(document.querySelector("#columnchart"), options);
-        chart.render();
+        var chart1 = new ApexCharts(document.querySelector("#columnchart"), options2);
+        chart1.render();
         // keypress modal js
         // get input field and add 'keyup' event listener
         let searchInput = document.querySelector('.search-input');
@@ -403,7 +428,7 @@
             success:function(response){
                 var obj = response.data;
                 if(response.status_code == 200 && response.success == true) {
-                    console.log(obj)
+                    var notif = obj.slice(0, 3)
                     var notification = ``;
                     var notificationDash = ``;
                     if(obj.length == 0){
@@ -457,23 +482,28 @@
                                 </div>
                             </a>
                         </li>`;
-
-                        notificationDash +=`
-                            <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
-                                <div class=" col-md-9 pl-2 m-0 p-0 ">
-                                    <span class="notification-text-home">
-                                        `+obj[i].noti_desc+`
-                                    </span>
-
-                                </div>
-                                <div class="col-md-3 m-0 p-0">
-                                    <span class="heading-sixth row time-top float-right mr-2">
-                                        `+ getTimeInterval(new Date(obj[i].created_at)); +`
-                                    </span>
-                                </div>
-                            </div>`;
                         }
                         $(".show_all_notifications").html(notification);
+
+                        for(var i =0; i < notif.length; i++) {
+
+                            notificationDash +=`
+                            <div class="w-100 container-bg-1 mr-2 pb-2 pt-0 notifiaction-margin " >
+                                <div class="notification-hover row mt-2 pt-2 pb-2 m-0 p-0 w-100">
+                                    <div class=" col-md-9 pl-2 m-0 p-0 ">
+                                        <span class="notification-text-home">
+                                            `+notif[i].noti_desc+`
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3 m-0 p-0">
+                                        <span class="heading-sixth row time-top float-right mr-2">
+                                            `+ getTimeInterval(new Date(notif[i].created_at)) +`
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>`;
+
+                        }
                         $("#dashNotif").html(notificationDash);
 
                     }
@@ -564,4 +594,6 @@
             unit = unit + "s";
         return value + " " + unit + " " + direction;
         }
+
+
     </script>
