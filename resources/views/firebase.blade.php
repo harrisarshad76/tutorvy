@@ -29,7 +29,7 @@ messaging.onMessage((payload) => {
 
     var user_id = $(".user_id").val();
     var user_role_id = $(".user_role_id").val();
-
+var unread_msg_count = payload.data.unread_msg_count;
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
