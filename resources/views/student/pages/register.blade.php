@@ -518,6 +518,12 @@
     </section>
     <script>
 
+        window.addEventListener("load", function(){
+                document.querySelector('.abcRioButtonIcon').style.marginLeft="15px";
+                document.querySelector('.abcRioButtonContents').style.marginLeft="-40px";
+                document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+        });
+
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
