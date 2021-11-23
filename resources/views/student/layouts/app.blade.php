@@ -111,7 +111,7 @@
 
             <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>	
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
                     
         <!-- iGuider Plugin -->
 
