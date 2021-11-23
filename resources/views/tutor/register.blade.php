@@ -468,7 +468,7 @@
                                                                     data-shape="rectangular"
                                                                     data-height="40"
                                                                     data-logo_alignment="center"
-                                                                    onclick="checkLogin()">
+                                                                    >
                                                                 </div>
 
                                                             </div>
@@ -1096,34 +1096,34 @@
                 fbLogout();
             };
 
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
-                var lastName = profile.getName().split(' ').slice(-1).join(' ');
+            // function onSignIn(googleUser) {
+            //     var profile = googleUser.getBasicProfile();
+            //     var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+            //     var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
-                $.ajax({
-                    url: "{{ route('login.google') }}",
-                    dataType: "json",
-                    type: "Post",
-                    async: true,
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        first_name: firstName,
-                        last_name: lastName,
-                        email: profile.getEmail(),
-                        picture: profile.getImageUrl(),
-                        provider: 'google',
-                        role: 2
-                    },
-                    success: function(data) {
-                        if(data.status == 200){
-                            window.location.href = window.location.origin+data.url
-                        }
-                    },
+            //     $.ajax({
+            //         url: "{{ route('login.google') }}",
+            //         dataType: "json",
+            //         type: "Post",
+            //         async: true,
+            //         data: {
+            //             _token: "{{ csrf_token() }}",
+            //             first_name: firstName,
+            //             last_name: lastName,
+            //             email: profile.getEmail(),
+            //             picture: profile.getImageUrl(),
+            //             provider: 'google',
+            //             role: 2
+            //         },
+            //         success: function(data) {
+            //             if(data.status == 200){
+            //                 window.location.href = window.location.origin+data.url
+            //             }
+            //         },
 
-                });
+            //     });
 
-            }
+            // }
 
             //Facebook Login Script
 
@@ -1166,32 +1166,32 @@
             }
 
             // Fetch the user profile data from facebook
-            function getFbUserData(){
-                FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
-                function (response) {
-                    $.ajax({
-                        url: "{{ route('login.google') }}",
-                        dataType: "json",
-                        type: "Post",
-                        async: true,
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            first_name: response.first_name,
-                            last_name: response.last_name,
-                            email: response.email,
-                            picture: response.picture.data.url,
-                            provider: 'facebook',
-                            role: 2
-                        },
-                        success: function(data) {
-                            if(data.status == 200){
-                                window.location.href = window.location.origin+data.url
-                            }
-                        },
+            // function getFbUserData(){
+            //     FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+            //     function (response) {
+            //         $.ajax({
+            //             url: "{{ route('login.google') }}",
+            //             dataType: "json",
+            //             type: "Post",
+            //             async: true,
+            //             data: {
+            //                 _token: "{{ csrf_token() }}",
+            //                 first_name: response.first_name,
+            //                 last_name: response.last_name,
+            //                 email: response.email,
+            //                 picture: response.picture.data.url,
+            //                 provider: 'facebook',
+            //                 role: 2
+            //             },
+            //             success: function(data) {
+            //                 if(data.status == 200){
+            //                     window.location.href = window.location.origin+data.url
+            //                 }
+            //             },
 
-                    });
-                });
-            }
+            //         });
+            //     });
+            // }
 
             // Logout from facebook
             function fbLogout() {

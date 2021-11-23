@@ -186,7 +186,7 @@
                                             @if(!isset($user))
                                             <input type="email" name="email" id="myName" placeholder="Enter Email Address"
                                                 class="form-control @if(Session::has('error')) is-invalid @endif">
-
+                                                <div id="messages"></div>
                                                 @if(Session::has('error'))
                                                     <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{session::get('error')}}</strong>
@@ -240,7 +240,7 @@
                                 data-height="40"
                                 data-text="continue_with"
                                 data-logo_alignment="center"
-                                onclick="checkLogin()">
+                                >
                             </div>
 
                             <div class="facebook">
@@ -377,46 +377,51 @@
                 document.querySelector('.abcRioButtonIcon').style.marginLeft="130px";
                 document.querySelector('.abcRioButtonContents').style.marginLeft="-168px";
                 document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+
+                signOut();
+                fbLogout();
             });
 
 
             function signOut() {
-                    var auth2 = gapi.auth2.getAuthInstance();
-                    auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    });
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                console.log('User signed out.');
+                });
             }
-            window.onload = function() {
-                fbLogout();
-                signOut();
-            };
+
 
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();
                 var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
                 var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
-                $.ajax({
-                    url: "{{ route('login.google') }}",
-                    dataType: "json",
-                    type: "Post",
-                    async: true,
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        first_name: firstName,
-                        last_name: lastName,
-                        email: profile.getEmail(),
-                        picture: profile.getImageUrl(),
-                        provider: 'google',
-                        role: 2
-                    },
-                    success: function(data) {
-                        if(data.status == 200){
-                            window.location.href = window.location.origin+data.url
-                        }
-                    },
+                // $.ajax({
+                //     url: "{{ route('login.check') }}",
+                //     dataType: "json",
+                //     type: "Post",
+                //     async: true,
+                //     data: {
+                //         _token: "{{ csrf_token() }}",
+                //         first_name: firstName,
+                //         last_name: lastName,
+                //         email: profile.getEmail(),
+                //         picture: profile.getImageUrl(),
+                //         provider: 'google',
+                //     },
+                //     success: function(data) {
+                //         if(data.status == 200){
+                //             window.location.href = window.location.origin+data.url
+                //         }
+                //         if(data.status == 400){
+                //              var message = `<span class="invalid-feedback d-block" role="alert">
+                //                                 <strong>`+data.message+`</strong>
+                //                             </span>`;
+                //                 $("#messages").html(message);
+                //         }
+                //     },
 
-                });
+                // });
 
             }
 
@@ -465,7 +470,7 @@
                 FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
                 function (response) {
                     $.ajax({
-                        url: "{{ route('login.google') }}",
+                        url: "{{ route('login.check') }}",
                         dataType: "json",
                         type: "Post",
                         async: true,
@@ -476,11 +481,16 @@
                             email: response.email,
                             picture: response.picture.data.url,
                             provider: 'facebook',
-                            role: 2
                         },
                         success: function(data) {
                             if(data.status == 200){
                                 window.location.href = window.location.origin+data.url
+                            }
+                            if(data.status == 400){
+                             var message = `<span class="invalid-feedback d-block" role="alert">
+                                                <strong>`+data.message+`</strong>
+                                            </span>`;
+                                $("#message").html(message);
                             }
                         },
 
