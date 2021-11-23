@@ -302,7 +302,7 @@
                                                     <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
