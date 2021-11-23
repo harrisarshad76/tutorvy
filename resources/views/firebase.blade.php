@@ -518,9 +518,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                                     </div>
                                 </a>`;
                     $('.line-box').prepend(contact);            
-
                 }
-                
                 
             }else if(url+'#' == custom_url){
                 var msg_type = payload.data.msg_type;
@@ -595,7 +593,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                 
             }
             
-        }
+        
         
         if (type == "booking_rescheduled") {
             let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
