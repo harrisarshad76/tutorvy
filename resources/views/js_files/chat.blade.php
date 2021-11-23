@@ -113,8 +113,10 @@ $(document).ready(function(){
     };
 
     $( '#chat_form' ).on( 'submit', function(e) {
-       $('.emojionearea-editor').html();
-        event.preventDefault();
+       event.preventDefault();
+       let ter = $('.emojionearea-editor').html();
+
+       if(ter != ""){
         let msg =  $('.emojionearea-editor').html();
         
         let receiver = tt_id;
@@ -129,6 +131,8 @@ $(document).ready(function(){
             },
             success:function(response){
             // console.log(response);
+            $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
+
             if(response.status == 200) {
                 $(".emojionearea-editor").html('');
                 
@@ -157,6 +161,12 @@ $(document).ready(function(){
             }
             },
         });
+       }
+       else{
+        toastr.error("Can't send empty message");
+       }
+       
+      
     });
 
     $( '#fileSendForm' ).on( 'submit', function(e) {
@@ -176,7 +186,7 @@ $(document).ready(function(){
             cache: false,
             enctype:'multipart/form-data',
             success:function(response){
-            
+                $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
             if(response.status == 200) {
                 var message = '';
                 $('#sendFileCall').modal('hide');
