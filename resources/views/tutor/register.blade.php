@@ -468,7 +468,7 @@
                                                                     data-shape="rectangular"
                                                                     data-height="40"
                                                                     data-logo_alignment="center"
-                                                                    onclick="checkLogin()">
+                                                                    >
                                                                 </div>
 
                                                             </div>
@@ -1079,6 +1079,11 @@
         </div>
         </div>
         <script>
+            window.addEventListener("load", function(){
+                document.querySelector('.abcRioButtonIcon').style.marginLeft="15px";
+                document.querySelector('.abcRioButtonContents').style.marginLeft="-40px";
+                document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+            });
 
             function signOut() {
                     var auth2 = gapi.auth2.getAuthInstance();
@@ -1091,109 +1096,109 @@
                 fbLogout();
             };
 
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
-                var lastName = profile.getName().split(' ').slice(-1).join(' ');
+            // function onSignIn(googleUser) {
+            //     var profile = googleUser.getBasicProfile();
+            //     var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+            //     var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
-                $.ajax({
-                    url: "{{ route('login.google') }}",
-                    dataType: "json",
-                    type: "Post",
-                    async: true,
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        first_name: firstName,
-                        last_name: lastName,
-                        email: profile.getEmail(),
-                        picture: profile.getImageUrl(),
-                        provider: 'google',
-                        role: 2
-                    },
-                    success: function(data) {
-                        if(data.status == 200){
-                            window.location.href = window.location.origin+data.url
-                        }
-                    },
+            //     $.ajax({
+            //         url: "{{ route('login.google') }}",
+            //         dataType: "json",
+            //         type: "Post",
+            //         async: true,
+            //         data: {
+            //             _token: "{{ csrf_token() }}",
+            //             first_name: firstName,
+            //             last_name: lastName,
+            //             email: profile.getEmail(),
+            //             picture: profile.getImageUrl(),
+            //             provider: 'google',
+            //             role: 2
+            //         },
+            //         success: function(data) {
+            //             if(data.status == 200){
+            //                 window.location.href = window.location.origin+data.url
+            //             }
+            //         },
 
-                });
+            //     });
 
-            }
+            // }
 
             //Facebook Login Script
 
-    window.fbAsyncInit = function() {
-        // FB JavaScript SDK configuration and setup
-        FB.init({
-        appId      : '{{ env("FACEBOOK_APP_ID") }}', // FB App ID
-        cookie     : true,  // enable cookies to allow the server to access the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v3.2' // use graph api version 2.8
-        });
+            window.fbAsyncInit = function() {
+                // FB JavaScript SDK configuration and setup
+                FB.init({
+                appId      : '{{ env("FACEBOOK_APP_ID") }}', // FB App ID
+                cookie     : true,  // enable cookies to allow the server to access the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v3.2' // use graph api version 2.8
+                });
 
-        // Check whether the user already logged in
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                //display user data
-                getFbUserData();
-            }
-        });
-    };
-
-    // Load the JavaScript SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Facebook login with JavaScript SDK
-    function fbLogin() {
-        FB.login(function (response) {
-            if (response.authResponse) {
-                getFbUserData();
-            } else {
-                document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
-            }
-        }, {scope: 'email'});
-    }
-
-    // Fetch the user profile data from facebook
-    function getFbUserData(){
-        FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
-        function (response) {
-            $.ajax({
-                url: "{{ route('login.google') }}",
-                dataType: "json",
-                type: "Post",
-                async: true,
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    first_name: response.first_name,
-                    last_name: response.last_name,
-                    email: response.email,
-                    picture: response.picture.data.url,
-                    provider: 'facebook',
-                    role: 2
-                },
-                success: function(data) {
-                    if(data.status == 200){
-                        window.location.href = window.location.origin+data.url
+                // Check whether the user already logged in
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        //display user data
+                        getFbUserData();
                     }
-                },
+                });
+            };
 
-            });
-        });
-    }
+            // Load the JavaScript SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
-    // Logout from facebook
-    function fbLogout() {
-        FB.logout(function() {
-            console.log('facebook logged out')
-        });
-    }
+            // Facebook login with JavaScript SDK
+            function fbLogin() {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        getFbUserData();
+                    } else {
+                        document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
+                    }
+                }, {scope: 'email'});
+            }
+
+            // Fetch the user profile data from facebook
+            // function getFbUserData(){
+            //     FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+            //     function (response) {
+            //         $.ajax({
+            //             url: "{{ route('login.google') }}",
+            //             dataType: "json",
+            //             type: "Post",
+            //             async: true,
+            //             data: {
+            //                 _token: "{{ csrf_token() }}",
+            //                 first_name: response.first_name,
+            //                 last_name: response.last_name,
+            //                 email: response.email,
+            //                 picture: response.picture.data.url,
+            //                 provider: 'facebook',
+            //                 role: 2
+            //             },
+            //             success: function(data) {
+            //                 if(data.status == 200){
+            //                     window.location.href = window.location.origin+data.url
+            //                 }
+            //             },
+
+            //         });
+            //     });
+            // }
+
+            // Logout from facebook
+            function fbLogout() {
+                FB.logout(function() {
+                    console.log('facebook logged out')
+                });
+            }
 
         </script>
 

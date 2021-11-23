@@ -29,13 +29,13 @@ messaging.onMessage((payload) => {
 
     var user_id = $(".user_id").val();
     var user_role_id = $(".user_role_id").val();
-var unread_msg_count = payload.data.unread_msg_count;
+    var unread_msg_count = payload.data.unread_msg_count;
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
     var current_user_id = payload.data.receiver_id;
     var notification_time = 330000;
-
+    var attachment = "";
     var unread_count = payload.data.unread_count;
 
     var body = payload.notification.body;
@@ -196,7 +196,6 @@ var unread_msg_count = payload.data.unread_msg_count;
             var sender_id = payload.data.sender_id;
             var sender_data = payload.data.sender_data;
             sender_data = JSON.parse(sender_data);
-          
             if(url == custom_url) {
                 
                 var msg_type = payload.data.msg_type;
@@ -242,7 +241,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                        
-                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('`+sender_data.picture+`')}}" id="img_`+sender_data.id+`">
                                           
                                         <span class="activeDot" id="activeDot_"></span>
                                         <div class="img-chat w-100">
@@ -259,13 +258,13 @@ var unread_msg_count = payload.data.unread_msg_count;
                                                 <div class="col-md-9">
                                                     <p class="massage-client mt-0" id="recent_msg_">
                                                        
-                                                            Say Hi to 
+                                                        `+msgs+` 
                                                         </p>
 
                                                 </div>
                                                 <div class="col-md-3">
                                                         <span class="unread_co"  id="unseen_msg_cnt_">
-                                                            2
+                                                            `+unread_msg_count+`
                                                         </span>
                                                     
                                                 </div>
@@ -277,8 +276,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                 }
                 
             }else if(url+'#' == custom_url){
-                var msg_type = payload.data.msg_type;
-                var msgs = payload.data.msg;
+              
 
                 if(msg_type == 'file'){
                     if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
@@ -319,12 +317,11 @@ var unread_msg_count = payload.data.unread_msg_count;
                                 onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
-                                
-                                    <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                    
+                                    <img class="leftImg ml-1 profile-img" src="{{asset('`+sender_data.picture+`')}}" id="img_`+sender_data.id+`">
                                     
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
-
                                         <div class="row">
                                             <div class="col-9">
                                                 <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
@@ -336,16 +333,13 @@ var unread_msg_count = payload.data.unread_msg_count;
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <p class="massage-client mt-0" id="recent_msg_">
-                                                
-                                                        Say Hi to 
+                                                        `+msgs+`
                                                     </p>
-
                                             </div>
                                             <div class="col-md-3">
                                                     <span class="unread_co"  id="unseen_msg_cnt_">
-                                                        2
+                                                        `+unread_msg_count+`
                                                     </span>
-                                                
                                             </div>
                                         </div>
                                     </div>

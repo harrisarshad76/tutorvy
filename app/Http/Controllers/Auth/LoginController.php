@@ -367,5 +367,35 @@ class LoginController extends Controller
         }
     }
 
+    public function checkLogin(Request $request)
+    {
+        try{
+            $user = User::where('email', $request->email)->where('provider',$request->provider)->first();
+            if(!$user){
+                return response([
+                        'status' => 400,
+                        'message'=>'No '.ucfirst($request->provider).' account is asscociated with this '.$request->email.' email'
+                    ]);
+            }
+
+            Auth::login($user);
+
+            if($user->role == 2){
+                return response(['status' => 200,'url'=>'/tutor/dashboard']);
+            }
+
+            if($user->role == 3){
+                return response(['status' => 200,'url'=>'/student/dashboard']);
+            }
+            if(!$user->role){
+                return redirect('role');
+            }
+
+        }catch(Exception $e){
+
+            dd($e->getMessage());
+        }
+
+    }
 
 }

@@ -511,6 +511,7 @@ Auth::routes(['verify' => true]);
 Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
 // Route::get('/google/redirect/{c_id?}', [LoginController::class,'redirectGoogle'])->name('social.google');
 Route::post('/login/google', [LoginController::class,'googleLoggin'])->name('login.google');
+Route::post('/login/check', [LoginController::class,'checkLogin'])->name('login.check');
 // Facebook
 
 Route::get('/facebook/redirect/{c_id?}', [LoginController::class,'redirectFacebook'])->name('social.facebook');
