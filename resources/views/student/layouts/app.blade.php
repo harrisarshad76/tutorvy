@@ -34,9 +34,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-     <!-- iGuider Plugin -->
-     <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <!-- iGuider Plugin -->
+    <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
 
     <!-- Styles -->
@@ -49,13 +49,13 @@
             margin-top:10px;
         }
         table.dataTable.no-footer {
-                border-bottom: none;
-                margin-bottom:20px;
+            border-bottom: none;
+            margin-bottom:20px;
 
-            }
-            table .table-bordered .dataTable .no-footer{
-                    margin-bottom:20px;
-            }
+        }
+        table .table-bordered .dataTable .no-footer{
+            margin-bottom:20px;
+        }
     </style>
 </head>
 
@@ -72,112 +72,116 @@
             <!-- Main-->
             @yield('content')
 
-        <div>
+            <div>
 
-    </div>
-     <!-- custom js -->
-     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+            </div>
+            <!-- custom js -->
+            <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
-     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-     <script src="{{ asset('assets/js/mobile.js') }}"></script>
-     <script src="{{ asset('assets/js/history.js') }}"></script>
-     <script src="{{ asset('assets/js/subject.js') }}"></script>
-     <script src="{{ asset('assets/js/languages.js') }}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+            <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+            <script src="{{ asset('assets/js/mobile.js') }}"></script>
+            <script src="{{ asset('assets/js/history.js') }}"></script>
+            <script src="{{ asset('assets/js/subject.js') }}"></script>
+            <script src="{{ asset('assets/js/languages.js') }}"></script>
 
-     <script src="{{ asset('assets/js/homePage.js') }}"></script>
-     <script src="{{ asset('assets/js/registration.js') }}"></script>
-     <script src="{{ asset('assets/js/dropify.js')}}"></script>
-     <script src="{{ asset('assets/js/multiselect.js')}}"></script>
-     <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
-     <script src="{{ asset('assets/js/jquery.validate.js')}}"></script>
-     <script src="{{ asset('assets/js/countrySelect.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.2.7/emojionearea.min.js"></script>
+            <script src="{{ asset('assets/js/homePage.js') }}"></script>
+            <script src="{{ asset('assets/js/registration.js') }}"></script>
+            <script src="{{ asset('assets/js/dropify.js')}}"></script>
+            <script src="{{ asset('assets/js/multiselect.js')}}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
+            <script src="{{ asset('assets/js/jquery.validate.js')}}"></script>
+            <script src="{{ asset('assets/js/countrySelect.js')}}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.2.7/emojionearea.min.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
+            <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
             <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
-                    
-        <!-- iGuider Plugin -->
+            <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
 
-    <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
-    @include('firebase')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
+            <!-- iGuider Plugin -->
+
+            <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
+            @include('firebase')
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
-    </script>
+        </script>
         <!--Plugin JavaScript file-->
         <script src="{{ asset('assets/js/ion.rangeSlider.js')}}"></script>
 
-     @yield('scripts')
-     @include('js_files.student.supportJs')
-     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        @yield('scripts')
+        @include('js_files.student.supportJs')
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-    $(document).ready(function(){
+            $(document).ready(function(){
 
 
         // iGuider Initialization
 
         $('.start-tour').on('click',function(){
-        iGuider({
-        tourTitle:'continue.enable',
-        'intro': {
-        'title': 'Welcome To Tutorvy',
-        'content': 'Dashboard ',
-        'overlayOpacity': '0.4'
-    },
-            continue:{
-                enable:true,
-                cover:'../doc_files/images/hello.gif',
-                overlayColor:'#000',
-                overlayOpacity:0.5
-            },
-        'lang': {
-        'cancelText': '',
-        'tourMapText': '',
-        'endText': 'End tour'
-         },
-            steps:[{
-                title:'Set Your Porifile',
-                content:'Here you can setup your profile',   
-                target:'el-profile'
-            },{
-                title:'Booking Tour',
-                content:'Booking Tour Description',   
-                target:'el-booking'
-            },{
-                title:'Classroom Tour',
-                content:'Classroom Tour Description',   
-                target:'el-classroom'
-            },{
-                title:'Courses Tour',
-                content:'Courses Tour Description',   
-                target:'el-courses'
-            },{
-                title:'Find Affordable Online Tutor',
-                content:'find a tutor near you at affordable prices',   
-                target:'el-findtutor'
-            }]
+            iGuider({
+                tourTitle:'continue.enable',
+                'intro': {
+                    'title': 'Welcome To Tutorvy',
+                    'content': 'Dashboard ',
+                    'overlayOpacity': '0.4'
+                },
+                continue:{
+                    enable:true,
+                    cover:'../doc_files/images/hello.gif',
+                    overlayColor:'#000',
+                    overlayOpacity:0.5
+                },
+                'tourMap': {
+                    'enable': false,
+                    'clickable': 'ready'
+                },
+                'lang': {
+                    'cancelText': '',
+                    'tourMapText': '',
+                    'endText': 'End of time'
+                },
+                steps:[{
+                    title:'Set Your Porifile',
+                    content:'Here you can setup your profile',   
+                    target:'el-profile'
+                },{
+                    title:'Booking Tour',
+                    content:'Booking Tour Description',   
+                    target:'el-booking'
+                },{
+                    title:'Classroom Tour',
+                    content:'Classroom Tour Description',   
+                    target:'el-classroom'
+                },{
+                    title:'Courses Tour',
+                    content:'Courses Tour Description',   
+                    target:'el-courses'
+                },{
+                    title:'Find Affordable Online Tutor',
+                    content:'find a tutor near you at affordable prices',   
+                    target:'el-findtutor'
+                }]
 
             });
             return false;
@@ -186,14 +190,14 @@
 
 
 
-            $('.table').DataTable();
-            get_all_notifications();
-            $(".mk").hide();
-            $(".vc").hide();
-            $(".dropify").dropify();
-            $('.js-multiSelect').select2();
-            $('.accSelect2').select2();
-            $('.form-select').select2();
+        $('.table').DataTable();
+        get_all_notifications();
+        $(".mk").hide();
+        $(".vc").hide();
+        $(".dropify").dropify();
+        $('.js-multiSelect').select2();
+        $('.accSelect2').select2();
+        $('.form-select').select2();
             // $("#year").yearpicker({
             //         year: {{$user->year ?? '1990'}},
             //         startYear: 1950,
@@ -217,9 +221,9 @@
                 grid: true,
             });
             $("#msg").emojioneArea({
-                    pickerPosition: "top",
-                    saveEmojisAs:"shortname"
-                });
+                pickerPosition: "top",
+                saveEmojisAs:"shortname"
+            });
             /* Table Sorting */
 
             //   $("th").append('<i class="ml-1 fa fa-sort"></i>');
@@ -240,51 +244,51 @@
 
 
             /* Table Sorting */
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip()
-                    })
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
 
 
 
 
         });
 
-                $('.dd').click(function() {
-                    $('.dd2').toggle('hide');
-                    $(".notification-menu ").hide();
+$('.dd').click(function() {
+    $('.dd2').toggle('hide');
+    $(".notification-menu ").hide();
 
-                });
-                $('.notification').click(function() {
-                    $('.dd2').hide();
+});
+$('.notification').click(function() {
+    $('.dd2').hide();
 
-                });
-                $(".content-wrapper").click(function() {
-                    $(".notification-menu ").hide();
-                    $('.dd2').hide();
-                });
-                $("#country_selector").countrySelect({
-                    defaultCountry: "{{ $user->country_short ?? '' }}",
-                    preferredCountries: ['ca', 'gb', 'us', 'pk']
-                });
+});
+$(".content-wrapper").click(function() {
+    $(".notification-menu ").hide();
+    $('.dd2').hide();
+});
+$("#country_selector").countrySelect({
+    defaultCountry: "{{ $user->country_short ?? '' }}",
+    preferredCountries: ['ca', 'gb', 'us', 'pk']
+});
 
-                $("#country_selector").on('change', function() {
-                    var short = $(this).countrySelect("getSelectedCountryData");
-                    $("#country_short").val(short.iso2);
-                });
+$("#country_selector").on('change', function() {
+    var short = $(this).countrySelect("getSelectedCountryData");
+    $("#country_short").val(short.iso2);
+});
 
 
-                $("#country_selector").countrySelect({
-                    defaultCountry: "{{ $user->country_short ?? '' }}",
-                    preferredCountries: ['ca', 'gb', 'us', 'pk']
-                });
+$("#country_selector").countrySelect({
+    defaultCountry: "{{ $user->country_short ?? '' }}",
+    preferredCountries: ['ca', 'gb', 'us', 'pk']
+});
 
-                $("#country_selector").on('change', function() {
-                    var short = $(this).countrySelect("getSelectedCountryData");
-                    $("#country_short").val(short.iso2);
-                });
+$("#country_selector").on('change', function() {
+    var short = $(this).countrySelect("getSelectedCountryData");
+    $("#country_short").val(short.iso2);
+});
 
-                $("#register").validate({
-                    rules: {
+$("#register").validate({
+    rules: {
                         // compound rule
                         email: {
                             required: true,
@@ -318,12 +322,12 @@
                     }
                 });
 
-                function langshort(opt) {
-                    var val = opt.options[opt.selectedIndex].innerHTML;
-                    $("#lang").val(val)
-                }
+function langshort(opt) {
+    var val = opt.options[opt.selectedIndex].innerHTML;
+    $("#lang").val(val)
+}
 
-                function hideCard() {
+function hideCard() {
                     // alert();
                     $(".infoCard").hide('slow');
                 };
@@ -351,10 +355,10 @@
 
                                     $('.show_notification_counts').text(0);
                                     notification += `
-                                                        <li class="text-center">
-                                                            No more unread notifications
-                                                        </li>
-                                                            `;
+                                    <li class="text-center">
+                                    No more unread notifications
+                                    </li>
+                                    `;
                                     $(".show_all_notifications").html(notification);
                                 } else {
                                     $(".show_notification_counts").addClass("notification-text");
@@ -364,34 +368,34 @@
 
                                         if (obj[i].sender_pic != null) {
                                             img =
-                                                `<img class="profile-img w-100 p-0 mt-2" src="{{ asset('`+obj[i].sender_pic+`') }}" alt="layer">`;
+                                            `<img class="profile-img w-100 p-0 mt-2" src="{{ asset('`+obj[i].sender_pic+`') }}" alt="layer">`;
                                         } else {
                                             img =
-                                                `<img class="profile-img w-100 p-0 mt-2" src="{{ asset('assets/images/ico/Square-white.jpg') }}" alt="layer">`;
+                                            `<img class="profile-img w-100 p-0 mt-2" src="{{ asset('assets/images/ico/Square-white.jpg') }}" alt="layer">`;
                                         }
                                         notification += `
-                    <li>
+                                        <li>
 
-                    <div class="row bgm" >
-                        <div class="col-md-2 text-center pr-0">
-                        <a href="` + obj[i].slug + `" class="">
-                            ` + img + `
-                        </a>
-                        </div>
-                        <div class="col-md-10">
-                            <a href="` + obj[i].slug + `" class="">
-                                <div class="head-1-noti">
-                                    <span class="notification-text6">
+                                        <div class="row bgm" >
+                                        <div class="col-md-2 text-center pr-0">
+                                        <a href="` + obj[i].slug + `" class="">
+                                        ` + img + `
+                                        </a>
+                                        </div>
+                                        <div class="col-md-10">
+                                        <a href="` + obj[i].slug + `" class="">
+                                        <div class="head-1-noti">
+                                        <span class="notification-text6">
                                         <strong>` + obj[i].noti_title + ` </strong>
                                         ` + obj[i].noti_desc + `
-                                    </span>
-                                </div>
-                                <span class="notification-time">
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    </li>`;
+                                        </span>
+                                        </div>
+                                        <span class="notification-time">
+                                        </span>
+                                        </a>
+                                        </div>
+                                        </div>
+                                        </li>`;
                                     }
                                     $(".show_all_notifications").html(notification);
                                 }
@@ -404,18 +408,18 @@
                             console.log(e)
                         }
                     });
-                }
+}
 
-                function allRead(event) {
-                    event.preventDefault();
-                    $.ajax({
-                        url: "{{ route('markAllRead') }}",
-                        type: "get",
-                        dataType: 'json',
-                        cache: false,
-                        async: false,
-                        success: function(data) {
-                            get_all_notifications();
+function allRead(event) {
+    event.preventDefault();
+    $.ajax({
+        url: "{{ route('markAllRead') }}",
+        type: "get",
+        dataType: 'json',
+        cache: false,
+        async: false,
+        success: function(data) {
+            get_all_notifications();
                             // $('.message-item').remove();
 
                         },
@@ -424,20 +428,20 @@
                         }
                     });
 
-                };
+};
 
 
-                function langshort(opt) {
-                    var val = opt.options[opt.selectedIndex].innerHTML;
-                    $("#lang").val(val)
-                }
+function langshort(opt) {
+    var val = opt.options[opt.selectedIndex].innerHTML;
+    $("#lang").val(val)
+}
 
-                function hideCard() {
+function hideCard() {
                     // alert();
                     $(".infoCard").hide('slow');
                 };
             </script>
 
-</body>
+        </body>
 
-</html>
+        </html>
