@@ -247,16 +247,19 @@
                 <div class="modal-body">
                     <div class="input-serach">
                         <input class="w-100" id="search" type="search" placeholder="Search members" />
-                        <img class="serach-icon" src="../assets/img/ico/Search.png" />
+                        <img class="serach-icon" src="{{ asset('admin/assets/img/ico/Search.png')}}" />
+
                     </div>
                     @foreach($staff_members as $staff)
                     <div class="container mt-4" id="record">
                         <div class="row">
                             <div class="col-md-6 col-6">
-                                <span class="alex-name">
+                                <!-- <span class="alex-name">
                                     <img src="{{asset($staff->picture)}}"
                                         alt="std-icon" />
-                                    </span>
+
+                                    </span> -->
+
                                 <span class="pl-2 alex-names">{{$staff->name}}</span>
                             </div>
                             <div class="col-md-6 col-6">

@@ -1,6 +1,14 @@
 @extends(Auth::user()->role == 2 ? 'tutor.layouts.app' : 'student.layouts.app' )
 
 @section('content')
+<?php
+    function startsWith ($string, $startString)
+    {
+        $len = strlen($startString);
+        return (substr($string, 0, $len) === $startString);
+    }
+  
+?>
     <style>
         .box-main {
             height: 550px;
@@ -70,6 +78,8 @@
 
         .sender {
             float: right;
+            display:grid;
+
         }
         .reciever {
             float: left;
@@ -77,30 +87,42 @@
         }
 
         .reciever p,
-        .sender p {
-            min-width: 219px;
+        .sender p,
+        .img-style,
+        .reciever-img-style {
+            min-width: 301px;
             border: 1px solid ;
             border-color: #D3D8DF;
-
+            display:block;
             border-radius: 5px;
             padding: 5px;
-            max-width:509px;
+            word-break:break-all;
+            max-width:300px;
+            
         }
-        .reciever p{
+        /* .sender p,
+        .img-style{
+            width: 400px;
+        }
+        .reciever-img-style{
+            width: 400px;
+        } */
+        .reciever-img-style, .reciever p{
             border: 1px solid;
             border-color:#6EAAFF;
         }
 
+        .img-style:hover,
         .reciever p:hover,
         .sender p:hover {
             cursor: pointer;
         }
 
         .recDull {
-            position: absolute;
-            left: 34%;
-            color: #BCC0C7;
-        }
+    position: absolute;
+    left: 28%;
+    color: #BCC0C7;
+}
 
         .dull {
             
@@ -121,16 +143,16 @@
         .textMenu2 {
             color: #00132D;
             position: absolute;
-            top: 28%;
-            left: 45%;
-            display: none;
+            top: 30px;
+            left: 40%;
+            /* display: none; */
         }
 
         .textMenu {
             color: #00132D;
             position: absolute;
             top: 28%;
-            right: 45%;
+            right: 40%;
         }
 
         .textMenu2 i,
@@ -187,6 +209,17 @@
             border:none;
             background:none;
         }
+        .massage-client .emojioneemoji{
+            width:15px;
+            height:15px;
+            margin-top:0;
+        }
+        .senderText img{
+            width: 20px;
+            height: auto;
+
+        }
+      
     </style>
 
     <div class="content content-wrapper " style="width: 100%;background-color: #FBFBFB !important;">
@@ -226,11 +259,26 @@
                         </div>
                         <div class="line-box"></div>
                         @foreach($users as $contact)
+                            <?php
+                           
+                            
+                            ?>
                             <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
                                 onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
-                                    <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}" class="leftImg ml-1">
+                                    @if($contact->user->picture)
+                                        <?php
+                                            $path = Auth::user()->picture;
+                                        ?>
+                                        @if(file_exists( public_path($path) ))
+                                            <img src="{{asset($contact->user->picture)}}" class="profile-img leftImg ml-1" id="img_{{$contact->user->id}}">
+                                        @else
+                                            <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
+                                        @endif
+                                    @else
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
+                                    @endif    
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
 
@@ -244,12 +292,46 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <p class="massage-client" id="recent_msg_">{{$contact->last_talk->message != null ? $contact->last_talk->message : "Say Hi to "}} </p>
+                                                <p class="massage-client mt-0" id="recent_msg_">
+                                                            
+                                                    @if($contact->last_talk != null)
+                                                            <?php
+                                                                 if(startsWith($contact->last_talk->message,"<"))
+                                                                 $red = "True";
+                                                             else
+                                                                     $red = "False";
+                                                            ?>
+                                                        @if($contact->last_talk->type == 'file')
+                                                            <i class="fa fa-picture-o"></i> image
+                                                        @elseif($contact->last_talk->type == 'text' && $red == 'True')
+                                                            <?php
+                                                                $string = $contact->last_talk->message;
+                                                                // echo $contact->last_talk->message;
+                                                                echo substr($string, 0,237);
+                                                            ?>
+                                                        @elseif($contact->last_talk->type == 'text' && $red == 'False')
+                                                            <?php
+                                                                $string = $contact->last_talk->message;
+                                                                echo substr($string, 0, 22);
+                                                            ?>
+                                                        @endif
+                                                    @else
+                                                        Say Hi to 
+                                                    @endif </p>
 
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="dot  " id="unseen_msg_cnt_">{{$contact->unread_count}}
-                                                </span>
+                                                @if($contact->unread_count == 0)
+                                                    <span class="unread_co"  id="unseen_msg_cnt_">
+                                                        
+                                                    </span>
+                                                @else
+                                                     <span class="dot unread_co"  id="unseen_msg_cnt_">
+                                                        {{$contact->unread_count}}
+                                                    </span>
+                                                @endif
+                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +347,7 @@
                             <a class="navbar-brand pb-0" href="#">
                                 <div class="container-fluid m-0 p-0 img-chats">
 
-                                    <img src="{{ asset('admin/assets/img/logo/harram.jpg') }}">
+                                    <img  id="clientPic" class="profile-img">
 
                                     <div class="img-chat">
                                         <div class="row">
@@ -296,7 +378,7 @@
                     </nav>
                     <div class="line-box2"></div>
 
-                    <div class="row chatArea ml-1 pb-2 mr-1" id="chatArea">
+                    <div class="row chatArea ml-1 pb-2 mr-1" id="">
                         <div class='text-center col-md-12 mb-3'>
                             <small>
                                 Your all communications will be monitored for maintaining quality, will not share your personal information. 
@@ -354,14 +436,16 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center ">
-                   <h5></h5>
-                   <input type="file" class="dropify"  data-default-file="@Model.MemberImage" data-height="220" multiple>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
-                    <button type="button" class="btn-general " id="endCallYes"> Send </button>
-                </div>
+                <form id="fileSendForm" enctype="multipart/form-data">
+                    <div class="modal-body text-center ">
+                    <h5></h5>
+                    <input type="file" name="file" class="dropify"  accept="image/*">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
+                        <button type="submit" class="btn-general " id="filesend"> Send </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

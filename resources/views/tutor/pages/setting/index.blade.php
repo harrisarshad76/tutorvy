@@ -74,28 +74,28 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <!-- <a class="nav-link {{session()->has('key') ? '' : 'active'}}" id="v-pills-General-tab" data-toggle="pill" href="#v-pills-General"
-                                    role="tab" aria-controls="v-pills-General" aria-selected="true">General</a> -->
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <!-- <a class="nav-link {{session()->has('key') ? '' : 'active'}}" id="v-pills-General-tab" data-toggle="pill" href="#v-pills-General"
+                                        role="tab" aria-controls="v-pills-General" aria-selected="true">General</a> -->
 
-                                <a class="nav-link {{session()->has('key') ? '' : 'active'}}" id="v-pills-Security-tab" data-toggle="pill" href="#v-pills-Security"
-                                    role="tab" aria-controls="v-pills-Security" aria-selected="true">Security</a>
+                                    <a class="nav-link {{session()->has('key') ? '' : 'active'}}" id="v-pills-Security-tab" data-toggle="pill" href="#v-pills-Security"
+                                        role="tab" aria-controls="v-pills-Security" aria-selected="true">Security</a>
 
-                                <a class="nav-link" id="v-pills-Payment-tab" data-toggle="pill"
-                                    href="#v-pills-Payment" role="tab" aria-controls="v-pills-Payment"
-                                    aria-selected="false">Payments</a>
+                                    <a class="nav-link" id="v-pills-Payment-tab" data-toggle="pill"
+                                        href="#v-pills-Payment" role="tab" aria-controls="v-pills-Payment"
+                                        aria-selected="false">Payments</a>
 
-                                <a class="nav-link" id="v-pills-Notifications-tab" data-toggle="pill"
-                                    href="#v-pills-Notifications" role="tab" aria-controls="v-pills-Notifications"
-                                    aria-selected="false">Notifications</a>
+                                    <a class="nav-link" id="v-pills-Notifications-tab" data-toggle="pill"
+                                        href="#v-pills-Notifications" role="tab" aria-controls="v-pills-Notifications"
+                                        aria-selected="false">Notifications</a>
 
-                                <a class="nav-link" id="v-pills-Slots-tab" data-toggle="pill"
-                                    href="#v-pills-Slots" role="tab" aria-controls="v-pills-Slots"
-                                    aria-selected="false">Working Slots</a>
+                                    <a class="nav-link" id="v-pills-Slots-tab" data-toggle="pill"
+                                        href="#v-pills-Slots" role="tab" aria-controls="v-pills-Slots"
+                                        aria-selected="false">Working Slots</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -397,7 +397,6 @@
                                             @endif
 
                                         </div>
-                                        @endif
 
                                     </div>
 
@@ -471,8 +470,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade chee" id="v-pills-Slots" role="tabpanel"
+                                    <div class="tab-pane fade chee" id="v-pills-Slots" role="tabpanel"
                                     aria-labelledby="v-pills-Slots-tab">
                                     <div class="row">
                                         <div class="col-md-12 mb-4">
@@ -851,6 +849,8 @@
 
                                     </div>
                                 </div>
+                                </div>
+                               
                             </div>
                         </div>
                     </div>
