@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
+
     <title>Login</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,6 +26,7 @@
     <link href="{{ asset('assets/css/fontawesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/modal.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <!--toggle Eye for tutor and student-->
     <style>
@@ -224,21 +227,36 @@
                         </form> -->
                         @if(!isset($user))
                         <div class="social-Icon ml-3 mr-3">
-                            <div class="Google">
+                            {{-- <div class="Google">
                                 <a href="{{route('social.google',[0])}}" target="popup"
                                 onclick="window.open({{route('social.google',[0])}},'popup','width=600,height=600'); return true;">
                                     <img class="mr-3" src="../assets/images/ico/google.png" alt="google">
                                     Continue with Google
                                 </a>
+                            </div> --}}
+                            <div class="g-signin2 mt-3 text-center"
+                                data-onsuccess="onSignIn"
+                                data-width="480"
+                                data-height="40"
+                                data-text="continue_with"
+                                data-logo_alignment="center"
+                                onclick="checkLogin()">
                             </div>
+
                             <div class="facebook">
+                                <a href="javascript:void(0);" style="text-decoration:none" onclick="fbLogin();" id="fbLink">
+                                <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
+                                Continue with Facebook
+                                </a>
+                            </div>
+                            {{-- <div class="facebook">
                                 <a href="{{route('social.facebook',[0])}}">
 
                                 <!-- <img class="mr-3" src="../assets/images/ico/facebook(1).png" alt="facebook"> -->
                                 <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
                                 Continue with Facebook
                                 </a>
-                            </div>
+                            </div> --}}
                             <!-- <div class="Apple">
                                 <img class="mr-3" src="../assets/images/ico/apple.png" alt="apple">
                                 <i class="fa fa-apple fa-lg mr-2" aria-hidden="true"></i>
@@ -354,6 +372,122 @@
         <script src="../assets/js/login.js"></script>
         <script src="../assets/js/jquery.validate.js"></script>
         <script>
+
+            function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                    });
+            }
+            window.onload = function() {
+                signOut();
+                fbLogout();
+            };
+
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+                var lastName = profile.getName().split(' ').slice(-1).join(' ');
+
+                $.ajax({
+                    url: "{{ route('login.google') }}",
+                    dataType: "json",
+                    type: "Post",
+                    async: true,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: profile.getEmail(),
+                        picture: profile.getImageUrl(),
+                        provider: 'google',
+                        role: 2
+                    },
+                    success: function(data) {
+                        if(data.status == 200){
+                            window.location.href = window.location.origin+data.url
+                        }
+                    },
+
+                });
+
+            }
+
+            //Facebook Login Script
+
+            window.fbAsyncInit = function() {
+                // FB JavaScript SDK configuration and setup
+                FB.init({
+                appId      : '{{ env("FACEBOOK_APP_ID") }}', // FB App ID
+                cookie     : true,  // enable cookies to allow the server to access the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v3.2' // use graph api version 2.8
+                });
+
+                // Check whether the user already logged in
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        //display user data
+                        getFbUserData();
+                    }
+                });
+            };
+
+            // Load the JavaScript SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            // Facebook login with JavaScript SDK
+            function fbLogin() {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        getFbUserData();
+                    } else {
+                        document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
+                    }
+                }, {scope: 'email'});
+            }
+
+            // Fetch the user profile data from facebook
+            function getFbUserData(){
+                FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+                function (response) {
+                    $.ajax({
+                        url: "{{ route('login.google') }}",
+                        dataType: "json",
+                        type: "Post",
+                        async: true,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            first_name: response.first_name,
+                            last_name: response.last_name,
+                            email: response.email,
+                            picture: response.picture.data.url,
+                            provider: 'facebook',
+                            role: 2
+                        },
+                        success: function(data) {
+                            if(data.status == 200){
+                                window.location.href = window.location.origin+data.url
+                            }
+                        },
+
+                    });
+                });
+            }
+
+            // Logout from facebook
+            function fbLogout() {
+                FB.logout(function() {
+                    console.log('facebook logged out')
+                });
+            }
+
             // jquery form validation
             $(document).ready(function() {
                 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

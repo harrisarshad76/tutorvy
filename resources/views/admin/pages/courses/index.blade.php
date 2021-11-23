@@ -379,6 +379,5 @@
 @endsection
 
 @section('js')
-
-@include('js_files.admin.course')
+    @include('js_files.admin.course')
 @endsection

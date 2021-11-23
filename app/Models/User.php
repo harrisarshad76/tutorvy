@@ -19,6 +19,7 @@ use App\Models\Student\Wallet;
 use PhpParser\Node\Expr\Empty_;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FavTutors;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
@@ -150,12 +151,18 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Wallet::class);
     }
-
     public function support()
     {
         return $this->hasMany(supportTkts::class);
     }
-
+    public function assignTicket()
+    {
+        return $this->hasMany(supportTkts::class,'assign_to','id');
+    }
+    public function favtutor()
+    {
+        return $this->hasMany(FavTutors::class);
+    }
     public function scopeCanJoinRoom($room_id)
     {
         return true;
