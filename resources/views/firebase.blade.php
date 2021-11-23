@@ -227,14 +227,17 @@ messaging.onMessage((payload) => {
                                     </div>
                                 </div>
                             </div>`;
+                            
                     $('#chatArea_'+sender_id).append(msg);
 
                 }else if($('#chatClient_'+sender_id).length){
+
                     
                                
                 }else{
+
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
+                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                        
@@ -305,11 +308,13 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
 
+                    
+
                             
                 }else{
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')">
+                                onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -526,7 +531,6 @@ messaging.onMessage((payload) => {
                 showConfirmButton: false,
                 timer: notification_time,
             });
-
             var url = window.location.href;
             var origin = window.location.origin
             var custom_url = origin + '/student/chat';
@@ -548,7 +552,8 @@ messaging.onMessage((payload) => {
                     attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
                 }
                 if($('#chatArea_'+sender_id).length){
-
+                  
+                    
                     let msg = `<div class="col-md-12 mt-3">
                                 <div class="row">
                                     <div class="col-md-1">
@@ -568,10 +573,9 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
 
-                            
                 }else{
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
+                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -622,6 +626,7 @@ messaging.onMessage((payload) => {
                     attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
                 }
                 if($('#chatArea_'+sender_id).length){
+                
 
                     let msg = `<div class="col-md-12 mt-3">
                                 <div class="row">
@@ -641,11 +646,13 @@ messaging.onMessage((payload) => {
                         $('#chatArea_'+sender_id).append(msg);
 
                 }else if($('#chatClient_'+sender_id).length){
+             
 
                             
                 }else{
+                   
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
+                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
