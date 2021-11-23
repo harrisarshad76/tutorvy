@@ -55,8 +55,7 @@ class SettingController extends Controller
         return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots','user_slots'));
     }
 
-    protected function validator(array $request)
-    {
+    protected function validator(array $request) {
         return Validator::make($request, [
             'current_password'     => 'required',
             'new_password'     => 'required|min:6',
@@ -101,6 +100,7 @@ class SettingController extends Controller
         return view('tutor.pages.classroom.call',compact('users'));
 
     }
+
     public function whiteBoard(){
         $users = User::where('role',3)->get();
 
@@ -119,8 +119,6 @@ class SettingController extends Controller
         return view('tutor.pages.classroom.classroom',compact('class','user','booking'));
 
     }
-
-
 
     public function change_password(Request $request) {
 
@@ -212,7 +210,6 @@ class SettingController extends Controller
         ]);
     }
 
-
     public function ticket($id) {
         $ticket = supportTkts::where('ticket_no',$id)->with(['category','tkt_created_by'])->first();
         $ticket_replies = TicketChat::with(['sender','receiver'])->where('ticket_id',$ticket->id)->get();
@@ -249,42 +246,67 @@ class SettingController extends Controller
     }
 
     public function saveSlots(Request $request) {
-       
-        // return $request;
+              
         $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
         $message = '';
-        if($slots == 0 ) {
-            for($i = 0; $i < count($request->day); $i++) {
-                TutorSlots::create([
-                    'user_id' => Auth::user()->id , 
-                    'day' => $request->day[$i] ,
-                    'wrk_from' => ($request->from[$i] ?? NULL) ,
-                    'wrk_to' => ($request->to[$i] ?? NULL) ,
-                    // 'slot_length' => ($request->slot_length[$i] ?? NULL),
-                    // 'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
-                    'day_off' => ($request->day_off[$i] ?? NULL),
-                ]);
-            }
-            $message = 'Slots Added.';
-        }else{
-            TutorSlots::where('user_id',Auth::user()->id)->delete();
-            for($i = 0; $i < count($request->day); $i++) {
-                TutorSlots::create([
-                    'user_id' => Auth::user()->id , 
-                    'day' => $request->day[$i] ,
-                    'wrk_from' => ($request->from[$i] ?? NULL) ,
-                    'wrk_to' => ($request->to[$i] ?? NULL) ,
-                    // 'slot_length' => ($request->slot_length[$i] ?? NULL),
-                    // 'bk_pr_slot' => ($request->booking_slot[$i] ?? NULL),
-                    'day_off' => ($request->day_off[$i] ?? NULL),
-                ]);
-            }
-            $message = 'Slots Updated.';
 
+        if($slots  == 0) {
+            for($i = 0; $i < count($request->day); $i++) {
+
+                $data = array(
+                    'user_id' => Auth::user()->id , 
+                    'day' => $request->day[$i] ,
+                    'wrk_from' => ($request->from[$i] ?? NULL) ,
+                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                );
+                
+                TutorSlots::create($data);
+            }
+
+            if($request->day_off != null && $request->day_off != "") {
+                $days_oof = explode(',', $request->day_off);
+
+                $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
+
+                $z = 0;
+                foreach($all_slots as $slot) {
+                    $slot->day_off = $days_oof[$z];
+                    $slot->save();
+                    $z++;
+                } 
+            }
+        }else{
+            TutorSlots::where('user_id' , Auth::user()->id)->delete();
+
+            for($i = 0; $i < count($request->day); $i++) {
+
+                $data = array(
+                    'user_id' => Auth::user()->id , 
+                    'day' => $request->day[$i] ,
+                    'wrk_from' => ($request->from[$i] ?? NULL) ,
+                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                );
+                
+                TutorSlots::create($data);
+            }
+
+            if($request->day_off != null && $request->day_off != "") {
+                $days_oof = explode(',', $request->day_off);
+
+                $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
+
+                $z = 0;
+                foreach($all_slots as $slot) {
+                    $slot->day_off = $days_oof[$z];
+                    $slot->save();
+                    $z++;
+                } 
+            }
         }
+
         return response()->json([
             'status_code'=> 200,
-            'message' => $message,
+            'message' => 'abc',
             'success' => true,
         ]);
     }
