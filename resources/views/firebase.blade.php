@@ -35,7 +35,7 @@ messaging.onMessage((payload) => {
     var pic = payload.data.pic;
     var current_user_id = payload.data.receiver_id;
     var notification_time = 330000;
-
+    var attachment = "";
     var unread_count = payload.data.unread_count;
 
     var body = payload.notification.body;
