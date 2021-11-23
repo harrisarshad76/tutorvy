@@ -238,7 +238,7 @@ messaging.onMessage((payload) => {
                     $("#recent_msg_"+sender_data.id).text(msgs);
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                        
@@ -317,7 +317,7 @@ messaging.onMessage((payload) => {
                     $("#recent_msg_"+sender_data.id).text(msgs);
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -583,7 +583,7 @@ messaging.onMessage((payload) => {
                     $("#recent_msg_"+sender_data.id).text(msgs);
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -661,7 +661,7 @@ messaging.onMessage((payload) => {
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
