@@ -306,7 +306,7 @@ class SettingController extends Controller
 
         return response()->json([
             'status_code'=> 200,
-            'message' => 'abc',
+            'message' => 'Time Slots Saved Successfully',
             'success' => true,
         ]);
     }
