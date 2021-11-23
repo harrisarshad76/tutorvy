@@ -167,7 +167,7 @@ var unread_msg_count = payload.data.unread_msg_count;
 
     }
 
-    if (user_id == current_user_id && user_role_id == 2) {
+    else if (user_id == current_user_id && user_role_id == 2) {
         $('.show_notification_counts').text(unread_count);
         let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
 
@@ -420,7 +420,7 @@ var unread_msg_count = payload.data.unread_msg_count;
         $('.show_all_notifications').prepend(html);
     }
 
-    if (user_id == current_user_id && user_role_id == 3) {
+    else if (user_id == current_user_id && user_role_id == 3) {
         $('.show_notification_counts').text(unread_count);
 
         if(type == "class_started"){
@@ -658,28 +658,29 @@ var unread_msg_count = payload.data.unread_msg_count;
 
         if (pic != null) {
             img = `<img class="profile-img mt-2 p-0 w-100" src="{{asset('`+pic+`')}}" alt="layer">`;
-        } else {
+        } 
+        else {
             img = `<img class="profile-img mt-2 p-0 w-100" src="{{asset('assets/images/ico/Square-white.jpg')}}" alt="layer">`;
         }
         var html = ` <li>
-            <a href="` + slug + `" class="bgm">
-                <div class="row">
-                <div class="col-md-2 text-center">
-                    ` + img + `
-                </div>
-                <div class="col-md-10">
-                    <div class="head-1-noti">
-                        <span class="notification-text6">
-                            <strong>` + title + ` </strong> 
-                            ` + body + `
-                        </span>
+                <a href="` + slug + `" class="bgm">
+                    <div class="row">
+                    <div class="col-md-2 text-center">
+                        ` + img + `
                     </div>
-                    <span class="notification-time">
-                    </span>
-                </div>
-            </div>
-            </a>
-        </li>`;
+                    <div class="col-md-10">
+                        <div class="head-1-noti">
+                            <span class="notification-text6">
+                                <strong>` + title + ` </strong> 
+                                ` + body + `
+                            </span>
+                        </div>
+                            <span class="notification-time">
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </li>`;
 
         $('.show_all_notifications').prepend(html);
 
