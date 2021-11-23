@@ -193,11 +193,40 @@ var unread_msg_count = payload.data.unread_msg_count;
             var url = window.location.href;
             var origin = window.location.origin
             var custom_url = origin + '/tutor/chat';
+            var receiver_id = payload.data.receiver_id;
 
-            // if(url == custom_url) {
-            //     var url = slug.replace(/[^0-9]/gi, '');
+            if(url == custom_url) {
                 
-            // }
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+                
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+receiver_id).append(msg);
+                
+            }
 
         }
 
@@ -385,9 +414,41 @@ var unread_msg_count = payload.data.unread_msg_count;
             var url = window.location.href;
             var origin = window.location.origin
             var custom_url = origin + '/student/chat';
+            var receiver_id = payload.data.receiver_id;
 
             if(url == custom_url) {
-                var url = slug.replace(/[^0-9]/gi, '');
+                
+                // if("{{Auth::user()->id}}" == response[i].user_id){
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+receiver_id).append(msg);
+
+                // }
+
             }
         }
         
