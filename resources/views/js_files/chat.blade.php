@@ -235,12 +235,12 @@ $(document).ready(function(){
                       var type = response[i].type;
                       if(type == 'file'){
                         if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                            attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                                attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
                             }
                         }
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
-                            }
+                        }
                         let msg = `<div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-1">
@@ -264,13 +264,13 @@ $(document).ready(function(){
                     }else{
                         var type = response[i].type;
                       if(type == 'file'){
-                        if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                            attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                            if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                                attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
                             }
                         }
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
-                            }
+                        }
                         // let msg = `<div class="col-md-12 mt-3">
                         //                 <div class="col-md-12 ">
                         //                     <div class="reciever">
@@ -284,7 +284,7 @@ $(document).ready(function(){
                         let msg = `<div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <img src="{{asset($contact->user->picture)}}" class="profile-img" alt="">
+                                                <img src="{{asset('`+pic+`')}}" class="profile-img" alt="">
                                             </div>
                                             <div class="col-md-11">
                                                 <div class="">
