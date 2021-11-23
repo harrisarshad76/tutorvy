@@ -335,36 +335,36 @@
             </div>
 <!-- Category Modal -->
 
-             <!-- Modal -->
-    <div class="modal fade custom_modal" id="registerLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+        <!-- Modal -->
+        <div class="modal fade custom_modal" id="registerLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-                <div class="modal-body bg-custom text-center p-5">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="p-2"> <img src="{{asset('assets/images/logo-footer.png')}}" alt="">
-                            </h1>
-                            <h3 class="mb-4 p-2"> Are you a</h3>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="bg-btn-light">
-                                <a type="button" href="{{route('student.register')}}" class="btn  modal-btn animate__animated">Student</a>
-                                <a type="buttin" href="{{route('register')}}" class="btn  modal-btn animate__animated">Tutor</a>
+                    <div class="modal-body bg-custom text-center p-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="p-2"> <img src="{{asset('assets/images/logo-footer.png')}}" alt="">
+                                </h1>
+                                <h3 class="mb-4 p-2"> Are you a</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="bg-btn-light">
+                                    <a type="button" href="{{route('student.register')}}" class="btn  modal-btn animate__animated">Student</a>
+                                    <a type="buttin" href="{{route('register')}}" class="btn  modal-btn animate__animated">Tutor</a>
 
+                                </div>
                             </div>
                         </div>
+
+
+
                     </div>
+                    <!-- <div class="modal-footer">
 
-
-
+                    </div> -->
                 </div>
-                <!-- <div class="modal-footer">
-
-                </div> -->
             </div>
         </div>
-    </div>
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -373,6 +373,13 @@
         <script src="../assets/js/jquery.validate.js"></script>
         <script>
 
+            window.addEventListener("load", function(){
+                document.querySelector('.abcRioButtonIcon').style.marginLeft="130px";
+                document.querySelector('.abcRioButtonContents').style.marginLeft="-168px";
+                document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+            });
+
+
             function signOut() {
                     var auth2 = gapi.auth2.getAuthInstance();
                     auth2.signOut().then(function () {
@@ -380,8 +387,8 @@
                     });
             }
             window.onload = function() {
-                signOut();
                 fbLogout();
+                signOut();
             };
 
             function onSignIn(googleUser) {
