@@ -27,7 +27,7 @@ class GenChatController extends Controller
         // $contact = Contact::where('user_id',\Auth::user()->id)->where('contact_id',$request->user)->first();
         $contact = Contact::where(['user_id' => \Auth::user()->id, 'contact_id' => $request->user])
         ->orWhere(function ($q) use ($user) {
-            $q->where('user_id', $request->user);
+            $q->where('user_id', $user);
             $q->where('contact_id', \Auth::user()->id);
         })->get();
         if(sizeof($contact) == 0){
