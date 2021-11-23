@@ -220,9 +220,9 @@
             height:15px;
             margin-top:0;
         }
-        .senderText img{
-            width: 20px;
-            height: auto;
+        .senderText {
+            width: 72%;
+            word-break: break-all;
 
         }
       
@@ -325,11 +325,11 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     @if($contact->unread_count == 0)
-                                                        <span class="unread_co"  id="unseen_msg_cnt_">
+                                                        <span class="unread_co"  id="unseen_msg_cnt_{{$contact->user->id}}">
                                                             
                                                         </span>
                                                     @else
-                                                        <span class="dot unread_co"  id="unseen_msg_cnt_">
+                                                        <span class="dot unread_co"  id="unseen_msg_cnt_{{$contact->user->id}}">
                                                             {{$contact->unread_count}}
                                                         </span>
                                                     @endif
