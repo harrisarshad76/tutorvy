@@ -96,8 +96,11 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::post('student/delete-student',[StudentController::class,'deleteStudent'])->name('admin.deleteStudent');
     Route::post('assignStudent',[StudentController::class,'assignStudent'])->name('admin.assign.student');
     Route::get('student/activitylog/{id}',[StudentController::class,'activitylog'])->name('admin.student.activitylog');
+    Route::get('student/paidpayments/{id}',[StudentController::class,'paidPayments'])->name('admin.student.paidpayments');
+    Route::get('student/reports/{id}',[StudentController::class,'reports'])->name('admin.student.reports');
 
     Route::get('/classroom',[ClassroomController::class,'index'])->name('admin.classroom');
+    Route::get('/classdetail/{id}',[ClassroomController::class,'classdetail'])->name('admin.classdetail');
     Route::get('/booking',[AdminBookingController::class,'index'])->name('admin.booking');
     Route::get('/booking-details/{id}',[AdminBookingController::class,'bookingDetails'])->name('admin.bookingDetail');
 

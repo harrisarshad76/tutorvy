@@ -105,6 +105,7 @@ class SupportController extends Controller
 
     public function assignTicket(Request $request)
     {
+
         $ticket = supportTkts::where('ticket_no',$request->ticket_id)->update([
                         "assign_to" => $request->user
                     ]);
@@ -112,7 +113,7 @@ class SupportController extends Controller
 
         return response()->json([
             'status'=> 200,
-            'message' => 'Ticket has been successfully assigned to '.$user->first_name.''.$user->last_name ,
+            'message' => 'Ticket has been successfully assigned to '.$user->name ,
             'success' => true,
         ]);
 

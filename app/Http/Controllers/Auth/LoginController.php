@@ -261,7 +261,6 @@ class LoginController extends Controller
         }
     }
 
-
      /*
     *  Register User if not exist in db and if exist will login
     *  and redirect to dashboard
@@ -274,6 +273,7 @@ class LoginController extends Controller
             if(!$user && $r == 0){
                 return false;
             }
+
             if(!$user){
                $user = User::create([
                     'first_name' => $data['first_name'],
@@ -366,4 +366,6 @@ class LoginController extends Controller
             return redirect('role');
         }
     }
+
+
 }

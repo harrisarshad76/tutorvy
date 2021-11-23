@@ -11,8 +11,11 @@ use App\Http\Controllers\General\NotifyController;
 use Illuminate\Support\Facades\URL;
 use App\Models\Activitylogs;
 use App\Models\Admin\supportTkts;
+use App\Models\Booking;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
+use App\Models\FavTutors;
+use App\Models\Payments;
 
 class StudentController extends Controller
 {
@@ -34,9 +37,10 @@ class StudentController extends Controller
         return view('admin.pages.students.index',compact('students','staff_members'));
     }
 
-    public function profile($id){
+    public function profile($id)
+    {
 
-        $student = User::where('role',3)->where('id',$id)->first();
+        $student = User::with('favtutor')->where('role',3)->where('id',$id)->first();
 
         if(Auth::user()->role == 1):
             $tickets = supportTkts::with(['category','tkt_created_by'])->get();
@@ -44,9 +48,13 @@ class StudentController extends Controller
             $tickets = supportTkts::with(['category','tkt_created_by'])->where('assign_to',Auth::id())->get();
         endif;
 
+        $courseEnrolled = CourseEnrollment::where('user_id',$id)->get();
+        $classroom = Booking::with('classroom')->where('user_id',$id)->get()->pluck('classroom');
+        $payments = Payments::where('user_id',$id)->where('type','!=','payment_refund')->get();
+        $staff_members = User::whereNotIn('role', [1,2,3])->get();
+        $tickets = supportTkts::with('assignedUser')->where('user_id',$id)->get();
 
-
-        return view('admin.pages.students.profile',compact('student','tickets'));
+        return view('admin.pages.students.profile',compact('student','tickets','courseEnrolled','classroom','tickets','payments','staff_members'));
 
     }
     public function studentStatus(Request $request){
@@ -117,6 +125,17 @@ class StudentController extends Controller
     {
         $activity_logs = Activitylogs::where('ref_id',$id)->paginate(15);
         return view('admin.pages.students.activitylog',compact('activity_logs'));
+    }
+
+    public function paidPayments($id)
+    {
+        $payments = Payments::where('user_id',$id)->get();
+        return view('admin.pages.students.payments',compact('payments'));
+    }
+    public function reports($id)
+    {
+        // $payments = Payments::where('user_id',$id)->get();
+        return view('admin.pages.students.reports');
     }
 
 }
