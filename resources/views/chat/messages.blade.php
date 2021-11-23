@@ -209,7 +209,7 @@
         }
         .dot{
             padding-top: 1px;
-    padding-left: 6px;
+            padding-left: 6px;
         }
         #chat_form button{
             border:none;
@@ -220,10 +220,22 @@
             height:15px;
             margin-top:0;
         }
-        .senderText img{
-            width: 20px;
-            height: auto;
+        .massage-client{
+            width: 155px;
+            line-height:1.5;
+        }
+        .msg_parent{
+            overflow: hidden;
+            height: 18px;
+        }
+        .senderText {
+            width: 72%;
+            word-break: break-all;
 
+        }
+        .time-chat,
+        #name_main{
+            margin-bottom:0 !important;
         }
       
     </style>
@@ -266,7 +278,7 @@
                         <div class="line-box"></div>
                         @foreach($users as $contact)
                             @if($contact->user != NULL)
-                                <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
+                                <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->id}}"
                                     onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
@@ -286,7 +298,7 @@
                                         <div class="img-chat w-100">
 
                                             <div class="row">
-                                                <div class="col-9">
+                                                <div class="col-md-9">
                                                     <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
                                                 </div>
                                                 <div class="col-md-3">
@@ -294,8 +306,8 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-9">
-                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                <div class="col-md-9 msg_parent">
+                                                    <p class="massage-client mt-0" id="recent_msg_{{$contact->user->id}}">
                                                                 
                                                         @if($contact->last_talk != null)
                                                                 <?php
@@ -315,7 +327,7 @@
                                                             @elseif($contact->last_talk->type == 'text' && $red == 'False')
                                                                 <?php
                                                                     $string = $contact->last_talk->message;
-                                                                    echo substr($string, 0, 22);
+                                                                    echo substr($string, 0, 14);
                                                                 ?>
                                                             @endif
                                                         @else
@@ -325,11 +337,11 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     @if($contact->unread_count == 0)
-                                                        <span class="unread_co"  id="unseen_msg_cnt_">
+                                                        <span class="unread_co"  id="unseen_msg_cnt_{{$contact->user->id}}">
                                                             
                                                         </span>
                                                     @else
-                                                        <span class="dot unread_co"  id="unseen_msg_cnt_">
+                                                        <span class="dot unread_co"  id="unseen_msg_cnt_{{$contact->user->id}}">
                                                             {{$contact->unread_count}}
                                                         </span>
                                                     @endif

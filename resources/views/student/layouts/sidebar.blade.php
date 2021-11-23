@@ -10,15 +10,15 @@
      <!-- sidenav icons web view -->
      <div class="id-sideicons">
          <ol class="list-unstyled id-sideicons componentsX click-sideicon" style="display: none;" id="sidenav-show">
-             <li id="btns-sideicons" class="btn @if(\Request::path() === 'student/dashboard') active @endif w-100">
+             <li id="btns-sideicons" class=" btn @if(\Request::path() === 'student/dashboard') active @endif w-100">
                  <a href="{{route('student.dashboard')}}" data-toggle="" aria-expanded="false">
                      <img class="mr-2 dasborad-sid" src="{{asset('assets/images/ico/dash-ico.png')}}" alt="dasborad-ico">
-                     <span class="dasborad-show mt-3">
+                     <span class="dasborad-show mt-3" >
                          Dashboard
                      </span>
                  </a>
              </li>
-             <li class="btn mt-3 mt-3 @if(\Request::path() === 'student/bookings') active @endif">
+             <li class="btn mt-3 mt-3  @if(\Request::path() === 'student/bookings') active @endif" >
                  <a href="{{route('student.bookings')}}" aria-expanded="false">
                      <img class="mr-2 book-sid" src="{{asset('assets/images/ico/book-icons.png')}}" alt="book-ico">
                      <span class="book-show mt-3">
@@ -26,7 +26,7 @@
                      </span>
                  </a>
              </li>
-             <li class="btn mt-3 @if(\Request::path() === 'student/classroom') active @endif">
+             <li class="btn mt-3  @if(\Request::path() === 'student/classroom') active @endif" >
                  <a href="{{route('student.classroom')}}" aria-expanded="false">
                      <img class="class-sid mr-2" src="{{asset('assets/images/ico/class-ico.png')}}" alt="class-ico">
                      <span class="class-show mt-3">
@@ -34,7 +34,7 @@
                      </span>
                  </a>
              </li>
-             <li class="btn mt-3 @if(\Request::path() === 'student/classroom') active @endif">
+             <li class="btn mt-3  @if(\Request::path() === 'student/classroom') active @endif">
                  <a href="{{route('student.classroom')}}" aria-expanded="false">
                      <img class="class-sid mr-2" src="{{asset('assets/images/ico/class-ico.png')}}" alt="class-ico">
                      <span class="class-show mt-3">
@@ -101,25 +101,25 @@
                      Dashboard
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'student/bookings') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'student/bookings') active @endif w-100" data-target="el-booking">
                  <a href="{{route('student.bookings')}}" aria-expanded="false" class="">
                      <img src="{{asset('assets/images/ico/book-icons.png')}}" alt="book-ico" class=" mr-2">
                      Bookings
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'student/classroom') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'student/classroom') active @endif w-100" data-target="el-classroom">
                  <a href="{{route('student.classroom')}}">
                      <img src="{{asset('assets/images/ico/class-ico.png')}}" alt="class-ico" class=" mr-2">
                      Classroom
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'student/courses') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'student/courses') active @endif w-100" data-target="el-courses">
                  <a href="{{route('student.courses')}}">
                      <img src="{{asset('assets/images/ico/class-ico.png')}}" alt="class-ico" class=" mr-2">
                      Courses
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'student/tutor') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'student/tutor') active @endif w-100" data-target="el-findtutor">
                 <a href="{{route('student.tutor')}}">
                     <img src="{{asset('assets/images/ico/find-ico.png')}}" alt="tutor" class=" mr-2">
                     Find a Tutor

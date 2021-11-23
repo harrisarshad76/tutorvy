@@ -13,21 +13,26 @@ use Illuminate\Support\Facades\DB;
 use App\Models\General\ClassTable;
 
 
-
 class ClassroomController extends Controller
 {
 
     public function index()
-    {  
+    {
         $classes = Booking::with(['classroom','user','tutor','subject'])
             ->whereIn('status',[2,5])->get();
-        
+
         // $delivered_classess = DB::table("classroom")
         // ->leftJoin('bookings', 'classroom.booking_id', '=', 'bookings.id')
         // ->count();
 
         $delivered_classess =  Booking::with(['classroom','user','tutor','subject'])->where('status',5)->get();
-        
+
         return view('admin.pages.classroom.index',compact('classes','delivered_classess'));
+    }
+
+    public function classdetail($id)
+    {
+        $class = Classroom::with('booking')->where('id',$id)->first();
+        return view('admin.pages.classroom.classdetail',compact('class'));
     }
 }

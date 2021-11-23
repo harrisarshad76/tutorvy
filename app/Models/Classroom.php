@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Booking;
-
+use App\Models\Admin\Subject;
 class Classroom extends Model
 {
     use HasFactory;
@@ -23,7 +23,10 @@ class Classroom extends Model
 
     ];
 
-
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 
 }
 

@@ -13,7 +13,7 @@
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
                     &times;
                 </a>
-                <ul class="list-unstyled componentsX" id="sidenav-hide">
+                <ul class="list-unstyled componentsX " id="sidenav-hide">
                     <li class="btn w-100 mt-3 @if(\Request::path() === 'student/dashboard') active @endif">
                         <a href="{{route('student.dashboard')}}" data-toggle="" aria-expanded="false" class="">
                             <img src="{{asset('assets/images/ico/dash-ico.png') }}" alt="dash-ico" class=" mr-2">
@@ -236,7 +236,7 @@
                         
                 </a>
             </li>
-            <li class="nav-item profile-name1" id="imageDropdowns">
+            <li class="nav-item profile-name1" id="imageDropdowns" data-target="el-profile">
                 <div class="dropdown d-flex ">
                
                     <a class="nav-link profile-name dd  pl-4 mr-3 mt-0 pb-0" href="#"
