@@ -252,7 +252,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -330,7 +330,7 @@ messaging.onMessage((payload) => {
                                                 <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                             </div>
                                             <div class="col-md-3 ">
-                                                <p class="time-chat">11:25</p>
+                                                <p class="time-chat"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -597,7 +597,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -675,7 +675,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
