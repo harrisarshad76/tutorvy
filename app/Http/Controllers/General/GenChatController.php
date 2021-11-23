@@ -23,10 +23,14 @@ class GenChatController extends Controller
     public function sendMessage(Request $request){
 
         $msg_type = '';
-
-        $contact = Contact::where('contact_id',$request->user)->first();
-
-        if($contact){
+        $user = $request->user;
+        // $contact = Contact::where('user_id',\Auth::user()->id)->where('contact_id',$request->user)->first();
+        $contact = Contact::where(['user_id' => \Auth::user()->id, 'contact_id' => $request->user])
+        ->orWhere(function ($q) use ($user) {
+            $q->where('user_id', $user);
+            $q->where('contact_id', \Auth::user()->id);
+        })->get();
+        if(sizeof($contact) == 0){
 
         }else{
 

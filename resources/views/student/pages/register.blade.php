@@ -220,9 +220,6 @@
 
 <body>
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId={{env('FACEBOOK_APP_ID')}}&autoLogAppEvents=1" nonce="i0UN3OzF"></script>
-
 
     <section id="body">
         <div class="container">
@@ -451,6 +448,7 @@
                                                         {{ Session::get('error') }}
                                                     </div>
                                                 @endif
+                                                <div id="status"></div>
                                                 <div class="row mt-4">
 
                                                     <div class="col-md-6">
@@ -458,8 +456,14 @@
                                                             data-onsuccess="onSignIn" data-width="250" data-height="40">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-3">
-                                                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                                                    <div class="col-md-6">
+                                                        <div class="facebook">
+                                                            <a href="javascript:void(0);" style="text-decoration:none" onclick="fbLogin();" id="fbLink">
+                                                            <i class="fa fa-facebook fa-lg mr-2" aria-hidden="true"></i>
+                                                            Continue with Facebook
+                                                            </a>
+                                                        </div>
+                                                        {{-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> --}}
                                                     </div>
                                                 </div>
                                                 <div class="Policy-text" style="display: flex;">
@@ -514,6 +518,12 @@
     </section>
     <script>
 
+        window.addEventListener("load", function(){
+                document.querySelector('.abcRioButtonIcon').style.marginLeft="15px";
+                document.querySelector('.abcRioButtonContents').style.marginLeft="-40px";
+                document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+        });
+
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
@@ -523,55 +533,113 @@
 
         window.onload = function() {
                 signOut();
+                fbLogout();
             }
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
-            var lastName = profile.getName().split(' ').slice(-1).join(' ');
+        // function onSignIn(googleUser) {
+        //     var profile = googleUser.getBasicProfile();
+        //     var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+        //     var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
-            if(profile){
-                    signOut();
+        //     if(profile){
+        //         signOut();
+        //     }
+
+        //     $.ajax({
+        //         url: "{{ route('login.google') }}",
+        //         dataType: "json",
+        //         type: "Post",
+        //         async: true,
+        //         data: {
+        //             _token: "{{ csrf_token() }}",
+        //             first_name: firstName,
+        //             last_name: lastName,
+        //             email: profile.getEmail(),
+        //             picture: profile.getImageUrl(),
+        //             provider: 'google',
+        //             role: 3
+        //         },
+        //         success: function(data) {
+        //             if(data.status == 200){
+        //                 window.location.href = window.location.origin+data.url
+        //             }
+        //         },
+
+        //     });
+        // }
+
+    //Facebook Login Script
+    window.fbAsyncInit = function() {
+        // FB JavaScript SDK configuration and setup
+        FB.init({
+        appId      : '{{ env("FACEBOOK_APP_ID") }}', // FB App ID
+        cookie     : true,  // enable cookies to allow the server to access the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v3.2' // use graph api version 2.8
+        });
+
+        // Check whether the user already logged in
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                //display user data
+                getFbUserData();
             }
+        });
+    };
 
-            $.ajax({
-                url: "{{ route('login.google') }}",
-                dataType: "json",
-                type: "Post",
-                async: true,
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    first_name: firstName,
-                    last_name: lastName,
-                    email: profile.getEmail(),
-                    picture: profile.getImageUrl(),
-                    provider: 'google',
-                    role: 3
-                },
-                success: function(data) {
-                    if(data.status == 200){
-                        window.location.href = window.location.origin+data.url
-                    }
-                },
+    // Load the JavaScript SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
-            });
-        }
-
-
-        FB.ui({
-        method: 'share',
-        href: 'https://developers.facebook.com/docs/'
-        }, function(response){});
-        FB.login(function(response) {
-    if (response.authResponse) {
-     console.log('Welcome!  Fetching your information.... ');
-     FB.api('/me', function(response) {
-       console.log('Good to see you, ' + response.name + '.');
-     });
-    } else {
-     console.log('User cancelled login or did not fully authorize.');
+    // Facebook login with JavaScript SDK
+    function fbLogin() {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                getFbUserData();
+            } else {
+                document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
+            }
+        }, {scope: 'email'});
     }
-});
 
+    // Fetch the user profile data from facebook
+    function getFbUserData(){
+        FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+        function (response) {
+            // $.ajax({
+            //     url: "{{ route('login.google') }}",
+            //     dataType: "json",
+            //     type: "Post",
+            //     async: true,
+            //     data: {
+            //         _token: "{{ csrf_token() }}",
+            //         first_name: response.first_name,
+            //         last_name: response.last_name,
+            //         email: response.email,
+            //         picture: response.picture.data.url,
+            //         provider: 'facebook',
+            //         role: 3
+            //     },
+            //     success: function(data) {
+            //         if(data.status == 200){
+            //             window.location.href = window.location.origin+data.url
+            //         }
+            //     },
+
+            // });
+        });
+    }
+
+    // Logout from facebook
+    function fbLogout() {
+        FB.logout(function() {
+            console.log('facebook logged out')
+        });
+    }
 
     </script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>

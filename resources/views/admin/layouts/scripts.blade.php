@@ -240,182 +240,6 @@
         };
 
 
-        var options = {
-            series: [],
-            chart: {
-                type: 'area',
-                //   height: 'auto',
-                height: '240vh',
-                stacked: true,
-                events: {
-                    selection: function (chart, e) {
-                        console.log(e,chart)
-                    }
-                },
-            },
-            colors: ['#008FFB', '#00E396', '#CED4DC'],
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    opacityFrom: 0.6,
-                    opacityTo: 0.8,
-                }
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'left'
-            },
-            noData: {
-            text: 'Loading...'
-            },
-
-
-        };
-
-
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-
-
-
-        var updateChart = function() {
-                $.ajax({
-                url: "{{ route('admin.dash.graph') }}",
-                type: 'GET',
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    var user = data.tutor.length + data.student.length + data.staff.length
-                    chart.updateSeries([{
-                        name: 'Tutor',
-                        data: data.tutor
-                    },
-                    {
-                        name: 'Student',
-                        data: data.student
-                    },
-                    {
-                        name: 'Staff',
-                        data: data.staff
-                    }
-                    ])
-
-                    $("#users").html(data.users)
-                },
-                error: function(data){
-                    console.log(data);
-                }
-            });
-        }
-
-
-    updateChart();
-    setInterval(() => {
-        updateChart();
-        // get_all_notifications();
-    }, 1000);
-
-
-
-        var options2 = {
-            series: [{
-                name: 'Inflation',
-                data: [2.3, 3.1, 4.0, 10.1, 4.0,]
-            }],
-            chart: {
-                height: '250vh',
-                type: 'bar',
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 10,
-                    dataLabels: {
-                        position: 'top', // top, center, bottom
-                    },
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val) {
-                    return val + "%";
-                },
-                offsetY: -20,
-                style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                }
-            },
-
-            xaxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-                position: 'bottom',
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                },
-                crosshairs: {
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            colorFrom: '#D8E3F0',
-                            colorTo: '#BED1E6',
-                            stops: [0, 100],
-                            opacityFrom: 0.4,
-                            opacityTo: 0.5,
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true,
-                }
-            },
-            yaxis: {
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false,
-                },
-                labels: {
-                    show: false,
-                    formatter: function (val) {
-                        return val + "%";
-                    }
-                }
-
-            },
-            title: {
-                text: 'Monthly Inflation in Argentina, 2002',
-                floating: true,
-                offsetY: 330,
-                align: 'center',
-                style: {
-                    color: '#444'
-                }
-            }
-        };
-
-        var chart1 = new ApexCharts(document.querySelector("#columnchart"), options2);
-        chart1.render();
-        // keypress modal js
-        // get input field and add 'keyup' event listener
-        let searchInput = document.querySelector('.search-input');
-        searchInput.addEventListener('keyup', search);
-
-        if(document.getElementById("defaultOpen")){
-            document.getElementById("defaultOpen").click();
-        }
 
 
     });
@@ -598,3 +422,184 @@
 
 
     </script>
+
+
+@if(\Request::path() === 'admin/dashboard')
+    <script>
+
+        var options = {
+            series: [],
+            chart: {
+                type: 'area',
+                //   height: 'auto',
+                height: '240vh',
+                stacked: true,
+                events: {
+                    selection: function (chart, e) {
+                        console.log(e,chart)
+                    }
+                },
+            },
+            colors: ['#008FFB', '#00E396', '#CED4DC'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    opacityFrom: 0.6,
+                    opacityTo: 0.8,
+                }
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left'
+            },
+            noData: {
+            text: 'Loading...'
+            },
+
+
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+
+        var updateChart = function() {
+                $.ajax({
+                url: "{{ route('admin.dash.graph') }}",
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    var user = data.tutor.length + data.student.length + data.staff.length
+                    chart.updateSeries([{
+                        name: 'Tutor',
+                        data: data.tutor
+                    },
+                    {
+                        name: 'Student',
+                        data: data.student
+                    },
+                    {
+                        name: 'Staff',
+                        data: data.staff
+                    }
+                    ])
+
+                    $("#users").html(data.users)
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+
+        updateChart();
+        setInterval(() => {
+            updateChart();
+            get_all_notifications();
+        }, 1000);
+
+
+
+        var options2 = {
+            series: [{
+                name: 'Inflation',
+                data: [2.3, 3.1, 4.0, 10.1, 4.0,]
+            }],
+            chart: {
+                height: '250vh',
+                type: 'bar',
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 10,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
+                    },
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                    return val + "%";
+                },
+                offsetY: -20,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#304758"]
+                }
+            },
+
+            xaxis: {
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                position: 'bottom',
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                crosshairs: {
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            colorFrom: '#D8E3F0',
+                            colorTo: '#BED1E6',
+                            stops: [0, 100],
+                            opacityFrom: 0.4,
+                            opacityTo: 0.5,
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                }
+            },
+            yaxis: {
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false,
+                },
+                labels: {
+                    show: false,
+                    formatter: function (val) {
+                        return val + "%";
+                    }
+                }
+
+            },
+            title: {
+                text: 'Monthly Inflation in Argentina, 2002',
+                floating: true,
+                offsetY: 330,
+                align: 'center',
+                style: {
+                    color: '#444'
+                }
+            }
+        };
+
+        var chart1 = new ApexCharts(document.querySelector("#columnchart"), options2);
+        chart1.render();
+        // keypress modal js
+        // get input field and add 'keyup' event listener
+        let searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keyup', search);
+
+        if(document.getElementById("defaultOpen")){
+            document.getElementById("defaultOpen").click();
+        }
+    </script>
+@endif

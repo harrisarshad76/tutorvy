@@ -37,5 +37,9 @@ class supportTkts extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class,'assign_to','id');
+    }
 
 }

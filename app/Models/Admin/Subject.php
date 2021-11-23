@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\SubjectCategory;
 use App\Models\Booking;
+use App\Models\Classroom;
 use App\Models\General\Education;
 use App\Models\General\Teach;
 use App\Models\Course;
@@ -54,6 +55,10 @@ class Subject extends Model
     public function booking()
     {
         return $this->hasMany(Booking::class);
+    }
+    public function classroom()
+    {
+        return $this->hasMany(Classroom::class);
     }
     public function getCatNameAttribute()
     {
