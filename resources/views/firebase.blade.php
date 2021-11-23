@@ -462,8 +462,8 @@ var unread_msg_count = payload.data.unread_msg_count;
                 else{
                     attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
                 }
-
-                let msg = `<div class="col-md-12 mt-3">
+                if($('#chatArea_'+sender_id).length){
+                    let msg = `<div class="col-md-12 mt-3">
                                 <div class="row">
                                     <div class="col-md-1">
                                         <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
@@ -478,7 +478,49 @@ var unread_msg_count = payload.data.unread_msg_count;
                                     </div>
                                 </div>
                             </div>`;
-                $('#chatArea_'+sender_id).append(msg);
+                    $('#chatArea_'+sender_id).append(msg);
+                }else{
+                    
+                    let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name}`)' >
+                                    <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
+                                    <div class="container-fluid m-0 p-0 img-chats">
+                                       
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                          
+                                        <span class="activeDot" id="activeDot_"></span>
+                                        <div class="img-chat w-100">
+
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p class="time-chat">11:25</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                       
+                                                            Say Hi to 
+                                                        </p>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <span class="unread_co"  id="unseen_msg_cnt_">
+                                                            2
+                                                        </span>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>`;
+                    $('.line-box').prepend(contact);            
+
+                }
+                
                 
             }else if(url+'#' == custom_url){
                 var msg_type = payload.data.msg_type;
@@ -492,8 +534,8 @@ var unread_msg_count = payload.data.unread_msg_count;
                 else{
                     attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
                 }
-                
-                let msg = `<div class="col-md-12 mt-3">
+                if($('#chatArea_'+sender_id).length){
+                    let msg = `<div class="col-md-12 mt-3">
                                 <div class="row">
                                     <div class="col-md-1">
                                         <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
@@ -508,7 +550,49 @@ var unread_msg_count = payload.data.unread_msg_count;
                                     </div>
                                 </div>
                             </div>`;
-                $('#chatArea_'+sender_id).append(msg);
+                    $('#chatArea_'+sender_id).append(msg);
+                }else{
+                    
+                    let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name}`)' >
+                                    <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
+                                    <div class="container-fluid m-0 p-0 img-chats">
+                                       
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                          
+                                        <span class="activeDot" id="activeDot_"></span>
+                                        <div class="img-chat w-100">
+
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p class="time-chat">11:25</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                       
+                                                            Say Hi to 
+                                                        </p>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <span class="unread_co"  id="unseen_msg_cnt_">
+                                                            2
+                                                        </span>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>`;
+                    $('.line-box').prepend(contact);  
+
+                }
+                
             }
             
         }
