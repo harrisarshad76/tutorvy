@@ -31,6 +31,8 @@ messaging.onMessage((payload) => {
     var user_role_id = $(".user_role_id").val();
     var unread_msg_count = payload.data.unread_msg_count;
     var rec_msg_count = payload.data.rec_msg_count;
+
+
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
@@ -236,7 +238,7 @@ messaging.onMessage((payload) => {
                                
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
@@ -315,7 +317,7 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                 onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
@@ -581,7 +583,7 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
@@ -660,6 +662,7 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
