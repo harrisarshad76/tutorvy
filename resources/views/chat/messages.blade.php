@@ -367,7 +367,7 @@
                                     <div class="img-chat">
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="name-client" id="clientName"></p>
+                                                <p class="name-client mb-0" id="clientName"></p>
                                             </div>
                                         </div>
                                         <div class="row">
