@@ -235,7 +235,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                                
                 }else{
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
+                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                        
@@ -311,7 +311,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                 }else{
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
+                                onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')">
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                 
@@ -577,7 +577,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                             
                 }else{
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
+                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -651,7 +651,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                             
                 }else{
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
+                                    onclick="selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')" >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -691,7 +691,7 @@ var unread_msg_count = payload.data.unread_msg_count;
                 
             }
             
-        
+        }
         
         if (type == "booking_rescheduled") {
             let redirect = body + '<br> ' + `<a href="` + slug + `" class="notification_link"> click here to view.</a>`;
