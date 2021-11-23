@@ -232,7 +232,8 @@ $(document).ready(function(){
             type:"get",
 
             success:function(response){
-                $(".chatArea").animate({ scrollTop: $(document).height() }, 1000);
+                // $(".chatArea").animate({ scrollTop: $(document).height() }, 1000);
+                $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                 $auth = "{{Auth::user()->id}}";
                 var attachment = '';
                 $('#chatArea_'+id).html('');

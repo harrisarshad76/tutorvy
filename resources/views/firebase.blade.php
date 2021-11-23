@@ -31,6 +31,8 @@ messaging.onMessage((payload) => {
     var user_role_id = $(".user_role_id").val();
     var unread_msg_count = payload.data.unread_msg_count;
     var rec_msg_count = payload.data.rec_msg_count;
+
+
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
@@ -236,9 +238,9 @@ messaging.onMessage((payload) => {
                                
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                        
@@ -252,7 +254,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -315,9 +317,9 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                 <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                 <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -330,7 +332,7 @@ messaging.onMessage((payload) => {
                                                 <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                             </div>
                                             <div class="col-md-3 ">
-                                                <p class="time-chat">11:25</p>
+                                                <p class="time-chat"></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -581,9 +583,9 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
-
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -597,7 +599,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -660,8 +662,9 @@ messaging.onMessage((payload) => {
 
                 }else{
                     $("#recent_msg_"+sender_data.id).text(msgs);
+                    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
-                                    onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
+                                    onclick='selectUser(`+sender_data.id+`,`+sender_data.first_name+` `+sender_data.last_name+`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
@@ -675,7 +678,7 @@ messaging.onMessage((payload) => {
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <p class="time-chat">11:25</p>
+                                                    <p class="time-chat"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
