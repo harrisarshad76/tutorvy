@@ -276,7 +276,7 @@
                                             <img src="{{asset($staff->picture)}}"
                                                 alt="std-icon" />
                                             </span>
-                                        <span class="pl-2 alex-names">{{$staff->first_name}} {{$staff->last_name}}</span>
+                                        <span class="pl-2 alex-names">{{$staff->name}}</span>
                                     </div>
                                     <div class="col-md-6 col-6">
                                         @if ($staff->id == $ticket->assign_to)
