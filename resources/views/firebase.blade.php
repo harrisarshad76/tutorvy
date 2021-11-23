@@ -232,7 +232,8 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
 
-                    
+                    $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
+                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
                                
                 }else{
 
@@ -308,9 +309,9 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
 
-                    
-
-                            
+                    $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
+                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
+                               
                 }else{
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
@@ -572,7 +573,8 @@ messaging.onMessage((payload) => {
                     $('#chatArea_'+sender_id).append(msg);
 
                 }else if($('#chatClient_'+sender_id).length){
-
+                    $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
+                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
                 }else{
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
@@ -646,9 +648,8 @@ messaging.onMessage((payload) => {
                         $('#chatArea_'+sender_id).append(msg);
 
                 }else if($('#chatClient_'+sender_id).length){
-             
-
-                            
+                    $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
+                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
                 }else{
                    
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
