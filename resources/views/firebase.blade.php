@@ -29,7 +29,7 @@ messaging.onMessage((payload) => {
 
     var user_id = $(".user_id").val();
     var user_role_id = $(".user_role_id").val();
-
+var unread_msg_count = payload.data.unread_msg_count;
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
@@ -193,10 +193,70 @@ messaging.onMessage((payload) => {
             var url = window.location.href;
             var origin = window.location.origin
             var custom_url = origin + '/tutor/chat';
-
+            var sender_id = payload.data.sender_id;
+            var sender_data = payload.data.sender_data;
+            sender_data = JSON.parse(sender_data)
+          
             if(url == custom_url) {
-                var url = slug.replace(/[^0-9]/gi, '');
                 
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> `+sender_data.first_name+` `+sender_data.last_name+`</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+sender_id).append(msg);
+                
+            }else if(url+'#' == custom_url){
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+                
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> `+sender_data.first_name+` `+sender_data.last_name+`</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+sender_id).append(msg);
             }
 
         }
@@ -385,10 +445,72 @@ messaging.onMessage((payload) => {
             var url = window.location.href;
             var origin = window.location.origin
             var custom_url = origin + '/student/chat';
-
+            var sender_id = payload.data.sender_id;
+            var sender_data = payload.data.sender_data;
+            sender_data = JSON.parse(sender_data)
+          
             if(url == custom_url) {
-                var url = slug.replace(/[^0-9]/gi, '');
+                console.log(custom_url)
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> `+sender_data.first_name+` `+sender_data.last_name+`</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+sender_id).append(msg);
+                
+            }else if(url+'#' == custom_url){
+                var msg_type = payload.data.msg_type;
+                var msgs = payload.data.msg;
+
+                if(msg_type == 'file'){
+                    if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                        attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
+                    }
+                }
+                else{
+                    attachment = `<p class="senderText mb-0">` + msgs + ` </p>`;
+                }
+                
+                let msg = `<div class="col-md-12 mt-3">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset('`+sender_data.picture+`')}}" class="profile-img" alt="">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div class="">
+                                            <p class="mb-0"><b> `+sender_data.first_name+` `+sender_data.last_name+`</b></p>
+                                            <small class="dull pull-right">1min ago</small>
+                                                `+attachment+`
+                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#chatArea_'+sender_id).append(msg);
             }
+            
         }
         
         if (type == "booking_rescheduled") {
