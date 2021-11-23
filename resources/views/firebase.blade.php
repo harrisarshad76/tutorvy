@@ -30,6 +30,7 @@ messaging.onMessage((payload) => {
     var user_id = $(".user_id").val();
     var user_role_id = $(".user_role_id").val();
     var unread_msg_count = payload.data.unread_msg_count;
+    var rec_msg_count = payload.data.rec_msg_count;
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;
@@ -198,9 +199,6 @@ messaging.onMessage((payload) => {
             var sender_data = payload.data.sender_data;
             sender_data = JSON.parse(sender_data);
             if(url == custom_url) {
-                
-            
-
                 if(msg_type == 'file'){
                     if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                         attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + msgs + `')}}">`;
@@ -233,9 +231,11 @@ messaging.onMessage((payload) => {
                 }else if($('#chatClient_'+sender_id).length){
 
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
-                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
+                    $("#unseen_msg_cnt_"+sender_data.id).text(rec_msg_count);
+                    $("#recent_msg_"+sender_data.id).text(msgs);
                                
                 }else{
+                    $("#recent_msg_"+sender_data.id).text(msgs);
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
@@ -248,7 +248,7 @@ messaging.onMessage((payload) => {
                                         <div class="img-chat w-100">
 
                                             <div class="row">
-                                                <div class="col-9">
+                                                <div class="col-md-9 ">
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
@@ -256,8 +256,8 @@ messaging.onMessage((payload) => {
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-9">
-                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                <div class="col-md-9 msg_parent">
+                                                    <p class="massage-client mt-0" id="recent_msg_`+sender_data.id+`">
                                                        
                                                         `+msgs+` 
                                                         </p>
@@ -265,7 +265,7 @@ messaging.onMessage((payload) => {
                                                 </div>
                                                 <div class="col-md-3">
                                                         <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
-                                                            `+unread_msg_count+`
+                                                            `+rec_msg_count+`
                                                         </span>
                                                     
                                                 </div>
@@ -310,9 +310,11 @@ messaging.onMessage((payload) => {
                 }else if($('#chatClient_'+sender_id).length){
 
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
-                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
+                    $("#unseen_msg_cnt_"+sender_data.id).text(rec_msg_count);
+                    $("#recent_msg_"+sender_data.id).text(msgs);
 
                 }else{
+                    $("#recent_msg_"+sender_data.id).text(msgs);
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                 onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
@@ -324,22 +326,22 @@ messaging.onMessage((payload) => {
                                     <span class="activeDot" id="activeDot_"></span>
                                     <div class="img-chat w-100">
                                         <div class="row">
-                                            <div class="col-9">
+                                            <div class="col-md-9">
                                                 <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 ">
                                                 <p class="time-chat">11:25</p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-9">
-                                                <p class="massage-client mt-0" id="recent_msg_">
+                                            <div class="col-md-9 msg_parent">
+                                                <p class="massage-client mt-0" id="recent_msg_`+sender_data.id+`">
                                                     `+msgs+`
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
                                                 <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
-                                                    `+unread_msg_count+`
+                                                    `+rec_msg_count+`
                                                 </span>
                                             </div>
                                         </div>
@@ -574,8 +576,12 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
-                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
+                    $("#unseen_msg_cnt_"+sender_data.id).text(rec_msg_count);
+                    $("#recent_msg_"+sender_data.id).text(msgs);
+
                 }else{
+                    $("#recent_msg_"+sender_data.id).text(msgs);
+
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
@@ -587,7 +593,7 @@ messaging.onMessage((payload) => {
                                         <div class="img-chat w-100">
 
                                             <div class="row">
-                                                <div class="col-9">
+                                                <div class="col-md-9">
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
@@ -595,8 +601,8 @@ messaging.onMessage((payload) => {
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-9">
-                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                <div class="col-md-9 msg_parent">
+                                                    <p class="massage-client mt-0" id="recent_msg_`+sender_data.id+`">
                                                     
                                                             `+msgs+`
                                                         </p>
@@ -604,7 +610,7 @@ messaging.onMessage((payload) => {
                                                 </div>
                                                 <div class="col-md-3">
                                                         <span class="dot unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
-                                                        `+unread_msg_count+`
+                                                        `+rec_msg_count+`
                                                         </span>
                                                     
                                                 </div>
@@ -649,9 +655,11 @@ messaging.onMessage((payload) => {
 
                 }else if($('#chatClient_'+sender_id).length){
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
-                    $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
+                    $("#unseen_msg_cnt_"+sender_data.id).text(rec_msg_count);
+                    $("#recent_msg_"+sender_data.id).text(msgs);
+
                 }else{
-                   
+                    $("#recent_msg_"+sender_data.id).text(msgs);
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
                                     onclick='selectUser(`+sender_data.id+`,'`+sender_data.first_name+` `+sender_data.last_name+`')' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
@@ -663,7 +671,7 @@ messaging.onMessage((payload) => {
                                         <div class="img-chat w-100">
 
                                             <div class="row">
-                                                <div class="col-9">
+                                                <div class="col-md-9">
                                                     <p id="name_main" class="name-client">`+sender_data.first_name+` `+sender_data.last_name+` </p>
                                                 </div>
                                                 <div class="col-md-3">
@@ -671,16 +679,15 @@ messaging.onMessage((payload) => {
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-9">
-                                                    <p class="massage-client mt-0" id="recent_msg_">
-                                                    
-                                                    `+msgs+`
+                                                <div class="col-md-9 msg_parent">
+                                                    <p class="massage-client mt-0" id="recent_msg_`+sender_data.id+`">
+                                                            `+msgs+`
                                                         </p>
 
                                                 </div>
                                                 <div class="col-md-3">
                                                         <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
-                                                            `+unread_msg_count+`
+                                                            `+rec_msg_count+`
                                                         </span>
                                                     
                                                 </div>
