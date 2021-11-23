@@ -75,7 +75,7 @@ class Notification extends Model
                 'msg' => $msg,
                 'receiver_id' => $user_id,
                 'sender_id' => \Auth::user()->id,
-                'sender_data' => User::where('id',\Auth::user()->id)->first(),
+                'sender_data' => json_encode(User::where('id',\Auth::user()->id)->first()),
             ]);
         }else{
             $notificationBuilder->setBody($body)
