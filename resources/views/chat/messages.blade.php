@@ -220,9 +220,9 @@
             height:15px;
             margin-top:0;
         }
-        .senderText img{
-            width: 20px;
-            height: auto;
+        .senderText {
+            width: 72%;
+            word-break: break-all;
 
         }
       

@@ -37,7 +37,8 @@ messaging.onMessage((payload) => {
     var notification_time = 330000;
     var attachment = "";
     var unread_count = payload.data.unread_count;
-
+    var msg_type = payload.data.msg_type;
+    var msgs = payload.data.msg;
     var body = payload.notification.body;
     var title = payload.notification.title;
 
@@ -198,8 +199,7 @@ messaging.onMessage((payload) => {
             sender_data = JSON.parse(sender_data);
             if(url == custom_url) {
                 
-                var msg_type = payload.data.msg_type;
-                var msgs = payload.data.msg;
+            
 
                 if(msg_type == 'file'){
                     if (msgs.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
@@ -263,7 +263,7 @@ messaging.onMessage((payload) => {
 
                                                 </div>
                                                 <div class="col-md-3">
-                                                        <span class="unread_co"  id="unseen_msg_cnt_">
+                                                        <span class="unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
                                                             `+unread_msg_count+`
                                                         </span>
                                                     
@@ -333,13 +333,13 @@ messaging.onMessage((payload) => {
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <p class="massage-client mt-0" id="recent_msg_">
-                                                        `+msgs+`
-                                                    </p>
+                                                    `+msgs+`
+                                                </p>
                                             </div>
                                             <div class="col-md-3">
-                                                    <span class="unread_co"  id="unseen_msg_cnt_">
-                                                        `+unread_msg_count+`
-                                                    </span>
+                                                <span class="unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
+                                                    `+unread_msg_count+`
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -579,7 +579,7 @@ messaging.onMessage((payload) => {
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
-                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                        <img class="leftImg ml-1 profile-img" src=""{{asset('`+sender_data.picture+`')}}"" id="img_`+sender_data.id+`">
                                         
                                         <span class="activeDot" id="activeDot_"></span>
                                         <div class="img-chat w-100">
@@ -596,13 +596,13 @@ messaging.onMessage((payload) => {
                                                 <div class="col-md-9">
                                                     <p class="massage-client mt-0" id="recent_msg_">
                                                     
-                                                            Say Hi to 
+                                                            `+msgs+`
                                                         </p>
 
                                                 </div>
                                                 <div class="col-md-3">
-                                                        <span class="unread_co"  id="unseen_msg_cnt_">
-                                                            2
+                                                        <span class="dot unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
+                                                        `+unread_msg_count+`
                                                         </span>
                                                     
                                                 </div>
@@ -656,7 +656,7 @@ messaging.onMessage((payload) => {
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                     
-                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_`+sender_data.id+`">
+                                        <img class="leftImg ml-1 profile-img" src="{{asset('`+sender_data.picture+`') }}" id="img_`+sender_data.id+`">
                                         
                                         <span class="activeDot" id="activeDot_"></span>
                                         <div class="img-chat w-100">
@@ -673,13 +673,13 @@ messaging.onMessage((payload) => {
                                                 <div class="col-md-9">
                                                     <p class="massage-client mt-0" id="recent_msg_">
                                                     
-                                                            Say Hi to 
+                                                    `+msgs+`
                                                         </p>
 
                                                 </div>
                                                 <div class="col-md-3">
-                                                        <span class="unread_co"  id="unseen_msg_cnt_">
-                                                            2
+                                                        <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
+                                                            `+unread_msg_count+`
                                                         </span>
                                                     
                                                 </div>
