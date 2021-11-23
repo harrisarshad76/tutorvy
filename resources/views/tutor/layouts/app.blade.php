@@ -38,6 +38,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- iGuider Plugin -->
+        <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <!-- iGuider Plugin -->
 
     <!-- Styles -->
 
@@ -193,7 +197,15 @@
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
-            <!-- <script src="{{ asset('assets/firebase/index.js') . '?ver=' . rand() }}"></script> -->
+
+        <!-- iGuider Plugin -->
+            <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>	
+                    
+        <!-- iGuider Plugin -->
+
+   
+   <!-- <script src="{{ asset('assets/firebase/index.js') . '?ver=' . rand() }}"></script> -->
             @include('firebase')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
 
@@ -206,6 +218,37 @@
             @yield('js')
             <script>
                 $(document).ready(function() {
+
+                    // iGuider Initialization
+
+                        $('.start-tour').on('click',function(){
+                        iGuider({
+                            tourTitle:'continue.enable',
+                            continue:{
+                                enable:true,
+                                cover:'../doc_files/images/hello.gif',
+                                overlayColor:'#000',
+                                overlayOpacity:0.5
+                            },
+                            steps:[{
+                                title:'Step 1',
+                                content:'Step 1 Description',	
+                                target:'el-1'
+                            },{
+                                title:'Step 2',
+                                content:'Step 2 Description',	
+                                target:'el-2'
+                            },{
+                                title:'Step 3',
+                                content:'Step 3 Description',	
+                                target:'el-3'
+                            }]
+                            });
+                            return false;
+                        });
+
+
+                    // iGuider Initialization
                     $('.table').DataTable();
                     get_all_notifications();
                     $('.table').DataTable();

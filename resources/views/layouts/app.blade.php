@@ -29,10 +29,16 @@
 
     <link href="{{ asset('assets/css/modal.css') }}" rel="stylesheet">
     <script src="assets/js/jquery.js"></script>
-
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.css')}}"/>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- iGuider Plugin -->
+        <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <!-- iGuider Plugin -->
+
+ 
+
 
 <style>
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -66,11 +72,35 @@
 <script>
 
 
-
     $(document).ready(function(){
         $(".input-subject").select2();
         $(".form-select").select2();
         $("#subjects").select2();
+        $('.start-tour').on('click',function(){
+		iGuider({
+			tourTitle:'continue.enable',
+			continue:{
+				enable:true,
+				cover:'../doc_files/images/hello.gif',
+				overlayColor:'#000',
+				overlayOpacity:0.5
+			},
+			steps:[{
+				title:'Step 1',
+				content:'Step 1 Description',	
+				target:'el-1'
+			},{
+				title:'Step 2',
+				content:'Step 2 Description',	
+				target:'el-2'
+			},{
+				title:'Step 3',
+				content:'Step 3 Description',	
+				target:'el-3'
+			}]
+            });
+            return false;
+        });
     })
     function getSubSubject(id){
 
