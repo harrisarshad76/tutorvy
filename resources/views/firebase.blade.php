@@ -196,10 +196,6 @@ var unread_msg_count = payload.data.unread_msg_count;
             var sender_id = payload.data.sender_id;
             var sender_data = payload.data.sender_data;
 
-            console.log(sender_data,'sender_data');
-            console.log(url)
-            console.log(custom_url)
-
             if(url == custom_url) {
                 
                 var msg_type = payload.data.msg_type;
