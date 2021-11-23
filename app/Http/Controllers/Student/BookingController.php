@@ -8,6 +8,7 @@ use App\Http\Controllers\General\NotifyController;
 use App\Models\Booking;
 use App\Models\Classroom;
 use App\Models\User;
+use App\Models\TutorSlots;
 use App\Models\Activitylogs;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -76,11 +77,25 @@ class BookingController extends Controller
     }
 
     public function bookNow($t_id){
-
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
         return view('student.pages.booking.book_now',compact('t_id','subjects','user'));
     }
+
+
+    public function getTutorSlots(Request $request) {
+
+        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
+
+        return response()->json([
+            'status_code'=> 200,
+            'success' => true,
+            'slots' => $slots,
+        ]);
+    }
+
+
+
     public function bookingDetail($id){
 
         $booking = Booking::with(['tutor','user','subject'])->where('id',$id)->first();

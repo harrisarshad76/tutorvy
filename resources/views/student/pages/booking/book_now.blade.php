@@ -158,18 +158,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                         <div class="col-md-4">
                             <label for=""><b> Class Date </b></label>
                             <!-- <input type="date" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required> -->
-                            <input type="date" class="form-control" name="date"   placeholder="Class Date" required>
+                            <input type="date" class="form-control" onchange="getDate(this.value)" id="get_date" name="date"   placeholder="Class Date" required>
                         
                             <!-- <input id="classDate" class="form-control"  name="date"  placeholder="Class Date"> -->
                         </div>
                         <div class=" col-md-4">
-                            <label for=""><b> Class Time </b></label>
-                            <!-- <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required> -->
-                            <input type="time" class="form-control" name="time" placeholder="Class Time" required>
-                        </div>
-                        <div class=" col-md-4">
                             <label for=""><b> Class Duration </b></label>
-                            <select name="duration" class="form-control form-select" id="">
+                            <select name="duration" onchange="showTimeSlot(this.value)" class="form-control form-select" id="">
                                 <option value="1">1 Hour</option>
                                 <option value="2">2 Hour</option>
                                 <option value="3">3 Hour</option>
@@ -178,6 +173,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                             </select>
                             <!-- <input type="number" min="1" max="24" class="form-control" name="duration" placeholder="Class Duration (in hours)" required> -->
                         </div>
+                        <div class=" col-md-4">
+                            <label for=""><b> Class Time </b></label>
+                            <!-- <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required> -->
+                            <!-- <input type="time" class="form-control" name="time" form-select placeholder="Class Time" required disabled> -->
+                            <select name="time" id="booking_time" class="form-control create_booking_time form-select" required disabled> </select>
+                        </div>
+
                     </div>
                     <div class="row mt-3">
                         <div class="input-text col-md-12">
@@ -271,6 +273,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 </section>
 @endsection
 @section('scripts')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @include('js_files.student.bookingJs')
 @endsection

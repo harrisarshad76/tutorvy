@@ -1,6 +1,6 @@
 <script type="text/javascript">
 /* Booking Insert */
-
+var time_slots = [];
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -8,7 +8,7 @@ $(document).ready(function() {
         }
     });
 
-
+    
 
     $( '#book_tutor_form' ).on( 'submit', function(e) {
     event.preventDefault();
@@ -114,6 +114,127 @@ $(document).ready(function() {
         }
     });
 })
+
+
+function getDate(date) {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let current_date = new Date(date);
+    let day = days[current_date.getDay()];
+    var duration = 1;
+    var tutor_id = $("#tutor_id").val();
+    getTutorSlots(tutor_id , day , date);
+
+}
+
+function getTutorSlots(id , day , date) {
+    $.ajax({
+        url: "{{route('student.getTutorSlots')}}",
+        type:"POST",
+        data: {id:id , day:day},
+        dataType:'json',
+        beforeSend:function(data) {
+            
+        },
+        success:function(response){
+            console.log(response);
+            var obj = response.slots;
+            if(response.status_code == 200 && response.success == true) {
+                if(obj.wrk_from != null && obj.wrk_to != null) {
+                    let ab = {
+                        date: date,
+                        from : obj.wrk_from , 
+                        to : obj.wrk_to , 
+                    }
+                    time_slots.push(ab);
+                }else{
+
+                    toastr.error('Time Slot Not Available',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });    
+                }
+            }else{
+                toastr.error('Something went wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        },
+        complete:function(data) {
+           
+        },
+        error:function(e){
+            toastr.error('Something went wrong',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+
+
+}
+
+function showTimeSlot(value) {
+
+    if(time_slots.length == 0) {
+        toastr.error('Time Slot Not Selected ... please Select',{
+            position: 'top-end',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2500
+        }); 
+    }else{
+        var date = time_slots[0].date;
+        var from = time_slots[0].from;
+        var to = time_slots[0].to;
+
+        let from_new_date = date + ' ' + from;
+        let to_new_date = date + ' ' + to;
+
+        var fr = new Date(from_new_date);
+        var too = new Date(to_new_date);
+
+        let a = moment(fr).format('DD/MM/YYYY HH:mm:ss');
+        let b = moment(too).format('DD/MM/YYYY HH:mm:ss');
+
+        var ms = moment(b,"DD/MM/YYYY HH:mm:ss").diff(moment(a,"DD/MM/YYYY HH:mm:ss"));
+        var d = moment.duration(ms);
+        console.log(d.hours() , "d hours");
+        var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+
+        let remain_hours = d.hours();
+
+        let check = remain_hours / value;
+        console.log(check , "check");
+        if(check <= 0 ||  check <= 0.0) {
+            toastr.error('TimeSlot not available',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            }); 
+        }else{
+            $("#booking_time").removeAttr('disabled');
+            var time_html = ``;
+            for(var i = 1 ; i <= check; i++ ) {
+                console.log(i , "i");
+                console.log(i + ':00' , "i");
+                time_html += `<option value="`+ i +`:00"> `+ i +`:00</option>`;
+            }
+            $(".create_booking_time").html(time_html);
+
+        }
+        
+        
+    }
+    
+}
 
 
 function pay_now(id) {
