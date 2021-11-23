@@ -136,13 +136,22 @@ $(document).ready(function(){
                 var message = `<p class="senderText mb-0">` + msg + ` </p>`;
                             
                 let html = `<div class="col-md-12 mt-3">
-                                <div class="sender">
-                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
-                                    `+message+`
-                                    <small class="dull">1min ago</small>
-                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
-                                </div>
-                            </div>`;
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="">
+                                                    <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                                    <small class="dull pull-right">1min ago</small>
+                                                    `+message+`
+                                                    
+                                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>`;
                 $('#chatArea_'+tt_id).append(html);
                 $(".msg").val('');
             }
@@ -176,14 +185,24 @@ $(document).ready(function(){
                     message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
                 }
                  
-                let html = `<div class="col-md-12 mt-3">
-                                <div class="sender">
-                                    <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
-                                    `+message+`
-                                    <small class="dull">1min ago</small>
-                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
-                                </div>
-                            </div>`;
+                let html = `
+                            <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="">
+                                                    <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                                    <small class="dull pull-right">1min ago</small>
+                                                    `+message+`
+                                                    
+                                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>`;
                 $('#chatArea_'+tt_id).append(html);
                 
                 $(".msg").val('');
@@ -235,19 +254,28 @@ $(document).ready(function(){
                       var type = response[i].type;
                       if(type == 'file'){
                         if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                            attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                                attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
                             }
                         }
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
-                            }
+                        }
                         let msg = `<div class="col-md-12 mt-3">
-                                        <div class="sender">
-                                            <small>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</small>
-                                            `+attachment+`
-                                            <small class="dull">1min ago</small>
-                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="">
+                                                    <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                                    <small class="dull pull-right">1min ago</small>
+                                                    `+attachment+`
+                                                    
+                                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
+                                       
                                     </div>`;
 
                         $('#chatArea_'+id).append(msg);
@@ -255,23 +283,39 @@ $(document).ready(function(){
                     }else{
                         var type = response[i].type;
                       if(type == 'file'){
-                        if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                            attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                            if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                                attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
                             }
                         }
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
-                            }
+                        }
+                        // let msg = `<div class="col-md-12 mt-3">
+                        //                 <div class="col-md-12 ">
+                        //                     <div class="reciever">
+                        //                         <small>From `+name+`</small>
+                        //                         `+attachment+`
+                        //                         <small class="recDull">1min ago</small>
+                        //                         <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
+                        //                     </div>
+                        //                 </div>
+                        //             </div>    `;
                         let msg = `<div class="col-md-12 mt-3">
-                                        <div class="col-md-12 ">
-                                            <div class="reciever">
-                                                <small>From `+name+`</small>
-                                                `+attachment+`
-                                                <small class="recDull">1min ago</small>
-                                                <a href="#" class="textMenu2"><i class="fa fa-ellipsis-h"></i></a>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset('`+pic+`')}}" class="profile-img" alt="">
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="">
+                                                    <p class="mb-0"><b> `+name+`</b></p>
+                                                    <small class="dull pull-right">1min ago</small>
+                                                    `+attachment+`
+                                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>    `;
+                                       
+                                    </div>`
                         $('#chatArea_'+id).append(msg);
 
                     }

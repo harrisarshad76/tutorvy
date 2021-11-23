@@ -42,13 +42,13 @@ class NotifyController extends Controller
     function getAllNotification(Request $request) {
 
       $notifications = Notification::orderBy('id','desc')->where('receiver_id',Auth::user()->id)->where('read_at',NULL)->get();
-    //   $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
+      $unread_msg_count = Message::where('receiver_id',\Auth::user()->id)->where('is_seen',0)->count();
 
       $response['message'] = 'Notification List';
       $response['status_code'] = 200;
       $response['success'] = true;
       $response['data'] = $notifications;
-    //   $response['unread_msg_count'] = $unread_msg_count;
+      $response['unread_msg_count'] = $unread_msg_count;
 
 
       return response()->json($response);
@@ -89,7 +89,7 @@ class NotifyController extends Controller
                 $user->save();
               }else{
                 array_push($fcm_array, $fcm_data);
-                $user->token = $fcm_data;
+                $user->token = $fcm_array;
                 $user->token_updated_at = date('Y-m-d h:m:s');
                 $user->is_token_updated = 1;
                 $user->save();

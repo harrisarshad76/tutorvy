@@ -34,6 +34,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+     <!-- iGuider Plugin -->
+     <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <!-- iGuider Plugin -->
+
     <!-- Styles -->
     @include('student.layouts.css')
     <style>
@@ -104,6 +109,12 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+            <!-- iGuider Plugin -->
+            <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
+                    
+        <!-- iGuider Plugin -->
+
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
     @include('firebase')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -123,68 +134,103 @@
         });
 
     $(document).ready(function(){
-        $('.table').DataTable();
-        get_all_notifications();
-        $(".mk").hide();
-        $(".vc").hide();
-        $(".dropify").dropify();
-        $('.js-multiSelect').select2();
-        $('.accSelect2').select2();
-        $('.form-select').select2();
-        // $("#year").yearpicker({
-        //         year: {{$user->year ?? '1990'}},
-        //         startYear: 1950,
-        //         endYear: 2050,
-        //     });
-        $(".js-range-slider").ionRangeSlider({
-            type: "double",
-            min: 0,
-            max: 100,
-            from: 0,
-            to: 20,
-            grid: true,
-            prefix: "$"
-        });
-        $(".age-range-slider").ionRangeSlider({
-            type: "double",
-            min: 18,
-            max: 70,
-            from: 18,
-            to: 70,
-            grid: true,
-        });
-        $("#msg").emojioneArea({
-                pickerPosition: "top",
-                saveEmojisAs:"shortname"
+
+
+        // iGuider Initialization
+
+        $('.start-tour').on('click',function(){
+        iGuider({
+            tourTitle:'continue.enable',
+            continue:{
+                enable:true,
+                cover:'../doc_files/images/hello.gif',
+                overlayColor:'#000',
+                overlayOpacity:0.5
+            },
+            steps:[{
+                title:'Step 1',
+                content:'Step 1 Description',   
+                target:'el-1'
+            },{
+                title:'Step 2',
+                content:'Step 2 Description',   
+                target:'el-2'
+            },{
+                title:'Step 3',
+                content:'Step 3 Description',   
+                target:'el-3'
+            }]
             });
-          /* Table Sorting */
+            return false;
+        });
 
-        //   $("th").append('<i class="ml-1 fa fa-sort"></i>');
-        //      $("th:last-child").css("color",'white');
 
-        //     const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+        // iGuider Initialization
 
-        //     const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-        //         v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-        //         )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
 
-        //     document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-        //         const table = th.closest('table');
-        //         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-        //             .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        //             .forEach(tr => table.appendChild(tr) );
-        //     })));
+
+            $('.table').DataTable();
+            get_all_notifications();
+            $(".mk").hide();
+            $(".vc").hide();
+            $(".dropify").dropify();
+            $('.js-multiSelect').select2();
+            $('.accSelect2').select2();
+            $('.form-select').select2();
+            // $("#year").yearpicker({
+            //         year: {{$user->year ?? '1990'}},
+            //         startYear: 1950,
+            //         endYear: 2050,
+            //     });
+            $(".js-range-slider").ionRangeSlider({
+                type: "double",
+                min: 0,
+                max: 100,
+                from: 0,
+                to: 20,
+                grid: true,
+                prefix: "$"
+            });
+            $(".age-range-slider").ionRangeSlider({
+                type: "double",
+                min: 18,
+                max: 70,
+                from: 18,
+                to: 70,
+                grid: true,
+            });
+            $("#msg").emojioneArea({
+                    pickerPosition: "top",
+                    saveEmojisAs:"shortname"
+                });
+            /* Table Sorting */
+
+            //   $("th").append('<i class="ml-1 fa fa-sort"></i>');
+            //      $("th:last-child").css("color",'white');
+
+            //     const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+            //     const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+            //         v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+            //         )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+            //     document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+            //         const table = th.closest('table');
+            //         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+            //             .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+            //             .forEach(tr => table.appendChild(tr) );
+            //     })));
 
 
             /* Table Sorting */
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-                })
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                    })
 
 
 
 
-                })
+        });
 
                 $('.dd').click(function() {
                     $('.dd2').toggle('hide');
@@ -307,7 +353,7 @@
                                                 `<img class="profile-img w-100 p-0 mt-2" src="{{ asset('assets/images/ico/Square-white.jpg') }}" alt="layer">`;
                                         }
                                         notification += `
-            <li>
+                    <li>
 
                     <div class="row bgm" >
                         <div class="col-md-2 text-center pr-0">
@@ -328,7 +374,7 @@
                             </a>
                         </div>
                     </div>
-            </li>`;
+                    </li>`;
                                     }
                                     $(".show_all_notifications").html(notification);
                                 }

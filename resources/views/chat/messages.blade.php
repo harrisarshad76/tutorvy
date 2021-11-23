@@ -58,8 +58,9 @@
         }
 
         .chatArea {
-            height: 470px;
+            height: 403px;
             padding-left: 0px;
+            margin-bottom: 8px;
             padding-right: 0;
             overflow-y: auto;
         }
@@ -91,7 +92,9 @@
         .img-style,
         .reciever-img-style {
             min-width: 301px;
-            border: 1px solid ;
+            /* border: 1px solid; */
+            border: none;
+            
             border-color: #D3D8DF;
             display:block;
             border-radius: 5px;
@@ -108,7 +111,9 @@
             width: 400px;
         } */
         .reciever-img-style, .reciever p{
-            border: 1px solid;
+            /* border: 1px solid; */
+            border: none;
+
             border-color:#6EAAFF;
         }
 
@@ -145,7 +150,7 @@
             position: absolute;
             top: 30px;
             left: 40%;
-            /* display: none; */
+            display: none;
         }
 
         .textMenu {
@@ -153,6 +158,7 @@
             position: absolute;
             top: 28%;
             right: 40%;
+            display:none;
         }
 
         .textMenu2 i,
@@ -259,84 +265,81 @@
                         </div>
                         <div class="line-box"></div>
                         @foreach($users as $contact)
-                            <?php
-                           
-                            
-                            ?>
-                            <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->first_name}}"
-                                onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
-                                <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
-                                <div class="container-fluid m-0 p-0 img-chats">
-                                    @if($contact->user->picture)
-                                        <?php
-                                            $path = Auth::user()->picture;
-                                        ?>
-                                        @if(file_exists( public_path($path) ))
-                                            <img src="{{asset($contact->user->picture)}}" class="profile-img leftImg ml-1" id="img_{{$contact->user->id}}">
+                            @if($contact->user != NULL)
+                                <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->id}}"
+                                    onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
+                                    <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
+                                    <div class="container-fluid m-0 p-0 img-chats">
+                                        @if($contact->user->picture)
+                                            <?php
+                                                $path = Auth::user()->picture;
+                                            ?>
+                                            @if(file_exists( public_path($path) ))
+                                                <img src="{{asset($contact->user->picture)}}" class="profile-img leftImg ml-1" id="img_{{$contact->user->id}}">
+                                            @else
+                                                <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
+                                            @endif
                                         @else
                                             <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
-                                        @endif
-                                    @else
-                                        <img class="leftImg ml-1 profile-img" src="{{asset('assets/images/ico/Square-white.jpg') }}" id="img_{{$contact->user->id}}">
-                                    @endif    
-                                    <span class="activeDot" id="activeDot_"></span>
-                                    <div class="img-chat w-100">
+                                        @endif    
+                                        <span class="activeDot" id="activeDot_"></span>
+                                        <div class="img-chat w-100">
 
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p class="time-chat">11:25</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <p class="time-chat">11:25</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <p class="massage-client mt-0" id="recent_msg_">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <p class="massage-client mt-0" id="recent_msg_">
+                                                                
+                                                        @if($contact->last_talk != null)
+                                                                <?php
+                                                                    if(startsWith($contact->last_talk->message,"<"))
+                                                                    $red = "True";
+                                                                else
+                                                                        $red = "False";
+                                                                ?>
+                                                            @if($contact->last_talk->type == 'file')
+                                                                <i class="fa fa-picture-o"></i> image
+                                                            @elseif($contact->last_talk->type == 'text' && $red == 'True')
+                                                                <?php
+                                                                    $string = $contact->last_talk->message;
+                                                                    // echo $contact->last_talk->message;
+                                                                    echo substr($string, 0,237);
+                                                                ?>
+                                                            @elseif($contact->last_talk->type == 'text' && $red == 'False')
+                                                                <?php
+                                                                    $string = $contact->last_talk->message;
+                                                                    echo substr($string, 0, 22);
+                                                                ?>
+                                                            @endif
+                                                        @else
+                                                            Say Hi to 
+                                                        @endif </p>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @if($contact->unread_count == 0)
+                                                        <span class="unread_co"  id="unseen_msg_cnt_">
                                                             
-                                                    @if($contact->last_talk != null)
-                                                            <?php
-                                                                 if(startsWith($contact->last_talk->message,"<"))
-                                                                 $red = "True";
-                                                             else
-                                                                     $red = "False";
-                                                            ?>
-                                                        @if($contact->last_talk->type == 'file')
-                                                            <i class="fa fa-picture-o"></i> image
-                                                        @elseif($contact->last_talk->type == 'text' && $red == 'True')
-                                                            <?php
-                                                                $string = $contact->last_talk->message;
-                                                                // echo $contact->last_talk->message;
-                                                                echo substr($string, 0,237);
-                                                            ?>
-                                                        @elseif($contact->last_talk->type == 'text' && $red == 'False')
-                                                            <?php
-                                                                $string = $contact->last_talk->message;
-                                                                echo substr($string, 0, 22);
-                                                            ?>
-                                                        @endif
+                                                        </span>
                                                     @else
-                                                        Say Hi to 
-                                                    @endif </p>
-
-                                            </div>
-                                            <div class="col-md-3">
-                                                @if($contact->unread_count == 0)
-                                                    <span class="unread_co"  id="unseen_msg_cnt_">
-                                                        
-                                                    </span>
-                                                @else
-                                                     <span class="dot unread_co"  id="unseen_msg_cnt_">
-                                                        {{$contact->unread_count}}
-                                                    </span>
-                                                @endif
-                                               
-
+                                                        <span class="dot unread_co"  id="unseen_msg_cnt_">
+                                                            {{$contact->unread_count}}
+                                                        </span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            @endif
+                            
                         @endforeach
                     </div>
 
@@ -371,9 +374,9 @@
                             <a href="#">
                                 <i class="fa fa-search headIcon"></i>
                             </a>
-                            <a href="#">
+                            <!-- <a href="#">
                                 <i class="fa fa-ellipsis-v headIcon"></i>
-                            </a>
+                            </a> -->
                         </div>
                     </nav>
                     <div class="line-box2"></div>
@@ -439,7 +442,7 @@
                 <form id="fileSendForm" enctype="multipart/form-data">
                     <div class="modal-body text-center ">
                     <h5></h5>
-                    <input type="file" name="file" class="dropify"  accept="image/*">
+                    <input type="file" name="file" class="dropify"  accept="image/*" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>

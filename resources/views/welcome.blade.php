@@ -17,8 +17,7 @@
                     e-learning
                 </p>
                 <p class="there-text there-text-main mt-4">
-                    There are many variations of passages available, but <br />
-                    the majority have suffered alteration in some form.</p>
+                    Tutorvy – Taking the Platform of e-learning to New Heights</p>
                 <div class=" input-text-button-1 input-text-main mt-4">
                     <a href="{{ url('tutor') }}" class="btn"> For tutor &#8594;
                     </a>
@@ -26,6 +25,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-6 col-12  top-home-img" data-aos="fade-left" data-aos-anchor="#example-anchor"
             data-aos-offset="100" data-aos-duration="1000" class="text-sectiom-one">
             <div class="image-section-image ">
@@ -53,8 +53,7 @@
                 </span>
 
                 <p class="there-text there-text-main ml-4 mr-4">
-                    There are many variations of passages available, but
-                    the majority have suffered alteration in some form.</p>
+                Tutorvy – Taking the Platform of e-learning to New Heights</p>
                 <div class=" input-text-button-1 input-text-main mt-4">
                     <a href="{{ url('tutor') }}" class="btn"> For tutor &#8594;
                     </a>
@@ -67,6 +66,11 @@
 <!-- how work -->
 <div class="container margin-top" data-aos="fade-up" data-aos-duration="1000" class=" mt-5">
     <br /> <br />
+    <p><a class="btn start-tour" href="#">Start Tour</a></p>
+
+<span class="custom-element" data-target="el-1">Element 1 </span>	
+<span class="custom-element" data-target="el-2">Element 2 </span>	
+<span class="custom-element" data-target="el-3">Element 3 </span>
     <div class="row scroll-logos">
         <div class="col-md-1 col-0"></div>
         <div class="col-md-2 col-4 m-0 p-0">
@@ -130,35 +134,35 @@
                         <span class=" tex" style="">1</span>
                         <span class="number-1 number-3" style="">Expert
                             tutors</span>
-                        <p class="number-2">There are many variations of passages available, but the
-                            majority have suffered alteration in some form.</p>
+                        <p class="number-2">Connect with our specialized tutors anytime and get your problem
+solved within no time. Work with him for as long as you finally get
+success.</p>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="">
                         <span class=" tex" style="">2</span>
-                        <span class="number-1 number-3" style="">Learn
-                            anytime</span>
-                        <p class="number-2">There are many variations of passages available, but the
-                            majority have suffered alteration in some form.</p>
+                        <span class="number-1 number-3" style="">Subject Specialist</span>
+                        <p class="number-2">You don’t need to go anywhere and pay a high fee to a subject 
+specialist. Choose a master for any specific subject of your desire 
+just in one click.</p>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="">
                         <span class=" tex" style="">3</span>
-                        <span class="number-1 number-3" style="">Expert
-                            tutors</span>
-                        <p class="number-2">There are many variations of passages available, but the
-                            majority have suffered alteration in some form.</p>
+                        <span class="number-1 number-3" style="">Virtual Learning</span>
+                        <p class="number-2">TWe can arrange live learning sessions at your desired time. Just 
+enter the virtual classroom and connect with your tutor.</p>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="">
                         <span class=" tex" style="">4</span>
-                        <span class="number-1 number-3" style="">Learn
-                            anytime</span>
-                        <p class="number-2">There are many variations of passages available, but the
-                            majority have suffered alteration in some form.</p>
+                        <span class="number-1 number-3" style="">Lessons Engagement</span>
+                        <p class="number-2">Our tutors use interactive exercises to bring difficult concepts to 
+life, draw diagrams, and mark homework and practice questions 
+together for better engagements with the learners.</p>
                     </div>
                 </div>
                 <div class="input-text input-text-main input-text-main-mob mt-4 d-flex"
@@ -172,8 +176,8 @@
         <div class="col-md-5 mt-5 none" style="height: 400px;" data-aos="fade-up" data-aos-duration="1000">
             <div class="" style="position: relative;top: 30px;">
                 <p class="there-text mt-4">
-                    There are many variations of passages available, but
-                    the majority have suffered alteration in some form.
+                At any level, advance your profession, earn a degree, or broaden 
+your knowledge
                 </p>
                 <div class="tilt tilt-logo" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">
                     <span class="tilt-logo-inner">
@@ -203,11 +207,11 @@
                                     Teach anytime, get
                                 </span>
                                 <span class="where-texts where-texts-mobile font-size font-weight800">
-                                    best rate
+                                    the best rate
                                 </span>
                                 <p class="there-text none mt-4">
-                                    There are many variations of passages available, but <br />
-                                    the majority have suffered alteration in some form.
+                                Share your knowledge by signing up and get paid accordingly for 
+what you deserve.
                                     <br />
                                 </p>
                                 <div class="container mt-4">
@@ -221,7 +225,7 @@
                                                     <div class="col-md-2 col-2">
                                                         <img src="assets/images/ico/book-icon-std.svg"
                                                             alt="book-icon-std" class="book-icons">
-                                                        <p class="number-4 mt-3">Find tutor</p>
+                                                        <p class="number-4 mt-3">Get Bookings</p>
                                                     </div>
                                                     <div class="col-md-2 col-2 m-0 p-0 mt-2">
                                                         <img src="assets/images/ico/line-icon.png" alt=""
@@ -292,10 +296,11 @@
             <div class="text-center">
                 <img src="assets/images/tutor.png" alt="tutor">
                 <p class="text-expert mt-4">
-                    Expert tutors
+                Verified Profiles
                 </p>
                 <span class="there-text mt-0">
-                    There are many variations of passages available, but the majority
+                We make certain that all the tutors who create profiles are 100% 
+verified.
                 </span>
             </div>
         </div>
@@ -303,10 +308,11 @@
             <div class="text-center">
                 <img src="assets/images/clock.png" alt="tutor">
                 <p class="text-expert mt-4">
-                    Expert tutors
+                Flexible Timings
                 </p>
                 <span class="there-text mt-0">
-                    There are many variations of passages available, but the majority
+                Do you have a busy schedule? Arrange your class at a time that 
+suits your routine.
                 </span>
             </div>
         </div>
@@ -314,10 +320,11 @@
             <div class="text-center">
                 <img src="assets/images/learning.png" alt="tutor">
                 <p class="text-expert mt-4">
-                    Expert tutors
+                Variety of Subjects
                 </p>
                 <span class="there-text mt-0">
-                    There are many variations of passages available, but the majority
+                We have 10000+ tutors that are experts in a wide range of 
+subjects.
                 </span>
             </div>
         </div>
@@ -325,10 +332,11 @@
             <div class="text-center">
                 <img src="assets/images/salary.png" alt="tutor">
                 <p class="text-expert mt-4">
-                    Expert tutors
+                Affordable Prices
                 </p>
                 <span class="there-text mt-0">
-                    There are many variations of passages available, but the majority
+                Look for your budget and hire a specialist tutor in your affordable 
+range
                 </span>
             </div>
         </div>
@@ -339,18 +347,21 @@
 <div class="container mt-5 margin-top-mobile" data-aos="fade-up" data-aos-duration="1000">
     <div class=" text-center text-xs-center">
         <p class="Learn-texts  Learn-texts-mobile font-size font-weight800">
-            Covering all
+             
             <span class="where-texts where-texts-mobile font-size font-weight800">
-                subject
+            Subjects
             </span>
+            We Cover
         </p>
         <span class="there-text shows mt-0">
-            There are many variations of passages available, but
-            the majority have suffered alteration in some form.
+            Ready to learn with us? Choose the subject of your desire from
+            the list given below and start exploring the new depths of your
+            selected course.
         </span>
         <span class="there-text none">
-            There are many variations of passages available, but<br />
-            the majority have suffered alteration in some form.
+        Ready to learn with us? Choose the subject of your desire from
+the list given below and start exploring the new depths of your
+selected course
         </span>
     </div>
     <!-- tabs -->
@@ -379,455 +390,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="col-md-9">
-            <div id="London" class="tabcontent show" style="display: block;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Paris" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="ForeignLanguage" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Tokyo" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="science" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="Humanities" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="Professional" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="Math" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="TestPrep" class="tabcontent">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-4 m-0 p-0">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>English</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <ul class="book-luli">
-                                <li>Arabic</li>
-                                <li>Bengali</li>
-                                <li>Bulgarian</li>
-                                <li>Cantonese</li>
-                                <li>Coptic</li>
-                                <li>Danish</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                                <li>Macedonian</li>
-                                <li>Arabic</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </div>
 </div>
 <!-- course thought -->
@@ -841,11 +403,10 @@
                 </p>
                 <p class="where-texts course-text Learn-texts-mobile font-size font-weight800"
                     style="">
-                    top tutors
+                    our top tutors
                 </p>
                 <p class="there-text there-text-left mt-4">
-                    There are many variations of passages available, but
-                    the majority have suffered alteration in some form.</p>
+                Explore the courses offered by our masters.</p>
                 <div class="input-text-1 input-text-center mt-4">
                     <a href="{{ url('course') }}">
                         <input type="submit" value="View all courses">

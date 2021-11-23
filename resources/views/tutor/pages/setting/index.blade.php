@@ -476,7 +476,7 @@
                                         <div class="col-md-12 mb-4">
                                             <h3>Slots</h3>
                                         </div>
-                                        <!-- <div class="col-md-12">
+                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-2">
                                                    <b> Day of Week</b>
@@ -484,22 +484,88 @@
                                                 <div class="col-md-4 text-center">
                                                     <b>Working Time</b>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <!-- <div class="col-md-2">
                                                     <b>Slot Length</b>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <b>Bookings per Slot</b>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-2 text-center">
                                                 <b>Day Off</b>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div> 
                                         <div class="col-md-12">
+                                            <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
+                                                @if(sizeof($user_slots) <= 0)
+                                                    @foreach($days as $day)
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-2 dayName">
+                                                                {{$day['day']}}
+                                                            </div>
+                                                            <input type="hidden" name="day[]" value="{{$days['day']}}" >
+                                                            <div class="col-md-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 pt-1">
+                                                                    From:
+                                                                    </div>
+                                                                    <div class="col-md-8 ">
+                                                                        <input type="time" name="from[]" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-4 pt-1">
+                                                                    To:
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="time" name="to[]" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2 dayCheck text-center">
+                                                                <input type="checkbox" name="day_off[]"  class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    @foreach($user_slots as $u_slot)
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-2 dayName">
+                                                                {{$u_slot->day}}
+                                                            </div>
+                                                            <input type="hidden" name="day[]" value="{{$u_slot->day}}" >
+                                                            <div class="col-md-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 pt-1">
+                                                                    From:
+                                                                    </div>
+                                                                    <div class="col-md-8 ">
+                                                                        <input type="time" name="from[]" value="{{$u_slot->wrk_from}}" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-4 pt-1">
+                                                                    To:
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="time" name="to[]" value="{{$u_slot->wrk_to}}" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                              
+                                                            <div class="col-md-2 dayCheck text-center">
+                                                                <input type="checkbox" name="day_off[]" value="1" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+                                                @endif
+                                                <div class="float-right">
+                                                    <button class="schedule-btn" type="submit">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div> 
+                                        <!-- <div class="col-md-12">
                                             <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
                                                 <div id="accordion">
 
-                                                @foreach($days as $day)
+                                                @foreach($days as $day) -->
                                                     <!-- <div class="col-md-12 pt-3">
                                                         <div class="row">
                                                             <div class="col-md-2 dayName"> {{$day['day']}} </div>
@@ -536,7 +602,7 @@
                                                             </div>
                                                         </div>
                                                     </div> -->
-                                                    <div class="card">
+                                                    <!-- <div class="card">
                                                         <div class="card-header" id="{{$day['day']}}" data-toggle="collapse" data-target="#day_{{$day['day']}}" aria-expanded="false" aria-controls="day_{{$day['day']}}">
                                                             <h5 class="mb-0" >
 
@@ -608,245 +674,7 @@
                                                 <button type="submit" class="btn btn-primary" id="slot_save"> Save </button>
                                                 <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
                                             </form>
-                                        </div>
-
-
-                                        <!-- <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Tuesday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Wednesday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Thursday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Friday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Saturday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 pt-3">
-                                            <div class="row">
-                                                <div class="col-md-2 dayName">
-                                                    Sunday
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4 pt-1">
-                                                           From:
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-4 pt-1">
-                                                           To:
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="time" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <select name="" class="form-control" id="">
-                                                        <option value="1 Hour">
-                                                        1 Hour
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2 dayName">
-                                                    <input type="number" class="form-control">
-
-                                                </div>
-                                                <div class="col-md-2 dayCheck text-center">
-                                                    <input type="checkbox" class="">
-
-                                                </div>
-                                            </div>
                                         </div> -->
-
-
                                     </div>
                                 </div>
                                 </div>
@@ -870,7 +698,7 @@
         $(".get").find("th:last-child").css("color",'red');
 
         $("#tutorSlotForm").submit(function(e) {
-        e.preventDefault();
+            e.preventDefault();
 
             var action = $(this).attr('action');
             var method = $(this).attr('method');
@@ -941,32 +769,6 @@
                     setInterval(function(){
                         window.location.href = "{{ route('tutor.settings') }}";
                     }, 1500);
-
-    @include('Modals.paymentModal')
-
-
-    <script>
-        function delPayMethod(id) {
-            $.ajax({
-                url: "{{ route('del.payment') }}",
-                type: "POST",
-                data: {
-                    id: id,
-                },
-                success: function(data) {
-                    if (data == "success") {
-                        toastr.success('Payment Method Deleted Successfully!', {
-                            position: 'top-end',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
-
-                        setInterval(function() {
-                            window.location.href = "{{ route('tutor.settings') }}";
-                        }, 1500);
-
-
                     }
                 },
             });

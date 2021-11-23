@@ -1544,6 +1544,7 @@ height:25px;
    });
    $(".no-ph").click(function(){
         $("#endCall").modal("show");
+        callOnModal();
     });
     $("#reviewLater").click(function(){
         window.location.href="{{route('student.classroom')}}";
@@ -1595,6 +1596,8 @@ height:25px;
                         timer: 2500
                     });
                     $("#reviewModal").modal('hide');
+                    $("#classOffModal").modal("hide");
+
                     window.location.href = "{{route('student.classroom')}}";
                 }else{
                     toastr.error(response.message,{
@@ -1967,6 +1970,7 @@ connection.onopen = function(event) {
     // connection.onUserStatusChanged(event);
 // timer.resume();
     //conection joined
+    $("#classOffModal").modal("hide");
     connection.send({
         class_joined: true
     });
@@ -2031,11 +2035,15 @@ connection.onmessage = function(event) {
         toastr.success("Tutor ended the class.");
         $(".content-wrapper").css("display","none !important");
         $("#reviewModal").modal("show");
+    $("#classOffModal").modal("hide");
+
     }
     if(event.data.call_confirmation === true){
         // toastr.success("Tutor ended the class.");
         // $(".content-wrapper").css("display","none !important");
         $("#callEndConfirmationModal").modal("show");
+    $("#classOffModal").modal("hide");
+
     }
     if(event.data.is_timer === true){
         console.log(event.data.time_value)
@@ -2085,6 +2093,9 @@ connection.onstream = function(event) {
         event.mediaElement.controls = false;
         var otherVideos = document.querySelector('#other-videos');
         otherVideos.appendChild(event.mediaElement);
+        $("#classOffModal").modal("hide");
+
+
     }
 
     // connection.onUserStatusChanged(event);
@@ -2177,6 +2188,9 @@ $("#endCallYes").click(function(){
     toastr.success("Class has Ended.");
     $("#endCall").modal("hide");
     $("#reviewModal").modal("show");
+    $("#classOffModal").modal("hide");
+
+
     $(".content-wrapper").css("display",'none');
     
 });
@@ -2187,6 +2201,9 @@ $("#endCallYes2").click(function(){
     toastr.success("Class has Ended.");
     $("#callEndConfirmationModal").modal("hide");
     $("#reviewModal").modal("show");
+    $("#classOffModal").modal("hide");
+
+
     $(".content-wrapper").css("display",'none');
     
 });
@@ -2450,6 +2467,7 @@ console.log(connection)
 
 
 designer.appendTo(document.getElementById('widget-container'), function() {
+    
     // if (params.open === true || params.open === 'true') {
     //         var tempStreamCanvas = document.getElementById('temp-stream-canvas');
     //         var tempStream = tempStreamCanvas.captureStream();
@@ -2476,7 +2494,8 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
             // alert('in join')
-            
+            $("#classOffModal").modal("hide");
+
             if (error) {
                 console.log(error)
                 if (error === connection.errors.ROOM_NOT_AVAILABLE) {
@@ -2555,6 +2574,9 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
                 $('#reviewModal').modal("show");
+             
+                $("#classOffModal").modal("hide");
+
                 $(".content-wrapper").css("display","none");
 
             });
@@ -2564,6 +2586,8 @@ designer.appendTo(document.getElementById('widget-container'), function() {
                 $('#countdownExample .values').html("Class Time Over");
                 $('#reviewModal').modal("show");
                 $(".content-wrapper").css("display","none");
+                $("#classOffModal").modal("hide");
+
             }
 
 
@@ -2815,9 +2839,9 @@ $(".s_status").change(function(){
     }
 });
 function callOnModal(){
+
     $("#classOffModal").modal("hide");
-    
-}
+};
 function callOffModal(){
     $("#classOffModal").modal("show");
     var defaults = {}
