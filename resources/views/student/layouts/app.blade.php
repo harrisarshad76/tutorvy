@@ -111,7 +111,7 @@
 
             <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>	
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
                     
         <!-- iGuider Plugin -->
 
@@ -139,27 +139,27 @@
         // iGuider Initialization
 
         $('.start-tour').on('click',function(){
-		iGuider({
-			tourTitle:'continue.enable',
-			continue:{
-				enable:true,
-				cover:'../doc_files/images/hello.gif',
-				overlayColor:'#000',
-				overlayOpacity:0.5
-			},
-			steps:[{
-				title:'Step 1',
-				content:'Step 1 Description',	
-				target:'el-1'
-			},{
-				title:'Step 2',
-				content:'Step 2 Description',	
-				target:'el-2'
-			},{
-				title:'Step 3',
-				content:'Step 3 Description',	
-				target:'el-3'
-			}]
+        iGuider({
+            tourTitle:'continue.enable',
+            continue:{
+                enable:true,
+                cover:'../doc_files/images/hello.gif',
+                overlayColor:'#000',
+                overlayOpacity:0.5
+            },
+            steps:[{
+                title:'Step 1',
+                content:'Step 1 Description',   
+                target:'el-1'
+            },{
+                title:'Step 2',
+                content:'Step 2 Description',   
+                target:'el-2'
+            },{
+                title:'Step 3',
+                content:'Step 3 Description',   
+                target:'el-3'
+            }]
             });
             return false;
         });
