@@ -140,6 +140,26 @@
 
         $('.start-tour').on('click',function(){
 		iGuider({
+            intro:{										//Default intro settings
+                enable:true,							//If set to true, before the tour you will see the introductory slide, which will offer to see a tour. 
+                
+                title:'Start Tuor Of Tutorvy',												//Title of introduction dialog
+                content:'This tour will tell you about the main site functionalities',					//Content of introduction dialog
+                
+                cover:'',								//Path to the cover of intro
+                overlayColor:false,						//For intro, you can specify the different color values of the overlay layer.
+                overlayOpacity:false,					//For intro, you can specify the different opacity values of the overlay layer.
+                width:false,							//Width of the intro message block
+                
+                bgColor:false,							//Background color of the intro message block
+                titleColor:false,						//Title color of the intro message block
+                
+                modalContentColor:false,				//Content color of the intro message block
+                modalTypeColor:false,					//Modal type color of the intro message block
+                
+                btnColor:false,							//Buttons color of the intro message block
+                btnHoverColor:false						//Buttons Hover color of the intro message block
+            },
 			tourTitle:'continue.enable',
 			continue:{
 				enable:true,

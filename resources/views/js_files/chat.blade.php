@@ -303,7 +303,7 @@ $(document).ready(function(){
                         let msg = `<div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <img src="{{asset('`+pic+`')}}" class="profile-img" alt="">
+                                                <img src="`+pic+`" class="profile-img" alt="">
                                             </div>
                                             <div class="col-md-11">
                                                 <div class="">
