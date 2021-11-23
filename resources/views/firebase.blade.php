@@ -264,7 +264,7 @@ messaging.onMessage((payload) => {
 
                                                 </div>
                                                 <div class="col-md-3">
-                                                        <span class="unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
+                                                        <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
                                                             `+unread_msg_count+`
                                                         </span>
                                                     
@@ -311,7 +311,7 @@ messaging.onMessage((payload) => {
 
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
                     $("#unseen_msg_cnt_"+sender_data.id).text(unread_msg_count);
-                               
+
                 }else{
 
                     let contact = `<a type="button" class="chatLeft w-100" id="chatClient_`+sender_data.id+`"
@@ -338,7 +338,7 @@ messaging.onMessage((payload) => {
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
-                                                <span class="unread_co"  id="unseen_msg_cnt_`+sender_data.id+`">
+                                                <span class="unread_co dot"  id="unseen_msg_cnt_`+sender_data.id+`">
                                                     `+unread_msg_count+`
                                                 </span>
                                             </div>
