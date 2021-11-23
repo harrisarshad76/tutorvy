@@ -140,7 +140,7 @@
 
         $('.start-tour').on('click',function(){
         iGuider({
-            tourTitle:'continue.enable',
+        tourTitle:'continue.enable',
         'intro': {
         'title': 'Welcome To Tutorvy',
         'content': 'Dashboard ',
@@ -152,6 +152,11 @@
                 overlayColor:'#000',
                 overlayOpacity:0.5
             },
+        'lang': {
+        'cancelText': '',
+        'tourMapText': '',
+        'endText': 'End tour'
+         },
             steps:[{
                 title:'Set Your Porifile',
                 content:'Here you can setup your profile',   
