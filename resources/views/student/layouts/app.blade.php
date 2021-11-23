@@ -139,27 +139,47 @@
         // iGuider Initialization
 
         $('.start-tour').on('click',function(){
-        iGuider({
-            tourTitle:'continue.enable',
-            continue:{
-                enable:true,
-                cover:'../doc_files/images/hello.gif',
-                overlayColor:'#000',
-                overlayOpacity:0.5
+		iGuider({
+            intro:{										//Default intro settings
+                enable:true,							//If set to true, before the tour you will see the introductory slide, which will offer to see a tour. 
+                
+                title:'Start Tuor Of Tutorvy',												//Title of introduction dialog
+                content:'This tour will tell you about the main site functionalities',					//Content of introduction dialog
+                
+                cover:'',								//Path to the cover of intro
+                overlayColor:false,						//For intro, you can specify the different color values of the overlay layer.
+                overlayOpacity:false,					//For intro, you can specify the different opacity values of the overlay layer.
+                width:false,							//Width of the intro message block
+                
+                bgColor:false,							//Background color of the intro message block
+                titleColor:false,						//Title color of the intro message block
+                
+                modalContentColor:false,				//Content color of the intro message block
+                modalTypeColor:false,					//Modal type color of the intro message block
+                
+                btnColor:false,							//Buttons color of the intro message block
+                btnHoverColor:false						//Buttons Hover color of the intro message block
             },
-            steps:[{
-                title:'Step 1',
-                content:'Step 1 Description',   
-                target:'el-1'
-            },{
-                title:'Step 2',
-                content:'Step 2 Description',   
-                target:'el-2'
-            },{
-                title:'Step 3',
-                content:'Step 3 Description',   
-                target:'el-3'
-            }]
+			tourTitle:'continue.enable',
+			continue:{
+				enable:true,
+				cover:'../doc_files/images/hello.gif',
+				overlayColor:'#000',
+				overlayOpacity:0.5
+			},
+			steps:[{
+				title:'Step 1',
+				content:'Step 1 Description',	
+				target:'el-1'
+			},{
+				title:'Step 2',
+				content:'Step 2 Description',	
+				target:'el-2'
+			},{
+				title:'Step 3',
+				content:'Step 3 Description',	
+				target:'el-3'
+			}]
             });
             return false;
         });
