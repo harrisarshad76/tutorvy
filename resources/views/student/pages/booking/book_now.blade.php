@@ -177,7 +177,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                             <label for=""><b> Class Time </b></label>
                             <!-- <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required> -->
                             <!-- <input type="time" class="form-control" name="time" form-select placeholder="Class Time" required disabled> -->
-                            <select name="time" id="booking_time" class="form-control create_booking_time form-select" required disabled> </select>
+                            <select name="time" id="booking_time" class="form-control create_booking_time form-select" required > </select>
                         </div>
 
                     </div>
