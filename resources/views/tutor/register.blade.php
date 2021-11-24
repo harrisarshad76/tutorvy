@@ -35,14 +35,15 @@
     <!-- Dropify CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/dropify.css') }}" />
     <link href="{{ asset('assets/css/fontawesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Moment Js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0rc.0/dist/js/select2.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
 
     <style>
         .error {
@@ -1096,34 +1097,47 @@
                 fbLogout();
             };
 
-            // function onSignIn(googleUser) {
-            //     var profile = googleUser.getBasicProfile();
-            //     var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
-            //     var lastName = profile.getName().split(' ').slice(-1).join(' ');
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                var firstName = profile.getName().split(' ').slice(0, -1).join(' ');
+                var lastName = profile.getName().split(' ').slice(-1).join(' ');
 
-            //     $.ajax({
-            //         url: "{{ route('login.google') }}",
-            //         dataType: "json",
-            //         type: "Post",
-            //         async: true,
-            //         data: {
-            //             _token: "{{ csrf_token() }}",
-            //             first_name: firstName,
-            //             last_name: lastName,
-            //             email: profile.getEmail(),
-            //             picture: profile.getImageUrl(),
-            //             provider: 'google',
-            //             role: 2
-            //         },
-            //         success: function(data) {
-            //             if(data.status == 200){
-            //                 window.location.href = window.location.origin+data.url
-            //             }
-            //         },
+                $.ajax({
+                    url: "{{ route('login.google') }}",
+                    dataType: "json",
+                    type: "Post",
+                    async: true,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: profile.getEmail(),
+                        picture: profile.getImageUrl(),
+                        provider: 'google',
+                        role: 2
+                    },
+                    success: function(data) {
+                        if(data.status == 200){
+                            signOut();
+                            window.location.href = window.location.origin+data.url
+                        }
+                        if(data.status == 400){
+                            signOut();
+                            document.querySelector('.abcRioButtonIcon').style.marginLeft="15px";
+                            document.querySelector('.abcRioButtonContents').style.marginLeft="-40px";
+                            document.querySelector('.abcRioButtonContents span').innerHTML="Continue With Google";
+                            toastr.error(data.message,{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                    },
 
-            //     });
+                });
 
-            // }
+            }
 
             //Facebook Login Script
 
@@ -1165,33 +1179,44 @@
                 }, {scope: 'email'});
             }
 
-            // Fetch the user profile data from facebook
-            // function getFbUserData(){
-            //     FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
-            //     function (response) {
-            //         $.ajax({
-            //             url: "{{ route('login.google') }}",
-            //             dataType: "json",
-            //             type: "Post",
-            //             async: true,
-            //             data: {
-            //                 _token: "{{ csrf_token() }}",
-            //                 first_name: response.first_name,
-            //                 last_name: response.last_name,
-            //                 email: response.email,
-            //                 picture: response.picture.data.url,
-            //                 provider: 'facebook',
-            //                 role: 2
-            //             },
-            //             success: function(data) {
-            //                 if(data.status == 200){
-            //                     window.location.href = window.location.origin+data.url
-            //                 }
-            //             },
+            //Fetch the user profile data from facebook
+            function getFbUserData(){
+                FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+                function (response) {
+                    $.ajax({
+                        url: "{{ route('login.google') }}",
+                        dataType: "json",
+                        type: "Post",
+                        async: true,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            first_name: response.first_name,
+                            last_name: response.last_name,
+                            email: response.email,
+                            picture: response.picture.data.url,
+                            provider: 'facebook',
+                            role: 2
+                        },
+                        success: function(data) {
+                            if(data.status == 200){
+                                fbLogout();
+                                window.location.href = window.location.origin+data.url
+                            }
+                            if(data.status == 400){
 
-            //         });
-            //     });
-            // }
+                                fbLogout();
+                                toastr.error(data.message,{
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                });
+                            }
+                        },
+
+                    });
+                });
+            }
 
             // Logout from facebook
             function fbLogout() {

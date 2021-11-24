@@ -66,11 +66,11 @@
 <!-- how work -->
 <div class="container margin-top" data-aos="fade-up" data-aos-duration="1000" class=" mt-5">
     <br /> <br />
-    <p><a class="btn start-tour" href="#">Start Tour</a></p>
+    <!-- <p><a class="btn start-tour" href="#">Start Tour</a></p>
 
 <span class="custom-element" data-target="el-1">Element 1 </span>	
 <span class="custom-element" data-target="el-2">Element 2 </span>	
-<span class="custom-element" data-target="el-3">Element 3 </span>
+<span class="custom-element" data-target="el-3">Element 3 </span> -->
     <div class="row scroll-logos">
         <div class="col-md-1 col-0"></div>
         <div class="col-md-2 col-4 m-0 p-0">
