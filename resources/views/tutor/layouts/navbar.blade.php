@@ -549,7 +549,7 @@
                         <span class=" show_message_counts"></span>
                 </a>
             </li>
-            <li class="nav-item profile-name1" id="imageDropdowns">
+            <li class="nav-item profile-name1" id="imageDropdowns"  data-target="el-profile">
                 <div class="dropdown d-flex">
                     <a class="nav-link profile-name dd pl-4 mr-3 mt-0 pb-0" href="#"
                         data-toggle="dropdown" aria-expanded="false">

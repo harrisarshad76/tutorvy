@@ -208,12 +208,28 @@
                                     <div class="card-1 mt-3">
                                         <div class="row pt-3 mb-3 ml-1 mr-1 border-bottom pb-1">
                                             <div class="col-md-6">
-                                                <div class="">
+                                                <div class="pt-2">
                                                     <span class="heading-fifth">Status</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="">
+                                                    <select name="" class="form-control" id="ticketStatus">
+                                                        @if ($ticket->status == 0)
+                                                            <option value="0" selected disabled>Pending</option>
+                                                            <option value="1">Open</option>
+                                                            <option value="2">Resolved</option>
+                                                            <option value="3">Waiting</option>
+                                                            <option value="4">Closed</option>
+                                                        @else
+                                                            <option value="0" >Pending</option>
+                                                            <option value="1">Open</option>
+                                                            <option value="2">Resolved</option>
+                                                            <option value="3">Waiting</option>
+                                                            <option value="4">Closed</option>
+                                                        @endif
+                                                    </select>
+                                                <!-- <div class="">
+                                                 
                                                     <span class="pending-text-1 float-right">
                                                         @if($ticket->status == 0)
                                                             Pending 
@@ -221,7 +237,7 @@
                                                             - 
                                                         @endif
                                                     </span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
 

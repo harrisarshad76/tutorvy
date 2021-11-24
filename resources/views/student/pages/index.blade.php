@@ -34,9 +34,9 @@
                                         </a>
                                        <p><a class="btn start-tour" href="#">Start Tour</a></p>
 
-{{-- <span class="custom-element" data-target="el-1">Element 1 </span>   
+<!-- <span class="custom-element" data-target="el-1">Element 1 </span>   
 <span class="custom-element" data-target="el-2">Element 2 </span>   
-<span class="custom-element" data-target="el-3">Element 3 </span> --}}
+<span class="custom-element" data-target="el-3">Element 3 </span> -->
 
                                     </div>
                                 </div>

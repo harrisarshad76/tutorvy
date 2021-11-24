@@ -85,25 +85,25 @@
                      Dashboard
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'tutor/booking') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'tutor/booking') active @endif w-100" data-target="el-booking">
                  <a href="{{route('tutor.booking')}}" aria-expanded="false" class="">
                      <img src="{{asset('assets/images/ico/book-icons.png') }}" alt="book-ico" class=" mr-2">
                      Bookings
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'tutor/classroom') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'tutor/classroom') active @endif w-100" data-target="el-classroom">
                  <a href="{{route('tutor.classroom')}}">
                      <img src="{{asset('assets/images/ico/class-ico.png') }}" alt="class-ico" class=" mr-2">
                      Classroom
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'tutor/couser') active @endif w-100">
+             <li class="btn @if(\Request::path() === 'tutor/couser') active @endif w-100" data-target="el-courses">
                 <a href="{{route('tutor.course')}}">
                     <img src="{{asset('assets/images/manage-icon.svg')}}" alt="class-ico" style="filter: invert(1)" class="mr-2">
                     Courses
                 </a>
             </li>
-             <li class="btn  @if(\Request::path() === 'tutor/subjects') active @endif w-100">
+             <li class="btn  @if(\Request::path() === 'tutor/subjects') active @endif w-100" data-target="el-subjects">
                  <a href="{{route('tutor.subject')}}">
                      <img src="{{asset('assets/images/ico/subject-ico.png') }}" alt="subject-ico" class=" mr-2">
                      Subjects
