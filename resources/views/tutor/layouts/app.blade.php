@@ -42,6 +42,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <!-- Styles -->
 
@@ -195,16 +196,16 @@
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
             <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 
         <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>	
-                    
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>
+
         <!-- iGuider Plugin -->
 
-   
+
    <!-- <script src="{{ asset('assets/firebase/index.js') . '?ver=' . rand() }}"></script> -->
             @include('firebase')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -232,15 +233,15 @@
                             },
                             steps:[{
                                 title:'Step 1',
-                                content:'Step 1 Description',	
+                                content:'Step 1 Description',
                                 target:'el-1'
                             },{
                                 title:'Step 2',
-                                content:'Step 2 Description',	
+                                content:'Step 2 Description',
                                 target:'el-2'
                             },{
                                 title:'Step 3',
-                                content:'Step 3 Description',	
+                                content:'Step 3 Description',
                                 target:'el-3'
                             }]
                             });
@@ -335,7 +336,7 @@
                                 var notification = ``;
                                 if (obj.length == 0) {
                                     $('.show_notification_counts').css("display","none");
-                                    
+
                                     $('.show_notification_counts').text(0);
                                     notification += `
                                                         <li class="text-center">
@@ -401,13 +402,13 @@
                             success: function(data) {
                                 get_all_notifications();
                                 // $('.message-item').remove();
-                             
+
                             },
                             failure: function(errMsg) {
                                 console.log(errMsg);
                             }
                         });
-                        
+
                     };
 
             </script>

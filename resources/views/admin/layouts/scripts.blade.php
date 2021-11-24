@@ -479,7 +479,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    var user = data.tutor.length + data.student.length + data.staff.length
                     chart.updateSeries([{
                         name: 'Tutor',
                         data: data.tutor
@@ -495,6 +494,9 @@
                     ])
 
                     $("#users").html(data.users)
+                    $("#tutor").html(data.tutorCount)
+                    $("#student").html(data.studentCount)
+                    $("#staff").html(data.staffCount)
                 },
                 error: function(data){
                     console.log(data);
