@@ -142,10 +142,11 @@
                                         <div class="container-fluid  m-0 p-0">
                                             <span class="heading-fifth-1 mb-3">Reply</span>
 
-                                            <form class="form-border" method="POST" id="stdTicketForm">
-                                                {{-- <input type="hidden" name="reciever_id" value="{{ $admin->id }}">
+                                            <form class="form-border" method="post" id="stdTicketForm" action="{{route('student.ticketChat')}}">
+                                                @csrf
+                                                <input type="hidden" name="reciever_id" value="{{ $admin->id }}">
                                                 <input type="hidden" name="sender_id" value="{{ $ticket->user_id }}">
-                                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}"> --}}
+                                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <textarea class="textarea-ticket form-control mt-3 p-2" name="text"
@@ -157,11 +158,11 @@
                                                 </div>
                                                 <div class="row p-1">
                                                     <div class="col-md-9 ">
-                                                        <input type="file" id="file" class="file-attach" />
+                                                        <!-- <input type="file" id="file" class="file-attach" />
                                                         <label for="file" class="p-0">
                                                             <img src="{{ asset('admin/assets/img/ico/Repeat-image.png') }}"
                                                                 class="" alt="repeat" />
-                                                        </label>
+                                                        </label> -->
                                                         <input type="file" id="file" accept=".jpg,.jpeg,.png"
                                                             class="file-attach" />
                                                         <label for="file" class="p-0">
@@ -448,30 +449,107 @@
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
 
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyCpJjFlBbKKVNtnr8C27Q0JNPbT9Onw2Zo",
-            authDomain: "tutorvy-support.firebaseapp.com",
-            projectId: "tutorvy-support",
-            storageBucket: "tutorvy-support.appspot.com",
-            messagingSenderId: "485519028370",
-            appId: "1:485519028370:web:1bcf230b47172f25a6764b",
-            measurementId: "G-TKK3MPRS8T"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        // // Your web app's Firebase configuration
+        // var firebaseConfig = {
+        //     apiKey: "AIzaSyCpJjFlBbKKVNtnr8C27Q0JNPbT9Onw2Zo",
+        //     authDomain: "tutorvy-support.firebaseapp.com",
+        //     projectId: "tutorvy-support",
+        //     storageBucket: "tutorvy-support.appspot.com",
+        //     messagingSenderId: "485519028370",
+        //     appId: "1:485519028370:web:1bcf230b47172f25a6764b",
+        //     measurementId: "G-TKK3MPRS8T"
+        // };
+        // // Initialize Firebase
+        // firebase.initializeApp(firebaseConfig);
 
-        $("#stdTicketForm").submit(function(e) {
-            e.preventDefault();
+        // $("#stdTicketForm").submit(function(e) {
+        //     e.preventDefault();
 
-            var message = document.getElementById("message").value
+        //     var message = document.getElementById("message").value
 
-            firebase.database().ref("messages").push().set({
-                "ticket":"{{$ticket->id}}",
-                "sender":"{{Auth::id()}}",
-                "message":message
-            });
+        //     firebase.database().ref("messages").push().set({
+        //         "ticket":"{{$ticket->id}}",
+        //         "sender":"{{Auth::id()}}",
+        //         "message":message
+        //     });
+        // });
+        $("#stdTicketForm").submit(function(e){
+          e.preventDefault();
+
+          var action = $(this).attr('action');
+          var method = $(this).attr('method');
+           $.ajax({
+            url: action,
+            type:method,
+            data: new FormData( this ),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                // console.log(response);
+                if(response.status_code == 200) {
+                    toastr.success(response.message,{
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    if(response.message_type == file){
+                    let html = `<div class="col-md-12 ">
+                                <div class="reciever">
+                                    <small>From You</small>
+                                    <p class="mb-0 text-center">
+                                        <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
+                                    </p>
+                                    <small class="dull pull-right">
+                                        1min ago
+                                    </small>
+                                </div>
+
+                            </div>`;
+                        $(".ticketChat").append(html);
+                    }
+                    else{
+                        let html = `<div class="col-md-12">
+                                        <div class="reciever">
+                                            <small>From You</small>
+                                            <p class="mb-0">
+                                                `+response.data.text+`
+                                            </p>
+                                            <small class="dull pull-right">
+                                                1min ago
+                                            </small>
+                                        </div>
+
+                                    </div>`;
+                        $(".ticketChat").append(html);
+                    }
+
+                }
+                // let html = `<div class="col-md-12 ">
+                //                 <div class="reciever">
+                //                     <small>From You</small>
+                //                     <p class="mb-0">
+                //                         `+response.data.text+`
+                //                     </p>
+                //                     <small class="dull pull-right">
+                //                         1min ago
+                //                     </small>
+                //                 </div>
+                            
+                //             </div>`;
+                //     $(".ticketChat").append(html);
+            },
+            error:function(e){
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
         });
+      })
 
     </script>
 

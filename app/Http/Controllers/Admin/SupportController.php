@@ -74,6 +74,7 @@ class SupportController extends Controller
 
         $data = $request->all();
         if(request()->has('file')){
+           
             $filename = request('file')->store('ticket','public');
             $type = 'file';
             $message = TicketChat::create([
