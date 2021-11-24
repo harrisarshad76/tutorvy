@@ -152,12 +152,12 @@ svg:not(:root) {
                                                                 src="{{ asset('/admin/assets/img/ico/edit-icon.svg')}}" alt="a"
                                                                 class="mr-2 cursor-1">
                                                         </div>
-                                                        <div class="col-md-2">
+                                                        <!-- <div class="col-md-2">
                                                             <label class="switch">
                                                                 <input type="checkbox">
                                                                 <span class="slider round"></span>
                                                             </label>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </td>
