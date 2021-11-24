@@ -45,6 +45,8 @@ use PayPal\Api\Transaction;
 use Obydul\LaraSkrill\SkrillClient;
 use Obydul\LaraSkrill\SkrillRequest;
 use App\Models\Wallet;
+use DateTime;
+
 class BookingController extends Controller
 {
 
@@ -85,8 +87,39 @@ class BookingController extends Controller
 
     public function getTutorSlots(Request $request) {
 
-        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
+        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->where('day_off',0)->first();
 
+        return response()->json([
+            'status_code'=> 200,
+            'success' => true,
+            'slots' => $slots,
+        ]);
+    }
+
+    function getFilteredTimeSlot(Request $request)
+    {
+        $interval = $request->interval * 60;
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
+
+        $start = new DateTime($start_time);
+        $end = new DateTime($end_time);
+        $startTime = $start->format('H:i');
+        $endTime = $end->format('H:i');
+        $i=0;
+        $slots = array();
+        while(strtotime($startTime) <= strtotime($endTime)){
+            $start = $startTime;
+            $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
+            $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
+            $slot = new \stdClass();
+            if(strtotime($startTime) <= strtotime($endTime)){
+                $slot->slot_start_time = $start;
+                $slot->slot_end_time = $end;
+                array_push($slots,$slot);
+            }
+        }
+        // return $time;
         return response()->json([
             'status_code'=> 200,
             'success' => true,
@@ -124,26 +157,14 @@ class BookingController extends Controller
     public function booked(Request $request)
     {
         $class_date = $request->date;
-        $class_time = $request->time;
+        $class_time = explode("-",$request->time);
+     
+        $from_time = $class_time[0];
+        $to_time = $class_time[1];
 
+        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->get();
 
-        $from_time = date("H:i", strtotime("$class_time"));
-        $to_time = date("H:i", strtotime("$from_time"."+".$request->duration."hours"));
-
-        DB::enableQueryLog();
-        $booking = DB::select("select * from `bookings` where booked_tutor = ? && class_date = ? && class_time BETWEEN ? AND ? or `class_booked_till` BETWEEN ? AND ?", [
-            $request->tutor_id,
-            $class_date,
-            $from_time,
-            $to_time,
-            $from_time,
-            $to_time
-        ]);
-
-
-        $bookings = collect($booking);
-
-        if($bookings->count() <= 0){
+        if($booking->count() <= 0){
 
             $attachments = [];
             $path = '';
@@ -164,7 +185,7 @@ class BookingController extends Controller
                 'brief' => $request->brief,
                 'attachments' => $path,
                 'class_date' => $request->date,
-                'class_time' => $request->time,
+                'class_time' => $from_time,
                 'class_booked_till' => $to_time,
                 'duration' => $request->duration,
                 'price' => $price,
@@ -232,7 +253,7 @@ class BookingController extends Controller
             return response()->json([
                 'status'=>400,
                 'type' => 'error',
-                'message' => 'Class is already booked between '.date("h:i A",strtotime($bookings->min('class_time'))).' to '.date("h:i A",strtotime($bookings->max('class_booked_till')))
+                'message' => 'Class is already booked between '.date("h:i A",strtotime($from_time)).' to '.date("h:i A",strtotime($to_time))
             ]);
         }
     }

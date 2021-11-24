@@ -11,72 +11,72 @@ $(document).ready(function() {
     
 
     $( '#book_tutor_form' ).on( 'submit', function(e) {
-    event.preventDefault();
+        event.preventDefault();
 
-    $('#tutor_id').val("{{$t_id ?? '' }}");
-    // let _token   = $('meta[name="csrf_token"]').attr('content');
-    var tutor_subjects = $("#tutor_subjects").val();
+        $('#tutor_id').val("{{$t_id ?? '' }}");
+        // let _token   = $('meta[name="csrf_token"]').attr('content');
+        var tutor_subjects = $("#tutor_subjects").val();
 
-    if(tutor_subjects != "Select Subject") {
-        $.ajax({
-            url: "{{route('student.booked.tutor')}}",
-            type:"POST",
-            data:new FormData( this ),
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend:function(data) {
-                $("#finish").hide();
-                $("#proBtn").show();
-            },
-            success:function(response){
-                // console.log(response);
-                if(response.status == 200) {
-                    toastr.success(response.message,{
-                        position: 'top-end',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
+        if(tutor_subjects != "Select Subject") {
+            $.ajax({
+                url: "{{route('student.booked.tutor')}}",
+                type:"POST",
+                data:new FormData( this ),
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend:function(data) {
+                    $("#finish").hide();
+                    $("#proBtn").show();
+                },
+                success:function(response){
+                    // console.log(response);
+                    if(response.status == 200) {
+                        toastr.success(response.message,{
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
 
-                    setInterval(function(){
-                        window.location.href = "{{ route('student.bookings') }}";
-                    }, 1500);
+                        setInterval(function(){
+                            window.location.href = "{{ route('student.bookings') }}";
+                        }, 1500);
 
-                } else if(response.status == 400) {
-                        toastr.error(response.message,{
+                    } else if(response.status == 400) {
+                            toastr.error(response.message,{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+
+                        setInterval(function(){}, 1500);
+                    }
+                },
+                complete:function(data) {
+                    $("#finish").show();
+                    $("#proBtn").hide();
+                },
+                error:function(e){
+                    $("#finish").show();
+                    $("#proBtn").hide();
+                    toastr.error('Something Went Wrong',{
                         position: 'top-end',
                         icon: 'error',
                         showConfirmButton: false,
                         timer: 2500
                     });
-
-                    setInterval(function(){}, 1500);
                 }
-            },
-            complete:function(data) {
-                $("#finish").show();
-                $("#proBtn").hide();
-            },
-            error:function(e){
-                $("#finish").show();
-                $("#proBtn").hide();
-                toastr.error('Something Went Wrong',{
-                    position: 'top-end',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-            }
-        });
-    }else{
-        toastr.error('Subject Field is required',{
-            position: 'top-end',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 2500
-        });
-    }
+            });
+        }else{
+            toastr.error('Subject Field is required',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
 
 
     });
@@ -190,47 +190,60 @@ function showTimeSlot(value) {
             timer: 2500
         }); 
     }else{
-        var date = time_slots[0].date;
-        var from = time_slots[0].from;
-        var to = time_slots[0].to;
 
-        let from_new_date = date + ' ' + from;
-        let to_new_date = date + ' ' + to;
+        $.ajax({
+            url: "{{route('student.getFilteredTutorSlots')}}",
+            type:"POST",
+            data: {interval:value , start_time:time_slots[0].from,end_time:time_slots[0].to},
+            dataType:'json',
+            beforeSend:function(data) {
+                
+            },
+            success:function(response){
+                console.log(response);
+                if(response.status_code == 200 && response.success == true) {
+                    if(response.slots.length > 0){
+                        var time_html = ``;
+                        var slots = response.slots;
+                    console.log(slots.length)
+                        
+                        for(var i = 0 ; i < slots.length; i++ ) {
+                         console.log(slots[i])
+                            time_html += `<option value="`+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`"> `+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`</option>`;
+                        }
+                        $(".create_booking_time").html(time_html);
+                    }else{
+                        toastr.error('No Slots available kindly select other tutor.',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                    
 
-        var fr = new Date(from_new_date);
-        var too = new Date(to_new_date);
-
-        let a = moment(fr).format('DD/MM/YYYY HH:mm:ss');
-        let b = moment(too).format('DD/MM/YYYY HH:mm:ss');
-
-        var ms = moment(b,"DD/MM/YYYY HH:mm:ss").diff(moment(a,"DD/MM/YYYY HH:mm:ss"));
-        var d = moment.duration(ms);
-        console.log(d.hours() , "d hours");
-        var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
-
-        let remain_hours = d.hours();
-
-        let check = remain_hours / value;
-        console.log(check , "check");
-        if(check <= 0 ||  check <= 0.0) {
-            toastr.error('TimeSlot not available',{
-                position: 'top-end',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 2500
-            }); 
-        }else{
-            $("#booking_time").removeAttr('disabled');
-            var time_html = ``;
-            for(var i = 1 ; i <= check; i++ ) {
-                console.log(i , "i");
-                console.log(i + ':00' , "i");
-                time_html += `<option value="`+ i +`:00"> `+ i +`:00</option>`;
+                }else{
+                    toastr.error('Something went wrong',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            },
+            complete:function(data) {
+            
+            },
+            error:function(e){
+                toastr.error('Something went wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
             }
-            $(".create_booking_time").html(time_html);
-
-        }
-        
+        });
+      
         
     }
     
