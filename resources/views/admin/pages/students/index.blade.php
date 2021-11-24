@@ -30,20 +30,19 @@
             </div>
             <div class="col-md-4">
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <a href="">
-                    <span class="view-bookings mr-4 view-bookings-res">
-                        <!-- View all students -->
-                    </span>
+                        View all students
+                
                 </a>
-            </div>
+            </div> -->
 
         </div>
         <div class="row ml-1 mr-1">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row border-bottom pb-2 ml-1 mr-1">
+                        <!-- <div class="row border-bottom pb-2 ml-1 mr-1">
                             <div class="col-md-11">
                                 <form class="row">
                                     <div class="col-md-2">
@@ -102,8 +101,8 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-4">
+                        </div> -->
+                        <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-borderless">
                                     <thead>
@@ -144,10 +143,10 @@
                                                         <img src="{{ asset('admin/assets/img/ico/delete-icon.png')}}" alt="delete-icon" >
                                                     </a>
 
-                                                    <a href="edit-student.html">
+                                                    <!-- <a href="edit-student.html">
                                                         <img src=" {{ asset('admin/assets/img/ico/edit-icon.png')}}" alt="delete-icon" class="ml-1">
-                                                    </a>
-                                                    <label class="switch ml-2" style="position: relative;left: -10px;width: 60px;">
+                                                    </a> -->
+                                                    <label class="switch" style="position: relative;left: -10px;width: 60px;">
                                                         <input type="checkbox" class="s_status" val_id="{{$student->id}}" val_st="{{$student->status}}" {{ ($student->status == 1) ? 'checked' : ''}}>
                                                         <!-- <input type="checkbox" class="s_status" val_id="{{$student->id}}" val_st="{{$student->status}} "  {{ ($student->status == 1) ? 'checked' : ''}} -->
                                                         <span class="slider round"></span>
@@ -168,7 +167,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <nav aria-label="Page navigation" class="mt-4">
                                     <ul class="pagination bg-white pagination-example-1">
                                         <li class="page-item">
@@ -201,7 +200,7 @@
                                             @endif
                                     </ul>
                                 </nav>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

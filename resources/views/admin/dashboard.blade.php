@@ -123,7 +123,7 @@ svg:not(:root) {
                                             Showing user growth from last months
                                         </span>
                                     </div>
-                                    <div class="col-md-6 text-center">
+                                    <!-- <div class="col-md-6 text-center">
                                         <div class="row class-row">
                                             <div class="col-md-4">
                                                 <span class="dot"></span>
@@ -139,7 +139,7 @@ svg:not(:root) {
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -235,15 +235,14 @@ svg:not(:root) {
                         <div class="col-md-6">
                             <h2 class="mt-4 ml-3"> New tutor requests </h2>
                         </div>
-                        <div class="col-md-6">
-                            <div class="pull-right">
+                        <div class="col-md-6 text-right">
                                 <a href="#" class="btn view-bookings"> View All Tutors</a>
-                            </div>
+                       
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-11">
                                     <form class="row">
                                         <div class="col-md-2">
@@ -306,7 +305,7 @@ svg:not(:root) {
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row ">
                                 <div class="col-md-12">
                                     <table class="table table-borderless">
@@ -433,16 +432,14 @@ svg:not(:root) {
                         <div class="col-md-6">
                             <h2 class="mt-4 ml-3"> Support </h2>
                         </div>
-                        <div class="col-md-6">
-                            <div class="pull-right">
+                        <div class="col-md-6 text-right">
                                 <a href="#" class="btn view-bookings"> View All Tickets</a>
-                            </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-11">
                                     <form class="row">
                                         <div class="col-md-2">
@@ -495,7 +492,7 @@ svg:not(:root) {
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="row ">
                                 <div class="col-md-12">
