@@ -216,22 +216,27 @@ function showTimeSlot(value) {
                     if(response.slots.length > 0){
                         var time_html = ``;
                         var slots = response.slots;
-                    console.log(slots.length)
+                        console.log(slots.length)
                         $(".create_booking_time").html('')
 
                         
 
                         for(var i = 0 ; i < slots.length; i++ ) {
-                         console.log(slots[i])
                             var date = $('#get_date').val(); 
                             var from  = slots[i].slot_start_time ; 
                             var to =  slots[i].slot_end_time; 
                             var st_slot = date+' '+from;
+                            var fn_slot = date+' '+to;
 
-                            var st_slot = new Date(st_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
+                            st_slot = new Date(st_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
+                            st_slot = moment(st_slot).format('hh:mm A')
                             console.log(st_slot);
-                            
-                            time_html += `<option value="`+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`"> `+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`</option>`;
+
+                            fn_slot = new Date(fn_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
+                            fn_slot = moment(fn_slot).format('hh:mm A')
+                            console.log(fn_slot);
+
+                            time_html += `<option value="`+ st_slot +`-`+ fn_slot +`"> `+ st_slot +`-`+ fn_slot +`</option>`;
                         }
                         $(".create_booking_time").html(time_html);
                     }else{
