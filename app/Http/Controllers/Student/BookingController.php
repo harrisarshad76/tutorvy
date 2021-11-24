@@ -108,7 +108,7 @@ class BookingController extends Controller
         $endTime = $end->format('H:i');
         $i=0;
         $slots = array();
-        while(strtotime($startTime) <= strtotime($endTime)){
+        while(strtotime($startTime) < strtotime($endTime)){
             $start = $startTime;
             $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
