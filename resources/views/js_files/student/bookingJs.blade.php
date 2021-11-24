@@ -139,13 +139,24 @@ function getTutorSlots(id , day , date) {
             console.log(response);
             var obj = response.slots;
             if(response.status_code == 200 && response.success == true) {
+                
                 if(obj.wrk_from != null && obj.wrk_to != null) {
-                    let ab = {
-                        date: date,
-                        from : obj.wrk_from , 
-                        to : obj.wrk_to , 
+                    if(obj.day_off == 1){
+                        toastr.error('Tutor is off today.',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        }); 
+                    }else{
+                        let ab = {
+                            date: date,
+                            from : obj.wrk_from , 
+                            to : obj.wrk_to , 
+                        }
+                        time_slots.push(ab);
                     }
-                    time_slots.push(ab);
+                    
                 }else{
 
                     toastr.error('Time Slot Not Available',{
@@ -206,7 +217,7 @@ function showTimeSlot(value) {
                         var time_html = ``;
                         var slots = response.slots;
                     console.log(slots.length)
-                        
+                        $(".create_booking_time").html('')
                         for(var i = 0 ; i < slots.length; i++ ) {
                          console.log(slots[i])
                             time_html += `<option value="`+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`"> `+ slots[i].slot_start_time +`-`+ slots[i].slot_end_time+`</option>`;

@@ -165,6 +165,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                         <div class=" col-md-4">
                             <label for=""><b> Class Duration </b></label>
                             <select name="duration" onchange="showTimeSlot(this.value)" class="form-control form-select" id="">
+                                <option value="">Select Duration of slot</option>    
                                 <option value="1">1 Hour</option>
                                 <option value="2">2 Hour</option>
                                 <option value="3">3 Hour</option>
