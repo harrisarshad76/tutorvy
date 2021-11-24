@@ -87,7 +87,7 @@ class BookingController extends Controller
 
     public function getTutorSlots(Request $request) {
 
-        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->where('day_off',0)->first();
+        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
 
         return response()->json([
             'status_code'=> 200,

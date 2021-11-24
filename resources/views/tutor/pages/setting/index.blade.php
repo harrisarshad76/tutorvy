@@ -492,6 +492,7 @@
 
                                         <div class="col-md-12">
                                             <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
+                                                @csrf
                                                 <div id="accordion">
                                                     @if(count($user_slots)  == 0)
                                                         @foreach($days as $day) 
