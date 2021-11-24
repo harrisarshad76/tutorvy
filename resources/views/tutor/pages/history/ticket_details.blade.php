@@ -173,6 +173,7 @@
                                             </div>
                                         </form> -->
                                         <form class="form-border" id="formTkt" method="POST" action="{{route('tutor.ticketChat')}}">
+                                            @csrf
                                             <input type="hidden" name="reciever_id" value="{{$admin->id}}">
                                             <input type="hidden" name="sender_id" value="{{$ticket->user_id}}">
                                             <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
@@ -186,10 +187,10 @@
                                             </div>
                                             <div class="row p-1">
                                                 <div class="col-md-9 ">
-                                                    <input type="file" id="file" class="file-attach" />
+                                                    <!-- <input type="file" id="file" class="file-attach" />
                                                     <label for="file" class="p-0" >
                                                         <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
-                                                    </label>
+                                                    </label> -->
                                                     <input type="file" id="file" accept=".jpg,.jpeg,.png" class="file-attach" />
                                                     <label for="file" class="p-0">
                                                         <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
@@ -484,21 +485,51 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
-
-                }
-                let html = `<div class="col-md-12 ">
+                    if(response.message_type == file){
+                    let html = `<div class="col-md-12 ">
                                 <div class="reciever">
                                     <small>From You</small>
-                                    <p class="mb-0">
-                                        `+response.data.text+`
+                                    <p class="mb-0 text-center">
+                                        <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
                                     </p>
                                     <small class="dull pull-right">
                                         1min ago
                                     </small>
                                 </div>
-                            
+
                             </div>`;
-                    $(".ticketChat").append(html);
+                        $(".ticketChat").append(html);
+                    }
+                    else{
+                        let html = `<div class="col-md-12">
+                                        <div class="reciever">
+                                            <small>From You</small>
+                                            <p class="mb-0">
+                                                `+response.data.text+`
+                                            </p>
+                                            <small class="dull pull-right">
+                                                1min ago
+                                            </small>
+                                        </div>
+
+                                    </div>`;
+                        $(".ticketChat").append(html);
+                    }
+
+                }
+                // let html = `<div class="col-md-12 ">
+                //                 <div class="reciever">
+                //                     <small>From You</small>
+                //                     <p class="mb-0">
+                //                         `+response.data.text+`
+                //                     </p>
+                //                     <small class="dull pull-right">
+                //                         1min ago
+                //                     </small>
+                //                 </div>
+                            
+                //             </div>`;
+                //     $(".ticketChat").append(html);
             },
             error:function(e){
                 toastr.error('Something Went Wrong',{

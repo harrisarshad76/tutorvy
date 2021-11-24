@@ -38,7 +38,7 @@
             <div class="col-md-12">
                 <div class="pt-3 mt-3 container-bg ">
                     <div class=" container-fluid border-bottom  pb-2">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-11">
                                 <form class="row">
                                     <div class="col-md-2">
@@ -102,182 +102,184 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class=" row">
-                        <div class="col-md-12">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr class="border-bottom table-margin-top ">
+                        </div> -->
+                        <div class=" row">
+                            <div class="col-md-12">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr class="border-bottom table-margin-top ">
 
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Subjects</th>
-                                        <th scope="col">Location</th>
-                                        <!-- <th scope="col">Grade</th> -->
-                                        <th scope="col">Availability </th>
-                                        <th scope="col">Rate</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tutor_assessment_table">
-                                    @foreach($new_requests as $request)
-                                        @if($request->status == 2 && $request->assessment_id != '' && $request->assessment_id != null && $request->assessment_status == 0)
-                                        <tr>
-                                            <td class="pt-4">
-                                                {{ $request->first_name }} {{ $request->last_name }}
-                                            </td>
-                                            <td class="pt-4">
-                                                <span data-toggle="tooltip"
-                                                    title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
-                                            </td>
-                                            <td class="pt-4">{{$request->subject_name}}</td>
-                                            <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
-
-                                            <td class="pt-4">---</td>
-                                            <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4">
-                                                @if($request->assessment_status == 0 && $request->status == 2)
-                                                    <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
-                                                @else
-                                                    @if( $request->status == 0)
-                                                        <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
-                                                    @elseif( $request->status == 1)
-                                                        <span class="statusTag doc_sub_status">  Document Sumitted </span>
-                                                    @endif
-                                                @endif
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
-                                                    View
-                                                </a>
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                @if ($request->assign_to != null)
-                                                <button class="btn schedule-btn" disabled>Assigned</button>
-                                                @else
-                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
-                                                @endif                                            </td>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Subjects</th>
+                                            <th scope="col">Location</th>
+                                            <!-- <th scope="col">Grade</th> -->
+                                            <th scope="col">Availability </th>
+                                            <th scope="col">Rate</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
                                         </tr>
-                                        @elseif($request->status == 0)
-                                        <tr>
-                                            <td class="pt-4">
-                                                {{ $request->first_name }} {{ $request->last_name }}
-                                            </td>
-                                            <td class="pt-4">
-                                                <span data-toggle="tooltip"
-                                                    title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
-                                            </td>
-                                            <td class="pt-4">{{$request->subject_name}}</td>
-                                            <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
+                                    </thead>
+                                    <tbody id="tutor_assessment_table">
+                                        @foreach($new_requests as $request)
+                                            @if($request->status == 2 && $request->assessment_id != '' && $request->assessment_id != null && $request->assessment_status == 0)
+                                            <tr>
+                                                <td class="pt-4">
+                                                    {{ $request->first_name }} {{ $request->last_name }}
+                                                </td>
+                                                <td class="pt-4">
+                                                    <span data-toggle="tooltip"
+                                                        title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
+                                                </td>
+                                                <td class="pt-4">{{$request->subject_name}}</td>
+                                                <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
 
-
-                                            <td class="pt-4">---</td>
-                                            <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4">
-                                                @if($request->assessment_status == 0 && $request->status == 2)
-                                                    <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
-                                                @else
-                                                    @if( $request->status == 0)
-                                                        <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
-                                                    @elseif( $request->status == 1)
-                                                        <span class="statusTag doc_sub_status">  Document Sumitted </span>
+                                                <td class="pt-4">---</td>
+                                                <td class="pt-4">{{$request->hourly_rate}}</td>
+                                                <td class="pt-4">
+                                                    @if($request->assessment_status == 0 && $request->status == 2)
+                                                        <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
+                                                    @else
+                                                        @if( $request->status == 0)
+                                                            <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
+                                                        @elseif( $request->status == 1)
+                                                            <span class="statusTag doc_sub_status">  Document Sumitted </span>
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
-                                                    View
-                                                </a>
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                @if ($request->assign_to != null)
-                                                <button class="btn schedule-btn" disabled>Assigned</button>
-                                                @else
-                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        @elseif($request->status == 1)
-                                        <tr>
-                                            <td class="pt-4">
-                                                {{ $request->first_name }} {{ $request->last_name }}
-                                            </td>
-                                            <td class="pt-4">
-                                                <span data-toggle="tooltip"
-                                                    title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
-                                            </td>
-                                            <td class="pt-4">{{$request->subject_name}}</td>
-                                            <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
+                                                        View
+                                                    </a>
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    @if ($request->assign_to != null)
+                                                    <button class="btn schedule-btn" disabled>Assigned</button>
+                                                    @else
+                                                    <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                    @endif                                            </td>
+                                            </tr>
+                                            @elseif($request->status == 0)
+                                            <tr>
+                                                <td class="pt-4">
+                                                    {{ $request->first_name }} {{ $request->last_name }}
+                                                </td>
+                                                <td class="pt-4">
+                                                    <span data-toggle="tooltip"
+                                                        title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
+                                                </td>
+                                                <td class="pt-4">{{$request->subject_name}}</td>
+                                                <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
 
-                                            <td class="pt-4">---</td>
-                                            <td class="pt-4">{{$request->hourly_rate}}</td>
-                                            <td class="pt-4">
-                                                @if($request->assessment_status == 0 && $request->status == 2)
-                                                    <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
-                                                @else
-                                                    @if( $request->status == 0)
-                                                        <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
-                                                    @elseif( $request->status == 1)
-                                                        <span class="statusTag doc_sub_status">  Document Sumitted </span>
+
+                                                <td class="pt-4">---</td>
+                                                <td class="pt-4">{{$request->hourly_rate}}</td>
+                                                <td class="pt-4">
+                                                    @if($request->assessment_status == 0 && $request->status == 2)
+                                                        <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
+                                                    @else
+                                                        @if( $request->status == 0)
+                                                            <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
+                                                        @elseif( $request->status == 1)
+                                                            <span class="statusTag doc_sub_status">  Document Sumitted </span>
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
-                                                    View
-                                                </a>
-                                            </td>
-                                            <td class="pt-3 text-right">
-                                                @if ($request->assign_to != null)
-                                                <button class="btn schedule-btn" disabled>Assigned</button>
-                                                @else
-                                                <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
-                                                @endif                                            </td>
-                                        </tr>
-                                        @endif
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
+                                                        View
+                                                    </a>
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    @if ($request->assign_to != null)
+                                                    <button class="btn schedule-btn" disabled>Assigned</button>
+                                                    @else
+                                                    <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @elseif($request->status == 1)
+                                            <tr>
+                                                <td class="pt-4">
+                                                    {{ $request->first_name }} {{ $request->last_name }}
+                                                </td>
+                                                <td class="pt-4">
+                                                    <span data-toggle="tooltip"
+                                                        title="{{$request->email}}">{{Str::limit($request->email, 3, $end='***')}}</span>
+                                                </td>
+                                                <td class="pt-4">{{$request->subject_name}}</td>
+                                                <td class="pt-4">{{$request->city != NULL ? $request->city.', ' : '---'}}{{$request->country != NULL ? $request->country : '---'}}</td>
 
-                                    @endforeach
+                                                <td class="pt-4">---</td>
+                                                <td class="pt-4">{{$request->hourly_rate}}</td>
+                                                <td class="pt-4">
+                                                    @if($request->assessment_status == 0 && $request->status == 2)
+                                                        <span class="statusTag doc_sub_status">  Assessment Sumitted </span>
+                                                    @else
+                                                        @if( $request->status == 0)
+                                                            <span class="statusTag doc_not_sub_status">  Document not Submitted </span>
+                                                        @elseif( $request->status == 1)
+                                                            <span class="statusTag doc_sub_status">  Document Sumitted </span>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    <a href="{{ route('admin.tutorRequest',[$request->id,$request->assessment_id !=null ? $request->assessment_id : '']) }}" class="cencel-btn btn">
+                                                        View
+                                                    </a>
+                                                </td>
+                                                <td class="pt-3 text-right">
+                                                    @if ($request->assign_to != null)
+                                                    <button class="btn schedule-btn" disabled>Assigned</button>
+                                                    @else
+                                                    <button class="schedule-btn" onclick="assignTutorModal({{$request->id}})">Assign</button>
+                                                    @endif                                            </td>
+                                            </tr>
+                                            @endif
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-12">
-                            <nav aria-label="Page navigation" class="mt-4">
-                                <ul class="pagination bg-white pagination-example-1">
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{$new_requests->previousPageUrl()}}" tabindex="-1">
-                                            <img src="{{ asset('/admin/assets/img/ico/arrow-left-1.png')}}" alt="image" />
-                                        </a>
-                                    </li>
-                                    @if($new_requests->onFirstPage())
-                                        <li class="page-item"><a class="page-link" href="{{$new_requests->url(1)}}" style="display:none;">1</a></li>
-                                    @else
-                                    <li class="page-item"><a class="page-link" href="{{$new_requests->url(1)}}">1</a></li>
-                                        @endif
-                                    <li class="page-item"><a class="page-link page-link-1" href="#">{{$new_requests->currentPage()}}</a></li>
+                                        @endforeach
 
-                                    @if($new_requests->hasPages())
-                                        <li class="page-item"><a class="page-link " href="#">.....</a></li>
-
-                                        <li class="page-item"><a class="page-link" href="{{$new_requests->url($new_requests->lastPage())}}"> {{$new_requests->lastPage()}} </a></li>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- <div class="col-md-12">
+                                <nav aria-label="Page navigation" class="mt-4">
+                                    <ul class="pagination bg-white pagination-example-1">
                                         <li class="page-item">
-                                            <a class="page-link" href="{{$new_requests->nextPageUrl()}}">
-                                                <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
+                                            <a class="page-link" href="{{$new_requests->previousPageUrl()}}" tabindex="-1">
+                                                <img src="{{ asset('/admin/assets/img/ico/arrow-left-1.png')}}" alt="image" />
                                             </a>
                                         </li>
-                                    @else
-                                        <li class="page-item">
-                                            <a class="page-link" href="{{$new_requests->nextPageUrl()}}">
-                                                <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </nav>
+                                        @if($new_requests->onFirstPage())
+                                            <li class="page-item"><a class="page-link" href="{{$new_requests->url(1)}}" style="display:none;">1</a></li>
+                                        @else
+                                        <li class="page-item"><a class="page-link" href="{{$new_requests->url(1)}}">1</a></li>
+                                            @endif
+                                        <li class="page-item"><a class="page-link page-link-1" href="#">{{$new_requests->currentPage()}}</a></li>
+
+                                        @if($new_requests->hasPages())
+                                            <li class="page-item"><a class="page-link " href="#">.....</a></li>
+
+                                            <li class="page-item"><a class="page-link" href="{{$new_requests->url($new_requests->lastPage())}}"> {{$new_requests->lastPage()}} </a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{$new_requests->nextPageUrl()}}">
+                                                    <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{$new_requests->nextPageUrl()}}">
+                                                    <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
+                                                </a>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div> -->
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>

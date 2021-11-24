@@ -794,10 +794,10 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                {{-- <div class="schoolList col-md-6">
+                                                 <div class="schoolList col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">School Name</label>
                                                     <input type="text" class="form-control " name="institute[]">
-                                                </div> --}}
+                                                </div>
                                                  <div class=" col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">Completion Date</label>
                                                     <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control" value="{{$edu->year}}"> -->
@@ -1308,12 +1308,18 @@
             var ter = $(this).val();
             // alert(ter);
             if(ter == 10){
+               
                 $(".schoolList").show();
                 $(".instituteList").hide();
+                $(".instituteList").css('display','none');
+                $(".schoolList").css('display','block');
             }
             else{
                 $(".schoolList").hide();
                 $(".instituteList").show();
+                $(".instituteList").css('display','block');
+                $(".schoolList").css('display','none');
+
             }
         })
 
