@@ -219,36 +219,58 @@
             <script>
                 $(document).ready(function() {
 
-                    // iGuider Initialization
+                   
+        // iGuider Initialization
 
-                        $('.start-tour').on('click',function(){
-                        iGuider({
-                            tourTitle:'continue.enable',
-                            continue:{
-                                enable:true,
-                                cover:'../doc_files/images/hello.gif',
-                                overlayColor:'#000',
-                                overlayOpacity:0.5
-                            },
-                            steps:[{
-                                title:'Step 1',
-                                content:'Step 1 Description',	
-                                target:'el-1'
-                            },{
-                                title:'Step 2',
-                                content:'Step 2 Description',	
-                                target:'el-2'
-                            },{
-                                title:'Step 3',
-                                content:'Step 3 Description',	
-                                target:'el-3'
-                            }]
-                            });
-                            return false;
-                        });
+        $('.start-tour').on('click',function(){
+            iGuider({
+                tourTitle:'continue.enable',
+                'intro': {
+                    'title': 'Welcome To Tutorvy',
+                    'content': 'Dashboard ',
+                    'overlayOpacity': '0.4'
+                },
+                continue:{
+                    enable:true,
+                    cover:'../doc_files/images/hello.gif',
+                    overlayColor:'#000',
+                    overlayOpacity:0.5
+                },
+                'tourMap': {
+                    'enable': false,
+                    'clickable': 'ready'
+                },
+                'lang': {
+                    'cancelText': '',
+                    'tourMapText': '',
+                    'endText': 'End of time'
+                },
+                steps:[{
+                    title:'Set Your Porifile',
+                    content:'Here you can setup your profile',   
+                    target:'el-profile'
+                },{
+                    title:'Booking Tour',
+                    content:'Booking Tour Description',   
+                    target:'el-booking'
+                },{
+                    title:'Classroom Tour',
+                    content:'Classroom Tour Description',   
+                    target:'el-classroom'
+                },{
+                    title:'Courses Tour',
+                    content:'Courses Tour Description',   
+                    target:'el-courses'
+                },{
+                    title:'Select Subject',
+                    content:'find a subject you prefer to teach',   
+                    target:'el-subjects'
+                }]
 
-
-                    // iGuider Initialization
+            });
+            return false;
+        });
+        // iGuider Initialization
                     $('.table').DataTable();
                     get_all_notifications();
                     $('.table').DataTable();
