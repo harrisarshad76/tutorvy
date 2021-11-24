@@ -214,6 +214,9 @@
             border: 1px solid #007bff;
             color: #007bff;
         }
+        #passTech{
+            display:none;
+        }
 
     </style>
 

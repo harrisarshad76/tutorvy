@@ -466,13 +466,13 @@
                         <div class="container mt-4" id="record">
                             <div class="row">
                                 <div class="col-md-8 col-6">
-                                    <span class="alex-name">
+                                    <!-- <span class="alex-name">
                                         @if ($staff->picture != null)
                                         <img src="{{ asset($staff->picture) }}" width="70" height="70" alt="std-icon" />
                                         @else
                                         <img src="{{ asset('admin/assets/img/ico/Square-white.jpg') }}" width="70" height="70" alt="std-icon" />
                                         @endif
-                                    </span>
+                                    </span> -->
                                     <span class="pl-2 alex-names">{{ $staff->name }} </span>
                                 </div>
                                 <div class="col-md-4 col-6">
