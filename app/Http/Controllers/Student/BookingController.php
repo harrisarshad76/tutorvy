@@ -87,7 +87,7 @@ class BookingController extends Controller
 
     public function getTutorSlots(Request $request) {
 
-        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->where('day_off',0)->first();
+        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
 
         return response()->json([
             'status_code'=> 200,
@@ -108,7 +108,7 @@ class BookingController extends Controller
         $endTime = $end->format('H:i');
         $i=0;
         $slots = array();
-        while(strtotime($startTime) <= strtotime($endTime)){
+        while(strtotime($startTime) < strtotime($endTime)){
             $start = $startTime;
             $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
