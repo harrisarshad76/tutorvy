@@ -111,8 +111,8 @@
 
             <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
-                    
+        <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>
+
         <!-- iGuider Plugin -->
 
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
@@ -149,15 +149,15 @@
             },
             steps:[{
                 title:'Step 1',
-                content:'Step 1 Description',   
+                content:'Step 1 Description',
                 target:'el-1'
             },{
                 title:'Step 2',
-                content:'Step 2 Description',   
+                content:'Step 2 Description',
                 target:'el-2'
             },{
                 title:'Step 3',
-                content:'Step 3 Description',   
+                content:'Step 3 Description',
                 target:'el-3'
             }]
             });

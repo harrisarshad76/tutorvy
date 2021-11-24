@@ -441,7 +441,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     Route::get('/profile',[StudentProfileController::class,'index'])->name('student.profile');
     Route::get('/subSubject',[StudentProfileController::class,'subSubject'])->name('student.subSubject');
     Route::get('/profile-view/{id}',[StudentProfileController::class,'profile'])->name('student.profileView');
-    Route::post('/tutor-plans',[StudentProfileController::class,'showTutorPlans'])->name('student.tutor.plans');
+    Route::post('/tutor-plans',[StudentProfileController::class,'showTutorPlans'])->name('student.tutor.show.plans');
 
 
     Route::get('/call',[StudentSettingController::class,'call'])->name('student.call');

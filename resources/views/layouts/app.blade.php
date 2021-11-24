@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,35 +31,38 @@
     <link href="{{ asset('assets/css/modal.css') }}" rel="stylesheet">
     <script src="assets/js/jquery.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.css') }}" />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- iGuider Plugin -->
-        <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
 
- 
 
 
-<style>
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    font-size: 18px;
-    line-height: 40px;
-}
-.select2-selection__arrow
-{
-    display:none;
-}
-.select2-container--default .select2-selection--single{
-    height:43px !important;
-}
-.select2-selection__rendered{
-    float:left;
-}
 
-</style>
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            font-size: 18px;
+            line-height: 40px;
+        }
+
+        .select2-selection__arrow {
+            display: none;
+        }
+
+        .select2-container--default .select2-selection--single {
+            height: 43px !important;
+        }
+
+        .select2-selection__rendered {
+            float: left;
+        }
+
+    </style>
 </head>
+
 <body>
     <section>
         <!-- navbar -->
@@ -69,88 +73,87 @@
         <!--End Main-->
         @include('layouts.footer')
     </section>
-<script>
+    <script>
 
-
-    $(document).ready(function(){
-        $(".input-subject").select2();
-        $(".form-select").select2();
-        $("#subjects").select2();
-        $('.start-tour').on('click',function(){
-		iGuider({
-			tourTitle:'continue.enable',
-			continue:{
-				enable:true,
-				cover:'../doc_files/images/hello.gif',
-				overlayColor:'#000',
-				overlayOpacity:0.5
-			},
-			steps:[{
-				title:'Step 1',
-				content:'Step 1 Description',	
-				target:'el-1'
-			},{
-				title:'Step 2',
-				content:'Step 2 Description',	
-				target:'el-2'
-			},{
-				title:'Step 3',
-				content:'Step 3 Description',	
-				target:'el-3'
-			}]
+        $(document).ready(function() {
+            $(".input-subject").select2();
+            $(".form-select").select2();
+            $("#subjects").select2();
+            $('.start-tour').on('click', function() {
+                iGuider({
+                    tourTitle: 'continue.enable',
+                    continue: {
+                        enable: true,
+                        cover: '../doc_files/images/hello.gif',
+                        overlayColor: '#000',
+                        overlayOpacity: 0.5
+                    },
+                    steps: [{
+                        title: 'Step 1',
+                        content: 'Step 1 Description',
+                        target: 'el-1'
+                    }, {
+                        title: 'Step 2',
+                        content: 'Step 2 Description',
+                        target: 'el-2'
+                    }, {
+                        title: 'Step 3',
+                        content: 'Step 3 Description',
+                        target: 'el-3'
+                    }]
+                });
+                return false;
             });
-            return false;
-        });
-    })
-    function getSubSubject(id){
+        })
 
-        for(var i=0; i<= $(".tablinks").length; i++){
-            $(".tablinks").removeClass('active')
-        }
+        function getSubSubject(id) {
 
-        $("#defaultOpen_"+id).addClass('active')
+            for (var i = 0; i <= $(".tablinks").length; i++) {
+                $(".tablinks").removeClass('active')
+            }
 
-        $.ajax({
-            url: "{{url('subjects-all')}}"+"/"+id,
-            type:"get",
-            success:function(response){
-                $("#subSubjects").html('')
-                if(response){
-                for(var i=0; i<=response.length; i++){
-                    var html = `<div class="col-md-4">
+            $("#defaultOpen_" + id).addClass('active')
+
+            $.ajax({
+                url: "{{ url('subjects-all') }}" + "/" + id,
+                type: "get",
+                success: function(response) {
+                    $("#subSubjects").html('')
+                    if (response) {
+                        for (var i = 0; i <= response.length; i++) {
+                            var html = `<div class="col-md-4">
                                             <a href="#"  class="">
-                                            `+response[i].name+`
+                                            ` + response[i].name + `
                                             </a>
                                         </div>`
 
-                        $('#subSubjects').append(html)
+                            $('#subSubjects').append(html)
+                        }
+
                     }
+                },
+                error: function(e) {
+                    console.log(e);
 
                 }
-            },
-            error:function(e) {
-                console.log(e);
+            });
 
-            }
+
+
+        }
+
+        $("#subjects").change(function() {
+            let id = $("#subjects").val();
+            document.cookie = 's_link' + "=" + id + ";" + 60 + ";";
+            location.href = '{{ route('student.tutor', ['+id+']) }}';
         });
-
-
-
-}
-
-$("#subjects").change(function() {
-    let id = $("#subjects").val();
-    document.cookie = 's_link' + "=" + id + ";" + 60 + ";";
-    location.href = '{{route('student.tutor',['+id+'])}}';
-});
-
-</script>
+    </script>
     <!-- <div class="modal fade support_modal show" id="support-modal" tabindex="-1" role="dialog" aria-labelledby="support-modal" style="padding-right: 7px; display: block;">
         <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content modals">
                 <div class="modal-body modal-bodys">
                     <div class="container text-center pb-3 pt-3">
-                        <img src="{{asset('')}}" alt="verfiy">
+                        <img src="{{ asset('') }}" alt="verfiy">
                         <h3 class="mt-3">
                             Add Role
                         </h3>
@@ -180,4 +183,5 @@ $("#subjects").change(function() {
         </div>
     </div> -->
 </body>
+
 </html>
