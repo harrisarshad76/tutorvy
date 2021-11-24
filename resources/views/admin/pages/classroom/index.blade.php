@@ -45,7 +45,7 @@
                                                 <th scope="col">Duration</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Starts In</th>
-                                                <th scope="col"></th>
+                                                <!-- <th scope="col"></th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,6 +92,7 @@
                                                         </td>
                                                         <td class="pt-4"> {{$class->class_time}} {{date("g:i a", strtotime("$class->class_time UTC"))}} </td>
                                                         </td>
+                                                        <!-- <td></td> -->
                                                     </tr>
                                                 @endforeach
                                             @else
@@ -106,22 +107,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane tab-border-none fade" id="nav-profile" role="tabpanel"
+                        <div class="tab-pane tab-border-none fade  w-100" id="nav-profile" role="tabpanel"
                             aria-labelledby="nav-profile-tab">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                <table class="table table-bordered ">
+                                <table class="table table-bordered w-100">
                                         <thead>
                                             <tr
                                                 style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
                                                 <th scope="col">Tutor</th>
-                                                <td scope="col">Student</td>
+                                                <th scope="col">Student</th>
                                                 <th scope="col">Subjects</th>
                                                 <th scope="col">Topic</th>
                                                 <th scope="col">Time</th>
                                                 <th scope="col">Duration</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col"></th>
+                                                <!-- <th scope="col"></th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -162,6 +163,7 @@
                                                             </span>
                                                     
                                                         </td>
+                                                        <!-- <td></td> -->
                                                     </tr>
                                                 @endforeach
                                             @else

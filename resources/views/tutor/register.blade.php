@@ -224,6 +224,9 @@
             border: 1px solid #007bff;
             color: #007bff;
         }
+        #passTech{
+            display:none;
+        }
 
     </style>
 
@@ -1309,16 +1312,12 @@
                 $(".form-select").select2();
                 $(".text-red").hide();
                 /* Password STrength */
+              
 
-                $("#password").focus(function(e) {
-                    $("#passTech").show("slow");
-                });
-
-                $("#password").focusout(function(e) {
-                    $("#passTech").hide("slow");
-                });
-
-                $("#password").keyup(function(e) {
+               
+                /* Password Strength End  */
+            });
+            $("#password").keyup(function(e) {
                     var capital_leters = new RegExp('[A-Z]');
                     var lower_leters = new RegExp('[a-z]');
                     var numeric = new RegExp('[0-9]');
@@ -1449,8 +1448,13 @@
                     //     return false;
                     // }
                 });
-                /* Password Strength End  */
-            });
+            $("#password").focus(function(e) {
+                    $("#passTech").show("slow");
+                });
+
+                $("#password").focusout(function(e) {
+                    $("#passTech").hide("slow");
+                });
         </script>
     </section>
 </body>

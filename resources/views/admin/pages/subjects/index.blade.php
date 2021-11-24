@@ -48,7 +48,7 @@ svg:not(:root) {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row border-bottom ">
+                        <!-- <div class="row border-bottom ">
                             <div class="col-md-11 m-0 p-0">
                                 <form>
                                     <div class="d-flex table">
@@ -81,9 +81,9 @@ svg:not(:root) {
                                                 <option value="1">Highest rate</option>
                                             </select>
                                         </div>
-                                        <!-- <div class=" ml-3">
-                                        <input type="submit" value="Go" class="schedule-btn" />
-                                    </div> -->
+                                        <div class=" ml-3">
+                                            <input type="submit" value="Go" class="schedule-btn" />
+                                        </div>
 
                                         <div class="reset-text mt-2 ">
                                             <a href="">
@@ -103,7 +103,7 @@ svg:not(:root) {
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mt-0">
                             <div class="col-md-12">
                                 <!-- start table -->
@@ -176,7 +176,7 @@ svg:not(:root) {
             </div>
 
         </div>
-        <div class="row ml-1 mr-1">
+        <!-- <div class="row ml-1 mr-1">
             <div class="col-md-12">
                 <nav aria-label="Page navigation" class="mt-4">
                     <ul class="pagination bg-white pagination-example-1">
@@ -211,7 +211,7 @@ svg:not(:root) {
                     </ul>
                 </nav>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- end section -->

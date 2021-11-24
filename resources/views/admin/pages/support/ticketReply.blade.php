@@ -219,8 +219,8 @@
                             <div class="container mt-4">
                                 <div class="row">
                                     <div class="col-md-6 col-6">
-                                        <span class="alex-name"><img src="{{asset('admin/assets/img/ico/std-icon.png')}}"
-                                                alt="std-icon" /></span>
+                                        <!-- <span class="alex-name"><img src="{{asset('admin/assets/img/ico/std-icon.png')}}"
+                                                alt="std-icon" /></span> -->
                                         <span class="pl-2 alex-names">Harram</span>
                                     </div>
                                     <div class="col-md-6 col-6">

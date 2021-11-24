@@ -153,6 +153,13 @@
                                                             @endif
                                                         </span>
                                                     </div>
+                                                    <!-- <select name="ticketStatus" id="">
+                                                        <option value="0">Pending</option>
+                                                        <option value="0">Pending</option>
+                                                        <option value="0">Pending</option>
+                                                        <option value="0">Pending</option>
+                                                        <option value="0">Pending</option>
+                                                    </select> -->
                                                 </div>
                                             </div>
                                             <div class="row pt-3 mb-3 ml-1 mr-1 border-bottom pb-1">
@@ -272,10 +279,10 @@
                             <div class="container mt-4" id="record">
                                 <div class="row">
                                     <div class="col-md-6 col-6">
-                                        <span class="alex-name">
+                                        <!-- <span class="alex-name">
                                             <img src="{{asset($staff->picture)}}"
                                                 alt="std-icon" />
-                                            </span>
+                                            </span> -->
                                         <span class="pl-2 alex-names">{{$staff->name}}</span>
                                     </div>
                                     <div class="col-md-6 col-6">
