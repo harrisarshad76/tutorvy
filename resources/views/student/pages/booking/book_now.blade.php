@@ -81,7 +81,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                                                 </div>
                                                 <div class="col-md-6 col-6">
                                                     <h3 class="mb-0">{{$user->first_name}}  {{$user->last_name}}</h3>
-                                                    <p class="mb-0 "><img src="{{asset('assets/images/ico/red-icon.png')}}" alt="" class="pr-2">  {{$user->professional->last()->designation ?? '---'}}</p>
+                                                    <p class="mb-0 "><img src="{{asset('assets/images/ico/red-icon.png')}}" alt="" class="pr-2">{{$user->professional->last()->designation ?? '---'}} at {{$user->professional->last()->organization}}</p>
                                                     <p class="mb-0 "><img src="{{asset('assets/images/ico/location-pro.png')}}" alt="" class="pr-2">{{ $user->city != NULL ? $user->city.' , ' : '---' }} {{ $user->country != NULL ? $user->country: '---' }}</p>
 
                                                 </div>
