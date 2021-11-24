@@ -269,31 +269,30 @@ class LoginController extends Controller
     {
 
         try{
-            $user = User::where('email', $data['email'])->where('provider',$data['provider'])->first();
-            if(!$user && $r == 0){
-                return false;
-            }
+            // $user = User::where('email', $data['email'])->where('provider',$data['provider'])->first();
+            // if(!$user && $r == 0){
+            //     return false;
+            // }
 
-            if(!$user){
-               $user = User::create([
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'email' => $data['email'],
-                    'picture' => $data['picture'],
-                    'provider' => 'google',
-                    'role'=> $r
-                ]);
-            }else{
-                if($user->role != $r){
-                    return false;
-                }
-            }
+            // if(!$user){
+            $user = User::create([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'picture' => $data['picture'],
+                'provider' => 'google',
+                'role'=> $r
+            ]);
+            // }else{
+            //     if($user->role != $r){
+            //         return false;
+            //     }
+            // }
 
             return $user;
 
         }catch(Exception $e){
-
-            dd($e->getMessage());
+            return $errorCode = $e->errorInfo;
         }
 
     }
@@ -336,35 +335,45 @@ class LoginController extends Controller
     public function googleLoggin(Request $request)
     {
 
-        $c_id = $request->role;
+            $c_id = $request->role;
+            $user = User::where('email', $request->email)->first();
 
-        $data = $this->_registerOrLogin($request->all(),$c_id);
+            $asRegiser = ($user->role == 3) ? 'Student' : 'Tutor';
 
-        if($data == false || $data == ''){
+            $data = $this->_registerOrLogin($request->all(),$c_id);
 
-            if($c_id == 2) {
-                return redirect()->route('tutor.register')->with('error','Unable to login with this email.');
-            }else if($c_id == 3) {
-                return redirect()->route('student.register')->with('error','Unable to login with this email.');
-            }else if($c_id == 0) {
-                return redirect()->route('login')->with('error','Google account is not attached with any account.');
-            }else{
-                return redirect()->to('/');
+            if($data == false || $data == ''){
+
+                if($c_id == 2) {
+                    return redirect()->route('tutor.register')->with('error','Unable to login with this email.');
+                }else if($c_id == 3) {
+                    return redirect()->route('student.register')->with('error','Unable to login with this email.');
+                }
             }
-            // return redirect()->back()->with('error','Unable to login with this email.');
-        }
-        Auth::login($data);
 
-        if($data->role == 2){
-            return response(['status' => 200,'url'=>'/tutor/dashboard']);
-        }
+            if($data[1] == 1062){
+                return response([
+                            'status' => 400,
+                            'message' =>'This email '.$request->email .' is already registered as a '.$asRegiser.', please choose another'
+                        ]);
+            }
 
-        if($data->role == 3){
-            return response(['status' => 200,'url'=>'/student/dashboard']);
-        }
-        if(!$data->role){
-            return redirect('role');
-        }
+            Auth::login($data);
+
+            if($data->role == 2){
+                return response(['status' => 200,'url'=>'/tutor/dashboard']);
+            }
+
+            if($data->role == 3){
+                return response(['status' => 200,'url'=>'/student/dashboard']);
+            }
+            if(!$data->role){
+                return redirect('role');
+            }
+
+
+
+
     }
 
     public function checkLogin(Request $request)

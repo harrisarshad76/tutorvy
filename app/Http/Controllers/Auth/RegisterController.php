@@ -144,7 +144,7 @@ class RegisterController extends Controller
          * Identify user already exist
          */
 
-        if($request->role == 2):
+        // if($request->role == 2):
             $user = User::updateOrCreate(["email" => $request->email,"ip" => $request->ip],[
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -171,40 +171,40 @@ class RegisterController extends Controller
             // 'gender' => $request->gender,
             // 'bio' => $request->bio,
             ]);
-        else:
+        // else:
             // return $request;
             // return "Null";
         //   $user = $this->registerStudent($request);
-        $user = User::updateOrCreate(["email" => $request->email],[
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'account_id' => $account_id,
-            'region' =>  $region,
-            'time_zone' =>  $request->time_zone,
-            // 'ip' => $request->ip,
-            // 'dob' => $request->dob,
-            // 'phone' => $request->phone,
-            // 'city' => $request->city,
-            // 'country' => $request->country,
-            // 'country_short' => $request->country_short,
-            'role' => $request->role,
-            // 'type' => ($request->type == 1) ? 'cnic' : 'security',
-            // 'cnic_security' => $request->cnic ?? $request->security,
-            // 'language' => $request->language,
-            // 'lang_short' => $request->lang_short,
-            // 'student_level' => $request->student_level,
-            // 'std_grade' => $request->student_grade,
-            // 'hourly_rate' => $request->hour_rate,
-            // 'policies' => $request->policies,
-            // 'email_market' => $request->email_market,
-            // 'gender' => $request->gender,
-            // 'bio' => $request->bio,
-            ]);
+        // $user = User::updateOrCreate(["email" => $request->email],[
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'account_id' => $account_id,
+        //     'region' =>  $region,
+        //     'time_zone' =>  $request->time_zone,
+        //     // 'ip' => $request->ip,
+        //     // 'dob' => $request->dob,
+        //     // 'phone' => $request->phone,
+        //     // 'city' => $request->city,
+        //     // 'country' => $request->country,
+        //     // 'country_short' => $request->country_short,
+        //     'role' => $request->role,
+        //     // 'type' => ($request->type == 1) ? 'cnic' : 'security',
+        //     // 'cnic_security' => $request->cnic ?? $request->security,
+        //     // 'language' => $request->language,
+        //     // 'lang_short' => $request->lang_short,
+        //     // 'student_level' => $request->student_level,
+        //     // 'std_grade' => $request->student_grade,
+        //     // 'hourly_rate' => $request->hour_rate,
+        //     // 'policies' => $request->policies,
+        //     // 'email_market' => $request->email_market,
+        //     // 'gender' => $request->gender,
+        //     // 'bio' => $request->bio,
+        //     ]);
 
 
-        endif;
+        // endif;
 
         /**
          * Userdetail Model/Table is only for Tutor , so here is checking ( 2 represent tutor)
@@ -229,8 +229,6 @@ class RegisterController extends Controller
 
             if(Auth::user()->role == 2):
                 return redirect()->route('tutor.dashboard');
-
-
                 // return view('tutor.skip',compact('request'));
             else:
 
@@ -257,7 +255,7 @@ class RegisterController extends Controller
                 if($value != ''){
 
                     $subject = $value;
-      
+
                     $query = DB::table('users')
                     ->select('view_tutors_data.*')
                     ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
@@ -270,7 +268,7 @@ class RegisterController extends Controller
                         if($subject != null && $subject != ''){
                             $query2->where('teachs.subject_id', $subject);
                         }
-                        
+
                     });
 
                     $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
@@ -283,7 +281,7 @@ class RegisterController extends Controller
                     $subjects = Subject::all();
                     $locations = DB::table('search_locations')->get();
                     return redirect()->route('student.tutor')->with(['available_tutors'=> $available_tutors, 'subjects' => $subjects, 'locations' => $locations ]);
-                    
+
                 }
 
                 return redirect()->route('student.dashboard');
