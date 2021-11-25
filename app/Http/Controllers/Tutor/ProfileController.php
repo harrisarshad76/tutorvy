@@ -40,7 +40,7 @@ class ProfileController extends Controller
     public function profileUpdate(Request $request) {
 
         $date_of_birth = $request->year.'-'.$request->month.'-'.$request->day;
-
+        
         $data =array(
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -78,8 +78,14 @@ class ProfileController extends Controller
         $activity_logs = new GeneralController();
         $activity_logs->save_activity_logs("Profile Updated", "users.id", $id, $action_perform, $request->header('User-Agent'), $id);
 
+
+        $general_profile = "profile";
         $user_general_profile = User::where('id',Auth::user()->id)->first();
-        if($user_general_profile->profile_completed == 0) {
+
+        if(!str_contains($user_general_profile->profile_completion , "profile" )) {
+            User::where('id',Auth::user()->id)->update(["profile_completion" => $user_general_profile->profile_completion . $general_profile .',']);
+        }
+        if(str_contains($user_general_profile->profile_completion , "profile,education,professional,verification," )){
             User::where('id',Auth::user()->id)->update(["profile_completed" => 1]);
         }
 
@@ -125,6 +131,16 @@ class ProfileController extends Controller
         $activity_logs = new GeneralController();
         $activity_logs->save_activity_logs("Profile Updated", "education.id", $id, $action_perform, $request->header('User-Agent'), $id);
 
+        $general_profile = "education";
+        $user_general_profile = User::where('id',Auth::user()->id)->first();
+
+        if(!str_contains($user_general_profile->profile_completion , "education" )) {
+            User::where('id',Auth::user()->id)->update(["profile_completion" => $user_general_profile->profile_completion . $general_profile .',']);
+        }
+        if(str_contains($user_general_profile->profile_completion , "profile,education,professional,verification," )){
+            User::where('id',Auth::user()->id)->update(["profile_completed" => 1]);
+        }
+
         return response()->json([
             "status_code" => 200,
             "success" => true,
@@ -157,7 +173,16 @@ class ProfileController extends Controller
         $action_perform = '<a href="'.URL::to('/') . '/admin/tutor/profile/'. $id .'"> '.$name.' </a> Update his Professional Record';
         $activity_logs = new GeneralController();
         $activity_logs->save_activity_logs("Profile Updated", "professionals.id", $id, $action_perform, $request->header('User-Agent'), $id);
+        
+        $general_profile = "professional";
+        $user_general_profile = User::where('id',Auth::user()->id)->first();
 
+        if(!str_contains($user_general_profile->profile_completion , "professional" )) {
+            User::where('id',Auth::user()->id)->update(["profile_completion" => $user_general_profile->profile_completion . $general_profile .',']);
+        }
+        if(str_contains($user_general_profile->profile_completion , "profile,education,professional,verification," )){
+            User::where('id',Auth::user()->id)->update(["profile_completed" => 1]);
+        }
         return response()->json([
             "status_code" => 200,
             "success" => true,
@@ -211,6 +236,8 @@ class ProfileController extends Controller
             }
 
         }
+    
+     
 
         foreach($data as $file) {
             DB::table("user_files")->insert([
@@ -241,6 +268,17 @@ class ProfileController extends Controller
         $activity_logs = new GeneralController();
         $activity_logs->save_activity_logs("Profile Updated", "user_files.user_id", $id, $action_perform, $request->header('User-Agent'), $id);
 
+        $general_profile = "verification";
+        $user_general_profile = User::where('id',Auth::user()->id)->first();
+
+        if(!str_contains($user_general_profile->profile_completion , "verification" )) {
+            User::where('id',Auth::user()->id)->update(["profile_completion" => $user_general_profile->profile_completion . $general_profile .',']);
+        }
+        if(str_contains($user_general_profile->profile_completion , "profile,education,professional,verification," )){
+            User::where('id',Auth::user()->id)->update(["profile_completed" => 1]);
+        }
+
+        
         return response()->json([
             "status_code" => 200,
             "success" => true,

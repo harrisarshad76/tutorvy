@@ -327,6 +327,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::view('/skip','tutor.skip')->name('skip');
     Route::get('/assessment/{id}',[AssessmentController::class,'index'])->name('tutor.test');
     Route::post('/assessment',[AssessmentController::class,'store'])->name('tutor.assessment');
+    Route::post('/subjectPlanUpdate',[AssessmentController::class,'update_sub_plan'])->name('tutor.update_sub_plan');
 
     //Course CRUD
     Route::get('/course',[TutorCourseController::class,'index'])->name('tutor.course');

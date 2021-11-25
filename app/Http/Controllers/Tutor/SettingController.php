@@ -52,7 +52,35 @@ class SettingController extends Controller
             array("id" => 7 , "day" => "Sunday"),
         );
 
-        return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots','user_slots'));
+        
+        $times = array(
+            array("value" => "12:00 AM"),
+            array("value" => "01:00 AM"),
+            array("value" => "02:00 AM"),
+            array("value" => "03:00 AM"),
+            array("value" => "04:00 AM"),
+            array("value" => "05:00 AM"),
+            array("value" => "06:00 AM"),
+            array("value" => "07:00 AM"),
+            array("value" => "08:00 AM"),
+            array("value" => "09:00 AM"),
+            array("value" => "10:00 AM"),
+            array("value" => "11:00 AM"),
+            array("value" => "12:00 PM"),
+            array("value" => "01:00 PM"),
+            array("value" => "02:00 PM"),
+            array("value" => "03:00 PM"),
+            array("value" => "04:00 PM"),
+            array("value" => "05:00 PM"),
+            array("value" => "06:00 PM"),
+            array("value" => "07:00 PM"),
+            array("value" => "08:00 PM"),
+            array("value" => "09:00 PM"),
+            array("value" => "10:00 PM"),
+            array("value" => "11:00 PM"),
+        );
+
+        return view('tutor.pages.setting.index',compact('user','paypal_payment','days','slots','user_slots','times'));
     }
 
     protected function validator(array $request) {

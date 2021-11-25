@@ -226,29 +226,31 @@
             <div class="modal-content">
                 <!-- <div class="modal-header text-center">
                 </div> -->
-                <div class="modal-body h-auto  card-body">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <img  src="{{asset('admin/assets/img/ico/dollars.png')}}" />
+                <form action="{{ route('tutor.update_sub_plan') }}" method="Post" id="subPlanUpdate">
+                    <div class="modal-body h-auto  card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img  src="{{asset('admin/assets/img/ico/dollars.png')}}" />
+                            </div>
+                            <div class="col-md-12 text-center mt-3">
+                                <h3 id="subject_title"> </h3>
+                            </div>
                         </div>
-                        <div class="col-md-12 text-center mt-3">
-                            <h3 id="subject_title"> </h3>
+                        <div id="show_plans"></div>
+                    </div>
+                    <div class="modal-footer ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="cencel-btn btn" data-dismiss="modal" type="button">
+                                    Cancel
+                                </button>
+                                <button class="schedule-btn btn" type="submit">
+                                    Save Changes
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div id="show_plans"></div>
-                </div>
-                <div class="modal-footer ">
-                    <div class="row">
-                        <div class="col-md-12">
-                             <button class="cencel-btn btn" data-dismiss="modal">
-                                Cancel
-                            </button>
-                            <button class="schedule-btn btn" data-dismiss="modal">
-                                Save Changes
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -257,54 +259,113 @@
 @section('scripts')
     @include('js_files.tutor.subjectJs')
     <script>
-         function showTutorPlans(subject_title , user_id , subject_id) {
-        $.ajax({
-            url: "{{route('tutor.plans')}}",
-            type:"POST",
-            data:{
-            user_id:user_id,
-            subject_id:subject_id,
-            },
-            success:function(response){
+        function showTutorPlans(subject_title , user_id , subject_id) {
+            $.ajax({
+                url: "{{route('tutor.plans')}}",
+                type:"POST",
+                data:{
+                user_id:user_id,
+                subject_id:subject_id,
+                },
+                success:function(response){
 
-            var data = ``;
-            if(response.status_code == 200) {
+                var data = ``;
+                var obj = response.tutor_plans;
+                if(response.status_code == 200) {
+                    console.log(obj, 'junk');
+                    for(var i =0; i < obj.length; i++) {
+                        var name = obj[i].experty_title != null ? obj[i].experty_title .replace("-", "_") : '-';
+                        var title = $.trim(name).toLowerCase();
+                    data +=`
 
-                for(var i =0; i < response.tutor_plans.length; i++) {
-
-                data +=`
-                    <div class="row mt-3 ">
-                        <div class="col-md-6">
-                            <p class="pt-3"> `+ (response.tutor_plans[i].experty_title != null ? response.tutor_plans[i].experty_title : '-') +` </p>
-                        </div>
-                        <div class="text-right col-md-6 ">
-                            <div class="input-group mt-2">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input type="text" class="form-control" id="preElementary_rate" name="preElementary_rate" value="`+response.tutor_plans[i].rate+`">
+                        <div class="row mt-3 ">
+                            <div class="col-md-6">
+                                <p class="pt-3"> `+ name +` </p>
                             </div>
-                        </div>
-                    </div>`
+                            <div class="text-right col-md-6 ">
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="preElementary_rate" name="`+ title +`" value="`+ obj[i].rate+`">                                   
+                                    <input type="hidden" class="form-control"  name="`+ title +`_id" value="`+ obj[i].id+`">                                  
+                                    <input type="hidden" class="form-control"  name="subject_id" value="`+ obj[i].subject_id+`">                                  
+                                </div>
+                            </div>
+                        </div>`
+                    }
+                    $("#subject_title").text(subject_title);
+                    $("#show_plans").html(data);
+                    $("#priceModal").modal('show');
+
+                }else{
+
+                    toastr.error( response.message,{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
 
                 }
-                $("#subject_title").text(subject_title);
-                $("#show_plans").html(data);
-                $("#priceModal").modal('show');
+                },
+            });
 
-            }else{
+        }
+                // update tutor edu record
+        $("#subPlanUpdate").submit(function(e) {
+            
+            e.preventDefault();
 
-                toastr.error( response.message,{
-                    position: 'top-end',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+            var action = $(this).attr('action');
+            var method = $(this).attr('method');
+            var form = new FormData(this);
+            $.ajax({
+                url: action,
+                type:method,
+                data:form,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend:function(data) {
+                    $("#educational_save").hide();
+                    $("#educational_loading").show();
+                },
+                success:function(response){
+                    if(response.status_code == 200 && response.success == true) {
+                        toastr.success(response.message,{
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }else{
+                        toastr.error(response.message,{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                },
+                complete:function(data) {
+                    $("#educational_save").show();
+                    $("#educational_loading").hide();
+                },
+                error:function(e) {
+                    $("#educational_save").show();
+                    $("#educational_loading").hide();
+                    console.log(e);
+                    toastr.error('Something Went Wrong',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            });
 
-            }
-            },
         });
-
-  }
+    
     </script>
 @endsection

@@ -36,10 +36,9 @@
 
             @php
 
-            $tz = get_local_time();
-            $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-            $time = $dt->format('g:i a');
-
+                $tz = get_local_time();
+                $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
+                $time = $dt->format('g:i a');
             @endphp
                 <div class="row">
                     <div class="col-md-12">
@@ -145,9 +144,9 @@
 
                                                                 Schedule Time:
                                                             </span>
-                                                            <span class="time-details">
-                                                                {{$time}}
-                                                            </span>
+                                                            <span class="time-details" id="show_curr_region_time">
+                                                                
+                                                                </span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -472,4 +471,13 @@
 
 @section('scripts')
     @include('js_files.student.bookingJs')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+        var time_zone = new Date().toLocaleString('en-US', { timeZone: "{{Auth::user()->time_zone}}" });
+        let booking_time = "{{$booking->class_time}}";
+        let curr_date = moment(time_zone).format('YYYY-MM-DD');
+        let create_date = curr_date + ' ' + booking_time;
+        let converted_time = moment(create_date).format('LT') ;
+        $("#show_curr_region_time").text(converted_time);
+    </script>
 @endsection

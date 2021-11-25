@@ -74,10 +74,8 @@ class AssessmentController extends Controller
                 "experty_title" => $plans[$i]['name'],
                 "rate" => $plans[$i]['rate'],
             ]);
-
         }
 
-        
         $minimum_rate = DB::table("subject_plans")->where('user_id',Auth::user()->id)->min('rate');
 
         if($minimum_rate) {
@@ -115,5 +113,41 @@ class AssessmentController extends Controller
             "success" => true,
             "message" => "Request completed"
         ]);
+    }
+
+
+    public function update_sub_plan(Request $request){
+
+        $plans = [];     
+        return $request->subject_id;
+        
+        if($request->pre_elementary_school) {
+            array_push($plans , array( "id" => $request->pre_elementary_school_id , "rate" => $request->pre_elementary_school));
+        }
+        if($request->elementary_school) {
+            array_push($plans , array("id" => $request->elementary_school_id ,  "rate" => $request->elementary_school ));
+        }
+        if($request->secondary_school) {
+            array_push($plans , array("id" => $request->secondary_school_id ,  "rate" => $request->secondary_school));
+        }
+        if($request->high_school) {
+            array_push($plans , array("id" => $request->high_school_id ,  "rate" => $request->high_school ));
+        }
+        if($request->post_secondary_school) {
+            array_push($plans , array("id" => $request->post_secondary_school_id ,  "rate" => $request->post_secondary_school ));
+        }
+
+
+
+
+        for($i = 0; $i < sizeOf($plans); $i++) {
+
+            subjectPlans::where('id', $plans[$i]['id'])->update([
+                "rate" => $plans[$i]['rate'] , 
+            ]);
+        }
+
+
+        return 'done';
     }
 }
