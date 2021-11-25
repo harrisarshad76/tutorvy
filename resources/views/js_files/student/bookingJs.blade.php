@@ -362,6 +362,7 @@ function pay_now(id) {
                     commit: true,
                     // payment() is called when the button is clicked
                     payment: function(data, actions) {
+                        alert(total_price)
                         // Make a call to the REST api to create the payment
                         return actions.payment.create({
                             transactions: [{
