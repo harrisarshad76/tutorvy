@@ -75,13 +75,12 @@
                                                 @if($classes != null && $classes != [] && $classes != "")
                                                     @foreach($classes as $class)
                                                         @if($class != null && $class != "")
-                                                        @php
+                                                            @php
 
-                                                        $tz = get_local_time();
-                                                        $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                        $time = $dt->format('g:i a');
-
-                                                        @endphp
+                                                            $tz = get_local_time();
+                                                            $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
+                                                            $time = $dt->format('g:i a');
+                                                            @endphp
                                                             <tr>
                                                                 <td class="pt-4">
                                                                     @if($class->user != null && $class->user != "")
@@ -95,7 +94,11 @@
                                                                 </td>
                                                                 <td class="pt-4"> {{ $class->subject->name }} </td>
                                                                 <td class="pt-4"> {{ $class->topic }} </td>
-                                                                <td class="pt-4 tutor_time_{{$class->id}}">  </td>
+                                                                <td class="pt-4 "> 
+                                                                    <span class=" show_curr_region_time" >
+                                                                        
+                                                                    </span> 
+                                                                </td>
                                                                
                                                                 <td class="pt-4"> {{ $class->duration }} Hour(s) </td>
                                                                 <td class="pt-4">
@@ -194,7 +197,10 @@
                                                                         {{ $class->topic }}
                                                                     </td>
                                                                     <td class="pt-4">
-                                                                    {{$class->class_time}} {{date("g:i a", strtotime("$class->class_time UTC"))}}
+                                                                        <span class=" show_curr_region_time">
+                                                                        
+                                                                        </span>
+                                                                        <!-- {{$class->class_time}} {{date("g:i a", strtotime("$class->class_time UTC"))}} -->
                                                                     </td>
                                                                     
                                                                     <td class="pt-4">
@@ -364,7 +370,18 @@
             return fin;
 
         }
+      
 
     });
 </script>
+<script>
+        var time_zone = new Date().toLocaleString('en-US', { timeZone: "{{Auth::user()->time_zone}}" });
+        let booking_time = "{{$class->class_time}}";
+
+        let curr_date = moment(time_zone).format('YYYY-MM-DD');
+        let create_date = curr_date + ' ' + booking_time;
+        let converted_time = moment(create_date).format('LT') ;
+        $(".show_curr_region_time").text(converted_time);
+
+    </script>
 @endsection
