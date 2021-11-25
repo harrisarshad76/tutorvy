@@ -101,6 +101,8 @@ class BookingController extends Controller
         $interval = $request->interval * 60;
         $start_time = $request->start_time;
         $end_time = $request->end_time;
+        $date = $request->date;
+        $t_id = $request->t_id;
 
         $start = new DateTime($start_time);
         $end = new DateTime($end_time);
@@ -113,8 +115,8 @@ class BookingController extends Controller
             $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $slot = new \stdClass();
-            $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->first();
-
+            $booking = Booking::where('class_time','>=',$start)->where('class_booked_till','<=',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->first();
+            // return $booking;
             if(strtotime($startTime) <= strtotime($endTime)){
                 if($booking){
                     
@@ -166,8 +168,11 @@ class BookingController extends Controller
         $class_date = $request->date;
         $class_time = explode("-",$request->time);
      
-        $from_time = $class_time[0];
-        $to_time = $class_time[1];
+        $from_time = explode(" ",$class_time[0]);
+        $from_time = $from_time[0];
+
+        $to_time = explode(" ",$class_time[1]);
+        $to_time = $to_time[0];
 
         $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->get();
 
