@@ -695,7 +695,7 @@ class BookingController extends Controller
             );
 
             Classroom::create([
-                'booking_id' => $request->id ?? null,
+                'booking_id' => $booking->id ?? null,
                 'classroom_id' => $classroom_id
             ]);
 
