@@ -123,7 +123,7 @@ function getDate(date) {
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
     getTutorSlots(tutor_id , day , date);
-    showTimeSlot(duration);
+    
 
 }
 
@@ -141,7 +141,14 @@ function getTutorSlots(id , day , date) {
             console.log(response);
             var obj = response.slots;
             if(response.status_code == 200 && response.success == true) {
-                
+                if(obj == null){
+                    toastr.error('Time slot Not Available',{
+                        position: 'top-end',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });  
+                }
                 if(obj.wrk_from != null && obj.wrk_to != null) {
                     if(obj.day_off == 1){
                         toastr.error('Tutor is off today.',{
@@ -158,7 +165,7 @@ function getTutorSlots(id , day , date) {
                         }
                         time_slots.push(ab);
                     }
-                    
+                    showTimeSlot(duration);
                 }else{
 
                     toastr.error('Time Slot Not Available',{
