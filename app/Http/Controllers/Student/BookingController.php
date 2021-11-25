@@ -662,6 +662,7 @@ class BookingController extends Controller
             // ]);
             $booking = '';
             $subject = '';
+            $course = '';
             if($request->type == 'booking_class'){
                 $booking = Booking::where('id',$request->id)->first();
                 if($booking != null){
@@ -670,6 +671,8 @@ class BookingController extends Controller
                     $booking->service_fee =  $request->service_fee;
                     $booking->save();
                 }
+            }else if($request->type == 'course_enrollment'){
+
             }
             Payments::create([
                 'user_id' => Auth::user()->id,
