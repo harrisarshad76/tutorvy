@@ -342,12 +342,13 @@ function pay_now(id) {
 
                 var origin   = window.location.origin;
                 var url = origin + '/student/booking/payment/'+ obj.id;
-                $("#show_pay_btn #payment span").html('');
+
                 $("#payment").attr("action",url)
                 let btn = `<input type="submit" class="schedule-btn btn w-30" value="Pay Now" />`;
                 $("#show_pay_btn #payment span").html(btn);
 
                 $("#payModel").modal('show');
+                $("#paypal-button-container").html('');
 
                 paypal.Button.render({
                     // selection for sandbox or production
