@@ -174,7 +174,7 @@ class BookingController extends Controller
         $to_time = explode(" ",$class_time[1]);
         $to_time = $to_time[0];
 
-        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$date)->where('booked_tutor',$request->tutor_id)->get();
+        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
         if($booking->count() <= 0){
 
