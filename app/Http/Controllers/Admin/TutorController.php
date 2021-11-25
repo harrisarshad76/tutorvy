@@ -45,7 +45,7 @@ class TutorController extends Controller
             ->whereIn('users.status', [0, 1, 2])
             ->paginate(15);
         //  return $new_requests;
-
+        // dd($new_requests);
 
         return view('admin.pages.tutors.index',compact('new_requests','approved_tutors','staff_members'));
     }
@@ -288,7 +288,7 @@ class TutorController extends Controller
 
                 // dd($user);
 
-        $message = $user->first_name.' '.$user->last_name. ' has been assigned to '.User::find($request->staff)->first_name.' '.User::find($request->staff)->last_name;
+        $message = $user->first_name.' '.$user->last_name. ' has been assigned to '.User::find($request->staff)->name;
         $notify_msg = $user->first_name.' '.$user->last_name.' user is assigned to you';
 
 

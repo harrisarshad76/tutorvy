@@ -53,7 +53,10 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-        $user = User::where('email',$request->email)->where('role','!=',1)->first();
+        $user = User::where('email',$request->email)
+                        ->where('role','!=',1)
+                        // ->where('provider','direct')
+                        ->first();
 
         if($user){
             return view('auth.login',compact('user'));
@@ -65,7 +68,7 @@ class LoginController extends Controller
         */
 
         if($request->filled('valid_email','password','role')){
-            if(Auth::attempt(['email' => $request->valid_email, 'password' => $request->password,'role'=>$request->role ])){
+            if(Auth::attempt(['email' => $request->valid_email, 'password' => $request->password,'role'=>$request->role, 'provider' => 'direct' ])){
                 if($request->role == 2){
 
                     // activity logs
@@ -338,7 +341,12 @@ class LoginController extends Controller
             $c_id = $request->role;
             $user = User::where('email', $request->email)->first();
 
-            $asRegiser = ($user->role == 3) ? 'Student' : 'Tutor';
+            $asRegiser = '';
+            if(isset($user) && $user->role == 3):
+                $asRegiser = 'Student';
+            elseif(isset($user) && $user->role == 2):
+                $asRegiser = 'Tutor';
+            endif;
 
             $data = $this->_registerOrLogin($request->all(),$c_id);
 
@@ -379,7 +387,8 @@ class LoginController extends Controller
     public function checkLogin(Request $request)
     {
         try{
-            $user = User::where('email', $request->email)->where('provider',$request->provider)->first();
+            // $user = User::where('email', $request->email)->where('provider',$request->provider)->first();
+            $user = User::where('email', $request->email)->first();
             if(!$user){
                 return response([
                         'status' => 400,

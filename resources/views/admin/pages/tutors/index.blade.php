@@ -502,11 +502,7 @@
                                 <span class="pl-2 alex-names">{{$staff->name}}</span>
                             </div>
                             <div class="col-md-6 col-6">
-                                @if ($staff->id == $tutor->id)
-                                <button class="btn schedule-btn assgin-text" disabled>Assigned</button>
-                                @else
                                 <button class="schedule-btn assgin-text" onclick="assign({{$staff->id}})">Assign</button>
-                                @endif
                             </div>
                         </div>
                     </div>

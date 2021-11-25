@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <!-- Styles -->
     @include('student.layouts.css')
@@ -74,7 +75,7 @@
 
             <div>
 
-            </div>
+        </div>
             <!-- custom js -->
             <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 

@@ -413,7 +413,7 @@ class CourseController extends Controller
 
                 // dd($user);
 
-        $message = 'Course has been assigned to '.User::find($request->staff)->first_name.' '.User::find($request->staff)->last_name;
+        $message = 'Course has been assigned to '.User::find($request->staff)->name;
         $notify_msg = 'Course is assigned to you';
 
 

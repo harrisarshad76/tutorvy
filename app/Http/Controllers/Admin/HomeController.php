@@ -75,7 +75,10 @@ class HomeController extends Controller
                                 'staff' => $collection2->pluck('count(*)')->toArray(),
                                 'month' => $collection->pluck('MONTHNAME(created_at)')->toArray(),
                                 'year' => $collection->pluck('Date(created_at)')->toArray(),
-                                'users' => $users
+                                'users' => $users,
+                                'tutorCount' => $collection->pluck('count(*)')->sum(),
+                                'studentCount' => $collection1->pluck('count(*)')->sum(),
+                                'staffCount' => $collection2->pluck('count(*)')->sum(),
                             ]);
     }
 }
