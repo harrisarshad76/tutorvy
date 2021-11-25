@@ -113,11 +113,12 @@ class BookingController extends Controller
         $slots = array();
         while(strtotime($startTime) < strtotime($endTime)){
             $start = $startTime;
+            // return $start;
             $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $slot = new \stdClass();
             $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
-            // return $booking;
+            // return $start;
             if(strtotime($startTime) <= strtotime($endTime)){
                 if($booking){
                     
