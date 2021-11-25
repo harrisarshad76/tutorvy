@@ -342,7 +342,6 @@ function pay_now(id) {
 
                 var origin   = window.location.origin;
                 var url = origin + '/student/booking/payment/'+ obj.id;
-           
 
                 $("#payment").attr("action",url)
                 let btn = `<input type="submit" class="schedule-btn btn w-30" value="Pay Now" />`;
