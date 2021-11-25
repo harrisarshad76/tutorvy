@@ -28,6 +28,13 @@
         padding-bottom: 15px;
         padding-top: 15px;
     }
+    #accordion .slider{
+        height: 20px;
+        width: 42px;
+    }
+    input:checked+.slider {
+    background-color: #1173FF !important;
+}
 </style>
 @section('content')
 
@@ -593,13 +600,16 @@
                                                                         </div>
                                                                         <div class="col-md-12 mt-1">
                                                                             <div class="row">
-                                                                                <div class="col-md-2 pt-1">
+                                                                                <div class="col-md-2 pt-2">
                                                                                     <p><b>Day Off </b></p>
 
                                                                                 </div>
-                                                                                <div class="col-md-10 pt-2">
-                                                                                    <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off">
-                                                                                    
+                                                                                <div class="col-md-10 ">
+                                                                                    <!-- <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off switch"> -->
+                                                                                    <label class="switch mt-0">
+                                                                                        <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off">
+                                                                                        <span class="slider round"></span>
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
                                                                             
@@ -713,13 +723,16 @@
                                                                         </div>
                                                                         <div class="col-md-12 mt-1">
                                                                             <div class="row">
-                                                                                <div class="col-md-2 pt-1">
+                                                                                <div class="col-md-2 pt-2">
                                                                                     <p><b>Day Off </b></p>
 
                                                                                 </div>
-                                                                                <div class="col-md-10 pt-2">
-                                                                                    <input type="checkbox" class="day_off" {{$slot->day_off == 1 ? 'checked' : ''}}>
-                                                                                    
+                                                                                <div class="col-md-10 ">
+                                                                                    <!-- <input type="checkbox" class="day_off" {{$slot->day_off == 1 ? 'checked' : ''}}> -->
+                                                                                    <label class="switch mt-0">
+                                                                                        <input type="checkbox" id="{{$day['day']}}_off" class="day_off" {{$slot->day_off == 1 ? 'checked' : ''}}>
+                                                                                        <span class="slider round"></span>
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
                                                                             
