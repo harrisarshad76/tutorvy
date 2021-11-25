@@ -427,7 +427,7 @@ function pay_now(id) {
                         // Make a call to the REST api to execute the payment
                         return actions.payment.execute().then(function() {
                             // If the transaction is successful on Paypal, you can then Post to a script to run actions on your site like emailing the user etc
-                            return actions.request.post("{{route('student.payment_success')}}", {
+                            return actions.request.post("{{route('student.payment-success')}}", {
                                 _token: "{{csrf_token()}}",
                                 paymentID: data.paymentID,
                                 payerID: data.payerID,
