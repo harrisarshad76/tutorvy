@@ -540,7 +540,7 @@
                                                                                         </div> -->
                                                                                         <div class="col-md-9 ">
                                                                                             
-                                                                                            <select name="" class="form-select mt-1" id="" id="{{$day['day']}}_from" name="from[]">
+                                                                                            <select class="form-select mt-1" id="" id="{{$day['day']}}_from" name="from[]">
                                                                                                 @foreach($times as $time)
                                                                                                     <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                 @endforeach
@@ -555,7 +555,7 @@
 
                                                                                         <div class="col-md-9">
                                                                                             <!-- <input type="time" id="{{$day['day']}}_to" name="to[]" class="form-control mt-1"> -->
-                                                                                            <select name="" class="form-select mt-1" id="" id="{{$day['day']}}_to" name="to[]">
+                                                                                            <select  class="form-select mt-1" id="" id="{{$day['day']}}_to" name="to[]">
                                                                                                 @foreach($times as $time)
                                                                                                     <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                 @endforeach
@@ -575,7 +575,7 @@
                                                                                         <div class="col-md-3 pt-3 text-right"> From: </div>
                                                                             
                                                                                         <div class="col-md-9 ">
-                                                                                            <select name="" class="form-select mt-1" id="" id="" name="">
+                                                                                            <select  class="form-select mt-1" id="" id="" name="break_from[]">
                                                                                                 @foreach($times as $time)
                                                                                                     <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                 @endforeach
@@ -588,7 +588,7 @@
                                                                                         <div class="col-md-3 pt-3 text-right"> To: </div>
 
                                                                                         <div class="col-md-9">
-                                                                                            <select name="" class="form-select mt-1" id="" id="" name="">
+                                                                                            <select  class="form-select mt-1" id="" id="" name="break_to[]">
                                                                                                 @foreach($times as $time)
                                                                                                     <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                 @endforeach
@@ -661,9 +661,9 @@
                                                                             src="{{ asset('admin/assets/img/ico/round.png') }}" />
                                                                             {{$day['day']}}</a>
                                                                 </div>
-                                                                <input type="hidden" name="day[]" value="{{$day['day']}}">
+                                                                <input type="hidden" name="day[]" value="{{$slot->day}}">
                                                                
-                                                                <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
+                                                                <div id="outline{{$slot->day}}" class="collapse border-radius" aria-labelledby="{{$slot->day}}" data-parent="#outline{{$day['day']}}">
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <div class="col-md-12 mt-1">

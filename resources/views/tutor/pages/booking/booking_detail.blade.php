@@ -3,10 +3,9 @@
 
     @php
 
-    $tz = get_local_time();
-    $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-    $time = $dt->format('g:i a');
-
+        $tz = get_local_time();
+        $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
+        $time = $dt->format('g:i a');
     @endphp
     <section>
 
@@ -71,12 +70,20 @@
 
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
+                                    @if($booking->status == 2)
+                                        <button type="button" href="{{route('tutor.classroom')}}"
+                                            class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> 
+                                            Go to Classroom
+                                          
+                                        </button>
+                                    @endif
                                     @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
                                             class="cencel-btn mr-2" style="font-size: 12px;width: 150px;"> Cancel
                                             Booking
                                         </button>
                                     @endif
+                                   
                                     <!-- <button type="button" data-toggle="modal" data-target="#exampleModalCente"
                                         class="schedule-btn" style="font-size: 12px;width: 150px;"> Re-schedule
                                         class
@@ -241,8 +248,8 @@
 
                                                                 Schedule Time:
                                                             </span>
-                                                            <span class="time-details">
-                                                                {{$time}}
+                                                            <span class="time-details" id="show_curr_region_time">
+                                                                
                                                             </span>
                                                         </span>
                                                     </div>
@@ -514,4 +521,15 @@
 @endsection
 @section('scripts')
     @include('js_files.tutor.bookingJs')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+        var time_zone = new Date().toLocaleString('en-US', { timeZone: "{{Auth::user()->time_zone}}" });
+        let booking_time = "{{$booking->class_time}}";
+
+        let curr_date = moment(time_zone).format('YYYY-MM-DD');
+        let create_date = curr_date + ' ' + booking_time;
+        let converted_time = moment(create_date).format('LT') ;
+        $("#show_curr_region_time").text(converted_time);
+
+    </script>
 @endsection
