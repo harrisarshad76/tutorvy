@@ -148,33 +148,35 @@ function getTutorSlots(id , day , date) {
                         showConfirmButton: false,
                         timer: 2500
                     });  
-                }
-                if(obj.wrk_from != null && obj.wrk_to != null) {
-                    if(obj.day_off == 1){
-                        toastr.error('Tutor is off today.',{
+                }else{
+                    if(obj.wrk_from != null && obj.wrk_to != null) {
+                        if(obj.day_off == 1){
+                            toastr.error('Tutor is off today.',{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            }); 
+                        }else{
+                            let ab = {
+                                date: date,
+                                from : obj.wrk_from , 
+                                to : obj.wrk_to , 
+                            }
+                            time_slots.push(ab);
+                        }
+                        showTimeSlot(duration);
+                    }else{
+
+                        toastr.error('Time Slot Not Available',{
                             position: 'top-end',
                             icon: 'error',
                             showConfirmButton: false,
                             timer: 2500
-                        }); 
-                    }else{
-                        let ab = {
-                            date: date,
-                            from : obj.wrk_from , 
-                            to : obj.wrk_to , 
-                        }
-                        time_slots.push(ab);
+                        });    
                     }
-                    showTimeSlot(duration);
-                }else{
-
-                    toastr.error('Time Slot Not Available',{
-                        position: 'top-end',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });    
                 }
+                
             }else{
                 toastr.error('Something went wrong',{
                     position: 'top-end',
