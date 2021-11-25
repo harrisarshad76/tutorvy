@@ -435,7 +435,7 @@ function pay_now(id) {
                                 method: 'paypal',
                                 type_id:id,
                                 type:'booking_class',
-                                service_fee:commission
+                                service_fee:price_calcualtion
                             }).then(function(response) {
                                 if(response.status == 200) {
                                     toastr.success(response.message,{
