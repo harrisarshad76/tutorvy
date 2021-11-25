@@ -105,7 +105,7 @@ class TutorController extends Controller
         $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
         
         
-        if(sizeof($available_tutors) > 0){
+        // if(sizeof($available_tutors) > 0){
            
             $query->where(function($query3) use ($lang)
             {
@@ -155,47 +155,47 @@ class TutorController extends Controller
     
             $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
 
-        }else{
+        // }else{
 
-            $query = DB::table('users')
-            ->select('view_tutors_data.*')
-            ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
-            ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
-            ->where('users.role',2)
-            ->where('users.status',2)
-            ->where('view_tutors_data.subject_names','!=',null);
+        //     $query = DB::table('users')
+        //     ->select('view_tutors_data.*')
+        //     ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
+        //     ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
+        //     ->where('users.role',2)
+        //     ->where('users.status',2)
+        //     ->where('view_tutors_data.subject_names','!=',null);
 
-            $query->where(function($query3) use ($lang)
-            {
-                if($lang != null && $lang != ''){
-                    $query3->where('users.lang_short', $lang);
-                }
+        //     $query->where(function($query3) use ($lang)
+        //     {
+        //         if($lang != null && $lang != ''){
+        //             $query3->where('users.lang_short', $lang);
+        //         }
                 
-            });
+        //     });
     
-            $query->where(function($query4) use ($rating)
-            {
-                if($rating != null && $rating != ''){
-                    $query4->where('users.rating','<=', $rating);
-                }
+        //     $query->where(function($query4) use ($rating)
+        //     {
+        //         if($rating != null && $rating != ''){
+        //             $query4->where('users.rating','<=', $rating);
+        //         }
                 
-            });
+        //     });
     
-            $query->where(function($query5) use ($loc)
-            {
-                if($loc != null && $loc != ''){
-                    $query5->where('users.country', $loc);
-                }
+        //     $query->where(function($query5) use ($loc)
+        //     {
+        //         if($loc != null && $loc != ''){
+        //             $query5->where('users.country', $loc);
+        //         }
                 
-            });
+        //     });
     
-            $query->where(function($query6) use ($gender)
-            {
-                if($gender != null && $gender != '' && $gender != 'any'){
-                    $query6->where('users.gender', $gender);
-                }
+        //     $query->where(function($query6) use ($gender)
+        //     {
+        //         if($gender != null && $gender != '' && $gender != 'any'){
+        //             $query6->where('users.gender', $gender);
+        //         }
                 
-            });
+        //     });
     
             // $query->where(function($query7) use ($price)
             // {
@@ -211,9 +211,9 @@ class TutorController extends Controller
                 
             // });
     
-            $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
+        //     $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
 
-        }
+        // }
 
        
 
