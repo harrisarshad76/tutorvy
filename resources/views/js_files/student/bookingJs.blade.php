@@ -122,12 +122,12 @@ function getDate(date) {
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
-    getTutorSlots(tutor_id , day , date);
+    getTutorSlots(tutor_id , day , date , duration);
     
 
 }
 
-function getTutorSlots(id , day , date) {
+function getTutorSlots(id , day , date, duration) {
     $.ajax({
         url: "{{route('student.getTutorSlots')}}",
         type:"POST",
