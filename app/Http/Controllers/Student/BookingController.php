@@ -711,17 +711,23 @@ class BookingController extends Controller
             $admin = User::where('role',1)->first();
 
             $notification = new NotifyController();
-            $slug = ($booking != null) ? URL::to('/') . '/tutor/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            // $slug = ($booking != null) ? URL::to('/') . '/tutor/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            $slug =  URL::to('/') . '/tutor/booking-detail/' . $booking->id ;
+
             $type = ($booking != null) ? 'booking_confirmed' : 'course_enrlled';
             $title = ($booking != null) ? 'Booking Confirmed' : 'Course Enrolled';
             $icon = 'fas fa-tag';
             $class = 'btn-success';
-            $desc = ($booking != null) ? $name . ' Paid for Class of ' . $subject->name : $name.' Paid for Course of '. $course->title;
+            // $desc = ($booking != null) ? $name . ' Paid for Class of ' . $subject->name : $name.' Paid for Course of '. $course->title;
+            $desc =  $name . ' Paid for Class of ' . $subject->name ;
+
             $pic = Auth::User()->picture;
             $notification->GeneralNotifi($booking->booked_tutor ?? $course->user_id,$slug,$type,$title,$icon,$class,$desc,$pic);
 
             // send to admin
-            $admin_slug = ($booking != null) ? URL::to('/') . '/admin/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            // $admin_slug = ($booking != null) ? URL::to('/') . '/admin/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            $admin_slug =  URL::to('/') . '/admin/booking-detail/' . $booking->id ;
+
             $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
 
 
