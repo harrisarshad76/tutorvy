@@ -664,7 +664,7 @@ class BookingController extends Controller
             $subject = '';
             $course = '';
             if($request->type == 'booking_class'){
-                $booking = Booking::where('id',$request->id)->first();
+                $booking = Booking::where('id',$request->type_id)->first();
                 if($booking != null){
                     $subject = Subject::where('id',$booking->subject_id)->first();
                     $booking->status = 2;
@@ -676,7 +676,7 @@ class BookingController extends Controller
             }
             Payments::create([
                 'user_id' => Auth::user()->id,
-                'type_id' => $request->id ,
+                'type_id' => $request->type_id ,
                 // 'type' => ($booking != null) ? 'booking_class' : 'course_enrollment',
                 'type' => $request->type,
                 'transaction_id' => $request->paymentID,
