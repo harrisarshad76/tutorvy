@@ -180,9 +180,9 @@
                                                             </tr>
                                                             @endforeach
                                                         @else
-                                                          
+
                                                                 <td>No Booking Found</td>
-                                                          
+
                                                         @endif
                                                     </tbody>
                                                 </table>
@@ -276,9 +276,9 @@
                                                                 </tr>
                                                             @endforeach
                                                         @else
-                                                     
+
                                                             <td>No Booking Found</td>
-                                                       
+
                                                     @endif
 
                                                     </tbody>
@@ -374,9 +374,9 @@
                                                             </tr>
                                                         @endforeach
                                                     @else
-                                                       
+
                                                             <td>No Booking Found</td>
-                                                    
+
                                                     @endif
 
                                                     </tbody>
@@ -476,9 +476,9 @@
                                                             </tr>
                                                         @endforeach
                                                     @else
-                                                     
+
                                                             <td>No Booking Found</td>
-                                                        
+
                                                     @endif
                                                 </tbody>
                                             </table>
@@ -574,9 +574,9 @@
                                                         </tr>
                                                     @endforeach
                                                 @else
-                                                 
+
                                                         <td>No Booking Found</td>
-                                                 
+
                                                 @endif
                                             </tbody>
                                         </table>
@@ -665,7 +665,7 @@
                                             @endif
                                          </div>
                                         <div class="col-md-6">
-                                            <div class="card">
+                                            {{-- <div class="card">
                                                 <div class="card-body">
                                                     <div class="text-center">
                                                         <img src="{{asset ('assets/images/payment-icon/paypal2.png')}}" class="w-50" alt="">
@@ -675,10 +675,11 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+                                            <div id="paypal-button-container"></div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card">
+                                            {{-- <div class="card">
                                                 <div class="card-body">
                                                     <div class="text-center">
                                                         <img src="{{asset ('assets/images/payment-icon/skrill.png')}}" class="w-50" alt="">
@@ -688,10 +689,16 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+
+                                            <button class="btn btn-default" id="skrillPayment" style="border:1px solid; cursor: pointer;">
+                                                <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
+                                                class="w-50" alt="">
+                                           </button>
+
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card">
+                                            {{-- <div class="card">
                                                 <div class="card-body">
                                                     <div class="text-center">
                                                         <img src="{{asset ('assets/images/icons8-wallet-64.png')}}" class="w-50" alt="">
@@ -701,7 +708,12 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+
+                                            <button class="btn btn-default"  style="border:1px solid; cursor: pointer;">
+                                                <img src="{{asset ('assets/images/icons8-wallet-64.png')}}"
+                                                class="w-50" alt="">
+                                           </button>
                                         </div>
 
 

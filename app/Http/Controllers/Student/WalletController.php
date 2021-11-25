@@ -29,6 +29,7 @@ use App\Models\Payments;
 use App\Models\Wallet;
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\General\NotifyController;
+use Exception;
 
 class WalletController extends Controller
 {
@@ -43,10 +44,9 @@ class WalletController extends Controller
         // Skrill Integeration
         $this->skrilRequest = new SkrillRequest();
         $this->skrilRequest->pay_to_email = 'skrill_user_test2@smart2pay.com';
-        $this->skrilRequest->return_url = 'https://webs.dev/student/getskrillstatus';
-        $this->skrilRequest->cancel_url = 'https://webs.dev/student/wallet';
+        $this->skrilRequest->return_url =  URL::to('student/getskrillstatus');
+        $this->skrilRequest->cancel_url =  URL::to('student/skrillCancel');
         $this->skrilRequest->logo_url = 'https://tutorvydev.naumanyasin.com/assets/images/logo/logo.png';
-        $this->skrilRequest->status_url = 'hamzalc869@gmail.com';
 
     }
 
@@ -66,118 +66,163 @@ class WalletController extends Controller
     public function depositMoney(Request $request)
     {
 
-        if($request->paytype == 'skrill'){
-            $payerEmail = DB::table('payment_methods')
-                                ->where('user_id',Auth::user()->id)
-                                ->where('method','skrill')
-                                ->first();
+        try{
+            Payments::create([
+                'user_id' => Auth::user()->id,
+                'type' => 'Deposit Balance',
+                'transaction_id' => $request->paymentID,
+                'amount'  => $request->amount,
+                'method'  => $request->method
+            ]);
 
-            //Payment Through Skrill
-            $this->skrilRequest->pay_from_email = $payerEmail->email;
-            $this->skrilRequest->transaction_id = 'SKRL-'.rand();
-            $this->skrilRequest->amount = $request->amount;
-            $this->skrilRequest->currency = 'USD';
-            $this->skrilRequest->language = 'EN';
-            $this->skrilRequest->prepare_only = '1';
-            $this->skrilRequest->merchant_fields = 'Tutorvy,'.Auth::user()->email;
-            $this->skrilRequest->site_name = 'Tutorvy.com';
-            $this->skrilRequest->customer_email = Auth::user()->email;
-            $this->skrilRequest->detail1_description = 'Payment Deposit';
-            $this->skrilRequest->detail1_text = $request->amount;
-            $this->skrilRequest->detail2_description = 'Service Fee:%0';
-            $this->skrilRequest->detail2_text = '$0';
+            Wallet::create([
+                'user_id' => Auth::user()->id,
+                'amount'  => $request->amount,
+                'type' => 'in',
+                'note' => 'balance added',
+            ]);
 
-            Session::put('transaction_id',$this->skrilRequest->transaction_id);
-            Session::put('amount',$request->amount);
+            $id = Auth::user()->id;
+            $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $action_perform = '<a href="'.URL::to('/') . '/admin/student/profile/'. $id .'"> '.$name.' </a> Payment Deposit Successfully';
+            $activity_logs = new GeneralController();
+            $activity_logs->save_activity_logs("Payment Deposit Successfully", "users.id", $id, $action_perform, $request->header('User-Agent'), $id);
 
-            // create object instance of SkrillClient
-            $client = new SkrillClient($this->skrilRequest);
-            $sid = $client->generateSID(); //return SESSION ID
 
-            // handle error
-            $jsonSID = json_decode($sid);
+            $notification = new NotifyController();
+            $slug = URL::to('/') . '/student/wallet';
+            $type = 'deposit_balance';
+            $title = 'Deposit Balance';
+            $icon = 'fas fa-tag';
+            $class = 'btn-success';
+            $desc = 'You have Successfully Deposit $'.$request->amount.' by Paypal';
+            $pic = Auth::User()->picture;
+            $notification->GeneralNotifi(Auth::user()->id ,$slug,$type,$title,$icon,$class,$desc,$pic);
 
-            if ($jsonSID != null && $jsonSID->code == "BAD_REQUEST")
-                return $jsonSID->message;
-            // do the payment
-            $redirectUrl= $client->paymentRedirectUrl($sid); //return redirect url
-
-            return redirect()->to($redirectUrl);
-
-        }else{
-            //Payment Through Paypal
-            Session::put('amount',$request->amount);
-            Session::put('service_fee',0);
-            Session::forget('payment_id');
-
-            $payerEmail = DB::table('payment_methods')
-                                ->where('user_id',Auth::user()->id)
-                                ->where('method','paypal')
-                                ->first();
-
-            $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
-
-            $payerInfo = new PayerInfo();
-            $payerInfo->setEmail($payerEmail->email);
-
-            $payer->setPayerInfo($payerInfo);
-
-            $item_1 = new Item();
-
-            $item_1->setName('Deposit Money')
-                ->setCurrency('USD')
-                ->setQuantity(1)
-                ->setPrice($request->amount);
-
-            $item_list = new ItemList();
-            $item_list->setItems(array($item_1));
-
-            $amount = new Amount();
-            $amount->setCurrency('USD')
-                ->setTotal($request->amount);
-
-            $transaction = new Transaction();
-            $transaction->setAmount($amount)
-                ->setItemList($item_list)
-                ->setDescription('Enter Your transaction description');
-
-            $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(URL::route('deposit.status'))
-                ->setCancelUrl(URL::route('deposit.status'));
-
-            $payment = new Payment();
-            $payment->setIntent('Sale')
-                ->setPayer($payer)
-                ->setRedirectUrls($redirect_urls)
-                ->setTransactions(array($transaction));
-            try {
-                $payment->create($this->_api_context);
-            } catch (\PayPal\Exception\PPConnectionException $ex) {
-                if (Config::get('app.debug')) {
-                    Session::put('error','Connection timeout');
-                    return redirect()->route('deposit.status');
-                } else {
-                    Session::put('error','Some error occur, sorry for inconvenient');
-                    return redirect()->route('deposit.status');
-                }
-            }
-
-            foreach($payment->getLinks() as $link) {
-                if($link->getRel() == 'approval_url') {
-                    $redirect_url = $link->getHref();
-                    break;
-                }
-            }
-
-            if(isset($redirect_url)) {
-                return redirect()->away($redirect_url);
-            }
-            Session::put('error','Unknown error occurred');
-
+            return response()->json([
+                'status'=>'200',
+                'message' => "You have successfully deposit $".$request->amount
+            ]);
+        }
+        catch(Exception $e){
+            return response()->json([
+                'status'=>'400',
+                'message' => $e->errorInfo[2]
+            ]);
         }
 
-    	return redirect()-route('student.wallet');
+        // if($request->paytype == 'skrill'){
+        //     $payerEmail = DB::table('payment_methods')
+        //                         ->where('user_id',Auth::user()->id)
+        //                         ->where('method','skrill')
+        //                         ->first();
+
+        //     //Payment Through Skrill
+        //     $this->skrilRequest->pay_from_email = $payerEmail->email;
+        //     $this->skrilRequest->transaction_id = 'SKRL-'.rand();
+        //     $this->skrilRequest->amount = $request->amount;
+        //     $this->skrilRequest->currency = 'USD';
+        //     $this->skrilRequest->language = 'EN';
+        //     $this->skrilRequest->prepare_only = '1';
+        //     $this->skrilRequest->merchant_fields = 'Tutorvy,'.Auth::user()->email;
+        //     $this->skrilRequest->site_name = 'Tutorvy.com';
+        //     $this->skrilRequest->customer_email = Auth::user()->email;
+        //     $this->skrilRequest->detail1_description = 'Payment Deposit';
+        //     $this->skrilRequest->detail1_text = $request->amount;
+        //     $this->skrilRequest->detail2_description = 'Service Fee:%0';
+        //     $this->skrilRequest->detail2_text = '$0';
+
+        //     Session::put('transaction_id',$this->skrilRequest->transaction_id);
+        //     Session::put('amount',$request->amount);
+
+        //     // create object instance of SkrillClient
+        //     $client = new SkrillClient($this->skrilRequest);
+        //     $sid = $client->generateSID(); //return SESSION ID
+
+        //     // handle error
+        //     $jsonSID = json_decode($sid);
+
+        //     if ($jsonSID != null && $jsonSID->code == "BAD_REQUEST")
+        //         return $jsonSID->message;
+        //     // do the payment
+        //     $redirectUrl= $client->paymentRedirectUrl($sid); //return redirect url
+
+        //     return redirect()->to($redirectUrl);
+
+        // }else{
+        //     //Payment Through Paypal
+        //     Session::put('amount',$request->amount);
+        //     Session::put('service_fee',0);
+        //     Session::forget('payment_id');
+
+        //     $payerEmail = DB::table('payment_methods')
+        //                         ->where('user_id',Auth::user()->id)
+        //                         ->where('method','paypal')
+        //                         ->first();
+
+        //     $payer = new Payer();
+        //     $payer->setPaymentMethod('paypal');
+
+        //     $payerInfo = new PayerInfo();
+        //     $payerInfo->setEmail($payerEmail->email);
+
+        //     $payer->setPayerInfo($payerInfo);
+
+        //     $item_1 = new Item();
+
+        //     $item_1->setName('Deposit Money')
+        //         ->setCurrency('USD')
+        //         ->setQuantity(1)
+        //         ->setPrice($request->amount);
+
+        //     $item_list = new ItemList();
+        //     $item_list->setItems(array($item_1));
+
+        //     $amount = new Amount();
+        //     $amount->setCurrency('USD')
+        //         ->setTotal($request->amount);
+
+        //     $transaction = new Transaction();
+        //     $transaction->setAmount($amount)
+        //         ->setItemList($item_list)
+        //         ->setDescription('Enter Your transaction description');
+
+        //     $redirect_urls = new RedirectUrls();
+        //     $redirect_urls->setReturnUrl(URL::route('deposit.status'))
+        //         ->setCancelUrl(URL::route('deposit.status'));
+
+        //     $payment = new Payment();
+        //     $payment->setIntent('Sale')
+        //         ->setPayer($payer)
+        //         ->setRedirectUrls($redirect_urls)
+        //         ->setTransactions(array($transaction));
+        //     try {
+        //         $payment->create($this->_api_context);
+        //     } catch (\PayPal\Exception\PPConnectionException $ex) {
+        //         if (Config::get('app.debug')) {
+        //             Session::put('error','Connection timeout');
+        //             return redirect()->route('deposit.status');
+        //         } else {
+        //             Session::put('error','Some error occur, sorry for inconvenient');
+        //             return redirect()->route('deposit.status');
+        //         }
+        //     }
+
+        //     foreach($payment->getLinks() as $link) {
+        //         if($link->getRel() == 'approval_url') {
+        //             $redirect_url = $link->getHref();
+        //             break;
+        //         }
+        //     }
+
+        //     if(isset($redirect_url)) {
+        //         return redirect()->away($redirect_url);
+        //     }
+        //     Session::put('error','Unknown error occurred');
+
+        // }
+
+
 
     }
 
@@ -238,7 +283,45 @@ class WalletController extends Controller
 		return redirect()->route('student.wallet');
     }
 
+    public function skrillPayment($amount)
+    {
 
+        $payerEmail = DB::table('payment_methods')
+                        ->where('user_id',Auth::user()->id)
+                        ->where('method','skrill')
+                        ->first();
+        //  Payment Through Skrill
+        $this->skrilRequest->pay_from_email = $payerEmail->email;
+        $this->skrilRequest->transaction_id = 'SKRL-'.rand();
+        $this->skrilRequest->amount = $amount;
+        $this->skrilRequest->currency = 'USD';
+        $this->skrilRequest->language = 'EN';
+        $this->skrilRequest->prepare_only = '1';
+        $this->skrilRequest->merchant_fields = 'Tutorvy,'.Auth::user()->email;
+        $this->skrilRequest->site_name = 'Tutorvy.com';
+        $this->skrilRequest->customer_email = Auth::user()->email;
+        $this->skrilRequest->detail1_description = 'Payment Deposit';
+        $this->skrilRequest->detail1_text = $amount;
+        $this->skrilRequest->detail2_description = 'Service Fee:%0';
+        $this->skrilRequest->detail2_text = '$0';
+
+        Session::put('transaction_id',$this->skrilRequest->transaction_id);
+        Session::put('amount',$amount);
+
+        // create object instance of SkrillClient
+        $client = new SkrillClient($this->skrilRequest);
+        $sid = $client->generateSID(); //return SESSION ID
+
+        // handle error
+        $jsonSID = json_decode($sid);
+
+        if ($jsonSID != null && $jsonSID->code == "BAD_REQUEST")
+            return $jsonSID->message;
+        // do the payment
+        $redirectUrl= $client->paymentRedirectUrl($sid); //return redirect url
+
+        return redirect()->to($redirectUrl);
+    }
     public function getSkrillStatus(Request $request)
     {
         $amount = Session::get('amount');
@@ -280,5 +363,7 @@ class WalletController extends Controller
         return redirect()->route('student.wallet');
 
     }
-
+    public function skrillCancel(){
+        return '<script type="text/javascript"> alert(window.parent.location); window.close();</script>';
+    }
 }
