@@ -165,7 +165,7 @@ class BookingController extends Controller
 
     public function booked(Request $request)
     {
-        ;
+        
         
         $class_date = $request->date;
         $class_time = explode("-",$request->time);
@@ -190,7 +190,7 @@ class BookingController extends Controller
             }
 
             $tutor = User::where('id',$request->tutor_id)->first();
-            $price = $request->subject_plan * $request->duration;
+            $price = $request->subject_plan * 1;
 
             $booking = Booking::create([
                 'user_id' => Auth::user()->id,
