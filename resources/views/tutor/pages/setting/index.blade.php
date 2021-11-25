@@ -480,206 +480,153 @@
                                                 <div id="accordion" class="mb-3">
                                                     @if(count($user_slots)  == 0)
                                                         @foreach($days as $day) 
-                                                        <div class="m-0 p-0">
-
-                                                            <div class="card-header"
-                                                                id="outlinehead{{$day['day']}}" class=" bg-color btn-header-link collapsed"
-                                                                    data-toggle="collapse"
-                                                                    data-target="#outline{{$day['day']}}"
-                                                                    aria-expanded="true"
-                                                                    aria-controls="outline{{$day['day']}}">
-                                                         
-                                                                    <img class="mr-2"
-                                                                        src="{{ asset('admin/assets/img/ico/round.png') }}" />
-                                                                        {{$day['day']}}  
-                                                                        <img src="{{ asset('assets/images/ico/cal-blue.png') }}" class="pull-right" alt="" style="width:18px;">
-                                                            </div>
-                                                            <input type="hidden" name="day[]" value="{{$day['day']}}">
-                                                            <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-1">
-                                                                                    <p> <b>Availability </b></p>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-3 pt-3 text-right"> From: </div>
-                                                                            
-                                                                                        <div class="col-md-9 ">
-                                                                                            
-                                                                                            <select class="form-select mt-1" id="" id="{{$day['day']}}_from" name="from[]">
-                                                                                                @foreach($times as $time)
-                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                @endforeach
-                                                                                            </select>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-3 pt-3 text-right"> To: </div>
-
-                                                                                        <div class="col-md-9">
-                                                                                            <select  class="form-select mt-1" id="" id="{{$day['day']}}_to" name="to[]">
-                                                                                                @foreach($times as $time)
-                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-1">
-                                                                                    <p> <b>Break </b></p>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-3 pt-3 text-right"> From: </div>
-                                                                            
-                                                                                        <div class="col-md-9 ">
-                                                                                            <select  class="form-select mt-1" id="" id="" name="break_from[]">
-                                                                                                @foreach($times as $time)
-                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-3 pt-3 text-right"> To: </div>
-
-                                                                                        <div class="col-md-9">
-                                                                                            <select  class="form-select mt-1" id="" id="" name="break_to[]">
-                                                                                                @foreach($times as $time)
-                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-2">
-                                                                                    <p><b>Day Off </b></p>
-
-                                                                                </div>
-                                                                                <div class="col-md-10 ">
-                                                                                    <label class="switch mt-0">
-                                                                                        <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off">
-                                                                                        <span class="slider round"></span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach($user_slots as $slot)
-                                                            <div class="card m-0 p-0">
+                                                            <div class="m-0 p-0">
 
                                                                 <div class="card-header"
-                                                                    id="outlinehead{{$slot->day}}">
-                                                                    <a href="#"
-                                                                        class=" bg-color btn-header-link collapsed"
+                                                                    id="outlinehead{{$day['day']}}" class=" bg-color btn-header-link collapsed"
                                                                         data-toggle="collapse"
-                                                                        data-target="#outline{{$slot->day}}"
+                                                                        data-target="#outline{{$day['day']}}"
                                                                         aria-expanded="true"
-                                                                        aria-controls="outline{{$slot->day}}">
+                                                                        aria-controls="outline{{$day['day']}}">
+                                                            
                                                                         <img class="mr-2"
                                                                             src="{{ asset('admin/assets/img/ico/round.png') }}" />
-                                                                            {{$slot->day}}</a>
+                                                                            {{$day['day']}}  
+                                                                            <img src="{{ asset('assets/images/ico/cal-blue.png') }}" class="pull-right" alt="" style="width:18px;">
                                                                 </div>
-                                                                <input type="hidden" name="day[]" value="{{$slot->day}}">
-                                                               
-                                                                <div id="outline{{$slot->day}}" class="collapse border-radius" aria-labelledby="{{$slot->day}}" data-parent="#outline{{$slot->day}}">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-1">
-                                                                                    <p> <b>Availability </b></p>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4 pt-3 text-right"> From: </div>
-                                                                            
-                                                                                        <div class="col-md-9 ">
-                                                                                            <select name="" class="form-select" id="">
-                                                                                                @foreach($times as $time)
-                                                                                                <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                @endforeach
-                                                                                            </select>
+                                                                <input type="hidden" name="day[]" value="{{$day['day']}}">
+                                                                <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 pt-1">
+                                                                                        <p> <b>Availability </b></p>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 pt-3 text-right"> From: </div>
+                                                                                
+                                                                                            <div class="col-md-9 ">
+                                                                                                
+                                                                                                <select class="form-select mt-1" id="{{$day['day']}}_from" name="from[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-3 pt-3 text-right"> To: </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 pt-3 text-right"> To: </div>
 
-                                                                                        <div class="col-md-9">
-                                                                                            <input type="time" value="{{$slot->wrk_to}}"  name="to[]" class="form-control mt-1">
+                                                                                            <div class="col-md-9">
+                                                                                                <select  class="form-select mt-1" id="{{$day['day']}}_to" name="to[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-1">
-                                                                                    <p> <b>Break </b></p>
-                                                                                </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4 pt-1 text-right"> From: </div>
-                                                                            
-                                                                                        <div class="col-md-8 ">
-                                                                                            <input type="time"  id="{{$slot->day}}_from" name="from[]" class="form-control">
-                                                                                        </div>
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 pt-2">
+                                                                                        <p><b>Day Off </b></p>
+
+                                                                                    </div>
+                                                                                    <div class="col-md-10 ">
+                                                                                        <label class="switch mt-0">
+                                                                                            <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off">
+                                                                                            <span class="slider round"></span>
+                                                                                        </label>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-md-4">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4 pt-1 text-right"> To: </div>
-
-                                                                                        <div class="col-md-8">
-                                                                                            <input type="time" id="{{$slot->day}}_to" name="to[]" class="form-control mt-1">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                                                
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-md-12 mt-1">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2 pt-2">
-                                                                                    <p><b>Day Off </b></p>
-
-                                                                                </div>
-                                                                                <div class="col-md-10 ">
-                                                                                    <label class="switch mt-0">
-                                                                                        <input type="checkbox" id="{{$slot->day}}_off" class="day_off" {{$slot->day_off == 1 ? 'checked' : ''}}>
-                                                                                        <span class="slider round"></span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                         @endforeach
+                                                    @else
+                                                        @foreach($user_slots as $slot)
+                                                        <div class=" m-0 p-0">
+
+                                                            <div class="card-header"
+                                                                        id="outlinehead{{$slot->day}}"  class="bg-color btn-header-link collapsed"
+                                                                            data-toggle="collapse"
+                                                                            data-target="#outline{{$slot->day}}"
+                                                                            aria-expanded="true"
+                                                                            aria-controls="outline{{$slot->day}}">
+                                                                    
+                                                                            <img class="mr-2"
+                                                                                src="{{ asset('admin/assets/img/ico/round.png') }}" />
+                                                                                {{$slot->day}}
+                                                                            <img src="{{ asset('assets/images/ico/cal-blue.png') }}" class="pull-right" alt="" style="width:18px;">
+
+                                                                    </div>
+                                                                    <input type="hidden" name="day[]" value="{{$slot->day}}">
+
+                                                                    <div id="outline{{$slot->day}}" class="collapse border-radius" aria-labelledby="{{$slot->day}}" data-parent="#outline{{$slot->day}}">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 pt-3">
+                                                                                        <p> <b>Availability </b></p>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4 pt-3 text-right"> From: </div>
+                                                                                
+                                                                                            <div class="col-md-8 ">
+                                                                                                <select class="form-select" id="{{$slot->day}}_from" name="from[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4 pt-3 text-right"> To: </div>
+
+                                                                                            <div class="col-md-8">
+                                                                                                <select class="form-select"  id="{{$slot->day}}_to" name="to[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 pt-2">
+                                                                                        <p><b>Day Off </b></p>
+
+                                                                                    </div>
+                                                                                    <div class="col-md-10 ">
+                                                                                        <label class="switch mt-0">
+                                                                                            <input type="checkbox" id="{{$slot->day}}_off" class="day_off" {{$slot->day_off == 1 ? 'checked' : ''}}>
+                                                                                            <span class="slider round"></span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                             </div>
+                                                        </div>
                                                         @endforeach
                                                     @endif
                                                  
