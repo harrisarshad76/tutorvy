@@ -123,11 +123,10 @@ function getDate(date) {
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
     getTutorSlots(tutor_id , day , date , duration);
-    
-
 }
 
 function getTutorSlots(id , day , date, duration) {
+    console.log(time_slots , "time_slots 123123");
     $.ajax({
         url: "{{route('student.getTutorSlots')}}",
         type:"POST",
@@ -163,7 +162,16 @@ function getTutorSlots(id , day , date, duration) {
                                 from : obj.wrk_from , 
                                 to : obj.wrk_to , 
                             }
-                            time_slots.push(ab);
+                            if(time_slots.length == 0){
+                                time_slots.push(ab)
+                            }else{
+
+                                time_slots[0].date = date;
+                                time_slots[0].from = obj.wrk_from;
+                                time_slots[0].to = obj.wrk_to;
+
+                            }
+                            // time_slots.push(ab);                           
                         }
                         showTimeSlot(duration);
                     }else{
@@ -203,8 +211,8 @@ function getTutorSlots(id , day , date, duration) {
 }
 
 function showTimeSlot(value) {
-
-    if(time_slots.length == 0) {
+    console.log(time_slots ,"sssssss");
+    if(time_slots.length == 0 ) {
         toastr.error('Time Slot Not Selected ... please Select',{
             position: 'top-end',
             icon: 'error',
@@ -283,8 +291,6 @@ function showTimeSlot(value) {
                 });
             }
         });
-      
-        
     }
     
 }
