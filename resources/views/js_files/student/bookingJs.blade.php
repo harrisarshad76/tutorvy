@@ -123,6 +123,7 @@ function getDate(date) {
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
     getTutorSlots(tutor_id , day , date);
+    showTimeSlot(duration);
 
 }
 
@@ -132,6 +133,7 @@ function getTutorSlots(id , day , date) {
         type:"POST",
         data: {id:id , day:day},
         dataType:'json',
+        async:false,
         beforeSend:function(data) {
             
         },
@@ -201,12 +203,14 @@ function showTimeSlot(value) {
             timer: 2500
         }); 
     }else{
-
+        var date = $('#get_date').val(); 
+        var t_id = $('#tutor_id').val();
         $.ajax({
             url: "{{route('student.getFilteredTutorSlots')}}",
             type:"POST",
-            data: {interval:value , start_time:time_slots[0].from,end_time:time_slots[0].to},
+            data: {t_id:t_id,date:date,interval:value , start_time:time_slots[0].from,end_time:time_slots[0].to},
             dataType:'json',
+            async:false,
             beforeSend:function(data) {
                 
             },
