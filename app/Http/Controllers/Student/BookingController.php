@@ -650,6 +650,92 @@ class BookingController extends Controller
             return $redirect_url;
     }
 
+    public function paymentDone(Request $request){
+
+        try{
+            // Payments::create([
+            //     'user_id' => Auth::user()->id,
+            //     'type' => 'Deposit Balance',
+            //     'transaction_id' => $request->paymentID,
+            //     'amount'  => $request->amount,
+            //     'method'  => $request->method
+            // ]);
+            $booking = '';
+            $subject = '';
+            if($request->type == 'booking_class'){
+                $booking = Booking::where('id',$request->id)->first();
+                if($booking != null){
+                    $subject = Subject::where('id',$booking->subject_id)->first();
+                    $booking->status = 2;
+                    $booking->service_fee =  $request->service_fee;
+                    $booking->save();
+                }
+            }
+            Payments::create([
+                'user_id' => Auth::user()->id,
+                'type_id' => $request->id ,
+                // 'type' => ($booking != null) ? 'booking_class' : 'course_enrollment',
+                'type' => $request->type,
+                'transaction_id' => $request->paymentID,
+                // 'sale_id' => $result->transactions[0]->related_resources[0]->sale->id ?? '',
+                'amount'  => $request->amount,
+                'service_fee' => $request->service_fee,
+                'method'  => $request->method
+            ]);
+
+            $classroom_id = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0x0C2f ) | 0x4000,
+                mt_rand( 0, 0x3fff ) | 0x8000,
+                mt_rand( 0, 0x2Aff ), mt_rand( 0, 0xffD3 ), mt_rand( 0, 0xff4B )
+            );
+
+            Classroom::create([
+                'booking_id' => $request->id ?? null,
+                'classroom_id' => $classroom_id
+            ]);
+
+           
+
+
+            $id = Auth::user()->id;
+            $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $action_perform = '<a href="'.URL::to('/') . '/admin/student/profile/'. $id .'"> '.$name.' </a> Payment success';
+            $activity_logs = new GeneralController();
+            $activity_logs->save_activity_logs("Payment Success", "users.id", $id, $action_perform, \Request::header('User-Agent'), $id);
+
+            $admin = User::where('role',1)->first();
+
+            $notification = new NotifyController();
+            $slug = ($booking != null) ? URL::to('/') . '/tutor/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            $type = ($booking != null) ? 'booking_confirmed' : 'course_enrlled';
+            $title = ($booking != null) ? 'Booking Confirmed' : 'Course Enrolled';
+            $icon = 'fas fa-tag';
+            $class = 'btn-success';
+            $desc = ($booking != null) ? $name . ' Paid for Class of ' . $subject->name : $name.' Paid for Course of '. $course->title;
+            $pic = Auth::User()->picture;
+            $notification->GeneralNotifi($booking->booked_tutor ?? $course->user_id,$slug,$type,$title,$icon,$class,$desc,$pic);
+
+            // send to admin
+            $admin_slug = ($booking != null) ? URL::to('/') . '/admin/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
+            $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
+
+
+            return response()->json([
+                'status'=>'200',
+                'message' => "Payment processed. Booking approved now u can join class on scheduled time."
+            ]);
+        }
+        catch(Exception $e){
+            return response()->json([
+                'status'=>'400',
+                'message' => 'Something went wrong'
+            ]);
+        }
+
+    }
+
     public function getPaymentStatus(Request $request)
     {
         $payment_id = Session::get('payment_id');
