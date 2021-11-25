@@ -491,7 +491,7 @@
                                                          
                                                                     <img class="mr-2"
                                                                         src="{{ asset('admin/assets/img/ico/round.png') }}" />
-                                                                        {{$day['day']}} 
+                                                                        {{$day['day']}}  
                                                                         <img src="{{ asset('assets/images/ico/cal-blue.png') }}" class="pull-right" alt="" style="width:18px;">
                                                             </div>
                                                             <input type="hidden" name="day[]" value="{{$day['day']}}">
