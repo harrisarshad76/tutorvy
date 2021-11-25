@@ -362,7 +362,6 @@ function pay_now(id) {
                     commit: true,
                     // payment() is called when the button is clicked
                     payment: function(data, actions) {
-                        alert(total_price)
                         // Make a call to the REST api to create the payment
                         return actions.payment.create({
                             transactions: [{
@@ -432,7 +431,7 @@ function pay_now(id) {
                                 _token: "{{csrf_token()}}",
                                 paymentID: data.paymentID,
                                 payerID: data.payerID,
-                                amount: amount,
+                                amount: total_price,
                                 method: 'paypal',
                             }).then(function(response) {
                                 if(response.status == 200) {
