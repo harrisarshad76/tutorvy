@@ -600,7 +600,7 @@
                                                                                             <div class="col-md-8">
                                                                                                 <select class="form-select"  id="{{$slot->day}}_to" name="to[]">
                                                                                                     @foreach($times as $time)
-                                                                                                    <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                     @endforeach
                                                                                                 </select>
                                                                                             </div>
