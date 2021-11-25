@@ -411,7 +411,7 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
 
     Route::post('/booking/payment/{id}',[StudentBookingController::class,'bookingPayment'])->name('student.booking.payment');
     Route::get('/booking/paymentstatus',[StudentBookingController::class,'getPaymentStatus'])->name('student.paymentstatus');
-    Route::post('/payment-done',[StudentBookingController::class,'paymentDone'])->name('student.payment_success');
+    Route::post('/payment-done',[StudentBookingController::class,'paymentDone'])->name('student.payment-success');
 
     Route::post('/course/payment/{id}',[StudentBookingController::class,'coursePayment'])->name('student.course.payment');
 
