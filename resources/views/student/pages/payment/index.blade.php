@@ -51,8 +51,7 @@
                             <div class="card-body">
                                 <img src="../assets/images/ico/dollars.png" style="width: 45px;">
                                 <div class="">
-                                <p class=" heading-fifth mt-3"
-                                    style="line-height: 0;">Total Spend</p>
+                                    <p class=" heading-fifth mt-3" style="line-height: 0;">Total Spend</p>
                                     <p class="heading-first mb-0"> ${{ $spent_payment }}</p>
                                 </div>
                             </div>
@@ -63,9 +62,8 @@
                             <div class="card-body">
                                 <img src="../assets/images/ico/doollarss.png" style="width: 45px;">
                                 <div class="">
-                                <p class=" heading-fifth mt-3"
-                                    style="line-height: 0;">Current balance</p>
-                                    <p class="heading-first mb-0"> ${{$balance}}</p>
+                                    <p class=" heading-fifth mt-3" style="line-height: 0;">Current balance</p>
+                                    <p class="heading-first mb-0"> ${{ $balance }}</p>
                                 </div>
                             </div>
                         </div>
@@ -75,8 +73,7 @@
                             <div class="card-body">
                                 <img src="../assets/images/ico/dollars.png" style="width: 45px;">
                                 <div class="">
-                                <p class=" heading-fifth mt-3"
-                                    style="line-height: 0;">Pending balance</p>
+                                    <p class=" heading-fifth mt-3" style="line-height: 0;">Pending balance</p>
                                     <p class="heading-first mb-0"> $0</p>
                                 </div>
                             </div>
@@ -87,9 +84,8 @@
                             <div class="card-body">
                                 <img src="../assets/images/ico/dollars.png" style="width: 45px;">
                                 <div class="">
-                                <p class=" heading-fifth mt-3"
-                                    style="line-height: 0;">
-                                    <a type="button" onclick="addBalance()" data-target=""> + Add balance</a>
+                                    <p class=" heading-fifth mt-3" style="line-height: 0;">
+                                        <a type="button" onclick="addBalance()" data-target=""> + Add balance</a>
                                     </p>
                                 </div>
                             </div>
@@ -161,7 +157,6 @@
                 </div>
             </div>
         </section>
-
         <!--Pay Now Class Modal -->
         <div class="modal fade" id="payModel" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -169,8 +164,8 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
-                                <form action="{{route('student.deposit')}}" method="post">
-                                    @csrf
+                                {{-- <form action="{{ route('student.deposit') }}" method="post">
+                                    @csrf --}}
 
                                     <div class="col-md-12">
                                         <div class="iconss" style="text-align: center;">
@@ -189,7 +184,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="number" name="amount" class="form-control"
+                                            <input type="number" name="amount" id="amount" class="form-control"
                                                 aria-label="Amount (to the nearest dollar)">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">.00</span>
@@ -197,46 +192,51 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <h3>Select Payment Method</h3>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <p id="pmnt" class="font-weight-normal"></p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <img src="{{ asset('assets/images/payment-icon/paypal2.png') }}"
-                                                            class="w-50" alt="">
-                                                        <span class="round">
-                                                            <input id="checkbox1" name="paytype" class="radio-custom"
-                                                                value="paypal" type="radio">
-                                                        </span>
+                                    <div id="paymentBlock" style="display: none">
+                                        <div class="col-md-12">
+                                            <h3>Select Payment Method</h3>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p id="pmnt" class="font-weight-normal"></p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 p-3">
+                                                {{-- <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <img src="{{ asset('assets/images/payment-icon/paypal2.png') }}"
+                                                                class="w-50" alt="">
+                                                            <span class="round">
+                                                                <input id="checkbox1" name="paytype" class="radio-custom"
+                                                                    value="paypal" type="radio">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                                <div id="paypal-button-container"></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
+                                                                class="w-50" alt="">
+                                                            <span class="round">
+                                                                <input id="checkbox2" name="paytype" value="skrill"
+                                                                    type="radio">
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
-                                                            class="w-50" alt="">
-                                                        <span class="round">
-                                                            <input id="checkbox2" name="paytype" value="skrill"
-                                                                type="radio">
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
+
                                     <div class="col-md-12 mt-3 text-right">
-                                        <input type="submit" id="paymntbtn" class="schedule-btn btn w-30" value="Continue" />
+                                        <input type="button" id="paymntbtn" class="schedule-btn btn w-30"
+                                            value="Continue" />
                                     </div>
-                                </form>
+                                {{-- </form> --}}
                             </div>
                         </div>
 
@@ -246,9 +246,9 @@
         </div>
 
     </div>
+
 @endsection
 
 @section('scripts')
     @include('js_files.student.wallet')
 @endsection
-

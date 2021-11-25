@@ -49,7 +49,7 @@ svg:not(:root) {
                                 <a href="{{route('admin.tutor')}}" class="text-dark" style="text-decoration: none;">
                                     <div class="container card ">
                                         <div class="text-home">
-                                            <p class="number-booking">
+                                            <p class="number-booking" id="tutor">
                                                 {{ $tutors_count }}
                                             </p>
                                             <p class="class-booking">
@@ -66,7 +66,7 @@ svg:not(:root) {
                                 <a href="{{route('admin.student')}}" class="text-dark" style="text-decoration: none;">
                                     <div class="container card ">
                                         <div class="text-home">
-                                            <p class="number-booking">
+                                            <p class="number-booking" id="student">
                                                 {{ $students_count }}
                                             </p>
                                             <p class="class-booking">
@@ -82,11 +82,11 @@ svg:not(:root) {
                             <div class="col-md-4">
                                 <div class="container card">
                                     <div class="text-home">
-                                        <p class="number-booking">
+                                        <p class="number-booking" id="staff">
                                             0
                                         </p>
                                         <p class="class-booking">
-                                            Total institutes
+                                            Total Staff
                                         </p>
                                     </div>
                                     <div class="iconside">
