@@ -46,6 +46,7 @@ use Obydul\LaraSkrill\SkrillClient;
 use Obydul\LaraSkrill\SkrillRequest;
 use App\Models\Wallet;
 use DateTime;
+use Illuminate\Support\Carbon;
 
 class BookingController extends Controller
 {
@@ -115,7 +116,7 @@ class BookingController extends Controller
             $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
             $slot = new \stdClass();
-            $booking = Booking::where('class_time','>=',$start)->where('class_booked_till','<=',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->first();
+            $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
             // return $booking;
             if(strtotime($startTime) <= strtotime($endTime)){
                 if($booking){
@@ -125,7 +126,6 @@ class BookingController extends Controller
                     $slot->slot_end_time = $end;
                     array_push($slots,$slot);
                 }
-                
             }
         }
         // return $time;
@@ -165,16 +165,20 @@ class BookingController extends Controller
 
     public function booked(Request $request)
     {
+        
+        
         $class_date = $request->date;
         $class_time = explode("-",$request->time);
      
-        $from_time = explode(" ",$class_time[0]);
-        $from_time = $from_time[0];
+        // $from_time = explode(" ",$class_time[0]);
+        // $from_time = $from_time[0];
+        $from_time = date("H:i", strtotime($class_time[0]));
+       
+        // $to_time = explode(" ",$class_time[1]);
+        // $to_time = $to_time[0];
+        $to_time = date("H:i", strtotime($class_time[1]));
 
-        $to_time = explode(" ",$class_time[1]);
-        $to_time = $to_time[0];
-
-        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->get();
+        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
         if($booking->count() <= 0){
 
@@ -186,7 +190,7 @@ class BookingController extends Controller
             }
 
             $tutor = User::where('id',$request->tutor_id)->first();
-            $price = $request->subject_plan * $request->duration;
+            $price = $request->subject_plan * 1;
 
             $booking = Booking::create([
                 'user_id' => Auth::user()->id,
@@ -199,7 +203,7 @@ class BookingController extends Controller
                 'class_date' => $request->date,
                 'class_time' => $from_time,
                 'class_booked_till' => $to_time,
-                'duration' => $request->duration,
+                'duration' => 1,
                 'price' => $price,
 
             ]);

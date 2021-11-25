@@ -122,12 +122,12 @@ function getDate(date) {
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
-    getTutorSlots(tutor_id , day , date);
-    showTimeSlot(duration);
+    getTutorSlots(tutor_id , day , date , duration);
+    
 
 }
 
-function getTutorSlots(id , day , date) {
+function getTutorSlots(id , day , date, duration) {
     $.ajax({
         url: "{{route('student.getTutorSlots')}}",
         type:"POST",
@@ -141,33 +141,42 @@ function getTutorSlots(id , day , date) {
             console.log(response);
             var obj = response.slots;
             if(response.status_code == 200 && response.success == true) {
-                
-                if(obj.wrk_from != null && obj.wrk_to != null) {
-                    if(obj.day_off == 1){
-                        toastr.error('Tutor is off today.',{
-                            position: 'top-end',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 2500
-                        }); 
-                    }else{
-                        let ab = {
-                            date: date,
-                            from : obj.wrk_from , 
-                            to : obj.wrk_to , 
-                        }
-                        time_slots.push(ab);
-                    }
-                    
-                }else{
-
-                    toastr.error('Time Slot Not Available',{
+                if(obj == null){
+                    toastr.error('Time slot Not Available',{
                         position: 'top-end',
                         icon: 'error',
                         showConfirmButton: false,
                         timer: 2500
-                    });    
+                    });  
+                }else{
+                    if(obj.wrk_from != null && obj.wrk_to != null) {
+                        if(obj.day_off == 1){
+                            toastr.error('Tutor is off today.',{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            }); 
+                        }else{
+                            let ab = {
+                                date: date,
+                                from : obj.wrk_from , 
+                                to : obj.wrk_to , 
+                            }
+                            time_slots.push(ab);
+                        }
+                        showTimeSlot(duration);
+                    }else{
+
+                        toastr.error('Time Slot Not Available',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });    
+                    }
                 }
+                
             }else{
                 toastr.error('Something went wrong',{
                     position: 'top-end',
@@ -333,7 +342,7 @@ function pay_now(id) {
 
                 var origin   = window.location.origin;
                 var url = origin + '/student/booking/payment/'+ obj.id;
-
+                $("#show_pay_btn #payment span").html('');
                 $("#payment").attr("action",url)
                 let btn = `<input type="submit" class="schedule-btn btn w-30" value="Pay Now" />`;
                 $("#show_pay_btn #payment span").html(btn);

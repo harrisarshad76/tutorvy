@@ -470,8 +470,8 @@
 <script>
 
     var checkTimeZone = $("#timeZone").val(); 
-    checkTimeZone.length == 0 ? saveTimeZone() : '';
-            
+    // checkTimeZone.length == 0 ? saveTimeZone() : '';
+    saveTimeZone();
     function saveTimeZone() {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         var date = new Date();
