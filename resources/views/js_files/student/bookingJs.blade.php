@@ -331,7 +331,7 @@ function pay_now(id) {
                     price_calcualtion = (price * commission) / 100;
                 }
                 let total_price = parseFloat(price) + parseFloat(price_calcualtion);
-
+                console.log(total_price)
                 $("#scdule_date").text(class_date);
                 $("#class_time").text(class_time);
                 $("#duration").text(duration + 'Hour(s)');
