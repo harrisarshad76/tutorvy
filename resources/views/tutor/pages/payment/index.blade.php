@@ -138,7 +138,7 @@
                                     <th>Duration</th>
                                     <th>Payment Status</th>
                                     <th>Amount</th>
-                                    <th style="visibility: hidden;">adasdasd </th>
+                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -165,11 +165,9 @@
                                         </tr>
                                     @endforeach
                                 @else
-                                <tr>
                                     <td>
                                         No Payment Found Yet
                                     </td>
-                                </tr>
                                 @endif
                             </tbody>
                         </table>

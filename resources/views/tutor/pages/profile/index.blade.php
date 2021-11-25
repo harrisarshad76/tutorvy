@@ -687,7 +687,7 @@
                                         </div>
 
                                         <div class="row mt-3">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 instituteList">
                                                 <label for="exampleText" class="m-0 heading-fifth">Institute</label>
                                                 <select name="institute[]" id="institutes_list" class="form-select form-select-lg mb-3"
                                                     aria-label=".form-select-lg example" required>
@@ -1409,7 +1409,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="input-text col-md-6">
+                    <div class="input-text col-md-6 instituteList">
                     <select name="institute[]" id="institutes_list" class="form-select form-select-lg mb-3"
                         aria-label=".form-select-lg example">
                         <option value="Institute">Institute</option>
