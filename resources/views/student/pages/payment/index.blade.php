@@ -200,7 +200,7 @@
                                             <p id="pmnt" class="font-weight-normal"></p>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 p-3">
+                                            <div class="col-md-6 p-3 text-center">
                                                 {{-- <div class="card">
                                                     <div class="card-body">
                                                         <div class="text-center">
@@ -215,19 +215,21 @@
                                                 </div> --}}
                                                 <div id="paypal-button-container"></div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
+                                            <div class="col-md-6 p-3 text-center">
+                                                <button class="btn btn-default" id="skrillPayment" style="border:1px solid; cursor: pointer;">
+                                                    <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
+                                                    class="w-50" alt="">
+                                               </button>
+                                                {{-- <div class="card">
                                                     <div class="card-body">
                                                         <div class="text-center">
-                                                            <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
-                                                                class="w-50" alt="">
                                                             <span class="round">
                                                                 <input id="checkbox2" name="paytype" value="skrill"
                                                                     type="radio">
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

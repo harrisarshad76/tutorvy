@@ -417,8 +417,11 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
 
     Route::get('/wallet',[WalletController::class,'index'])->name('student.wallet');
     Route::post('/deposit-money',[WalletController::class,'depositMoney'])->name('student.deposit');
+    Route::get('/skrillPayment/{amount}',[WalletController::class,'skrillPayment'])->name('skrill.payment');
+
     Route::get('/deposit-money-status',[WalletController::class,'getPaymentStatus'])->name('deposit.status');
     Route::get('/getskrillstatus',[WalletController::class,'getSkrillStatus']);
+    Route::get('/skrillCancel',[WalletController::class,'skrillCancel']);
 
     Route::post('/save-review',[StudentClassController::class,'saveReview'])->name('student.save.review');
 
