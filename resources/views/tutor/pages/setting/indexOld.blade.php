@@ -488,19 +488,11 @@
                                                                         data-target="#outline{{$day['day']}}"
                                                                         aria-expanded="true"
                                                                         aria-controls="outline{{$day['day']}}">
-                                                                        <div class="row">
-                                                                            <div class="col-md-8">
-                                                                                <img class="mr-2"
-                                                                                src="{{ asset('admin/assets/img/ico/round.png') }}" />
-                                                                                {{$day['day']}}  
-                                                                            </div>
-                                                                            <div class="col-md-4 text-right">
-                                                                                <label class="switch mt-0">
-                                                                                    <input type="checkbox" data-day="{{$day['day']}}" value="0" id="{{$day['day']}}_off" class="day_off">
-                                                                                    <span class="slider round"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
+                                                            
+                                                                        <img class="mr-2"
+                                                                            src="{{ asset('admin/assets/img/ico/round.png') }}" />
+                                                                            {{$day['day']}}  
+                                                                            <img src="{{ asset('assets/images/ico/cal-blue.png') }}" class="pull-right" alt="" style="width:18px;">
                                                                 </div>
                                                                 <input type="hidden" name="day[]" value="{{$day['day']}}">
                                                                 <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
@@ -508,6 +500,9 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12 mt-1">
                                                                                 <div class="row">
+                                                                                    <div class="col-md-2 pt-1">
+                                                                                        <p> <b>Availability </b></p>
+                                                                                    </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="row">
                                                                                             <div class="col-md-3 pt-3 text-right"> From: </div>
@@ -536,11 +531,22 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-md-4 pt-3 text-right">
-                                                                                        <a href="#" onclick="moreFields('{{$day['day']}}')"> + Add More </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 pt-2">
+                                                                                        <p><b>Day Off </b></p>
+
+                                                                                    </div>
+                                                                                    <div class="col-md-10 ">
+                                                                                        <label class="switch mt-0">
+                                                                                            <input type="checkbox" data-day="{{$day['day']}}" value="1" id="{{$day['day']}}_off" class="day_off">
+                                                                                            <span class="slider round"></span>
+                                                                                        </label>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div id="new_fields_{{$day['day']}}"></div>
+                                                                                
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -749,45 +755,6 @@
                     }
                 },
             });
-        }
-        function moreFields(day){
-                var count_field = document.querySelectorAll(".customer_records").length;
-                let html = '';
-                html =  `<div class="row" id="new_field`+count_field+`"> 
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-3 pt-3 text-right"> From: </div>
-                    
-                                <div class="col-md-9 ">
-                                    
-                                    <select class="form-select mt-1" id="`+day+`_from" name="from[]">
-                                        @foreach($times as $time)
-                                            <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-3 pt-3 text-right"> To: </div>
-
-                                <div class="col-md-9">
-                                    <select  class="form-select mt-1" id="`+day+`_to" name="to[]">
-                                        @foreach($times as $time)
-                                            <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 pt-3 text-right">
-                            <a href="#" onclick="removeFields('{{$day['day']}}')"> + Add More </a>
-                        </div>`;
-                        $("#new_fields_"+day).append(html);
-                        $(day+"_to").select2();
-                        $(day+"_from").select2();
         }
     </script>
 
