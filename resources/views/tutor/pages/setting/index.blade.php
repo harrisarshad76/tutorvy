@@ -484,10 +484,7 @@
 
                                                                 <div class="card-header"
                                                                     id="outlinehead{{$day['day']}}" class=" bg-color btn-header-link collapsed"
-                                                                        data-toggle="collapse"
-                                                                        data-target="#outline{{$day['day']}}"
-                                                                        aria-expanded="true"
-                                                                        aria-controls="outline{{$day['day']}}">
+                                                                      >
                                                                         <div class="row">
                                                                             <div class="col-md-8">
                                                                                 <img class="mr-2"
@@ -496,7 +493,7 @@
                                                                             </div>
                                                                             <div class="col-md-4 text-right">
                                                                                 <label class="switch mt-0">
-                                                                                    <input type="checkbox" data-day="{{$day['day']}}" value="0" id="{{$day['day']}}_off" class="day_off" onclick="changer()">
+                                                                                    <input type="checkbox" data-day="{{$day['day']}}" value="0" id="{{$day['day']}}_off" class="day_off" onclick="changer('{{$day['day']}}','{{$day['day']}}_off')">
                                                                                     <span class="slider round"></span>
                                                                                 </label>
                                                                             </div>
@@ -553,10 +550,7 @@
 
                                                             <div class="card-header"
                                                                         id="outlinehead{{$slot->day}}"  class="bg-color btn-header-link collapsed"
-                                                                            data-toggle="collapse"
-                                                                            data-target="#outline{{$slot->day}}"
-                                                                            aria-expanded="true"
-                                                                            aria-controls="outline{{$slot->day}}">
+                                                                          >
                                                                     
                                                                             <div class="row">
                                                                                 <div class="col-md-8">
@@ -566,7 +560,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-4 text-right">
                                                                                     <label class="switch mt-0">
-                                                                                        <input type="checkbox" data-day="{{$slot->day}}" value="0" id="{{$slot->day}}_off" class="day_off" onclick="changer()">
+                                                                                        <input type="checkbox" data-day="{{$slot->day}}" value="0" id="{{$slot->day}}_off" class="day_off" onchange="changer('{{$slot->day}}','{{$slot->day}}_off')">
                                                                                         <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -791,8 +785,18 @@
             $("#"+name).remove();
         }
 
-        function changer(){
-            alert($(this).attr("value"));
+        function changer(data,day){
+          
+            var ter = $("#"+day).val();
+            if(ter == 0){
+                $("#"+day).val(1);
+                $("#outline"+data).addClass("show");
+            }
+            else if(ter == 1){
+                $("#"+day).val(0);
+                $("#outline"+data).removeClass("show");
+
+            }
         }
 
     </script>
