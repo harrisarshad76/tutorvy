@@ -75,12 +75,13 @@
                                                 @if($classes != null && $classes != [] && $classes != "")
                                                     @foreach($classes as $class)
                                                         @if($class != null && $class != "")
-                                                            @php
+                                                             @php
 
-                                                            $tz = get_local_time();
-                                                            $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                            $time = $dt->format('g:i a');
-                                                            @endphp
+                                                                $tz = get_local_time();
+                                                                $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
+                                                                $time = $dt->format('g:i a');
+
+                                                                @endphp
                                                             <tr>
                                                                 <td class="pt-4">
                                                                     @if($class->user != null && $class->user != "")
@@ -95,9 +96,7 @@
                                                                 <td class="pt-4"> {{ $class->subject->name }} </td>
                                                                 <td class="pt-4"> {{ $class->topic }} </td>
                                                                 <td class="pt-4 "> 
-                                                                    <span class=" show_curr_region_time" >
-                                                                        
-                                                                    </span> 
+                                                                {{ $time }}
                                                                 </td>
                                                                
                                                                 <td class="pt-4"> {{ $class->duration }} Hour(s) </td>
@@ -197,9 +196,8 @@
                                                                         {{ $class->topic }}
                                                                     </td>
                                                                     <td class="pt-4">
-                                                                        <span class=" show_curr_region_time">
-                                                                        
-                                                                        </span>
+                                                                        {{ $class->class_time }}
+                                                                        <!-- {{ date('g:i a', strtotime("$class->class_time UTC")) }} -->
                                                                         <!-- {{$class->class_time}} {{date("g:i a", strtotime("$class->class_time UTC"))}} -->
                                                                     </td>
                                                                     
@@ -374,5 +372,4 @@
 
     });
 </script>
-
 @endsection
