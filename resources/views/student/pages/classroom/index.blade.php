@@ -130,7 +130,7 @@
                                 role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <table class="table table-bordered ">
+                                        <table class="table table-bordered text-center">
                                             <thead>
                                                 <tr
                                                     style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
@@ -196,6 +196,7 @@
                                                             <td>
                                                                 <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
                                                                 data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
+                                                                data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
                                                                 class="current_time"> 
                                                                     
                                                                 </span>
@@ -380,7 +381,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
     $(document).ready(function() {
-
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         $('#stars li').on('click', function() {
             var onStar = parseInt($(this).data('value'), 10); // The star currently selected
             var stars = $(this).parent().children('li.star');
@@ -444,14 +445,15 @@
         });
 
 
-
-        $(".current_time").each(function() {
+        setInterval(() => {
+            $(".current_time").each(function() {
             // var timer = new Timer();
-
+            
             var id = $(this).data('id');
             var booking_time = $(this).data('time');
             var booking_date = $(this).data('date');
             var duration = $(this).data('duration');
+            var room = $(this).data('room');
 
             const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
             let get_day_in_no = moment(booking_date).day();
@@ -460,36 +462,39 @@
             let convert_date = moment(booking_date).format('DD MMMM');
 
             let user_region = "{{Auth::user()->time_zone}}";
-            var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
 
-            let create_date_format = new Date(booking_date + ' ' + booking_time);
-            
-            let start_date = moment(create_date_format).format("hh:mm A");
-          
-            let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
-            let end_date_booking = new Date(booking_date + ' ' + end_date);
-            
-            var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
+            if(user_region != null && user_region != "") {
 
-            $("#class_time_"+id).text(show_date_time);
-            
-            let timezoneTime = new Date(current_user_time_zone);
-            
-            let current = timezoneTime.getTime();
-            let a = create_date_format.getTime();
-            let b = end_date_booking.getTime();
+                var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
 
-            var join_btn = `<a class="schedule-btn"> Join Class </a>`;
+                let create_date_format = new Date(booking_date + ' ' + booking_time);
+                let start_date = moment(create_date_format).format("hh:mm A");
+            
+                let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
+                let end_date_booking = new Date(booking_date + ' ' + end_date);
+                
+                var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
 
-            if(current > a && current < b) {
-                $("#class_time_"+id).html(join_btn);
-            }else {
-                $(".join_class_"+id).html("");
+                $("#class_time_"+id).text(show_date_time);
+                
+                let timezoneTime = new Date(current_user_time_zone);
+                
+                let current = timezoneTime.getTime();
+                let a = create_date_format.getTime();
+                let b = end_date_booking.getTime();
+
+                let join_btn = `<a onclick="joinClass('`+room+`')" class="schedule-btn"> Join Class </a>`;
+
+                if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
+                    if(room != null && room != "") {
+                        $("#class_time_"+id).html(join_btn);
+                    }else{
+                        $("#class_time_"+id).html("-");
+                    }
+                }else {
+                    $("#class_time_"+id).html("-");
+                } 
             }
-            
-
-
-
             // var now = moment();
             // const date1 = moment(booking_date).format('YYYY-MM-DD').valueOf()
             // const date2 = moment().format('YYYY-MM-DD').valueOf();
@@ -558,7 +563,9 @@
             //     }
             // }
 
-        });
+        });    
+        }, 1000);
+        
     });
 
 
