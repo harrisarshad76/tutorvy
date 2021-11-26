@@ -137,8 +137,8 @@
                                                     <th scope="col">Tutor</th>
                                                     <th scope="col">Subjects</th>
                                                     <th scope="col">Topic</th>
-                                                    <th scope="col">Time</th>
-                                                    <th scope="col">Duration</th>
+                                                    <!-- <th scope="col">Time</th>
+                                                    <th scope="col">Duration</th> -->
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Starts In</th>
                                                     <th scope="col"></th>
@@ -165,13 +165,13 @@
                                                             <td class="pt-3">
                                                                 {{ $class != null ? $class->topic : '---' }}
                                                             </td>
-                                                            <td class="pt-3">
+                                                            <!-- <td class="pt-3">
                                                                 {{ $time }}
                                                             </td>
 
                                                             <td class="pt-3">
                                                                 {{ $class->duration }} Hour(s)
-                                                            </td>
+                                                            </td> -->
                                                             <td class="pt-3">
 
                                                                 @if ($class->status == 1)
@@ -194,10 +194,10 @@
                                                             </td>
 
                                                             <td>
-                                                                <span data-date="{{$class->class_date}}" data-id="{{$class->id}}"
-                                                                data-date="{{$class->class_time}}" id="class_time_{{$class->id}}" 
+                                                                <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
+                                                                data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
                                                                 class="current_time"> 
-                                                                    {{ $class->class_date }} {{ $class->class_time }} 
+                                                                    
                                                                 </span>
                                                                 
                                                             </td>
@@ -446,85 +446,117 @@
 
 
         $(".current_time").each(function() {
-            var timer = new Timer();
+            // var timer = new Timer();
 
-            var booking_time = $.trim($( this ).text());
-            var booking_seconds_time = HmsToSeconds(moment(booking_time).format('HH:mm:ss'));;
-
-            var attr_id = $(this).data('id');
-            var room_id = $(this).data('room');
+            var id = $(this).data('id');
+            var booking_time = $(this).data('time');
             var booking_date = $(this).data('date');
-            console.log(booking_date , "booking_date");
             var duration = $(this).data('duration');
-            var review = $(this).data('review');
 
-            var now = moment();
-            const date1 = moment(booking_date).format('YYYY-MM-DD').valueOf()
-            const date2 = moment().format('YYYY-MM-DD').valueOf();
+            const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            let get_day_in_no = moment(booking_date).day();
+            let day = days[get_day_in_no];            
+            
+            let convert_date = moment(booking_date).format('DD MMMM');
 
-            if (date1 < date2) {
-                $("#join_class_"+attr_id).html("");
-                $("#class_time_"+attr_id).html("Class Time Over");
-            } else {
-                var date = new Date();
-                var remain_time = (booking_seconds_time - HmsToSeconds(moment(date).format('HH:mm:ss')));
+            let user_region = "{{Auth::user()->time_zone}}";
+            var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
 
-                var std_time_in_seconds = HmsToSeconds(moment(date).format('HH:mm:ss'));
+            let create_date_format = new Date(booking_date + ' ' + booking_time);
+            
+            let start_date = moment(create_date_format).format("hh:mm A");
+          
+            let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
+            let end_date_booking = new Date(booking_date + ' ' + end_date);
+            
+            var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
 
-                var region_booking_time = moment(date).add(remain_time,'s').format("LT");
-                var booking_time = new Date(booking_date + ' ' +  region_booking_time);
+            $("#class_time_"+id).text(show_date_time);
+            
+            let timezoneTime = new Date(current_user_time_zone);
+            
+            let current = timezoneTime.getTime();
+            let a = create_date_format.getTime();
+            let b = end_date_booking.getTime();
 
-                var class_end_time = moment(date).add(remain_time,'s').add(duration, 'h').format("LT");
-                var class_end_date = new Date(booking_date + ' ' +  class_end_time);
+            var join_btn = `<a class="schedule-btn"> Join Class </a>`;
 
-
-                let join_btn = `<a onclick="joinClass('`+room_id+`')" class="schedule-btn"> Join Class </a>`;
-
-                timer.start({countdown: true, startValues: {seconds: remain_time}});
-                timer.addEventListener('secondsUpdated', function (e) {
-                    if( parseInt(remain_time) > 0)  {
-                        $("#class_time_"+attr_id).html(timer.getTimeValues().toString());
-                        var current_time_text =  $("#class_time_"+attr_id).text();
-                        if($.trim(current_time_text) == "00:00:00") {
-                            $(".join_class_"+attr_id).html(join_btn);
-                            $("#class_time_"+attr_id).html("");
-                        }
-                    }else{
-                        $(".join_class_"+attr_id).html("");
-                        $("#class_time_"+attr_id).html("Class Time Over");
-                    }
-
-                });
-
-                timer.addEventListener('targetAchieved', function (e) {
-                    var current_time_text =  $("#class_time_"+attr_id).text();
-
-                    if( parseInt(remain_time) > 0) {
-                        if($.trim(current_time_text)  == "00:00:00") {
-                            $(".join_class_"+attr_id).html(join_btn);
-                            $("#class_time_"+attr_id).html("");
-                        }
-                    }else{
-                        $(".join_class_"+attr_id).html("");
-                        $("#class_time_"+attr_id).html("Class Time Over");
-                    }
-                });
-
-                if(date.getTime() > booking_time.getTime() &&  date.getTime() < class_end_date.getTime()) {
-                    if(review == 0) {
-                        if(Math.abs(remain_time) > 0) {
-                            $(".join_class_"+attr_id).html(join_btn);
-                            $("#class_time_"+attr_id).html("");
-                        }else{
-                            $(".join_class_"+attr_id).html("");
-                            $("#class_time_"+attr_id).html("Class Time Over");
-                        }
-                    }
-                }else {
-                    $(".join_class_"+attr_id).html("");
-                    $("#class_time_"+attr_id).html("Class Time Over");
-                }
+            if(current > a && current < b) {
+                $("#class_time_"+id).html(join_btn);
+            }else {
+                $(".join_class_"+id).html("");
             }
+            
+
+
+
+            // var now = moment();
+            // const date1 = moment(booking_date).format('YYYY-MM-DD').valueOf()
+            // const date2 = moment().format('YYYY-MM-DD').valueOf();
+
+            // if (date1 < date2) {
+            //     $("#join_class_"+attr_id).html("");
+            //     $("#class_time_"+attr_id).html("Class Time Over");
+            // } else {
+            //     var date = new Date();
+            //     var remain_time = (booking_seconds_time - HmsToSeconds(moment(date).format('HH:mm:ss')));
+
+            //     var std_time_in_seconds = HmsToSeconds(moment(date).format('HH:mm:ss'));
+
+            //     var region_booking_time = moment(date).add(remain_time,'s').format("LT");
+            //     var booking_time = new Date(booking_date + ' ' +  region_booking_time);
+
+            //     var class_end_time = moment(date).add(remain_time,'s').add(duration, 'h').format("LT");
+            //     var class_end_date = new Date(booking_date + ' ' +  class_end_time);
+
+
+            //     let join_btn = `<a onclick="joinClass('`+room_id+`')" class="schedule-btn"> Join Class </a>`;
+
+            //     timer.start({countdown: true, startValues: {seconds: remain_time}});
+            //     timer.addEventListener('secondsUpdated', function (e) {
+            //         if( parseInt(remain_time) > 0)  {
+            //             $("#class_time_"+attr_id).html(timer.getTimeValues().toString());
+            //             var current_time_text =  $("#class_time_"+attr_id).text();
+            //             if($.trim(current_time_text) == "00:00:00") {
+            //                 $(".join_class_"+attr_id).html(join_btn);
+            //                 $("#class_time_"+attr_id).html("");
+            //             }
+            //         }else{
+            //             $(".join_class_"+attr_id).html("");
+            //             $("#class_time_"+attr_id).html("Class Time Over");
+            //         }
+
+            //     });
+
+            //     timer.addEventListener('targetAchieved', function (e) {
+            //         var current_time_text =  $("#class_time_"+attr_id).text();
+
+            //         if( parseInt(remain_time) > 0) {
+            //             if($.trim(current_time_text)  == "00:00:00") {
+            //                 $(".join_class_"+attr_id).html(join_btn);
+            //                 $("#class_time_"+attr_id).html("");
+            //             }
+            //         }else{
+            //             $(".join_class_"+attr_id).html("");
+            //             $("#class_time_"+attr_id).html("Class Time Over");
+            //         }
+            //     });
+
+            //     if(date.getTime() > booking_time.getTime() &&  date.getTime() < class_end_date.getTime()) {
+            //         if(review == 0) {
+            //             if(Math.abs(remain_time) > 0) {
+            //                 $(".join_class_"+attr_id).html(join_btn);
+            //                 $("#class_time_"+attr_id).html("");
+            //             }else{
+            //                 $(".join_class_"+attr_id).html("");
+            //                 $("#class_time_"+attr_id).html("Class Time Over");
+            //             }
+            //         }
+            //     }else {
+            //         $(".join_class_"+attr_id).html("");
+            //         $("#class_time_"+attr_id).html("Class Time Over");
+            //     }
+            // }
 
         });
     });
