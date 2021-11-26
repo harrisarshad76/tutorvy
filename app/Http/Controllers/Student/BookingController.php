@@ -47,6 +47,7 @@ use Obydul\LaraSkrill\SkrillRequest;
 use App\Models\Wallet;
 use DateTime;
 use Illuminate\Support\Carbon;
+use Carbon\CarbonPeriod;
 
 class BookingController extends Controller
 {
@@ -99,36 +100,50 @@ class BookingController extends Controller
 
     function getFilteredTimeSlot(Request $request)
     {
-        $interval = $request->interval * 60;
-        $start_time = $request->start_time;
-        $end_time = $request->end_time;
-        $date = $request->date;
-        $t_id = $request->t_id;
 
-        $start = new DateTime($start_time);
-        $end = new DateTime($end_time);
-        $startTime = $start->format('H:i');
-        $endTime = $end->format('H:i');
-        $i=0;
-        $slots = array();
-        while(strtotime($startTime) < strtotime($endTime)){
-            $start = $startTime;
-            // return $start;
-            $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
-            $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
-            $slot = new \stdClass();
-            $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
-            // return $start;
-            if(strtotime($startTime) <= strtotime($endTime)){
-                if($booking){
-                    
-                }else{
-                    $slot->slot_start_time = $start;
-                    $slot->slot_end_time = $end;
-                    array_push($slots,$slot);
-                }
-            }
+        $period = new CarbonPeriod('09:00', '60 minutes', '24:00'); // for create use 24 hours format later change format 
+        $slots = [];
+        foreach($period as $item){
+            array_push($slots,$item->format("H:i"));
         }
+
+        return $slots;
+        // $interval = $request->interval * 60;
+        // $start_time = $request->start_time;
+        // $end_time = $request->end_time;
+        // $date = $request->date;
+        // $t_id = $request->t_id;
+
+        // $start = new DateTime($start_time);
+        // $end = new DateTime($end_time);
+        // $startTime = $start->format('H:i');
+        // $endTime = $end->format('H:i');
+
+        // // $startTime = $start_time;
+        // // $endTime = $end_time;
+        // // return strtotime($startTime) .'---'.strtotime($endTime);
+        // $i=0;
+        // $slots = array();
+        // // return strtotime($startTime) .' -- '. strtotime($endTime);
+        // while(strtotime($startTime) < strtotime($endTime)){
+        //     $start = $startTime;
+        //     // return $start;
+        //     $end = date('H:i',strtotime('+'. 30 ,strtotime($startTime)));
+        //     $startTime = date('H:i',strtotime('+'. 30 ,strtotime($startTime)));
+        //     $slot = new \stdClass();
+        //     $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
+        //     // return $startTime .'---'.$end ;
+           
+        //     if(strtotime($startTime) <= strtotime($endTime)){
+        //         if($booking){
+                    
+        //         }else{
+        //             $slot->slot_start_time = $start;
+        //             $slot->slot_end_time = $end;
+        //             array_push($slots,$slot);
+        //         }
+        //     }
+        // }
         // return $time;
         return response()->json([
             'status_code'=> 200,

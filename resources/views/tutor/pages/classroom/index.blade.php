@@ -374,14 +374,5 @@
 
     });
 </script>
-<script>
-        var time_zone = new Date().toLocaleString('en-US', { timeZone: "{{Auth::user()->time_zone}}" });
-        let booking_time = "{{$class->class_time}}";
 
-        let curr_date = moment(time_zone).format('YYYY-MM-DD');
-        let create_date = curr_date + ' ' + booking_time;
-        let converted_time = moment(create_date).format('LT') ;
-        $(".show_curr_region_time").text(converted_time);
-
-    </script>
 @endsection

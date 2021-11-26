@@ -194,21 +194,14 @@
                                                             </td>
 
                                                             <td>
-                                                                @if($class->classroom != null)
-                                                                    <span data-id="{{$class->id}}"
-                                                                        data-review="{{$class->is_reviewed}}" data-duration="{{$class->duration}}"
-                                                                        data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
-                                                                        id="class_time_{{$class->id}}" data-date="{{$class->class_date}}"
-                                                                        class="badge current_time badge-pill text-white font-weight-normal bg-success mt-2">
-
-                                                                        {{ $class->class_date }} {{ $class->class_time }}
-
-                                                                    </span>
-
-                                                                    <div class="join_class_{{ $class->id }}"
-                                                                        class="text-center">
-                                                                @endif
+                                                                <span data-date="{{$class->class_date}}" data-id="{{$class->id}}"
+                                                                data-date="{{$class->class_time}}" id="class_time_{{$class->id}}" 
+                                                                class="current_time"> 
+                                                                    {{ $class->class_date }} {{ $class->class_time }} 
+                                                                </span>
+                                                                
                                                             </td>
+
                                                             @if ($class->status == 5 && $class->is_reviewed == 0)
                                                                 <td style="text-align: center;padding-top:14px;">
                                                                     <button class="cencel-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review Now

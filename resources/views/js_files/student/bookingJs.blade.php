@@ -250,11 +250,11 @@ function showTimeSlot(value) {
                             var fn_slot = date+' '+to;
 
                             st_slot = new Date(st_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
-                            st_slot = moment(st_slot).format('hh:mm A')
+                            st_slot = moment(st_slot).format('hh:mm')
                             console.log(st_slot);
 
                             fn_slot = new Date(fn_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
-                            fn_slot = moment(fn_slot).format('hh:mm A')
+                            fn_slot = moment(fn_slot).format('hh:mm')
                             console.log(fn_slot);
 
                             time_html += `<option value="`+ st_slot +`-`+ fn_slot +`"> `+ st_slot +`-`+ fn_slot +`</option>`;
