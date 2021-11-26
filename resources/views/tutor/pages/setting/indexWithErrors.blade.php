@@ -117,6 +117,73 @@
                             <div class="card-body">
                                 <div class="tab-content" id="v-pills-tabContent chang_photo">
 
+                                    <!-- <div class="tab-pane fade {{ session()->has('key') ? '' : 'active show' }} chee" id="v-pills-General" role="tabpanel"
+                                        aria-labelledby="v-pills-General-tab">
+
+                                        <form action="{{ route('tutor.profile.update', [Auth::user()->id]) }}" method="Post"
+                                            enctype="multipart/form-data" id="personal">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4">
+                                                    <h3>General</h3>
+                                                </div>
+                                                <div class="col-md-12 font-light">
+                                                    Change email address
+                                                </div>
+                                                <div class="col-sm-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <small class="">Name</small>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" value="" class="form-control"
+                                                                        placeholder="First Name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <input type="text" value="" class="form-control"
+                                                                        placeholder=" Last Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <small class="">Email Address</small>
+                                                        <div class="form-group">
+                                                            <input type="email" value="" class="form-control"
+                                                                placeholder="yourname@yourdomain.com">
+                                                        </div>
+                                                        <small class=" ">Phone number</small>
+                                                        <div class="form-group">
+                                                            <input type="number" value="" class="form-control"
+                                                                placeholder="03XX XXXXXXXX">
+                                                        </div>
+                                                        <small class=" ">Address</small>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <input type="text" value="" class="form-control"
+                                                                    placeholder="City">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <div class="form-item">
+                                                                    <input id="country_selector" class="form-control" name="country" type="">
+                                                                    <input id="country_short" class="form-control" name="country_short" type="" hidden>
+                                                                    <label for="country_selector" style="display:none;">Select a
+                                                                        country here...</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="float-right">
+                                                            <button class="schedule-btn">Save changes</button>
+                                                        </div>
+
+                                                    </div>
+                                            </div>
+                                        </form>
+                                    </div> -->
+
                                     <div class="tab-pane fade {{ session()->has('key') ? '' : 'active show' }} chee"
                                         id="v-pills-Security" role="tabpanel" aria-labelledby="v-pills-Security-tab">
                                         <div class="row">
@@ -202,7 +269,7 @@
                                             </div>
                                         </div>
 
-                                            <hr>
+                                        <hr>
                                         <div class="row">
                                             <div class="col-md-2 text-center">
                                                 <img class="mt-4 w-100"
@@ -400,91 +467,91 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane fade chee" id="v-pills-Slots" role="tabpanel"
                                     aria-labelledby="v-pills-Slots-tab">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-4">
-                                                <h3>Slots</h3>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4">
+                                            <h3>Slots</h3>
+                                        </div>
 
-                                            <div class="col-md-12 mb-4">
-                                                <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
-                                                    @csrf
-                                                    <div id="accordion" class="mb-3">
-                                                        @if(count($user_slots)  == 0)
-                                                            @foreach($days as $day) 
-                                                                <div class="m-0 p-0">
+                                        <div class="col-md-12 mb-4">
+                                            <form action="{{route('tutor.saveSlots')}}" id="tutorSlotForm" method="POST">
+                                                @csrf
+                                                <div id="accordion" class="mb-3">
+                                                    @if(count($user_slots)  == 0)
+                                                        @foreach($days as $day) 
+                                                            <div class="m-0 p-0">
 
-                                                                    <div class="card-header"
-                                                                        id="outlinehead{{$day['day']}}" class=" bg-color btn-header-link collapsed">
-                                                                            <div class="row">
-                                                                                <div class="col-md-8">
-                                                                                    <img class="mr-2"
-                                                                                    src="{{ asset('admin/assets/img/ico/round.png') }}" />
-                                                                                    {{$day['day']}}  
-                                                                                </div>
-                                                                                <div class="col-md-4 text-right">
-                                                                                    <label class="switch mt-0">
-                                                                                        <input type="checkbox" data-day="{{$day['day']}}" value="0" id="{{$day['day']}}_off" class="day_off" onclick="changer('{{$day['day']}}','{{$day['day']}}_off')">
-                                                                                        <span class="slider round"></span>
-                                                                                    </label>
-                                                                                </div>
+                                                                <div class="card-header"
+                                                                    id="outlinehead{{$day['day']}}" class=" bg-color btn-header-link collapsed"
+                                                                      >
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <img class="mr-2"
+                                                                                src="{{ asset('admin/assets/img/ico/round.png') }}" />
+                                                                                {{$day['day']}}  
                                                                             </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="day[]" value="{{$day['day']}}">
-                                                                    <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
-                                                                        <div class="card-body">
-                                                                            <div class="row">
-                                                                                <div class="col-md-12 mt-1">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-3 pt-3 text-right"> From: </div>
-                                                                                    
-                                                                                                <div class="col-md-9 ">
-                                                                                                    
-                                                                                                    <select class="form-select mt-1" id="{{$day['day']}}_from" name="from[]">
-                                                                                                        @foreach($times as $time)
-                                                                                                            <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                        @endforeach
-                                                                                                    </select>
+                                                                            <div class="col-md-4 text-right">
+                                                                                <label class="switch mt-0">
+                                                                                    <input type="checkbox" data-day="{{$day['day']}}" value="0" id="{{$day['day']}}_off" class="day_off" onclick="changer('{{$day['day']}}','{{$day['day']}}_off')">
+                                                                                    <span class="slider round"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <input type="hidden" name="day[]" value="{{$day['day']}}">
+                                                                <div id="outline{{$day['day']}}" class="collapse border-radius" aria-labelledby="{{$day['day']}}" data-parent="#outline{{$day['day']}}">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 mt-1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 pt-3 text-right"> From: </div>
+                                                                                
+                                                                                            <div class="col-md-9 ">
+                                                                                                
+                                                                                                <select class="form-select mt-1" id="{{$day['day']}}_from" name="from[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
 
-                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-4">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-3 pt-3 text-right"> To: </div>
-
-                                                                                                <div class="col-md-9">
-                                                                                                    <select  class="form-select mt-1" id="{{$day['day']}}_to" name="to[]">
-                                                                                                        @foreach($times as $time)
-                                                                                                            <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                        @endforeach
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-4 pt-3 text-right">
-                                                                                            <a href="#" onclick="moreFields('{{$day['day']}}')"> + Add More </a>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div id="new_fields_{{$day['day']}}"></div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 pt-3 text-right"> To: </div>
+
+                                                                                            <div class="col-md-9">
+                                                                                                <select  class="form-select mt-1" id="{{$day['day']}}_to" name="to[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4 pt-3 text-right">
+                                                                                        <a href="#" onclick="moreFields('{{$day['day']}}')"> + Add More </a>
+                                                                                    </div>
                                                                                 </div>
+                                                                                <div id="new_fields_{{$day['day']}}"></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
-                                                        @else
-                                                            @foreach($user_slots as $slot)
-                                                                    <div class=" m-0 p-0">
+                                                            </div>
+                                                         @endforeach
+                                                    @else
+                                                        @foreach($user_slots as $slot)
+                                                        <div class=" m-0 p-0">
 
-                                                                        <div class="card-header"
-                                                                            id="outlinehead{{$slot->day}}"  class="bg-color btn-header-link collapsed"
-                                                                            >
-                                                                        
+                                                            <div class="card-header"
+                                                                        id="outlinehead{{$slot->day}}"  class="bg-color btn-header-link collapsed"
+                                                                          >
+                                                                    
                                                                             <div class="row">
                                                                                 <div class="col-md-8">
                                                                                     <img class="mr-2"
@@ -499,63 +566,63 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="hidden" name="day[]" value="{{$slot->day}}">
+                                                                    <input type="hidden" name="day[]" value="{{$slot->day}}">
 
-                                                                        <div id="outline{{$slot->day}}" class="collapse border-radius" aria-labelledby="{{$slot->day}}" data-parent="#outline{{$slot->day}}">
-                                                                            <div class="card-body">
+                                                                    <div id="outline{{$slot->day}}" class="collapse border-radius" aria-labelledby="{{$slot->day}}" data-parent="#outline{{$slot->day}}">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 mt-1">
                                                                                 <div class="row">
-                                                                                    <div class="col-md-12 mt-1">
+                                                                                    <div class="col-md-4">
                                                                                         <div class="row">
-                                                                                            <div class="col-md-4">
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-4 pt-3 text-right"> From: </div>
-                                                                                        
-                                                                                                    <div class="col-md-8 ">
-                                                                                                        <select class="form-select" id="{{$slot->day}}_from" name="from[]">
-                                                                                                            @foreach($times as $time)
-                                                                                                                <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                            @endforeach
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-4">
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-4 pt-3 text-right"> To: </div>
-
-                                                                                                    <div class="col-md-8">
-                                                                                                        <select class="form-select"  id="{{$slot->day}}_to" name="to[]">
-                                                                                                            @foreach($times as $time)
-                                                                                                                <option value="{{$time['value']}}"> {{$time['value']}} </option>
-                                                                                                            @endforeach
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-4 pt-3 text-right">
-                                                                                                <a href="#" onclick="moreFields('{{$slot->day}}')"> + Add More </a>
+                                                                                            <div class="col-md-4 pt-3 text-right"> From: </div>
+                                                                                
+                                                                                            <div class="col-md-8 ">
+                                                                                                <select class="form-select" id="{{$slot->day}}_from" name="from[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div id="new_fields_{{$slot->day}}"></div>
                                                                                     </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4 pt-3 text-right"> To: </div>
+
+                                                                                            <div class="col-md-8">
+                                                                                                <select class="form-select"  id="{{$slot->day}}_to" name="to[]">
+                                                                                                    @foreach($times as $time)
+                                                                                                        <option value="{{$time['value']}}"> {{$time['value']}} </option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4 pt-3 text-right">
+                                                                                        <a href="#" onclick="moreFields('{{$slot->day}}')"> + Add More </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="new_fields_{{$slot->day}}"></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                            
-                                                            @endforeach
-                                                        @endif
-                                                    
-                                                                                    
-                                                    </div>
-                                                    <div class="pull-right">
-                                                        <button type="submit" class="schedule-btn" id="slot_save">Save changes</button>
-                                                        <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    @endif
+                                                 
+                                                                                
+                                                </div>
+                                                <div class="pull-right">
+                                                    <button type="submit" class="schedule-btn" id="slot_save">Save changes</button>
+                                                    <button type="button" class="btn btn-primary" id="slot_loader" style="display:none" disabled> Processing </button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                                
                             </div>
@@ -679,9 +746,9 @@
                            
                         <div class="col-md-4">
                             <div class="row">
-                                <div class="col-md-4 pt-3 text-right"> From: </div>
+                                <div class="col-md-3 pt-3 text-right"> From: </div>
                     
-                                <div class="col-md-8 ">
+                                <div class="col-md-9 ">
                                     
                                     <select class="form-select mt-1 `+day+`_from" name="from[`+count_field+`]">
                                         @foreach($times as $time)
@@ -694,9 +761,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                                <div class="col-md-4 pt-3 text-right"> To: </div>
+                                <div class="col-md-3 pt-3 text-right"> To: </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <select  class="form-select mt-1 `+day+`_to"  name="to[`+count_field+`]">
                                         @foreach($times as $time)
                                             <option value="{{$time['value']}}"> {{$time['value']}} </option>
