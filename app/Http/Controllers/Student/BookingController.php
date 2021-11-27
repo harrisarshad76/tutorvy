@@ -80,16 +80,29 @@ class BookingController extends Controller
         return view('student.pages.booking.index',compact('confirmed','pending','completed','cancelled','all','commission','defaultPay'));
     }
 
+
+
+
     public function bookNow($t_id){
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
         return view('student.pages.booking.book_now',compact('t_id','subjects','user'));
     }
 
+    public function book_now($date, $time , $t_id) {
+
+        $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
+        $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
+
+        $attr = array( "slug" => $date , "time" => $time);
+
+        return view('student.pages.booking.book_now',compact('t_id','subjects','user','attr'));
+    }
+
 
     public function getTutorSlots(Request $request) {
 
-        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
+        $slots = TutorSlots::where('user_id',$request->id)->get();
 
         return response()->json([
             'status_code'=> 200,
@@ -181,18 +194,18 @@ class BookingController extends Controller
 
     public function booked(Request $request)
     {
-        
-        
-        $class_date = $request->date;
-        $class_time = explode("-",$request->time);
+        // return date("H:i", strtotime($request->class_time));
+        // return dd($request->all());
+        $class_date = $request->current_date;
+        // $class_time = explode("-",$request->time);
      
         // $from_time = explode(" ",$class_time[0]);
         // $from_time = $from_time[0];
-        $from_time = date("H:i", strtotime($class_time[0]));
+        $from_time = date("H:i", strtotime( $request->class_time));
        
         // $to_time = explode(" ",$class_time[1]);
         // $to_time = $to_time[0];
-        $to_time = date("H:i", strtotime($class_time[1]));
+        $to_time = date("H:i", strtotime($request->class_end_time));
 
         $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
@@ -216,7 +229,7 @@ class BookingController extends Controller
                 'question' => $request->question,
                 'brief' => $request->brief,
                 'attachments' => $path,
-                'class_date' => $request->date,
+                'class_date' => $request->current_date,
                 'class_time' => $from_time,
                 'class_booked_till' => $to_time,
                 'duration' => 1,
