@@ -1,6 +1,8 @@
 <script>
 
 let tt_id;
+var all_slots = [];
+var current_date = new Date();
 
 $(document).ready(function() {
     $.ajaxSetup({
@@ -8,6 +10,8 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
 });
 
 let tutors = '';
@@ -86,6 +90,7 @@ $('input[type=radio][name=gender]').change(function() {
     search_tutors(price,subject,lang,rating,location ,gender);
 
 });
+
 
 function search_tutors(price,subject,lang,rating,location, gender){
 
@@ -443,5 +448,141 @@ $( '#chat_form' ).on( 'submit', function(e) {
         },
     });
 });
+
+
+function getDate(date) {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    current_date = new Date(date);
+    let day = days[current_date.getDay()];
+    var duration = 1;
+    var tutor_id = $("#tutor_id").val();
+    
+    
+    // filter array get day wise slots
+    var item = all_slots.filter(item => item.day === day);
+    
+    var html = ``;
+    if(item != null && item != "" && item != undefined && item != [] && item.length > 0) {
+
+        for(let data of item) {
+            html += `
+            <div class="col-md-3">
+                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+                    <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
+                    <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
+                </div>
+            </div>`;
+        }
+        $(".show_response").text("Available Slots of " + day);
+        $(".show_all_slots").html(html);
+    }else{
+        $(".show_response").text("No Slots Available for " + day);
+        $(".show_all_slots").html("");
+        $("#request_booking_btn").removeAttr('href');
+    }
+
+
+
+}
+
+
+function checkBookingSlots(id){
+    $("#tutor_id").val(id);
+
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    current_date = new Date();
+    let day = days[current_date.getDay()];
+
+    getTutorSlots(id);
+}
+
+function getTutorSlots(tutor_id ,day) {
+
+    $("#get_date").val(moment(current_date).format('YYYY-MM-DD'));
+    
+    $.ajax({
+        url: "{{route('student.getTutorSlots')}}",
+        type:"POST",
+        data: {id:tutor_id , day:day},
+        dataType:'json',
+        success:function(response){
+            console.log(response);
+            var obj = response.slots;
+            all_slots = obj;
+
+            if(response.status_code == 200 && response.success == true) {
+            
+                const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                let current_date = new Date();
+                let day = days[current_date.getDay()];
+             
+
+                if(obj.length > 0) {
+                    var html = ``;
+
+                    for(let data of obj) {
+
+                        if(data.day == day) {
+                            html += `
+                            <div class="col-md-3">
+                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+                                    <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
+                                    <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
+                                </div>
+                            </div>`;
+                        }
+                        
+                    }
+                    $(".show_response").text("Available Slots of " + day);
+                    $(".show_all_slots").html(html);
+                    $("#modalSlot").modal("show");
+                }else{
+                    $(".show_response").text("No Slots Available for " + day);
+                    $(".show_all_slots").html("");
+                }
+
+                
+            }else{
+                toastr.error('Something went wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        },
+        error:function(e){
+            toastr.error('Something went wrong',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}
+
+function selectSlot(id , time) {
+    
+    $("#booking_time").val(time)
+    $('.slotSet').addClass("activeSlot");
+    $('.slotSet').removeClass("activeSlot");
+
+    let tutor_id =  $("#tutor_id").val();
+    let date = $("#get_date").val();
+    time = time.split(':');
+
+    let create_date = new Date(date);
+
+    if(time != null && time != "") {
+        var create_link =  create_date.getTime() + '/' + time[0] + '/' + tutor_id;        
+        var custom_url = window.location.origin + '/student/book-now' + '/' + create_link;
+
+        $("#request_booking_btn").attr('href',custom_url);
+    }else{
+        $("#request_booking_btn").removeAttr('href');
+    }
+    
+}
 
 </script>

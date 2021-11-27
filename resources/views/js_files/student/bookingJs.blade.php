@@ -8,7 +8,6 @@ $(document).ready(function() {
         }
     });
 
-    
 
     $( '#book_tutor_form' ).on( 'submit', function(e) {
         event.preventDefault();
@@ -113,7 +112,27 @@ $(document).ready(function() {
             });
         }
     });
-})
+
+    $("#amount").change(function(){
+
+        amount = $(this).val();
+        if(amount != null){
+            $("#paypal-button-container").html('')
+
+            //show div block on enter payment
+            $("#paymntbtn").click(function(){
+                $("#paymentBlock").css('display','block');
+                $("#paymntbtn").css('display','none');
+            });
+
+            $("#skrillPayment").click(function(){
+                skrill(amount);
+            });
+
+
+        }
+    });
+});
 
 
 function getDate(date) {
@@ -250,11 +269,11 @@ function showTimeSlot(value) {
                             var fn_slot = date+' '+to;
 
                             st_slot = new Date(st_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
-                            st_slot = moment(st_slot).format('hh:mm A')
+                            st_slot = moment(st_slot).format('hh:mm')
                             console.log(st_slot);
 
                             fn_slot = new Date(fn_slot).toLocaleString('en-US', { timeZone: '{{\Auth::user()->time_zone}}' });
-                            fn_slot = moment(fn_slot).format('hh:mm A')
+                            fn_slot = moment(fn_slot).format('hh:mm')
                             console.log(fn_slot);
 
                             time_html += `<option value="`+ st_slot +`-`+ fn_slot +`"> `+ st_slot +`-`+ fn_slot +`</option>`;
@@ -710,28 +729,6 @@ $( '#cancel-task' ).on( 'submit', function(e) {
 
 });
 
-
-$(document).ready(function(){
-        $("#amount").change(function(){
-
-            amount = $(this).val();
-            if(amount != null){
-                $("#paypal-button-container").html('')
-
-                //show div block on enter payment
-                $("#paymntbtn").click(function(){
-                    $("#paymentBlock").css('display','block');
-                    $("#paymntbtn").css('display','none');
-                });
-
-                $("#skrillPayment").click(function(){
-                    skrill(amount);
-                });
-
-
-            }
-        });
-    });
 
 
 

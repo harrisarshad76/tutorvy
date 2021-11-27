@@ -47,6 +47,7 @@ use Obydul\LaraSkrill\SkrillRequest;
 use App\Models\Wallet;
 use DateTime;
 use Illuminate\Support\Carbon;
+use Carbon\CarbonPeriod;
 
 class BookingController extends Controller
 {
@@ -79,16 +80,29 @@ class BookingController extends Controller
         return view('student.pages.booking.index',compact('confirmed','pending','completed','cancelled','all','commission','defaultPay'));
     }
 
+
+
+
     public function bookNow($t_id){
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
         return view('student.pages.booking.book_now',compact('t_id','subjects','user'));
     }
 
+    public function book_now($date, $time , $t_id) {
+
+        $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
+        $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
+
+        $attr = array( "slug" => $date , "time" => $time);
+
+        return view('student.pages.booking.book_now',compact('t_id','subjects','user','attr'));
+    }
+
 
     public function getTutorSlots(Request $request) {
 
-        $slots = TutorSlots::where('user_id',$request->id)->where('day', $request->day)->first();
+        $slots = TutorSlots::where('user_id',$request->id)->get();
 
         return response()->json([
             'status_code'=> 200,
@@ -99,36 +113,50 @@ class BookingController extends Controller
 
     function getFilteredTimeSlot(Request $request)
     {
-        $interval = $request->interval * 60;
-        $start_time = $request->start_time;
-        $end_time = $request->end_time;
-        $date = $request->date;
-        $t_id = $request->t_id;
 
-        $start = new DateTime($start_time);
-        $end = new DateTime($end_time);
-        $startTime = $start->format('H:i');
-        $endTime = $end->format('H:i');
-        $i=0;
-        $slots = array();
-        while(strtotime($startTime) < strtotime($endTime)){
-            $start = $startTime;
-            // return $start;
-            $end = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
-            $startTime = date('H:i',strtotime('+'.$interval.' minutes',strtotime($startTime)));
-            $slot = new \stdClass();
-            $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
-            // return $start;
-            if(strtotime($startTime) <= strtotime($endTime)){
-                if($booking){
-                    
-                }else{
-                    $slot->slot_start_time = $start;
-                    $slot->slot_end_time = $end;
-                    array_push($slots,$slot);
-                }
-            }
+        $period = new CarbonPeriod('09:00', '60 minutes', '24:00'); // for create use 24 hours format later change format 
+        $slots = [];
+        foreach($period as $item){
+            array_push($slots,$item->format("H:i"));
         }
+
+        return $slots;
+        // $interval = $request->interval * 60;
+        // $start_time = $request->start_time;
+        // $end_time = $request->end_time;
+        // $date = $request->date;
+        // $t_id = $request->t_id;
+
+        // $start = new DateTime($start_time);
+        // $end = new DateTime($end_time);
+        // $startTime = $start->format('H:i');
+        // $endTime = $end->format('H:i');
+
+        // // $startTime = $start_time;
+        // // $endTime = $end_time;
+        // // return strtotime($startTime) .'---'.strtotime($endTime);
+        // $i=0;
+        // $slots = array();
+        // // return strtotime($startTime) .' -- '. strtotime($endTime);
+        // while(strtotime($startTime) < strtotime($endTime)){
+        //     $start = $startTime;
+        //     // return $start;
+        //     $end = date('H:i',strtotime('+'. 30 ,strtotime($startTime)));
+        //     $startTime = date('H:i',strtotime('+'. 30 ,strtotime($startTime)));
+        //     $slot = new \stdClass();
+        //     $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$date)->where('booked_tutor',$t_id)->where('status','!=',3)->where('status','!=',4)->first();
+        //     // return $startTime .'---'.$end ;
+           
+        //     if(strtotime($startTime) <= strtotime($endTime)){
+        //         if($booking){
+                    
+        //         }else{
+        //             $slot->slot_start_time = $start;
+        //             $slot->slot_end_time = $end;
+        //             array_push($slots,$slot);
+        //         }
+        //     }
+        // }
         // return $time;
         return response()->json([
             'status_code'=> 200,
@@ -166,18 +194,18 @@ class BookingController extends Controller
 
     public function booked(Request $request)
     {
-        
-        
-        $class_date = $request->date;
-        $class_time = explode("-",$request->time);
+        // return date("H:i", strtotime($request->class_time));
+        // return dd($request->all());
+        $class_date = $request->current_date;
+        // $class_time = explode("-",$request->time);
      
         // $from_time = explode(" ",$class_time[0]);
         // $from_time = $from_time[0];
-        $from_time = date("H:i", strtotime($class_time[0]));
+        $from_time = date("H:i", strtotime( $request->class_time));
        
         // $to_time = explode(" ",$class_time[1]);
         // $to_time = $to_time[0];
-        $to_time = date("H:i", strtotime($class_time[1]));
+        $to_time = date("H:i", strtotime($request->class_end_time));
 
         $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
@@ -201,7 +229,7 @@ class BookingController extends Controller
                 'question' => $request->question,
                 'brief' => $request->brief,
                 'attachments' => $path,
-                'class_date' => $request->date,
+                'class_date' => $request->current_date,
                 'class_time' => $from_time,
                 'class_booked_till' => $to_time,
                 'duration' => 1,

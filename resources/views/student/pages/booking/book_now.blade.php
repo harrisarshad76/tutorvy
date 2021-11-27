@@ -41,6 +41,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
             <p class="heading-third mt-3">Personal information</p>
             <form enctype="multipart/form-data" id="book_tutor_form">
                 <input type="hidden" name="current_date" id="current_date">
+                <input type="hidden" name="class_time" id="class_time">
+                <input type="hidden" name="class_end_time" id="class_end_time">
                 <div class="row mt-5">
                         <div class=" col-md-6">
                             <div class="row">
@@ -146,6 +148,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                                             <p class="mb-0 "><img src="{{asset('assets/images/ico/language.png')}}" alt="" class="pr-2">{{ $user->lang_short != NULL ? $user->lang_short : '---' }}</p>
                                         </div> -->
                                     </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="show_booking_text"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,14 +160,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                                 value="{{$t_id}}">
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-4">
-                            <label for=""><b> Class Date </b></label>
+                    <!-- <div class="row mt-3"> -->
+                        <!-- <div class="col-md-4"> -->
+                            <!-- <label for=""><b> Class Date </b></label> -->
                             <!-- <input type="date" class="form-control" name="date"  onfocus="(this.type='date')" placeholder="Class Date" required> -->
-                            <input type="date" class="form-control" onchange="getDate(this.value)" id="get_date" name="date"   placeholder="Class Date" required>
+                            <!-- <input type="date" class="form-control" onchange="getDate(this.value)" id="get_date" name="date"   placeholder="Class Date" required> -->
                         
                             <!-- <input id="classDate" class="form-control"  name="date"  placeholder="Class Date"> -->
-                        </div>
+                        <!-- </div> -->
                         <!--<div class=" col-md-4">
                             <label for=""><b> Class Duration </b></label>
                             <select name="duration" onchange="showTimeSlot(this.value)" class="form-control form-select" id="">
@@ -174,14 +180,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                             </select>
                               <input type="number" min="1" max="24" class="form-control" name="duration" placeholder="Class Duration (in hours)" required>  
                         </div>-->
-                        <div class=" col-md-4">
-                            <label for=""><b> Class Time </b></label>
+                        <!-- <div class=" col-md-4">
+                            <label for=""><b> Class Time </b></label> -->
                             <!-- <input type="" class="form-control" name="time" onfocus="(this.type='time')"  placeholder="Class Time" required> -->
                             <!-- <input type="time" class="form-control" name="time" form-select placeholder="Class Time" required disabled> -->
-                            <select name="time" id="booking_time" class="form-control create_booking_time form-select" required > </select>
+                            <!-- <select name="time" id="booking_time" class="form-control create_booking_time form-select" required > </select>
                         </div>
 
-                    </div>
+                    </div> -->
                     <div class="row mt-3">
                         <div class="input-text col-md-12">
                             <input type="text"class="form-control " name="question"
@@ -275,5 +281,28 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    var array = {!! json_encode($attr) !!};
+    if(array != null && array != "") {
+        var parse_date = new Date(parseInt(array.slug));
+        var converted_date = moment(parse_date).format('YYYY-MM-DD');
+
+        let create_date = moment(parse_date).format('DD MMMM');
+
+        var time = array.time + ':00';
+        var new_date_time = new Date(converted_date + ' ' + time);
+        
+        var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm");
+        
+        $('.show_booking_text').text(create_date + ", " + time + " - " + class_end_time);
+
+        $("#current_date").val(converted_date);
+        $("#class_time").val(time);
+        $("#class_end_time").val(class_end_time);
+
+    }else{
+        $('.show_booking_text').text("");
+    }
+</script>
 @include('js_files.student.bookingJs')
 @endsection

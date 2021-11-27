@@ -58,7 +58,7 @@
         }
 
         .chatArea {
-            height: 403px;
+            height: 471px;
             padding-left: 0px;
             margin-bottom: 8px;
             padding-right: 0;
@@ -237,6 +237,55 @@
         #name_main{
             margin-bottom:0 !important;
         }
+        .chatAbout{
+            width:35%;
+            display:none;
+        }
+        .chatAbout .card{
+            height:600px !important
+        }
+        #media{
+             overflow: hidden;
+        }
+        .Disk{
+            display:flex !important;
+        }
+        .Disk .chatHalf{
+            width:65%;
+        }
+        .Disk .chatAbout{
+            display:block;
+            margin-left:15px;
+            margin-right:15px;
+        }
+        .Disk .chatName{
+            padding-left:6% !important;
+        }
+        .deadColor{
+            background: rgb(0 0 0 / 40%);
+            text-align: center;
+            padding: 29% 3%;
+            font-size: 10px;
+        }
+        .deadColor a{
+            color:#fff;
+            text-decoration:none;
+        }
+        .mediaHeight{
+            overflow-y: auto !important;
+        }
+        .mediaHeight .mediaAttachments{
+            height:auto;
+            max-height: 415px;
+            overflow: auto !important;
+        }
+        .mediaAttachments{
+            height: 150px;
+            overflow: hidden;
+        }
+        .mediaAttachments img{
+            height:75px;   
+        }
       
     </style>
 
@@ -245,7 +294,7 @@
             <p class="heading-first ml-4 ">Inbox </p>
             <div id="react"></div>
             <div class="row">
-                <div class="col-md-12 mb-1 ">
+                <!-- <div class="col-md-12 mb-1 ">
                     <div class=" card  bg-toast infoCard">
 
 
@@ -265,7 +314,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3" style="background-color: #F2F3F4;">
                     <div class="box-main pt-3 pb-3 pr-3">
                         <div class="input-box mr-0">
@@ -279,7 +328,7 @@
                         @foreach($users as $contact)
                             @if($contact->user != NULL)
                                 <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->id}}"
-                                    onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`)' >
+                                    onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`,`{{$contact->user->tagline}}`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 img-chats">
                                         @if($contact->user->picture)
@@ -300,6 +349,7 @@
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     <p id="name_main" class="name-client">{{$contact->user->first_name}} {{$contact->user->last_name}}</p>
+                                                    <p class="tagline-client" style="display:none;">{{$contact->user->tagline}}</p>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <p class="time-chat"></p>
@@ -356,81 +406,136 @@
                     </div>
 
                 </div>
-                <div class="col-md-9  chatSet" style="display:none;">
-                    <nav class="chatHead navbars navbar-light bg-white m-0 p-0 pl-3 pr-3 row">
-                        <div class="col-md-6 col-6">
-                            <a class="navbar-brand pb-0" href="#">
-                                <div class="container-fluid m-0 p-0 img-chats">
+                <div class="col-md-9  chatSet " style="display:none;">
+                    <div class="chatHalf"> 
+                        <nav class="chatHead navbars navbar-light bg-white m-0 p-0 pl-3 pr-3 row">
+                            <div class="col-md-6 col-6">
+                                <a class="navbar-brand pb-0" href="#">
+                                    <div class="container-fluid m-0 p-0 img-chats">
 
-                                    <img  id="clientPic" class="profile-img">
+                                        <img  class="profile-img clientPic">
 
-                                    <div class="img-chat">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <p class="name-client mb-0" id="clientName"></p>
+                                        <div class="img-chat">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="name-client mb-0 clientName"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="massage-client" style="position: relative;top: -5px;">Online
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="massage-client" style="position: relative;top: -5px;">Online
-                                                </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-6 pt-3 text-right">
+                                <input type="hidden" class="col-sm-9 form-control ">
+
+                                <a href="#">
+                                    <i class="fa fa-search headIcon"></i>
+                                </a>
+                                <!-- <a href="#">
+                                    <i class="fa fa-ellipsis-v headIcon"></i>
+                                </a> -->
+                            </div>
+                        </nav>
+                        <div class="line-box2"></div>
+
+                        <div class="row chatArea ml-1 pb-2 mr-1" id="">
+                            <div class='text-center col-md-12 mb-3'>
+                                <small>
+                                    Your all communications will be monitored for maintaining quality, will not share your personal information. 
+                                </small>
+                                <small>
+                                    <a href="#">View Privacy Policy</a>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="search-type ">
+                                <div class="row">
+                                    <div class="col-md-2 col-4">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span class="text-muted" id="typingUser"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-12 col-8 p-0">
+
+                                        <form id="chat_form" >
+                                            <button class="sendLeft" onclick="sendFileModal()" type="button">
+                                                <i class="fa fa-paperclip rightChatIcon"></i>
+                                            </button>
+                                            <input type="search" id="msg" class="w-100" alt="message">
+                                            <button  class="sendRight" type="submit">
+                                                <i class="fa fa-paper-plane f-19"></i>
+                                            </button>
+                                        </form>
+                                        <!-- <img src="../assets/img/ico/Icon material-send.png" style="position: relative;left: -35px;height: 25px;margin-top: 10px;"> -->
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chatAbout">
+                        <div class="card mt-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 text-center" id="intro">
+                                        <img  alt="profile-image" class="profile-card-img clientPic">
+                                        <p class="heading-third mt-1 mb-0 clientName">
+                                          
+                                        </p>
+                                        <p class="profile-tutor mt-0 mb-0 clientTag" style="">
+                                            
+                                        </p>
+                                        <a class="schedule-btn w-100 mt-1 clientId" >
+                                            Book class
+                                        </a>
+                                        <div class="star-icos">
+                                            <p class="name-text1 paragraph-text1 mb-0">
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="paragraph-text1">0.0</span>
+                                            </p>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12" id="media">
+                                        <p class="heading-third mt-1 mb-0">
+                                            Shared Media
+                                        </p>
+                                        <div class="row pl-3 pr-3 mediaAttachments">
+                                         
+                                        </div>
+                                        <div class="row pl-3 pr-3">
+                                            <div class="col-md-4 p-1 ">
+                                                <div class="deadColor hungama">
+                                                    <a href="#" class="showMoreMedia">
+                                                        Show More +
+                                                    </a>
+                                                </div>
+                                                <div class="deadColor hungama2" style="display:none;">
+                                                    <a class="showLessMedia text-white" onclick="showLess()">
+                                                        Show Less 
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-6 pt-3 text-right">
-                            <input type="hidden" class="col-sm-9 form-control ">
-
-                            <a href="#">
-                                <i class="fa fa-search headIcon"></i>
-                            </a>
-                            <!-- <a href="#">
-                                <i class="fa fa-ellipsis-v headIcon"></i>
-                            </a> -->
-                        </div>
-                    </nav>
-                    <div class="line-box2"></div>
-
-                    <div class="row chatArea ml-1 pb-2 mr-1" id="">
-                        <div class='text-center col-md-12 mb-3'>
-                            <small>
-                                Your all communications will be monitored for maintaining quality, will not share your personal information. 
-                            </small>
-                            <small>
-                                <a href="#">View Privacy Policy</a>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="container-fluid mb-3">
-                        <div class="search-type ">
-                            <div class="row">
-                                <div class="col-md-2 col-4">
-                                </div>
-                                <div class="col-md-10">
-                                    <span class="text-muted" id="typingUser"></span>
-                                </div>
                             </div>
-                            <div class="row">
-
-                                <div class="col-md-12 col-8 p-0">
-
-                                    <form id="chat_form" >
-                                        <button class="sendLeft" onclick="sendFileModal()" type="button">
-                                            <i class="fa fa-paperclip rightChatIcon"></i>
-                                        </button>
-                                        <input type="search" id="msg" class="w-100" alt="message">
-                                        <button  class="sendRight" type="submit">
-                                            <i class="fa fa-paper-plane f-19"></i>
-                                        </button>
-                                    </form>
-                                    <!-- <img src="../assets/img/ico/Icon material-send.png" style="position: relative;left: -35px;height: 25px;margin-top: 10px;"> -->
-                                </div>
-                            </div>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -468,19 +573,6 @@
 @endsection
 @section('scripts')
 
-<script>
-    // $(document).ready(function(){
-      
-    // });
-    // $(".emojionearea-editor"). (function(){
-    //     alert();
-    // })
-    // $(".chatLeft").click(function(){
-    //     $(this).find(".img-chats").css("background","#ffffff");
-    //     $(".chatSet").css("display","block");
-    //     $(".chatDefault").css("display","none");
-    // });
-</script>
 @include('js_files.chat')
 
 @endsection
