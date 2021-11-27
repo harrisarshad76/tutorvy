@@ -377,6 +377,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::post('/ticket-chat',[TutorSettingController::class,'ticketChat'])->name('tutor.ticketChat');
 
     Route::post('/save_sloats',[TutorSettingController::class,'saveSlots'])->name('tutor.saveSlots');
+    Route::post('/delete_sloats',[TutorSettingController::class,'deleteSlots'])->name('tutor.deleteSlots');
 
 });
 
