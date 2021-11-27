@@ -330,7 +330,7 @@
                                 <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->id}}"
                                     onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`,`{{$contact->user->tagline}}`)' >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
-                                    <div class="container-fluid m-0 p-0 img-chats">
+                                    <div class="container-fluid m-0 p-0 pb-2 img-chats">
                                         @if($contact->user->picture)
                                             <?php
                                                 $path = Auth::user()->picture;
@@ -418,12 +418,12 @@
                                         <div class="img-chat">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <p class="name-client mb-0 clientName"></p>
+                                                    <p class="name-client mb-2 clientName"></p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="massage-client" style="position: relative;top: -5px;">Online
+                                                    <p class="massage-client mb-0" style="position: relative;top: -5px;">Online
                                                     </p>
                                                 </div>
                                             </div>
@@ -497,9 +497,9 @@
                                         <p class="profile-tutor mt-0 mb-0 clientTag" style="">
                                             
                                         </p>
-                                        <a class="schedule-btn w-100 mt-1 clientId" >
+                                        <!-- <a class="schedule-btn w-100 mt-1 clientId" >
                                             Book class
-                                        </a>
+                                        </a> -->
                                         <div class="star-icos">
                                             <p class="name-text1 paragraph-text1 mb-0">
                                                 <span class="fa fa-star "></span>
@@ -569,6 +569,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Send File Modal -->
 @endsection
 @section('scripts')

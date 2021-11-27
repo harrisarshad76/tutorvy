@@ -379,7 +379,7 @@ ol li:hover {
 
 .scroll-nav {
     overflow-y: auto;
-    height: 643px;
+    height: 694px;
     position: sticky;
     top: 85px;
     overflow-x: hidden;
