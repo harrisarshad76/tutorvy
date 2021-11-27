@@ -8,7 +8,6 @@ $(document).ready(function() {
         }
     });
 
-    
 
     $( '#book_tutor_form' ).on( 'submit', function(e) {
         event.preventDefault();
@@ -113,7 +112,27 @@ $(document).ready(function() {
             });
         }
     });
-})
+
+    $("#amount").change(function(){
+
+        amount = $(this).val();
+        if(amount != null){
+            $("#paypal-button-container").html('')
+
+            //show div block on enter payment
+            $("#paymntbtn").click(function(){
+                $("#paymentBlock").css('display','block');
+                $("#paymntbtn").css('display','none');
+            });
+
+            $("#skrillPayment").click(function(){
+                skrill(amount);
+            });
+
+
+        }
+    });
+});
 
 
 function getDate(date) {
@@ -710,28 +729,6 @@ $( '#cancel-task' ).on( 'submit', function(e) {
 
 });
 
-
-$(document).ready(function(){
-        $("#amount").change(function(){
-
-            amount = $(this).val();
-            if(amount != null){
-                $("#paypal-button-container").html('')
-
-                //show div block on enter payment
-                $("#paymntbtn").click(function(){
-                    $("#paymentBlock").css('display','block');
-                    $("#paymntbtn").css('display','none');
-                });
-
-                $("#skrillPayment").click(function(){
-                    skrill(amount);
-                });
-
-
-            }
-        });
-    });
 
 
 
