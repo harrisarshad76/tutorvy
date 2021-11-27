@@ -866,8 +866,12 @@
 
 
     function deleteSlot(day , id) {
+        var origin  = window.location.origin;
+        let create = origin +"/tutor/delete_sloats";
+        console.log(create , "create");
+        
         $.ajax({
-            url: "{{route('tutor.deleteSlots')}}",
+            url: create,
             type: "POST",
             data: {day:day , id:id},
             success:function(response){
