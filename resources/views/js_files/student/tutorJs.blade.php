@@ -576,7 +576,7 @@ function selectSlot(id , time) {
 
     if(time != null && time != "") {
         var create_link =  create_date.getTime() + '/' + time[0] + '/' + tutor_id;        
-        var custom_url = window.location.origin + '/student/book-now' + '/' + create_link;
+        var custom_url = window.location.origin + '/student/book_now' + '/' + create_link;
 
         $("#request_booking_btn").attr('href',custom_url);
     }else{
