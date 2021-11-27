@@ -144,7 +144,7 @@ $(document).ready(function(){
                                             <div class="col-md-1">
                                                 <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
                                             </div>
-                                            <div class="col-md-11">
+                                            <div class="col-md-11 chatName">
                                                 <div class="">
                                                     <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
                                                     <small class="dull pull-right">1min ago</small>
@@ -193,6 +193,11 @@ $(document).ready(function(){
                 $('.dropify-clear').click();
                 if (response.message.message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                     message += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.message.message + `')}}">`;
+                    
+                    let media_attachment = `   <div class="col-md-4 p-1">
+                                                <a href="{{asset('storage/` + response.message.message + `')}}" target="_blank"><img src="{{asset('storage/` + response.message.message + `')}}" class="w-100" alt=""></a>
+                                            </div>`
+                            $('#mediaAttachments_'+tt_id).prepend(media_attachment);
                 }
                  
                 let html = `
@@ -201,12 +206,11 @@ $(document).ready(function(){
                                             <div class="col-md-1">
                                                 <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
                                             </div>
-                                            <div class="col-md-11">
+                                            <div class="col-md-11 chatName">
                                                 <div class="">
                                                     <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
                                                     <small class="dull pull-right">1min ago</small>
                                                     `+message+`
-                                                    
                                                     <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
                                                 </div>
                                             </div>
@@ -221,15 +225,21 @@ $(document).ready(function(){
             },
         });
     });
-    function selectUser(id,name){
+    function selectUser(id,name,tagline){
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
+        var urlId = "{{route('student.book-now',':id')}}";
+        urlId = urlId.replace(':id', id);
+       
         $(".chatDefault").css("display","none");
         $('.chatSet').css("display","block");
-        $("#clientName").text(name);
-        $("#clientPic").attr('src',pic);
-        $(".chatArea").attr("id","chatArea_"+id);
+        $(".clientName").text(name);
+        $(".clientPic").attr('src',pic);
+        $(".clientTag").text(tagline);
+        $(".clientId").attr("href",urlId);
+        $(".chatArea").attr("id","chatArea_"+id);  
+        $(".mediaAttachments").attr("id","mediaAttachments_"+id);
         tt_id = id;
         tt_n = name;
 
@@ -247,6 +257,7 @@ $(document).ready(function(){
                 $auth = "{{Auth::user()->id}}";
                 var attachment = '';
                 $('#chatArea_'+id).html('');
+                $("#mediaAttachments_"+id).html('');
                 for(let i = 0 ; i<response.length;i++){
                     var attachment = '';
                         // if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
@@ -267,6 +278,10 @@ $(document).ready(function(){
                         if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                                 attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
                             }
+                            let media_attachment = `   <div class="col-md-4 p-1">
+                                                <a href="{{asset('storage/` + response[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response[i].message + `')}}" class="w-100" alt=""></a>
+                                            </div>`
+                            $('#mediaAttachments_'+id).prepend(media_attachment);
                         }
                         else{
                             attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
@@ -276,7 +291,7 @@ $(document).ready(function(){
                                             <div class="col-md-1">
                                                 <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
                                             </div>
-                                            <div class="col-md-11">
+                                            <div class="col-md-11 chatName">
                                                 <div class="">
                                                     <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
                                                     <small class="dull pull-right">1min ago</small>
@@ -296,6 +311,11 @@ $(document).ready(function(){
                       if(type == 'file'){
                             if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                                 attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                                let media_attachment = `   <div class="col-md-4 p-1">
+                                                <a href="{{asset('storage/` + response[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response[i].message + `')}}" class="w-100" alt=""></a>
+                                            </div>`
+                            $('#mediaAttachments_'+id).prepend(media_attachment);
+                            
                             }
                         }
                         else{
@@ -316,7 +336,7 @@ $(document).ready(function(){
                                             <div class="col-md-1">
                                                 <img src="`+pic+`" class="profile-img" alt="">
                                             </div>
-                                            <div class="col-md-11">
+                                            <div class="col-md-11 chatName">
                                                 <div class="">
                                                     <p class="mb-0"><b> `+name+`</b></p>
                                                     <small class="dull pull-right">1min ago</small>
@@ -378,4 +398,23 @@ $(document).ready(function(){
         $("#sendFileCall").modal("show");
     }
 
+    $(".clientName").click(function(){
+        $(".chatSet").toggleClass("Disk");
+        showLess();
+    });
+
+    $(".showMoreMedia").click(function(){
+        // alert("");
+        $("#intro").hide("slow");
+        $("#media").addClass("mediaHeight");
+        $(".hungama").css("display","none");
+        $(".hungama2").css("display","block");
+    });
+    function showLess(){
+    
+        $("#intro").show("slow");
+        $("#media").removeClass("mediaHeight");
+        $(".hungama2").css("display","none");
+        $(".hungama").css("display","block");
+    };
 </script>
