@@ -32,8 +32,8 @@ class SettingController extends Controller
 
         $user = User::where('id',\Auth::user()->id)->first();
         $paypal_payment = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('method','paypal')->first();
-        $user_slots = TutorSlots::where('user_id',Auth::user()->id)->get();
-
+        $user_slots = TutorSlots::where('user_id',Auth::user()->id)->get()->toArray();
+        
         $slots = array(
           array("value" => "1 Hours"),
           array("value" => "2 Hours"),
@@ -456,58 +456,62 @@ class SettingController extends Controller
         $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
         $message = '';
 
+        // return dd($request->all());
+
         if($slots  == 0) {
-            for($i = 0; $i < count($request->day); $i++) {
+            for($i = 0; $i < sizeOf($request->from); $i++) {
 
                 $data = array(
                     'user_id' => Auth::user()->id , 
-                    'day' => $request->day[$i] ,
+                    'day' => $request->day,
                     'wrk_from' => ($request->from[$i] ?? NULL) ,
                     'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'day_off' => ($request->d_off ?? NULL) ,
                 );
                 
                 TutorSlots::create($data);
             }
 
-            if($request->day_off != null && $request->day_off != "") {
-                $days_oof = explode(',', $request->day_off);
+            // if($request->day_off != null && $request->day_off != "") {
+            //     $days_oof = explode(',', $request->day_off);
 
-                $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
+            //     $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
 
-                $z = 0;
-                foreach($all_slots as $slot) {
-                    $slot->day_off = $days_oof[$z];
-                    $slot->save();
-                    $z++;
-                } 
-            }
+            //     $z = 0;
+            //     foreach($all_slots as $slot) {
+            //         $slot->day_off = $days_oof[$z];
+            //         $slot->save();
+            //         $z++;
+            //     } 
+            // }
         }else{
-            TutorSlots::where('user_id' , Auth::user()->id)->delete();
+            TutorSlots::where('user_id' , Auth::user()->id)->where('day',$request->day)->delete();
 
-            for($i = 0; $i < count($request->day); $i++) {
+            for($i = 0; $i < sizeOf($request->from); $i++) {
 
                 $data = array(
                     'user_id' => Auth::user()->id , 
-                    'day' => $request->day[$i] ,
+                    'day' => $request->day,
                     'wrk_from' => ($request->from[$i] ?? NULL) ,
                     'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'day_off' => ($request->d_off ?? NULL) ,
                 );
                 
                 TutorSlots::create($data);
             }
 
-            if($request->day_off != null && $request->day_off != "") {
-                $days_oof = explode(',', $request->day_off);
+            // if($request->day_off != null && $request->day_off != "") {
+            //     $days_oof = explode(',', $request->day_off);
 
-                $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
+            //     $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
 
-                $z = 0;
-                foreach($all_slots as $slot) {
-                    $slot->day_off = $days_oof[$z];
-                    $slot->save();
-                    $z++;
-                } 
-            }
+            //     $z = 0;
+            //     foreach($all_slots as $slot) {
+            //         $slot->day_off = $days_oof[$z];
+            //         $slot->save();
+            //         $z++;
+            //     } 
+            // }
         }
 
         return response()->json([
@@ -517,5 +521,15 @@ class SettingController extends Controller
         ]);
     }
 
+
+    public function deleteSlots(Request $request) {
+        TutorSlots::where('id' , $request->id)->where('day',$request->day)->delete();
+
+        return response()->json([
+            'status_code'=> 200,
+            'message' => 'Time Slots Deleted Successfully',
+            'success' => true,
+        ]);
+    }
 
 }

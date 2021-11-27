@@ -57,15 +57,15 @@
                                 <div class="container-fluid ">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered text-center">
                                                 <thead>
                                                     <tr
                                                         style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
                                                         <th scope="col">Student</th>
                                                         <th scope="col">Subject</th>
                                                         <th scope="col">Topic</th>
-                                                        <th scope="col">Time</th>
-                                                        <th scope="col">Duration</th>
+                                                        <!-- <th scope="col">Time</th>
+                                                        <th scope="col">Duration</th> -->
                                                         <th scope="col">Status</th>
                                                         <th scope="col">Starts In</th>
                                                         <th scope="col"></th>
@@ -95,11 +95,8 @@
                                                                 </td>
                                                                 <td class="pt-4"> {{ $class->subject->name }} </td>
                                                                 <td class="pt-4"> {{ $class->topic }} </td>
-                                                                <td class="pt-4 "> 
-                                                                {{ $time }}
-                                                                </td>
-                                                               
-                                                                <td class="pt-4"> {{ $class->duration }} Hour(s) </td>
+                                                                <!-- <td class="pt-4 ">  {{ $time }} </td>
+                                                                <td class="pt-4"> {{ $class->duration }} Hour(s) </td> -->
                                                                 <td class="pt-4">
                                                                 @if($class->status == 1)
                                                                     <span class="bg-color-apporve3">
@@ -119,21 +116,14 @@
                                                                     </span>
                                                                 @endif
                                                                 </td>
-                                                                <td style="text-align: center;">
-                                                                    @if($class->classroom != null)
-                                                                    <span data-id="{{$class->id}}"
-                                                                        data-tzone="{{$class->tutor->time_zone}}" data-zone="{{$class->user->time_zone}}"  
-                                                                        data-review="{{$class->is_reviewed}}" data-date="{{$class->class_date}}" 
-                                                                        data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}" 
-                                                                        data-time="{{$class->class_time}}" data-duration="{{$class->duration}}"
-                                                                        id="class_time_{{$class->id}}" 
-                                                                        class="badge current_time badge-pill text-white font-weight-normal bg-success mt-3">
-                                                                        {{$class->class_date}} {{$class->class_time}} 
-                                                                    </span>     
-
-                                                                    <div id="join_class_{{$class->id}}" class="text-center">
-                                                                    </div> 
-                                                                    @endif
+                                                                <td>
+                                                                    <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
+                                                                    data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
+                                                                    data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
+                                                                    class="current_time"> 
+                                                                        
+                                                                    </span>
+                                                                    
                                                                 </td>
                                                                 <td class="pt-4" style="text-align: center;">
                                                                     <a class="cencel-btn" href="{{route('tutor.booking.detail',[$class->id])}}"> View details </a>                                                            
@@ -248,101 +238,151 @@
 <script>
     $(document).ready(function() {
 
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        setInterval(() => {
+            $( ".current_time" ).each(function() {
 
-        $( ".current_time" ).each(function() {
-            var timer = new Timer();
+                    var id = $(this).data('id');
+                    var booking_time = $(this).data('time');
+                    var booking_date = $(this).data('date');
+                    var duration = $(this).data('duration');
+                    var room = $(this).data('room');
 
-            var booking_time = $.trim($( this ).text());
-            var booking_seconds_time =  HmsToSeconds(moment(booking_time).format('HH:mm:ss'));
+                    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                    let get_day_in_no = moment(booking_date).day();
+                    let day = days[get_day_in_no];            
 
-            var attr_id = $(this).data('id');
-            var room_id = $(this).data('room');
-            var review = $(this).data('review');
-            var duration = $(this).data('duration');
-            var std_time_zone = $(this).data('zone');
-            var tutor_time_zone = $(this).data('tzone');
-            var booking_class_date = $(this).data('date');
-            var date = moment(booking_class_date)
+                    let convert_date = moment(booking_date).format('DD MMMM');
 
-            var now = moment();
-            const date1 = moment(booking_class_date).format('YYYY-MM-DD').valueOf()
-            const date2 = moment().format('YYYY-MM-DD').valueOf();
+                    let user_region = "{{Auth::user()->time_zone}}";
 
-            
-            if (date1 < date2) {
-                $("#join_class_"+attr_id).html("");
-                $("#class_time_"+attr_id).html("Class Time Over");
-            } else {
-                var std_current_region_date = new Date().toLocaleString('en-US', { timeZone: tutor_time_zone });
-                var std_time_in_seconds = HmsToSeconds(moment(std_current_region_date).format('HH:mm:ss'));
+                    if(user_region != null && user_region != "") {
 
-                var remain_time = (booking_seconds_time -  std_time_in_seconds);          
-                var date = new Date();
+                        var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
 
-                var moment_date = moment(date).format('YYYY-MM-DD');
+                        let create_date_format = new Date(booking_date + ' ' + booking_time);
+                        let start_date = moment(create_date_format).format("hh:mm A");
 
-                var tutor_time_in_seconds = HmsToSeconds(moment(date).format('HH:mm:ss'));
-                // console.log(tutor_time_in_seconds , "tutor_time_in_seconds");
-                var region_booking_time = moment(date).add(remain_time,'s').format("LT");
-                
-                var create_region_date = new Date(booking_class_date + ' ' +  region_booking_time)
-                var class_end_time = moment(date).add(remain_time,'s').add(duration, 'h').format("LT");
-                var class_end_date = new Date(booking_class_date + ' ' +  class_end_time);
-                
-                $(".tutor_time_"+attr_id).text(region_booking_time);    
-
-                let start_call = `<a href="{{url('tutor/class')}}/`+room_id+`"  class="schedule-btn"> Start Call </a>`;
-                
-                timer.start({countdown: true, startValues: {seconds: remain_time }});
-                timer.addEventListener('secondsUpdated', function (e) {
-                    var current_time_text =  $("#class_time_"+attr_id).text();    
-                    if( parseInt(remain_time) > 0) {
-                        $("#class_time_"+attr_id).html(timer.getTimeValues().toString());
+                        let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
+                        let end_date_booking = new Date(booking_date + ' ' + end_date);
                         
-                        if($.trim(current_time_text) == "00:00:00") {
-                            $("#join_class_"+attr_id).html(start_call);
-                            $("#class_time_"+attr_id).html("");
-                        }
-                    }else{
-                        $("#join_class_"+attr_id).html("");
-                        $("#class_time_"+attr_id).html("Class Time Over");
-                    }
+                        var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
+                        
+                        let timezoneTime = new Date(current_user_time_zone);
 
-                });
+                        let start_call = `<a href="{{url('tutor/class')}}/`+ room +`"  class="schedule-btn"> Start Call </a>`;
 
-                timer.addEventListener('targetAchieved', function (e) {
-                    var current_time_text =  $("#class_time_"+attr_id).text();    
-                    
-                    if( parseInt(remain_time) > 0) {
-                        if($.trim(current_time_text)  == "00:00:00") {
-                            $("#join_class_"+attr_id).html(start_call);
-                            $("#class_time_"+attr_id).html("");
-                        }
-                    }else{
-                        $("#join_class_"+attr_id).html("");
-                        $("#class_time_"+attr_id).html("Class Time Over");  
-                    }
-                    
-                });
-
-                if(date.getTime() > create_region_date.getTime() &&  date.getTime() < class_end_date.getTime()) {
-                    if(review == 0) {
-                        if(Math.abs(remain_time) > 0) {
-                            $("#join_class_"+attr_id).html(start_call);
-                            $("#class_time_"+attr_id).html("");
+                        if(timezoneTime.getTime()  < create_date_format.getTime() ) {
+                            $("#class_time_"+id).text(show_date_time);
                         }else{
-                            $("#join_class_"+attr_id).html("");
-                            $("#class_time_"+attr_id).html("Class Time Over");        
-                        }                    
+                            if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
+                                if(room != null && room != "") {
+                                    $("#class_time_"+id).html(start_call);
+                                }else{
+                                    $("#class_time_"+id).html("-");
+                                }
+                            }else {
+                                $("#class_time_"+id).html("-");
+                            } 
+                        }
+                        
                     }
-                }else {
-                    $("#join_class_"+attr_id).html("");
-                    $("#class_time_"+attr_id).html("Class Time Over");
-                }
 
-            }
+                    // var timer = new Timer();
 
-        });
+                    // var booking_time = $.trim($( this ).text());
+                    // var booking_seconds_time =  HmsToSeconds(moment(booking_time).format('HH:mm:ss'));
+
+                    // var attr_id = $(this).data('id');
+                    // var room_id = $(this).data('room');
+                    // var review = $(this).data('review');
+                    // var duration = $(this).data('duration');
+                    // var std_time_zone = $(this).data('zone');
+                    // var tutor_time_zone = $(this).data('tzone');
+                    // var booking_class_date = $(this).data('date');
+                    // var date = moment(booking_class_date)
+
+                    // var now = moment();
+                    // const date1 = moment(booking_class_date).format('YYYY-MM-DD').valueOf()
+                    // const date2 = moment().format('YYYY-MM-DD').valueOf();
+
+
+                    // if (date1 < date2) {
+                    //     $("#join_class_"+attr_id).html("");
+                    //     $("#class_time_"+attr_id).html("Class Time Over");
+                    // } else {
+                    //     var std_current_region_date = new Date().toLocaleString('en-US', { timeZone: tutor_time_zone });
+                    //     var std_time_in_seconds = HmsToSeconds(moment(std_current_region_date).format('HH:mm:ss'));
+
+                    //     var remain_time = (booking_seconds_time -  std_time_in_seconds);          
+                    //     var date = new Date();
+
+                    //     var moment_date = moment(date).format('YYYY-MM-DD');
+
+                    //     var tutor_time_in_seconds = HmsToSeconds(moment(date).format('HH:mm:ss'));
+                    //     // console.log(tutor_time_in_seconds , "tutor_time_in_seconds");
+                    //     var region_booking_time = moment(date).add(remain_time,'s').format("LT");
+                        
+                    //     var create_region_date = new Date(booking_class_date + ' ' +  region_booking_time)
+                    //     var class_end_time = moment(date).add(remain_time,'s').add(duration, 'h').format("LT");
+                    //     var class_end_date = new Date(booking_class_date + ' ' +  class_end_time);
+                        
+                    //     $(".tutor_time_"+attr_id).text(region_booking_time);    
+
+                    //     let start_call = `<a href="{{url('tutor/class')}}/`+room_id+`"  class="schedule-btn"> Start Call </a>`;
+                        
+                    //     timer.start({countdown: true, startValues: {seconds: remain_time }});
+                    //     timer.addEventListener('secondsUpdated', function (e) {
+                    //         var current_time_text =  $("#class_time_"+attr_id).text();    
+                    //         if( parseInt(remain_time) > 0) {
+                    //             $("#class_time_"+attr_id).html(timer.getTimeValues().toString());
+                                
+                    //             if($.trim(current_time_text) == "00:00:00") {
+                    //                 $("#join_class_"+attr_id).html(start_call);
+                    //                 $("#class_time_"+attr_id).html("");
+                    //             }
+                    //         }else{
+                    //             $("#join_class_"+attr_id).html("");
+                    //             $("#class_time_"+attr_id).html("Class Time Over");
+                    //         }
+
+                    //     });
+
+                    //     timer.addEventListener('targetAchieved', function (e) {
+                    //         var current_time_text =  $("#class_time_"+attr_id).text();    
+                            
+                    //         if( parseInt(remain_time) > 0) {
+                    //             if($.trim(current_time_text)  == "00:00:00") {
+                    //                 $("#join_class_"+attr_id).html(start_call);
+                    //                 $("#class_time_"+attr_id).html("");
+                    //             }
+                    //         }else{
+                    //             $("#join_class_"+attr_id).html("");
+                    //             $("#class_time_"+attr_id).html("Class Time Over");  
+                    //         }
+                            
+                    //     });
+
+                    //     if(date.getTime() > create_region_date.getTime() &&  date.getTime() < class_end_date.getTime()) {
+                    //         if(review == 0) {
+                    //             if(Math.abs(remain_time) > 0) {
+                    //                 $("#join_class_"+attr_id).html(start_call);
+                    //                 $("#class_time_"+attr_id).html("");
+                    //             }else{
+                    //                 $("#join_class_"+attr_id).html("");
+                    //                 $("#class_time_"+attr_id).html("Class Time Over");        
+                    //             }                    
+                    //         }
+                    //     }else {
+                    //         $("#join_class_"+attr_id).html("");
+                    //         $("#class_time_"+attr_id).html("Class Time Over");
+                    //     }
+
+                    // }
+
+                });
+        }, 1000);
+
 
         function HmsToSeconds(hms) {
             // var hms = '02:04:33';

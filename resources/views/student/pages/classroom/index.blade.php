@@ -478,22 +478,22 @@
                 $("#class_time_"+id).text(show_date_time);
                 
                 let timezoneTime = new Date(current_user_time_zone);
-                
-                let current = timezoneTime.getTime();
-                let a = create_date_format.getTime();
-                let b = end_date_booking.getTime();
 
                 let join_btn = `<a onclick="joinClass('`+room+`')" class="schedule-btn"> Join Class </a>`;
 
-                if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
-                    if(room != null && room != "") {
-                        $("#class_time_"+id).html(join_btn);
-                    }else{
+                if(timezoneTime.getTime()  < create_date_format.getTime() ) {
+                    $("#class_time_"+id).text(show_date_time);
+                }else{
+                    if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
+                        if(room != null && room != "") {
+                            $("#class_time_"+id).html(join_btn);
+                        }else{
+                            $("#class_time_"+id).html("-");
+                        }
+                    }else {
                         $("#class_time_"+id).html("-");
-                    }
-                }else {
-                    $("#class_time_"+id).html("-");
-                } 
+                    } 
+                }
             }
             // var now = moment();
             // const date1 = moment(booking_date).format('YYYY-MM-DD').valueOf()
