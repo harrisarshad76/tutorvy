@@ -188,6 +188,7 @@ class BookingController extends Controller
     }
     public function directBooking($id)
     {
+        
         $tutor = User::with('teach')->find($id);
        return view('student.pages.booking.booking',compact('tutor'));
     }
