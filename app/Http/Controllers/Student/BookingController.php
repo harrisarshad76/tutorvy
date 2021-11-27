@@ -93,9 +93,7 @@ class BookingController extends Controller
 
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
-
         $attr = array( "slug" => $date , "time" => $time);
-
         return view('student.pages.booking.book_now',compact('t_id','subjects','user','attr'));
     }
 
@@ -188,7 +186,7 @@ class BookingController extends Controller
     }
     public function directBooking($id)
     {
-        
+
         $tutor = User::with('teach')->find($id);
        return view('student.pages.booking.booking',compact('tutor'));
     }
