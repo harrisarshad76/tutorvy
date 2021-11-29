@@ -57,7 +57,7 @@
                                 <div class="container-fluid ">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <table class="table table-bordered text-center">
+                                            <table class="table table-bordered ">
                                                 <thead>
                                                     <tr
                                                         style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
@@ -118,25 +118,24 @@
                                                                 </td>
                                                                 <td>
                                                                     <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
-                                                                    data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
-                                                                    data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
-                                                                    class="current_time"> 
-                                                                        
+                                                                        data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
+                                                                        data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
+                                                                        class="current_time text-center"> 
                                                                     </span>
                                                                     
                                                                 </td>
                                                                 <td class="pt-4" style="text-align: center;">
-                                                                    <a class="cencel-btn" href="{{route('tutor.booking.detail',[$class->id])}}"> View details </a>                                                            
+                                                                    <a class="cencel-btn" href="{{route('tutor.booking.detail',[$class->id])}}"> 
+                                                                        View details 
+                                                                    </a>                                                            
                                                                 </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
                                                 @else
-                                                    <tr>
                                                         <td>
                                                             No Class Found
                                                         </td>
-                                                    </tr>
                                                 @endif
                                                 </tbody>
                                             </table>

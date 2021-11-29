@@ -190,6 +190,9 @@
         // iGuider Initialization
 
 
+          
+        
+
 
         $('.table').DataTable();
         get_all_notifications();
