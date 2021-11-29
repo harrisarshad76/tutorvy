@@ -229,8 +229,7 @@ $(document).ready(function(){
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
-        // var urlId = "{{route('student.book-now',':id')}}";
-        // urlId = urlId.replace(':id', id);
+     
        
         $(".chatDefault").css("display","none");
         $('.chatSet').css("display","block");
