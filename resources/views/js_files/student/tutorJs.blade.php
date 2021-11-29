@@ -448,12 +448,24 @@ $( '#chat_form' ).on( 'submit', function(e) {
         },
     });
 });
+function HmsToSeconds(hms) {
+    // var hms = '02:04:33';
+    var a = hms.split(':'); // split it at the colons
 
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    return seconds;
+}
 
 function getDate(date) {
-
+    var today_date = new Date();
+    var current_time =  moment(today_date).format('hh:mm') ;
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
+
+    var curr_d = new Date(date + ' ' + current_time);
+    let curr_ms = curr_d.getTime();
+
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
@@ -462,15 +474,23 @@ function getDate(date) {
     
     var html = ``;
     if(item != null && item != "" && item != undefined && item != [] && item.length > 0) {
-
         for(let data of item) {
-            html += `
-            <div class="col-md-3 col-4">
-                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
-                    <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
-                    <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
-                </div>
-            </div>`;
+
+            var slot_ms_date = new Date(date+' ' + data.wrk_from);
+            slot_ms_date = slot_ms_date.getTime();
+            if(curr_ms >= slot_ms_date){
+
+            }else{
+                html += `
+                <div class="col-md-3 col-4">
+                    <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
+                        <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
+                        <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
+                    </div>
+                </div>`;
+            }
+
+           
         }
         $(".show_response").text("Available Slots of " + day);
         $('#booking_day').val(day);
@@ -516,29 +536,39 @@ function getTutorSlots(tutor_id ,day) {
             console.log(response);
             var obj = response.slots;
             all_slots = obj;
-
-            if(response.status_code == 200 && response.success == true) {
             
+            if(response.status_code == 200 && response.success == true) {
+                var today_date = new Date();
+                var current_time =  moment(today_date).format('hh:mm') ;
+
                 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                 let current_date = new Date();
                 let day = days[current_date.getDay()];
-             
+                current_date = new Date(date);
+
+                var curr_d = new Date(date + ' ' + current_time);
+                let curr_ms = curr_d.getTime();
 
                 if(obj.length > 0) {
                     var html = ``;
-
                     for(let data of obj) {
 
-                        if(data.day == day) {
-                            html += `
-                            <div class="col-md-3 col-4">
-                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
-                                    <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
-                                    <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
-                                </div>
-                            </div>`;
+                        var slot_ms_date = new Date(date+' ' + data.wrk_from);
+                        slot_ms_date = slot_ms_date.getTime();
+
+                        if(curr_ms >= slot_ms_date){
+
+                        }else{
+                            if(data.day == day) {
+                                html += `
+                                <div class="col-md-3 col-4">
+                                    <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
+                                        <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
+                                        <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
+                                    </div>
+                                </div>`;
+                            }
                         }
-                        
                     }
                     $(".show_response").text("Available Slots of " + day);
                     $('#booking_day').val(day);
