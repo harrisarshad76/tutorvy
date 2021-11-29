@@ -18,6 +18,7 @@ use App\Models\Admin\tktCat;
 use App\Models\Admin\supportTkts;
 use App\Models\Admin\Subject;
 use App\Models\Course;
+use App\Models\OrphanBooking;
 use App\Models\CourseEnrollment;
 use App\Models\Payments;
 use Illuminate\Support\Facades\URL;
@@ -83,36 +84,110 @@ class BookingController extends Controller
 
 
 
-    public function bookNow($t_id){
+    public function bookNow($t_id,$b_id){
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
-        return view('student.pages.booking.book_now',compact('t_id','subjects','user'));
+        $op_booking = OrphanBooking::where('uuid',$b_id)->first();
+
+
+        return view('student.pages.booking.book_now',compact('t_id','subjects','user','op_booking'));
     }
 
-    public function book_now($date, $time , $t_id) {
+    public function book_now(Request $request) {
+        
+        $uuid = mt_rand(100000,999999);
+        $op_booking = new OrphanBooking();
+        $op_booking->uuid = $uuid;
+        $op_booking->tutor_id = $request->tutor_id;
+        $op_booking->user_id = \Auth::user()->id;
+        $op_booking->day = $request->day;
+        $op_booking->date = $request->date;
+        $op_booking->slot = $request->time;
+        $op_booking->timezone = \Auth::user()->timezone;
+        $op_booking->save();
 
-        $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
-        $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
-        $attr = array( "slug" => $date , "time" => $time);
-        return view('student.pages.booking.book_now',compact('t_id','subjects','user','attr'));
+        $subjects = Teach::where('user_id',$request->tutor_id)->with('subject_plans')->get();
+        $user = User::with(['education','professional','teach'])->where('id',$request->tutor_id)->first();
+
+        // return view('student.pages.booking.book_now',compact('subjects','user','op_booking'));
+
+        return redirect('/student/book-now/'.$request->tutor_id.'/'.$uuid );
+
+        // return $request;
+
+        // $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
+        // $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
+        // $attr = array( "slug" => $date , "time" => $time);
+        // return view('student.pages.booking.book_now',compact('t_id','subjects','user','attr'));
     }
 
 
     public function getTutorSlots(Request $request) {
 
         $slots = TutorSlots::where('user_id',$request->id)->get();
+        $slots_partition = [];
+        $center_slot = '';
+        $end_slot = '';
 
+        foreach($slots as $slot){
+            $period = new CarbonPeriod($slot->wrk_from, '30 minutes', $slot->wrk_to); 
+            foreach($period as $item){
+
+                $start = $item->format("H:i");
+                $end = date('H:i',strtotime($start . ' +60 minutes'));
+            
+                $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$request->date)->where('booked_tutor',$request->id)->where('status','!=',3)->where('status','!=',4)->first();
+                if($center_slot != ''){
+                    $center_slot = '';
+                    continue;
+                }
+                // if($end_slot != ''){
+                //     $end_slot = '';
+                //     continue;
+                // }
+                if($booking){
+
+                    $center_slot = date('H:i',strtotime($start . ' +30 minutes'));
+                    $end_slot = $end;
+
+                }else{
+                    $start_check = date('H:i',strtotime($start . ' +30 minutes'));
+
+                    $booking = Booking::where('class_time',$start_check)->where('class_date',$request->date)->where('booked_tutor',$request->id)->where('status','!=',3)->where('status','!=',4)->first();
+                    if($booking){
+
+                    }else{
+                        if($item->format("H:i") == $slot->wrk_to){
+                            array_pop($slots_partition);
+                        }else{
+    
+                            $_id = sprintf( '%04x%04x',
+                                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                            );
+                            $calculated_slot = new \stdClass();
+                            $calculated_slot->id = $_id;
+                            $calculated_slot->wrk_from = $item->format("H:i");
+                            $calculated_slot->day = $slot->day;
+                            array_push($slots_partition,$calculated_slot);
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        // return $slots_partition;
         return response()->json([
             'status_code'=> 200,
             'success' => true,
-            'slots' => $slots,
+            'slots' => $slots_partition,
         ]);
     }
 
     function getFilteredTimeSlot(Request $request)
     {
 
-        $period = new CarbonPeriod('09:00', '60 minutes', '24:00'); // for create use 24 hours format later change format 
+        $period = new CarbonPeriod('09:00', '30 minutes', '24:00'); // for create use 24 hours format later change format 
         $slots = [];
         foreach($period as $item){
             array_push($slots,$item->format("H:i"));
@@ -222,6 +297,7 @@ class BookingController extends Controller
 
             $booking = Booking::create([
                 'user_id' => Auth::user()->id,
+                'uuid' => 'BK-'.$request->_id,
                 'booked_tutor' => $request->tutor_id,
                 'subject_id' =>$request->subject,
                 'topic' => $request->topic,
@@ -235,6 +311,8 @@ class BookingController extends Controller
                 'price' => $price,
 
             ]);
+
+            OrphanBooking::where('uuid',$request->_id)->delete();
 
             $subject = Subject::where("id",$request->subject)->first();
 

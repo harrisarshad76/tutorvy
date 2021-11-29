@@ -140,8 +140,8 @@ function list_tutors(){
             let rating_html = '';
             let rank_html = '';
             let t_id = tutors[i].id;
-            let url = "{{route('student.book-now', ':id')}}";
-            url = url.replace(':id', t_id);
+            let url = '';
+            // url = url.replace(':id', t_id);
             let url2 = "{{route('student.tutor.show', ':id')}}";
             url2 = url2.replace(':id', t_id);
             console.log(t_id);
@@ -451,13 +451,12 @@ $( '#chat_form' ).on( 'submit', function(e) {
 
 
 function getDate(date) {
+
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
-    
-    
     // filter array get day wise slots
     var item = all_slots.filter(item => item.day === day);
     
@@ -466,22 +465,30 @@ function getDate(date) {
 
         for(let data of item) {
             html += `
-            <div class="col-md-3">
-                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+            <div class="col-md-3 col-4">
+                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
                 </div>
             </div>`;
         }
         $(".show_response").text("Available Slots of " + day);
+        $('#booking_day').val(day);
         $(".show_all_slots").html(html);
+        $(".show_response").removeClass("text-danger");
+        $(".show_response").css("text-align-last"," left");
+
+
     }else{
         $(".show_response").text("No Slots Available for " + day);
         $(".show_all_slots").html("");
+        $('#booking_day').val();
         $("#request_booking_btn").removeAttr('href');
+        $(".show_response").addClass("text-danger");
+        $(".show_response").css("text-align-last"," center");
+
+
     }
-
-
 
 }
 
@@ -499,11 +506,11 @@ function checkBookingSlots(id){
 function getTutorSlots(tutor_id ,day) {
 
     $("#get_date").val(moment(current_date).format('YYYY-MM-DD'));
-    
+    var date = moment(current_date).format('YYYY-MM-DD');
     $.ajax({
         url: "{{route('student.getTutorSlots')}}",
         type:"POST",
-        data: {id:tutor_id , day:day},
+        data: {id:tutor_id , day:day , date:date},
         dataType:'json',
         success:function(response){
             console.log(response);
@@ -524,8 +531,8 @@ function getTutorSlots(tutor_id ,day) {
 
                         if(data.day == day) {
                             html += `
-                            <div class="col-md-3">
-                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+                            <div class="col-md-3 col-4">
+                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
                                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
                                 </div>
@@ -534,11 +541,19 @@ function getTutorSlots(tutor_id ,day) {
                         
                     }
                     $(".show_response").text("Available Slots of " + day);
+                    $('#booking_day').val(day);
                     $(".show_all_slots").html(html);
                     $("#modalSlot").modal("show");
+                    $(".show_response").removeClass("text-danger");
+                    $(".show_response").css("text-align-last"," left");
+
+
                 }else{
                     $(".show_response").text("No Slots Available for " + day);
+                    $('#booking_day').val();
                     $(".show_all_slots").html("");
+                    $(".show_response").addClass("text-danger");
+                    $(".show_response").css("text-align-last"," center");
                 }
 
                 
@@ -563,19 +578,20 @@ function getTutorSlots(tutor_id ,day) {
 }
 
 function selectSlot(id , time) {
-    
+    // alert("junk");
+    var ter = "slotSet_"+id;
     $("#booking_time").val(time)
-    $('.slotSet').addClass("activeSlot");
     $('.slotSet').removeClass("activeSlot");
+    $('#'+ter).addClass("activeSlot");
 
     let tutor_id =  $("#tutor_id").val();
     let date = $("#get_date").val();
-    time = time.split(':');
+    // time = time.split(':');
 
     let create_date = new Date(date);
 
     if(time != null && time != "") {
-        var create_link =  create_date.getTime() + '/' + time[0] + '/' + tutor_id;        
+        var create_link =  create_date.getTime() + '/' + time + '/' + tutor_id;        
         var custom_url = window.location.origin + '/student/book_now' + '/' + create_link;
 
         $("#request_booking_btn").attr('href',custom_url);

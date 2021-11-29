@@ -593,9 +593,7 @@
                                                 <button type="button" class=" cencel-btn w-100" onclick="chat({{$tutor->id}})">
                                                         &nbsp; Message &nbsp;
                                                 </button>
-                                                <!-- <button type="button" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';" class=" btn-general w-100 mt-2" >
-                                                        &nbsp; Book Class &nbsp;
-                                                </button> -->
+                                               
                                                 <button type="button" onclick="checkBookingSlots({{$tutor->id}})" class=" btn-general w-100 mt-2" >
                                                         &nbsp; Book Class &nbsp;
                                                 </button>
@@ -659,9 +657,12 @@
     aria-labelledby="tutorModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form id="bookingSlotForm" class="mb-0">
+            <form id="bookingSlotForm" class="mb-0" method = 'POST' action = "{{route('student.book-slot')}}">
+                @csrf
                 <input type="hidden" name="tutor_id" id="tutor_id">
                 <input type="hidden" name="time" id="booking_time">
+                <input type="hidden" name="day" id="booking_day">
+
                 <div class="modal-body h-auto  card-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -685,43 +686,17 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <div class="row show_all_slots" id="show_all_slots">
-                                <!-- <div class="col-md-3">
-                                    <div class="slotSet activeSlot">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div> -->
-                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
                     <div class="row">
-                        <div class="col-md-12">
-                            <button class="cencel-btn" data-dismiss="modal"> Cancel Request </button>
-                            <a class="schedule-btn" id="request_booking_btn"> Request Booking </a>
+                        <div class="col-md-6">
+                            <small>Your current time zone region is {{Auth::User()->region}}</small>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="schedule-btn" id="request_booking_btn"> Confirm Booking </button>
                         </div>
                     </div>
                 </div>
@@ -737,7 +712,5 @@
 @section('scripts')
 @include('js_files.student.tutorJs')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
 
-</script>
 @endsection
