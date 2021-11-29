@@ -466,7 +466,7 @@ function getDate(date) {
 
         for(let data of item) {
             html += `
-            <div class="col-md-3">
+            <div class="col-md-3 col-4">
                 <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
@@ -524,7 +524,7 @@ function getTutorSlots(tutor_id ,day) {
 
                         if(data.day == day) {
                             html += `
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-4">
                                 <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
                                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
@@ -563,10 +563,11 @@ function getTutorSlots(tutor_id ,day) {
 }
 
 function selectSlot(id , time) {
-    
+    // alert("junk");
+    var ter = "slotSet_"+id;
     $("#booking_time").val(time)
     $('.slotSet').removeClass("activeSlot");
-    $('.slotSet').addClass("activeSlot");
+    $('#'+ter).addClass("activeSlot");
 
     let tutor_id =  $("#tutor_id").val();
     let date = $("#get_date").val();
