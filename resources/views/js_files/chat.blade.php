@@ -229,15 +229,15 @@ $(document).ready(function(){
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
-        var urlId = "{{route('student.book-now',':id')}}";
-        urlId = urlId.replace(':id', id);
+        // var urlId = "{{route('student.book-now',':id')}}";
+        // urlId = urlId.replace(':id', id);
        
         $(".chatDefault").css("display","none");
         $('.chatSet').css("display","block");
         $(".clientName").text(name);
         $(".clientPic").attr('src',pic);
         $(".clientTag").text(tagline);
-        $(".clientId").attr("href",urlId);
+        // $(".clientId").attr("href",urlId);
         $(".chatArea").attr("id","chatArea_"+id);  
         $(".mediaAttachments").attr("id","mediaAttachments_"+id);
         tt_id = id;
