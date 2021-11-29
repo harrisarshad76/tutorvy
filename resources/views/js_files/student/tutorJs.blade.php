@@ -91,7 +91,6 @@ $('input[type=radio][name=gender]').change(function() {
 
 });
 
-
 function search_tutors(price,subject,lang,rating,location, gender){
 
     $.ajax({
@@ -369,7 +368,6 @@ function list_tutors(){
 
 }
 
-
 function star(){
     // alert("D");
     $(".fa-star").addClass("text-yellow");
@@ -419,7 +417,6 @@ function favourite_tutor(id,type) {
     });
 }
 
-
 function chat(id){
     $("#tutorModal").modal("show");
     tt_id = id;
@@ -449,7 +446,6 @@ $( '#chat_form' ).on( 'submit', function(e) {
         },
     });
 });
-
 
 function getDate(date) {
 
@@ -492,7 +488,6 @@ function getDate(date) {
     }
 
 }
-
 
 function checkBookingSlots(id){
     $("#tutor_id").val(id);
@@ -601,5 +596,4 @@ function selectSlot(id , time) {
     }
     
 }
-
 </script>
