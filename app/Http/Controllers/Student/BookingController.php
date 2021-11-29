@@ -18,6 +18,7 @@ use App\Models\Admin\tktCat;
 use App\Models\Admin\supportTkts;
 use App\Models\Admin\Subject;
 use App\Models\Course;
+use App\Models\OrphanBooking;
 use App\Models\CourseEnrollment;
 use App\Models\Payments;
 use Illuminate\Support\Facades\URL;
@@ -83,7 +84,7 @@ class BookingController extends Controller
 
 
 
-    public function bookNow($t_id){
+    public function bookNow($t_id,$b_id){
         $subjects = Teach::where('user_id',$t_id)->with('subject_plans')->get();
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
         return view('student.pages.booking.book_now',compact('t_id','subjects','user'));

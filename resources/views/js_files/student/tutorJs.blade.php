@@ -568,12 +568,12 @@ function selectSlot(id , time) {
 
     let tutor_id =  $("#tutor_id").val();
     let date = $("#get_date").val();
-    time = time.split(':');
+    // time = time.split(':');
 
     let create_date = new Date(date);
 
     if(time != null && time != "") {
-        var create_link =  create_date.getTime() + '/' + time[0] + '/' + tutor_id;        
+        var create_link =  create_date.getTime() + '/' + time + '/' + tutor_id;        
         var custom_url = window.location.origin + '/student/book_now' + '/' + create_link;
 
         $("#request_booking_btn").attr('href',custom_url);

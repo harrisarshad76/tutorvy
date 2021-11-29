@@ -659,7 +659,7 @@
     aria-labelledby="tutorModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form id="bookingSlotForm" class="mb-0">
+            <form id="bookingSlotForm" class="mb-0" method = 'POST' action = "{{route('student.book_now')}}">
                 <input type="hidden" name="tutor_id" id="tutor_id">
                 <input type="hidden" name="time" id="booking_time">
                 <div class="modal-body h-auto  card-body">
