@@ -593,9 +593,7 @@
                                                 <button type="button" class=" cencel-btn w-100" onclick="chat({{$tutor->id}})">
                                                         &nbsp; Message &nbsp;
                                                 </button>
-                                                <!-- <button type="button" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';" class=" btn-general w-100 mt-2" >
-                                                        &nbsp; Book Class &nbsp;
-                                                </button> -->
+                                               
                                                 <button type="button" onclick="checkBookingSlots({{$tutor->id}})" class=" btn-general w-100 mt-2" >
                                                         &nbsp; Book Class &nbsp;
                                                 </button>
@@ -659,9 +657,12 @@
     aria-labelledby="tutorModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form id="bookingSlotForm" class="mb-0" method = 'POST' action = "{{route('student.book_now')}}">
+            <form id="bookingSlotForm" class="mb-0" method = 'POST' action = "{{route('student.book-slot')}}">
+                @csrf
                 <input type="hidden" name="tutor_id" id="tutor_id">
                 <input type="hidden" name="time" id="booking_time">
+                <input type="hidden" name="day" id="booking_day">
+
                 <div class="modal-body h-auto  card-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -695,7 +696,7 @@
                             <small>Your current time zone region is {{Auth::User()->region}}</small>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a class="schedule-btn" id="request_booking_btn"> Confirm Booking </a>
+                            <button class="schedule-btn" id="request_booking_btn"> Confirm Booking </button>
                         </div>
                     </div>
                 </div>

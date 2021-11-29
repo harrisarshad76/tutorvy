@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
 
             $table->id();
             $table->integer('user_id')->nullable();
+            $table->integer('uuid')->nullable();
             $table->integer('booked_tutor')->nullable();
             $table->integer('subject_id')->nullable();
             $table->string('topic')->nullable();

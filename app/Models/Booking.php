@@ -20,6 +20,7 @@ class Booking extends Model
      */
     protected $fillable = [
         'user_id',
+        'uuid',
         'booked_tutor',
         'subject_id',
         'topic',

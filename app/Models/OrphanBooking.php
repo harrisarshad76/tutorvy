@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class OrphanBooking extends Model
 {
 
-    protected $table = 'rphan_bookings';
+    protected $table = 'orphan_bookings';
     protected $fillable = [
         'uuid',
         'user_id',
         'tutor_id',
-        'tutor_id',
+        'date',
         'slot',
         'day',
         'timezone'
