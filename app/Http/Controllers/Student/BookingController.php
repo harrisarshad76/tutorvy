@@ -128,7 +128,6 @@ class BookingController extends Controller
         $slots_partition = [];
         $center_slot = '';
         $end_slot = '';
-        $ldate = date('H:i');
 
         foreach($slots as $slot){
             $period = new CarbonPeriod($slot->wrk_from, '30 minutes', $slot->wrk_to); 

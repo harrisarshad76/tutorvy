@@ -457,15 +457,20 @@ function HmsToSeconds(hms) {
 
 function getDate(date) {
     var today_date = new Date();
-    var current_time =  moment(today_date).format('hh:mm') ;
+    var current_time =  moment(today_date).format('HH:MM') ;
+    today_date = moment(today_date).format('YYYY-MM-DD') ;
+    
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
-    // alert(today_date)
     // alert(date)
 
     var curr_d = new Date(today_date + ' ' + current_time);
+    // console.log(curr_d)
+
     let curr_ms = curr_d.getTime();
-    console.log(curr_ms)
+    // console.log(current_time)
+
+    console.log(curr_ms , "curr_ms");
 
     let day = days[current_date.getDay()];
     var duration = 1;
@@ -474,15 +479,20 @@ function getDate(date) {
     var item = all_slots.filter(item => item.day === day);
     
     var html = ``;
+    // console.log(item , "item");
     if(item != null && item != "" && item != undefined && item != [] && item.length > 0) {
+        var check = false;
+
         for(let data of item) {
-
-            var slot_ms_date = new Date(date+' ' + data.wrk_from);
+            
+            var slot_ms_date = new Date(date+' ' +  data.wrk_from);
             slot_ms_date = slot_ms_date.getTime();
-            console.log(slot_ms_date + ' --- '+data.wrk_from)
-            if(curr_ms >= slot_ms_date){
-
+            console.log(slot_ms_date , "slot_ms_date");
+            
+            if(curr_ms >= slot_ms_date ){
+                
             }else{
+                check = true;
                 html += `
                 <div class="col-md-3 col-4">
                     <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
@@ -494,13 +504,22 @@ function getDate(date) {
 
            
         }
+        if(check == false){
+            $(".show_response").text("No Slots Available for " + day);
+            $('#booking_day').val();
+            $(".show_all_slots").html("");
+            $(".show_response").addClass("text-danger");
+            $(".show_response").css("text-align-last"," center");
+        }else{
 
-        $(".show_all_slots").html("");
-        $(".show_response").text("Available Slots of " + day);
-        $('#booking_day').val(day);
-        $(".show_all_slots").html(html);
-        $(".show_response").removeClass("text-danger");
-        $(".show_response").css("text-align-last"," left");
+            // $(".show_all_slots").html("");
+            $(".show_response").text("Available Slots of " + day);
+            $('#booking_day').val(day);
+            $(".show_all_slots").html(html);
+            $(".show_response").removeClass("text-danger");
+            $(".show_response").css("text-align-last"," left");
+        }
+
 
 
     }else{
@@ -538,31 +557,42 @@ function getTutorSlots(tutor_id ,day) {
         success:function(response){
             console.log(response);
             var obj = response.slots;
+            console.log(obj ,"all slots");
             all_slots = obj;
             
             if(response.status_code == 200 && response.success == true) {
                 var today_date = new Date();
-                var current_time =  moment(today_date).format('hh:mm') ;
+                var current_time =  moment(today_date).format('HH:MM') ;
+                today_date = moment(today_date).format('YYYY-MM-DD') ;
 
                 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-                let current_date = new Date();
-                let day = days[current_date.getDay()];
                 current_date = new Date(date);
+                // alert(date)
 
-                var curr_d = new Date(date + ' ' + current_time);
+                var curr_d = new Date(today_date + ' ' + current_time);
+                // console.log(curr_d)
+
                 let curr_ms = curr_d.getTime();
+                // console.log(current_time)
+
+                console.log(curr_ms , "curr_ms");
+                let day = days[current_date.getDay()];
+                
+                var msg = "No Slots Available for " + day;
 
                 if(obj.length > 0) {
                     var html = ``;
+                    var check = false;
                     for(let data of obj) {
 
                         var slot_ms_date = new Date(date+' ' + data.wrk_from);
                         slot_ms_date = slot_ms_date.getTime();
 
                         if(curr_ms >= slot_ms_date){
-
+                            
                         }else{
                             if(data.day == day) {
+                                check = true;
                                 html += `
                                 <div class="col-md-3 col-4">
                                     <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
@@ -573,14 +603,25 @@ function getTutorSlots(tutor_id ,day) {
                             }
                         }
                     }
+                    if(check == false){
+                        $(".show_response").text("No Slots Available for " + day);
+                        $('#booking_day').val();
+                        $(".show_all_slots").html("");
+                        $("#modalSlot").modal("show");
 
-                    $(".show_all_slots").html("");
-                    $(".show_response").text("Available Slots of " + day);
-                    $('#booking_day').val(day);
-                    $(".show_all_slots").html(html);
-                    $("#modalSlot").modal("show");
-                    $(".show_response").removeClass("text-danger");
-                    $(".show_response").css("text-align-last"," left");
+                        $(".show_response").addClass("text-danger");
+                        $(".show_response").css("text-align-last"," center");
+                    }else{
+                        $(".show_all_slots").html("");
+                        $(".show_response").text("Available Slots of " + day);
+                        $('#booking_day').val(day);
+                        $(".show_all_slots").html(html);
+                        $("#modalSlot").modal("show");
+                        $(".show_response").removeClass("text-danger");
+                        $(".show_response").css("text-align-last"," left");
+                    }
+
+                    
 
 
                 }else{
