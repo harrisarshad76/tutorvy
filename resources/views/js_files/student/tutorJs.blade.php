@@ -494,6 +494,8 @@ function getDate(date) {
 
            
         }
+
+        $(".show_all_slots").html("");
         $(".show_response").text("Available Slots of " + day);
         $('#booking_day').val(day);
         $(".show_all_slots").html(html);
@@ -571,6 +573,8 @@ function getTutorSlots(tutor_id ,day) {
                             }
                         }
                     }
+
+                    $(".show_all_slots").html("");
                     $(".show_response").text("Available Slots of " + day);
                     $('#booking_day').val(day);
                     $(".show_all_slots").html(html);
