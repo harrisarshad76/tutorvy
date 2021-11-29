@@ -459,13 +459,13 @@ function getDate(date) {
     var today_date = new Date();
     var current_time =  moment(today_date).format('HH:MM') ;
     today_date = moment(today_date).format('YYYY-MM-DD') ;
-    
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() ;
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
-    // alert(date)
 
-    var curr_d = new Date(today_date + ' ' + current_time);
-    // console.log(curr_d)
+    var curr_d = new Date(today_date + ' ' + time);
+    console.log(current_time)
 
     let curr_ms = curr_d.getTime();
     // console.log(current_time)
@@ -487,7 +487,7 @@ function getDate(date) {
             
             var slot_ms_date = new Date(date+' ' +  data.wrk_from);
             slot_ms_date = slot_ms_date.getTime();
-            console.log(slot_ms_date , "slot_ms_date");
+            // console.log(slot_ms_date , "slot_ms_date");
             
             if(curr_ms >= slot_ms_date ){
                 
@@ -564,7 +564,8 @@ function getTutorSlots(tutor_id ,day) {
                 var today_date = new Date();
                 var current_time =  moment(today_date).format('HH:MM') ;
                 today_date = moment(today_date).format('YYYY-MM-DD') ;
-
+                var today = new Date();
+                var time = today.getHours() + ":" + today.getMinutes() ;
                 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                 current_date = new Date(date);
                 // alert(date)
