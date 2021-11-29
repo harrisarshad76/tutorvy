@@ -474,10 +474,18 @@ function getDate(date) {
         }
         $(".show_response").text("Available Slots of " + day);
         $(".show_all_slots").html(html);
+        $(".show_response").removeClass("text-danger");
+        $(".show_response").css("text-align-last"," left");
+
+
     }else{
         $(".show_response").text("No Slots Available for " + day);
         $(".show_all_slots").html("");
         $("#request_booking_btn").removeAttr('href');
+        $(".show_response").addClass("text-danger");
+        $(".show_response").css("text-align-last"," center");
+
+
     }
 
 }
@@ -533,9 +541,15 @@ function getTutorSlots(tutor_id ,day) {
                     $(".show_response").text("Available Slots of " + day);
                     $(".show_all_slots").html(html);
                     $("#modalSlot").modal("show");
+                    $(".show_response").removeClass("text-danger");
+                    $(".show_response").css("text-align-last"," left");
+
+
                 }else{
                     $(".show_response").text("No Slots Available for " + day);
                     $(".show_all_slots").html("");
+                    $(".show_response").addClass("text-danger");
+                    $(".show_response").css("text-align-last"," center");
                 }
 
                 

@@ -685,43 +685,17 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <div class="row show_all_slots" id="show_all_slots">
-                                <!-- <div class="col-md-3">
-                                    <div class="slotSet activeSlot">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="slotSet">
-                                         <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> 12:00
-                                    </div>
-                                </div> -->
-                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
                     <div class="row">
-                        <div class="col-md-12">
-                            <button class="cencel-btn" data-dismiss="modal"> Cancel Request </button>
-                            <a class="schedule-btn" id="request_booking_btn"> Request Booking </a>
+                        <div class="col-md-6">
+                            <small>Your current time zone region is {{Auth::User()->region}}</small>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a class="schedule-btn" id="request_booking_btn"> Confirm Booking </a>
                         </div>
                     </div>
                 </div>
