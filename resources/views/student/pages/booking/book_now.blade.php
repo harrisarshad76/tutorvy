@@ -290,11 +290,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
         let create_date = moment(data.date).format('DD MMMM');
 
         var time = data.slot;
+        
         var new_date_time = new Date(converted_date + ' ' + time);
+        var start = moment(new_date_time).format("hh:mm a");
+
+        var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm a");
         
-        var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm");
-        
-        $('.show_booking_text').text("Selected slot is on " + create_date + ", from " + time + " to " + class_end_time);
+        $('.show_booking_text').text("Selected slot is on " + create_date + ", from " + start + " to " + class_end_time);
 
         $("#current_date").val(converted_date);
         $("#class_time").val(time);
