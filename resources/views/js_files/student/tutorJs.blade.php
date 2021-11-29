@@ -496,11 +496,11 @@ function checkBookingSlots(id){
 function getTutorSlots(tutor_id ,day) {
 
     $("#get_date").val(moment(current_date).format('YYYY-MM-DD'));
-    
+    var date = moment(current_date).format('YYYY-MM-DD');
     $.ajax({
         url: "{{route('student.getTutorSlots')}}",
         type:"POST",
-        data: {id:tutor_id , day:day},
+        data: {id:tutor_id , day:day , date:date},
         dataType:'json',
         success:function(response){
             console.log(response);

@@ -102,17 +102,41 @@ class BookingController extends Controller
 
         $slots = TutorSlots::where('user_id',$request->id)->get();
         $slots_partition = [];
+        $center_slot = '';
+        $end_slot = '';
+
         foreach($slots as $slot){
             $period = new CarbonPeriod($slot->wrk_from, '30 minutes', $slot->wrk_to); 
             foreach($period as $item){
-                if($item->format("H:i") == $slot->wrk_to){
-                    array_pop($slots_partition);
+
+                $start = $item->format("H:i");
+                $end = date('H:i',strtotime($start . ' +60 minutes'));
+            
+                $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$request->date)->where('booked_tutor',$request->id)->where('status','!=',3)->where('status','!=',4)->first();
+                if($center_slot != ''){
+                    $center_slot = '';
+                    continue;
+                }
+                // if($end_slot != ''){
+                //     $end_slot = '';
+                //     continue;
+                // }
+                if($booking){
+
+                    $center_slot = date('H:i',strtotime($start . ' +30 minutes'));
+                    $end_slot = $end;
+
                 }else{
-                    $calculated_slot = new \stdClass();
-                    $calculated_slot->id = $slot->id;
-                    $calculated_slot->wrk_from = $item->format("H:i");
-                    $calculated_slot->day = $slot->day;
-                    array_push($slots_partition,$calculated_slot);
+
+                    if($item->format("H:i") == $slot->wrk_to){
+                        array_pop($slots_partition);
+                    }else{
+                        $calculated_slot = new \stdClass();
+                        $calculated_slot->id = $slot->id;
+                        $calculated_slot->wrk_from = $item->format("H:i");
+                        $calculated_slot->day = $slot->day;
+                        array_push($slots_partition,$calculated_slot);
+                    }
                 }
                 
             }
