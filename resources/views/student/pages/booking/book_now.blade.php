@@ -72,7 +72,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                             <div class="card mt-0">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-7">
                                             <div class="row">
                                                 <div class="col-md-2 col-6">
                                                     @if($user->picture == "" || $user->picture == null)
@@ -81,76 +81,73 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                                                         <img src="{{asset($user->picture)}}"  alt="" class="profile-img">
                                                     @endif
                                                 </div>
-                                                <div class="col-md-6 col-6">
+                                                <div class="col-md-10 col-6">
                                                     <h3 class="mb-0">{{$user->first_name}}  {{$user->last_name}}</h3>
                                                     <p class="mb-0 "><img src="{{asset('assets/images/ico/red-icon.png')}}" alt="" class="pr-2">{{$user->professional->last()->designation ?? '---'}} at {{$user->professional->last()->organization}}</p>
                                                     <p class="mb-0 "><img src="{{asset('assets/images/ico/location-pro.png')}}" alt="" class="pr-2">{{ $user->city != NULL ? $user->city.' , ' : '---' }} {{ $user->country != NULL ? $user->country: '---' }}</p>
 
                                                 </div>
-                                                <div class="col-md-4 col-12">
-                                                    <p>
-                                                        @if($user->rating == 1)
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i> 1.0
-                                                        @elseif($user->rating == 2)
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i>  2.0
-                                                        @elseif($user->rating == 3)
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star "></i>  3.0
-                                                        @elseif($user->rating == 4)
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>
-                                                        <i class="fa fa-star text-yellow"></i>  4.0
-                                                        @else
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i>
-                                                        <i class="fa fa-star "></i>  0.0
-                                                        @endif
-
-                                                        <small class="text-grey">(0 reviews)</small>
-                                                    </p>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                        @if($user->rank == 0)
-                                        <a class="ab_right" href="#" data-toggle="modal"
-                                            data-target="#rankModal">New <img src="/assets/images/ico/bluebadge.png" class="wd-30" alt="" width="25">
-                                        </a>
-                                        @elseif($user->rank == 1)
-                                        <a class="ab_right" href="#" data-toggle="modal"
-                                            data-target="#rankModal">Emerging <img src="/assets/images/ico/yellow-rank.png" class="wd-30" alt="" width="25">
-                                        </a>
-                                        @elseif($user->rank == 2)
-                                        <a class="ab_right" href="#" data-toggle="modal"
-                                            data-target="#rankModal">Top Rank <img src="/assets/images/ico/rank.png" class="wd-30" alt="" width="25">
-                                        </a>
-                                        @else
-                                        <a class="ab_right" href="#" data-toggle="modal"
-                                            data-target="#rankModal">Upgrade badge <img src="/assets/images/ico/rank.png" class="wd-30" alt="" width="25">
-                                        </a>
-                                        @endif
+                                        <div class="col-md-5">
+                                            <p class="text-right mb-0">
+                                                @if($user->rank == 0)
+                                                <a class="ab_right" href="#" data-toggle="modal"
+                                                    data-target="#rankModal">New <img src="/assets/images/ico/bluebadge.png" class="wd-30" alt="" width="25">
+                                                </a>
+                                                @elseif($user->rank == 1)
+                                                <a class="ab_right" href="#" data-toggle="modal"
+                                                    data-target="#rankModal">Emerging <img src="/assets/images/ico/yellow-rank.png" class="wd-30" alt="" width="25">
+                                                </a>
+                                                @elseif($user->rank == 2)
+                                                <a class="ab_right" href="#" data-toggle="modal"
+                                                    data-target="#rankModal">Top Rank <img src="/assets/images/ico/rank.png" class="wd-30" alt="" width="25">
+                                                </a>
+                                                @else
+                                                <a class="ab_right" href="#" data-toggle="modal"
+                                                    data-target="#rankModal">Upgrade badge <img src="/assets/images/ico/rank.png" class="wd-30" alt="" width="25">
+                                                </a>
+                                                @endif
+                                            </p>
+                                       
+                                            <p class="text-right mb-0">
+                                                @if($user->rating == 1)
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i> 1.0
+                                                @elseif($user->rating == 2)
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i>  2.0
+                                                @elseif($user->rating == 3)
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star "></i>  3.0
+                                                @elseif($user->rating == 4)
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>
+                                                <i class="fa fa-star text-yellow"></i>  4.0
+                                                @else
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i>
+                                                <i class="fa fa-star "></i>  0.0
+                                                @endif
+
+                                                <small class="text-grey">(0 reviews)</small>
+                                            </p>
                                         </div>
-                                        <!-- <div class="col-md-4">
+                                        <div class="col-md-12">
+                                         <hr>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <div class="show_booking_text"></div>
+                                            <small class="text-grey">Time is purely based on your current region i.e. {{Auth::User()->region}} </small>
                                         </div>
-                                        <div class="col-md-4">
-                                            <p class="mb-0 "><img src="{{asset('assets/images/ico/language.png')}}" alt="" class="pr-2">{{ $user->lang_short != NULL ? $user->lang_short : '---' }}</p>
-                                        </div> -->
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="show_booking_text"></div>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +291,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
         
         var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm");
         
-        $('.show_booking_text').text(create_date + ", " + time + " - " + class_end_time);
+        $('.show_booking_text').text("Selected slot is on " + create_date + ", from " + time + " to " + class_end_time);
 
         $("#current_date").val(converted_date);
         $("#class_time").val(time);
