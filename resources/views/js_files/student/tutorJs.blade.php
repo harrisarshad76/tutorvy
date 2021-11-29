@@ -91,7 +91,6 @@ $('input[type=radio][name=gender]').change(function() {
 
 });
 
-
 function search_tutors(price,subject,lang,rating,location, gender){
 
     $.ajax({
@@ -335,10 +334,11 @@ function list_tutors(){
                                                     <p>starting from</p>
                                                     <h1 class="f-60">$`+ (tutors[i].hourly_rate != null ? tutors[i].hourly_rate : '0') +`</h1>
                                                     <p>per hour</p>
-                                                    <button type="button" class=" cencel-btn w-100">
-                                                            &nbsp; Message &nbsp;
-                                                        </button>
-                                                    <button type="button" onclick="location.href = '`+url+`'" class=" btn-general w-100 mt-2" >
+                                                    <button type="button" class=" cencel-btn w-100" onclick="chat(`+tutors[i].id+`)">
+                                                        &nbsp; Message &nbsp;
+                                                    </button>
+                                                
+                                                    <button type="button" onclick="checkBookingSlots(`+tutors[i].id+`)" class=" btn-general w-100 mt-2" >
                                                             &nbsp; Book Class &nbsp;
                                                     </button>
                                                 </div>
@@ -367,7 +367,6 @@ function list_tutors(){
     }
 
 }
-
 
 function star(){
     // alert("D");
@@ -417,7 +416,6 @@ function favourite_tutor(id,type) {
         }
     });
 }
-
 
 function chat(id){
     $("#tutorModal").modal("show");
@@ -511,7 +509,6 @@ function getDate(date) {
     }
 
 }
-
 
 function checkBookingSlots(id){
     $("#tutor_id").val(id);
@@ -630,5 +627,4 @@ function selectSlot(id , time) {
     }
     
 }
-
 </script>
