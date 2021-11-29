@@ -565,8 +565,8 @@ function getTutorSlots(tutor_id ,day) {
 function selectSlot(id , time) {
     
     $("#booking_time").val(time)
-    $('.slotSet').addClass("activeSlot");
     $('.slotSet').removeClass("activeSlot");
+    $('.slotSet').addClass("activeSlot");
 
     let tutor_id =  $("#tutor_id").val();
     let date = $("#get_date").val();

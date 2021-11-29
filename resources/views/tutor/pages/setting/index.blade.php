@@ -538,7 +538,7 @@
                                                                                         
                                                                                                     <div class="col-md-9 ">
                                                                                                         
-                                                                                                        <select class="form-select mt-1" id="{{$day['day']}}_from" name="from[]">
+                                                                                                        <select class="form-select form-control mt-1" id="{{$day['day']}}_from" name="from[]">
                                                                                                             @foreach($times as $time)
                                                                                                                 <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                             @endforeach
@@ -552,7 +552,7 @@
                                                                                                     <div class="col-md-3 pt-3 text-right"> To: </div>
 
                                                                                                     <div class="col-md-9">
-                                                                                                        <select  class="form-select mt-1" id="{{$day['day']}}_to" name="to[]">
+                                                                                                        <select  class="form-select form-control mt-1" id="{{$day['day']}}_to" name="to[]">
                                                                                                             @foreach($times as $time)
                                                                                                                 <option value="{{$time['value']}}"> {{$time['value']}} </option>
                                                                                                             @endforeach
@@ -803,9 +803,9 @@
                         
                     <div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-4 pt-3 text-right"> From: </div>
+                            <div class="col-md-3 pt-3 text-right"> From: </div>
                 
-                            <div class="col-md-8 ">
+                            <div class="col-md-9 ">
                                 
                                 <select class="form-select mt-1 `+day+`_from" name="from[]">
                                     @foreach($times as $time)
@@ -818,9 +818,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-4 pt-3 text-right"> To: </div>
+                            <div class="col-md-3 pt-3 text-right"> To: </div>
 
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <select  class="form-select mt-1 `+day+`_to"  name="to[]">
                                     @foreach($times as $time)
                                         <option value="{{$time['value']}}"> {{$time['value']}} </option>
