@@ -460,9 +460,12 @@ function getDate(date) {
     var current_time =  moment(today_date).format('hh:mm') ;
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
+    // alert(today_date)
+    // alert(date)
 
-    var curr_d = new Date(date + ' ' + current_time);
+    var curr_d = new Date(today_date + ' ' + current_time);
     let curr_ms = curr_d.getTime();
+    console.log(curr_ms)
 
     let day = days[current_date.getDay()];
     var duration = 1;
@@ -476,6 +479,7 @@ function getDate(date) {
 
             var slot_ms_date = new Date(date+' ' + data.wrk_from);
             slot_ms_date = slot_ms_date.getTime();
+            console.log(slot_ms_date + ' --- '+data.wrk_from)
             if(curr_ms >= slot_ms_date){
 
             }else{
