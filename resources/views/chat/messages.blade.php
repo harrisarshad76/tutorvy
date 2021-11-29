@@ -58,7 +58,7 @@
         }
 
         .chatArea {
-            height: 471px;
+            max-height: 471px;
             padding-left: 0px;
             margin-bottom: 8px;
             padding-right: 0;
@@ -286,6 +286,9 @@
         .mediaAttachments img{
             height:75px;   
         }
+        .h-471{
+            height:471px;
+        }
       
     </style>
 
@@ -443,17 +446,20 @@
                             </div>
                         </nav>
                         <div class="line-box2"></div>
-
-                        <div class="row chatArea ml-1 pb-2 mr-1" id="">
-                            <div class='text-center col-md-12 mb-3'>
-                                <small>
-                                    Your all communications will be monitored for maintaining quality, will not share your personal information. 
-                                </small>
-                                <small>
-                                    <a href="#">View Privacy Policy</a>
-                                </small>
+                        <div class="h-471">
+                            <div class="row chatArea ml-1 pb-2 mr-1" id="">
+                                <div class='text-center col-md-12 mb-3'>
+                                    <small>
+                                        Your all communications will be monitored for maintaining quality, will not share your personal information. 
+                                    </small>
+                                    <small>
+                                        <a href="#">View Privacy Policy</a>
+                                    </small>
+                                </div>
                             </div>
+
                         </div>
+                        
                         <div class="container-fluid">
                             <div class="search-type ">
                                 <div class="row">
