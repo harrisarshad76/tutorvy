@@ -159,6 +159,8 @@ class BookingController extends Controller
                     }else{
                         if($item->format("H:i") == $slot->wrk_to){
                             array_pop($slots_partition);
+                        }elseif($item->format("H:i") == "00:00" && $slot->wrk_to == "24:00"){
+                            array_pop($slots_partition);
                         }else{
     
                             $_id = sprintf( '%04x%04x',
