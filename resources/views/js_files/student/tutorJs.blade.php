@@ -466,7 +466,7 @@ function getDate(date) {
         for(let data of item) {
             html += `
             <div class="col-md-3 col-4">
-                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
                 </div>
@@ -522,7 +522,7 @@ function getTutorSlots(tutor_id ,day) {
                         if(data.day == day) {
                             html += `
                             <div class="col-md-3 col-4">
-                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot(`+data.id+`,'`+ data.wrk_from +`')">
+                                <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
                                     <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
                                     <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
                                 </div>

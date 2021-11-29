@@ -131,8 +131,12 @@ class BookingController extends Controller
                     if($item->format("H:i") == $slot->wrk_to){
                         array_pop($slots_partition);
                     }else{
+
+                        $_id = sprintf( '%04x%04x',
+                            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                        );
                         $calculated_slot = new \stdClass();
-                        $calculated_slot->id = $slot->id;
+                        $calculated_slot->id = $_id;
                         $calculated_slot->wrk_from = $item->format("H:i");
                         $calculated_slot->day = $slot->day;
                         array_push($slots_partition,$calculated_slot);
