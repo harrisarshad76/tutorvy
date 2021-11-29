@@ -699,7 +699,9 @@ height:25px;
 
                                             <div class="row mt-5">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <textarea name="content" id="editor" placeholder="Add your Text Here......."></textarea>
+                                                    <textarea name="content" id="editor" placeholder="">
+                                                    &lt;p&gt;Add your text here&lt;/p&gt;
+                                                    </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -707,29 +709,44 @@ height:25px;
                                 </div>
                                 <div class="tab-pane tab-border-none fade" id="nav-codeEditor" role="tabpanel" aria-labelledby="nav-codeEditor-tab">
 
-                                        <div class="container-fluid ">
+                                    <div class="container-fluid ">
 
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <pre><code class="language-html">
-                                                        
-                                                    </code></pre>
-                                                    <textarea name="" id="check" cols="30" rows="10" onkeypress="cheng()"></textarea>
-
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
+                                                <div id="editor2">
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- end -->
+                                    </div>
+                                    <!-- end -->
                                 </div>
                                 <div class="tab-pane tab-border-none fade" id="nav-googleDocs" role="tabpanel" aria-labelledby="nav-googleDocs-tab">
 
                                     <div class="container-fluid ">
 
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                
+                                            <div class="row mt-5">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
+                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/docs.png')}}" alt="" >
+                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
+                                                    <button class="mt-2 schedule-btn">
+                                                        Launch Google Docs <i class="fa fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
+                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/sheets.png')}}" alt="" >
+                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
+                                                    <button class="mt-2 schedule-btn">
+                                                        Launch Google Sheets <i class="fa fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
+                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/slides.png')}}" alt="" >
+                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
+                                                    <button class="mt-2 schedule-btn">
+                                                        Launch Google Slides <i class="fa fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                     <!-- end -->
                                 </div>
@@ -963,6 +980,14 @@ height:25px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://www.webrtc-experiment.com/DetectRTC.js"></script>
 <script>
+
+
+     // var timerInstance = new easytimer.Timer();
+     var editor2 = ace.edit("editor2");
+    editor2.setTheme("ace/theme/monokai");
+    editor2.session.setMode("ace/mode/javascript");
+
+
     $(document).ready(function(){
         // $(".tech_weck").hide();
         $(".mk").hide();

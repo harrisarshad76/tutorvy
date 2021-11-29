@@ -71,11 +71,11 @@
                                 </p>
                                 <p style="text-align: right;" class="col-md-6 col-xs-12 class-btn-center">
                                     @if($booking->status == 2)
-                                        <button type="button" href="{{route('tutor.classroom')}}"
-                                            class="schedule-btn mr-2" style="font-size: 12px;width: 150px;"> 
+                                        <a href="{{route('tutor.classroom')}}"
+                                            class="schedule-btn mr-2 text-center" style="font-size: 12px;width: 150px;"> 
                                             Go to Classroom
                                           
-                                        </button>
+                                        </a>
                                     @endif
                                     @if($booking->status != 3 && $booking->status != 4 && $booking->status != 6 && $booking->status != 5)
                                         <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
