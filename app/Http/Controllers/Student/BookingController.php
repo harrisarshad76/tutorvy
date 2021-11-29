@@ -101,18 +101,34 @@ class BookingController extends Controller
     public function getTutorSlots(Request $request) {
 
         $slots = TutorSlots::where('user_id',$request->id)->get();
-
+        $slots_partition = [];
+        foreach($slots as $slot){
+            $period = new CarbonPeriod($slot->wrk_from, '30 minutes', $slot->wrk_to); 
+            foreach($period as $item){
+                if($item->format("H:i") == $slot->wrk_to){
+                    array_pop($slots_partition);
+                }else{
+                    $calculated_slot = new \stdClass();
+                    $calculated_slot->id = $slot->id;
+                    $calculated_slot->wrk_from = $item->format("H:i");
+                    $calculated_slot->day = $slot->day;
+                    array_push($slots_partition,$calculated_slot);
+                }
+                
+            }
+        }
+        // return $slots_partition;
         return response()->json([
             'status_code'=> 200,
             'success' => true,
-            'slots' => $slots,
+            'slots' => $slots_partition,
         ]);
     }
 
     function getFilteredTimeSlot(Request $request)
     {
 
-        $period = new CarbonPeriod('09:00', '60 minutes', '24:00'); // for create use 24 hours format later change format 
+        $period = new CarbonPeriod('09:00', '30 minutes', '24:00'); // for create use 24 hours format later change format 
         $slots = [];
         foreach($period as $item){
             array_push($slots,$item->format("H:i"));

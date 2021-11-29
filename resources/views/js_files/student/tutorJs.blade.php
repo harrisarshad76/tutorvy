@@ -451,13 +451,12 @@ $( '#chat_form' ).on( 'submit', function(e) {
 
 
 function getDate(date) {
+
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date(date);
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
-    
-    
     // filter array get day wise slots
     var item = all_slots.filter(item => item.day === day);
     
@@ -480,8 +479,6 @@ function getDate(date) {
         $(".show_all_slots").html("");
         $("#request_booking_btn").removeAttr('href');
     }
-
-
 
 }
 
