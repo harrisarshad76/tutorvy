@@ -43,6 +43,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                 <input type="hidden" name="current_date" id="current_date">
                 <input type="hidden" name="class_time" id="class_time">
                 <input type="hidden" name="class_end_time" id="class_end_time">
+                <input type="hidden" name="_id" id="_id">
+
                 <div class="row mt-5">
                         <div class=" col-md-6">
                             <div class="row">
@@ -154,7 +156,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                         </div>
                         <div class="input-text col-md-6 d-block">
                             <input type="text" class="form-control " hidden name="tutor_id" id="tutor_id"
-                                value="{{$t_id}}">
+                               >
                         </div>
                     </div>
                     <!-- <div class="row mt-3"> -->
@@ -279,23 +281,28 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    var array = {!! json_encode($attr) !!};
-    if(array != null && array != "") {
-        var parse_date = new Date(parseInt(array.slug));
-        var converted_date = moment(parse_date).format('YYYY-MM-DD');
+    var data = {!! json_encode($op_booking) !!};
+    console.log(data)
+    if(data != null && data != "") {
+        // var parse_date = new Date(parseInt(array.slug));
+        var converted_date = moment(data.date).format('YYYY-MM-DD');
 
-        let create_date = moment(parse_date).format('DD MMMM');
+        let create_date = moment(data.date).format('DD MMMM');
 
-        var time = array.time + ':00';
+        var time = data.slot;
+        
         var new_date_time = new Date(converted_date + ' ' + time);
+        var start = moment(new_date_time).format("hh:mm a");
+
+        var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm a");
         
-        var class_end_time = moment(new_date_time).add(1, 'hours').format("hh:mm");
-        
-        $('.show_booking_text').text("Selected slot is on " + create_date + ", from " + time + " to " + class_end_time);
+        $('.show_booking_text').text("Selected slot is on " + create_date + ", from " + start + " to " + class_end_time);
 
         $("#current_date").val(converted_date);
         $("#class_time").val(time);
         $("#class_end_time").val(class_end_time);
+        $("#_id").val(data.uuid);
+        $('#tutor_id').val(data.tutor_id)
 
     }else{
         $('.show_booking_text').text("");

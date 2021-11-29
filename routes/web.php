@@ -396,8 +396,8 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
     //Bookings
     Route::get('/bookings',[StudentBookingController::class,'index'])->name('student.bookings');
 
-    Route::get('/book-now/{id}',[StudentBookingController::class,'bookNow'])->name('student.book-now');
-    Route::get('/book_now/{slug}/{time}/{id}',[StudentBookingController::class,'book_now'])->name('student.book_now');
+    Route::get('/book-now/{id}/{b_id}',[StudentBookingController::class,'bookNow'])->name('student.book-now');
+    Route::post('/book_now',[StudentBookingController::class,'book_now'])->name('student.book-slot');
 
     Route::post('/get_slots',[StudentBookingController::class,'getTutorSlots'])->name('student.getTutorSlots');
     Route::post('/get_filtered_slots',[StudentBookingController::class,'getFilteredTimeSlot'])->name('student.getFilteredTutorSlots');
