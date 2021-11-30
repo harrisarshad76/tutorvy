@@ -530,6 +530,17 @@ class SettingController extends Controller
             'message' => 'Time Slots Deleted Successfully',
             'success' => true,
         ]);
+    } 
+
+    public function testMedia($class_room_id){
+       
+        $class = Classroom::where('classroom_id',$class_room_id)->first();
+        $booking = Booking::where('id',$class->booking_id)->first();
+
+        // $class = Classroom::with('booking')->where('classroom_id',$class_room_id)->first();
+        $user = User::where('id',Auth::user()->id)->first();
+        // dd($class);
+        return view('tutor.pages.classroom.testmedia',compact('class','user','booking'));
     }
 
 }

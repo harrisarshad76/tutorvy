@@ -196,7 +196,8 @@
                                                             <td>
                                                                 <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
                                                                 data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
-                                                                data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
+                                                                data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}" 
+                                                                data-booking="{{$class->classroom != null ? $class->classroom->booking_id : ''}}"
                                                                 class="current_time"> 
                                                                     
                                                                 </span>
@@ -454,6 +455,7 @@
             var booking_date = $(this).data('date');
             var duration = $(this).data('duration');
             var room = $(this).data('room');
+            var booking = $(this).data('booking');
 
             const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
             let get_day_in_no = moment(booking_date).day();
@@ -479,7 +481,7 @@
                 
                 let timezoneTime = new Date(current_user_time_zone);
 
-                let join_btn = `<a onclick="joinClass('`+room+`')" class="schedule-btn"> Join Class </a>`;
+                let join_btn = `<a onclick="joinClass('`+room+`','`+booking+`')" class="schedule-btn"> Join Class </a>`;
 
                 if(timezoneTime.getTime()  < create_date_format.getTime() ) {
                     $("#class_time_"+id).text(show_date_time);
@@ -594,15 +596,38 @@
 
     }
 
-    function joinClass(id) {
+    // function joinClass(id) {
+    //     var connection = new RTCMultiConnection();
+    //     var roomid = id;
+    //     var fullName = '---';
+    //     connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
+
+    //     connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
+    //         if (isRoomExist === true) {
+    //             window.location.href = `{{ url('student/class') }}/` + id;
+    //         } else {
+    //             toastr.warning('Tutor not joined yet.', {
+    //                 position: 'top-end',
+    //                 icon: 'warning',
+    //                 showConfirmButton: false,
+    //                 timer: 2500
+    //             });
+    //         }
+    //     });
+    // }
+
+    function joinClass(id,booking) {
         var connection = new RTCMultiConnection();
         var roomid = id;
+        var booking = booking;
+        
         var fullName = '---';
         connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
 
         connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
             if (isRoomExist === true) {
-                window.location.href = `{{ url('student/class') }}/` + id;
+
+                window.location.href = `{{ url('student/testmedia') }}/` + booking;
             } else {
                 toastr.warning('Tutor not joined yet.', {
                     position: 'top-end',
@@ -614,9 +639,14 @@
         });
     }
 
+
     function showReviewModal(id) {
         $("#booking_id").val(id);
         // $(".content-wrapper").css("display","none");
         $("#reviewModal").modal('show');
     }
+    function randstr(prefix)
+{
+    return Math.random().toString(36).replace('0.',prefix || '');
+}
 </script>
