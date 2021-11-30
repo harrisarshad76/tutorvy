@@ -23,7 +23,7 @@
         display:inline-flex;
     }
     .slotSet:hover .clockBlue{
-        display:none;
+        display:none ;
     }
     .slotSet:hover{
         background:#1173FF;
@@ -44,9 +44,9 @@
     }
     .slotLine{
         margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid #1173FF;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #1173FF;
     }
     
 </style>

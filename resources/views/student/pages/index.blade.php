@@ -2,6 +2,52 @@
 
 @section('content')
 <style>
+    .slotSet{
+        color: #1173FF;
+    text-align: center;
+    border: 1px solid;
+    border-color: #1173FF;
+    border-radius: 21px;
+    padding: 2px 1px 5px;
+    margin-top: 15px;
+    cursor:pointer;
+    }
+    .slotSet img{
+        width:15px;
+    }
+    .slotSet .clockWhite{
+        display:none;
+    }
+    .slotSet:hover .clockWhite{
+        display:inline-flex;
+    }
+    .slotSet:hover .clockBLue{
+        display:none;
+    }
+    .slotSet:hover{
+        background:#1173FF;
+        color:#fff;
+    }
+    .activeSlot{
+        background:#1173FF;
+        color:#fff;
+    }
+    .activeSlot:hover{
+       border-color:#fff;
+    }
+    .activeSlot .clockWhite{
+        display:inline-flex !important;
+    }
+    .activeSlot .clockBLue{
+        display:none !important;
+    }
+    .slotLine{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #1173FF;
+    }
+    
 </style>
   <!-- top Fixed navbar End -->
   <div class="content-wrapper " style="overflow: hidden;">
@@ -392,8 +438,8 @@
                                                                         <p>per hour</p>
                                                                         <button type="button" class=" cencel-btn w-100">
                                                                                 &nbsp; Message &nbsp;
-                                                                            </button>
-                                                                        <button type="button" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';" class=" btn-general w-100 mt-2 p-2" >
+                                                                        </button>
+                                                                        <button type="button" onclick="checkBookingSlots({{$tutor->id}})" class=" btn-general w-100 mt-2" >
                                                                                 &nbsp; Book Class &nbsp;
                                                                         </button>
                                                                     </div>
@@ -626,6 +672,57 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="modalSlot" tabindex="-1" role="dialog"
+            aria-labelledby="tutorModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form id="bookingSlotForm" class="mb-0" method = 'POST' action = "{{route('student.book-slot')}}">
+                        @csrf
+                        <input type="hidden" name="tutor_id" id="tutor_id">
+                        <input type="hidden" name="time" id="booking_time">
+                        <input type="hidden" name="day" id="booking_day">
+
+                        <div class="modal-body h-auto  card-body">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <img  src="{{asset('assets/images//ico/icon1.png')}}" />
+                                </div>
+                                <div class="col-md-12 text-center mt-3">
+                                    <h3> Book a Class </h3>
+                                    <p> Select a date and respective slot to make a booking request </p>
+                                </div>
+                                <div class="col-md-4 text-center mt-2">
+                                    <label for=""> Select Date </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <input type="date" class="form-control" onchange="getDate(this.value)" id="get_date" name="date"   placeholder="Class Date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <hr class="slotLine">
+                                </div>
+                                <div class="col-md-12">
+                                    <h3 id="show_response" class="show_response">Available Slots</h3>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="row show_all_slots" id="show_all_slots">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small>Your current time zone region is {{Auth::User()->region}}</small>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button class="schedule-btn" id="request_booking_btn"> Confirm Booking </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
     <div class="line"></div>
 </div>
@@ -634,7 +731,9 @@
 </script>
 @endsection
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @include('js_files.student.dashboardJS')
+@include('js_files.student.tutorJs')
 <script>
 
     var checkTimeZone = $("#timeZone").val(); 
