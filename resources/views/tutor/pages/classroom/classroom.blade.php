@@ -1867,11 +1867,11 @@ designer.appendTo(document.getElementById('widget-container'), function() {
         }
 
         // start timer here
-        var video = document.getElementById('main-video');
-        video.setAttribute('data-streamid', event.streamid);
-            saveClassLogs();
-            connection.socket.on('disconnect', function() {
-                location.reload();
+        // var video = document.getElementById('main-video');
+        // video.setAttribute('data-streamid', event.streamid);
+        saveClassLogs();
+        connection.socket.on('disconnect', function() {
+            location.reload();
         });
     });
     

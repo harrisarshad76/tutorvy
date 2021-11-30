@@ -199,7 +199,7 @@ class SettingController extends Controller
 
         
         $times = array(
-            array("value" => "00:00"),
+            // array("value" => "00:00"),
             array("value" => "01:00"),
             array("value" => "02:00"),
             array("value" => "03:00"),

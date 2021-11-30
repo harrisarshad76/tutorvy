@@ -393,7 +393,7 @@
                                                                         <button type="button" class=" cencel-btn w-100">
                                                                                 &nbsp; Message &nbsp;
                                                                             </button>
-                                                                        <button type="button" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';" class=" btn-general w-100 mt-2 p-2" >
+                                                                        <button type="button" onclick="location.href = '#';" class=" btn-general w-100 mt-2 p-2" >
                                                                                 &nbsp; Book Class &nbsp;
                                                                         </button>
                                                                     </div>
