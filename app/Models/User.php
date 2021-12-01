@@ -246,6 +246,18 @@ class User extends Authenticatable implements MustVerifyEmail
             ->orderBy('id', 'ASC')->get();
     }
 
+    public function file_count($user)
+    {
+
+        return Message::where(['user_id' => $this->id, 'receiver_id' => $user->id])
+            ->orWhere(function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+                $q->where('receiver_id', $this->id);
+            })
+            ->where('type','file')
+            ->count();
+    }
+
     // Scopes for Filteration
     public function scopeTutor($query)
     {

@@ -137,8 +137,14 @@ class GenChatController extends Controller
         $user = User::where('id',$id)->first();
 
         $messages = auth()->user()->messages_between($user);
+        $attachment_count = auth()->user()->file_count($user);
 
-        return response()->json($messages);
+        // return response()->json($messages);
+        return response()->json([
+            'status' => 200,
+            'messages' => $messages,
+            'attachment_count' => $attachment_count
+        ]);
     }
 
     public function sendSignal(Request $request){
