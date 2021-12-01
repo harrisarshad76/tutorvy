@@ -73,4 +73,14 @@ class StudentClassController extends Controller
         ]);
 
     }
+
+    
+    public function testMedia($booking_id){
+       
+        $booking = Booking::where('id',$booking_id)->first();
+        $class = Classroom::where('booking_id',$booking_id)->first();
+        $user = User::where('id',\Auth::user()->id)->first();
+        return view('student.pages.classroom.testMedia',compact("user","class","booking"));
+    }
+
 }

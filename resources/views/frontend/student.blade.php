@@ -20,10 +20,10 @@
                         <div class="input-text input-text-main mt-5 d-flex" style="overflow:hidden;">
                             <!-- <input data-aos="zoom-in-up" type="text"
                                 placeholder="What subject do you need help with?"> -->
-                                <select name="subjects" id="subjects" class="form-select form-control">
+                                <select name="subjects" id="subjects" class="form-select form-control w-50">
                                     <option selected >What subject do you need help with?</option>
                                     @foreach ($subjects as $subject)
-                                    <option value="{{$subject->id}}"> {{$subject->name}}</option>
+                                        <option value="{{$subject->id}}"> {{$subject->name}}</option>
                                     @endforeach
                                 </select>
                             <!-- <input type="submit" value="Search"> -->
@@ -53,19 +53,17 @@
                         <p class="there-text there-text-main">
                             There are many variations of passages available, but
                             the majority have suffered alteration in some form.</p>
-                        <div class="input-text input-text-main mt-5 d-flex">
+                        <div class="input-text input-text-main mt-5 text-center">
                             <!-- <input type="text" placeholder="What subject do you need help with?"> -->
-                            <select name="subjects" class="form-select form-control" id="subjects">
-                                <option value="">Search Subject</option>
+                            <select name="subjects" id="subjects" class="form-select form-control">
+                                <option selected >What subject do you need help with?</option>
                                 @foreach ($subjects as $subject)
                                 <option value="{{$subject->id}}"> {{$subject->name}}</option>
                                 @endforeach
                             </select>
-                            <input type="submit" value="Search">
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- end -->
@@ -216,11 +214,13 @@
                     <br />
                     <input type="submit" value="Take a demo class" class="submit-type none">
                     <div class="none">
-                        <span class="text-demo">
+                        <span class="text-white">
                             Watch demo
                         </span>
-                        <img id="image-rotate-play" data-toggle="modal" data-target="#exampleModalCenter"
+                        <a href="#">
+                            <img id="image-rotate-play" data-toggle="modal" data-target="#exampleModalCenter"
                             src="../assets/images/play-icon.png" alt="play-icon">
+                        </a>
                     </div>
                 </div>
                 <div class="take-demo shows">Take demo class</div>
@@ -307,13 +307,21 @@
                     </p>
                     <!-- <br /> -->
                     <div class="btn-socail mt-4">
-                        <img class="w-25 ml-5" src="../assets/images/g-btn.png" alt="img">
-                        <img class="w-25 ml-3" src="../assets/images/Apple-btn.png" alt="img">
+                        <a href="#" class="decoration-none">
+                            <img class="w-25 ml-5" src="assets/images/g-btn.png" alt="img">
+                        </a>
+                        <a href="#" class="decoration-none">
+                            <img class="w-25 ml-3" src="assets/images/Apple-btn.png" alt="img">
+                        </a>
                     </div>
                 </div>
                 <div class="margin-top-image">
-                    <img src="../assets/images/mobile-image.png" class="w-100 none" alt="icon">
-                    <img src="../assets/images/ico/mobile-advance.svg" class="w-100 shows" alt="icon">
+                    <a href="#" class="decoration-none">
+                        <img src="assets/images/mobile-image.png" class="w-100 none" alt="icon">
+                    </a>
+                    <a href="#" class="decoration-none">
+                        <img src="assets/images/ico/mobile-advance.svg" class="w-100 shows" alt="icon">
+                    </a>
                 </div>
             </div>
         </div>
@@ -346,8 +354,8 @@
                 <div class="col-md-4 col-12 mb-3 train ">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -368,8 +376,8 @@
                 <div class="col-md-4 col-12 mb-3 train ">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -390,8 +398,8 @@
                 <div class="col-md-4 col-12 mb-3 train">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -425,18 +433,18 @@
             <div class="panes">
                 <div>3</div>
             </div>
+
             <div class="panes">
                 <div class="row" style="overflow: hidden;">
                     <div class="col-md-4 mb-3">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
                             </div>
-
                             <p class="there-text mt-2 ml-3">
                                 It is a long established fact that a reader will <br /> be distracted
                                 by the readable content.
@@ -446,13 +454,12 @@
                     <div class="col-md-4 mb-3 ">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
                             </div>
-
                             <p class="there-text mt-2 ml-3">
                                 It is a long established fact that a reader will <br /> be distracted
                                 by the readable content.
@@ -462,13 +469,12 @@
                     <div class="col-md-4 mb-3">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
                             </div>
-
                             <p class="there-text mt-2 ml-3">
                                 It is a long established fact that a reader will <br /> be distracted
                                 by the readable content.
@@ -476,22 +482,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="panes ml-4">
                 <div>
                     <div class="row" style="overflow: hidden;">
                         <div class="col-md-4 mb-3">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
                                 </div>
-
                                 <p class="there-text mt-2 ml-3">
                                     It is a long established fact that a reader will <br /> be distracted
                                     by the readable content.
@@ -501,13 +504,12 @@
                         <div class="col-md-4 mb-3 ">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
                                 </div>
-
                                 <p class="there-text mt-2 ml-3">
                                     It is a long established fact that a reader will <br /> be distracted
                                     by the readable content.
@@ -517,13 +519,12 @@
                         <div class="col-md-4 mb-3 ">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
                                 </div>
-
                                 <p class="there-text mt-2 ml-3">
                                     It is a long established fact that a reader will <br /> be distracted
                                     by the readable content.
@@ -531,10 +532,9 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
+
             <div class="panes">
                 <div>Last</div>
             </div>
@@ -559,7 +559,7 @@
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
                         <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -581,30 +581,7 @@
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
                         <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
-                            <p class="std-text">Student</p>
-                        </span>
-                    </div>
-                    <span class="date-year">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        4.0
-                    </span>
-                    <p class="there-text mt-2 ml-1 m-4 text-left">
-                        It is a long established fact that a reader
-                        will be distracted
-                        by the readable content.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-10 mb-3 card-mobile">
-                <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
-                    <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -627,7 +604,7 @@
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
                         <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -650,7 +627,30 @@
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
                         <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <span class="std-name ml-3">Mohsin Malik
+                            <p class="std-text">Student</p>
+                        </span>
+                    </div>
+                    <span class="date-year">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        4.0
+                    </span>
+                    <p class="there-text mt-2 ml-1 m-4 text-left">
+                        It is a long established fact that a reader
+                        will be distracted
+                        by the readable content.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-10 mb-3 card-mobile">
+                <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
+                    <div class=" ml-4 d-flex ">
+                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>

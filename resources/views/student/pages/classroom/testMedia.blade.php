@@ -640,8 +640,10 @@ height:25px;
     <input type="hidden" id="class_date" value="{{$booking->class_date}}">
     <input type="hidden" id="class_time" value="{{$booking->class_time}}">
     <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
-     <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
+    <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
+    <input type="hidden" id="classroom_id" value="{{$class->classroom_id}}">
     <div class="content-wrapper " style="overflow: hidden;">
+
         <div class="container-fluidd">
             
             <div class="row callDiv mt-4 mr-2 ml-2" >
@@ -691,7 +693,7 @@ height:25px;
                             <li>Avoid Incognito mode for better experience.</li>
                         </ul>
                         <div class="text-center">
-                            <button type="button" role="button" id="join_now"  class="schedule-btn ">
+                            <button type="button" role="button" onclick="joinClass('{{$class->classroom_id}}')" class="schedule-btn ">
                                 Join Class Now
                             </button>
                             <p class="hide" id="p1">/tutor/class/{{$class->classroom_id}}</p>
@@ -849,66 +851,90 @@ var class_duration = {{$booking->duration}};
 
 console.log(connection.socket)
 // var class_duration = 20;
+
+
+
+
+    function joinClass(id) {
+        var connection = new RTCMultiConnection();
+        var roomid = id;
+        var fullName = '---';
+        connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
+
+        connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
+            if (isRoomExist === true) {
+                window.location.href = `{{ url('student/class') }}/` + id;
+            } else {
+                toastr.warning('Tutor not joined yet.', {
+                    position: 'top-end',
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
+
 $("#join_now").click(function(){
-                $(".tech_weck").removeClass("tech_weck-none");
-                $(".callDiv").hide();
-                    connection.onstream = function(event) {
-                        if (event.stream.isScreen && !event.stream.canvasStream) {
-                            $('#screen-viewer').get(0).srcObject = event.stream;
-                            $('#screen-viewer').hide();
-                        }
-                        else if (event.extra.roomOwner === true) {
-                            var video = document.getElementById('main-video');
-                            video.setAttribute('data-streamid', event.streamid);
-                            // video.style.display = 'none';
-                            if(event.type === 'local') {
-                                video.muted = true;
-                                video.volume = 0;
-                            }
-                            video.srcObject = event.stream;
-                            $('#main-video').show();
-                        } else {
-                            event.mediaElement.controls = false;
+                // $(".tech_weck").removeClass("tech_weck-none");
+                // $(".callDiv").hide();
+                //     connection.onstream = function(event) {
+                //         if (event.stream.isScreen && !event.stream.canvasStream) {
+                //             $('#screen-viewer').get(0).srcObject = event.stream;
+                //             $('#screen-viewer').hide();
+                //         }
+                //         else if (event.extra.roomOwner === true) {
+                //             var video = document.getElementById('main-video');
+                //             video.setAttribute('data-streamid', event.streamid);
+                //             // video.style.display = 'none';
+                //             if(event.type === 'local') {
+                //                 video.muted = true;
+                //                 video.volume = 0;
+                //             }
+                //             video.srcObject = event.stream;
+                //             $('#main-video').show();
+                //         } else {
+                //             event.mediaElement.controls = false;
 
-                            var otherVideos = document.querySelector('#other-videos');
-                            otherVideos.appendChild(event.mediaElement);
-                        }
+                //             var otherVideos = document.querySelector('#other-videos');
+                //             otherVideos.appendChild(event.mediaElement);
+                //         }
 
-                        // connection.onUserStatusChanged(event);
-                    };
+                //         // connection.onUserStatusChanged(event);
+                //     };
                 
-                    // timer.start({countdown: true, startValues: {hours: class_duration}});
+                //     // timer.start({countdown: true, startValues: {hours: class_duration}});
 
-                    // $('#countdownExample .values').html(timer.getTimeValues().toString());
+                //     // $('#countdownExample .values').html(timer.getTimeValues().toString());
 
-                    // timer.addEventListener('secondsUpdated', function (e) {
-                    //     $('#countdownExample .values').html(timer.getTimeValues().toString());
-                    // });
+                //     // timer.addEventListener('secondsUpdated', function (e) {
+                //     //     $('#countdownExample .values').html(timer.getTimeValues().toString());
+                //     // });
 
-                    //     var ter =$('.values').text();
+                //     //     var ter =$('.values').text();
                         
-                    //     if( ter == deadline ){
+                //     //     if( ter == deadline ){
                             
-                    //         $(".blink").css("background","#dc3545");
-                    //         $(".Text-reck").text("Class will end in Five minutes sharp.");
-                    //     }
-                    //     else if( ter == resced ){
-                    //         $(".blink").css("background","#ffc107");
-                    //         let html = `<p class="mb-0">Do you want to reschedule another class? <a href="#" data-toggle="modal" data-target="#resced">Yes</a> or  <a href="">No</a> </p>`
-                    //         $(".Text-reck").html(html);
-                    //     }
-                    //     else if( ter >= resced ){
-                    //         $(".blink").css("background","#28a745");
-                    //         $(".Text-reck").text("Class will ends in: ");
+                //     //         $(".blink").css("background","#dc3545");
+                //     //         $(".Text-reck").text("Class will end in Five minutes sharp.");
+                //     //     }
+                //     //     else if( ter == resced ){
+                //     //         $(".blink").css("background","#ffc107");
+                //     //         let html = `<p class="mb-0">Do you want to reschedule another class? <a href="#" data-toggle="modal" data-target="#resced">Yes</a> or  <a href="">No</a> </p>`
+                //     //         $(".Text-reck").html(html);
+                //     //     }
+                //     //     else if( ter >= resced ){
+                //     //         $(".blink").css("background","#28a745");
+                //     //         $(".Text-reck").text("Class will ends in: ");
 
-                    //     }
+                //     //     }
 
-                    // timer.addEventListener('targetAchieved', function (e) {
-                    //     // $('#countdownExample .values').html('');
-                    //     $('#reviewModal').modal("show");
+                //     // timer.addEventListener('targetAchieved', function (e) {
+                //     //     // $('#countdownExample .values').html('');
+                //     //     $('#reviewModal').modal("show");
 
-                    // });
-                /* Javascript Timer ENd */
+                //     // });
+                // /* Javascript Timer ENd */
             });
 (function() {
     var params = {},
