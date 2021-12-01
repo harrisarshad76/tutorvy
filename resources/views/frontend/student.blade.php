@@ -23,7 +23,7 @@
                                 <select name="subjects" id="subjects" class="form-select form-control w-50">
                                     <option selected >What subject do you need help with?</option>
                                     @foreach ($subjects as $subject)
-                                    <option value="{{$subject->id}}"> {{$subject->name}}</option>
+                                        <option value="{{$subject->id}}"> {{$subject->name}}</option>
                                     @endforeach
                                 </select>
                             <!-- <input type="submit" value="Search"> -->
@@ -64,7 +64,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- end -->
