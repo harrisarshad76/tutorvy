@@ -461,7 +461,7 @@ height:25px;
     <input type="hidden" id="class_date" value="{{$booking->class_date}}">
     <input type="hidden" id="class_time" value="{{$booking->class_time}}">
     <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
-<div class="overlayCam container-fluid">
+<!-- <div class="overlayCam container-fluid">
     <div class="row text-center text-white">
         <div class="col-md-12">
             <img src="{{asset('assets/images/ico/noCam.svg')}}" class="w-50" alt="">
@@ -481,12 +481,12 @@ height:25px;
             </div>
         </div>
         <div class="col-md-12">
-            <!-- <button class="schedule-btn"> Allow Access </button> -->
+            <button class="schedule-btn"> Allow Access </button>
             <button class="cencel-btn" id="conCam"> Continue without Camera </button>
         </div>
     </div>
 
-</div>
+</div> -->
     <div class="content-wrapper " style="overflow: hidden;">
         <div class="container-fluid">
             <div class="row">
@@ -501,11 +501,11 @@ height:25px;
                     </div>
                 </div>
             </div>
-            <div class="row callDiv ml-2 mr-2 mt-4" >
+            <!-- <div class="row callDiv ml-2 mr-2 mt-4" >
                 <div class="col-md-8 text-center rounded bg-dark ">
                     <video id="main-video2" class=" w-62" playsinline autoplay></video>
 
-                    <!-- @if($user->picture)
+                    @if($user->picture)
                         @if(file_exists( public_path(). $user->picture))
                             <img src="{{asset($user->picture)}}" class="profile-img pg" alt="">
                         @else
@@ -513,7 +513,7 @@ height:25px;
                         @endif
                     @else
                         <img src="{{asset('assets/images/ico/Square-white.jpg')}}" class="profile-img pg" alt="">
-                    @endif -->
+                    @endif
                 </div>
                 <div class="col-md-4  mt-3">
                     <div class="m-2">
@@ -538,8 +538,8 @@ height:25px;
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row  tech_weck tech_weck-none">
+            </div> -->
+            <div class="row  tech_weck ">
                 <div class="col-md-9 "> 
                     <div class="row">
                         <div class="col-md-12 ">

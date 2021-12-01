@@ -363,6 +363,11 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 
     Route::get('/call',[TutorSettingController::class,'call'])->name('tutor.call');
     Route::get('/class/{class_room_id}',[TutorSettingController::class,'start_class'])->name('tutor.start_class');
+    Route::get('/testmedia/{class_room_id}',[TutorSettingController::class,'testMedia'])->name('tutor.testmedia');
+
+
+
+
     Route::post('/save-class-logs',[ClassController::class,'saveClassLogs'])->name('tutor.class.logs');
     Route::post('/end-class',[ClassController::class,'endClass'])->name('tutor.class.end');
 
@@ -460,6 +465,8 @@ Route::group(['prefix' => '/student','middleware' => ['auth','student']],functio
 
     Route::get('/call',[StudentSettingController::class,'call'])->name('student.call');
     Route::get('/class/{class_room_id}',[StudentSettingController::class,'join_class'])->name('student.join_class');
+    Route::get('/testmedia/{class_room_id}',[StudentClassController::class,'testMedia'])->name('student.testmedia');
+
 
     Route::get('/whiteBoard',[StudentSettingController::class,'whiteBoard'])->name('student.whiteBoard');
 

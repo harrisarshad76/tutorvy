@@ -642,7 +642,7 @@ height:25px;
     <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
 
      <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
-     <div class="overlayCam container-fluid">
+<!-- <div class="overlayCam container-fluid">
     <div class="row text-center text-white">
         <div class="col-md-12">
             <img src="{{asset('assets/images/ico/noCam.svg')}}" class="w-50" alt="">
@@ -667,7 +667,7 @@ height:25px;
         </div>
     </div>
 
-</div>
+</div> -->
     <div class="content-wrapper " style="overflow: hidden;">
         <div class="container-fluidd">
             <div class="row">
@@ -682,7 +682,7 @@ height:25px;
                     </div>
                 </div>
             </div>
-            <div class="row callDiv mt-4 mr-2 ml-2" >
+            <!-- <div class="row callDiv mt-4 mr-2 ml-2" >
                 <div class="col-md-8 text-center rounded bg-dark ">
                     <div class="row">
                         <div class="col-md-12">
@@ -690,7 +690,7 @@ height:25px;
                                
                             </div>
 
-                            <!-- @if($user->picture)
+                            @if($user->picture)
                                 @if(file_exists( public_path(). $user->picture))
                                     <img src="{{asset($user->picture)}}" class="profile-img pg" alt="">
                                 @else
@@ -698,7 +698,7 @@ height:25px;
                                 @endif
                             @else
                                 <img src="{{asset('assets/images/ico/Square-white.jpg')}}"  class="profile-img pg" alt="">
-                            @endif -->
+                            @endif
                         </div>
                         <div class="col-md-12 " style="position: absolute;bottom: 22px;">
                             <a  class="callSet vc">
@@ -740,8 +740,8 @@ height:25px;
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row  tech_weck tech_weck-none">
+            </div> -->
+            <div class="row  tech_weck ">
                 <div class="col-md-9 "> 
                     <div class="row">
                         <div class="col-md-12 mt-3">
@@ -1515,7 +1515,7 @@ height:25px;
     var editor2 = ace.edit("editor2");
     editor2.setTheme("ace/theme/monokai");
     editor2.session.setMode("ace/mode/javascript");
-
+    var checkConnectionSeq  = 0;
     $(document).ready(function(){
        
         // $(".tech_weck").hide();
@@ -1968,11 +1968,33 @@ connection.onUserStatusChanged = function(event) {
 
 connection.onopen = function(event) {
     // connection.onUserStatusChanged(event);
-// timer.resume();
+    // timer.resume();
     //conection joined
+    let x= 1;
+    checkConnectionSeq = checkConnectionSeq+x;
     $("#classOffModal").modal("hide");
+
+    
+  
+    if(checkConnectionSeq == 1)
+    {
+        // toastr.success(checkConnectionSeq+" Student refreshes the window");
+    }
+    if(checkConnectionSeq > 1)
+    {
+
+        // toastr.success(checkConnectionSeq+" Tutor refreshes the window");
+        setInterval(function(){ 
+            location.reload(); }, 5000);
+        
+        $(".tech_weck").removeClass("tech_weck-none");
+        $(".callDiv").css("display","none !important");
+        checkConnectionSeq = 0;
+    }
+    
     connection.send({
-        class_joined: true
+        class_joined: true,
+    
     });
     if (designer.pointsLength <= 0) {
         // make sure that remote user gets all drawings synced.
@@ -2042,7 +2064,7 @@ connection.onmessage = function(event) {
         // toastr.success("Tutor ended the class.");
         // $(".content-wrapper").css("display","none !important");
         $("#callEndConfirmationModal").modal("show");
-    $("#classOffModal").modal("hide");
+        $("#classOffModal").modal("hide");
 
     }
     if(event.data.is_timer === true){
@@ -2063,6 +2085,7 @@ connection.onmessage = function(event) {
     }
 
     if (event.data === 'plz-sync-points') {
+
         designer.sync();
         return;
     }
@@ -2075,12 +2098,14 @@ connection.onmessage = function(event) {
 
 connection.onstream = function(event) {
     callOnModal();
+
     if (event.stream.isScreen && !event.stream.canvasStream) {
         $('#screen-viewer').get(0).srcObject = event.stream;
         $('#screen-viewer').hide();
     }
     else if (event.extra.roomOwner === true) {
         var video = document.getElementById('main-video');
+        console.log(event.streamid+" Stream Id");
         video.setAttribute('data-streamid', event.streamid);
         // video.style.display = 'none';
         if(event.type === 'local') {
@@ -2094,6 +2119,7 @@ connection.onstream = function(event) {
         var otherVideos = document.querySelector('#other-videos');
         otherVideos.appendChild(event.mediaElement);
         $("#classOffModal").modal("hide");
+        
 
 
     }
@@ -2493,6 +2519,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     //         });
     // } else {
         connection.join(roomid, function(isRoomJoined, roomid, error) {
+            //First time joining
             // alert('in join')
             $("#classOffModal").modal("hide");
 
@@ -2841,6 +2868,7 @@ $(".s_status").change(function(){
 function callOnModal(){
 
     $("#classOffModal").modal("hide");
+    // alert("Junk");
 };
 function callOffModal(){
     $("#classOffModal").modal("show");

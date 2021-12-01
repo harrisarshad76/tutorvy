@@ -157,6 +157,8 @@ $(document).ready(function(){
                                        
                                     </div>`;
                 $('#chatArea_'+tt_id).append(html);
+                $('#chatArea_'+tt_id).animate({ scrollTop: 20000000 }, "slow");
+                
                 $(".msg").val('');
             }
             },
@@ -218,7 +220,7 @@ $(document).ready(function(){
                                        
                                     </div>`;
                 $('#chatArea_'+tt_id).append(html);
-                
+                $('#chatArea_'+tt_id).animate({ scrollTop: 20000000 }, "slow");
                 $(".msg").val('');
 
             }
@@ -302,9 +304,10 @@ $(document).ready(function(){
                                         </div>
                                        
                                     </div>`;
+                                    
 
                         $('#chatArea_'+id).append(msg);
-
+                        $('#chatArea_'+id).animate({ scrollTop: 20000000 }, "slow");
                     }else{
                         var type = response[i].type;
                       if(type == 'file'){
@@ -347,7 +350,7 @@ $(document).ready(function(){
                                        
                                     </div>`
                         $('#chatArea_'+id).append(msg);
-
+                        $('#chatArea_'+id).animate({ scrollTop: 20000000 }, "slow");
                     }
 
                 }

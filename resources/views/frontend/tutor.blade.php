@@ -181,11 +181,13 @@
                     <br />
                     <input type="submit" value="Take a demo class" class="submit-type none">
                     <div class="none">
-                    <span class="text-demo">
+                    <span class="text-white">
                         Watch demo
                     </span>
-                    <img id="image-rotate-play"  data-toggle="modal" data-target="#exampleModalCenter"
-                        src="../assets/images/play-icon.png" alt="play-icon">
+                    <a href="#">
+                            <img id="image-rotate-play" data-toggle="modal" data-target="#exampleModalCenter"
+                            src="../assets/images/play-icon.png" alt="play-icon">
+                        </a>
                     </div>
                     </div>
                     <div class="take-demo shows">Take demo class</div>
@@ -205,10 +207,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="variation">
                     <ul>
@@ -268,14 +268,23 @@
                         There are many variations of passages available, but
                         the majority have suffered alteration in some form.
                  </p>
-                    <div class="btn-socail">
-                        <img class="w-25 ml-5" src="../assets/images/g-btn.png" alt="img">
-                        <img class="w-25 ml-3" src="../assets/images/Apple-btn.png" alt="img">
+                    <!-- <br /> -->
+                    <div class="btn-socail mt-4">
+                        <a href="#" class="decoration-none">
+                            <img class="w-25 ml-5" src="assets/images/g-btn.png" alt="img">
+                        </a>
+                        <a href="#" class="decoration-none">
+                            <img class="w-25 ml-3" src="assets/images/Apple-btn.png" alt="img">
+                        </a>
                     </div>
                 </div>
                 <div class="margin-top-image">
-                    <img src="../assets/images/mobile-image.png" class="w-100 none" alt="icon">
-                    <img src="../assets/images/ico/mobile-advance.svg" class="w-100 shows" alt="icon">
+                    <a href="#" class="decoration-none">
+                        <img src="assets/images/mobile-image.png" class="w-100 none" alt="icon">
+                    </a>
+                    <a href="#" class="decoration-none">
+                        <img src="assets/images/ico/mobile-advance.svg" class="w-100 shows" alt="icon">
+                    </a>
                 </div>
             </div>
         </div>
@@ -307,8 +316,8 @@
                 <div class="col-md-4 col-12 mb-3 train ">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -328,8 +337,8 @@
                 <div class="col-md-4 col-12 mb-3 train ">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -349,8 +358,8 @@
                 <div class="col-md-4 col-12 mb-3 train">
                     <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                         <div class=" ml-4 d-flex ">
-                            <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                            <span class="std-name ml-3">Harram Altaf
+                            <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                            <span class="std-name ml-3">Mohsin Malik
                                 <p class="std-text">Student</p>
                             </span>
                             <span class="date-year">
@@ -384,8 +393,8 @@
                     <div class="col-md-4 mb-3">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
@@ -399,8 +408,8 @@
                     <div class="col-md-4 mb-3 ">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
@@ -414,8 +423,8 @@
                     <div class="col-md-4 mb-3">
                         <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                             <div class=" ml-4 d-flex ">
-                                <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                <span class="std-name ml-3">Harram Altaf
+                                <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                <span class="std-name ml-3">Mohsin Malik
                                     <p class="std-text">Student</p>
                                 </span>
                                 <span class="date-year"> 02 March 2021</span>
@@ -434,8 +443,8 @@
                         <div class="col-md-4 mb-3">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
@@ -449,8 +458,8 @@
                         <div class="col-md-4 mb-3 ">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
@@ -464,8 +473,8 @@
                         <div class="col-md-4 mb-3 ">
                             <div class="pt-4 pb-3 bg-card-std" style="background-color: #F9FBFF;">
                                 <div class=" ml-4 d-flex ">
-                                    <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                                    <span class="std-name ml-3">Harram Altaf
+                                    <img src="assets/images/card-profile.png" cl class="profile-img wh50"ass="profile-img wh50" height="50px" alt="card-profile">
+                                    <span class="std-name ml-3">Mohsin Malik
                                         <p class="std-text">Student</p>
                                     </span>
                                     <span class="date-year"> 02 March 2021</span>
@@ -500,8 +509,8 @@
             <div class="col-md-4 col-10 mb-3 card-mobile">
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -522,8 +531,8 @@
             <div class="col-md-4 col-10 mb-3 card-mobile">
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -544,8 +553,8 @@
             <div class="col-md-4 col-10 mb-3 card-mobile">
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -566,8 +575,8 @@
             <div class="col-md-4 col-10 mb-3 card-mobile">
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
@@ -588,8 +597,8 @@
             <div class="col-md-4 col-10 mb-3 card-mobile">
                 <div class="pt-3 pb-1 bg-card-std" style="background-color: #F9FBFF;">
                     <div class=" ml-4 d-flex ">
-                        <img src="../assets/images/card-profile.png" height="50px" alt="card-profile">
-                        <span class="std-name ml-3">Harram Altaf
+                        <img src="../assets/images/card-profile.png" class="profile-img wh50" height="50px" alt="card-profile">
+                        <span class="std-name ml-3">Mohsin Malik
                             <p class="std-text">Student</p>
                         </span>
                     </div>
