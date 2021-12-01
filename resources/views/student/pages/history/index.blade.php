@@ -175,6 +175,3 @@
 
 @endsection
 
-@section('scripts')
-    @include('js_files.student.supportJs')
-@endsection
