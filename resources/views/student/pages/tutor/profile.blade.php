@@ -46,9 +46,9 @@ width:22px;
                         <p class="profile-tutor mt-0" style="">
                             {{$tutor->tagline}}
                         </p>
-                        <button class="schedule-btn w-100 mt-3" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';">
+                        <!-- <button class="schedule-btn w-100 mt-3" onclick="location.href = '#';">
                             Book class
-                        </button>
+                        </button> -->
                         <button class="cencel-btn w-100 mt-3">
                             Send massage
                         </button>

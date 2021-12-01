@@ -360,11 +360,11 @@
                                                 </div>
                                                 <p class="mb-0"> <small><img src="{{asset('assets/images/ico/location-pro.png')}}" alt="" class=""> {{ $tutor->city != NULL ? $tutor->city.' , ' : '---' }} {{ $tutor->country != NULL ? $tutor->country: '---' }}</small> </p>
                                             </div>
-                                            <div class="col-md-4">
-                                                <button class="schedule-btn w-100 mt-2" onclick="location.href = '{{route('student.book-now',[$tutor->id])}}';">
+                                            <!-- <div class="col-md-4">
+                                                <button class="schedule-btn w-100 mt-2" onclick="location.href = '#';">
                                                     Book class
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 @endforeach

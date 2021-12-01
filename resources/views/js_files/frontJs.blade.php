@@ -67,7 +67,7 @@ $(".filteration").change(function() {
 
 function bookNow(id){
     document.cookie = 't_id' + "=" + id + ";" + 60 + ";";
-    location.href = '{{route('student.book-now',[$tutor->id])}}';
+    location.href = '#';
 }
 
 function list_tutors(tutors){
@@ -85,7 +85,7 @@ function list_tutors(tutors){
             let rating_html = '';
             let rank_html = '';
             let t_id = tutors[i].id;
-            let url = "{{route('student.book-now', ':id')}}";
+            let url = "#";
             url = url.replace(':id', t_id);
             console.log(t_id);
             if(inst == '---'){
