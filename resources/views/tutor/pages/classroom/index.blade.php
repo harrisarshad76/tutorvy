@@ -269,7 +269,7 @@
                         
                         let timezoneTime = new Date(current_user_time_zone);
 
-                        let start_call = `<a href="{{url('tutor/testmedia')}}/`+ room +`"  class="schedule-btn"> Start Call </a>`;
+                        let start_call = `<a href="{{url('tutor/class')}}/`+ room +`"  class="schedule-btn"> Start Call </a>`;
 
                         if(timezoneTime.getTime()  < create_date_format.getTime() ) {
                             $("#class_time_"+id).text(show_date_time);
