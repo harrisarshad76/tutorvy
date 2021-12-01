@@ -699,6 +699,17 @@ footer a:hover {
         font-size: 18px;
         font-weight: 600;
     }
+    .mobile-nav ul li a:hover {
+        color: #1173FF !important;
+    }
+    .nav-link:hover {
+        color: #1173FF !important;
+    }
+    .nav-item:hover:after {
+        bottom: 0;
+        opacity: 0;
+        color: #1173FF !important;
+    }
     .mibile-image {
         margin: auto !important;
         text-align: center;
@@ -1012,6 +1023,11 @@ footer a:hover {
     cursor: pointer;
     border: 2px solid #1173FF;
     border-radius: 50%;
+}
+
+.wh50 {
+    width: 50px;
+    height: 50px;
 }
 
 
