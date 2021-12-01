@@ -575,6 +575,8 @@ messaging.onMessage((payload) => {
                                 </div>
                             </div>`;
                     $('#chatArea_'+sender_id).append(msg);
+                    $('#chatArea_'+sender_id).animate({ scrollTop: 20000000 }, "slow");
+
 
                 }else if($('#chatClient_'+sender_id).length){
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");
@@ -654,6 +656,9 @@ messaging.onMessage((payload) => {
                                 </div>
                             </div>`;
                         $('#chatArea_'+sender_id).append(msg);
+                        $('#chatArea_'+sender_id).animate({ scrollTop: 20000000 }, "slow");
+
+                        
 
                 }else if($('#chatClient_'+sender_id).length){
                     $('#unseen_msg_cnt_'+sender_data.id).addClass("dot");

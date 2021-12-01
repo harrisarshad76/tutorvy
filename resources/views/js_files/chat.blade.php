@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   
-  
+    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
     $("#msg").focus(function(){
         alert();
     });
@@ -227,10 +227,12 @@ $(document).ready(function(){
             },
         });
     });
+    
     function selectUser(id,name,tagline){
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
+        $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
      
        
         $(".chatDefault").css("display","none");
@@ -360,9 +362,6 @@ $(document).ready(function(){
     }
 
     function incrementUnseenMessagesCount(sender_id){
-
-
-
     }
 
     function allSeen(id){
@@ -379,6 +378,7 @@ $(document).ready(function(){
                 // $('.message-item').remove();
                 $(".unread_co").removeClass("dot");
                 $(".unread_co").html("");
+                $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
 
                 if(data.data == 0){
                     $(".show_message_counts").css("display","none");

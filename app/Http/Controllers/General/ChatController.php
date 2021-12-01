@@ -104,7 +104,7 @@ class ChatController extends Controller
         Message::where('sender_id', $id)->where('recipient_id', auth()->id())->update(['seen' => true]);
 
         // get all messages between the authenticated user and the selected user
-        $messages = Message::where(function($q) use ($id) {
+        $messages = Message::where(function($q) use ($id) { 
             $q->where('sender_id', auth()->id());
             $q->where('recipient_id', $id);
         })->orWhere(function($q) use ($id) {
