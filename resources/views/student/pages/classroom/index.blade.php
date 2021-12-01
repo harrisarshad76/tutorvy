@@ -596,38 +596,15 @@
 
     }
 
-    // function joinClass(id) {
-    //     var connection = new RTCMultiConnection();
-    //     var roomid = id;
-    //     var fullName = '---';
-    //     connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
-
-    //     connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
-    //         if (isRoomExist === true) {
-    //             window.location.href = `{{ url('student/class') }}/` + id;
-    //         } else {
-    //             toastr.warning('Tutor not joined yet.', {
-    //                 position: 'top-end',
-    //                 icon: 'warning',
-    //                 showConfirmButton: false,
-    //                 timer: 2500
-    //             });
-    //         }
-    //     });
-    // }
-
-    function joinClass(id,booking) {
+    function joinClass(id) {
         var connection = new RTCMultiConnection();
         var roomid = id;
-        var booking = booking;
-        
         var fullName = '---';
         connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
 
         connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
             if (isRoomExist === true) {
-
-                window.location.href = `{{ url('student/testmedia') }}/` + booking;
+                window.location.href = `{{ url('student/class') }}/` + id;
             } else {
                 toastr.warning('Tutor not joined yet.', {
                     position: 'top-end',
@@ -638,6 +615,29 @@
             }
         });
     }
+
+    // function joinClass(id,booking) {
+    //     var connection = new RTCMultiConnection();
+    //     var roomid = id;
+    //     var booking = booking;
+        
+    //     var fullName = '---';
+    //     connection.socketURL = 'https://tutorvy.herokuapp.com:443/';
+
+    //     connection.checkPresence(roomid, function(isRoomExist, roomid, error) {
+    //         if (isRoomExist === true) {
+
+    //             window.location.href = `{{ url('student/testmedia') }}/` + booking;
+    //         } else {
+    //             toastr.warning('Tutor not joined yet.', {
+    //                 position: 'top-end',
+    //                 icon: 'warning',
+    //                 showConfirmButton: false,
+    //                 timer: 2500
+    //             });
+    //         }
+    //     });
+    // }
 
 
     function showReviewModal(id) {
