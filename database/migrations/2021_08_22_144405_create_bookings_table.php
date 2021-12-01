@@ -26,6 +26,11 @@ class CreateBookingsTable extends Migration
             $table->string('attachments')->nullable();
             $table->string('class_date')->nullable();
             $table->string('class_time')->nullable();
+            $table->string('class_booked_till')->nullable();
+
+            $table->string('server_tmz')->nullable();
+            $table->string('server_time')->nullable();
+
             $table->integer('duration')->nullable();
             $table->integer('status')->nullable()->comment('1-Pending , 2-Payment Pending , 3-Approved , 4-Cancelled by tutor , 5-Cancelled by student , 6-Delivered');
             $table->text('cancel_note')->nullable();
@@ -35,7 +40,6 @@ class CreateBookingsTable extends Migration
             $table->text('reschedule_note')->nullable();
             $table->double('price', 15, 2);
             $table->double('service_fee', 15, 2);
-            $table->string('class_booked_till')->nullable();
             $table->timestamps();
         });
     }

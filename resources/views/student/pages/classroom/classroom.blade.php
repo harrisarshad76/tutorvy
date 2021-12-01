@@ -2346,7 +2346,7 @@ document.getElementById('btn-chat-message').onclick = function() {
         typing: false
     });
 
-    // save_class_room_messages(message , user_id ,receiver_id , type);
+    save_class_room_messages(message , user_id ,receiver_id , type);
 };
 
 var recentFile;
@@ -2363,43 +2363,43 @@ document.getElementById('btn-attach-file').onclick = function() {
 };
 
 // save class_room messages
-// function save_class_room_messages(message , user_id ,receiver_id , type) { 
-//     var object = {
-//         message : message,
-//         user_id : user_id, 
-//         receiver_id: receiver_id,
-//         type : type, 
-//     }
+function save_class_room_messages(message , user_id ,receiver_id , type) { 
+    var object = {
+        message : message,
+        user_id : user_id, 
+        receiver_id: receiver_id,
+        type : type, 
+    }
 
-//     $.ajax({
-//         url: "",
-//         type: "yourtype",
-//         data: object,
-//         success:function(response){
-//             var obj = response.messages;
-//             if(response.status == 200 && response.success == true) {
+    $.ajax({
+        url: "",
+        type: "yourtype",
+        data: object,
+        success:function(response){
+            var obj = response.messages;
+            if(response.status == 200 && response.success == true) {
 
                
 
-//             }else{
-//                 toastr.error('Something Went Wrong',{
-//                     position: 'top-end',
-//                     icon: 'error',
-//                     showConfirmButton: false,
-//                     timer: 2500
-//                 });
-//             }
-//         },
-//         error:function(e) {
-//             toastr.error('Something Went Wrong',{
-//                 position: 'top-end',
-//                 icon: 'error',
-//                 showConfirmButton: false,
-//                 timer: 2500
-//             });
-//         }
-//     });
-// }
+            }else{
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        },
+        error:function(e) {
+            toastr.error('Something Went Wrong',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}
 
 function getFileHTML(file) {
     var url = file.url || URL.createObjectURL(file);
