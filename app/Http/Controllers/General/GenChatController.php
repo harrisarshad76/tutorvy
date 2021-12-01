@@ -32,8 +32,6 @@ class GenChatController extends Controller
         })->get();
         if(sizeof($contact) == 0){
 
-        }else{
-
             $new_contact = new Contact();
             $new_contact->user_id = \Auth::user()->id;
             $new_contact->contact_id = $request->user;
@@ -43,6 +41,8 @@ class GenChatController extends Controller
             $new_contact->user_id = $request->user;
             $new_contact->contact_id = \Auth::user()->id;
             $new_contact->save();
+
+        }else{
             
         }
         if(request()->has('file')){
@@ -137,8 +137,14 @@ class GenChatController extends Controller
         $user = User::where('id',$id)->first();
 
         $messages = auth()->user()->messages_between($user);
+        $attachment_count = auth()->user()->file_count($user);
 
-        return response()->json($messages);
+        // return response()->json($messages);
+        return response()->json([
+            'status' => 200,
+            'messages' => $messages,
+            'attachment_count' => $attachment_count
+        ]);
     }
 
     public function sendSignal(Request $request){
