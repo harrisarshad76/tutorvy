@@ -37,6 +37,7 @@
                         $("#subject").val("");
                         $("#message").val("");
                         $(".support_category").val("").trigger('change');
+                        location.reload();
                     }else{
                         toastr.error(response.message,{
                             position: 'top-end',
