@@ -24,7 +24,7 @@
         .rightChatIcon {
             font-size: 25px;
             padding-left: 9px;
-            padding-top: 5px;
+            padding-top: 9px;
             padding-right: 19px;
             color: #00132D;
         }
@@ -40,7 +40,7 @@
         .sendRight {
             right: 12px;
             position: absolute;
-            top: 0;
+            top: 2px;
             color: #00132D;
             font-size: 21px;
         }
@@ -124,10 +124,10 @@
         }
 
         .recDull {
-            position: absolute;
-            left: 28%;
-            color: #BCC0C7;
-        }
+    position: absolute;
+    left: 28%;
+    color: #BCC0C7;
+}
 
         .dull {
             
@@ -522,11 +522,10 @@
                                         <p class="heading-third mt-1 mb-0">
                                             Shared Media
                                         </p>
-                                        
                                         <div class="row pl-3 pr-3 mediaAttachments">
                                          
                                         </div>
-                                        <div class="row pl-3 pr-3">
+                                        <div class="row pl-3 pr-3 showMor">
                                             <div class="col-md-4 p-1 ">
                                                 <div class="deadColor hungama">
                                                     <a href="#" class="showMoreMedia">
