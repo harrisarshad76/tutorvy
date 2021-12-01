@@ -249,12 +249,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function file_count($user)
     {
 
-        return Message::where(['user_id' => $this->id, 'receiver_id' => $user->id])
+        return Message::where(['user_id' => $this->id, 'receiver_id' => $user->id,'type' => 'file'])
             ->orWhere(function ($q) use ($user) {
                 $q->where('user_id', $user->id);
                 $q->where('receiver_id', $this->id);
+                $q->where('type','file');
             })
-            ->where('type','file')
             ->count();
     }
 

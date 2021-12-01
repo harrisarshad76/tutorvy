@@ -525,7 +525,7 @@
                                         <div class="row pl-3 pr-3 mediaAttachments">
                                          
                                         </div>
-                                        <div class="row pl-3 pr-3">
+                                        <div class="row pl-3 pr-3 showMor">
                                             <div class="col-md-4 p-1 ">
                                                 <div class="deadColor hungama">
                                                     <a href="#" class="showMoreMedia">

@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   
-  
+    $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
     $("#msg").focus(function(){
         alert();
     });
@@ -231,6 +231,7 @@ $(document).ready(function(){
         allSeen(id);
         // alert(name);
         var pic = $("#img_"+id).attr('src');
+        $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
      
        
         $(".chatDefault").css("display","none");
@@ -253,13 +254,22 @@ $(document).ready(function(){
             type:"get",
 
             success:function(response){
-                // $(".chatArea").animate({ scrollTop: $(document).height() }, 1000);
+                console.log(response,"response")
+                var count_att= response.attattachment_count; 
+
+                if(count_att < 6){
+                    $(".showMor").hide();
+                }
+                else if(count_att > 6){
+                    $(".showMor").show();
+                }
                 $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
                 $auth = "{{Auth::user()->id}}";
                 var attachment = '';
                 $('#chatArea_'+id).html('');
+                var cut = count_att;
                 $("#mediaAttachments_"+id).html('');
-                for(let i = 0 ; i<response.length;i++){
+                for(let i = 0 ; i<response.messages.length;i++){
                     var attachment = '';
                         // if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
                         //     attachment += `<img  crossOrigin="anonymous" src="` + response[i].message + `">
@@ -273,19 +283,19 @@ $(document).ready(function(){
                         //     `;
                         // }
 
-                    if("{{Auth::user()->id}}" == response[i].user_id){
-                      var type = response[i].type;
+                    if("{{Auth::user()->id}}" == response.messages[i].user_id){
+                      var type = response.messages[i].type;
                       if(type == 'file'){
-                        if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                                attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                        if (response.messages[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                                attachment += `<img class="img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.messages[i].message + `')}}">`;
                             }
                             let media_attachment = `   <div class="col-md-4 p-1">
-                                                <a href="{{asset('storage/` + response[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response[i].message + `')}}" class="w-100" alt=""></a>
+                                                <a href="{{asset('storage/` + response.messages[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response.messages[i].message + `')}}" class="w-100" alt=""></a>
                                             </div>`
                             $('#mediaAttachments_'+id).prepend(media_attachment);
                         }
                         else{
-                            attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
+                            attachment = `<p class="senderText mb-0">` + response.messages[i].message + ` </p>`;
                         }
                         let msg = `<div class="col-md-12 mt-3">
                                         <div class="row">
@@ -309,19 +319,23 @@ $(document).ready(function(){
                         $('#chatArea_'+id).append(msg);
                         $('#chatArea_'+id).animate({ scrollTop: 20000000 }, "slow");
                     }else{
-                        var type = response[i].type;
+                        var type = response.messages[i].type;
                       if(type == 'file'){
-                            if (response[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                                attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response[i].message + `')}}">`;
+                            if (response.messages[i].message.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                                attachment += `<img class="reciever-img-style"  crossOrigin="anonymous" src="{{asset('storage/` + response.messages[i].message + `')}}">`;
                                 let media_attachment = `   <div class="col-md-4 p-1">
-                                                <a href="{{asset('storage/` + response[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response[i].message + `')}}" class="w-100" alt=""></a>
+                                                <a href="{{asset('storage/` + response.messages[i].message + `')}}" target="_blank"><img src="{{asset('storage/` + response.messages[i].message + `')}}" class="w-100" alt=""></a>
                                             </div>`
                             $('#mediaAttachments_'+id).prepend(media_attachment);
+                                cut++;
+                                if(cut > 6){
+                                    $(".showMor").show();
+                                }
                             
                             }
                         }
                         else{
-                            attachment = `<p class="senderText mb-0">` + response[i].message + ` </p>`;
+                            attachment = `<p class="senderText mb-0">` + response.messages[i].message + ` </p>`;
                         }
                         // let msg = `<div class="col-md-12 mt-3">
                         //                 <div class="col-md-12 ">
@@ -361,8 +375,6 @@ $(document).ready(function(){
 
     function incrementUnseenMessagesCount(sender_id){
 
-
-
     }
 
     function allSeen(id){
@@ -379,6 +391,7 @@ $(document).ready(function(){
                 // $('.message-item').remove();
                 $(".unread_co").removeClass("dot");
                 $(".unread_co").html("");
+                $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
 
                 if(data.data == 0){
                     $(".show_message_counts").css("display","none");
