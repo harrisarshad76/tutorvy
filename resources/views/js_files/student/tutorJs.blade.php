@@ -54,19 +54,65 @@ $('input[type=radio][name=rating_filter]').change(function() {
 
 });
 
-$("#range").change(function() {
+// $("#range").change(function() {
 
-    let price = $("#range").val();
+//     let price = $("#range").val();
+//     let subject = $("#subjects-list").val();
+//     let lang = $("#languages-list").val();
+//     let rating = $("input[name='rating_filter']:checked").val();
+//     let location = $("#location").val();
+//     let gender = $("input[name='gender']:checked").val();
+
+//     search_tutors(price,subject,lang,rating,location ,gender);
+
+// });
+
+$("#range").mouseup(function(){
+    
+    let price = $(this).val();
     let subject = $("#subjects-list").val();
     let lang = $("#languages-list").val();
     let rating = $("input[name='rating_filter']:checked").val();
     let location = $("#location").val();
     let gender = $("input[name='gender']:checked").val();
 
+    $("#maxRg").val(price);
     search_tutors(price,subject,lang,rating,location ,gender);
-
+    // alert(ter);
 });
+$("#ageRange").mouseup(function(){
+    
+    // let price = $(this).val();
+    // let subject = $("#subjects-list").val();
+    // let lang = $("#languages-list").val();
+    // let rating = $("input[name='rating_filter']:checked").val();
+    // let location = $("#location").val();
+    // let gender = $("input[name='gender']:checked").val();
 
+    $("#maxAg").val(price);
+    // search_tutors(price,subject,lang,rating,location ,gender);
+    // alert(ter);
+});
+$("#maxAg").change(function(){
+    var vall =  $(this).val();
+    $("#ageRange").val(vall);
+})
+$("#maxRg").focusout(function(){
+        
+    let price = $(this).val();
+    let subject = $("#subjects-list").val();
+    let lang = $("#languages-list").val();
+    let rating = $("input[name='rating_filter']:checked").val();
+    let location = $("#location").val();
+    let gender = $("input[name='gender']:checked").val();
+    var vall =  $(this).val();
+    $("#range").val(vall);
+    search_tutors(price,subject,lang,rating,location ,gender);
+  
+});
+$("#maxRg").change(function(){
+        $("#range").val(vall);
+    });    
 $("#location").change(function() {
 
     let price = $("#range").val();
