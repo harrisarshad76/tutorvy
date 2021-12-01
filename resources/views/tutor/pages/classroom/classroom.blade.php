@@ -1649,7 +1649,7 @@ document.getElementById('btn-attach-file').onclick = function() {
 //     }
 
 //     $.ajax({
-//         url: "{{route('your_route')}}",
+//         url: "",
 //         type: "yourtype",
 //         data: object,
 //         success:function(response){
