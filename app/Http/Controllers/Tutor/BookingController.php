@@ -30,6 +30,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 use App\Models\Payments;
 use DateTime;
+use Illuminate\Support\Carbon;
 use DateTimeZone;
 
 class BookingController extends Controller
@@ -54,8 +55,6 @@ class BookingController extends Controller
     public function index() {
         $all = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->get();
 
-        // dd($all->toArray());
-
         foreach($all as $all_booking) {
             if($all_booking->tutor != null && $all_booking->tutor->time_zone != null) {
                 date_default_timezone_set($all_booking->tutor->time_zone);
@@ -64,33 +63,11 @@ class BookingController extends Controller
             }
         }
 
-        // dd($all->toArray());
-
-        // $booking_class_time = $all[0]->class_time . ':00';
-        // // dd($all->toArray());
-
-        // // tutor
-        // $date = date_create($all[0]->class_date, timezone_open($all[0]->tutor->time_zone));
-        // echo date_format($date, 'Y-m-d H:i:s') . " -> tutor -> india" . '<br>';
-
-
-        // echo "booking time " . $booking_class_time . '<br>';
-
-
-        // date_default_timezone_set($all[0]->tutor->time_zone);
-        // echo "india time zone " . date("h:i:sa"). '<br>';
-
-        // $time_in_24_hour_format  = date("H:i:s", strtotime(date("h:i:sa")));
-        // echo "current india time is:" . $time_in_24_hour_format;
-
-        // return false;
-
-
         $pending = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->whereIn('status',[0,1])->get();
         $confirmed = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->status(2)->get();
         $completed = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->status(5)->get();
         $cancelled = Booking::with(['user','tutor'])->where('booked_tutor',Auth::user()->id)->whereIn('status',[3,4,6])->get();
-        // dd($pending->toArray());
+        
         return view('tutor.pages.booking.index',compact('all','pending','confirmed','completed','cancelled'));
     }
 

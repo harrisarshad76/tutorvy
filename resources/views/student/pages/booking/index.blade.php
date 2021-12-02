@@ -125,7 +125,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -234,7 +234,7 @@
                                                                         {{$booking->topic}}
                                                                     </td>
                                                                     <td class="pt-4">
-                                                                        {{$time}} - {{$booking->class_date }}
+                                                                        {{$booking->class_tm}} - {{$booking->class_date }}
                                                                     </td>
 
                                                                     <td class="pt-4">
@@ -330,7 +330,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -427,7 +427,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -526,7 +526,7 @@
                                                                 {{$booking->topic}}
                                                             </td>
                                                             <td class="pt-4">
-                                                                {{$time}} - {{$booking->class_date }}
+                                                                {{$booking->class_tm}} - {{$booking->class_date }}
                                                             </td>
 
                                                             <td class="pt-4">
@@ -710,14 +710,14 @@
                                                 </div>
                                             </div> --}}
 
-                                            <button class="btn btn-default"  style="border:1px solid; cursor: pointer;">
+                                            <button class="btn btn-default mt-2"  style="border:1px solid; cursor: pointer;">
                                                 <img src="{{asset ('assets/images/icons8-wallet-64.png')}}"
                                                 class="w-50" alt="">
                                            </button>
                                         </div>
 
 
-                                        <div class="col-md-12 text-right mt-3" id="show_pay_btn">
+                                        <!-- <div class="col-md-12 text-right mt-3" id="show_pay_btn">
 
                                             <form action="{{url('/student/booking/payment')}}" id="payment" method="post" target="_blank">
                                                 @csrf
@@ -725,7 +725,7 @@
                                                 <span></span>
 
                                             </form>
-                                        </div>
+                                        </div> -->
 
                             </div>
                         </div>

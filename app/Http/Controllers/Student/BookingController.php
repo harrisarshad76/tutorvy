@@ -89,7 +89,6 @@ class BookingController extends Controller
         $user = User::with(['education','professional','teach'])->where('id',$t_id)->first();
         $op_booking = OrphanBooking::where('uuid',$b_id)->first();
 
-
         return view('student.pages.booking.book_now',compact('t_id','subjects','user','op_booking'));
     }
 
@@ -130,13 +129,46 @@ class BookingController extends Controller
         $end_slot = '';
 
         foreach($slots as $slot){
-            $period = new CarbonPeriod($slot->wrk_from, '30 minutes', $slot->wrk_to); 
+
+            $tm = date('Y-m-d') .' '. $slot->wrk_from;
+            $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
+            $region_offset = $date->getOffset();
+
+            // to
+            $t_to = date('Y-m-d') . ' ' . $slot->wrk_to;
+            $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
+
+            $a = $date->format('Y-m-d H:i:s P');
+
+            if(strpos($a , "+")) {
+                $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+                $to = Carbon::parse($t_to)->addSeconds($region_offset)->format('H:i');
+            }else if(strpos($a , "-")){
+                $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+                $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+            }
+
+            $period = new CarbonPeriod($from , '30 minutes', $to); 
+            
             foreach($period as $item){
 
-                $start = $item->format("H:i");
-                $end = date('H:i',strtotime($start . ' +60 minutes'));
                 
-                $booking = Booking::where('class_time',$start)->where('class_booked_till',$end)->where('class_date',$request->date)->where('booked_tutor',$request->id)->where('status','!=',3)->where('status','!=',4)->first();
+                $start = $item->format("H:i");
+                
+                $end = date('H:i',strtotime($start . ' +60 minutes'));
+
+                // return dd($start .'-'. $end);
+
+                $booking = Booking::where('class_time',$start)
+                            ->where('class_booked_till',$end)
+                            ->where('class_date',$request->date)
+                            ->where('booked_tutor',$request->id)
+                            ->where('status','!=',3)
+                            ->where('status','!=',4)
+                            ->first();
+
+                
+
                 if($center_slot != ''){
                     $center_slot = '';
                     continue;
@@ -145,6 +177,8 @@ class BookingController extends Controller
                 //     $end_slot = '';
                 //     continue;
                 // }
+
+                
                 if($booking){
 
                     $center_slot = date('H:i',strtotime($start . ' +30 minutes'));
@@ -153,19 +187,26 @@ class BookingController extends Controller
                 }else{
                     $start_check = date('H:i',strtotime($start . ' +30 minutes'));
 
-                    $booking = Booking::where('class_time',$start_check)->where('class_date',$request->date)->where('booked_tutor',$request->id)->where('status','!=',3)->where('status','!=',4)->first();
+
+                    $booking = Booking::where('class_time',$start_check)
+                                ->where('class_date',$request->date)
+                                ->where('booked_tutor',$request->id)
+                                ->where('status','!=',3)
+                                ->where('status','!=',4)
+                                ->first();
+
                     if($booking){
 
                     }else{
-                        if($item->format("H:i") == $slot->wrk_to){
+
+                        if($item->format("H:i") == $to){
                             array_pop($slots_partition);
-                        }elseif($item->format("H:i") == "00:00" && $slot->wrk_to == "24:00"){
+                        }elseif($item->format("H:i") == "00:00" && $to == "24:00"){
                             array_pop($slots_partition);
                         }else{
     
-                            $_id = sprintf( '%04x%04x',
-                                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-                            );
+                            $_id = sprintf( '%04x%04x', mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), );
+                         
                             $calculated_slot = new \stdClass();
                             $calculated_slot->id = $_id;
                             $calculated_slot->wrk_from = $item->format("H:i");
@@ -240,14 +281,12 @@ class BookingController extends Controller
         ]);
     }
 
-
-
     public function bookingDetail($id){
 
         $booking = Booking::with(['tutor','user','subject'])->where('id',$id)->first();
-        // return $booking;
         return view('student.pages.booking.booking_detail',compact('booking'));
     }
+
     public function bookingNew(Request $request){
 
         $booking = Booking::with(['tutor','user','subject'])->where('id',$request->id)->first();
@@ -261,6 +300,7 @@ class BookingController extends Controller
         ]);
 
     }
+
     public function directBooking($id)
     {
 
@@ -270,6 +310,43 @@ class BookingController extends Controller
 
     public function booked(Request $request)
     {
+        $tm = $request->current_date . ' ' . $request->class_time;
+        $ldate = date('Y-m-d H:i');
+        $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
+        $region_offset = $date->getOffset();
+
+        $a = $date->format('Y-m-d H:i:s P');
+    
+        if(strpos($a , "+")) {
+
+            $converted_date =  Carbon::parse($tm)->subSeconds($region_offset)->format('Y-m-d H:i:s');
+            $bk_time =  Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+            $bk_end_time =  Carbon::parse($tm)->subSeconds($region_offset)->addSeconds(3600)->format('H:i');
+
+        }else if(strpos($a , "-")){
+
+            $converted_date =  Carbon::parse($tm)->addSeconds($region_offset)->format('Y-m-d H:i:s');
+            $bk_time =  Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+            $bk_end_time =  Carbon::parse($tm)->addSeconds($region_offset)->addSeconds(3600)->format('H:i');
+
+        }
+
+
+
+        // $timezone_offset_minutes = $request->offset;
+        // $timezone_name = timezone_name_from_abbr("", $timezone_offset_minutes*60, false);
+        // return $timezone_name;
+
+
+        // $ldate = date('Y-m-d H:i');
+        // return $ldate;
+        // $date = new \DateTime();
+        // $ldate = $request->current_date.' '.$request->class_time;
+        // return $ldate;
+        // $datetime = Carbon::createFromFormat('Y-m-d H:i', $ldate);
+        
+        // $datetime->setTimezone('Asia/Kabul');
+        // return $datetime;
         // return date("H:i", strtotime($request->class_time));
         // return dd($request->all());
         $class_date = $request->current_date;
@@ -278,12 +355,16 @@ class BookingController extends Controller
         // $from_time = explode(" ",$class_time[0]);
         // $from_time = $from_time[0];
         $from_time = date("H:i", strtotime( $request->class_time));
+
+        // return Carbon::now($request->class_time);
        
         // $to_time = explode(" ",$class_time[1]);
         // $to_time = $to_time[0];
         $to_time = date("H:i", strtotime($request->class_end_time));
-
-        $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
+        // return $bk_time . ' - ' . $bk_end_time;
+        $booking = Booking::where('class_time',$bk_time)->where('class_booked_till',$bk_end_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
+        // return $booking->count();
+        // $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
         if($booking->count() <= 0){
 
@@ -307,11 +388,11 @@ class BookingController extends Controller
                 'brief' => $request->brief,
                 'attachments' => $path,
                 'class_date' => $request->current_date,
-                'class_time' => $from_time,
-                'class_booked_till' => $to_time,
+                'class_time' => $bk_time,
+                'class_booked_till' => $bk_end_time,
                 'duration' => 1,
                 'price' => $price,
-
+                'server_time' => $converted_date,
             ]);
 
             OrphanBooking::where('uuid',$request->_id)->delete();

@@ -128,7 +128,7 @@
                                                                 {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                {{$time}} - {{$booking->class_date }}
+                                                                {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -227,7 +227,7 @@
                                                             {{$booking->topic}}
                                                             </td>
                                                             <td class="pt-4">
-                                                                {{date("g:i a", strtotime("$booking->class_time UTC"))}} - {{$booking->class_date }}
+                                                                {{$booking->class_tm}} - {{$booking->class_date }}
                                                             </td>
 
                                                             <td class="pt-4">
@@ -273,6 +273,7 @@
                             </div>
                                 <!-- end -->
                         </div>
+
                         <div class="tab-pane tab-border-none fade" id="nav-contact" role="tabpanel"
                             aria-labelledby="nav-contact-tab">
 
@@ -313,7 +314,7 @@
                                                         {{$booking->topic}}
                                                         </td>
                                                         <td class="pt-4">
-                                                            {{date("g:i a", strtotime("$booking->class_time UTC"))}} - {{$booking->class_date }}
+                                                            {{$booking->class_tm}} - {{$booking->class_date }}
                                                         </td>
 
                                                         <td class="pt-4">
@@ -396,7 +397,7 @@
                                                             {{$booking->topic}}
                                                         </td>
                                                         <td class="pt-4">
-                                                            {{date("g:i a", strtotime("$booking->class_time UTC"))}} - {{$booking->class_date }}
+                                                            {{$booking->class_tm}} - {{$booking->class_date }}
                                                         </td>
 
                                                         <td class="pt-4">
@@ -496,7 +497,7 @@
                                                         {{$booking->topic}}
                                                         </td>
                                                         <td class="pt-4">
-                                                            {{date("g:i a", strtotime("$booking->class_time UTC"))}} - {{$booking->class_date }}
+                                                            {{$booking->class_tm}} - {{$booking->class_date }}
                                                         </td>
 
                                                         <td class="pt-4">

@@ -30,8 +30,7 @@ class GenChatController extends Controller
             $q->where('user_id', $user);
             $q->where('contact_id', \Auth::user()->id);
         })->get();
-        if(sizeof($contact) == 0){
-
+        if(sizeof($contact) == 0 || $contact == '[]' || empty($contact)){
             $new_contact = new Contact();
             $new_contact->user_id = \Auth::user()->id;
             $new_contact->contact_id = $request->user;
@@ -41,9 +40,7 @@ class GenChatController extends Controller
             $new_contact->user_id = $request->user;
             $new_contact->contact_id = \Auth::user()->id;
             $new_contact->save();
-
         }else{
-            
         }
         if(request()->has('file')){
             $filename = request('file')->store('chat','public');

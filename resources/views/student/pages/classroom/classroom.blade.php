@@ -1127,18 +1127,23 @@ height:25px;
                                     </div>
                                     
                                 </div>
-                                <div class="card-footer bg-chat-head">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <textarea id="txt-chat-message" style="display:none;" ></textarea>
-                                            <div id="check"></div>
-                                            <a type="button" id="btn-chat-message" disabled><i class="fa fa-paper-plane-o paper" aria-hidden="true"></i></a>
-                                            <a id="btn-attach-file" type="button"><i class="fa fa-paperclip clip" aria-hidden="true"></i></a>
-                                            <!-- <img id="btn-attach-file" src="https://www.webrtc-experiment.com/images/attach-file.png" title="Attach a File"> -->
-                                            <!-- <img id="btn-share-screen" src="https://www.webrtc-experiment.com/images/share-screen.png" title="Share Your Screen"> -->
+                                <form id="chat_form">
+                                    <div class="card-footer bg-chat-head">
+                                        <div class="row">
+
+                                                <div class="col-md-12">
+
+                                                    <textarea id="txt-chat-message" style="display:none;" ></textarea>
+                                                    <div id="check"></div>
+                                                    <button type="submit" id="btn-chat-message" ><i class="fa fa-paper-plane-o paper" aria-hidden="true"></i></button>
+                                                    <a id="btn-attach-file" type="button"><i class="fa fa-paperclip clip" aria-hidden="true"></i></a>
+                                                    <!-- <img id="btn-attach-file" src="https://www.webrtc-experiment.com/images/attach-file.png" title="Attach a File"> -->
+                                                    <!-- <img id="btn-share-screen" src="https://www.webrtc-experiment.com/images/share-screen.png" title="Share Your Screen"> -->
+                                                </div>
+                                            
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -1630,7 +1635,7 @@ var timer = new Timer();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
-
+var tt_id = {{$booking->booked_tutor}}
 console.log(connection.socket)
 // var class_duration = 20;
 $("#join_now").click(function(){
@@ -2326,9 +2331,10 @@ window.onkeyup = function(e) {
         $('#btn-chat-message').click();
     }
 };
-
+var msg_cht = '';
 document.getElementById('btn-chat-message').onclick = function() {
     var chatMessage = $('.emojionearea-editor').html();
+    msg_cht = chatMessage;
     $('.emojionearea-editor').html('');
 
     if (!chatMessage || !chatMessage.replace(/ /g, '').length) return;
@@ -2361,45 +2367,28 @@ document.getElementById('btn-attach-file').onclick = function() {
         }
     });
 };
+$( '#chat_form' ).on( 'submit', function(e) {
 
-// save class_room messages
-// function save_class_room_messages(message , user_id ,receiver_id , type) { 
-//     var object = {
-//         message : message,
-//         user_id : user_id, 
-//         receiver_id: receiver_id,
-//         type : type, 
-//     }
+    event.preventDefault();
+    let msg = msg_cht;
+    let receiver = tt_id;
+    
+    // $.ajax({
+    //     url: "{{route('store.classtext')}}",
+    //     type:"POST",
+    //     data:{
+    //         msg:msg,
+    //         user:receiver
+    //     },
+    //     success:function(response){
+    //         if(response.status == 200) {
+    //             msg_cht = '';
+    //         }
+    //     },
+    // });
 
-//     $.ajax({
-//         url: "",
-//         type: "yourtype",
-//         data: object,
-//         success:function(response){
-//             var obj = response.messages;
-//             if(response.status == 200 && response.success == true) {
+});
 
-               
-
-//             }else{
-//                 toastr.error('Something Went Wrong',{
-//                     position: 'top-end',
-//                     icon: 'error',
-//                     showConfirmButton: false,
-//                     timer: 2500
-//                 });
-//             }
-//         },
-//         error:function(e) {
-//             toastr.error('Something Went Wrong',{
-//                 position: 'top-end',
-//                 icon: 'error',
-//                 showConfirmButton: false,
-//                 timer: 2500
-//             });
-//         }
-//     });
-// }
 
 function getFileHTML(file) {
     var url = file.url || URL.createObjectURL(file);
