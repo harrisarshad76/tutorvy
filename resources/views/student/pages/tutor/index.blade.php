@@ -48,7 +48,21 @@
         border: 0;
         border-top: 1px solid #1173FF;
     }
-    
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background-color: #051731;
+       border-radius: 50%;
+        width: 14px;
+        height: 14px;
+    }
+    input[type=range] {
+    -webkit-appearance: none;
+    background-color: #1173FF;
+    width: 100px;
+        height: 10px !important;
+        padding:0;
+        border-radius:9px;
+    }
 </style>
  <!-- top Fixed navbar End -->
  <div class="content-wrapper " style="overflow: hidden;">
@@ -150,19 +164,20 @@
                                                             <input class="range-slider__range" type="range" id="range" value="999" min="0" max="1000">
                                                             <span class="range-slider__value"></span>
                                                         </div> -->
-                                                        <div class="range-slider">
+                                                        <!-- <div class="range-slider">
                                                              <input type="text" class="js-range-slider" id="range"  name="my_range" value="" />
                                                              <span class="range-slider__value"></span>
-                                                        </div>
+                                                        </div> -->
+                                                        <input type="range" class=" pr-0" id="range" min="5" max="100" value="50">
                                                         <div class="row mt-2">
                                                             <div class="col-md-5 ">
-                                                                <input type="number" class="  formy-range" placeholder="Min">
+                                                                <input type="text" class=" formy-range" id="minRg" disabled placeholder="Min" value="$5">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <p>-</p>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <input type="number" max="1000" class="  formy-range" placeholder="Max">
+                                                                <input type="number" max="100" id="maxRg" class="formy-range" placeholder="Max" value="50">
                                                             </div>
                                                         </div>
                                                 </div>
@@ -183,10 +198,46 @@
                                             <div id="ratingDiv" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body pl-2 pr-0 pt-0">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="0" >
+                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="5" checked>
                                                         <label class="form-check-label" for="rating_filter">
                                                         <p>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                        </p>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="4" checked>
+                                                        <label class="form-check-label" for="rating_filter">
+                                                        <p>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
                                                             <i class="fa fa-star "></i>
+                                                        </p>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="3" >
+                                                        <label class="form-check-label" for="rating_filter">
+                                                        <p>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star "></i>
+                                                            <i class="fa fa-star "></i>
+                                                        </p>
+                                                        </label>
+                                                    </div><div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="2" >
+                                                        <label class="form-check-label" for="rating_filter">
+                                                        <p>
+                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star text-yellow"></i>
                                                             <i class="fa fa-star "></i>
                                                             <i class="fa fa-star "></i>
                                                             <i class="fa fa-star "></i>
@@ -201,39 +252,19 @@
                                                             <i class="fa fa-star "></i>
                                                             <i class="fa fa-star "></i>
                                                             <i class="fa fa-star "></i>
-                                                        </p>
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="2" >
-                                                        <label class="form-check-label" for="rating_filter">
-                                                        <p>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star "></i>
                                                             <i class="fa fa-star "></i>
                                                         </p>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="3" >
+                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="0" >
                                                         <label class="form-check-label" for="rating_filter">
                                                         <p>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
                                                             <i class="fa fa-star "></i>
-                                                        </p>
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="4" checked>
-                                                        <label class="form-check-label" for="rating_filter">
-                                                        <p>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
-                                                            <i class="fa fa-star text-yellow"></i>
+                                                            <i class="fa fa-star "></i>
+                                                            <i class="fa fa-star "></i>
+                                                            <i class="fa fa-star "></i>
+                                                            <i class="fa fa-star "></i>
                                                         </p>
                                                         </label>
                                                     </div>
@@ -353,7 +384,7 @@
                                                             <input class="range-slider__range" type="range" id="range" value="999" min="0" max="1000">
                                                             <span class="range-slider__value"></span>
                                                         </div> -->
-                                                        <div class="range-slider">
+                                                        <!-- <div class="range-slider">
                                                              <input type="text" class="age-range-slider" name="my_range" value="" />
                                                         </div>
                                                         <div class="row mt-2">
@@ -365,6 +396,18 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <input type="number" max="70" class="  formy-range"  placeholder="Max">
+                                                            </div>
+                                                        </div> -->
+                                                        <input type="range" class=" pr-0" id="ageRange" min="17" max="70" value="30">
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-5 ">
+                                                                <input type="number" class=" formy-range" id="minAg" disabled placeholder="Min" value="17">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p>-</p>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <input type="number" max="70" id="maxAg" class="  formy-range" placeholder="Max" value="30">
                                                             </div>
                                                         </div>
                                                 </div>

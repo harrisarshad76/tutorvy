@@ -630,7 +630,7 @@ a[data-toggle="collapse"] {
 .notification-text {
     position: relative;
     top: -10px;
-    background-color: #DF615C;
+    background-color: #D30023;
     ;
     color: white;
     padding: 3px 7px;
@@ -1933,7 +1933,7 @@ a[data-toggle="collapse"] {
 .notification-text {
     position: relative;
     top: -10px;
-    background-color: #DF615C;
+    background-color: #D30023;
     ;
     color: white;
     padding: 3px 7px;
@@ -2841,7 +2841,7 @@ select#paymentMethod option[value="others"] {
 }
 
 .callSet:hover {
-    background: #DF615C;
+    background: #D30023;
     text-decoration: none;
 }
 
@@ -2861,12 +2861,11 @@ select#paymentMethod option[value="others"] {
     padding: 13px 10px 16px 14px;
 }
 
-
-/* .no-mk,
+.no-mk,
 .no-vc,
 .no-ph {
-    background: #DF615C;
-} */
+    background: #D30023;
+}
 
 
 /* .no-mk:hover,
@@ -2877,8 +2876,8 @@ select#paymentMethod option[value="others"] {
 .no-mk:hover,
 .no-vc:hover,
 .no-ph:hover {
-    background: #DF615C;
-    border-color: #DF615C;
+    background: #ffffff;
+    border-color: #ffffff;
 }
 
 .pg {
