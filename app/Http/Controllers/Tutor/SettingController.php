@@ -20,6 +20,7 @@ use App\Models\Admin\supportTkts;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\TutorSlots;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
 class SettingController extends Controller
@@ -33,7 +34,37 @@ class SettingController extends Controller
         $user = User::where('id',\Auth::user()->id)->first();
         $paypal_payment = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('method','paypal')->first();
         $user_slots = TutorSlots::where('user_id',Auth::user()->id)->get()->toArray();
+
+        if(sizeOf($user_slots) > 0) {
+            for($i = 0; $i < sizeOf($user_slots); $i++) {
+
+                if($user_slots[$i]['wrk_from'] && $user_slots[$i]['wrk_to']) {
+                    $tm = date('Y-m-d') .' '. $user_slots[$i]['wrk_from'];
+                    $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
+                    $region_offset = $date->getOffset();
         
+                    // to
+                    $t_to = date('Y-m-d') . ' ' . $user_slots[$i]['wrk_to'];
+                    $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
+        
+                    $a = $date->format('Y-m-d H:i:s P');
+        
+                    if(strpos($a , "+")) {
+                        $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+                        $to = Carbon::parse($t_to)->addSeconds($region_offset)->format('H:i');
+                    }else if(strpos($a , "-")){
+                        $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+                        $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                    }
+        
+                    $user_slots[$i]['wrk_from'] = $from;
+                    $user_slots[$i]['wrk_to'] = $to;
+                }    
+            }
+        }
+        
+        // dd($user_slots);
+
         $slots = array(
           array("value" => "1 Hours"),
           array("value" => "2 Hours"),
@@ -456,62 +487,72 @@ class SettingController extends Controller
         $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
         $message = '';
 
-        // return dd($request->all());
+        
 
         if($slots  == 0) {
             for($i = 0; $i < sizeOf($request->from); $i++) {
 
+                $tm = date('Y-m-d') . ' ' . $request->from[$i];
+                $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
+                $region_offset = $date->getOffset();
+
+                // to
+                $t_to = date('Y-m-d') . ' ' . $request->to[$i];
+                $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
+
+                $a = $date->format('Y-m-d H:i:s P');
+
+                if(strpos($a , "+")) {
+                    $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                }else if(strpos($a , "-")){
+                    $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                }
+
                 $data = array(
                     'user_id' => Auth::user()->id , 
                     'day' => $request->day,
-                    'wrk_from' => ($request->from[$i] ?? NULL) ,
-                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'wrk_from' => $from ,
+                    'wrk_to' => $to ,
                     'day_off' => ($request->d_off ?? NULL) ,
                 );
                 
                 TutorSlots::create($data);
             }
-
-            // if($request->day_off != null && $request->day_off != "") {
-            //     $days_oof = explode(',', $request->day_off);
-
-            //     $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
-
-            //     $z = 0;
-            //     foreach($all_slots as $slot) {
-            //         $slot->day_off = $days_oof[$z];
-            //         $slot->save();
-            //         $z++;
-            //     } 
-            // }
         }else{
             TutorSlots::where('user_id' , Auth::user()->id)->where('day',$request->day)->delete();
 
             for($i = 0; $i < sizeOf($request->from); $i++) {
 
+                $tm = date('Y-m-d') . ' ' . $request->from[$i];
+                $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
+                $region_offset = $date->getOffset();
+
+                // to
+                $t_to = date('Y-m-d') . ' ' . $request->to[$i];
+                $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
+
+                $a = $date->format('Y-m-d H:i:s P');
+
+                if(strpos($a , "+")) {
+                    $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                }else if(strpos($a , "-")){
+                    $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                }
+
                 $data = array(
                     'user_id' => Auth::user()->id , 
                     'day' => $request->day,
-                    'wrk_from' => ($request->from[$i] ?? NULL) ,
-                    'wrk_to' => ($request->to[$i] ?? NULL) ,
+                    'wrk_from' => $from ,
+                    'wrk_to' => $to ,
                     'day_off' => ($request->d_off ?? NULL) ,
                 );
                 
                 TutorSlots::create($data);
             }
-
-            // if($request->day_off != null && $request->day_off != "") {
-            //     $days_oof = explode(',', $request->day_off);
-
-            //     $all_slots = TutorSlots::where('user_id' , Auth::user()->id)->get();
-
-            //     $z = 0;
-            //     foreach($all_slots as $slot) {
-            //         $slot->day_off = $days_oof[$z];
-            //         $slot->save();
-            //         $z++;
-            //     } 
-            // }
         }
 
         return response()->json([

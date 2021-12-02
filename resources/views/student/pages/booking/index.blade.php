@@ -125,7 +125,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -234,7 +234,7 @@
                                                                         {{$booking->topic}}
                                                                     </td>
                                                                     <td class="pt-4">
-                                                                        {{$time}} - {{$booking->class_date }}
+                                                                        {{$booking->class_tm}} - {{$booking->class_date }}
                                                                     </td>
 
                                                                     <td class="pt-4">
@@ -330,7 +330,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -427,7 +427,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$time}} - {{$booking->class_date }}
+                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -526,7 +526,7 @@
                                                                 {{$booking->topic}}
                                                             </td>
                                                             <td class="pt-4">
-                                                                {{$time}} - {{$booking->class_date }}
+                                                                {{$booking->class_tm}} - {{$booking->class_date }}
                                                             </td>
 
                                                             <td class="pt-4">

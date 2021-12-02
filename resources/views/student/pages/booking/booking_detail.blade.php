@@ -16,12 +16,6 @@
                         <p class="heading-first ml-3 mr-3">Booking Details</p>
                     </div>
                 </div>
-
-
-
-
-
-
             </a>
             @if (Session::has('error'))
                 <div class="alert alert-danger alert-dismissible fade show bg-danger" role="alert">
@@ -144,9 +138,7 @@
 
                                                                 Schedule Time:
                                                             </span>
-                                                            <span class="time-details" id="show_curr_region_time">
-                                                                
-                                                                </span>
+                                                            <span class="time-details" id="show_curr_region_time">{{$booking->class_tm}} </span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -478,6 +470,6 @@
         let curr_date = moment(time_zone).format('YYYY-MM-DD');
         let create_date = curr_date + ' ' + booking_time;
         let converted_time = moment(create_date).format('LT') ;
-        $("#show_curr_region_time").text(converted_time);
+        // $("#show_curr_region_time").text(converted_time);
     </script>
 @endsection

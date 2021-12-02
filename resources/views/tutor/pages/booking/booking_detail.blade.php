@@ -248,9 +248,7 @@
 
                                                                 Schedule Time:
                                                             </span>
-                                                            <span class="time-details" id="show_curr_region_time">
-                                                                
-                                                            </span>
+                                                            <span class="time-details" id="">{{$booking->class_tm}} </span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -447,7 +445,7 @@
                                         <p>Schedule Time: </p>
                                     </div>
                                     <div class="col-md-6 col-6 col-sm-6 text-right">
-                                        <p><strong> {{ $time }} </strong></p>
+                                        <p><strong> {{ $booking->class_tm }} </strong></p>
                                     </div>
                                     <div class="col-md-6 col-6 col-sm-6">
                                         <p>Schedule Duration: </p>

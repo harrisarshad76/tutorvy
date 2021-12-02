@@ -19,8 +19,6 @@ class CreateTutorSlots extends Migration
             $table->string('day')->nullable();
             $table->string('wrk_from')->nullable();
             $table->string('wrk_to')->nullable();
-            $table->string('slot_length')->nullable();
-            $table->string('bk_pr_slot')->nullable();
             $table->string('day_off')->nullable();
             $table->timestamps();
         });

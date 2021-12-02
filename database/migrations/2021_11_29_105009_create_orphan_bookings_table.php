@@ -15,6 +15,7 @@ class CreateOrphanBookingsTable extends Migration
     {
         Schema::create('orphan_bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('tutor_id')->nullable();
             $table->date('date')->nullable();

@@ -28,7 +28,6 @@ class CreateBookingsTable extends Migration
             $table->string('class_time')->nullable();
             $table->string('class_booked_till')->nullable();
 
-            $table->string('server_tmz')->nullable();
             $table->string('server_time')->nullable();
 
             $table->integer('duration')->nullable();
