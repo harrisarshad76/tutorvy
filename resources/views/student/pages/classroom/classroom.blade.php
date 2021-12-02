@@ -2630,7 +2630,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
-                $('#reviewModal').modal("show");
+                // $('#reviewModal').modal("show");
              
                 $("#classOffModal").modal("hide");
 
@@ -2641,7 +2641,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 
             if(today_date_seconds > class_end_seconds) {
                 $('#countdownExample .values').html("Class Time Over");
-                $('#reviewModal').modal("show");
+                // $('#reviewModal').modal("show");
                 $(".content-wrapper").css("display","none");
                 $("#classOffModal").modal("hide");
 
