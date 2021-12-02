@@ -2022,7 +2022,7 @@ $('#btn-share-screen').click(function() {
         alert('Screen sharing is not enabled.');
         return;
     }
-
+console.log(mediaConstraints)
     $('#btn-share-screen').hide();
 
     if(navigator.mediaDevices.getDisplayMedia) {
@@ -2155,18 +2155,18 @@ $(".s_status").change(function(){
         alert('Screen sharing is not enabled.');
         return;
     }
-
+    console.log(connection.mediaConstraints)
     $('#btn-share-screen').hide();
 
     if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(mediaConstraints).then(stream => {
+        navigator.mediaDevices.getDisplayMedia(connection.mediaConstraints).then(stream => {
             replaceScreenTrack(stream);
         }, error => {
             alert('Please make sure to use Edge 17 or higher.');
         });
     }
     else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(mediaConstraints).then(stream => {
+        navigator.getDisplayMedia(connection.mediaConstraints).then(stream => {
             replaceScreenTrack(stream);
         }, error => {
             alert('Please make sure to use Edge 17 or higher.');
