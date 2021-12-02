@@ -45,6 +45,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                 <input type="hidden" name="class_end_time" id="class_end_time">
                 <input type="hidden" name="_id" id="_id">
 
+                <input type="hidden" name="offset" id="offset">
+
                 <div class="row mt-5">
                         <div class=" col-md-6">
                             <div class="row">
@@ -68,7 +70,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
                                     </select>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-6 d-block">
                             <div class="card mt-0">
@@ -307,6 +308,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     }else{
         $('.show_booking_text').text("");
     }
+
+    var timezone_offset_minutes = new Date().getTimezoneOffset();
+    timezone_offset_minutes = timezone_offset_minutes == 0 ? 0 : -timezone_offset_minutes;
+
+    // Timezone difference in minutes such as 330 or -360 or 0
+    console.log(timezone_offset_minutes , "timezone_offset_minutes"); 
+    $("#offset").val(timezone_offset_minutes);
 </script>
 @include('js_files.student.bookingJs')
 @endsection

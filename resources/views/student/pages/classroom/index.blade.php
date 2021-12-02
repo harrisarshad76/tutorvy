@@ -195,7 +195,7 @@
 
                                                             <td>
                                                                 <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
-                                                                data-time="{{$class->class_time}}" id="class_time_{{$class->id}}"
+                                                                data-time="{{$class->class_tm}}" data-endtime="{{$class->class_end_tm}}" id="class_time_{{$class->id}}"
                                                                 data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}" 
                                                                 data-booking="{{$class->classroom != null ? $class->classroom->booking_id : ''}}"
                                                                 class="current_time"> 
@@ -448,10 +448,9 @@
 
         setInterval(() => {
             $(".current_time").each(function() {
-            // var timer = new Timer();
-            
             var id = $(this).data('id');
             var booking_time = $(this).data('time');
+            var booking_end_time = $(this).data('endtime');
             var booking_date = $(this).data('date');
             var duration = $(this).data('duration');
             var room = $(this).data('room');
@@ -459,44 +458,81 @@
 
             const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
             let get_day_in_no = moment(booking_date).day();
-            let day = days[get_day_in_no];            
+            let day = days[get_day_in_no];        
             
+            var current_date = new Date();
+            
+            let strt_date = new Date(booking_date + ' ' + booking_time);
+            let end_date = new Date(booking_date + ' ' + booking_end_time);
+
             let convert_date = moment(booking_date).format('DD MMMM');
-
-            let user_region = "{{Auth::user()->time_zone}}";
-
-            if(user_region != null && user_region != "") {
-
-                var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
-
-                let create_date_format = new Date(booking_date + ' ' + booking_time);
-                let start_date = moment(create_date_format).format("hh:mm A");
             
-                let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
-                let end_date_booking = new Date(booking_date + ' ' + end_date);
-                
-                var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
+            let start_date = moment(strt_date).format("hh:mm A");
+            let ed_date = moment(end_date).format("hh:mm A");
 
-                $("#class_time_"+id).text(show_date_time);
-                
-                let timezoneTime = new Date(current_user_time_zone);
+            var dt_format = day +','+convert_date+', ' + start_date + ' - ' + ed_date;
 
-                let join_btn = `<a onclick="joinClass('`+room+`','`+booking+`')" class="schedule-btn"> Join Class </a>`;
+            let join_btn = `<a onclick="joinClass('`+room+`','`+booking+`')" class="schedule-btn"> Join Class </a>`;
+            $("#class_time_"+id).text(dt_format);
 
-                if(timezoneTime.getTime()  < create_date_format.getTime() ) {
-                    $("#class_time_"+id).text(show_date_time);
-                }else{
-                    if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
-                        if(room != null && room != "") {
-                            $("#class_time_"+id).html(join_btn);
-                        }else{
-                            $("#class_time_"+id).html("-");
-                        }
-                    }else {
+            // let a =  {
+            //     current_date : current_date.getTime() ,
+            //     strt_date : strt_date.getTime() ,
+            //     end_date : end_date.getTime() ,
+            // }
+
+            // console.table(a);
+
+            if(current_date.getTime()  < strt_date.getTime() ) {
+                $("#class_time_"+id).text(dt_format);
+            }else{
+                if(current_date.getTime()  > strt_date.getTime() && current_date.getTime() < end_date.getTime()) {
+                    if(room != null && room != "") {
+                        $("#class_time_"+id).html(join_btn);
+                    }else{
                         $("#class_time_"+id).html("-");
-                    } 
-                }
+                    }
+                }else {
+                    $("#class_time_"+id).html("-");
+                } 
             }
+
+            // console.log(day +','+convert_date+', ' + start_date + ' - ' + end_date , "convert_date");
+
+            // let user_region = "{{Auth::user()->time_zone}}";
+
+            // if(user_region != null && user_region != "") {
+
+            //     var current_user_time_zone = new Date().toLocaleString('en-US', { timeZone: user_region });
+
+            //     let create_date_format = new Date(booking_date + ' ' + booking_time);
+            //     let start_date = moment(create_date_format).format("hh:mm A");
+            
+            //     let end_date = moment(create_date_format).add(1, 'hours').format("hh:mm A");
+            //     let end_date_booking = new Date(booking_date + ' ' + end_date);
+                
+            //     var show_date_time = day + ',' + convert_date + ',' + start_date + ' - ' + end_date;
+
+            //     $("#class_time_"+id).text(show_date_time);
+                
+            //     let timezoneTime = new Date(current_user_time_zone);
+
+            //     let join_btn = `<a onclick="joinClass('`+room+`','`+booking+`')" class="schedule-btn"> Join Class </a>`;
+
+            //     if(timezoneTime.getTime()  < create_date_format.getTime() ) {
+            //         $("#class_time_"+id).text(show_date_time);
+            //     }else{
+            //         if(timezoneTime.getTime()  > create_date_format.getTime() && timezoneTime.getTime() < end_date_booking.getTime()) {
+            //             if(room != null && room != "") {
+            //                 $("#class_time_"+id).html(join_btn);
+            //             }else{
+            //                 $("#class_time_"+id).html("-");
+            //             }
+            //         }else {
+            //             $("#class_time_"+id).html("-");
+            //         } 
+            //     }
+            // }
             // var now = moment();
             // const date1 = moment(booking_date).format('YYYY-MM-DD').valueOf()
             // const date2 = moment().format('YYYY-MM-DD').valueOf();
