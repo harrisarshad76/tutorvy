@@ -2148,6 +2148,10 @@ function HmsToSeconds(hms) {
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
 };
+var displayMediaStreamConstraints = {
+    video: true // or pass HINTS
+};
+
 
 $(".s_status").change(function(){
     if($(this).prop("checked") == true){
@@ -2157,24 +2161,34 @@ $(".s_status").change(function(){
     }
     console.log(connection.mediaConstraints)
     $('#btn-share-screen').hide();
+    if (navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(displayMediaStreamConstraints).then(stream => {
+            replaceScreenTrack(stream);
+        },error => {
+            console.log(error)
+        });
+    } else {
+        navigator.getDisplayMedia(displayMediaStreamConstraints).then(success).catch(error);
+    }
+    // if(navigator.mediaDevices.getDisplayMedia) {
+    // console.log(navigator.mediaDevices.getDisplayMedia())
 
-    if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(connection.mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(connection.mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else {
-        alert('getDisplayMedia API is not available in this browser.');
-    }
+    //     navigator.mediaDevices.getDisplayMedia(connection.mediaConstraints).then(stream => {
+    //         replaceScreenTrack(stream);
+    //     }, error => {
+    //         alert('Please make sure to use Edge 17 or higher...');
+    //     });
+    // }
+    // else if(navigator.getDisplayMedia) {
+    //     navigator.getDisplayMedia(connection.mediaConstraints).then(stream => {
+    //         replaceScreenTrack(stream);
+    //     }, error => {
+    //         alert('Please make sure to use Edge 17 or higher.');
+    //     });
+    // }
+    // else {
+    //     alert('getDisplayMedia API is not available in this browser.');
+    // }
     }else{
        //run code
        alert('unchecked')
