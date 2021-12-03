@@ -1889,6 +1889,8 @@ connection.DetectRTC.load(function() {
     }
 });
 
+connection.mediaConstraints.screen = true;
+connection.session.screen = true;
 
 /// make this room public
 connection.publicRoomIdentifier = '';
@@ -2033,6 +2035,7 @@ connection.onmessage = function(event) {
 
     if(event.data.showMainVideo) {
         // $('#main-video').show();
+        console.log(event.data)
         $('#screen-viewer').css({
             top: $('#widget-container').offset().top,
             left: $('#widget-container').offset().left,
@@ -2045,6 +2048,8 @@ connection.onmessage = function(event) {
 
     if(event.data.hideMainVideo) {
         // $('#main-video').hide();
+        console.log('hide')
+
         $('#screen-viewer').hide();
         return;
     }
@@ -2105,7 +2110,11 @@ connection.onstream = function(event) {
     callOnModal();
 
     if (event.stream.isScreen && !event.stream.canvasStream) {
+        // alert('asd')
         $('#screen-viewer').get(0).srcObject = event.stream;
+        var video = document.getElementById('main-video');
+        video.setAttribute('data-streamid', event.streamid);
+        video.srcObject = event.stream;
         $('#screen-viewer').hide();
     }
     else if (event.extra.roomOwner === true) {
@@ -2374,7 +2383,7 @@ $( '#chat_form' ).on( 'submit', function(e) {
     let receiver = tt_id;
     
     // $.ajax({
-    //     url: "{{route('store.classtext')}}",
+    //     url: "",
     //     type:"POST",
     //     data:{
     //         msg:msg,
@@ -2634,7 +2643,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
              
                 $("#classOffModal").modal("hide");
 
-                $(".content-wrapper").css("display","none");
+                // $(".content-wrapper").css("display","none");
 
             });
             /* Javascript Timer ENd */
@@ -2642,7 +2651,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
             if(today_date_seconds > class_end_seconds) {
                 $('#countdownExample .values').html("Class Time Over");
                 // $('#reviewModal').modal("show");
-                $(".content-wrapper").css("display","none");
+                // $(".content-wrapper").css("display","none");
                 $("#classOffModal").modal("hide");
 
             }
@@ -2756,32 +2765,32 @@ function replaceScreenTrack(stream) {
     $('#screen-viewer').show();
 }
 
-$('#btn-share-screen').click(function() {
-    if(!window.tempStream) {
-        alert('Screen sharing is not enabled.');
-        return;
-    }
+// $('#btn-share-screen').click(function() {
+//     if(!window.tempStream) {
+//         alert('Screen sharing is not enabled.');
+//         return;
+//     }
 
-    $('#btn-share-screen').hide();
+//     $('#btn-share-screen').hide();
 
-    if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(screen_constraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else {
-        alert('getDisplayMedia API is not available in this browser.');
-    }
-});
+//     if(navigator.mediaDevices.getDisplayMedia) {
+//         navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
+//             replaceScreenTrack(stream);
+//         }, error => {
+//             alert('Please make sure to use Edge 17 or higher.');
+//         });
+//     }
+//     else if(navigator.getDisplayMedia) {
+//         navigator.getDisplayMedia(screen_constraints).then(stream => {
+//             replaceScreenTrack(stream);
+//         }, error => {
+//             alert('Please make sure to use Edge 17 or higher.');
+//         });
+//     }
+//     else {
+//         alert('getDisplayMedia API is not available in this browser.');
+//     }
+// });
 
 function saveClassLogs() {
 
@@ -2860,7 +2869,7 @@ function HmsToSeconds(hms) {
     return seconds;
 }
 if ($("#reviewModal").hasClass("show")) {
-  $(".content-wrapper").css("display","none");
+//   $(".content-wrapper").css("display","none");
 }
 
 $(".s_status").change(function(){
