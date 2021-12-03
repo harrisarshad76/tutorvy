@@ -117,52 +117,51 @@ $(document).ready(function(){
        let ter = $('.emojionearea-editor').html();
 
        if(ter != ""){
-        let msg =  $('.emojionearea-editor').html();
-        
-        let receiver = tt_id;
-        // let _token   = $('meta[name="csrf_token"]').attr('content');
+            let msg =  $('.emojionearea-editor').html();
+            
+            let receiver = tt_id;
+            // let _token   = $('meta[name="csrf_token"]').attr('content');
 
-        $.ajax({
-            url: "{{route('store.text')}}",
-            type:"POST",
-            data:{
-                msg:msg,
-                user:receiver
-            },
-            success:function(response){
-            // console.log(response);
-            $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
+            $.ajax({
+                url: "{{route('store.text')}}",
+                type:"POST",
+                data:{
+                    msg:msg,
+                    user:receiver
+                },
+                success:function(response){
+                // console.log(response);
+                $(".chatArea").animate({ scrollTop: 20000000 }, "slow");
+                    if(response.status == 200) {
+                        $(".emojionearea-editor").html('');
+                        
 
-            if(response.status == 200) {
-                $(".emojionearea-editor").html('');
-                
-
-                var message = `<p class="senderText mb-0">` + msg + ` </p>`;
-                            
-                let html = `<div class="col-md-12 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
-                                            </div>
-                                            <div class="col-md-11 chatName">
-                                                <div class="">
-                                                    <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
-                                                    <small class="dull pull-right">1min ago</small>
-                                                    `+message+`
-                                                    
-                                                    <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                        var message = `<p class="senderText mb-0">` + msg + ` </p>`;
+                                    
+                        let html = `<div class="col-md-12 mt-3">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <img src="{{asset(Auth::user()->picture)}}" class="profile-img" alt="">
+                                                    </div>
+                                                    <div class="col-md-11 chatName">
+                                                        <div class="">
+                                                            <p class="mb-0"><b> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</b></p>
+                                                            <small class="dull pull-right">1min ago</small>
+                                                            `+message+`
+                                                            
+                                                            <a href="#" class="textMenu"><i class="fa fa-ellipsis-h"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                       
-                                    </div>`;
-                $('#chatArea_'+tt_id).append(html);
-                $('#chatArea_'+tt_id).animate({ scrollTop: 20000000 }, "slow");
-                
-                $(".msg").val('');
-            }
-            },
-        });
+                                            
+                                            </div>`;
+                        $('#chatArea_'+tt_id).append(html);
+                        $('#chatArea_'+tt_id).animate({ scrollTop: 20000000 }, "slow");
+                        
+                        $(".msg").val('');
+                    }
+                },
+            });
        }
        else{
         toastr.error("Can't send empty message");

@@ -619,7 +619,7 @@
     .notification-text {
         position: relative;
         top: -10px;
-        background-color: #DF615C;
+        background-color: #D30023;
         ;
         color: white;
         padding: 3px 7px;
@@ -1301,7 +1301,7 @@
     }
     
     .callSet:hover {
-        background: #DF615C;
+        background: #D30023;
         text-decoration: none;
     }
     
@@ -1329,7 +1329,7 @@
     /* .no-mk,
     .no-vc,
     .no-ph {
-        background: #DF615C;
+        background: #D30023;
     } */
     
     .no-mk,
@@ -1337,8 +1337,8 @@
     .no-ph {
         /* background: transparent;
         border: 1px solid #fff; */
-        background: #DF615C;
-        border-color: #DF615C;
+        background: #D30023;
+        border-color: #D30023;
         cursor: pointer;
     }
     /*     
@@ -1354,8 +1354,8 @@
     .no-mk:hover,
     .no-vc:hover,
     .no-ph:hover {
-        background: #DF615C;
-        border-color: #DF615C;
+        background: #D30023;
+        border-color: #D30023;
     }
     
     .pg {

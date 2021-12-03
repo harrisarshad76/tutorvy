@@ -1310,7 +1310,8 @@ connection.chunkSize = 16000;
 connection.enableFileSharing = true;
 
 connection.session.data =  true;
-
+connection.mediaConstraints.screen = true;
+connection.session.screen = true;
 connection.sdpConstraints.mandatory = {
     OfferToReceiveAudio: true,
     OfferToReceiveVideo: false
@@ -1369,6 +1370,7 @@ connection.onmessage = function(event) {
     console.log(event)
     if(event.data.showMainVideo) {
         // $('#main-video').show();
+
         $('#screen-viewer').css({
             top: $('#widget-container').offset().top,
             left: $('#widget-container').offset().left,
@@ -1432,9 +1434,11 @@ connection.onmessage = function(event) {
 // extra code
 
 connection.onstream = function(event) {
+    
     if (event.stream.isScreen && !event.stream.canvasStream) {
         $('#screen-viewer').get(0).srcObject = event.stream;
         $('#screen-viewer').hide();
+        console.log(event.stream)
         
     }
     else if (event.extra.roomOwner === true) {
@@ -1815,6 +1819,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
     tempStream.isScreen = true;
     tempStream.streamid = tempStream.id;
     tempStream.type = 'local';
+    tempStream.type1 = 'local1';
     connection.attachStreams.push(tempStream);
     window.tempStream = tempStream;
 
@@ -1973,10 +1978,16 @@ function replaceTrack(videoTrack, screenTrackId) {
 };
 
 function replaceScreenTrack(stream) {
+    console.log(stream)
+
     stream.isScreen = true;
     stream.streamid = stream.id;
     stream.type = 'local';
-
+    // connection.resetScreen();
+    connection.addStream({
+        screen: true,
+        oneway: true
+    });
     // connection.attachStreams.push(stream);
     connection.onstream({
         stream: stream,
@@ -2022,7 +2033,7 @@ $('#btn-share-screen').click(function() {
         alert('Screen sharing is not enabled.');
         return;
     }
-
+console.log(mediaConstraints)
     $('#btn-share-screen').hide();
 
     if(navigator.mediaDevices.getDisplayMedia) {
@@ -2148,6 +2159,12 @@ function HmsToSeconds(hms) {
 if ($("#reviewModal").hasClass("show")) {
   $(".content-wrapper").css("display","none");
 };
+var displayMediaStreamConstraints = {
+    video: false, // or pass HINTS
+    screen: true,
+    oneway: true
+};
+
 
 $(".s_status").change(function(){
     if($(this).prop("checked") == true){
@@ -2155,26 +2172,36 @@ $(".s_status").change(function(){
         alert('Screen sharing is not enabled.');
         return;
     }
-
+    console.log(connection.mediaConstraints)
     $('#btn-share-screen').hide();
+    if (navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(displayMediaStreamConstraints).then(stream => {
+            replaceScreenTrack(stream);
+        },error => {
+            console.log(error)
+        });
+    } else {
+        navigator.getDisplayMedia(displayMediaStreamConstraints).then(success).catch(error);
+    }
+    // if(navigator.mediaDevices.getDisplayMedia) {
+    // console.log(navigator.mediaDevices.getDisplayMedia())
 
-    if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else {
-        alert('getDisplayMedia API is not available in this browser.');
-    }
+    //     navigator.mediaDevices.getDisplayMedia(connection.mediaConstraints).then(stream => {
+    //         replaceScreenTrack(stream);
+    //     }, error => {
+    //         alert('Please make sure to use Edge 17 or higher...');
+    //     });
+    // }
+    // else if(navigator.getDisplayMedia) {
+    //     navigator.getDisplayMedia(connection.mediaConstraints).then(stream => {
+    //         replaceScreenTrack(stream);
+    //     }, error => {
+    //         alert('Please make sure to use Edge 17 or higher.');
+    //     });
+    // }
+    // else {
+    //     alert('getDisplayMedia API is not available in this browser.');
+    // }
     }else{
        //run code
        alert('unchecked')
