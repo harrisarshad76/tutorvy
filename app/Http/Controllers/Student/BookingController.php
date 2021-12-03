@@ -166,10 +166,9 @@ class BookingController extends Controller
                             ->where('status','!=',3)
                             ->where('status','!=',4)
                             ->where('status','!=',6)
+                            ->where('status','!=',2)
 
                             ->first();
-
-                
 
                 if($center_slot != ''){
                     $center_slot = '';
@@ -188,14 +187,13 @@ class BookingController extends Controller
 
                 }else{
                     $start_check = date('H:i',strtotime($start . ' +30 minutes'));
-
-
                     $booking = Booking::where('class_time',$start_check)
                                 ->where('class_date',$request->date)
                                 ->where('booked_tutor',$request->id)
                                 ->where('status','!=',3)
                                 ->where('status','!=',4)
                                 ->where('status','!=',6)
+                                ->where('status','!=',2)
 
                                 ->first();
 
