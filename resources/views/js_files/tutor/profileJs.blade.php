@@ -7,6 +7,7 @@
             }
         });
 
+
         // image validation
         $("#imageUpload").on('change', function() {
             var file = this.files[0];
