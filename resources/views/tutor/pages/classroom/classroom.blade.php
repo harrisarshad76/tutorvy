@@ -1890,7 +1890,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
                 $(".Text-reck").html(html);
             }
             else if( ter > resced ){
-                $(".blink").css("background","#28a745");
+                $(".blink").css("background","#d30023");
                 $(".Text-reck").text("Class will ends in: ");
 
             }

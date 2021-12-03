@@ -675,7 +675,6 @@ height:25px;
                     <div id="countdownExample" class="mr-3" >
                         <div class="row blink text-white p-2">
                             <div class="col-md-8 Text-reck text-center">
-
                             </div>
                             <div class="col-md-4 values"></div>
                         </div>
@@ -2011,10 +2010,14 @@ connection.onopen = function(event) {
 var usersLeft = {};
 connection.onleave = function(event) {
     toastr.success("Tutor Disconnected. Please wait...");
-    $("#callDisconnectModal").modal("show");
-    callOffModal();
-    console.log(event.extra)
-    // timer.pause();
+    if ($("#reviewModal").hasClass("show")){
+        $("#classOffModal").modal("hide");
+        console.log("has class show");
+    }
+    else{
+        console.log("has class hide");
+        callOffModal()
+    }
     
 };
 

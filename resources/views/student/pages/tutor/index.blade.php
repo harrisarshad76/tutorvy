@@ -63,6 +63,13 @@
         padding:0;
         border-radius:9px;
     }
+    .rating-stars ul > li{
+    cursor: pointer;
+}
+.rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
 </style>
  <!-- top Fixed navbar End -->
  <div class="content-wrapper " style="overflow: hidden;">
@@ -138,7 +145,7 @@
                                             <div id="locationDiv" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body pl-2 pr-0 pt-0">
                                                     <select class="w-100 form-control accSelect2" id="location">
-                                                        <option value="">Select Location</option>
+                                                        <option value="">Any Location</option>
                                                         @foreach ($locations as $location)
                                                         <option value="{{$location->name}}"> {{$location->name}}</option>
                                                         @endforeach
@@ -168,10 +175,10 @@
                                                              <input type="text" class="js-range-slider" id="range"  name="my_range" value="" />
                                                              <span class="range-slider__value"></span>
                                                         </div> -->
-                                                        <input type="range" class=" pr-0" id="range" min="5" max="100" value="50">
+                                                        <input type="range" class=" pr-0" id="range" min="0" max="100" value="50">
                                                         <div class="row mt-2">
                                                             <div class="col-md-5 ">
-                                                                <input type="text" class=" formy-range" id="minRg" disabled placeholder="Min" value="$5">
+                                                                <input type="text" class=" formy-range" id="minRg" disabled placeholder="Min" value="0">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <p>-</p>
@@ -196,7 +203,7 @@
                                                 </div>
                                             </a>
                                             <div id="ratingDiv" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                                                <div class="card-body pl-2 pr-0 pt-0">
+                                                <!-- <div class="card-body pl-2 pr-0 pt-0">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="rating_filter" id="rating_filter" value="5" checked>
                                                         <label class="form-check-label" for="rating_filter">
@@ -268,6 +275,36 @@
                                                         </p>
                                                         </label>
                                                     </div>
+                                                </div> -->
+                                                <div class='rating-stars text-center mt-1'>
+                                                    <ul id='stars-ul' class="pl-0">
+                                                        
+                                                        <li class='star star-review  pl-2 pr-2' title='Poor' data-value='1'>
+                                                            <!-- <a href="#" class="ml-0"> -->
+                                                                <i class="fa fa-star bigStar "></i>
+                                                            <!-- </a> -->
+                                                        </li>
+                                                        <li class='star star-review  pl-2 pr-2' title='Poor' data-value='2'>
+                                                            <!-- <a href="#"> -->
+                                                                <i class="fa fa-star bigStar "></i>
+                                                            <!-- </a> -->
+                                                        </li>
+                                                        <li class='star star-review  pl-2 pr-2' title='Poor' data-value='3'>
+                                                             <!-- <a href="#"> -->
+                                                                <i class="fa fa-star bigStar "></i>
+                                                            <!-- </a> -->
+                                                        </li>
+                                                        <li class='star star-review  pl-2 pr-2' title='Poor' data-value='4'>
+                                                             <!-- <a href="#"> -->
+                                                                <i class="fa fa-star bigStar "></i>
+                                                            <!-- </a> -->
+                                                        </li>
+                                                        <li class='star star-review  pl-2 pr-2' title='Poor' data-value='5'>
+                                                            <!-- <a href="#"> -->
+                                                                <i class="fa fa-star bigStar"></i>
+                                                            <!-- </a> -->
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                             <hr class="m-0">
@@ -761,6 +798,22 @@
 @include('js_files.student.tutorJs')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-   
+    $('#stars-ul li').on('click', function(){
+     
+        var onStar = parseInt($(this).data('value'), 10);
+        var stars = $(this).parent().children('li.star');
+    
+        for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass('selected');
+        }
+        
+        for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass('selected');
+        }
+        
+        var ratingValue = parseInt($('#stars-ul li.selected').last().data('value'), 10);
+        $("#star_rating").val(ratingValue);
+        
+    });
 </script>
 @endsection

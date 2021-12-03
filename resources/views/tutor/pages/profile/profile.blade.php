@@ -149,7 +149,7 @@ width:22px;
                         </div>
 
                     </div>
-                    <div class="card-body profile-header">
+                    <div class="card-body profile-header pt-0">
                         <p class="heading-forth">
                             Education
                         </p>
@@ -164,7 +164,7 @@ width:22px;
                         @endforeach
 
                     </div>
-                    <div class="card-body profile-header">
+                    <div class="card-body profile-header pt-0">
                         <p class="heading-forth">
                             Experience
                         </p>
@@ -179,7 +179,159 @@ width:22px;
                         @endforeach
                     </div>
                 </div>
+                <div class="card bg-price">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="mt-2"> Reviews </h3>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="row image1 mt-3 ">
+
+                                                                        <div class="col-md-3 text-center">
+                                                                            <img src="http://127.0.0.1:8000/storage/profile/Allama-Iqbal.jpg" alt="profile-image" class="profile-img">
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                                <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;" class=" mt-1 mb-0"> Student Name </p>
+                                                                                <p style="font-size: 12px;">
+                                                                                Subject Name</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                            
+                                                                <div class="col-md-12">
+                                                                    <div class="">
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked  ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star  ml-1"></span>
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <p>
+                                                                    This is my first review to check whether its displaying again and again without text  him in person reviewing this occasion sit me side by side and teach me 100% AQUTHORITY HIGHER THAN MIXING THERAPY TEXTER HUNGER ALMOST TEXTER
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="row image1 mt-3 ">
+
+                                                                        <div class="col-md-3 text-center">
+                                                                            <img src="http://127.0.0.1:8000/storage/profile/Allama-Iqbal.jpg" alt="profile-image" class="profile-img">
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                                <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;" class=" mt-1 mb-0"> Student Name </p>
+                                                                                <p style="font-size: 12px;">
+                                                                                Subject Name</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                            
+                                                                <div class="col-md-12">
+                                                                    <div class="">
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked  ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star  ml-1"></span>
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <p>
+                                                                    This is my first review to check whether its displaying again and again without text  him in person reviewing this occasion sit me side by side and teach me 100% AQUTHORITY HIGHER THAN MIXING THERAPY TEXTER HUNGER ALMOST TEXTER
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="row image1 mt-3 ">
+
+                                                                        <div class="col-md-3 text-center">
+                                                                            <img src="http://127.0.0.1:8000/storage/profile/Allama-Iqbal.jpg" alt="profile-image" class="profile-img">
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                                <p style="color: #00132D; font-family: Poppins;font-size: 14px;font-weight: 500;" class=" mt-1 mb-0"> Student Name </p>
+                                                                                <p style="font-size: 12px;">
+                                                                                Subject Name</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="">
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked  ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star checked ml-1"></span>
+                                                                        <span class="fa fa-star  ml-1"></span>
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <p>
+                                                                    This is my first review to check whether its displaying again and again without text  him in person reviewing this occasion sit me side by side and teach me 100% AQUTHORITY HIGHER THAN MIXING THERAPY TEXTER HUNGER ALMOST TEXTER
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-9">
                 <div class="card">
@@ -340,6 +492,9 @@ width:22px;
                             </div>
                         </div>
                     </div>
+            </div>
+            <div class="col-md-12">
+         
             </div>
         </div>
     </div>
