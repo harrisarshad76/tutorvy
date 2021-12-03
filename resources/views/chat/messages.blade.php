@@ -581,5 +581,4 @@
 @section('scripts')
 
 @include('js_files.chat')
-
 @endsection

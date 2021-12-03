@@ -1290,7 +1290,7 @@ designer.setTools({
         arrow: false,
         dragSingle: true,
         dragMultiple: true,
-        arc: true,
+        arc: false,
         rectangle: true,
         quadratic: false,
         bezier: false,
