@@ -501,7 +501,7 @@ height:25px;
                     </div>
                 </div>
             </div>
-            <!-- <div class="row callDiv ml-2 mr-2 mt-4" >
+            <div class="row callDiv ml-2 mr-2 mt-4" style="display:none;">
                 <div class="col-md-8 text-center rounded bg-dark ">
                     <video id="main-video2" class=" w-62" playsinline autoplay></video>
 
@@ -538,7 +538,7 @@ height:25px;
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="row  tech_weck ">
                 <div class="col-md-9 "> 
                     <div class="row">
@@ -822,7 +822,7 @@ height:25px;
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="mt-5">
+                <!-- <div class="mt-5">
                         <video id="main-video"  playsinline autoplay></video>
                         <div class="col-md-12 mt-2 mb-2 vid-location text-center">
                             <a href="#" class="callSet vc">
@@ -1310,8 +1310,8 @@ connection.chunkSize = 16000;
 connection.enableFileSharing = true;
 
 connection.session.data =  true;
-connection.mediaConstraints.screen = true;
-connection.session.screen = true;
+// connection.mediaConstraints.screen = true;
+// connection.session.screen = true;
 connection.sdpConstraints.mandatory = {
     OfferToReceiveAudio: true,
     OfferToReceiveVideo: false

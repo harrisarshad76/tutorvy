@@ -1127,23 +1127,18 @@ height:25px;
                                     </div>
                                     
                                 </div>
-                                <form id="chat_form">
-                                    <div class="card-footer bg-chat-head">
-                                        <div class="row">
-
-                                                <div class="col-md-12">
-
-                                                    <textarea id="txt-chat-message" style="display:none;" ></textarea>
-                                                    <div id="check"></div>
-                                                    <button type="submit" id="btn-chat-message" ><i class="fa fa-paper-plane-o paper" aria-hidden="true"></i></button>
-                                                    <a id="btn-attach-file" type="button"><i class="fa fa-paperclip clip" aria-hidden="true"></i></a>
-                                                    <!-- <img id="btn-attach-file" src="https://www.webrtc-experiment.com/images/attach-file.png" title="Attach a File"> -->
-                                                    <!-- <img id="btn-share-screen" src="https://www.webrtc-experiment.com/images/share-screen.png" title="Share Your Screen"> -->
-                                                </div>
-                                            
+                                <div class="card-footer bg-chat-head">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <textarea id="txt-chat-message" style="display:none;" ></textarea>
+                                            <div id="check"></div>
+                                            <a type="button" id="btn-chat-message" disabled><i class="fa fa-paper-plane-o paper" aria-hidden="true"></i></a>
+                                            <a id="btn-attach-file" type="button"><i class="fa fa-paperclip clip" aria-hidden="true"></i></a>
+                                            <!-- <img id="btn-attach-file" src="https://www.webrtc-experiment.com/images/attach-file.png" title="Attach a File"> -->
+                                            <!-- <img id="btn-share-screen" src="https://www.webrtc-experiment.com/images/share-screen.png" title="Share Your Screen"> -->
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1623,11 +1618,11 @@ height:25px;
 </script>
 
 <script>
-$("#conCam").click(function(){
-    let html = `<img src="{{asset('assets/images/ico/Square-white.jpg')}}" class="profile-card-img"  alt="" style="margin-top:12%;">`;
-                    $("#other-videos2").html(html);
-    $(".overlayCam").hide();
-});
+// $("#conCam").click(function(){
+//     let html = `<img src="{{asset('assets/images/ico/Square-white.jpg')}}" class="profile-card-img"  alt="" style="margin-top:12%;">`;
+//                     $("#other-videos2").html(html);
+//     $(".overlayCam").hide();
+// });
 var connection = new RTCMultiConnection();
 var roomid = '{{$class->classroom_id}}';
 var fullName = '{{$user->first_name}} {{$user->last_name}}';
@@ -1635,8 +1630,8 @@ var timer = new Timer();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
-var tt_id = {{$booking->booked_tutor}}
-console.log(connection.socket)
+
+// console.log(connection.socket,"connectionTrue")
 // var class_duration = 20;
 $("#join_now").click(function(){
                 $(".tech_weck").removeClass("tech_weck-none");
@@ -1889,8 +1884,6 @@ connection.DetectRTC.load(function() {
     }
 });
 
-connection.mediaConstraints.screen = true;
-connection.session.screen = true;
 
 /// make this room public
 connection.publicRoomIdentifier = '';
@@ -2035,7 +2028,6 @@ connection.onmessage = function(event) {
 
     if(event.data.showMainVideo) {
         // $('#main-video').show();
-        console.log(event.data)
         $('#screen-viewer').css({
             top: $('#widget-container').offset().top,
             left: $('#widget-container').offset().left,
@@ -2048,8 +2040,6 @@ connection.onmessage = function(event) {
 
     if(event.data.hideMainVideo) {
         // $('#main-video').hide();
-        console.log('hide')
-
         $('#screen-viewer').hide();
         return;
     }
@@ -2110,11 +2100,7 @@ connection.onstream = function(event) {
     callOnModal();
 
     if (event.stream.isScreen && !event.stream.canvasStream) {
-        // alert('asd')
         $('#screen-viewer').get(0).srcObject = event.stream;
-        var video = document.getElementById('main-video');
-        video.setAttribute('data-streamid', event.streamid);
-        video.srcObject = event.stream;
         $('#screen-viewer').hide();
     }
     else if (event.extra.roomOwner === true) {
@@ -2340,10 +2326,9 @@ window.onkeyup = function(e) {
         $('#btn-chat-message').click();
     }
 };
-var msg_cht = '';
+
 document.getElementById('btn-chat-message').onclick = function() {
     var chatMessage = $('.emojionearea-editor').html();
-    msg_cht = chatMessage;
     $('.emojionearea-editor').html('');
 
     if (!chatMessage || !chatMessage.replace(/ /g, '').length) return;
@@ -2361,7 +2346,7 @@ document.getElementById('btn-chat-message').onclick = function() {
         typing: false
     });
 
-    // save_class_room_messages(message , user_id ,receiver_id , type);
+    save_class_room_messages(message , user_id ,receiver_id , type);
 };
 
 var recentFile;
@@ -2376,28 +2361,45 @@ document.getElementById('btn-attach-file').onclick = function() {
         }
     });
 };
-$( '#chat_form' ).on( 'submit', function(e) {
 
-    event.preventDefault();
-    let msg = msg_cht;
-    let receiver = tt_id;
-    
-    // $.ajax({
-    //     url: "",
-    //     type:"POST",
-    //     data:{
-    //         msg:msg,
-    //         user:receiver
-    //     },
-    //     success:function(response){
-    //         if(response.status == 200) {
-    //             msg_cht = '';
-    //         }
-    //     },
-    // });
+// save class_room messages
+function save_class_room_messages(message , user_id ,receiver_id , type) { 
+    var object = {
+        message : message,
+        user_id : user_id, 
+        receiver_id: receiver_id,
+        type : type, 
+    }
 
-});
+    $.ajax({
+        url: "",
+        type: "yourtype",
+        data: object,
+        success:function(response){
+            var obj = response.messages;
+            if(response.status == 200 && response.success == true) {
 
+               
+
+            }else{
+                toastr.error('Something Went Wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        },
+        error:function(e) {
+            toastr.error('Something Went Wrong',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}
 
 function getFileHTML(file) {
     var url = file.url || URL.createObjectURL(file);
@@ -2639,22 +2641,22 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 
             timer.addEventListener('targetAchieved', function (e) {
                 // $('#countdownExample .values').html('');
-                // $('#reviewModal').modal("show");
+                $('#reviewModal').modal("show");
              
                 $("#classOffModal").modal("hide");
 
-                // $(".content-wrapper").css("display","none");
+                $(".content-wrapper").css("display","none");
 
             });
             /* Javascript Timer ENd */
 
-            if(today_date_seconds > class_end_seconds) {
-                $('#countdownExample .values').html("Class Time Over");
-                // $('#reviewModal').modal("show");
-                // $(".content-wrapper").css("display","none");
-                $("#classOffModal").modal("hide");
+            // if(today_date_seconds > class_end_seconds) {
+            //     $('#countdownExample .values').html("Class Time Over");
+            //     $('#reviewModal').modal("show");
+            //     $(".content-wrapper").css("display","none");
+            //     $("#classOffModal").modal("hide");
 
-            }
+            // }
 
 
             saveClassLogs();
@@ -2765,32 +2767,32 @@ function replaceScreenTrack(stream) {
     $('#screen-viewer').show();
 }
 
-// $('#btn-share-screen').click(function() {
-//     if(!window.tempStream) {
-//         alert('Screen sharing is not enabled.');
-//         return;
-//     }
+$('#btn-share-screen').click(function() {
+    if(!window.tempStream) {
+        alert('Screen sharing is not enabled.');
+        return;
+    }
 
-//     $('#btn-share-screen').hide();
+    $('#btn-share-screen').hide();
 
-//     if(navigator.mediaDevices.getDisplayMedia) {
-//         navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
-//             replaceScreenTrack(stream);
-//         }, error => {
-//             alert('Please make sure to use Edge 17 or higher.');
-//         });
-//     }
-//     else if(navigator.getDisplayMedia) {
-//         navigator.getDisplayMedia(screen_constraints).then(stream => {
-//             replaceScreenTrack(stream);
-//         }, error => {
-//             alert('Please make sure to use Edge 17 or higher.');
-//         });
-//     }
-//     else {
-//         alert('getDisplayMedia API is not available in this browser.');
-//     }
-// });
+    if(navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else if(navigator.getDisplayMedia) {
+        navigator.getDisplayMedia(screen_constraints).then(stream => {
+            replaceScreenTrack(stream);
+        }, error => {
+            alert('Please make sure to use Edge 17 or higher.');
+        });
+    }
+    else {
+        alert('getDisplayMedia API is not available in this browser.');
+    }
+});
 
 function saveClassLogs() {
 
@@ -2869,7 +2871,7 @@ function HmsToSeconds(hms) {
     return seconds;
 }
 if ($("#reviewModal").hasClass("show")) {
-//   $(".content-wrapper").css("display","none");
+  $(".content-wrapper").css("display","none");
 }
 
 $(".s_status").change(function(){

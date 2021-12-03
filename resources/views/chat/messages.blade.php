@@ -331,7 +331,7 @@
                         @foreach($users as $contact)
                             @if($contact->user != NULL)
                                 <a type="button" class="chatLeft w-100" id="chatClient_{{$contact->user->id}}"
-                                    onclick='selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`,`{{$contact->user->tagline}}`)' >
+                                    onclick="selectUser(`{{$contact->user->id}}`,`{{$contact->user->first_name}} {{$contact->user->last_name}}`,`{{$contact->user->tagline}}`)" >
                                     <!-- <a href="#" class="chatLeft" id="chatClient_1" > -->
                                     <div class="container-fluid m-0 p-0 pb-2 img-chats">
                                         @if($contact->user->picture)
