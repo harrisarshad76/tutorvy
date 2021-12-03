@@ -19,85 +19,30 @@ class TutorController extends Controller
 
     public function index()
     {
-        $subject = \Auth::user()->std_learn;
+        // $subject = \Auth::user()->std_learn;
         $available_tutors = array();
         $all_tutors = array();
-        if($subject == '' || $subject == null){
-            $query = DB::table('users')
-            ->select('view_tutors_data.*')
-            ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
-            ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
-            ->where('users.role',2)
-            ->where('users.status',2)
-            ->where('view_tutors_data.subject_names','!=',null);
 
-            $all_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
-        }else{
+        $query = DB::table('users')
+        ->select('view_tutors_data.*')
+        ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
+        ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
+        ->where('users.role',2)
+        ->where('users.status',2)
+        ->where('view_tutors_data.subject_names','!=',null);
 
-            $query = DB::table('users')
-            ->select('view_tutors_data.*')
-            ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
-            ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
-            ->where('users.role',2)
-            ->where('users.status',2)
-            ->where('view_tutors_data.subject_names','!=',null);
-            $query->where(function($query2) use ($subject)
-            {
-                if($subject != null && $subject != ''){
-                    $query2->where('teachs.subject_id', $subject);
-                }
-                
-            });
-
-            $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
-
-            if(sizeof($available_tutors) == 0){
-                $query = DB::table('users')
-                ->select('view_tutors_data.*')
-                ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
-                ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
-                ->where('users.role',2)
-                ->where('users.status',2)
-                ->where('view_tutors_data.subject_names','!=',null);
-    
-                $all_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
-            }else {
-
-                $query = DB::table('users')
-                ->select('view_tutors_data.*')
-                ->leftJoin('teachs', 'users.id', '=', 'teachs.user_id')
-                ->leftJoin('view_tutors_data', 'view_tutors_data.id', '=', 'users.id')
-                ->where('users.role',2)
-                ->where('users.status',2)
-                ->where('view_tutors_data.subject_names','!=',null);
-                $query->where(function($query2) use ($subject)
-                {
-                    if($subject != null && $subject != ''){
-                        $query2->where('teachs.subject_id','!=', $subject);
-                    }
-                });
-               
-                // DB::enableQueryLog();
-                $all_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
-                // dd(DB::getQueryLog());
-            }
-
-        }
+        $available_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
 
         foreach($available_tutors as $tutor) {
             $tutor->is_favourite = DB::table("fav_tutors")->where("user_id",Auth::user()->id)->where("tutor_id",$tutor->id)->first();
             // $tutor->tutor_subject_rate = DB::table("subject_plans")->where("user_id",$tutor->id)->min('rate');
         }
 
-        foreach($all_tutors as $tutor) {
-            $tutor->is_favourite = DB::table("fav_tutors")->where("user_id",Auth::user()->id)->where("tutor_id",$tutor->id)->first();
-            // $tutor->tutor_subject_rate = DB::table("subject_plans")->where("user_id",$tutor->id)->min('rate');
-        }
-        
+       
         $subjects = Subject::all();
         $locations = DB::table('search_locations')->get();
 
-        return view('student.pages.tutor.index',compact('available_tutors','subjects','locations','all_tutors'));
+        return view('student.pages.tutor.index',compact('available_tutors','subjects','locations'));
     }
 
     public function filterTutor(Request $request)
@@ -229,8 +174,12 @@ class TutorController extends Controller
                         $query7->where('users.hourly_rate','>=', $min_prc)->orwhere('users.hourly_rate','<=', $max_prc);
                     }
                 });
-    
+                // DB::enableQueryLog();
                 $profile_interest_tutors = $query->orderByRaw('rating DESC')->groupByRaw('users.id')->get();
+
+                // and then you can get query log
+                
+                // dd(DB::getQueryLog());
             }
 
         }else{
