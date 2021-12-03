@@ -152,32 +152,44 @@ class BookingController extends Controller
             
             foreach($period as $item){
 
-                
                 $start = $item->format("H:i");
-                
                 $end = date('H:i',strtotime($start . ' +60 minutes'));
+                
+                $st_tmp = '';
+                $end_tmp = '';
 
-                // return dd($start .'-'. $end);
 
-                $booking = Booking::where('class_time',$start)
-                            ->where('class_booked_till',$end)
-                            ->where('class_date',$request->date)
-                            ->where('booked_tutor',$request->id)
-                            ->where('status','!=',3)
-                            ->where('status','!=',4)
-                            ->where('status','!=',6)
-                            ->where('status','!=',2)
-
-                            ->first();
-
+                if(strpos($a , "+")) {
+                    $st_tmp = Carbon::parse($start)->subSeconds($region_offset)->format('H:i');
+                    $end_tmp = Carbon::parse($end)->subSeconds($region_offset)->format('H:i');
+                }else if(strpos($a , "-")){
+                    $st_tmp = Carbon::parse($start)->addSeconds($region_offset)->format('H:i');
+                    $end_tmp = Carbon::parse($end)->addSeconds($region_offset)->format('H:i');
+                }
+                // DB::enableQueryLog(); // Enable query log
+                $booking = Booking::where('class_time',$st_tmp)
+                ->where('class_booked_till',$end_tmp)
+                ->where('class_date',$request->date)
+                ->where('booked_tutor',$request->id)
+                ->where('status','!=',3)
+                ->where('status','!=',4)
+                ->where('status','!=',6)
+                ->where('status',2)
+                ->first();
+                // Your Eloquent query executed by using get()
+                
+                // dd(DB::getQueryLog()); // Show results of log
+                
+                            // return $booking;
+                            // return dd($from .'-'. $to);
                 if($center_slot != ''){
                     $center_slot = '';
                     continue;
                 }
-                // if($end_slot != ''){
-                //     $end_slot = '';
-                //     continue;
-                // }
+                if($end_slot != ''){
+                    $end_slot = '';
+                    continue;
+                }
 
                 
                 if($booking){
@@ -186,7 +198,7 @@ class BookingController extends Controller
                     $end_slot = $end;
 
                 }else{
-                    $start_check = date('H:i',strtotime($start . ' +30 minutes'));
+                    $start_check = date('H:i',strtotime($st_tmp . ' +30 minutes'));
                     $booking = Booking::where('class_time',$start_check)
                                 ->where('class_date',$request->date)
                                 ->where('booked_tutor',$request->id)
