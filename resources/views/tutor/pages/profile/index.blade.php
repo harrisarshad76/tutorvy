@@ -698,10 +698,10 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="schoolList col-md-6">
+                                            <!-- <div class="schoolList col-md-6">
                                                 <label for="exampleText" class="mb-0 heading-fifth">School Name</label>
-                                                <input type="text" class="form-control " name="institute[]">
-                                            </div>
+                                                <input type="text" class="form-control " name="institutea">
+                                            </div> -->
                                             <div class="col-md-6">
                                                 <label for="exampleText" class="m-0 heading-fifth">Graduation Year</label>
                                                 <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control"> -->
@@ -794,10 +794,10 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                 <div class="schoolList col-md-6">
+                                                 <!-- <div class="schoolList col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">School Name</label>
-                                                    <input type="text" class="form-control " name="institute[]">
-                                                </div>
+                                                    <input type="text" class="form-control " name="institutea">
+                                                </div> -->
                                                  <div class=" col-md-6">
                                                     <label for="exampleText" class="mb-0 heading-fifth">Completion Date</label>
                                                     <!-- <input type="date" name="graduate_year[]" class=" yearpicker form-control" value="{{$edu->year}}"> -->
@@ -958,7 +958,6 @@
                                                         </div>
                                                         <div class="col-md-6 Cwork">
                                                             <label for="exampleText" class="mb-0 heading-fifth">Ending Year</label>
-
                                                             <input type="text" value="Currently Working" disabled >
                                                         </div>
                                                         <div class="col-md-8 mt-2 mb-3">
