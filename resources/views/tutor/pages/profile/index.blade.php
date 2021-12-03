@@ -621,13 +621,34 @@
                                                             <option value="" selected disabled>Gender</option>
                                                             <option value="male" @if (Auth::user()->gender == 'male') selected @endif>Male</option>
                                                             <option value="female" @if (Auth::user()->gender == 'female') selected @endif>Female</option>
-                                                            <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other</option>
+                                                            <!-- <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other</option> -->
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="container form-group mt-3"></div>
+                                            <div class="col-md-6 mt-3" >
+                                                <div class="form-group">
+                                                    <label for="exampleName" class="heading-fifth mb-0">Describe your teaching experience</label>
+                                                   <select name="" id="" class="form-select">
+                                                       <option value="">I have no teaching experience</option>
+                                                       <option value="">I have formal teaching experience</option>
+                                                       <option value="">I have non-formal teaching experience</option>
+                                                   </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <div class="form-group">
+                                                    <label for="exampleName" class="heading-fifth mb-0">Describe your current situation</label>
+                                                    <select name="" id="" class="form-select">
+                                                        <option value="">I have another teaching job</option>
+                                                        <option value="">I have another non-teaching job</option>
+                                                        <option value="">I am a student</option>
+                                                        <option value="">I have other commitments</option>
+                                                        <option value="">I have no other commitments</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                          
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="exampleText" class="heading-fifth mb-0">About</label>

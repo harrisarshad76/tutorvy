@@ -339,8 +339,8 @@
                                                                 <option value="male" @if (Auth::user()->gender == 'male') selected @endif>Male</option>
                                                                 <option value="female" @if (Auth::user()->gender == 'female') selected @endif>Female
                                                                 </option>
-                                                                <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other
-                                                                </option>
+                                                                <!-- <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other
+                                                                </option> -->
                                                             </select>
                                                         </div>
                                                     </div>
