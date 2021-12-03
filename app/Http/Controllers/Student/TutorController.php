@@ -100,7 +100,7 @@ class TutorController extends Controller
                 $max_prc = $price;
                 
                 // return $price;
-                $query7->where('users.hourly_rate','>=', $min_prc)->where('users.hourly_rate','<=', $max_prc);
+                $query7->where('users.hourly_rate','<=', $max_prc);
             }
         });
         
