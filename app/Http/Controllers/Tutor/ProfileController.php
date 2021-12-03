@@ -100,7 +100,7 @@ class ProfileController extends Controller
 
     public function updateProfileEdu($user_id ,Request $request) {
 
-    //    return $request;
+    //    return dd($request->all());
         $docs = [];
 
         if($request->hasFile('upload')){
