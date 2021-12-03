@@ -96,11 +96,11 @@ class TutorController extends Controller
                 $min_prc =  '';
                 $max_prc =  '';
                 // $price = explode(';',$price);
-                $min_prc = 5;
+                $min_prc = 0;
                 $max_prc = $price;
                 
                 // return $price;
-                $query7->where('users.hourly_rate','>=', $min_prc)->orwhere('users.hourly_rate','<=', $max_prc);
+                $query7->where('users.hourly_rate','>=', $min_prc)->where('users.hourly_rate','<=', $max_prc);
             }
         });
         
