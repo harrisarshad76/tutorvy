@@ -166,7 +166,8 @@ class BookingController extends Controller
                             ->where('status','!=',3)
                             ->where('status','!=',4)
                             ->where('status','!=',6)
-                            ->where('status',2)
+                            ->where('status','!=',2)
+
                             ->first();
 
                 if($center_slot != ''){
@@ -192,7 +193,7 @@ class BookingController extends Controller
                                 ->where('status','!=',3)
                                 ->where('status','!=',4)
                                 ->where('status','!=',6)
-                                ->where('status',2)
+                                ->where('status','!=',2)
 
                                 ->first();
 
