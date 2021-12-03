@@ -165,6 +165,8 @@ class BookingController extends Controller
                             ->where('booked_tutor',$request->id)
                             ->where('status','!=',3)
                             ->where('status','!=',4)
+                            ->where('status','!=',6)
+
                             ->first();
 
                 
@@ -193,6 +195,8 @@ class BookingController extends Controller
                                 ->where('booked_tutor',$request->id)
                                 ->where('status','!=',3)
                                 ->where('status','!=',4)
+                                ->where('status','!=',6)
+
                                 ->first();
 
                     if($booking){
@@ -362,7 +366,7 @@ class BookingController extends Controller
         // $to_time = $to_time[0];
         $to_time = date("H:i", strtotime($request->class_end_time));
         // return $bk_time . ' - ' . $bk_end_time;
-        $booking = Booking::where('class_time',$bk_time)->where('class_booked_till',$bk_end_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
+        $booking = Booking::where('class_time',$bk_time)->where('class_booked_till',$bk_end_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->where('status','!=',3)->where('status','!=',4)->where('status','!=',6)->get();
         // return $booking->count();
         // $booking = Booking::where('class_time',$from_time)->where('class_booked_till',$to_time)->where('class_date',$class_date)->where('booked_tutor',$request->tutor_id)->get();
 
