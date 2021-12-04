@@ -149,7 +149,13 @@ class BookingController extends Controller
                 $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
             }
 
-            $period = new CarbonPeriod($from , '30 minutes', $to); 
+            if(strtotime($from) > strtotime($to)){
+                $to = date('H:i',strtotime($to . ' +720 minutes'));
+                $period = new CarbonPeriod($from , '30 minutes', $to); 
+            }else{
+                $period = new CarbonPeriod($from , '30 minutes', $to); 
+            }
+            // $period = new CarbonPeriod($from , '30 minutes', $to); 
             
             foreach($period as $item){
 
