@@ -700,6 +700,7 @@
         </div>
     </section>
 </div>
+
 <div class="modal fade" id="tutorModal" tabindex="-1" role="dialog"
     aria-labelledby="tutorModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -781,7 +782,7 @@
                             <small>Your current time zone region is {{Auth::User()->region}}</small>
                         </div>
                         <div class="col-md-6 text-right">
-                            <button class="schedule-btn" id="request_booking_btn"> Confirm Booking </button>
+                            <button class="schedule-btn" id="request_booking_btn" disabled> Confirm Booking </button>
                         </div>
                     </div>
                 </div>
