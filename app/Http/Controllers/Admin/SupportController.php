@@ -97,6 +97,7 @@ class SupportController extends Controller
             $msg_type = 'text';
         }
         return response()->json([
+            'data' => $message,
             'status_code' => 200,
             'message_type' => $msg_type,
             'message' => 'Message Sent Successfully',

@@ -5,13 +5,20 @@
     .header h1 {
         margin-left: 70px;
     }
-    .dropify-wrapper{
+    /* .dropify-wrapper{
         display:none;
-    }
+    } */
+/* 
 
     .img-style {
-   width: 301px;
+        width: 301px;
         
+    } */
+    #sendFileCall .modal-body{
+        height:auto;
+    }
+    .img-style{
+        max-height:200px; 
     }
 </style>
 <div class="content-wrapper " style="overflow: hidden;">
@@ -67,7 +74,9 @@
                                                         <div class="sender">
                                                             <small>From {{$replies->sender->first_name}}</small>
                                                             @if($replies->type == "file")
-                                                                <p class="mb-0 text-center"><img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style"> </p>
+                                                                <p class="mb-0 text-center">
+                                                                    <img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style">
+                                                                 </p>
                                                             @else
                                                                 <p class="mb-0">
                                                                     {{$replies->text}}
@@ -84,7 +93,9 @@
                                                         <div class="reciever">
                                                             <small>From You</small>
                                                             @if($replies->type == "file")
-                                                                <p class="mb-0 text-center"><img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style"> </p>
+                                                                <p class="mb-0 text-center">
+                                                                    <img src="{{asset('storage/' . $replies->text)}}" alt="" class="img-style"> 
+                                                                </p>
                                                             @else
                                                                 <p class="mb-0">
                                                                     {{$replies->text}}
@@ -121,10 +132,10 @@
                                                     <label for="file">
                                                         <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
                                                     </label> -->
-                                                    <input type="file" id="file" class="dropify" name="file" accept=".jpg,.jpeg,.png" class="file-attach" />
+                                                    <!-- <input type="file" id="file" class="dropify" name="file" accept=".jpg,.jpeg,.png" class="file-attach" /> -->
                                                     <label for="file">
-                                                        <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
-                                                            alt="repeat" />
+                                                        <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class=""
+                                                            alt="repeat" id="file" style="width:23px;"/>
                                                     </label>
                                                     <div id="custom-file-name"></div>
                                                 </div>
@@ -261,6 +272,34 @@
             </div>
         </div>
     </section>
+
+     <!-- Send File Modal -->
+        <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Share File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="fileSendForm" method="POST" action="{{route('admin.ticketChat')}}">
+                        @csrf
+                        <input type="hidden" name="reciever_id" value="{{$ticket->user_id}}">
+                        <input type="hidden" name="sender_id" value="{{$idAdmin}}">
+                        <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
+                        <div class="modal-body text-center ">
+                        <h5></h5>
+                        <input type="file" name="file" class="dropify"  accept="image/*" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="cencel-btn " data-dismiss="modal"> Cancel </button>
+                            <button type="submit" class="schedule-btn "> Send </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <!-- Modal Assign -->
       <div class="modal" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="assignModalTitle"
                 aria-hidden="true">
@@ -305,6 +344,18 @@
 @endsection
 @section('js')
   <script>
+        $(document).ready(function(){
+            $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+                $("#record div").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+        })
+    $("#file").click(function(){
+        $("#sendFileCall").modal("show");
+    })
       $("#formTkt").submit(function(e){
           e.preventDefault();
 
@@ -417,15 +468,48 @@
         });
 
       }
-      //filter
-      $(document).ready(function(){
-        $("#search").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-                $("#record div").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
+      $( '#fileSendForm' ).on( 'submit', function(e) {
+
+e.preventDefault();
+var action = $(this).attr('action');
+var method = $(this).attr('method');
+let msg = $(".msg").val();
+// let _token   = $('meta[name="csrf_token"]').attr('content');
+var formData = new FormData($(this)[0]);
+$.ajax({
+    url: action,
+    type:method,
+    data:formData,
+    processData: false,
+    contentType: false,
+    cache: false,
+    enctype:'multipart/form-data',
+    success:function(response){
+        $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+        toastr.success(response.message,{
+            position: 'top-end',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2500
         });
+        $("#sendFileCall").modal("hide");
+        $('.dropify-clear').click();
+        let html = `<div class="col-md-12 ">
+                                <div class="reciever">
+                                    <small>From You</small>
+                                    <p class="mb-0 text-center">
+                                        <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
+                                    </p>
+                                    <small class="dull pull-right">
+                                        1min ago
+                                    </small>
+                                </div>
+
+                            </div>`;
+        $(".ticketChat").append(html);
+    },
+});
+});
 
   </script>
 @endsection
