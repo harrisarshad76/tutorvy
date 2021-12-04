@@ -48,7 +48,7 @@ class Booking extends Model
 
         $tm = $this->class_date .' '. $this->class_time;
         $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
-        $region_offset = $date->getOffset();
+        $region_offset = abs($date->getOffset());
 
         $a = $date->format('Y-m-d H:i:s P');
 
@@ -66,7 +66,7 @@ class Booking extends Model
 
         $tm = $this->class_date .' '. $this->class_time;
         $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
-        $region_offset = $date->getOffset();
+        $region_offset = abs($date->getOffset());
 
         $a = $date->format('Y-m-d H:i:s P');
 
