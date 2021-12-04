@@ -1076,12 +1076,13 @@ function getDate(date) {
 
 function checkBookingSlots(id){
     $("#tutor_id").val(id);
-
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     current_date = new Date();
-    let day = days[current_date.getDay()];
 
-    getTutorSlots(id);
+    let day = days[current_date.getDay()];
+    console.log(day + 'ssssssssssssssssssssssssssssssss')
+
+    getTutorSlots(id,day);
 }
 
 function getTutorSlots(tutor_id ,day) {
@@ -1116,7 +1117,8 @@ function getTutorSlots(tutor_id ,day) {
                 // console.log(current_time)
 
                 console.log(curr_ms , "curr_ms");
-                let day = days[current_date.getDay()];
+                // let day = days[current_date.getDay()];
+                console.log(day , "day");
                 
                 var msg = "No Slots Available for " + day;
 

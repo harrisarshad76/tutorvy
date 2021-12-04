@@ -133,13 +133,15 @@ class BookingController extends Controller
 
             $tm = date('Y-m-d') .' '. $slot->wrk_from;
             $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
-            $region_offset = $date->getOffset();
+            $region_offset = abs($date->getOffset());
 
             // to
             $t_to = date('Y-m-d') . ' ' . $slot->wrk_to;
             $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
 
             $a = $date->format('Y-m-d H:i:s P');
+            // return $a;
+            // return $tm .' -- '. $t_to;
 
             if(strpos($a , "+")) {
                 $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
@@ -148,14 +150,15 @@ class BookingController extends Controller
                 $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
                 $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
             }
+// if(strtotime($from) > strtotime($to)){
+//                 $to = date('H:i',strtotime($to . ' +720 minutes'));
+//                 $period = new CarbonPeriod($from , '30 minutes', $to); 
+//             }else{
+//                 $period = new CarbonPeriod($from , '30 minutes', $to); 
+//             }
+// return $from .' -- '. $to;
 
-            if(strtotime($from) > strtotime($to)){
-                $to = date('H:i',strtotime($to . ' +720 minutes'));
-                $period = new CarbonPeriod($from , '30 minutes', $to); 
-            }else{
-                $period = new CarbonPeriod($from , '30 minutes', $to); 
-            }
-            // $period = new CarbonPeriod($from , '30 minutes', $to); 
+            $period = new CarbonPeriod($from , '30 minutes', $to); 
             
             foreach($period as $item){
 
