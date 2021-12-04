@@ -758,9 +758,9 @@ height:25px;
                                         <a class="nav-item nav-link" id="nav-codeEditor-tab" data-toggle="tab" href="#nav-codeEditor" role="tab" aria-controls="nav-codeEditor" aria-selected="false">
                                             Code Editor
                                         </a>
-                                        <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
+                                        <!-- <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Google Docs
-                                        </a>
+                                        </a> -->
                                         <!-- <a class="nav-item nav-link" id="nav-fileShare-tab" data-toggle="tab" href="#nav-fileShare" role="tab" aria-controls="nav-fileShare" aria-selected="false">
                                             File Sharing
                                         </a> -->
@@ -782,7 +782,7 @@ height:25px;
                                                     <nav>
                                                         <div class="nav nav-tabs board-nav ml-0 pl-0 newTabs" id="nav-tab" role="tablist">
                                                             <a class="nav-item nav-link board-nav active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Board 1 </a>
-                                                            <a class="mt-2 ml-2" href="#" id="addNewBoard">Add new Board +</a>
+                                                            <!-- <a class="mt-2 ml-2" href="#" id="addNewBoard">Add new Board +</a> -->
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content newWhite" id="nav-tabContent">
