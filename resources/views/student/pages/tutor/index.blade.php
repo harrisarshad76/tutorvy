@@ -717,7 +717,7 @@
                             <h3> Send Message </h3>
                             <p>Type your queries here to let the tutor know what's the main reason of your contact</p>
                         </div>
-                        <div class="col-md-12 text-center mt-2">
+                        <div class="col-md-12  mt-2">
                             <textarea name="msg" class="form-control" id="msg" cols="30" rows="5"></textarea>
                         </div>
                     </div>
