@@ -124,6 +124,7 @@ class BookingController extends Controller
     public function getTutorSlots(Request $request) {
 
         $slots = TutorSlots::where('user_id',$request->id)->get();
+        $user = User::where('id',$request->id)->first();
         $slots_partition = [];
         $center_slot = '';
         $end_slot = '';
@@ -238,6 +239,7 @@ class BookingController extends Controller
             'status_code'=> 200,
             'success' => true,
             'slots' => $slots_partition,
+            'tt_tmz' => $user->time_zone
         ]);
     }
 
