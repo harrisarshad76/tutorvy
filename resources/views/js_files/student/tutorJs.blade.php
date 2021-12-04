@@ -3,7 +3,7 @@
 let tt_id;
 var all_slots = [];
 var current_date = new Date();
-var tt_tmz = '';
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -1006,8 +1006,6 @@ function getDate(date) {
     var curr_d = new Date(today_date + ' ' + time);
     console.log(current_time)
 
-    // var std_current_region_date = new Date().toLocaleString('en-US', { timeZone: tutor_time_zone });
-
     let curr_ms = curr_d.getTime();
     // console.log(current_time)
 
@@ -1096,23 +1094,9 @@ function getTutorSlots(tutor_id ,day) {
         data: {id:tutor_id , day:day , date:date},
         dataType:'json',
         success:function(response){
-            
             console.log(response);
             var obj = response.slots;
-            var tt_tmz = response.tt_tmz;
-
             console.log(obj ,"all slots");
-
-            var tt_current_region_date = new Date().toLocaleString('en-US', { timeZone: tt_tmz });
-            var std_current_region_date = new Date().toLocaleString('en-US', { timeZone: "{{\Auth::user()->time_zone}}" });
-
-            tt_current_region_date = moment(tt_current_region_date).format('YYYY-MM-DD') ;
-            std_current_region_date = moment(std_current_region_date).format('YYYY-MM-DD') ;
-            
-            // var date = moment("2013-03-24")
-            // var now = moment();
-
-            
             all_slots = obj;
             
             if(response.status_code == 200 && response.success == true) {
@@ -1132,9 +1116,7 @@ function getTutorSlots(tutor_id ,day) {
                 // console.log(current_time)
 
                 console.log(curr_ms , "curr_ms");
-               
                 let day = days[current_date.getDay()];
-
                 
                 var msg = "No Slots Available for " + day;
 
@@ -1149,48 +1131,16 @@ function getTutorSlots(tutor_id ,day) {
                         if(curr_ms >= slot_ms_date){
                             
                         }else{
-                            
-                            if (std_current_region_date > tt_current_region_date) {
-                            // date is past
-                                let day = days[current_date.getDay() - 1];
-                                if(data.day == day) {
-                                    check = true;
-                                    html += `
-                                    <div class="col-md-3 col-4">
-                                        <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
-                                            <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
-                                            <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
-                                        </div>
-                                    </div>`;
-                                }
-                                console.log('past');
-                            } else if(std_current_region_date < tt_current_region_date) {
-                            // date is future
-                                let day = days[current_date.getDay() + 1];
-                                if(data.day == day) {
-                                    check = true;
-                                    html += `
-                                    <div class="col-md-3 col-4">
-                                        <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
-                                            <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
-                                            <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
-                                        </div>
-                                    </div>`;
-                                }
-                                console.log('future');
-                            }else{
-                                if(data.day == day) {
-                                    check = true;
-                                    html += `
-                                    <div class="col-md-3 col-4">
-                                        <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
-                                            <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
-                                            <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
-                                        </div>
-                                    </div>`;
-                                }
+                            if(data.day == day) {
+                                check = true;
+                                html += `
+                                <div class="col-md-3 col-4">
+                                    <div class="slotSet" id="slotSet_`+data.id+`" onclick="selectSlot('`+data.id+`','`+ data.wrk_from +`')">
+                                        <img src="{{asset('assets/images/ico/clock.png')}}" alt=""  class="clockBLue"> 
+                                        <img src="{{asset('assets/images/ico/clock-white.png')}}" alt="" class="clockWhite"> `+ data.wrk_from +`
+                                    </div>
+                                </div>`;
                             }
-                            
                         }
                     }
                     if(check == false){
