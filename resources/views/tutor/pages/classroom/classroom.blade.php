@@ -489,7 +489,7 @@ height:25px;
 </div> -->
     <div class="content-wrapper " style="overflow: hidden;">
         <div class="container-fluid">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12 text-right">
                     <div id="countdownExample" class="" >
                         <div class="row blink text-white p-2">
@@ -500,7 +500,7 @@ height:25px;
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row callDiv ml-2 mr-2 mt-4" style="display:none;">
                 <div class="col-md-8 text-center rounded bg-dark ">
                     <video id="main-video2" class=" w-62" playsinline autoplay></video>
