@@ -487,8 +487,6 @@ class SettingController extends Controller
         $slots = TutorSlots::where('user_id',Auth::user()->id)->count();
         $message = '';
 
-        
-
         if($slots  == 0) {
             for($i = 0; $i < sizeOf($request->from); $i++) {
 
@@ -506,8 +504,8 @@ class SettingController extends Controller
                     $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
                     $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
                 }else if(strpos($a , "-")){
-                    $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
-                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                    $from = Carbon::parse($tm)->addSeconds(abs($region_offset))->format('H:i');
+                    $to = Carbon::parse($t_to)->addSeconds(abs($region_offset))->format('H:i');
                 }
 
                 $data = array(
