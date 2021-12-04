@@ -924,9 +924,9 @@
         padding: 0px;
         /* background-color: red; */
     }
-     ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         display: none;
-    }
+    } */
     .flex-scroll {
         display: flex;
         flex-wrap: nowrap;

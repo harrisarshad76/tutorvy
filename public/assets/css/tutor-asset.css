@@ -128,33 +128,38 @@
 
 /* width */
 
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
     width: 4px;
     height: 7px;
-}
+} */
 
 
 /* Track */
 
+
+/* 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px lightblue;
     border-radius: 10px;
-}
+} */
 
 
 /* Handle */
 
-::-webkit-scrollbar-thumb {
+
+/* ::-webkit-scrollbar-thumb {
     background: #00132D !important;
     border-radius: 10px;
-}
+} */
 
 
 /* Handle on hover */
 
-::-webkit-scrollbar-thumb:hover {
+
+/* ::-webkit-scrollbar-thumb:hover {
     background: #1173FF;
-}
+} */
 
 .hp-1 {
     font-family: 'poppins';
@@ -1506,33 +1511,38 @@ h3 {
 
 /* width */
 
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
-}
+} */
 
 
 /* Track */
 
-::-webkit-scrollbar-track {
+
+/* ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px rgb(185, 182, 182);
     border-radius: 10px;
-}
+} */
 
 
 /* Handle */
 
+
+/* 
 ::-webkit-scrollbar-thumb {
     background: #00132D;
     border-radius: 10px;
-}
+} */
 
 
 /* Handle on hover */
 
-::-webkit-scrollbar-thumb:hover {
+
+/* ::-webkit-scrollbar-thumb:hover {
     background: #1173FF;
-}
+} */
 
 .hp-1 {
     font-family: 'poppins';
