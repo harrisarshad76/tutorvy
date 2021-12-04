@@ -427,19 +427,12 @@ class SettingController extends Controller
     }
 
     public function ticketChat(Request $request){
-        // $data = $request->all();
-        // TicketChat::create($data);
-        // return response()->json([
-        //     'status_code'=> 200,
-        //     'message' => 'Message Sent Successfully',
-        //     'success' => true,
-        //     'data' => $data,
-        // ]);
+        
         $data = $request->all();
-
         if(request()->has('file')){
-            return "file";
+            
             $filename = request('file')->store('ticket','public');
+            // return $filename;
             $type = 'file';
             $message = TicketChat::create([
                 'sender_id' => auth()->id(),
@@ -461,6 +454,7 @@ class SettingController extends Controller
             $msg_type = 'text';
         }
         return response()->json([
+            'data' => $message,
             'status_code' => 200,
             'message_type' => $msg_type,
             'message' => 'Message Sent Successfully',

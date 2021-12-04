@@ -266,19 +266,14 @@ class SettingController extends Controller
         return view('student.pages.history.ticket_details',compact('ticket','ticket_replies','admin'));
     }
 
-    public function ticketChat(Request $request){
-        // $data = $request->all();
-        // TicketChat::create($data);
 
-        // return response()->json([
-        //     'status_code'=> 200,
-        //     'message' => 'Message Sent Successfully',
-        //     'success' => true,
-        //     'data' => $data,
-        // ]);
+    public function ticketChat(Request $request){
+        
         $data = $request->all();
         if(request()->has('file')){
+            
             $filename = request('file')->store('ticket','public');
+            // return $filename;
             $type = 'file';
             $message = TicketChat::create([
                 'sender_id' => auth()->id(),
@@ -300,13 +295,52 @@ class SettingController extends Controller
             $msg_type = 'text';
         }
         return response()->json([
+            'data' => $message,
             'status_code' => 200,
             'message_type' => $msg_type,
             'message' => 'Message Sent Successfully',
             'success' => true
         ]);
-
     }
+
+
+
+
+
+
+    // public function ticketChat(Request $request){
+
+    //     $data = $request->all();
+    //     if(request()->has('file')){
+    //         $filename = request('file')->store('ticket','public');
+    //         $type = 'file';
+    //         $message = TicketChat::create([
+    //             'sender_id' => auth()->id(),
+    //             'reciever_id' => $request->reciever_id,
+    //             'text' => $filename,
+    //             'type'=> $type,
+    //             'ticket_id'=>$request->ticket_id,
+    //         ]);
+    //         $msg_type = 'file';
+    //     }else{
+    //         $type = 'text';
+    //         $message = TicketChat::create([
+    //             'sender_id' => auth()->id(),
+    //             'reciever_id' => $request->reciever_id,
+    //             'text' => $request->text,
+    //             'type'=> $type,
+    //             'ticket_id'=>$request->ticket_id,
+    //         ]);
+    //         $msg_type = 'text';
+    //     }
+    //     return response()->json([
+    //         'status_code' => 200,
+    //         'message_type' => $msg_type,
+    //         'message' => 'Message Sent Successfully',
+    //         'success' => true
+    //     ]);
+
+    // }
     public function courses(){
         $courses = CourseEnrollment::where('user_id',Auth::user()->id)->get();
         return view('student.pages.course.index',compact('courses'));

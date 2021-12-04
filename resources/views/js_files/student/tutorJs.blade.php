@@ -1211,11 +1211,10 @@ function selectSlot(id , time) {
     if(time != null && time != "") {
         var create_link =  create_date.getTime() + '/' + time + '/' + tutor_id;        
         var custom_url = window.location.origin + '/student/book_now' + '/' + create_link;
-
         $("#request_booking_btn").attr('href',custom_url);
+        $("#request_booking_btn").removeAttr('disabled');
     }else{
         $("#request_booking_btn").removeAttr('href');
     }
-    
 }
 </script>

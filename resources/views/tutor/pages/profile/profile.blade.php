@@ -291,7 +291,6 @@ width:22px;
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="row image1 mt-3 ">
-
                                                                         <div class="col-md-3 text-center">
                                                                             <img src="http://127.0.0.1:8000/storage/profile/Allama-Iqbal.jpg" alt="profile-image" class="profile-img">
                                                                         </div>
@@ -300,7 +299,6 @@ width:22px;
                                                                                 <p style="font-size: 12px;">
                                                                                 Subject Name</p>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
 

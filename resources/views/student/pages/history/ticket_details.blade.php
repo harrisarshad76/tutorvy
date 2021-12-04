@@ -5,6 +5,9 @@
         .header h1 {
             margin-left: 70px;
         }
+        .img-style{
+        max-height:200px; 
+    }
 
     </style>
     <div class="content-wrapper " style="overflow: hidden;">
@@ -54,67 +57,26 @@
                                     <div class="col-md-8">
                                         <div class="col-md-12 pl-0">
                                             <span class="heading-fifth-1">Reply</span>
-                                            <!-- <div class="row mt-3 mb-3 ticketChat">
-                                                <div class="col-md-12 ">
-                                                    <div class="sender">
-                                                        <small>From Sender Name</small>
-                                                        <p class="mb-0">
-                                                            ewwe
-                                                        </p>
-                                                        <small class="dull pull-right">
-                                                            1min ago
-                                                        </small>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="reciever">
-                                                        <small>From You</small>
-                                                        <p class="mb-0">
-                                                            ewwe
-                                                        </p>
-                                                        <small class="dull pull-right">
-                                                            1min ago
-                                                        </small>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="sender">
-                                                        <small>From Sender Name</small>
-                                                        <p class="mb-0">
-                                                               <img src="http://127.0.0.1:8000/assets/images/ico/Square-white.jpg" class="attachment" alt="">
-
-                                                        </p>
-                                                        <small class="dull pull-right">
-                                                            1min ago
-                                                        </small>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="reciever">
-                                                        <small>From You</small>
-                                                        <p class="mb-0">
-                                                               <img src="http://127.0.0.1:8000/assets/images/ico/Mute-video.png" class="attachment" alt="">
-
-                                                        </p>
-                                                        <small class="dull pull-right">
-                                                            1min ago
-                                                        </small>
-                                                    </div>
-
-                                                </div>
-                                            </div> -->
                                             <div class="row mt-3 mb-3 ticketChat">
                                                 @foreach ($ticket_replies as $replies)
                                                     @if ($replies->sender_id != Auth::user()->id)
                                                         <div class="col-md-12 ">
                                                             <div class="sender">
-                                                                <small>From {{ $replies->sender->name }}</small>
-                                                                <p class="mb-0">
-                                                                    {{ $replies->text }}
-                                                                </p>
+                                                                <small>From {{$replies->sender->name}}</small>  
+                                                                    @if($replies->type == "text")
+                                                                        <p class="mb-0">
+                                                                        
+                                                                                {{$replies->text}}
+                                                                        </p>
+
+                                                                    @else
+                                                                        <p class="mb-0 text-center">
+                                                                            <a href="{{asset('storage/'.$replies->text)}}" target="_blank">
+                                                                                <img src="{{asset('storage/'.$replies->text)}}" alt="" class="img-style">
+                                                                            </a> 
+                                                                        </p>
+
+                                                                    @endif
                                                                 <small class="dull pull-right">
                                                                     1min ago
                                                                 </small>
@@ -124,9 +86,20 @@
                                                         <div class="col-md-12 ">
                                                             <div class="reciever">
                                                                 <small>From You</small>
-                                                                <p class="mb-0">
-                                                                    {{ $replies->text }}
-                                                                </p>
+                                                                    @if($replies->type == "text")
+                                                                        <p class="mb-0">
+                                                                        
+                                                                                {{$replies->text}}
+                                                                        </p>
+
+                                                                    @else
+                                                                        <p class="mb-0 text-center">
+                                                                            <a href="{{asset('storage/'.$replies->text)}}" target="_blank">
+                                                                                <img src="{{asset('storage/'.$replies->text)}}" alt="" class="img-style">
+                                                                            </a> 
+                                                                        </p>
+
+                                                                    @endif
                                                                 <small class="dull pull-right">
                                                                     1min ago
                                                                 </small>
@@ -163,11 +136,11 @@
                                                             <img src="{{ asset('admin/assets/img/ico/Repeat-image.png') }}"
                                                                 class="" alt="repeat" />
                                                         </label> -->
-                                                        <input type="file" id="file" accept=".jpg,.jpeg,.png"
-                                                            class="file-attach" />
+                                                        <!-- <input type="file" id="file" accept=".jpg,.jpeg,.png"
+                                                            class="file-attach" /> -->
                                                         <label for="file" class="p-0">
-                                                            <img src="{{ asset('admin/assets/img/ico/metro-attachment.png') }}"
-                                                                class="" style="width:23px;" alt="repeat" />
+                                                            <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
+                                                                alt="repeat" id="file"/>
                                                         </label>
                                                         <div id="custom-file-name"></div>
                                                     </div>
@@ -316,6 +289,35 @@
                 </div>
             </div>
         </section>
+
+          <!-- Send File Modal -->
+                <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Share File</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="fileSendForm" method="POST"  action="{{route('student.ticketChat')}}">
+                                @csrf
+                                <input type="hidden" name="reciever_id" value="{{$admin->id}}">
+                                <input type="hidden" name="sender_id" value="{{$ticket->user_id}}">
+                                <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
+                                <div class="modal-body text-center ">
+                                <h5></h5>
+                                <input type="file" name="file" class="dropify"  accept="image/*" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn-outline-general " data-dismiss="modal"> Cancel </button>
+                                    <button type="submit" class="btn-general "> Send </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
         <!-- Modal Assign -->
         <div class="modal" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="assignModalTitle"
             aria-hidden="true">
@@ -473,7 +475,80 @@
         //         "message":message
         //     });
         // });
-        $("#stdTicketForm").submit(function(e){
+        // $("#stdTicketForm").submit(function(e){
+        //   e.preventDefault();
+
+        //   var action = $(this).attr('action');
+        //   var method = $(this).attr('method');
+        //    $.ajax({
+        //     url: action,
+        //     type:method,
+        //     data: new FormData( this ),
+        //     cache: false,
+        //     contentType: false,
+        //     processData: false,
+        //     success:function(response){
+        //         // console.log(response);
+        //         if(response.status_code == 200) {
+        //             toastr.success(response.message,{
+        //                 position: 'top-end',
+        //                 icon: 'success',
+        //                 showConfirmButton: false,
+        //                 timer: 2500
+        //             });
+        //             if(response.message_type == file){
+        //             let html = `<div class="col-md-12 ">
+        //                         <div class="reciever">
+        //                             <small>From You</small>
+        //                             <p class="mb-0 text-center">
+        //                                 <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
+        //                             </p>
+        //                             <small class="dull pull-right">
+        //                                 1min ago
+        //                             </small>
+        //                         </div>
+
+        //                     </div>`;
+        //                 $(".ticketChat").append(html);
+        //             }
+        //             else{
+        //                 let html = `<div class="col-md-12">
+        //                                 <div class="reciever">
+        //                                     <small>From You</small>
+        //                                     <p class="mb-0">
+        //                                         `+response.data.text+`
+        //                                     </p>
+        //                                     <small class="dull pull-right">
+        //                                         1min ago
+        //                                     </small>
+        //                                 </div>
+
+        //                             </div>`;
+        //                 $(".ticketChat").append(html);
+        //             }
+
+        //         }
+        //     },
+        //     error:function(e){
+        //         toastr.error('Something Went Wrong',{
+        //             position: 'top-end',
+        //             icon: 'error',
+        //             showConfirmButton: false,
+        //             timer: 2500
+        //         });
+        //     }
+        // });
+    //   })
+
+    </script>
+<script>
+    $(document).ready(function(){
+        $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+    })
+    $("#file").click(function(){
+        $("#sendFileCall").modal("show");
+    })
+      $("#stdTicketForm").submit(function(e){
           e.preventDefault();
 
           var action = $(this).attr('action');
@@ -486,7 +561,9 @@
             contentType: false,
             processData: false,
             success:function(response){
-                // console.log(response);
+                console.log(response);
+                $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+
                 if(response.status_code == 200) {
                     toastr.success(response.message,{
                         position: 'top-end',
@@ -494,12 +571,15 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
+                    $("#message").val("");
                     if(response.message_type == file){
                     let html = `<div class="col-md-12 ">
                                 <div class="reciever">
                                     <small>From You</small>
                                     <p class="mb-0 text-center">
-                                        <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style"> 
+                                        <a href="{{asset('storage/` + response.data.text + `')}}" target="_blank">
+                                            <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style">
+                                        </a> 
                                     </p>
                                     <small class="dull pull-right">
                                         1min ago
@@ -514,7 +594,7 @@
                                         <div class="reciever">
                                             <small>From You</small>
                                             <p class="mb-0">
-                                                `+response.data.text+`
+                                            ` + response.data.text + `
                                             </p>
                                             <small class="dull pull-right">
                                                 1min ago
@@ -526,19 +606,6 @@
                     }
 
                 }
-                // let html = `<div class="col-md-12 ">
-                //                 <div class="reciever">
-                //                     <small>From You</small>
-                //                     <p class="mb-0">
-                //                         `+response.data.text+`
-                //                     </p>
-                //                     <small class="dull pull-right">
-                //                         1min ago
-                //                     </small>
-                //                 </div>
-                            
-                //             </div>`;
-                //     $(".ticketChat").append(html);
             },
             error:function(e){
                 toastr.error('Something Went Wrong',{
@@ -549,9 +616,51 @@
                 });
             }
         });
-      })
+      });
+      $( '#fileSendForm' ).on( 'submit', function(e) {
 
-    </script>
+        e.preventDefault();
+        var action = $(this).attr('action');
+          var method = $(this).attr('method');
+        let msg = $(".msg").val();
+        // let _token   = $('meta[name="csrf_token"]').attr('content');
+        var formData = new FormData($(this)[0]);
+            $.ajax({
+                url: action,
+                type:method,
+                data:formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                enctype:'multipart/form-data',
+                success:function(response){
+                    $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+                    toastr.success(response.message,{
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    $("#sendFileCall").modal("hide");
+                    $('.dropify-clear').click();
+                    let html = `<div class="col-md-12 ">
+                            <div class="reciever">
+                                <small>From You</small>
+                                <p class="mb-0 text-center">
+                                        <a href="{{asset('storage/` + response.data.text + `')}}" target="_blank">
+                                            <img src="{{asset('storage/` + response.data.text + `')}}" alt="" class="img-style">
+                                        </a> 
+                                </p>
+                                <small class="dull pull-right">
+                                    1min ago
+                                </small>
+                            </div>
 
+                        </div>`;
+                    $(".ticketChat").append(html);
+                },
+            });
+        });
+  </script>
 
     @endsection
