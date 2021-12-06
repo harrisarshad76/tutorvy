@@ -209,18 +209,11 @@
                                                                 
                                                             </td>
                                                             @endif
-                                                            <!-- @if ($class->status == 5 && $class->is_reviewed == 0)
-                                                                <td style="text-align: center;padding-top:14px;">
-                                                                    <button class="cencel-btn" type="button"  onclick="showReviewModal({{ $class->id }})"> Review Now
-                                                                    </button>
-                                                                </td>
-                                                            @else -->
-                                                                <td style="text-align: center;padding-top:14px;">
-                                                                    <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}"> View details
-                                                                </a>
-                                                                </td>
-                                                         
-                                                          
+                                                            
+                                                            <td style="text-align: center;padding-top:14px;">
+                                                                <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}"> View details
+                                                            </a>
+                                                            </td>
 
                                                         </tr>
                                                     @endforeach
