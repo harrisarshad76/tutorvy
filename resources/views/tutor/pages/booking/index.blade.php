@@ -128,7 +128,7 @@
                                                                 {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                {{$booking->class_tm}} - {{$booking->class_date }}
+                                                                {{$booking->class_tm}} -  {{$booking->class_end_tm}} -  {{$booking->class_date }}
                                                                 </td>
 
                                                                 <td class="pt-4">

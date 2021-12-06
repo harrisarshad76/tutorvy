@@ -652,12 +652,17 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="exampleText" class="heading-fifth mb-0">About</label>
-                                                    <textarea class="form-control" name="bio" id="exampleFormControlTextarea1"
+                                                    <textarea class="form-control" name="bio" id="aboutTextarea"
                                                         rows="5"
-                                                        placeholder="Write about yourself..." required="required">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                        placeholder="Write about yourself..." required="required" minlength="100" maxlength="200" onkeyup="countChars(this);">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                        <?php
+                                                            $length = strlen(Auth::user()->bio);
+                                                        ?>
+                                                        <span class="badge bg-d300 pull-right"><span id="changeAble">{{$length}}</span>/200</span>
+                                                       
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 mt-3">
                                                 <button class="schedule-btn" id="general_save" style="width:180px;float:right;font-size: 14px;" type="submit"
                                                     name="personal">Save Changes</button>
                                                 <button type="button" role="button" type="button" id="general_loading" disabled class="btn btn-primary mb-4 mr-2"

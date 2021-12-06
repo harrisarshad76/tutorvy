@@ -3201,3 +3201,8 @@ select#paymentMethod option[value="others"] {
 
 
 /*Ticket Messages End*/
+
+.bg-d300 {
+    background: #d30023;
+    color: #ffffff;
+}

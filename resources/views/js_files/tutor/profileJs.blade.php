@@ -1,4 +1,5 @@
 <script>
+        var free = false;
 
     $(document).ready(function() {
         $.ajaxSetup({
@@ -6,8 +7,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-
         // image validation
         $("#imageUpload").on('change', function() {
             var file = this.files[0];
@@ -30,30 +29,42 @@
         $("#personal").submit(function(e) {
             e.preventDefault();
 
-            var action = $(this).attr('action');
-            var method = $(this).attr('method');
-            var file =  $('#imageUpload')[0].files[0];
-            var form = new FormData(this);
+            var tech = $("#aboutTextarea").val();
+            languageTest(tech);
 
-            if( $('#imageUpload')[0].files.length != 0 ) {
-                if(Math.round(file.size / (1024 * 1024)) > 2 ) {
-                    toastr.error('Please select image size less than 2 MB',{
+            if(free == false){
+                toastr.error('Please Use English Language only for Tutor Description',{
                         position: 'top-end',
                         icon: 'error',
                         showConfirmButton: false,
                         timer: 2500
                     });
+            }
+            else if (free == true){
+                var action = $(this).attr('action');
+                var method = $(this).attr('method');
+                var file =  $('#imageUpload')[0].files[0];
+                var form = new FormData(this);
 
+                if( $('#imageUpload')[0].files.length != 0 ) {
+                    if(Math.round(file.size / (1024 * 1024)) > 2 ) {
+                        toastr.error('Please select image size less than 2 MB',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+
+                    }else{
+                        
+                        uploadProfile(action , method , form)
+                    }
+                
                 }else{
                     
                     uploadProfile(action , method , form)
                 }
-               
-            }else{
-                
-                uploadProfile(action , method , form)
             }
-
         });
 
         // update tutor edu record
@@ -278,5 +289,166 @@
             }
         });
     }
- 
+    // document.getElementById("aboutTextarea").addEventListener("keyup", function() {
+    //     if (/^[a-zA-Z]+$/.test(this.value) || /^\s+$/.test(this.value)) {
+    //         document.getElementById("show_lang_in_here").innerHTML = "English";
+    //     } else {
+    //         document.getElementById("show_lang_in_here").innerHTML = "Persian";
+    //     }
+    // });
+        function languageTest(testArea) {
+            
+            var test = testArea;
+                if (test.includes('this')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes(' is ')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes(' a ')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('his')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('you')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('your')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('ing')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('the')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('them')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('was')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('am')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('are')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('were')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('not')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('he')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('her')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('I')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('and')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('can')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('has')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('have')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('had')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('help')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('for')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('from')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('also')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('my')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('when')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('where')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('there')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('in')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('but')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('love')) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes("I'm")) { 
+                    // Found world
+                    free = true;
+                }
+                else if (test.includes('to')) { 
+                    // Found world
+                    free = true;
+                }
+                // if(free == true){
+                //     console.log("This is english");
+                // }
+                // else if(free ==  false){
+                //     console.log("This is not english")
+                // }
+                return free;
+        }
+
+        function countChars(obj){
+            document.getElementById("changeAble").innerHTML = obj.value.length;
+        }
 </script>

@@ -1167,6 +1167,7 @@ function getTutorSlots(tutor_id ,day) {
 
 
                 }else{
+                    $("#modalSlot").modal("show");
                     $(".show_response").text("No Slots Available for " + day);
                     $('#booking_day').val();
                     $(".show_all_slots").html("");
