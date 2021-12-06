@@ -532,7 +532,7 @@ class SettingController extends Controller
                     $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
                 }else if(strpos($a , "-")){
                     $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
-                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->addSeconds($region_offset)->format('H:i');
                 }
 
                 $data = array(
