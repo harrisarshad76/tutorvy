@@ -140,6 +140,7 @@ class BookingController extends Controller
             $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
 
             $a = $date->format('Y-m-d H:i:s P');
+        
             // return $a;
             // return $tm .' -- '. $t_to;
 
@@ -150,13 +151,15 @@ class BookingController extends Controller
                 $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
                 $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
             }
-// if(strtotime($from) > strtotime($to)){
-//                 $to = date('H:i',strtotime($to . ' +720 minutes'));
-//                 $period = new CarbonPeriod($from , '30 minutes', $to); 
-//             }else{
-//                 $period = new CarbonPeriod($from , '30 minutes', $to); 
-//             }
-// return $from .' -- '. $to;
+
+            // return $from .' -- '. $to;
+            // if(strtotime($from) > strtotime($to)){
+            //                 $to = date('H:i',strtotime($to . ' +720 minutes'));
+            //                 $period = new CarbonPeriod($from , '30 minutes', $to); 
+            //             }else{
+            //                 $period = new CarbonPeriod($from , '30 minutes', $to); 
+            //             }
+            // return $from .' -- '. $to;
 
             $period = new CarbonPeriod($from , '30 minutes', $to); 
             
