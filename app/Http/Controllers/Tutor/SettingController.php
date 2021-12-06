@@ -486,22 +486,22 @@ class SettingController extends Controller
 
                 $tm = date('Y-m-d') . ' ' . $request->from[$i];
                 $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
-                $region_offset = $date->getOffset();
+                $region_offset = abs($date->getOffset());
 
                 // to
                 $t_to = date('Y-m-d') . ' ' . $request->to[$i];
                 $date2 = new \DateTime($t_to, new \DateTimeZone(auth()->user()->time_zone));
 
                 $a = $date->format('Y-m-d H:i:s P');
-
+                
                 if(strpos($a , "+")) {
-                    $from = Carbon::parse($tm)->subSeconds(abs($region_offset))->format('H:i');
-                    $to = Carbon::parse($t_to)->subSeconds(abs($region_offset))->format('H:i');
+                    $from = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->subSeconds($region_offset)->format('H:i');
                 }else if(strpos($a , "-")){
-                    $from = Carbon::parse($tm)->addSeconds(abs($region_offset))->format('H:i');
-                    $to = Carbon::parse($t_to)->addSeconds(abs($region_offset))->format('H:i');
+                    $from = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+                    $to = Carbon::parse($t_to)->addSeconds($region_offset)->format('H:i');
                 }
-
+                // return $from .' - '. $to;
                 $data = array(
                     'user_id' => Auth::user()->id , 
                     'day' => $request->day,
@@ -519,7 +519,7 @@ class SettingController extends Controller
 
                 $tm = date('Y-m-d') . ' ' . $request->from[$i];
                 $date = new \DateTime($tm, new \DateTimeZone(auth()->user()->time_zone));
-                $region_offset = $date->getOffset();
+                $region_offset = abs($date->getOffset());
 
                 // to
                 $t_to = date('Y-m-d') . ' ' . $request->to[$i];
