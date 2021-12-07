@@ -43,7 +43,6 @@ class checkClassStaus extends Command
      */
     public function handle() {
         
-        // $bookings = DB::table("bookings")->where('status', 2)->where('class_date',date('Y-m-d'))->get();
         $bookings = DB::table("bookings")->where('status', 2)->get();
         
         foreach($bookings as $booking) {
@@ -157,9 +156,18 @@ class checkClassStaus extends Command
                 }else if(strpos($a , "-")){
                     $bookdt = Carbon::parse($tm)->subSeconds($region_offset)->format('Y-m-d H:i');
                 }
+                // echo $datetime;
+                // $bookdt = $bookdt->format('Y-m-d H:i');
+                // $datetime = $datetime->format('Y-m-d H:i');
 
                 //////////////////////////
-
+                // return $bookdt;
+                // $bookdt = $booking->class_date.' '.$booking->class_time;
+                // $ldate = date('Y-m-d H:i');
+                
+                $datetime = Carbon::createFromFormat('Y-m-d H:i', $datetime);
+                $datetime->setTimezone($student->time_zone);
+                // return $datetime;
                 if($datetime->lte($bookdt)){
 
                 }else{
