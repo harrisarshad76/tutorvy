@@ -2008,6 +2008,10 @@ $('#screen_share').on('hidden.bs.modal', function () {
         display: 'block'
     })
 
+    connection.send({
+        showMainVideo: true
+    });
+
 })
 
 function replaceScreenTrack(stream) {
@@ -2055,9 +2059,9 @@ function replaceScreenTrack(stream) {
         }
     });
 
-    connection.send({
-        showMainVideo: true
-    });
+    // connection.send({
+    //     showMainVideo: true
+    // });
 
     // $('#main-video').show();
     // $('#screen-viewer').css({
