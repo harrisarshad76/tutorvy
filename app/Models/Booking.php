@@ -54,9 +54,9 @@ class Booking extends Model
 
 
         if(strpos($a , "+")) {
-            $bk_time = Carbon::parse($tm)->addSeconds($region_offset)->format('H:i');
+            $bk_time = Carbon::parse($tm)->addSeconds($region_offset)->format('h:i A');
         }else if(strpos($a , "-")){
-            $bk_time = Carbon::parse($tm)->subSeconds($region_offset)->format('H:i');
+            $bk_time = Carbon::parse($tm)->subSeconds($region_offset)->format('h:i A');
         }
 
         return $this->attributes['class_tm'] = $bk_time;
@@ -72,9 +72,9 @@ class Booking extends Model
 
 
         if(strpos($a , "+")) {
-            $bk_end_time = Carbon::parse($tm)->addSeconds($region_offset)->addSeconds(3600)->format('H:i');
+            $bk_end_time = Carbon::parse($tm)->addSeconds($region_offset)->addSeconds(3600)->format('h:i A');
         }else if(strpos($a , "-")){
-            $bk_end_time = Carbon::parse($tm)->subSeconds($region_offset)->addSeconds(3600)->format('H:i');
+            $bk_end_time = Carbon::parse($tm)->subSeconds($region_offset)->addSeconds(3600)->format('h:i A');
         }
 
 
