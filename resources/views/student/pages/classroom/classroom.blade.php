@@ -790,7 +790,7 @@ height:25px;
                                                             <div class="row">
                                                                 <div class="col-md-12 h-500 mb-5">
                                                                     <div id="widget-container" style=""></div>
-                                                                    <video id="screen-viewer"  playsinline ></video>
+                                                                    <video id="screen-viewer"  playsinline autoplay></video>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2042,7 +2042,7 @@ connection.onmessage = function(event) {
     }
 
     if(event.data.hideMainVideo) {
-        // $('#main-video').hide();
+        $('#main-video').show();
         $('#screen-viewer').hide();
         return;
     }
