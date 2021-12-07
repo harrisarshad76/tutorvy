@@ -563,7 +563,8 @@ height:25px;
                                         <!-- <a class="nav-item nav-link" id="nav-fileShare-tab" data-toggle="tab" href="#nav-fileShare" role="tab" aria-controls="nav-fileShare" aria-selected="false">
                                             File Sharing
                                         </a> -->
-                                        <span class="bright">
+                                        <span class="bright span_share" style="display: none !important;cursor:pointer"><a onclick="viewScreen()">View shared screen</a></span>
+                                        <span class="bright share-ss">
                                             <label > Share Screen </label>   
                                                     <label class="switch  ml-2" style="">
                                                         <input type="checkbox" class="s_status" val_id="3" val_st="1">
@@ -2002,6 +2003,11 @@ $('#screen_share').on('hidden.bs.modal', function () {
     $('#screen-viewer').css({
         display: 'none'
     });
+
+    $('.span_share').css({
+        display: 'block'
+    })
+
 })
 
 function replaceScreenTrack(stream) {
@@ -2031,8 +2037,15 @@ function replaceScreenTrack(stream) {
 
         // $('#main-video').hide();
         $('#screen-viewer').hide();
-        $('#s_status').show();
+        $('.share-ss').css({
+            display:'block'
+        })
+        $(".s_status").prop("checked", false);
+
         $('#screen_share').modal('hide')
+        $('.span_share').css({
+            display: 'none'
+        })
         replaceTrack(tempStream.getTracks()[0], screenTrackId);
     });
 
@@ -2055,8 +2068,18 @@ function replaceScreenTrack(stream) {
     // });
     $('#screen-viewer').show();
     $('#screen_share').modal('show')
+    $('.share-ss').css({
+        display:'none'
+    })
 };
 
+function viewScreen(){
+
+    $('#screen_share').modal('show')
+    $('#screen-viewer').css({
+        display: 'inline'
+    });
+}
 
 var count = 2;
 
@@ -2205,10 +2228,6 @@ $(".s_status").change(function(){
     // else {
     //     alert('getDisplayMedia API is not available in this browser.');
     // }
-    }else{
-       //run code
-       alert('unchecked')
-
     }
 });
 
