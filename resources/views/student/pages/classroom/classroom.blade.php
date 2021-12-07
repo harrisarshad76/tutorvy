@@ -764,14 +764,17 @@ height:25px;
                                         <!-- <a class="nav-item nav-link" id="nav-fileShare-tab" data-toggle="tab" href="#nav-fileShare" role="tab" aria-controls="nav-fileShare" aria-selected="false">
                                             File Sharing
                                         </a> -->
-                                        <span class="bright">
+                                        <span class="bright span_share_hid" style="display: none !important;cursor:pointer"><a onclick="hideScreen()">Hide shared screen</a></span>
+                                        <span class="bright span_share_shw" style="display: none !important;cursor:pointer"><a onclick="showScreen()">Show shared screen</a></span>
+
+
+                                        <!-- <span class="bright">
                                             <label > Share Screen </label>   
                                             <label class="switch  ml-2" style="">
-                                                <input type="checkbox" class="s_status" val_id="3" val_st="1">
-                                                <!-- <input type="checkbox" class="s_status" val_id="3" val_st="1 "  checked -->
-                                                <span class="slider round"></span>
+                                                <input type="checkbox" class="s_status" val_id="3" val_st="1"> -->
+                                                <!-- <span class="slider round"></span>
                                             </label>
-                                        </span>
+                                        </span> -->
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
@@ -2038,12 +2041,16 @@ connection.onmessage = function(event) {
             height: $('#widget-container').height()
         });
         $('#screen-viewer').show();
+        $('.span_share_hid').css({display:'block'})
         return;
     }
 
     if(event.data.hideMainVideo) {
         $('#main-video').show();
         $('#screen-viewer').hide();
+        $('.span_share_hid').css({display:'none'})
+        $('.span_share_shw').css({display:'none'})
+
         return;
     }
 
@@ -2725,6 +2732,17 @@ function replaceTrack(videoTrack, screenTrackId) {
     });
 }
 
+function hideScreen(){
+    $('.span_share_hid').css({display:'none'})
+    $('.span_share_shw').css({display:'block'})
+    $('#screen-viewer').hide();
+}
+function showScreen(){
+    $('.span_share_hid').css({display:'block'})
+    $('.span_share_shw').css({display:'none'})
+    $('#screen-viewer').show();
+}
+
 function replaceScreenTrack(stream) {
     stream.isScreen = true;
     stream.streamid = stream.id;
@@ -2768,6 +2786,8 @@ function replaceScreenTrack(stream) {
             height: $('#widget-container').height()
         });
     $('#screen-viewer').show();
+    $('.span_share_hid').css({display:'block'})
+    
 }
 
 $('#btn-share-screen').click(function() {
