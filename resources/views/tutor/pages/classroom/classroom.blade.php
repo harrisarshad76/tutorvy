@@ -1998,6 +1998,7 @@ function replaceTrack(videoTrack, screenTrackId) {
         });
     });
 };
+var interval ;
 
 $('#screen_share').on('hidden.bs.modal', function () {
     $('#screen-viewer').css({
@@ -2007,10 +2008,12 @@ $('#screen_share').on('hidden.bs.modal', function () {
     $('.span_share').css({
         display: 'block'
     })
+    clearInterval(interval);
 
     connection.send({
         showMainVideo: true
     });
+    
 
 })
 
@@ -2072,6 +2075,12 @@ function replaceScreenTrack(stream) {
     // });
     $('#screen-viewer').show();
     $('#screen_share').modal('show')
+   
+    interval = setInterval(function(){ 
+        
+        $('#screen_share').modal('hide')
+    }, 3000);
+    
     $('.share-ss').css({
         display:'none'
     })
