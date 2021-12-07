@@ -142,7 +142,7 @@ hr {
 }
 
 #screen-viewer {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -589,7 +589,7 @@ height:25px;
                                                         <div class="row">
                                                             <div class="col-md-12 h-500 mb-5">
                                                                 <div id="widget-container"  style=""></div>
-                                                                <video id="screen-viewer"  playsinline autoplay></video>
+                                                                <!-- <video id="screen-viewer"  playsinline autoplay></video> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -953,6 +953,27 @@ height:25px;
             <div class="modal-body text-center ">
                 <button type="button" class="btn-general " id="endCallYes">End Call</button>
                 <button type="button" class="btn-outline-general " data-dismiss="modal"> Not Yet </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="screen_share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Screen share view</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center ">
+                <div class="row">
+                    <div class="col-md-12 h-500 mb-5">
+                        <video id="screen-viewer"  playsinline autoplay></video>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -1977,6 +1998,12 @@ function replaceTrack(videoTrack, screenTrackId) {
     });
 };
 
+$('#screen_share').on('hidden.bs.modal', function () {
+    $('#screen-viewer').css({
+        display: 'none'
+    });
+})
+
 function replaceScreenTrack(stream) {
     console.log(stream)
 
@@ -2004,7 +2031,8 @@ function replaceScreenTrack(stream) {
 
         // $('#main-video').hide();
         $('#screen-viewer').hide();
-        $('#btn-share-screen').show();
+        $('#s_status').show();
+        $('#screen_share').modal('hide')
         replaceTrack(tempStream.getTracks()[0], screenTrackId);
     });
 
@@ -2019,13 +2047,14 @@ function replaceScreenTrack(stream) {
     });
 
     // $('#main-video').show();
-    $('#screen-viewer').css({
-        top: $('#widget-container').offset().top,
-        left: $('#widget-container').offset().left,
-        width: $('#widget-container').width(),
-        height: $('#widget-container').height()
-    });
+    // $('#screen-viewer').css({
+    //     top: $('#widget-container').offset().top,
+    //     left: $('#widget-container').offset().left,
+    //     width: $('#widget-container').width(),
+    //     height: $('#widget-container').height()
+    // });
     $('#screen-viewer').show();
+    $('#screen_share').modal('show')
 };
 
 
