@@ -45,7 +45,7 @@ class checkClassStaus extends Command
         
         // $bookings = DB::table("bookings")->where('status', 2)->where('class_date',date('Y-m-d'))->get();
         $bookings = DB::table("bookings")->where('status', 2)->get();
-
+        
         foreach($bookings as $booking) {
             
             $student = User::where('id',$booking->user_id)->first();
@@ -69,7 +69,7 @@ class checkClassStaus extends Command
             $pic = '';
 
             if($date == 1  && $todayDate != $bookingDate){
-                
+              
                 if($class_log != '') {
                     if($class_log->tutor_join_time != NULL){
                         if($class_log->student_join_time == NULL) {
@@ -130,12 +130,20 @@ class checkClassStaus extends Command
 
                 }
             }else{
-    
+                
                 $bookdt = $booking->class_date.' '.$booking->class_time;
                 $ldate = date('Y-m-d H:i');
-                
+                // return $ldate;
                 $datetime = new \DateTime($ldate, new \DateTimeZone($student->time_zone));
-                $datetime = $datetime->format('Y-m-d H:i');
+                // $datetime = $datetime->format('Y-m-d H:i');
+                $region_offset = abs($datetime->getOffset());
+
+                $b = $datetime->format('Y-m-d H:i:s P');
+                if(strpos($b , "+")) {
+                    $datetime = Carbon::parse($ldate)->addSeconds($region_offset)->format('Y-m-d H:i');
+                }else if(strpos($a , "-")){
+                    $datetime = Carbon::parse($ldate)->subSeconds($region_offset)->format('Y-m-d H:i');
+                }
 
                 /////////
 
@@ -144,13 +152,12 @@ class checkClassStaus extends Command
                 $region_offset = abs($date->getOffset());
 
                 $a = $date->format('Y-m-d H:i:s P');
-
                 if(strpos($a , "+")) {
-                    $bookdt = Carbon::parse($tm)->addSeconds($region_offset)->addSeconds(3600)->format('Y-m-d H:i');
+                    $bookdt = Carbon::parse($tm)->addSeconds($region_offset)->format('Y-m-d H:i');
                 }else if(strpos($a , "-")){
-                    $bookdt = Carbon::parse($tm)->subSeconds($region_offset)->addSeconds(3600)->format('Y-m-d H:i');
+                    $bookdt = Carbon::parse($tm)->subSeconds($region_offset)->format('Y-m-d H:i');
                 }
-                
+
                 //////////////////////////
 
                 if($datetime->lte($bookdt)){
