@@ -134,8 +134,24 @@ class checkClassStaus extends Command
                 $bookdt = $booking->class_date.' '.$booking->class_time;
                 $ldate = date('Y-m-d H:i');
                 
-                $datetime = Carbon::createFromFormat('Y-m-d H:i', $ldate);
-                $datetime->setTimezone($student->time_zone);
+                $datetime = new \DateTime($ldate, new \DateTimeZone($student->time_zone));
+                $datetime = $datetime->format('Y-m-d H:i');
+
+                /////////
+
+                $tm = $booking->class_date .' '. $booking->class_time;
+                $date = new \DateTime($tm, new \DateTimeZone($student->time_zone));
+                $region_offset = abs($date->getOffset());
+
+                $a = $date->format('Y-m-d H:i:s P');
+
+                if(strpos($a , "+")) {
+                    $bookdt = Carbon::parse($tm)->addSeconds($region_offset)->addSeconds(3600)->format('Y-m-d H:i');
+                }else if(strpos($a , "-")){
+                    $bookdt = Carbon::parse($tm)->subSeconds($region_offset)->addSeconds(3600)->format('Y-m-d H:i');
+                }
+                
+                //////////////////////////
 
                 if($datetime->lte($bookdt)){
 
