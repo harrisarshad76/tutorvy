@@ -589,7 +589,7 @@ height:25px;
                                                         <div class="row">
                                                             <div class="col-md-12 h-500 mb-5">
                                                                 <div id="widget-container"  style=""></div>
-                                                                <video id="screen-viewer"  playsinline ></video>
+                                                                <video id="screen-viewer"  playsinline autoplay></video>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1984,10 +1984,10 @@ function replaceScreenTrack(stream) {
     stream.streamid = stream.id;
     stream.type = 'local';
     // connection.resetScreen();
-    connection.addStream({
-        screen: true,
-        oneway: true
-    });
+    // connection.addStream({
+    //     screen: true,
+    //     oneway: true
+    // });
     // connection.attachStreams.push(stream);
     connection.onstream({
         stream: stream,
@@ -2020,40 +2020,14 @@ function replaceScreenTrack(stream) {
 
     // $('#main-video').show();
     $('#screen-viewer').css({
-            top: $('#widget-container').offset().top,
-            left: $('#widget-container').offset().left,
-            width: $('#widget-container').width(),
-            height: $('#widget-container').height()
-        });
+        top: $('#widget-container').offset().top,
+        left: $('#widget-container').offset().left,
+        width: $('#widget-container').width(),
+        height: $('#widget-container').height()
+    });
     $('#screen-viewer').show();
 };
 
-$('#btn-share-screen').click(function() {
-    if(!window.tempStream) {
-        alert('Screen sharing is not enabled.');
-        return;
-    }
-console.log(mediaConstraints)
-    $('#btn-share-screen').hide();
-
-    if(navigator.mediaDevices.getDisplayMedia) {
-        navigator.mediaDevices.getDisplayMedia(mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else if(navigator.getDisplayMedia) {
-        navigator.getDisplayMedia(mediaConstraints).then(stream => {
-            replaceScreenTrack(stream);
-        }, error => {
-            alert('Please make sure to use Edge 17 or higher.');
-        });
-    }
-    else {
-        alert('getDisplayMedia API is not available in this browser.');
-    }
-});
 
 var count = 2;
 
