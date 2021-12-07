@@ -109,11 +109,9 @@
                                                         @if($all != "[]")
                                                             @foreach ($all as $booking)
                                                                 @php
-                                                                $tz = get_local_time();
-                                                                $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                                $time = $dt->format('g:i a');
-
-                                                                @endphp
+                                                                    $date = $booking->class_date;
+                                                                    $date = date("D, d-M-y", strtotime($date))
+                                                                @endphp    
                                                             <tr>
                                                                 <td class="pt-4">
                                                                     {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
@@ -125,7 +123,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$booking->class_tm}} - {{$booking->class_end_tm}} - {{$booking->class_date }}
+                                                                    {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -217,11 +215,8 @@
                                                         @if($confirmed != "[]")
                                                             @foreach ($confirmed as $booking)
                                                                 @php
-
-                                                                $tz = get_local_time();
-                                                                $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                                $time = $dt->format('g:i a');
-
+                                                                    $date = $booking->class_date;
+                                                                    $date = date("D, d-M-y", strtotime($date))
                                                                 @endphp
                                                                 <tr>
                                                                     <td class="pt-4">
@@ -234,7 +229,7 @@
                                                                         {{$booking->topic}}
                                                                     </td>
                                                                     <td class="pt-4">
-                                                                        {{$booking->class_tm}} - {{$booking->class_date }}
+                                                                        {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                                     </td>
 
                                                                     <td class="pt-4">
@@ -313,11 +308,8 @@
                                                     @if($pending !="[]")
                                                         @foreach ($pending as $booking)
                                                             @php
-
-                                                            $tz = get_local_time();
-                                                            $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                            $time = $dt->format('g:i a');
-
+                                                                $date = $booking->class_date;
+                                                                $date = date("D, d-M-y", strtotime($date))
                                                             @endphp
                                                             <tr>
                                                                 <td class="pt-4">
@@ -330,7 +322,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
+                                                                    {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -410,11 +402,8 @@
                                                     @if($completed !="[]")
                                                         @foreach ($completed as $booking)
                                                             @php
-
-                                                            $tz = get_local_time();
-                                                            $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                            $time = $dt->format('g:i a');
-
+                                                                $date = $booking->class_date;
+                                                                $date = date("D, d-M-y", strtotime($date))
                                                             @endphp
                                                             <tr>
                                                                 <td class="pt-4">
@@ -427,7 +416,7 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$booking->class_tm}} - {{$booking->class_date }}
+                                                                    {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                                 </td>
 
                                                                 <td class="pt-4">
@@ -510,10 +499,8 @@
                                                 @if($cancelled !="[]")
                                                     @foreach ($cancelled as $booking)
                                                         @php
-                                                        $tz = get_local_time();
-                                                        $dt = new DateTime($booking->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                        $time = $dt->format('g:i a');
-
+                                                            $date = $booking->class_date;
+                                                            $date = date("D, d-M-y", strtotime($date))
                                                         @endphp
                                                         <tr>
                                                             <td class="pt-4">
@@ -526,7 +513,7 @@
                                                                 {{$booking->topic}}
                                                             </td>
                                                             <td class="pt-4">
-                                                                {{$booking->class_tm}} - {{$booking->class_date }}
+                                                                {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                             </td>
 
                                                             <td class="pt-4">
