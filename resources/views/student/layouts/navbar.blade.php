@@ -173,9 +173,12 @@
 
 <!-- side navbar of icons button with navbar -->
 <nav class="navbar navbar-expand-lg mb-4 pb-2" style="width: 100%;background-color: #FBFBFB !important;">
-    <button onclick="navicon()" class="sidenav-toggle rotate" style="margin-top: 14px;">
-        <img src="{{asset('assets/images/ico/side-icons.png')}}" alt="side-arrow" style="width: 26px;">
+    <button onclick="navicon()" class="sidenav-toggle rotate">
+        <img src="{{asset('assets/images/ico/side-arrow-icon.jpg')}}" alt="side-arrow" style="width: 20px;">
     </button>
+    <!-- <button onclick="navicon()" class="sidenav-toggle rotate" style="margin-top: 14px;">
+        <img src="{{asset('assets/images/ico/side-icons.png')}}" alt="side-arrow" style="width: 26px;">
+    </button> -->
     <img id="sideicons-side" src="{{asset('assets/images/ico/side-icons.png') }}" alt="sideicons"
         style="position: absolute;left: 30px;margin-top: 10px; display: none;">
     <div class="box" id="box" style="float: left;">

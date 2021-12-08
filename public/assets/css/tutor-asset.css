@@ -3206,3 +3206,40 @@ select#paymentMethod option[value="others"] {
     background: #d30023;
     color: #ffffff;
 }
+
+
+/*Chat Customized Scroll Bar*/
+
+
+/* width */
+
+#chatSett ::-webkit-scrollbar {
+    width: 4px !important;
+    height: 7px !important;
+}
+
+
+/* Track */
+
+#chatSett ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(185, 182, 182) !important;
+    border-radius: 10px !important;
+}
+
+
+/* Handle */
+
+#chatSett ::-webkit-scrollbar-thumb {
+    background: #00132D !important;
+    border-radius: 10px !important;
+}
+
+
+/* Handle on hover */
+
+#chatSett ::-webkit-scrollbar-thumb:hover {
+    background: #1173FF !important;
+}
+
+
+/*Chat Customized Scroll Bar*/
