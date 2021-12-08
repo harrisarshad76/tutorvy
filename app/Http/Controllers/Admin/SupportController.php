@@ -36,6 +36,23 @@ class SupportController extends Controller
 
         return view('admin.pages.support.ticket',compact('ticket','idAdmin','ticket_replies','staffs'));
     }
+
+    public function ticketStatus(Request $request){
+
+        $ticket = supportTkts::where('ticket_no',$request->ticket_id)->first();
+        if($ticket){
+            $ticket->status = $request->status;
+            $ticket->save();
+        }
+
+        return response()->json([
+            'status_code'=> 200,
+            'message' => 'Ticket status updated',
+            'success' => true
+        ]);
+
+    }
+
     public function ticketReply()
     {
         return view('admin.pages.support.ticketReply');

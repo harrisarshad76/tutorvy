@@ -155,15 +155,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="">
-                                                        <span class="pending-text-1 float-right">
-                                                            @if($ticket->status == 0)
-                                                                Pending
-                                                            @else
-                                                                -
-                                                            @endif
-                                                        </span>
-                                                    </div>
+                                                <select name="" class="form-control" id="ticketStatus">
+                                                        @if ($ticket->status == 0)
+                                                            <option value="0" selected disabled>Pending</option>
+                                                            <option value="1" {{$ticket->status == '1' ? 'selected' : ''}}>Open</option>
+                                                            <option value="2">Resolved</option>
+                                                            <option value="3">Waiting</option>
+                                                            <option value="4">Closed</option>
+                                                        @else
+                                                            <option value="0" {{$ticket->status == '0' ? 'selected' : ''}}>Pending</option>
+                                                            <option value="1" {{$ticket->status == '1' ? 'selected' : ''}}>Open</option>
+                                                            <option value="2">Resolved</option>
+                                                            <option value="3">Waiting</option>
+                                                            <option value="4">Closed</option>
+                                                        @endif
+                                                    </select>
                                                     <!-- <select name="ticketStatus" id="">
                                                         <option value="0">Pending</option>
                                                         <option value="0">Pending</option>
@@ -352,6 +358,55 @@
                 });
             });
             $(".ticketChat").animate({ scrollTop: 20000000 }, "slow");
+
+            $("#ticketStatus").change(function () {
+                var val = this.value;
+                
+                $.ajax({
+                    url: "{{route('admin.ticketStatus')}}",
+                    type:"POST",
+                    data:{
+                        _token:"{{csrf_token()}}",
+                        status:val,
+                        ticket_id:"{{$ticket->ticket_no}}"
+                    },
+
+                    beforeSend:function(data) {
+                    },
+                    success:function(response){
+                        if(response.status_code == 200) {
+                            toastr.success(response.message,{
+                                position: 'top-end',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+
+
+                        } else if(response.status_code == 400) {
+                                toastr.error(response.message,{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+
+                        }
+                    },
+                    error:function(e){
+                        toastr.error('Something Went Wrong',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+
+            
+            });
+            
+
         })
     $("#file").click(function(){
         $("#sendFileCall").modal("show");
