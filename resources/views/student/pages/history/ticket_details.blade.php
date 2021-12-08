@@ -122,8 +122,10 @@
                                                 <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <textarea class="textarea-ticket form-control mt-3 p-2" name="text"
-                                                            id="message" cols="" rows="" placeholder="Your Reply"></textarea>
+                                                        <!-- <textarea class="textarea-ticket form-control mt-3 p-2" name="text"
+                                                            id="message" cols="" rows="" placeholder="Your Reply"></textarea> -->
+                                                        <input placeholder = "Add Reply ..." id="message" class="textarea-ticket form-control mt-3 p-2" name="text"> 
+
                                                         <!-- image upload name -->
                                                         <div class="divided-line"></div>
                                                         <!-- end -->
@@ -160,22 +162,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <select name="" class="form-control" id="ticketStatus">
-                                                        @if ($ticket->status == 0)
-                                                            <option value="0" selected disabled>Pending</option>
-                                                            <option value="1">Open</option>
-                                                            <option value="2">Resolved</option>
-                                                            <option value="3">Waiting</option>
-                                                            <option value="4">Closed</option>
-                                                        @else
-                                                            <option value="0" >Pending</option>
-                                                            <option value="1">Open</option>
-                                                            <option value="2">Resolved</option>
-                                                            <option value="3">Waiting</option>
-                                                            <option value="4">Closed</option>
-                                                        @endif
-                                                    </select>
-                                                    <!-- <div class="">
+                                                    
+                                                    <div class="">
                                                         <span class="pending-text-1 float-right">
                                                             @if ($ticket->status == 0)
                                                                 Pending
@@ -183,7 +171,7 @@
                                                                 -
                                                             @endif
                                                         </span>
-                                                    </div> -->
+                                                    </div> 
                                                 </div>
                                             </div>
 
