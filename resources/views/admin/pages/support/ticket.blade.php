@@ -120,7 +120,8 @@
                                             <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <textarea class="textarea-ticket form-control mt-3 p-2" name="text" id="" cols="" rows="" placeholder="Your Reply"></textarea>
+                                                    <!-- <textarea class="textarea-ticket form-control mt-3 p-2" name="text" id="" cols="" rows="" placeholder="Your Reply"></textarea> -->
+                                                    <input placeholder = "Add Reply ..." id="msg" class="textarea-ticket form-control mt-3 p-2" name="text"> 
                                                     <!-- image upload name -->
                                                     <div class="divided-line"></div>
                                                     <!-- end -->
@@ -426,6 +427,8 @@
             success:function(response){
                 // console.log(response);
                 if(response.status_code == 200) {
+                    $("#msg").val('');
+
                     toastr.success(response.message,{
                         position: 'top-end',
                         icon: 'success',
@@ -446,6 +449,8 @@
 
                             </div>`;
                         $(".ticketChat").append(html);
+                        
+
                     }
                     else{
                         let html = `<div class="col-md-12">
@@ -461,6 +466,7 @@
 
                                     </div>`;
                         $(".ticketChat").append(html);
+
                     }
 
                 }
