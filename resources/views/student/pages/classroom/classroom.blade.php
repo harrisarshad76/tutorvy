@@ -99,14 +99,13 @@ hr {
 }
 
 #screen-viewer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999999999999;
-    display: none;
+    /* position: fixed; */
+    width: 100% !important;
+    height: 600px !important ;
+    display: inline;
 }
+
+    
 .h-500{
     height:500px !important;
 }
@@ -397,7 +396,7 @@ height:25px;
 
     
     #other-videos video {
-        width: 30%;
+        width: 52%;
         margin: 0;
         border: none;
         padding: 0;
@@ -758,6 +757,9 @@ height:25px;
                                         <a class="nav-item nav-link" id="nav-codeEditor-tab" data-toggle="tab" href="#nav-codeEditor" role="tab" aria-controls="nav-codeEditor" aria-selected="false">
                                             Code Editor
                                         </a>
+                                        <a class="nav-item nav-link" id="nav-screenShare-tab" data-toggle="tab" href="#nav-screenShare" role="tab" aria-controls="nav-screenShare" aria-selected="false">
+                                            Screen Share
+                                        </a>
                                         <!-- <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Google Docs
                                         </a> -->
@@ -793,7 +795,6 @@ height:25px;
                                                             <div class="row">
                                                                 <div class="col-md-12 h-500 mb-5">
                                                                     <div id="widget-container" style=""></div>
-                                                                    <video id="screen-viewer"  playsinline autoplay></video>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1003,6 +1004,19 @@ height:25px;
                                                     <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
                                                         <div id="editor2">
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end -->
+                                    </div>
+                                    <div class="tab-pane tab-border-none fade" id="nav-screenShare" role="tabpanel" aria-labelledby="nav-screenShare-tab">
+
+                                            <div class="container-fluid ">
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
+                                                        
+                                                        <video id="screen-viewer"  playsinline autoplay></video>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1521,6 +1535,26 @@ height:25px;
     $(document).ready(function(){
        
         // $(".tech_weck").hide();
+     $("#sidebar").addClass("active");
+     $(".sidenav-toggle").click(function(){
+        $("#sidenav-hide").css("display","block");
+        $(".id-sideicons").css("display","none");
+        if($("#sidebar").hasClass("active")){
+            $(".h-200").css("margin-bottom" ,"56px");
+            $(".vid-location").css("bottom","-39px");
+            $("#other-videos video").css("width","52%");
+        }
+        else{
+            $(".h-200").css("margin-bottom" ,"10px");
+            $(".vid-location").css("bottom","16px");
+            $("#other-videos video").css("width","30%");
+        }
+     })
+     if($("#sidebar").hasClass("active")){
+         $(".h-200").css("margin-bottom" ,"56px");
+         $(".vid-location").css("bottom","-39px");
+     }
+     
      
         // $("#callModal").modal("show");
         $("#main-video").attr("poster","{{asset('assets/images/ico/Mute-video.png')}}");
