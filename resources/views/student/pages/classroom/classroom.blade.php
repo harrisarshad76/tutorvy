@@ -1549,7 +1549,7 @@ height:25px;
         if($("#sidebar").hasClass("active")){
             $(".h-200").css("margin-bottom" ,"56px");
             $(".vid-location").css("bottom","-39px");
-            $("#other-videos video").css("width","52%");
+            $("#other-videos video").css("width","42%");
         }
         else{
             $(".h-200").css("margin-bottom" ,"10px");
