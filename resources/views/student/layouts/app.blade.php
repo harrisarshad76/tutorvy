@@ -57,6 +57,9 @@
         table .table-bordered .dataTable .no-footer{
             margin-bottom:20px;
         }
+        .sidenav-toggle:hover{
+            background:none;
+        }
     </style>
 </head>
 
