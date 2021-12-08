@@ -122,8 +122,10 @@
                                                 <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <textarea class="textarea-ticket form-control mt-3 p-2" name="text"
-                                                            id="message" cols="" rows="" placeholder="Your Reply"></textarea>
+                                                        <!-- <textarea class="textarea-ticket form-control mt-3 p-2" name="text"
+                                                            id="message" cols="" rows="" placeholder="Your Reply"></textarea> -->
+                                                        <input placeholder = "Add Reply ..." id="message" class="textarea-ticket form-control mt-3 p-2" name="text"> 
+
                                                         <!-- image upload name -->
                                                         <div class="divided-line"></div>
                                                         <!-- end -->
