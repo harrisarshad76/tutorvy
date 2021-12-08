@@ -446,7 +446,7 @@
                             </div>
                         </nav>
                         <div class="line-box2"></div>
-                        <div class="h-471">
+                        <div class="h-471" id="chatSett">
                             <div class="row chatArea ml-1 pb-2 mr-1" id="">
                                 <div class='text-center col-md-12 mb-3'>
                                     <small>

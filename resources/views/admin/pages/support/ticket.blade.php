@@ -65,7 +65,7 @@
                         <div class="card-body">
                             <div class="row pt-4 container-bg-1  ml-1 mr-1">
                                 <div class="col-md-8">
-                                    <div class="col-md-12 pl-0">
+                                    <div class="col-md-12 pl-0 " id="chatSett">
                                         <span class="heading-fifth-1">Reply</span>
                                         <div class="row mt-3 mb-3 ticketChat">
                                             @foreach($ticket_replies as $replies)
