@@ -151,6 +151,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::get('/ticket-reply',[SupportController::class,'ticketReply'])->name('admin.ticketReply');
     Route::post('/ticket-chat',[SupportController::class,'ticketChat'])->name('admin.ticketChat');
     Route::post('/assignTicket',[SupportController::class,'assignTicket'])->name('admin.assign.ticket');
+    Route::post('/ticketStatus',[SupportController::class,'ticketStatus'])->name('admin.ticketStatus');
 
     Route::get('/setting',[SettingController::class,'index'])->name('admin.setting');
 
