@@ -730,10 +730,6 @@ height:25px;
 @section('content')
  <!-- top Fixed navbar End -->
  <section>
-    <input type="hidden" id="class_room_id" value="{{$class->id}}">
-    <input type="hidden" id="class_date" value="{{$booking->class_date}}">
-    <input type="hidden" id="class_time" value="{{$booking->class_time}}">
-    <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
 
      <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
 <!-- <div class="overlayCam container-fluid">
@@ -1761,19 +1757,38 @@ height:25px;
 //                     $("#other-videos2").html(html);
 //     $(".overlayCam").hide();
 // });
+var iceServers = '';
 var connection = new RTCMultiConnection();
+
+window.onload = function() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function($evt){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let res = JSON.parse(xhr.responseText);
+            var username = res.v.iceServers.username;
+            var creds = res.v.iceServers.credential;
+            iceServers = res.v.iceServers;
+            connection.iceServers = [iceServers];
+            console.log("response: ",res.v.iceServers);
+        }
+    }
+    xhr.open("PUT", "https://global.xirsys.net/_turn/Tutorvy", true);
+    xhr.setRequestHeader ("Authorization", "Basic " + btoa("kashif70000:12fe9734-58e1-11ec-9e37-0242ac150003") );
+    xhr.setRequestHeader ("Content-Type", "application/json");
+    xhr.send( JSON.stringify({"format": "urls"}) );
+}
+
+
+
 var roomid = '{{$class->classroom_id}}';
 var fullName = '{{$user->first_name}} {{$user->last_name}}';
 var timer = new Timer();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
-var class_duration = '{{$booking->duration}} ';
-var class_end_time = '{{$booking->class_booked_till}} ';
 
 var todays = new Date();
 var times = todays.getHours() + ":" + todays.getMinutes() + ":" + todays.getSeconds();
-console.log(times, "current time")
-console.log(class_end_time , "End time")
+
 
 
 // console.log(connection.socket,"connectionTrue")
@@ -3143,7 +3158,7 @@ function tick() {
 
 /*New Counter */
 
-var minutes = (class_duration * 60 );
+var minutes = (1 * 60 );
 
 var target_date = new Date().getTime() + ((minutes * 60 ) * 1000); // set the countdown date
 var time_limit = ((minutes * 60 ) * 1000);
@@ -3169,7 +3184,6 @@ function getCountdown(){
 	var seconds_left = (target_date - current_date) / 1000;
   
     if ( seconds_left >= 0 ) {
-        console.log(time_limit);
         if ( (seconds_left * 1000 ) < ( time_limit / 2 ) )  {
             $( '#tiles' ).removeClass('color-full');
             $( '#tiles' ).addClass('color-half');
