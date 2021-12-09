@@ -1085,9 +1085,29 @@ height:25px;
 </script>
 
 <script>
-
-
+    var iceServers = '';
 var connection = new RTCMultiConnection();
+
+window.onload = function() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function($evt){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let res = JSON.parse(xhr.responseText);
+            var username = res.v.iceServers.username;
+            var creds = res.v.iceServers.credential;
+
+            iceServers = res.v.iceServers;
+            connection.iceServers = [iceServers];
+
+            console.log("response: ",res.v.iceServers);
+        }
+    }
+    xhr.open("PUT", "https://global.xirsys.net/_turn/Tutorvy", true);
+    xhr.setRequestHeader ("Authorization", "Basic " + btoa("kashif70000:12fe9734-58e1-11ec-9e37-0242ac150003") );
+    xhr.setRequestHeader ("Content-Type", "application/json");
+    xhr.send( JSON.stringify({"format": "urls"}) );
+}
+
 console.log(connection , "connection");
 var roomid = '{{$class->classroom_id}}';
 var fullName = '{{$booking->tutor->first_name}} {{$booking->tutor->last_name}}';
@@ -1095,8 +1115,9 @@ var deadline = '00:05:00';
 var resced = '00:15:00'; 
 var class_duration = {{$booking->duration}};
 var class_id = {{$booking->id}};
-
 // var class_duration = 20;
+console.log(connection , "connection");
+
 var timer = new Timer();
 
 // connection.socket.to('3mdzdzm1a5d').emit("private message", "sdfsdfsdf")

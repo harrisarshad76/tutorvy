@@ -29,7 +29,6 @@ let profile_interest_tutors;
     document.getElementById('languages-list').innerHTML = option;
 })();
 
-
 $('#subjects-list').on("change", function(e) {
 
     let subject = $("#subjects-list").val();
@@ -67,6 +66,7 @@ $('input[type=radio][name=rating_filter]').change(function() {
     search_tutors(price,subject,lang,rating,location ,gender);
 
 });
+
 
 // $("#range").change(function() {
 
@@ -1001,24 +1001,22 @@ function getDate(date) {
     var today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() ;
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    current_date = new Date(date);
+    current_date = new Date(date+ ' 00:00:00');
+    console.log(current_date , "current_date");
 
     var curr_d = new Date(today_date + ' ' + time);
-    console.log(current_time)
-
     let curr_ms = curr_d.getTime();
-    // console.log(current_time)
-
-    console.log(curr_ms , "curr_ms");
-
+       
     let day = days[current_date.getDay()];
     var duration = 1;
     var tutor_id = $("#tutor_id").val();
+
+    console.log(day , "day");
     // filter array get day wise slots
     var item = all_slots.filter(item => item.day === day);
     
     var html = ``;
-    // console.log(item , "item");
+    console.log(item , "item");
     if(item != null && item != "" && item != undefined && item != [] && item.length > 0) {
         var check = false;
 
