@@ -68,6 +68,10 @@
 #conversation-panel .message img, #conversation-panel .message video, #conversation-panel .message iframe {
     max-width: 100%;
 }
+  
+
+
+
 
 .bg-chat-head{
     background-color:#fefefe !important;
@@ -396,7 +400,7 @@ height:25px;
 
     
     #other-videos video {
-        width: 52%;
+        width: 42%;
         margin: 0;
         border: none;
         padding: 0;
@@ -672,7 +676,7 @@ height:25px;
             <div class="row">
                 <div class="col-md-12 text-right">
                     <div id="countdownExample" class="mr-3" >
-                        <div class="row blink text-white p-2">
+                        <div class="row blink p-2">
                             <div class="col-md-8 Text-reck text-center">
                             </div>
                             <div class="col-md-4 values"></div>
@@ -766,8 +770,8 @@ height:25px;
                                         <!-- <a class="nav-item nav-link" id="nav-fileShare-tab" data-toggle="tab" href="#nav-fileShare" role="tab" aria-controls="nav-fileShare" aria-selected="false">
                                             File Sharing
                                         </a> -->
-                                        <span class="bright span_share_hid" style="display: none !important;cursor:pointer"><a onclick="hideScreen()">Hide shared screen</a></span>
-                                        <span class="bright span_share_shw" style="display: none !important;cursor:pointer"><a onclick="showScreen()">Show shared screen</a></span>
+                                        <!-- <span class="bright span_share_hid" style="display: none !important;cursor:pointer"><a onclick="hideScreen()">Hide shared screen</a></span>
+                                        <span class="bright span_share_shw" style="display: none !important;cursor:pointer"><a onclick="showScreen()">Show shared screen</a></span> -->
 
 
                                         <!-- <span class="bright">
@@ -783,11 +787,14 @@ height:25px;
                                     <div class="tab-pane tab-border-none tab-border-none-1 fade show active" id="nav-whiteBoard" role="tabpanel" aria-labelledby="nav-whiteBoard-tab">
                                         <div class="container-fluid ">
                                             <div class="row mt-2">
-                                                <div class="col-md-12">
+                                                <div class="col-md-12 h-500 mb-5 mt-5">
+                                                    <div id="widget-container" style=""></div>
+                                                </div>
+                                                <!-- <div class="col-md-12">
                                                     <nav>
                                                         <div class="nav nav-tabs board-nav ml-0 pl-0 newTabs" id="nav-tab" role="tablist">
                                                             <a class="nav-item nav-link board-nav active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Board 1 </a>
-                                                            <!-- <a class="mt-2 ml-2" href="#" id="addNewBoard">Add new Board +</a> -->
+                                                            <a class="mt-2 ml-2" href="#" id="addNewBoard">Add new Board +</a>
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content newWhite" id="nav-tabContent">
@@ -799,7 +806,7 @@ height:25px;
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <!-- -->
                                             </div>
                                         </div>
@@ -1125,7 +1132,7 @@ height:25px;
                                 <div class="card-header bg-chat-head">
                                     Chat <i class="fa fa-person"></i>
                                 </div>
-                                <div class="card-body" >
+                                <div class="card-body " id="chatSett">
                                     
                                     <div class="row  h-290" id="conversation-panel">
                                         <div class='text-center col-md-12 mb-3'>
@@ -1542,7 +1549,7 @@ height:25px;
         if($("#sidebar").hasClass("active")){
             $(".h-200").css("margin-bottom" ,"56px");
             $(".vid-location").css("bottom","-39px");
-            $("#other-videos video").css("width","52%");
+            $("#other-videos video").css("width","42%");
         }
         else{
             $(".h-200").css("margin-bottom" ,"10px");
@@ -2075,7 +2082,14 @@ connection.onmessage = function(event) {
             height: $('#widget-container').height()
         });
         $('#screen-viewer').show();
-        $('.span_share_hid').css({display:'block'})
+        $('.nav-link').removeClass('active');
+        $('.nav-link').removeClass('show');
+        $('#nav-screenShare-tab').addClass('active');
+        $('#nav-screenShare-tab').addClass('show');
+        $('.tab-pane').removeClass('active');
+        $('.tab-pane').removeClass('show');
+        $('#nav-screenShare').addClass('active');
+        $('#nav-screenShare').addClass('show');
         return;
     }
 
@@ -2084,6 +2098,14 @@ connection.onmessage = function(event) {
         $('#screen-viewer').hide();
         $('.span_share_hid').css({display:'none'})
         $('.span_share_shw').css({display:'none'})
+        $('.nav-link').removeClass('active');
+        $('.nav-link').removeClass('show');
+        $('#nav-whiteBoard-tab').addClass('active');
+        $('#nav-whiteBoard-tab').addClass('show');
+        $('.tab-pane').removeClass('active');
+        $('.tab-pane').removeClass('show');
+        $('#nav-whiteBoard').addClass('active');
+        $('#nav-whiteBoard').addClass('show');
 
         return;
     }

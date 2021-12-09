@@ -790,7 +790,7 @@ height:25px;
                                 <div class="card-header bg-chat-head">
                                     Chat <i class="fa fa-person"></i>
                                 </div>
-                                <div class="card-body" >
+                                <div class="card-body" id="chatSett">
 
                                     <div class="row  h-290" id="conversation-panel">
                                         <div class='text-center col-md-12 mb-3'>
@@ -1012,6 +1012,25 @@ height:25px;
 
     $(document).ready(function(){
         // $(".tech_weck").hide();
+        $("#sidebar").addClass("active");
+            $(".sidenav-toggle").click(function(){
+                $("#sidenav-hide").css("display","block");
+                $(".id-sideicons").css("display","none");
+                if($("#sidebar").hasClass("active")){
+                    $(".h-200").css("margin-bottom" ,"56px");
+                    $(".vid-location").css("bottom","-39px");
+                    $("#main-videos video").css("width","52%");
+                }
+                else{
+                    $(".h-200").css("margin-bottom" ,"10px");
+                    $(".vid-location").css("bottom","16px");
+                    $("#main-videos video").css("width","30%");
+                }
+            })
+            if($("#sidebar").hasClass("active")){
+                $(".h-200").css("margin-bottom" ,"56px");
+                $(".vid-location").css("bottom","-39px");
+            }
         $(".mk").hide();
         $(".vc").hide();
         // $("#callModal").modal("show");
