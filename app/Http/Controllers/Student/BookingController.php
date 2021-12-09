@@ -160,8 +160,11 @@ class BookingController extends Controller
             //                 $period = new CarbonPeriod($from , '30 minutes', $to); 
             //             }
             // return $from .' -- '. $to;
-
-            $period = new CarbonPeriod($from , '30 minutes', $to); 
+            if(strtotime($from) > strtotime($to)){
+                $period = new CarbonPeriod($from , '30 minutes', '24:00'); 
+            }else{
+                $period = new CarbonPeriod($from , '30 minutes', $to); 
+            }
             
             foreach($period as $item){
 
@@ -228,7 +231,7 @@ class BookingController extends Controller
 
                         if($item->format("H:i") == $to){
                             array_pop($slots_partition);
-                        }elseif($item->format("H:i") == "00:00" && $to == "24:00"){
+                        }elseif($item->format("H:i") == "00:00" || $to == "24:00"){
                             array_pop($slots_partition);
                         }else{
     
