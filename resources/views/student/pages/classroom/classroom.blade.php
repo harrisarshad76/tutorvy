@@ -635,6 +635,97 @@ height:25px;
 }
 
 /* Call of Modal End */
+
+/*New Counter */
+
+.countdown-label {
+  font: thin 15px Arial, sans-serif;
+	color: #65584c;
+	text-align: center;
+	text-transform: uppercase;
+	display: inline-block;
+  letter-spacing: 2px;
+  margin-top: 9px
+}
+#countdown{
+    box-shadow: 0 1px 2px 0 rgb(1 1 1 / 40%);
+    width: 113px;
+    height: 25px;
+    text-align: right;
+    background: #f1f1f1;
+    border-radius: 5px;
+    float: right;
+
+}
+
+
+
+#countdown #tiles{
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 0px #ccc;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 3px 0 0 0;
+    border-radius: 5px;
+    font-size: 19px;
+    font-weight: thin;
+    display: block;
+    
+}
+
+.color-full {
+  background: #53bb74;
+}
+.color-half {
+  background: #ebc85d;
+}
+.color-empty {
+  background: #d30023;
+}
+
+#countdown #tiles > span{
+	width: 70px;
+	max-width: 70px;
+
+	padding: 18px 0;
+	position: relative;
+}
+
+
+
+
+
+#countdown .labels{
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	position: absolute;
+	bottom: 8px;
+}
+
+#countdown .labels li{
+	width: 102px;
+	font: bold 15px 'Droid Sans', Arial, sans-serif;
+	color: #f47321;
+	text-shadow: 1px 1px 0px #000;
+	text-align: center;
+	text-transform: uppercase;
+	display: inline-block;
+}
+
+
+
+/*New Counter */
+
+
+
+
+
+
+
 </style>
 @section('content')
  <!-- top Fixed navbar End -->
@@ -675,12 +766,16 @@ height:25px;
         <div class="container-fluidd">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <div id="countdownExample" class="mr-3" >
+                    <!-- <div id="countdownExample" class="mr-3" >
                         <div class="row blink p-2">
                             <div class="col-md-8 Text-reck text-center">
                             </div>
                             <div class="col-md-4 values"></div>
                         </div>
+                    </div> -->
+                    <input type="hidden" id="set-time" value="1"/>
+                    <div id="countdown">
+                        <div id='tiles' class="color-full"></div>
                     </div>
                 </div>
             </div>
@@ -1666,17 +1761,43 @@ height:25px;
 //                     $("#other-videos2").html(html);
 //     $(".overlayCam").hide();
 // });
+var iceServers = '';
 var connection = new RTCMultiConnection();
-var roomid = '{{$class->classroom_id}}';
-var fullName = '{{$user->first_name}} {{$user->last_name}}';
-var timer = new Timer();
-var deadline = '00:05:00'; 
-var resced = '00:15:00'; 
-var class_duration = {{$booking->duration}};
 
-// console.log(connection.socket,"connectionTrue")
-// var class_duration = 20;
-$("#join_now").click(function(){
+window.onload = function() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function($evt){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let res = JSON.parse(xhr.responseText);
+            var username = res.v.iceServers.username;
+            var creds = res.v.iceServers.credential;
+            iceServers = res.v.iceServers;
+            connection.iceServers = [iceServers];
+            console.log("response: ",res.v.iceServers);
+        }
+    }
+    xhr.open("PUT", "https://global.xirsys.net/_turn/Tutorvy", true);
+    xhr.setRequestHeader ("Authorization", "Basic " + btoa("kashif70000:12fe9734-58e1-11ec-9e37-0242ac150003") );
+    xhr.setRequestHeader ("Content-Type", "application/json");
+    xhr.send( JSON.stringify({"format": "urls"}) );
+    }
+    var roomid = '{{$class->classroom_id}}';
+    var fullName = '{{$user->first_name}} {{$user->last_name}}';
+    var timer = new Timer();
+    var deadline = '00:05:00'; 
+    var resced = '00:15:00'; 
+    var class_duration = '{{$booking->duration}} ';
+    var class_end_time = '{{$booking->class_booked_till}} ';
+
+    var todays = new Date();
+    var times = todays.getHours() + ":" + todays.getMinutes() + ":" + todays.getSeconds();
+    console.log(times, "current time")
+    console.log(class_end_time , "End time")
+
+
+    // console.log(connection.socket,"connectionTrue")
+    // var class_duration = 20;
+    $("#join_now").click(function(){
                 $(".tech_weck").removeClass("tech_weck-none");
                 $(".callDiv").hide();
                     connection.onstream = function(event) {
@@ -3034,5 +3155,69 @@ function tick() {
   
 }
 }
+
+
+
+
+
+/*New Counter */
+
+var minutes = (class_duration * 60 );
+
+var target_date = new Date().getTime() + ((minutes * 60 ) * 1000); // set the countdown date
+var time_limit = ((minutes * 60 ) * 1000);
+//set actual timer
+setTimeout(
+  function() 
+  {
+    $("#reviewModal").hasClass("show")
+  }, time_limit );
+
+var days, hours, minutes, seconds; // variables for time units
+
+var countdown = document.getElementById("tiles"); // get tag element
+
+getCountdown();
+
+setInterval(function () { getCountdown(); }, 1000);
+
+function getCountdown(){
+
+	// find the amount of "seconds" between now and target
+	var current_date = new Date().getTime();
+	var seconds_left = (target_date - current_date) / 1000;
+  
+    if ( seconds_left >= 0 ) {
+        console.log(time_limit);
+        if ( (seconds_left * 1000 ) < ( time_limit / 2 ) )  {
+            $( '#tiles' ).removeClass('color-full');
+            $( '#tiles' ).addClass('color-half');
+
+                } 
+        if ( (seconds_left * 1000 ) < ( time_limit / 4 ) )  {
+            $( '#tiles' ).removeClass('color-half');
+            $( '#tiles' ).addClass('color-empty');
+        }
+        
+        days = pad( parseInt(seconds_left / 86400) );
+        seconds_left = seconds_left % 86400;
+            
+        hours = pad( parseInt(seconds_left / 3600) );
+        seconds_left = seconds_left % 3600;
+            
+        minutes = pad( parseInt(seconds_left / 60) );
+        seconds = pad( parseInt( seconds_left % 60 ) );
+
+        // format countdown string + set tag value
+        countdown.innerHTML = "<span>" + hours + ":</span><span>" + minutes + ":</span><span>" + seconds + "</span>"; 
+
+    }
+}
+
+function pad(n) {
+	return (n < 10 ? '0' : '') + n;
+}
+
+/*New Counter End */
 </script>
 @endsection
