@@ -1197,6 +1197,7 @@ a[data-toggle="collapse"] {
     font-family: 'Poppins', sans-serif;
     color: #00132D;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .profile-name:hover {
