@@ -1890,3 +1890,44 @@ svg:not(:root) {
 
 
 /*Ticket Messages End*/
+
+
+/*Chat Customized Scroll Bar*/
+
+
+/* width */
+
+#sidebar ::-webkit-scrollbar,
+#chatSett ::-webkit-scrollbar {
+    width: 4px !important;
+    height: 7px !important;
+}
+
+
+/* Track */
+
+#sidebar ::-webkit-scrollbar-track,
+#chatSett ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(185, 182, 182) !important;
+    border-radius: 10px !important;
+}
+
+
+/* Handle */
+
+#sidebar ::-webkit-scrollbar-thumb,
+#chatSett ::-webkit-scrollbar-thumb {
+    background: #00132D !important;
+    border-radius: 10px !important;
+}
+
+
+/* Handle on hover */
+
+#sidebar ::-webkit-scrollbar-thumb:hover,
+#chatSett ::-webkit-scrollbar-thumb:hover {
+    background: #1173FF !important;
+}
+
+
+/*Chat Customized Scroll Bar*/
