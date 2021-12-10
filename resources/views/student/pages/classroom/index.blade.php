@@ -148,11 +148,8 @@
                                                 @if ($classes != null && $classes != [] && $classes != '')
                                                     @foreach ($classes as $class)
                                                         @php
-
-                                                            $tz = get_local_time();
-                                                            $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                            $time = $dt->format('g:i a');
-
+                                                            $date = $class->class_date;
+                                                            $date = date("D, d-M-y", strtotime($date))
                                                         @endphp
                                                         <tr>
                                                             <td class="pt-3">
@@ -165,13 +162,7 @@
                                                             <td class="pt-3">
                                                                 {{ $class != null ? $class->topic : '---' }}
                                                             </td>
-                                                            <!-- <td class="pt-3">
-                                                                {{ $time }}
-                                                            </td>
-
-                                                            <td class="pt-3">
-                                                                {{ $class->duration }} Hour(s)
-                                                            </td> -->
+                              
                                                             <td class="pt-3">
 
                                                                 @if ($class->status == 1)
@@ -203,7 +194,7 @@
                                                                 data-time="{{$class->class_tm}}" data-endtime="{{$class->class_end_tm}}" id="class_time_{{$class->id}}"
                                                                 data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}" 
                                                                 data-booking="{{$class->classroom != null ? $class->classroom->booking_id : ''}}"
-                                                                class="current_time"> 
+                                                                class="current_time"> {{$date }} , {{$class->class_tm}} to {{$class->class_end_tm}}
                                                                     
                                                                 </span>
                                                                 
@@ -215,6 +206,9 @@
                                                             @endif
                                                             
                                                             <td style="text-align: center;padding-top:14px;">
+                                                            <span id="class_time_btn_{{$class->id}}">
+
+                                                                    </span>
                                                                 <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}"> View details
                                                             </a>
                                                             </td>
@@ -486,16 +480,16 @@
             // console.table(a);
 
             if(current_date.getTime()  < strt_date.getTime() ) {
-                $("#class_time_"+id).text(dt_format);
+                // $("#class_time_"+id).text(dt_format);
             }else{
                 if(current_date.getTime()  > strt_date.getTime() && current_date.getTime() < end_date.getTime()) {
                     if(room != null && room != "") {
-                        $("#class_time_"+id).html(join_btn);
+                        $("#class_time_btn_"+id).html(join_btn);
                     }else{
-                        $("#class_time_"+id).html("-");
+                        $("#class_time_btn_"+id).html("");
                     }
                 }else {
-                    $("#class_time_"+id).html("-");
+                    $("#class_time_btn_"+id).html("");
                 } 
             }
 

@@ -75,28 +75,23 @@
                                                 @if($classes != null && $classes != [] && $classes != "")
                                                     @foreach($classes as $class)
                                                         @if($class != null && $class != "")
-                                                             @php
-
-                                                                $tz = get_local_time();
-                                                                $dt = new DateTime($class->class_time, new DateTimeZone($tz)); //first argument "must" be a string
-                                                                $time = $dt->format('g:i a');
-
-                                                                @endphp
+                                                            @php
+                                                                $date = $class->class_date;
+                                                                $date = date("D, d-M-y", strtotime($date))
+                                                            @endphp
                                                             <tr>
                                                                 <td class="pt-4">
                                                                     @if($class->user != null && $class->user != "")
                                                                         <a href="{{route('tutor.student',[$class->user->id])}}">
                                                                             {{ $class->user->first_name }} {{ $class->user->last_name }}
                                                                         </a>
-                                                                        
                                                                     @else
                                                                     <span> - </span>
                                                                     @endif
                                                                 </td>
                                                                 <td class="pt-4"> {{ $class->subject->name }} </td>
                                                                 <td class="pt-4"> {{ $class->topic }} </td>
-                                                                <!-- <td class="pt-4 ">  {{ $time }} </td>
-                                                                <td class="pt-4"> {{ $class->duration }} Hour(s) </td> -->
+                                                                
                                                                 <td class="pt-4">
                                                                 @if($class->status == 1)
                                                                     <span class="bg-color-apporve3">
@@ -120,11 +115,14 @@
                                                                     <span data-date="{{$class->class_date}}" data-id="{{$class->id}}" data-duration="{{$class->duration}}"
                                                                         data-time="{{$class->class_tm}}" data-endtime="{{$class->class_end_tm}}" id="class_time_{{$class->id}}"
                                                                         data-room="{{$class->classroom != null ? $class->classroom->classroom_id : ''}}"
-                                                                        class="current_time text-center"> 
+                                                                        class="current_time text-center"> {{$date }} , {{$class->class_tm}} to {{$class->class_end_tm}}
                                                                     </span>
                                                                     
                                                                 </td>
                                                                 <td class="pt-4" style="text-align: center;">
+                                                                    <span id="class_time_btn_{{$class->id}}">
+
+                                                                    </span>
                                                                     <a class="cencel-btn" href="{{route('tutor.booking.detail',[$class->id])}}"> 
                                                                         View details 
                                                                     </a>                                                            
@@ -157,7 +155,7 @@
                                                         <th scope="col">Subjects</th>
                                                         <th scope="col">Topic</th>
                                                         <th scope="col">Time</th>
-                                                        <th scope="col">Duration</th>
+                                                        <!-- <th scope="col">Duration</th> -->
                                                         <th scope="col">Status</th>
                                                         <th scope="col"></th>
                                                     </tr>
@@ -265,7 +263,7 @@
                     var dt_format = day +','+convert_date+', ' + start_date + ' - ' + ed_date;
 
                     let start_call = `<a href="{{url('tutor/class')}}/`+ room +`"  class="schedule-btn"> Start Call </a>`;
-                    $("#class_time_"+id).text(dt_format);
+                    // $("#class_time_"+id).text(dt_format);
 
                     // let a =  {
                     //     current_date : current_date.getTime() ,
@@ -276,16 +274,20 @@
                     // console.table(a);
 
                     if(current_date.getTime()  < strt_date.getTime() ) {
-                        $("#class_time_"+id).text(dt_format);
+                        // $("#class_time_"+id).text(dt_format);
                     }else{
                         if(current_date.getTime()  > strt_date.getTime() && current_date.getTime() < end_date.getTime()) {
                             if(room != null && room != "") {
-                                $("#class_time_"+id).html(start_call);
+                                $("#class_time_btn_"+id).html(start_call);
                             }else{
-                                $("#class_time_"+id).html("-");
+                                // $("#class_time_"+id).html("-");
+                                $("#class_time_btn_"+id).html("");
+
                             }
                         }else {
-                            $("#class_time_"+id).html("-");
+                            // $("#class_time_"+id).html("-");
+                            $("#class_time_btn_"+id).html("");
+
                         } 
                     }
 
