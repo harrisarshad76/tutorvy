@@ -7,6 +7,29 @@
     }
     .img-style{
         max-height:200px; 
+        width:100%;
+    }
+    .addReply{
+        width: 100%;
+        padding-right: 85px;
+    }
+    .sendFile{
+        position: absolute;
+        right: 63px;
+        margin-top: 22px;
+        cursor: pointer;
+    }
+    .sendMsg{
+        position: absolute !important;
+        right: 28px;
+        margin-top: 25px;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+    .sendMsg i{
+        font-size:19px;
+        color:#00132D;
     }
 </style>
 <div class="content-wrapper " style="overflow: hidden;">
@@ -179,30 +202,34 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <!-- <textarea class="textarea-ticket form-control mt-3 p-2" name="text" id="textArea" cols="" rows="" placeholder="Your Reply"></textarea> -->
-                                                    <input placeholder = "Add Reply ..." id="message" class="textarea-ticket form-control mt-3 p-2" name="text"> 
+                                                    <input placeholder = "Add Reply ..." id="message" class="addReplytextarea-ticket form-control mt-3 p-2" name="text"> 
                                                     
                                                     <!-- image upload name -->
                                                     <div class="divided-line"></div>
                                                     <!-- end -->
                                                 </div>
-                                            </div>
-                                            <div class="row p-1">
-                                                <div class="col-md-9 ">
-                                                    <!-- <input type="file" id="file" class="file-attach" />
-                                                    <label for="file" class="p-0" >
-                                                        <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
-                                                    </label> -->
-                                                    <!-- <input type="file" id="file" accept=".jpg,.jpeg,.png" class="file-attach" /> -->
-                                                    <label for="file" class="p-0">
+                                                    <label for="file" class="p-0 sendFile">
                                                         <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
                                                             alt="repeat" id="file"/>
                                                     </label>
+                                                    <button type="submit" class="sendMsg">
+                                                        <i class="fa fa-paper-plane f-19"></i>
+                                                    </button>
+                                            </div>
+                                            <!-- <div class="row p-1">
+                                                <div class="col-md-9 ">
+                                                    <input type="file" id="file" class="file-attach" />
+                                                    <label for="file" class="p-0" >
+                                                        <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
+                                                    </label>
+                                                    <input type="file" id="file" accept=".jpg,.jpeg,.png" class="file-attach" />
+                                                   
                                                     <div id="custom-file-name"></div>
                                                 </div>
                                                 <div class="col-md-3 text-right">
                                                     <button class="schedule-btn " type="submit">Send</button>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                 </div>

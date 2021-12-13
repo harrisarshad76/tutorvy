@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\General\GeneralController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Admin\Subject;
 use App\Models\General\Degree;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ use App\Models\Admin\SubjectCategory;
 use Illuminate\Support\Facades\URL;
 use App\Models\Booking;
 use App\Models\subjectPlans;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -35,6 +37,10 @@ class ProfileController extends Controller
 
     public function profileUpdate(Request $request) {
 
+
+        //   $safeName = str_random(10).'.'.'png';
+        //   Storage::disk('public')->put('eejaz/'.$safeName, $image);
+
         $date_of_birth = $request->year . '-' . $request->month . '-' . $request->day;
 
         $data =  array(
@@ -52,8 +58,17 @@ class ProfileController extends Controller
         );
 
         if($request->hasFile('filepond')){
-            $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
-            $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+            
+        $image = $request->bs64; // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $random = Str::random(10).".png";
+        $imageName = $random;
+        
+        $data['picture'] = 'storage/profile/'.$imageName;
+        Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
+            // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
+            // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
         }
 
         User::where('id', $request->user_id)->update($data);

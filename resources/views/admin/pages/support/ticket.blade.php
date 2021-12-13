@@ -19,6 +19,25 @@
     }
     .img-style{
         max-height:200px; 
+        width:100%;
+    }
+    .sendFile{
+        position: absolute;
+        right: 63px;
+        margin-top: 22px;
+        cursor: pointer;
+    }
+    .sendMsg{
+        position: absolute !important;
+        right: 28px;
+        margin-top: 25px;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+    .sendMsg i{
+        font-size:19px;
+        color:#00132D;
     }
 </style>
 <div class="content-wrapper " style="overflow: hidden;">
@@ -126,14 +145,21 @@
                                                     <div class="divided-line"></div>
                                                     <!-- end -->
                                                 </div>
+                                                <label for="file" class="p-0 sendFile">
+                                                    <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class="" style="width:23px;"
+                                                        alt="repeat" id="file"/>
+                                                </label>
+                                                <button type="submit" class="sendMsg">
+                                                    <i class="fa fa-paper-plane f-19"></i>
+                                                </button>
                                             </div>
-                                            <div class="row p-1">
+                                            <!-- <div class="row p-1">
                                                 <div class="col-md-9 ">
-                                                    <!-- <input type="file" id="file" name="file" class="file-attach" />
+                                                    <input type="file" id="file" name="file" class="file-attach" />
                                                     <label for="file">
                                                         <img src="{{asset('admin/assets/img/ico/Repeat-image.png')}}" class="" alt="repeat" />
-                                                    </label> -->
-                                                    <!-- <input type="file" id="file" class="dropify" name="file" accept=".jpg,.jpeg,.png" class="file-attach" /> -->
+                                                    </label>
+                                                    <input type="file" id="file" class="dropify" name="file" accept=".jpg,.jpeg,.png" class="file-attach" />
                                                     <label for="file">
                                                         <img src="{{asset('admin/assets/img/ico/metro-attachment.png')}}" class=""
                                                             alt="repeat" id="file" style="width:23px;"/>
@@ -143,7 +169,7 @@
                                                 <div class="col-md-3 text-right">
                                                  <button class="schedule-btn " type="submit">Send</button>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                 </div>
