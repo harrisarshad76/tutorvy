@@ -121,6 +121,21 @@
 .policeCert{
     display:none;
 }
+#imageUpload{
+        height: 55px;
+    margin-bottom: 20px;
+    }
+     
+    .preview {
+        overflow: hidden;
+            margin: 10px;
+            border-radius:100%;
+            width: 192px;
+            height: 192px;
+            border-radius: 100%;
+            border: 6px solid #F8F8F8;
+            box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
+        }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -468,6 +483,7 @@
 
                                                 <div class="avatar-upload my-4">
                                                     <div class="avatar-edit">
+                                                        <input type="hidden" name="bs64" id="bs64">
                                                         <input type='file' name="filepond" id="imageUpload"
                                                             accept=".png, .jpg, .jpeg" />
                                                         <label for="imageUpload"></label>
@@ -1255,6 +1271,60 @@
         </div>
     </div>
 </section>
+ <!-- Send File Modal -->
+    <div class="modal fade" id="sendFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Image Before Upload</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img src="" id="sample_image" class="w-100"/>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="crop" class="btn schedule-btn">Save</button>
+                    <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <div class="imag">
+                        <img  src="" id="cropper" class="w-100">
+                    </div>
+                    <div>
+                        <button class="btn schedule-btn">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
 
 @endsection
 @section('scripts')
@@ -1387,19 +1457,38 @@
             $("#lang").val(val)
         }
 
+        // function readURL(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+        //             $('#imagePreview').hide();
+        //             $('#imagePreview').fadeIn(650);
+
+        //             $('.profile-img').attr('src',e.target.result);
+        //         }
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+
+        // }
+        
         function readURL(input) {
+            console.log(input,"input");
+            $('#imagePreview').css('background-image', 'url(' + input + ')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+            $("#bs64").val(input);
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
+                   
 
-                    $('.profile-img').attr('src',e.target.result);
+                    // $('#imagePreview').attr('src', e.target.result);
+                    
                 }
                 reader.readAsDataURL(input.files[0]);
+                 
             }
-
         }
 
         $("#edu2").click(function(){
@@ -1587,4 +1676,63 @@
                 }
                 });
     </script>
+        <script>
+    $(document).ready(function() {
+
+        var $modal = $('#sendFileCall');
+
+        var image = document.getElementById('sample_image');
+
+        var cropper;
+
+        $('#imageUpload').change(function(event) {
+            var files = event.target.files;
+            
+            var done = function(url) {
+                image.src = url;
+                
+                $modal.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function(event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        $modal.on('shown.bs.modal', function() {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function() {
+            cropper.destroy();
+            cropper = null;
+        });
+
+        $('#crop').click(function() {
+            console.log("ok");
+            $('#sendFileCall').modal("hide");
+            canvas = cropper.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function() {
+                    var base64data = reader.result;
+                    readURL(base64data);
+                };
+            });
+        });
+
+    });
+</script>
 @endsection
