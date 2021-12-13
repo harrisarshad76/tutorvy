@@ -45,7 +45,7 @@
                 var method = $(this).attr('method');
                 var file =  $('#imageUpload')[0].files[0];
                 var form = new FormData(this);
-
+                
                 if( $('#imageUpload')[0].files.length != 0 ) {
                     if(Math.round(file.size / (1024 * 1024)) > 2 ) {
                         toastr.error('Please select image size less than 2 MB',{

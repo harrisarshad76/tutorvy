@@ -43,7 +43,7 @@
     <!-- <link rel="stylesheet" href="{{ asset('assets/croppr/croppr.css') }}"> -->
     <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
 
-<script src="https://unpkg.com/cropperjs"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
     <!-- Cropper Plugin -->
 
 

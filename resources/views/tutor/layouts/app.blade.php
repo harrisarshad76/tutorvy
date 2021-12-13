@@ -42,6 +42,11 @@
         <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
+      <!-- Cropper Plugin -->
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/cropperjs"></script>
+    <!-- Cropper Plugin -->
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <!-- Styles -->
