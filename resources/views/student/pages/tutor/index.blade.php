@@ -157,7 +157,16 @@
                                         </select>
                                         
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 pr-0">
+                                        <label for="">Gender</label>
+                                        <select class="w-100 form-control accSelect2" id="gender" name="gender">
+                                            <option value="">Any</option>
+                                            <option value="">Male</option>
+                                            <option value="">Female</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="col-md-2 text-right">
                                         <label for="" class="mb-1 no-opacity">Availability</label>
                                         <p class="mb-0">
                                             <a href="#">
@@ -171,15 +180,7 @@
                                         </p>
                                         
                                     </div>
-                                    <div class="col-md-2 ">
-                                        <label for=""> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort</label>
-                                        <select class="w-100 form-control accSelect2" id="sort">
-                                            <option value="">Sort by Availability</option>
-                                            <option value="">Sort by Date</option>
-                                            <option value="">Sort by Price</option>
-                                            <option value="">Sort by Gender</option>
-                                        </select>
-                                    </div>
+                                   
                                     <!-- <div class="col-md-2">
                                         <label for="">Gender</label>
                                         <select class="w-100 form-control accSelect2" id="gender" name="gender">
@@ -203,10 +204,26 @@
                 <div class="col-md-12 " >
                     <div class="row">
                         
-                        <div class="col-md-12" id="number-booking">
+                        <div class="col-md-8" id="number-booking">
                             <h3  class="mb-0  mt-4">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
                         </div>
-                       
+                        <!-- <div class="col-md-4">
+                            <div class="row  ">
+                                <div class="col-md-3">
+                                   
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="w-100 form-control accSelect2" id="sort">
+                                        <option value="">Sort by Availability</option>
+                                        <option value="">Sort by Date</option>
+                                        <option value="">Sort by Price</option>
+                                        <option value="">Sort by Gender</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                           
+                        </div> -->
                         
                         <div class="col-md-12" id="tutors-list">
                             @if(sizeof($available_tutors) == 0 || $available_tutors == '[]' )
