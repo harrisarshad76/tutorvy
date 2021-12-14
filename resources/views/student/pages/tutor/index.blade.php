@@ -88,6 +88,9 @@
 .vid23{
     max-height:240px;
 }
+.fav{
+    z-index:999;
+}
 </style>
  <!-- top Fixed navbar End -->
  <div class="content-wrapper " style="overflow: hidden;">
