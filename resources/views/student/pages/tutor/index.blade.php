@@ -91,6 +91,13 @@
 .fav{
     z-index:999;
 }
+.scrolly{
+    height:700px;
+    overflow-y:auto;
+}
+.scrolly::-webkit-scrollbar{
+    display:none;
+}
 </style>
  <!-- top Fixed navbar End -->
  <div class="content-wrapper " style="overflow: hidden;">
@@ -100,10 +107,10 @@
             <p class="heading-first ml-3 mr-3">Find a Tutor</p>
          
                     <div class="row ml-2 mr-2">
-                        <div class="card">
+                        <div class="card filter">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 pr-0">
                                         <label for="">Subject</label>
                                         <select class="w-100 form-control accSelect2" id="subjects-list">
                                             <option value="">Search Subject</option>
@@ -113,7 +120,7 @@
                                         </select>
                                         
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 pr-0">
                                         <label for="">Location</label>
                                         <select class="w-100 form-control accSelect2" id="location">
                                             <option value="">Any Location</option>
@@ -125,16 +132,55 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="">Price</label>
-                                        <select class="w-100 form-control accSelect2" id="range" name="my_range">
+                                        <!-- <select class="w-100 form-control accSelect2" id="range" name="my_range">
                                             <option value="">Any hourly rate</option>
                                             <option value="$10">$10 & below</option>
                                             <option value="$30">$10 - $30</option>
                                             <option value="$60">$30 - $60</option>
                                             <option value="$100">$60 & above</option>
+                                        </select> -->
+                                        <div class="row">
+                                            <div class="col-md-6 pr-0">
+                                                <input type="number" placeholder="min" class="form-control pr-2 pl-2">
+                                            </div>
+                                            <div class="col-md-6 pr-0">
+                                             <input type="number" placeholder="max" class="form-control pr-2 pl-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 pr-0">
+                                        <label for="">Availability</label>
+                                        <select class="w-100 form-control accSelect2" id="gender" name="gender">
+                                            <option value="">Any</option>
+                                            <option value="">Online</option>
+                                            <option value="">Offline</option>
                                         </select>
                                         
                                     </div>
                                     <div class="col-md-2">
+                                        <label for="" class="mb-1 no-opacity">Availability</label>
+                                        <p class="mb-0">
+                                            <a href="#">
+                                                <i class="fa fa-sliders"></i> Advance Search
+                                            </a>
+                                        </p>
+                                        <p class="mb-0">
+                                            <a href="#">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> Reset Search
+                                            </a>
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <label for=""> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort</label>
+                                        <select class="w-100 form-control accSelect2" id="sort">
+                                            <option value="">Sort by Availability</option>
+                                            <option value="">Sort by Date</option>
+                                            <option value="">Sort by Price</option>
+                                            <option value="">Sort by Gender</option>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="col-md-2">
                                         <label for="">Gender</label>
                                         <select class="w-100 form-control accSelect2" id="gender" name="gender">
                                             <option value="">Any</option>
@@ -147,13 +193,13 @@
                                         <label for="">Language</label>
                                         <select class="w-100 form-control accSelect2" id="languages-list">
                                         </select>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
                         </div>
                     </div>
-            <div class="row ml-2 mr-2 ">
+            <div class="row ml-2 mr-2 scrolly">
                 <div class="col-md-12 " >
                     <div class="row">
                         
@@ -185,11 +231,11 @@
                                                                 <div class="col-md-2 pr-0">
                                                                     <div class="topImage">
                                                                             @if($tutor->rank == 1)
-                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/loki.png" alt=""></span> <span class="text-white bold ">New</span></p>
+                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">New</span></p>
                                                                             @elseif($tutor->rank == 2)
-                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/yellow-rank.png" alt=""></span> <span class="text-white bold ">Emerging</span></p>
+                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success">  <span class="text-white bold ">Emerging</span></p>
                                                                             @elseif($tutor->rank == 3)
-                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/rank.png" alt=""></span> <span class="text-white bold ">Top Rank</span></p>
+                                                                                <p class="mb-0 pt-1 pb-1 text-center bg-success">  <span class="text-white bold ">Top Rank</span></p>
                                                                                 @else
                                                                                 <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">No Badge Yet</span></p>
                                                                             @endif
@@ -362,8 +408,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <video loop autoplay muted controls class="vid23 w-100">
-                                                                        <source src="{{asset('storage/profile/kin123.mp4')}}" type="video/mp4">
+                                                                    <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                        <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
                                                                     </video>
                                                                 </div>
                                                             </div>
@@ -380,9 +426,6 @@
                     
                         </div>
                     </div>
-
-                    
-
                 </div>
             </div>
         </div>

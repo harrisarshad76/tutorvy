@@ -445,7 +445,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 scrolly">
                     <div class="row">
                         <div class="col-md-12 mb-1 ">
                             <div class=" card  bg-toast infoCard">
