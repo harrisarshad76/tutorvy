@@ -3244,3 +3244,18 @@ select#paymentMethod option[value="others"] {
 
 
 /*Chat Customized Scroll Bar*/
+
+
+/*right side scroll only*/
+
+.scrolly {
+    height: 774px;
+    overflow-y: auto;
+}
+
+.scrolly::-webkit-scrollbar {
+    display: none;
+}
+
+
+/*right side scroll only*/

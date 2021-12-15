@@ -136,6 +136,16 @@
             border: 6px solid #F8F8F8;
             box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
         }
+        .form-file{
+            padding-top: 7px !important;
+    padding-bottom: 36px !important;
+        }
+        .conListing{
+            list-style-type: disc;
+        }
+        .conListing li::marker{
+            color:#1173FF ;
+        }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -435,7 +445,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 scrolly">
                     <div class="row">
                         <div class="col-md-12 mb-1 ">
                             <div class=" card  bg-toast infoCard">
@@ -528,13 +538,22 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleName" class="heading-fifth mb-0">Tutor Tagline</label>
                                                     <input type="text" name="tagline" class="form-control"
                                                         value="{{ Auth::user()->tagline }}" id="exampleName"
                                                         aria-describedby="emailHelp" required="required"  placeholder="Tutor Tagline" style="text-transform: capitalize;" >
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
+                                                    <input id="file-input" type="file" accept="video/*" class="form-control form-file">
+                                                </div>
+                                               
+
+                                                
                                             </div>
 
 
@@ -1295,6 +1314,44 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="crop" class="btn schedule-btn">Save</button>
+                    <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Send Video File Modal -->
+     <div class="modal fade" id="sendFileVideo" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Follow the Instructions Before Uploading</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <video id="video" height="200" controls class="w-100"></video>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Conditions for uploading a video</h5>
+                                <ul class="conListing">
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                    <li>This is first condition</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn schedule-btn">Save</button>
                     <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
