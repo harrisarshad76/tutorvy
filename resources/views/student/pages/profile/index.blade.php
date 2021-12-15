@@ -175,7 +175,21 @@
             box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
 
         }
-        
+        .conListing{
+            list-style-type: disc;
+        }
+        .conListing li{
+           font-size:0.9rem;
+        }
+        .conListing li::marker{
+            color:#1173FF ;
+        }
+        .demoImg{
+            width:70px;
+            height:70px;
+            border-radius:100%;
+            margin-right:12px;
+        }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -288,6 +302,31 @@
                                                     </div>
 
                                                 </div>
+                                                <!-- <div class="col-md-2"></div>
+                                                <div class="col-md-7 mt-2 bg-price mb-3">
+                                                    <div class="row mb-3 mt-3">
+                                                        <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
+                                                        <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
+                                                        <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
+                                                    </div>
+                                                    <h3>Tips for an amazing photo</h3>
+                                                    <ul class="conListing pl-3">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <li>Smile and look at the camera</li>
+                                                                <li>Frame your head and shoulders</li>
+                                                                <li>Your photo is centered and upright</li>
+                                                                <li>Use neutral lighting and background</li>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <li>Your face and eyes are fully visible (except for religious reasons)</li>
+                                                                <li>Avoid logos or contact information</li>
+                                                                <li>You are the only person in the photo</li>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                    </ul>
+                                                </div> -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="exampleName">First Name</label>

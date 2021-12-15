@@ -152,6 +152,20 @@
             border-radius:100%;
             margin-right:12px;
         }
+        .uploadVideo{
+            border-radius:100%;
+            background:#fff;
+            border-color:#fff;
+            padding: 6px 8px;
+            z-index: 99999;
+            position: absolute;
+            top: 19%;
+            color: #000;
+            right: 25px;
+        }
+        .video2{
+            background:#FBFBFB;
+        }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -491,44 +505,16 @@
                                         enctype="multipart/form-data" id="personal">
                                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                         <div class="row">
-
                                             <div class="col-md-12">
-                                                <h1>Change Photo</h1>
+                                                <h1>Personal Information</h1>
                                             </div>
-                                            <div class="col-md-3 mt-3">
-
-                                                <div class="avatar-upload my-4">
-                                                    <div class="avatar-edit">
-                                                        <input type="hidden" name="bs64" id="bs64">
-                                                        <input type='file' name="filepond" id="imageUpload"
-                                                            accept=".png, .jpg, .jpeg" />
-                                                        <label for="imageUpload"></label>
-                                                    </div>
-                                                    <div class="avatar-preview">
-                                                        @if (Auth::user()->picture != null)
-                                                            <?php
-                                                                $path = Auth::user()->picture;
-                                                            ?>
-                                                            @if(file_exists( public_path($path) ))
-                                                            <div id="imagePreview"
-                                                                style="background-image: url('{{ asset(Auth::user()->picture) }}');">
-                                                            </div>
-                                                            @else
-                                                            <div id="imagePreview"
-                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
-                                                            </div>
-                                                            @endif
-                                                        @else
-                                                            <div id="imagePreview"
-                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-7 mt-2 bg-price">
+                                            
+                                        </div>
+                                        <div class="row mt-3">
+                                            
+                                          
+                                            <!--<div class="col-md-2"></div>
+                                             <div class="col-md-7 mt-2 bg-price mb-3">
                                                 <div class="row mb-3 mt-3">
                                                     <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
                                                     <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
@@ -549,9 +535,9 @@
                                                             <li>You are the only person in the photo</li>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleName" class="heading-fifth mb-0">First Name</label>
@@ -569,7 +555,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label for="exampleName" class="heading-fifth mb-0">Tutor Tagline</label>
                                                     <input type="text" name="tagline" class="form-control"
@@ -577,15 +563,7 @@
                                                         aria-describedby="emailHelp" required="required"  placeholder="Tutor Tagline" style="text-transform: capitalize;" >
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
-                                                    <input id="file-input" type="file" accept="video/*" class="form-control form-file">
-                                                </div>
-                                               
-
-                                                
-                                            </div>
+                                           
 
 
                                             <div class="col-md-12">
@@ -1067,7 +1045,7 @@
 
                                         @elseif(count(Auth::user()->professional) > 0)
                                             @foreach (Auth::user()->professional as $profession)
-                                                <div class="row">
+                                                <div class="row mt-3" >
                                                     <div class="col-md-12">
                                                         <div class="element">
                                                             <div class="row">
@@ -1199,7 +1177,7 @@
                                     aria-labelledby="v-pills-Verification-tab">
 
                                     @if(Auth::user()->status == 2)
-                                        <div class="card bg-success text-white">
+                                        <div class=" bg-success text-white">
                                             <div class="card-body row">
                                                 <div class="col-md-2 text-center">
                                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -1210,7 +1188,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="card">
+                                        <div class="">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -1228,7 +1206,7 @@
                                             </div>
                                         </div>
                                     @elseif(Auth::user()->status == 1)
-                                        <div class="card bg-toast infoCard" id="verfication_msg" >
+                                        <div class=" bg-toast infoCard" id="verfication_msg" >
                                             <div class="card-body row">
                                                 <div class="col-md-2 text-center">
                                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -1244,7 +1222,7 @@
                                             </div>
                                         </div>
                                     @else
-                                        <div class="card bg-toast infoCard" id="verfication_msg" style="display:none">
+                                        <div class=" bg-toast infoCard" id="verfication_msg" style="display:none">
                                             <div class="card-body row">
                                                 <div class="col-md-2 text-center">
                                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -1312,6 +1290,76 @@
                                             </div>
                                         </form>
                                     @endif
+                                        <div class="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p class="heading-third">
+                                                            Identity Verification
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-6">
+                                                    <label for="exampleName" class="heading-fifth mb-0">Tutor Profile Picture</label>
+
+                                                        <div class="avatar-upload ">
+                                                            <div class="avatar-edit">
+                                                                <input type="hidden" name="bs64" id="bs64">
+                                                                <input type='file' name="filepond" id="imageUpload"
+                                                                    accept=".png, .jpg, .jpeg" />
+                                                                <label for="imageUpload"></label>
+                                                            </div>
+                                                            <div class="avatar-preview">
+                                                                @if (Auth::user()->picture != null)
+                                                                    <?php
+                                                                        $path = Auth::user()->picture;
+                                                                    ?>
+                                                                    @if(file_exists( public_path($path) ))
+                                                                    <div id="imagePreview"
+                                                                        style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                                    </div>
+                                                                    @else
+                                                                    <div id="imagePreview"
+                                                                        style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                                    </div>
+                                                                    @endif
+                                                                @else
+                                                                    <div id="imagePreview"
+                                                                        style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
+                                                        
+                                                        <video id="video2" height="190" controls="" class="w-100 mt-2">
+                                                            
+                                                        </video>
+                                                            <!-- <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
+                                                            </video> -->
+                                                     
+                                                        <a href="#" class="uploadVideo" id="uploadVideo"> 
+                                                            <i class="fa fa-pencil"></i> 
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12">
+                                                        <button class="schedule-btn" id="verfication_btn" style="width: 180px;float:right;font-size: 14px;" type="submit" name="personal">Save Changes</button>
+                                                        <button type="button" role="button" type="button" id="verfication_loading" disabled class="btn btn-primary mb-4 mr-2"
+                                                            style="width: 180px;float:right; display:none">
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
                                 </div>
                             </div>
                         </div>
@@ -1363,20 +1411,31 @@
                 <div class="modal-body">
                     <div class="img-container">
                         <div class="row">
-                            <div class="col-md-6">
-                                <video id="video" height="200" controls class="w-100"></video>
+                            <div class="col-md-6 div-center">
+                                <video id="video" height="364" controls class="w-100"></video>
                             </div>
-                            <div class="col-md-6">
-                                <h5>Conditions for uploading a video</h5>
-                                <ul class="conListing">
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                    <li>This is first condition</li>
-                                </ul>
+                            <div class="col-md-6 ">
+                                <div class="bg-price p-4">
+                                    <h3>Tips for a great video</h3>
+                                    <ul class="conListing ">
+                                            <li class="pl-0" style="list-style-type:none;"><b>Technical</b></li>
+                                            <li>Keep your video between 30 seconds and 2 minutes long</li>
+                                            <li>Record in a horizontal mode</li>
+                                            <li>Position the camera at eye level</li>
+                                            <li>Use neutral lighting and background</li>
+                                            <li>Your face and eyes are fully visible (except for religious reasons)</li>
+                                            <li>No logos, links or contact details</li>
+                                            <li>No slideshows or presentations</li>
+                                    
+                                            <li class="pl-0" style="list-style-type:none;"><b>Content</b></li>
+                                            <li>Greet your students warmly</li>
+                                            <li>Highlight any teaching certification</li>
+                                            <li>Present your tutoring experience</li>
+                                            <li>Invite students to book a trial lesson</li>
+                                        </ul>  
+                                        <input id="file-input" type="file" accept="video/*" class="form-control form-file"> 
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -1509,6 +1568,9 @@
                 endYear: 2050,
             });
         });
+        $("#uploadVideo").click(function(){
+            $('#sendFileVideo').modal("show");
+        })
         $("#working").change(function(){
             var checkBox = document.getElementById("working");
             // if(checkBox.checked == true){

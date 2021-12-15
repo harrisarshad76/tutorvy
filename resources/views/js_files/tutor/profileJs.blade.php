@@ -464,6 +464,8 @@
             // const input2 = document.getElementById('file-input2');
             const video = document.getElementById('video');
             const videoSource = document.createElement('source');
+            const video2 = document.getElementById('video2');
+            const videoSource2 = document.createElement('source');
 
             input2.addEventListener('change', function() {
              
@@ -479,6 +481,10 @@
                     video.appendChild(videoSource);
                     video.load();
                     video.play();
+                    videoSource2.setAttribute('src', e.target.result);
+                    video2.appendChild(videoSource2);
+                    video2.load();
+                    video2.play();
                 };
                 
                 reader.onprogress = function (e) {
