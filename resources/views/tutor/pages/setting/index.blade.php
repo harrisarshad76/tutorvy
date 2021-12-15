@@ -124,7 +124,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9">
+                    <div class="col-md-9 scrolly">
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content" id="v-pills-tabContent chang_photo">

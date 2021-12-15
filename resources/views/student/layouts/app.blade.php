@@ -38,6 +38,16 @@
     <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
     <!-- iGuider Plugin -->
+
+    <!-- Cropper Plugin -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/croppr/croppr.css') }}"> -->
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/cropperjs"></script>
+    <!-- Cropper Plugin -->
+
+
+
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <!-- Styles -->
@@ -119,6 +129,9 @@
 
             <!-- iGuider Plugin -->
 
+                <!-- Cropper Plugin -->
+                <!-- <script src="{{ asset('assets/croppr/croppr.js') }}"></script> -->
+                    <!-- Cropper Plugin -->
             <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
             @include('firebase')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -192,9 +205,7 @@
         });
         // iGuider Initialization
 
-
-          
-        
+      
 
 
         $('.table').DataTable();

@@ -34,7 +34,7 @@ $('#subjects-list').on("change", function(e) {
     let subject = $("#subjects-list").val();
     let lang = $("#languages-list").val();
     let rating = $("input[name='rating_filter']:checked").val();
-    let gender = $("input[name='gender']:checked").val();
+    let gender = $("#gender").val();
     let price = $("#range").val();
     let location = $("#location").val();
 
@@ -49,9 +49,21 @@ $('#languages-list').on("change", function(e) {
     let rating = $("input[name='rating_filter']:checked").val();
     let price = $("#range").val();
     let location = $("#location").val();
-    let gender = $("input[name='gender']:checked").val();
+    let gender = $("#gender").val();
 
     search_tutors(price,subject,lang,rating,location ,gender);
+
+});
+$('#range').on("change", function(e) {
+
+let subject = $("#subjects-list").val();
+let lang = $("#languages-list").val();
+let rating = $("input[name='rating_filter']:checked").val();
+let price = $("#range").val();
+let location = $("#location").val();
+let gender = $("#gender").val();
+
+search_tutors(price,subject,lang,rating,location ,gender);
 
 });
 
@@ -61,7 +73,7 @@ $('input[type=radio][name=rating_filter]').change(function() {
     let rating = $("input[name='rating_filter']:checked").val();
     let price = $("#range").val();
     let location = $("#location").val();
-    let gender = $("input[name='gender']:checked").val();
+    let gender = $("#gender").val();
 
     search_tutors(price,subject,lang,rating,location ,gender);
 
@@ -75,25 +87,25 @@ $('input[type=radio][name=rating_filter]').change(function() {
 //     let lang = $("#languages-list").val();
 //     let rating = $("input[name='rating_filter']:checked").val();
 //     let location = $("#location").val();
-//     let gender = $("input[name='gender']:checked").val();
+//     let gender = $("#gender").val();
 
 //     search_tutors(price,subject,lang,rating,location ,gender);
 
 // });
 
-$("#range").mouseup(function(){
+// $("#range").mouseup(function(){
     
-    let price = $(this).val();
-    let subject = $("#subjects-list").val();
-    let lang = $("#languages-list").val();
-    let rating = $("input[name='rating_filter']:checked").val();
-    let location = $("#location").val();
-    let gender = $("input[name='gender']:checked").val();
+//     let price = $(this).val();
+//     let subject = $("#subjects-list").val();
+//     let lang = $("#languages-list").val();
+//     let rating = $("input[name='rating_filter']:checked").val();
+//     let location = $("#location").val();
+//     let gender = $("#gender").val();
 
-    $("#maxRg").val(price);
-    search_tutors(price,subject,lang,rating,location ,gender);
-    // alert(ter);
-});
+//     $("#maxRg").val(price);
+//     search_tutors(price,subject,lang,rating,location ,gender);
+//     // alert(ter);
+// });
 $("#ageRange").mouseup(function(){
     
     // let price = $(this).val();
@@ -101,7 +113,7 @@ $("#ageRange").mouseup(function(){
     // let lang = $("#languages-list").val();
     // let rating = $("input[name='rating_filter']:checked").val();
     // let location = $("#location").val();
-    // let gender = $("input[name='gender']:checked").val();
+    // let gender = $("#gender").val();
 
     $("#maxAg").val(price);
     // search_tutors(price,subject,lang,rating,location ,gender);
@@ -118,7 +130,7 @@ $("#maxRg").focusout(function(){
     let lang = $("#languages-list").val();
     let rating = $("input[name='rating_filter']:checked").val();
     let location = $("#location").val();
-    let gender = $("input[name='gender']:checked").val();
+    let gender = $("#gender").val();
     var vall =  $(this).val();
     $("#range").val(vall);
     search_tutors(price,subject,lang,rating,location ,gender);
@@ -134,7 +146,7 @@ $("#location").change(function() {
     let lang = $("#languages-list").val();
     let rating = $("input[name='rating_filter']:checked").val();
     let location = $("#location").val();
-    let gender = $("input[name='gender']:checked").val();
+    let gender = $("#gender").val();
 
     search_tutors(price,subject,lang,rating,location ,gender);
 
@@ -189,6 +201,7 @@ function list_tutors(){
     let noTut
     if(tutors.length > 0){
 
+
         $('#tutors-list').html('');
         noTut = ` <h3  class="mb-0  mt-4"> `+tutors.length+`  Tutors Available</h3>`;
         $('#number-booking').html(noTut);
@@ -240,18 +253,11 @@ function list_tutors(){
                 let poli = tut.length;
 
                 if(poli > 200){
-                    tutBio +=`<p> `+tut.substr(0, 200)+`..... <a href="`+url2+`"> Read more </a></p>`
+                    tutBio +=`<p class="mb-0 tutorAbout"> `+tut.substr(0, 200)+`..... <a href="`+url2+`"> Read more </a></p>`
                 }
                 else{
-                    tutBio +=`<p>`+tutors[i].bio+`</p>`
+                    tutBio +=`<p class="mb-0 tutorAbout">`+tutors[i].bio+`</p>`
                 }
-
-
-
-
-
-
-
             if(tutors[i].rating == 1){
                 rating_html +=  `<i class="fa fa-star text-yellow"></i>
                                 <i class="fa fa-star "></i>
@@ -302,20 +308,23 @@ function list_tutors(){
             }
 
             if(tutors[i].rank == 1){
-                rank_html = `<p class="text-right"><span class="text-green ">New</span> <span class="rank_icon"><img src="../assets/images/ico/bluebadge.png" alt=""></span> </p>`;
+
+                rank_html = `<p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/loki.png" alt=""></span> <span class="text-white bold ">New</span></p>`;
             }else if(tutors[i].rank == 2){
-                rank_html = `<p class="text-right"><span class="text-green ">Emerging</span> <span class="rank_icon"><img src="../assets/images/ico/yellow-rank.png" alt=""></span> </p>`;
+                rank_html = `<p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/yellow-rank.png" alt=""></span> <span class="text-white bold ">Emerging</span></p>`;
             }else if(tutors[i].rank == 3){
-                rank_html = `<p class="text-right"><span class="text-green ">Top Rank</span> <span class="rank_icon"><img src="../assets/images/ico/rank.png" alt=""></span> </p>`;
+                rank_html = `<p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="rank_icon"><img src="../assets/images/ico/rank.png" alt=""></span> <span class="text-white bold ">Top Rank</span></p>`;
+            }else{
+                rank_html = ` <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">No Badge Yet</span></p>  `;
             }
             let img = ``;
             if(tutors[i].picture != null){
                 console.log(tutors[i].picture);
 
                 
-                img = `<img src="{{asset('`+tutors[i].picture+`')}}" alt="" class="profile-img " style="height:70px;width:70px;">`;
+                img = `<img src="{{asset('`+tutors[i].picture+`')}}" alt="" class="w-100 " >`;
             }else{
-                img = `<img src="../assets/images/ico/Square-white.jpg" alt="" class="profile-img " style="height:70px;width:70px;">`;
+                img = `<img src="../assets/images/ico/Square-white.jpg" alt="" class="w-100 " >`;
             }
 
             var fav_btn = `
@@ -327,90 +336,185 @@ function list_tutors(){
                 <a type="button" onclick="favourite_tutor(`+tutors[i].id+`,'un_fav')" class="fav" title="Favourite">
                     <i class="fa fa-star text-yellow" id="favorite_start_`+tutors[i].id+`"></i>
                 </a>`;
+            let tutor_Card_new = `<div class="row">
+                                               
+                                               <div class="col-md-12 pl-0">
+                                                   <div class="card">
+                                                       <div class="card-body">
+                                                           <div class="row">
+                                                               <div class="col-md-2 pr-0">
+                                                                   <div class="topImage">
+                                                                        `+rank_html+`
+                                                                        
+                                                                   </div>
+                                                                   <div class="imgPart">
+                                                                       `+img+`
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-5">
+                                                                   <div class="row">
+                                                                       <div class="col-md-12">
+                                                                           <div class="row">
+                                                                               <div class="col-md-6 col-6  pr-0">
+                                                                                   <a href="`+url2+`" class="decoration-none"><h3 class="mb-0">`+tutors[i].first_name+ ' ' +tutors[i].last_name+`</h3></a>
+                                                                                   <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">`+tutors[i].city + ',' + tutors[i].country+`</p>
+                                                                               </div>
+                                                                               <div class="col-md-6 col-12 text-right">
+                                                                                    <p class="mb-0">
+                                                                                        `+rating_html+`
+                                                                                    </p>
+                                                                                   <!-- <p class="mb-0">
+                                                                                       <small>
+                                                                                           3 hours tutoring in (this subject)
+                                                                                       </small>
+                                                                                   </p> -->
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
+                                                                   <div class="row mt-3">
+                                                                       <div class="col-md-4">
+                                                                          
+                                                                           <p class="mb-1">Subject</p>
+                                                                           <p class="mb-1">
+                                                                                `+sub_html+`
+                                                                           </p>
+                                                                       </div>
+                                                                       <div class="col-md-4">
+                                                                           <p class="mb-1">Languages</p>
+                                                                           <p class="mb-1">
+                                                                                <span class="info-1 info lingo">`+tutors[i].lang_short+`</span>
+                                                                           </p>
+                                                                       </div>
+                                                                       <div class="col-md-4">
+                                                                           <p class="mb-1">Education</p>
+                                                                          
+                                                                           <p class="mb-1">
+                                                                                `+int_html+`
+                                                                           </p>
+                                                                       </div>
+                                                                   </div>
+                                                                   <div class="row mt-1">
+                                                                       <div class="col-md-12 find_tutor">
+                                                                           <p class="mb-0"><strong> About Tutor </strong></p>
+                                                                           `+tutBio+`
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-2 bg-price text-center">
+                                                                   <div class="row mt-2">
+                                                                        `+ (tutors[i].is_favourite != null && tutors[i].is_favourite != "" ? un_fav_btn : fav_btn) +`
+                                                                       <div class="col-md-12 mb-1">
+                                                                       
+                                                                           <p class="mb-1 mt-2">starting from</p>
+                                                                           <h1 class="f-40 mb-1">$`+ (tutors[i].hourly_rate != null ? tutors[i].hourly_rate : '0') +`</h1>
+                                                                           <p class="mb-1">per hour</p>
+                                                                       
+                                                                           <button type="button" class=" cencel-btn w-100" onclick="chat(`+tutors[i].id+`)">
+                                                                                   &nbsp; Message &nbsp;
+                                                                           </button>
+                                                                       
+                                                                           <button type="button" onclick="checkBookingSlots(`+tutors[i].id+`)" class=" btn-general w-100 mt-2" >
+                                                                                   &nbsp; Book Class &nbsp;
+                                                                           </button>
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-3">
+                                                                   <video loop autoplay muted controls class="vid23 w-100">
+                                                                       <source src="{{asset('storage/profile/kin123.mp4')}}" type="video/mp4">
+                                                                   </video>
+                                                               </div>
+                                                           </div>
 
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                              
+                                           
+                                           </div>`;
             let tutor_Card = `<div class="card">
-                                <div class="card-body">
+                <div class="card-body">
 
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-10">
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <div class="row">
-                                                        <div class="col-md-2 col-6 pr-0 div-center">
-                                                            <a href="`+url2+`">
-                                                                `+img+`
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-6 pr-0">
-                                                            <a href="`+url2+`" class="decoration-none">
-                                                                <h3 class="mb-0">`+tutors[i].first_name+ ' ' +tutors[i].last_name+`</h3>
-                                                            </a>
-                                                            <p class="mb-0"><img src="../assets/images/ico/red-icon.png" alt="" class="">`+tutors[i].designation+` </p>
-                                                            <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">`+tutors[i].city + ',' + tutors[i].country+`</p>
-                                                        </div>
-                                                        <div class="col-md-6 col-12">
-                                                            <p class="mb-0">
-                                                                `+rating_html+`
-                                                            </p>
-                                                            <p class="mb-0"> <small> 3 hours tutoring in (this subject) </small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    `+rank_html+`
-                                                </div>
-                                            </div>
-                                            <div class="row mt-3">
-                                                <div class="col-md-4">
-
-                                                    <p class="mb-2">Subject</p>
-                                                    `+sub_html+`
-
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p class="mb-2">Languages</p>
-                                                    <p>
-                                                        <span class="info-1 info lingo">`+tutors[i].lang_short+`</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                <p class="mb-2">Education</p>
-                                                    <p>`+
-                                                    int_html
-                                                    +`</p>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-md-12 find_tutor">
-                                                    <p><strong> About Tutor </strong></p>
-                                                    `+tutBio+`
-                                                </div>
-                                            </div>
+                                        <div class="col-md-2 col-6 pr-0 div-center">
+                                            <a href="`+url2+`">
+                                                `+img+`
+                                            </a>
                                         </div>
-                                        <div class="col-md-3 bg-price text-center">
-                                            <div class="row mt-30">
-                                                `+ (tutors[i].is_favourite != null && tutors[i].is_favourite != "" ? un_fav_btn : fav_btn) +`
-
-                                                <div class="col-md-12">
-                                                    <p>starting from</p>
-                                                    <h1 class="f-60">$`+ (tutors[i].hourly_rate != null ? tutors[i].hourly_rate : '0') +`</h1>
-                                                    <p>per hour</p>
-                                                    <button type="button" class=" cencel-btn w-100" onclick="chat(`+tutors[i].id+`)">
-                                                        &nbsp; Message &nbsp;
-                                                    </button>
-                                                
-                                                    <button type="button" onclick="checkBookingSlots(`+tutors[i].id+`)" class=" btn-general w-100 mt-2" >
-                                                            &nbsp; Book Class &nbsp;
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-4 col-6 pr-0">
+                                            <a href="`+url2+`" class="decoration-none">
+                                                <h3 class="mb-0">`+tutors[i].first_name+ ' ' +tutors[i].last_name+`</h3>
+                                            </a>
+                                            <p class="mb-0"><img src="../assets/images/ico/red-icon.png" alt="" class="">`+tutors[i].designation+` </p>
+                                            <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">`+tutors[i].city + ',' + tutors[i].country+`</p>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <p class="mb-0">
+                                                `+rating_html+`
+                                            </p>
+                                            <p class="mb-0"> <small> 3 hours tutoring in (this subject) </small></p>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-2">
+                                    `+rank_html+`
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+
+                                    <p class="mb-2">Subject</p>
+                                    `+sub_html+`
 
                                 </div>
-                            </div>`;
+                                <div class="col-md-4">
+                                    <p class="mb-2">Languages</p>
+                                    <p>
+                                        <span class="info-1 info lingo">`+tutors[i].lang_short+`</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                <p class="mb-2">Education</p>
+                                    <p>`+int_html+`</p>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12 find_tutor">
+                                    <p><strong> About Tutor </strong></p>
+                                    `+tutBio+`
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 bg-price text-center">
+                            <div class="row mt-30">
+                                `+ (tutors[i].is_favourite != null && tutors[i].is_favourite != "" ? un_fav_btn : fav_btn) +`
 
-            $('#tutors-list').append(tutor_Card);
+                                <div class="col-md-12">
+                                    <p>starting from</p>
+                                    <h1 class="f-60">$`+ (tutors[i].hourly_rate != null ? tutors[i].hourly_rate : '0') +`</h1>
+                                    <p>per hour</p>
+                                    <button type="button" class=" cencel-btn w-100" onclick="chat(`+tutors[i].id+`)">
+                                        &nbsp; Message &nbsp;
+                                    </button>
+                                
+                                    <button type="button" onclick="checkBookingSlots(`+tutors[i].id+`)" class=" btn-general w-100 mt-2" >
+                                            &nbsp; Book Class &nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>`;
+           
+
+            $('#tutors-list').append(tutor_Card_new);
         }
 
     }else{

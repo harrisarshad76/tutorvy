@@ -45,7 +45,7 @@
                 var method = $(this).attr('method');
                 var file =  $('#imageUpload')[0].files[0];
                 var form = new FormData(this);
-
+                
                 if( $('#imageUpload')[0].files.length != 0 ) {
                     if(Math.round(file.size / (1024 * 1024)) > 2 ) {
                         toastr.error('Please select image size less than 2 MB',{
@@ -451,4 +451,40 @@
         function countChars(obj){
             document.getElementById("changeAble").innerHTML = obj.value.length;
         }
+
+        $("#vid-file").change(function(){
+            var tye = $(this).val();
+            
+            $("#sendFileVideo").modal("show");
+            // $("#vid-dropify").dropify();
+            $("#vid-dropify").attr("src",tye);
+            
+        });
+            const input = document.getElementById('file-input');
+            // const input2 = document.getElementById('file-input2');
+            const video = document.getElementById('video');
+            const videoSource = document.createElement('source');
+
+            input.addEventListener('change', function() {
+             
+                $("#sendFileVideo").modal("show");
+                const files = this.files || [];
+
+                if (!files.length) return;
+                
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    videoSource.setAttribute('src', e.target.result);
+                    video.appendChild(videoSource);
+                    video.load();
+                    video.play();
+                };
+                
+                reader.onprogress = function (e) {
+                    console.log('progress: ', Math.round((e.loaded * 100) / e.total));
+                };
+                
+                reader.readAsDataURL(files[0]);
+            });
 </script>

@@ -706,6 +706,7 @@ a[data-toggle="collapse"] {
     font-family: 'Poppins', sans-serif;
     color: #00132D;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .profile-name:hover {
@@ -3243,3 +3244,18 @@ select#paymentMethod option[value="others"] {
 
 
 /*Chat Customized Scroll Bar*/
+
+
+/*right side scroll only*/
+
+.scrolly {
+    height: 774px;
+    overflow-y: auto;
+}
+
+.scrolly::-webkit-scrollbar {
+    display: none;
+}
+
+
+/*right side scroll only*/

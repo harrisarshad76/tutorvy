@@ -10,6 +10,7 @@ use App\Models\General\Degree;
 use App\Models\General\Institute;
 use App\Models\Admin\Subject;
 use App\Models\Activitylogs;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ use App\Models\Userdetail;
 use App\Models\Booking;
 use App\Models\subjectPlans;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -56,9 +58,22 @@ class ProfileController extends Controller
             'bio' => $request->bio,
         );
 
+        // if($request->hasFile('filepond')){
+        //     $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
+        //     $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+        // }
         if($request->hasFile('filepond')){
-            $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
-            $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+            
+            $image = $request->bs64; // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $random = Str::random(10).".png";
+            $imageName = $random;
+            
+            $data['picture'] = 'storage/profile/'.$imageName;
+            Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
+                // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
+                // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
         }
 
         User::where('id',$request->user_id)->update($data);

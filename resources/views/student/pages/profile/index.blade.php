@@ -127,13 +127,62 @@
     .license {
         display: none;
     }
+    #imageUplo{
+        display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 12%);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+    padding: 8px 17px;
+    padding-left: 10px;
+    }
+    #imageUplo i{
+        color: #757575;
+    }
+    
+  
+    /* .imag {
+        padding: 18px;
+        position: absolute;
+        border: 1px solid lightgrey;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+    }
 
+    .imag img {
+        max-width: 100%;
+    } */
+    #imageUpload{
+        height: 55px;
+    margin-bottom: 20px;
+    }
+     
+    .preview {
+            overflow: hidden;
+            margin: 10px;
+            border-radius:100%;
+            width: 192px;
+            height: 192px;
+            border-radius: 100%;
+            border: 6px solid #F8F8F8;
+            box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
+
+        }
+        
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/intlTelInput.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/countrySelect.css') }}">
 
+  
 @section('content')
     <section>
         <div class="content-wrapper " style="overflow: hidden;">
@@ -209,9 +258,12 @@
 
                                                     <div class="avatar-upload my-4">
                                                         <div class="avatar-edit">
-                                                            <input type='file' name="filepond" id="imageUpload"
-                                                                accept=".png, .jpg, .jpeg" />
-                                                            <label for="imageUpload"></label>
+                                                            <input type="hidden" name="bs64" id="bs64">
+                                                            <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                            <label for="imageUpload" id="imgUplo"></label>
+                                                            <!-- <a href="#" id="imageUplo">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a> -->
                                                         </div>
                                                         <div class="avatar-preview">
                                                             @if (Auth::user()->picture != null)
@@ -219,13 +271,13 @@
                                                                     $path = Auth::user()->picture;
                                                                 ?>
                                                                 @if(file_exists( public_path($path) ))
-                                                                <div id="imagePreview"
-                                                                    style="background-image: url('{{ asset(Auth::user()->picture) }}');">
-                                                                </div>
+                                                                    <div id="imagePreview"
+                                                                        style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                                    </div>
                                                                 @else
-                                                                <div id="imagePreview"
-                                                                    style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
-                                                                </div>
+                                                                    <div id="imagePreview"
+                                                                        style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                                    </div>
                                                                 @endif
                                                             @else
                                                                 <div id="imagePreview"
@@ -350,13 +402,20 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="exampleText">About</label>
-                                                        <textarea class="form-control" name="bio"
+                                                        <!-- <textarea class="form-control" name="bio"
                                                             id="exampleFormControlTextarea1" rows="5"
                                                             placeholder="Write about yourself..."
-                                                            required="required">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                            required="required">{{ Auth::user()->bio ?? '' }}</textarea> -->
+                                                        <textarea class="form-control" name="bio" id="aboutTextarea"
+                                                        rows="5"
+                                                        placeholder="Write about yourself..." required="required" minlength="100" maxlength="200" onkeyup="countChars(this);">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                        <?php
+                                                            $length = strlen(Auth::user()->bio);
+                                                        ?>
+                                                        <span class="badge bg-d300 pull-right"><span id="changeAble">{{$length}}</span>/200</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-12 mt-3">
                                                     <button class="schedule-btn" id="general_btn"
                                                         style="width: 180px;float:right;font-size: 14px;" type="submit">Save
                                                         Changes</button>
@@ -463,6 +522,59 @@
             </div>
         </div>
     </section>
+   <!-- Send File Modal -->
+   <div class="modal fade" id="sendFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Image Before Upload</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img src="" id="sample_image" class="w-100"/>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="crop" class="btn schedule-btn">Save</button>
+                    <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <div class="imag">
+                        <img  src="" id="cropper" class="w-100">
+                    </div>
+                    <div>
+                        <button class="btn schedule-btn">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
 
 @endsection
 @section('scripts')
@@ -480,6 +592,7 @@
                 startYear: 1950,
                 endYear: 2050,
             });
+           
 
         });
 
@@ -510,7 +623,9 @@
             document.getElementById('languages-list').innerHTML = option;
         })();
 
-
+        // $("#imageUplo").click(function(){
+        //     $("#modal").modal("show");
+        // });
 
         function checkLevel(opt) {
             var level = opt.options[opt.selectedIndex].getAttribute('level');
@@ -533,16 +648,21 @@
         }
 
         function readURL(input) {
+            console.log(input,"input");
+            $('#imagePreview').css('background-image', 'url(' + input + ')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+            $("#bs64").val(input);
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
+                   
 
-                    $('.profile-img').attr('src', e.target.result);
+                    // $('#imagePreview').attr('src', e.target.result);
+                    
                 }
                 reader.readAsDataURL(input.files[0]);
+                 
             }
         }
 
@@ -693,4 +813,63 @@
             });
         }
     </script>
+    <script>
+    $(document).ready(function() {
+
+        var $modal = $('#sendFileCall');
+
+        var image = document.getElementById('sample_image');
+
+        var cropper;
+
+        $('#imageUpload').change(function(event) {
+            var files = event.target.files;
+            
+            var done = function(url) {
+                image.src = url;
+                
+                $modal.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function(event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        $modal.on('shown.bs.modal', function() {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function() {
+            cropper.destroy();
+            cropper = null;
+        });
+
+        $('#crop').click(function() {
+            console.log("ok");
+            $('#sendFileCall').modal("hide");
+            canvas = cropper.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function() {
+                    var base64data = reader.result;
+                    readURL(base64data);
+                };
+            });
+        });
+
+    });
+</script>
 @endsection
