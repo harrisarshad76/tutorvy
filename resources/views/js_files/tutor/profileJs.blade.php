@@ -8,23 +8,23 @@
             }
         });
         // image validation
-        $("#imageUpload").on('change', function() {
-            var file = this.files[0];
+        // $("#imageUpload").on('change', function() {
+        //     var file = this.files[0];
 
-            if (Math.round(file.size / (1024 * 1024)) > 2) { 
-                toastr.error('Please select image size less than 2 MB',{
-                    position: 'top-end',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                $("#imageUpload").val(" ");
-                return false;
-            } else{
-                readURL(this);
-            }
-        });
-
+        //     if (Math.round(file.size / (1024 * 1024)) > 2) { 
+        //         toastr.error('Please select image size less than 2 MB',{
+        //             position: 'top-end',
+        //             icon: 'error',
+        //             showConfirmButton: false,
+        //             timer: 2500
+        //         });
+        //         $("#imageUpload").val(" ");
+        //         return false;
+        //     } else{
+        //         readURL(this);
+        //     }
+        // });
+        
         // update tutor profile
         $("#personal").submit(function(e) {
             e.preventDefault();
@@ -460,12 +460,12 @@
             $("#vid-dropify").attr("src",tye);
             
         });
-            const input = document.getElementById('file-input');
+            const input2 = document.getElementById('file-input');
             // const input2 = document.getElementById('file-input2');
             const video = document.getElementById('video');
             const videoSource = document.createElement('source');
 
-            input.addEventListener('change', function() {
+            input2.addEventListener('change', function() {
              
                 $("#sendFileVideo").modal("show");
                 const files = this.files || [];
