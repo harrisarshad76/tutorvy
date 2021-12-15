@@ -146,6 +146,12 @@
         .conListing li::marker{
             color:#1173FF ;
         }
+        .demoImg{
+            width:70px;
+            height:70px;
+            border-radius:100%;
+            margin-right:12px;
+        }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -489,7 +495,7 @@
                                             <div class="col-md-12">
                                                 <h1>Change Photo</h1>
                                             </div>
-                                            <div class="col-md-12 mt-3">
+                                            <div class="col-md-3 mt-3">
 
                                                 <div class="avatar-upload my-4">
                                                     <div class="avatar-edit">
@@ -520,6 +526,31 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-7 mt-2 bg-price">
+                                                <div class="row mb-3 mt-3">
+                                                    <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
+                                                    <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
+                                                    <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
+                                                </div>
+                                                <h3>Tips for an amazing photo</h3>
+                                                <ul class="conListing pl-3">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <li>Smile and look at the camera</li>
+                                                            <li>Frame your head and shoulders</li>
+                                                            <li>Your photo is centered and upright</li>
+                                                            <li>Use neutral lighting and background</li>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <li>Your face and eyes are fully visible (except for religious reasons)</li>
+                                                            <li>Avoid logos or contact information</li>
+                                                            <li>You are the only person in the photo</li>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </ul>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -1303,10 +1334,10 @@
                 <div class="modal-body">
                     <div class="img-container">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <img src="" id="sample_image" class="w-100"/>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="preview"></div>
                             </div>
                         </div>
@@ -1397,7 +1428,72 @@
 
 
         $(document).ready(function() {
+            var $modal = $('#sendFileCall');
 
+            var image = document.getElementById('sample_image');
+
+            var cropper;
+            $('#imageUpload').change(function(event) {
+            var files = event.target.files;
+            
+            var done = function(url) {
+                image.src = url;
+                
+                $modal.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                    reader.onload = function(event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            });
+
+            $modal.on('shown.bs.modal', function() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    preview: '.preview'
+                });
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $('#crop').click(function() {
+                console.log("ok");
+                $('#sendFileCall').modal("hide");
+                canvas = cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400
+                });
+
+                canvas.toBlob(function(blob) {
+                    url = URL.createObjectURL(blob);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var base64data = reader.result;
+                        readURL(base64data);
+                    };
+                });
+            });
+            function readURL(input) {
+                console.log(input,"input");
+                $('#imagePreview').css('background-image', 'url(' + input + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+                $("#bs64").val(input);
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // $('#imagePreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
             $("#institutes_list").select2();
             $(".schoolList").hide();
             var url = window.location.href;
@@ -1529,24 +1625,7 @@
 
         // }
         
-        function readURL(input) {
-            console.log(input,"input");
-            $('#imagePreview').css('background-image', 'url(' + input + ')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
-            $("#bs64").val(input);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                   
-
-                    // $('#imagePreview').attr('src', e.target.result);
-                    
-                }
-                reader.readAsDataURL(input.files[0]);
-                 
-            }
-        }
+   
 
         $("#edu2").click(function(){
             $("#edu").submit();
@@ -1731,65 +1810,6 @@
                 $(".policeCert").css("display","block");
 
                 }
-                });
+            });
     </script>
-        <script>
-    $(document).ready(function() {
-
-        var $modal = $('#sendFileCall');
-
-        var image = document.getElementById('sample_image');
-
-        var cropper;
-
-        $('#imageUpload').change(function(event) {
-            var files = event.target.files;
-            
-            var done = function(url) {
-                image.src = url;
-                
-                $modal.modal('show');
-            };
-
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function(event) {
-                    done(reader.result);
-                };
-                reader.readAsDataURL(files[0]);
-            }
-        });
-
-        $modal.on('shown.bs.modal', function() {
-            cropper = new Cropper(image, {
-                aspectRatio: 1,
-                viewMode: 3,
-                preview: '.preview'
-            });
-        }).on('hidden.bs.modal', function() {
-            cropper.destroy();
-            cropper = null;
-        });
-
-        $('#crop').click(function() {
-            console.log("ok");
-            $('#sendFileCall').modal("hide");
-            canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
-            });
-
-            canvas.toBlob(function(blob) {
-                url = URL.createObjectURL(blob);
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function() {
-                    var base64data = reader.result;
-                    readURL(base64data);
-                };
-            });
-        });
-
-    });
-</script>
 @endsection
