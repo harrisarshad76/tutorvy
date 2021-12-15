@@ -86,7 +86,7 @@
     color: grey;
 }
 .vid23{
-    max-height:240px;
+    max-height:215;
 }
 .fav{
     z-index:999;
@@ -96,6 +96,9 @@
     overflow-y:auto;
 }
 .scrolly::-webkit-scrollbar{
+    display:none;
+}
+.cardRight{
     display:none;
 }
 </style>
@@ -131,7 +134,7 @@
                                         
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="">Price</label>
+                                        <label for="">Price (in USD)</label>
                                         <!-- <select class="w-100 form-control accSelect2" id="range" name="my_range">
                                             <option value="">Any hourly rate</option>
                                             <option value="$10">$10 & below</option>
@@ -204,8 +207,17 @@
                 <div class="col-md-12 " >
                     <div class="row">
                         
-                        <div class="col-md-8" id="number-booking">
-                            <h3  class="mb-0  mt-4">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
+                        <div class="col-md-9 row pr-0 " id="number-booking">
+                            <h3  class="mb-0 col-md-6 mt-4">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
+                            <div class="text-right col-md-6 pt-4 pr-0">
+                                <label for=""> <b> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort:  </b> </label>
+                                <select class="pl-2 pr-2 ml-2" id="sort">
+                                    <option value="">Sort by Availability</option>
+                                    <option value="">Sort by Date</option>
+                                    <option value="">Sort by Price</option>
+                                    <option value="">Sort by Gender</option>
+                                </select>
+                            </div>
                         </div>
                         <!-- <div class="col-md-4">
                             <div class="row  ">
@@ -241,11 +253,11 @@
 
                                             <div class="row">
                                                
-                                                <div class="col-md-12 pl-0">
+                                                <div class="col-md-9 pl-0 cardLeft" id="{{$tutor->id}}">
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <div class="row">
-                                                                <div class="col-md-2 pr-0">
+                                                                <div class="col-md-3 pr-0">
                                                                     <div class="topImage">
                                                                             @if($tutor->rank == 1)
                                                                                 <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">New</span></p>
@@ -261,7 +273,7 @@
                                                                         <img src="{{asset($tutor->picture)}}" class="w-100" alt="">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-5">
+                                                                <div class="col-md-6">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="row">
@@ -397,7 +409,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-2 bg-price text-center">
+                                                                <div class="col-md-3 bg-price text-center">
                                                                     <div class="row mt-2">
                                                                         @if($tutor->is_favourite != null && $tutor->is_favourite != "")
                                                                             <a type="button" onclick="favourite_tutor({{$tutor->id}},'un_fav')" class="fav" title="Favourite">
@@ -424,15 +436,28 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
-                                                                    <video loop autoplay muted controls class="vid23 w-100 h-100">
-                                                                        <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
-                                                                    </video>
-                                                                </div>
+                                                               
                                                             </div>
 
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-3 pl-0 cardRight" id="{{$tutor->id}}-A">
+                                                    <div class="card">
+                                                        <div class="card-body div-center">
+                                                            <div>
+                                                                <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                    <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
+                                                                </video>
+                                                                <a href="{{route('student.tutor.show',[$tutor->id])}}" class="text-center no-decoration schedule-btn w-100 mt-2" >
+                                                                        &nbsp; View Profile &nbsp;
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   
+                                                            
                                                 </div>
                                                
                                             
@@ -565,5 +590,27 @@
         $("#star_rating").val(ratingValue);
         
     });
+    $(".cardLeft").mouseenter(function(){
+      
+        var ter = $(this).attr("id");
+     $("#"+ter+"-A").css("display","flex");
+       
+    })
+    $(".cardLeft").mouseleave(function(){
+      
+      var ter = $(this).attr("id");
+   $("#"+ter+"-A").css("display","none");
+     
+  })
+  $(".cardRight").mouseenter(function(){
+        
+        $(this).css("display","flex");
+        
+    })
+    $(".cardRight").mouseleave(function(){
+        
+        $(this).css("display","none");
+    
+    })
 </script>
 @endsection
