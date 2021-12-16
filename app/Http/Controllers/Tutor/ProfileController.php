@@ -230,11 +230,11 @@ class ProfileController extends Controller
 
     }
 
-    public function uploadPic(Request $request){
+    public function uploadPic($user_id ,  Request $request){
 
-        if($request->hasFile('filepond')){
+        if($request){
             
-            $image = $request->bs64; // your base64 encoded
+            $image = $request->filepond; // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             $random = Str::random(10).".png";
@@ -244,6 +244,13 @@ class ProfileController extends Controller
             Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
                 // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
                 // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+            User::where('id',$user_id)->update($data);
+                return response()->json([
+                    "status_code" => 200,
+                    "success" => true,
+                    "message" => "Image saved.",
+                    "path" => (array_key_exists("picture",$data) ? $data['picture'] : Auth::user()->picture ),
+                ]);
         }else{
             return response()->json([
                 "status_code" => 404,
@@ -252,11 +259,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        return response()->json([
-            "status_code" => 200,
-            "success" => true,
-            "message" => "Image saved.",
-        ]);
+        
 
 
     }

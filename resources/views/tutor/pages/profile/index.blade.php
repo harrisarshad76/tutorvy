@@ -1406,12 +1406,16 @@
                                 </a> -->
                                 <div class="preview"></div>
                             </div>
-                            
+                            <input type="hidden" name="bs64" id="bs64" >
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="crop" class="btn schedule-btn">Save</button>
+                    <button type="button" id="crop" class="btn schedule-btn">Crop</button>
+                    <button type="button" id="crop-save" class="btn schedule-btn">Save</button>
+                    <button type="button" role="button" type="button" id="crop_loading" disabled class="btn schedule-btn"
+                                                            style="display:none">
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
                     <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -1526,7 +1530,7 @@
                                     </div>
 
                                 </ul>
-                                    <input type="hidden" name="bs64" id="bs64">
+                                   
                                     <input type='file' name="filepond" id="imageUpload"
                                         accept=".png, .jpg, .jpeg" />
                             </div>
@@ -1552,7 +1556,7 @@
 
 
         $(document).ready(function() {
-       
+       $("#crop-save").hide();
            
             var $modal = $('#sendFileCall');
 
@@ -1591,8 +1595,7 @@
 
             $('#crop').click(function() {
                 console.log("ok");
-                $('#sendFileCall').modal("hide");
-                canvas = cropper.getCroppedCanvas({
+                    canvas = cropper.getCroppedCanvas({
                     width: 400,
                     height: 400
                 });
@@ -1604,7 +1607,75 @@
                     reader.onloadend = function() {
                         var base64data = reader.result;
                         readURL(base64data);
+                        
                     };
+                });
+                $("#crop").hide();
+                $("#crop-save").show();
+                
+              
+            });
+            $('#crop-save').click(function() {
+                    console.log("ok");
+                    console.log($("#bs64").val(),'forDat');
+                    var formData = {
+                        filepond : $("#bs64").val()
+                    };
+
+                $.ajax({
+                    
+                    url: "{{ route('tutor.profile.image', [Auth::user()->id]) }}",
+                    type:"POST",
+                    data: formData,
+                    // cache: false,
+                    // contentType: false,
+                    // processData: false,
+                    beforeSend:function(data) {
+                        $("#crop-save").hide();
+                        $("#crop_loading").show();
+                    },
+                    success:function(response){
+                        console.log(response);
+                        if(response.status_code == 200 && response.success == true) {
+                            toastr.success(response.message,{
+                                position: 'top-end',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                            let img_path = response.path;
+                            var origin   = window.location.origin
+
+                            if(img_path != null && img_path != "" ){
+                                $('.profile-img').attr('src',origin + '/'+ img_path );
+                            }else{
+                                $('.profile-img').attr('src', origin + '/assets/images/ico/Square-white.jpg');
+                            }
+                            $('#sendFileCall').modal("hide");
+                        }else{
+                            toastr.error(response.message,{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                    },
+                    complete:function(data) {
+                        $("#crop-save").show();
+                        $("#crop_loading").hide();
+                    },
+                    error:function(e) {
+                        console.log(e);
+                        $("#crop-save").show();
+                        $("#crop_loading").hide();
+                        toastr.error('Something Went Wrong',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
                 });
             });
             function readURL(input) {
