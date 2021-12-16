@@ -176,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ],
 
@@ -234,7 +235,7 @@ return [
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
 	    'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
-
+        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class
     ],
 
 ];

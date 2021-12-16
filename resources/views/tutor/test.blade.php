@@ -216,9 +216,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card_test mb-5"
-                    style="">
-                    <div class="container mt-4 ">
+                <div class="card card_test mb-5" style="">
+
+                    <!-- <div class="container mt-4 ">
                         <p class="heading-third ml-5">
                             Write down 3 questions and their awnsers in your words
                         </p>
@@ -229,61 +229,60 @@
                         <p class="view-bookings float-left ml-5">
                             Learn how to write effective questions and answers.
                         </p>
+                    </div> -->
+                    <input type="hidden" name="subject" value="{{$id}}">
+                    <!-- <div class="container">
+                        <div class="input-test ml-5 mr-5 mb-0">
+                            <br />
+                            <input type="" name="question_1" class="form-control" required placeholder="Question1" required>
+
+                        </div>
+                        <div class="input-answer ml-5 mr-5 mb-0">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1"></label>
+                                <textarea class="form-control" name="answer_1" placeholder="Answers"
+                                    rows="10" required></textarea>
+                            </div>
+                        </div>
                     </div>
-                    
-                        <input type="hidden" name="subject" value="{{$id}}">
-                        <div class="container">
-                            <div class="input-test ml-5 mr-5 mb-0">
-                                <br />
-                                <input type="" name="question_1" class="form-control" required placeholder="Question1" required>
-
-                            </div>
-                            <div class="input-answer ml-5 mr-5 mb-0">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1"></label>
-                                    <textarea class="form-control" name="answer_1" placeholder="Answers"
-                                        rows="10" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="input-test ml-5 mr-5 mb-0">
-                                <br />
-                                <input type="" name="question_2" class="form-control" placeholder="Question2" required>
-
-                            </div>
-                            <div class="input-answer ml-5 mr-5 mb-0">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1"></label>
-                                    <textarea class="form-control" name="answer_2" placeholder="Answers"
-                                        rows="10" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="input-test ml-5 mr-5 mb-0">
-                                <br />
-                                <input type="" name="question_3" class="form-control" placeholder="Question3" required>
-
-                            </div>
-                            <div class="input-answer ml-5 mr-5 mb-0">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1"></label>
-                                    <textarea class="form-control" name="answer_3" placeholder="Answers"
-                                        rows="10" required></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="schedule-btn mb-4 mt-4" id="saveBtn" style="width: 100px;float: right;margin-right: 50px;" > Submit </button>
-
-                            <button type="button" role="button" type="button" id="proBtn" disabled class="btn btn-primary mb-4 mt-4 mr-2" style="float: right;margin-right: 50px; display:none" >
-                                <i class="fas fa-circle-notch fa-spin"></i> Processing </button>
-                            
-
+                    <div class="container">
+                        <div class="input-test ml-5 mr-5 mb-0">
+                            <br />
+                            <input type="" name="question_2" class="form-control" placeholder="Question2" required>
 
                         </div>
+                        <div class="input-answer ml-5 mr-5 mb-0">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1"></label>
+                                <textarea class="form-control" name="answer_2" placeholder="Answers"
+                                    rows="10" required></textarea>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="container">
+                        <!-- <div class="input-test ml-5 mr-5 mb-0">
+                            <br />
+                            <input type="" name="question_3" class="form-control" placeholder="Question3" required>
+
+                        </div>
+                        <div class="input-answer ml-5 mr-5 mb-0">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1"></label>
+                                <textarea class="form-control" name="answer_3" placeholder="Answers"
+                                    rows="10" required></textarea>
+                            </div>
+                        </div> -->
+                        <button type="submit" class="schedule-btn mb-4 mt-4" id="saveBtn" style="width: 100px;float: right;margin-right: 50px;" > Submit </button>
+
+                        <button type="button" role="button" type="button" id="proBtn" disabled class="btn btn-primary mb-4 mt-4 mr-2" style="float: right;margin-right: 50px; display:none" >
+                            <i class="fas fa-circle-notch fa-spin"></i> Processing </button>
+                        
+
+
+                    </div>
+
                     </form>
                 </div>
-
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -295,7 +294,7 @@
                                 <div class="testsubmit-image text-center">
                                     <img class="mt-4" src="{{asset('assets/images/ico/submit-test.png')}}">
                                     <p class="text-center heading-third mt-5" style="line-height: 0.5;">
-                                            Your Questionnaire Submitted Successfully
+                                            Your Subject Submitted For Approval!
 
                                     </p>
                                     <p class="text-center paragraph-line">
