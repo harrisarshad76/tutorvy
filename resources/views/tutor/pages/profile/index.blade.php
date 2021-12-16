@@ -580,7 +580,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
-                                                    <input id="file-input" type="file" accept="video/*" class="form-control form-file">
+                                                    <input id="file-input" type="file" name="video" accept="video/*" class="form-control form-file">
                                                 </div>
                                                
 

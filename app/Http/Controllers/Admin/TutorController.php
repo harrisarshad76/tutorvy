@@ -44,7 +44,7 @@ class TutorController extends Controller
             ->where('users.role',2)
             ->whereIn('users.status', [0, 1, 2])
             ->paginate(15);
-        //  return $new_requests;
+        
         // dd($new_requests);
 
         return view('admin.pages.tutors.index',compact('new_requests','approved_tutors','staff_members'));

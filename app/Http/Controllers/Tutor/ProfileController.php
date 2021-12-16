@@ -22,6 +22,10 @@ use App\Models\Booking;
 use App\Models\subjectPlans;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
+use FFMpeg;
+
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Format\Video\X264;
 
 class ProfileController extends Controller
 {
@@ -57,11 +61,26 @@ class ProfileController extends Controller
             'gender' => $request->gender,
             'bio' => $request->bio,
         );
+        ini_set('max_execution_time', 780);
+        if($request->hasFile('video')){
+            $file = $request->file('video');                                       //get file from request 
+            $arrayFileName = explode(".", $file->getClientOriginalName());         
+                                                                                           
+            $filename =  $file->getClientOriginalName();            //to get existing name  of file
+            $storage_path_full = '/'.$filename;                            //to make path
+            $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
+            //to save the file in your public folder
 
-        // if($request->hasFile('filepond')){
-        //     $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
-        //     $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
-        // }
+            $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
+		    FFMpeg::fromDisk('videos')
+			->open($filename)
+            
+		    ->export()
+		    ->toDisk('videos')
+		    ->inFormat($lowBitrateFormat)
+		    ->save('kaushik.mp4');
+        }
+
         if($request->hasFile('filepond')){
             
             $image = $request->bs64; // your base64 encoded

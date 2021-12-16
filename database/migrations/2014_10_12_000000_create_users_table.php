@@ -42,6 +42,7 @@ class CreateUsersTable extends Migration
             $table->string('hourly_rate')->nullable();
             $table->integer('experty_level')->nullable();
             $table->integer('std_subj')->nullable();
+            $table->integer('assign_to')->nullable();
             $table->integer('std_learn')->nullable();
             $table->string('provider')->default('direct');
             $table->integer('role')->nullable()->comment('1-admin 2-tutor 3-student 4-staff');
