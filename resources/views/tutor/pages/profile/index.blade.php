@@ -153,18 +153,30 @@
             margin-right:12px;
         }
         .uploadVideo{
-            border-radius:100%;
-            background:#fff;
-            border-color:#fff;
+            position: absolute;
+            border-radius: 100%;
+            background: #fff;
+            border: 3px solid #e7e7e7;
             padding: 6px 8px;
             z-index: 99999;
-            position: absolute;
-            top: 19%;
             color: #000;
-            right: 25px;
+            right: 26px;
+            top: 19%;
+        }
+        .uploadImg{
+            border-radius:100%;
+            background:#fff;
+            border:3px solid #e7e7e7;
+            padding: 4px 8px;
+            z-index: 99999;
+            color: #000;
         }
         .video2{
             background:#FBFBFB;
+        }
+        .fa-24
+        {
+            font-size:24px !important;
         }
 </style>
 
@@ -1305,10 +1317,13 @@
 
                                                         <div class="avatar-upload ">
                                                             <div class="avatar-edit">
-                                                                <input type="hidden" name="bs64" id="bs64">
+                                                                <!-- <input type="hidden" name="bs64" id="bs64">
                                                                 <input type='file' name="filepond" id="imageUpload"
                                                                     accept=".png, .jpg, .jpeg" />
-                                                                <label for="imageUpload"></label>
+                                                                <label for="imageUpload"></label> -->
+                                                                <a href="#" class="uploadImg" id="uploadImg"> 
+                                                                    <i class="fa fa-pencil"></i> 
+                                                                </a>
                                                             </div>
                                                             <div class="avatar-preview">
                                                                 @if (Auth::user()->picture != null)
@@ -1335,7 +1350,9 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
-                                                        
+                                                        <a href="#" class="uploadVideo" id="uploadVideo"> 
+                                                            <i class="fa fa-pencil"></i> 
+                                                        </a>
                                                         <video id="video2" height="190" controls="" class="w-100 mt-2">
                                                             
                                                         </video>
@@ -1343,9 +1360,7 @@
                                                                 <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
                                                             </video> -->
                                                      
-                                                        <a href="#" class="uploadVideo" id="uploadVideo"> 
-                                                            <i class="fa fa-pencil"></i> 
-                                                        </a>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -1381,13 +1396,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="img-container">
-                        <div class="row">
+                        <div class="row"  >
                             <div class="col-md-6">
                                 <img src="" id="sample_image" class="w-100"/>
                             </div>
                             <div class="col-md-6">
+                                <!-- <a href="#" id="questImg" class="pull-right ">
+                                    <i class="fa fa-question-circle-o fa-24" aria-hidden="true"></i>
+                                </a> -->
                                 <div class="preview"></div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -1447,6 +1466,7 @@
             </div>
         </div>
     </div>
+    
     <!-- <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1471,7 +1491,52 @@
         </div>
     </div> -->
 
+    <div class="modal fade" id="newFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Image Before Upload</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row"  id="infoImg" >
+                        <div class="  col-md-12 mt-2 mb-3">
+                            <div class="bg-price p-4">
+                                <div class="d-flex mb-3 mt-3">
+                                    <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
+                                    <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
+                                    <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
+                                </div>
+                                <h3>Tips for an amazing photo</h3>
+                                <ul class="conListing pl-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <li>Smile and look at the camera</li>
+                                            <li>Frame your head and shoulders</li>
+                                            <li>Your photo is centered and upright</li>
+                                            <li>Use neutral lighting and background</li>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <li>Your face and eyes are fully visible (except for religious reasons)</li>
+                                            <li>Avoid logos or contact information</li>
+                                            <li>You are the only person in the photo</li>
+                                        </div>
+                                    </div>
 
+                                </ul>
+                                    <input type="hidden" name="bs64" id="bs64">
+                                    <input type='file' name="filepond" id="imageUpload"
+                                        accept=".png, .jpg, .jpeg" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @section('scripts')
@@ -1487,6 +1552,8 @@
 
 
         $(document).ready(function() {
+       
+           
             var $modal = $('#sendFileCall');
 
             var image = document.getElementById('sample_image');
@@ -1499,6 +1566,7 @@
                 image.src = url;
                 
                 $modal.modal('show');
+                $('#newFileCall').modal("hide");
             };
 
             if (files && files.length > 0) {
@@ -1568,6 +1636,9 @@
                 endYear: 2050,
             });
         });
+        $("#uploadImg").click(function(){
+            $('#newFileCall').modal("show");
+        })
         $("#uploadVideo").click(function(){
             $('#sendFileVideo').modal("show");
         })
