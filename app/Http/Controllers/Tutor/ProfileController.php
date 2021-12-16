@@ -61,40 +61,9 @@ class ProfileController extends Controller
             'gender' => $request->gender,
             'bio' => $request->bio,
         );
-        ini_set('max_execution_time', 780);
-        if($request->hasFile('video')){
-            $file = $request->file('video');                                       //get file from request 
-            $arrayFileName = explode(".", $file->getClientOriginalName());         
-                                                                                           
-            $filename =  $file->getClientOriginalName();            //to get existing name  of file
-            $storage_path_full = '/'.$filename;                            //to make path
-            $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
-            //to save the file in your public folder
+        
 
-            $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
-		    FFMpeg::fromDisk('videos')
-			->open($filename)
-            
-		    ->export()
-		    ->toDisk('videos')
-		    ->inFormat($lowBitrateFormat)
-		    ->save('kaushik.mp4');
-        }
-
-        if($request->hasFile('filepond')){
-            
-            $image = $request->bs64; // your base64 encoded
-            $image = str_replace('data:image/png;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            $random = Str::random(10).".png";
-            $imageName = $random;
-            
-            $data['picture'] = 'storage/profile/'.$imageName;
-            Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
-                // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
-                // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
-        }
-
+       
         User::where('id',$request->user_id)->update($data);
 
         $location = DB::table('search_locations')->where('name', $request->country)->first();
@@ -222,6 +191,73 @@ class ProfileController extends Controller
             "success" => true,
             "message" => "Record Saved Successfully",
         ]);
+
+    }
+
+    public function uploadVideo(Request $request){
+
+        ini_set('max_execution_time', 780);
+        if($request->hasFile('video')){
+            $file = $request->file('video');                                       //get file from request 
+            $arrayFileName = explode(".", $file->getClientOriginalName());         
+                                                                                           
+            $filename =  $file->getClientOriginalName();            //to get existing name  of file
+            $storage_path_full = '/'.$filename;                            //to make path
+            $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
+            //to save the file in your public folder
+
+            $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
+		    FFMpeg::fromDisk('videos')
+			->open($filename)
+            
+		    ->export()
+		    ->toDisk('videos')
+		    ->inFormat($lowBitrateFormat)
+		    ->save('kaushik.mp4');
+        }else{
+            return response()->json([
+                "status_code" => 404,
+                "success" => false,
+                "message" => "No video attached.",
+            ]);
+        }
+
+        return response()->json([
+            "status_code" => 200,
+            "success" => true,
+            "message" => "Video saved.",
+        ]);
+
+    }
+
+    public function uploadPic(Request $request){
+
+        if($request->hasFile('filepond')){
+            
+            $image = $request->bs64; // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $random = Str::random(10).".png";
+            $imageName = $random;
+            
+            $data['picture'] = 'storage/profile/'.$imageName;
+            Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
+                // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
+                // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+        }else{
+            return response()->json([
+                "status_code" => 404,
+                "success" => false,
+                "message" => "No image attached.",
+            ]);
+        }
+
+        return response()->json([
+            "status_code" => 200,
+            "success" => true,
+            "message" => "Image saved.",
+        ]);
+
 
     }
 
