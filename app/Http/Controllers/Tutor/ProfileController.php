@@ -194,12 +194,12 @@ class ProfileController extends Controller
 
     }
 
-    public function uploadVideo(Request $request){
+    public function uploadVideo($user_id ,Request $request){
 
         ini_set('max_execution_time', 780);
-        if($request->hasFile('video')){
-            $file = $request->file('video');                                       //get file from request 
-            $arrayFileName = explode(".", $file->getClientOriginalName());         
+        if($request){
+            $file = $request->video;                                       //get file from request 
+            $arrayFileName = explode(".", file($file)->getClientOriginalName());         
                                                                                            
             $filename =  $file->getClientOriginalName();            //to get existing name  of file
             $storage_path_full = '/'.$filename;                            //to make path
