@@ -1,6 +1,6 @@
 <script>
         var free = false;
-
+        var tye = "";
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -453,7 +453,7 @@
         }
 
         $("#vid-file").change(function(){
-            var tye = $(this).val();
+             tye = $(this).val();
             
             $("#sendFileVideo").modal("show");
             // $("#vid-dropify").dropify();
@@ -468,7 +468,8 @@
             const videoSource2 = document.createElement('source');
 
             input2.addEventListener('change', function() {
-             
+           
+                $("#vid64").val($(this).val())
                 $("#sendFileVideo").modal("show");
                 const files = this.files || [];
 
