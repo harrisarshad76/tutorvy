@@ -176,7 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
-        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+        // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ],
 
