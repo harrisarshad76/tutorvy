@@ -1703,61 +1703,7 @@
                     }
                 });
             });
-            $('#uploadVid').click(function() {
-                    console.log("ok");
-                    console.log( $("#vid64").files[0].name,'forDat');
-                    var formData = {
-                        video : $("#file-input").files[0].name
-                    };
-
-                $.ajax({
-                    
-                    url: "{{ route('tutor.profile.video', [Auth::user()->id]) }}",
-                    type:"POST",
-                    data: formData,
-                    // cache: false,
-                    // contentType: false,
-                    // processData: false,
-                    beforeSend:function(data) {
-                        $("#uploadVid").hide();
-                        $("#uploadVid_loading").show();
-                    },
-                    success:function(response){
-                        console.log(response);
-                        if(response.status_code == 200 && response.success == true) {
-                            toastr.success(response.message,{
-                                position: 'top-end',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
-                            $('#sendFileVideo').modal("hide");
-                        }else{
-                            toastr.error(response.message,{
-                                position: 'top-end',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
-                        }
-                    },
-                    complete:function(data) {
-                        $("#uploadVid").show();
-                        $("#uploadVid_loading").hide();
-                    },
-                    error:function(e) {
-                        console.log(e);
-                        $("#uploadVid").show();
-                        $("#uploadVid_loading").hide();
-                        toastr.error('Something Went Wrong',{
-                            position: 'top-end',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
-                    }
-                });
-            });
+       
             function readURL(input) {
                 console.log(input,"input");
                 $('#imagePreview').css('background-image', 'url(' + input + ')');
