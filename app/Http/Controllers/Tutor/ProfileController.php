@@ -22,10 +22,10 @@ use App\Models\Booking;
 use App\Models\subjectPlans;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
-use FFMpeg;
+// use FFMpeg;
 
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\X264;
+// use FFMpeg\Coordinate\Dimension;
+// use FFMpeg\Format\Video\X264;
 
 class ProfileController extends Controller
 {
@@ -194,41 +194,41 @@ class ProfileController extends Controller
 
     }
 
-    public function uploadVideo($user_id ,Request $request){
+    // public function uploadVideo($user_id ,Request $request){
 
-        ini_set('max_execution_time', 780);
-        if($request){
-            $file = $request->video;                                       //get file from request 
-            $arrayFileName = explode(".", file($file)->getClientOriginalName());         
+    //     ini_set('max_execution_time', 780);
+    //     if($request){
+    //         $file = $request->video;                                       //get file from request 
+    //         $arrayFileName = explode(".", file($file)->getClientOriginalName());         
                                                                                            
-            $filename =  $file->getClientOriginalName();            //to get existing name  of file
-            $storage_path_full = '/'.$filename;                            //to make path
-            $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
-            //to save the file in your public folder
+    //         $filename =  $file->getClientOriginalName();            //to get existing name  of file
+    //         $storage_path_full = '/'.$filename;                            //to make path
+    //         $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
+    //         //to save the file in your public folder
 
-            $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
-		    FFMpeg::fromDisk('videos')
-			->open($filename)
+    //         $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
+	// 	    FFMpeg::fromDisk('videos')
+	// 		->open($filename)
             
-		    ->export()
-		    ->toDisk('videos')
-		    ->inFormat($lowBitrateFormat)
-		    ->save('kaushik.mp4');
-        }else{
-            return response()->json([
-                "status_code" => 404,
-                "success" => false,
-                "message" => "No video attached.",
-            ]);
-        }
+	// 	    ->export()
+	// 	    ->toDisk('videos')
+	// 	    ->inFormat($lowBitrateFormat)
+	// 	    ->save('kaushik.mp4');
+    //     }else{
+    //         return response()->json([
+    //             "status_code" => 404,
+    //             "success" => false,
+    //             "message" => "No video attached.",
+    //         ]);
+    //     }
 
-        return response()->json([
-            "status_code" => 200,
-            "success" => true,
-            "message" => "Video saved.",
-        ]);
+    //     return response()->json([
+    //         "status_code" => 200,
+    //         "success" => true,
+    //         "message" => "Video saved.",
+    //     ]);
 
-    }
+    // }
 
     public function uploadPic($user_id ,  Request $request){
 
