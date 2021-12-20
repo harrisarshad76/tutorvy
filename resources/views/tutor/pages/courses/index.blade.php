@@ -233,7 +233,7 @@
     background: #fff;
     color: #00132D;
     top: 50%;
-    left: 23%;
+    left: 28%;
 }
 /* .leftSeat{
     position:absolute;

@@ -40,7 +40,7 @@ class TutorController extends Controller
             ->select('users.*','assessments.id as assessment_id','assessments.status as assessment_status','subjects.name as subject_name')
             ->leftJoin('assessments', 'users.id', '=', 'assessments.user_id')
             ->leftJoin('subjects', 'subjects.id', '=', 'assessments.subject_id')
-            // ->where('assessments.status','!=',1)
+            ->where('assessments.status','!=',1)
             ->where('users.role',2)
             ->whereIn('users.status', [0, 1, 2])
             ->paginate(15);
@@ -99,20 +99,23 @@ class TutorController extends Controller
     }
 
     public function tutorRequest($id,$assess_id = null){
-
+  
         $tutor = User::where('id',$id)->where('role',2)->first();
         $tutor_assessment =  Assessment::where('id',$assess_id)->first();
 
         $documents = DB::table("user_files")->where('user_id',$id)->get();
-
+        // return $tutor_assessment;
         return view('admin.pages.tutors.request',compact('tutor','tutor_assessment','documents'));
     }
 
     public function tutorAssessment($assessment_id){
 
         $test = Assessment::where('id',$assessment_id)->first();
+        $plans = subjectPlans::where("user_id", $test->user_id)->where("subject_id",$test->subject_id)->get();
+        $subject = Subject::where('id',$test->subject_id)->first();
+        // return $subject;
 
-        return view('admin.pages.tutors.tutor_test',compact('test'));
+        return view('admin.pages.tutors.tutor_test',compact('test','plans','subject'));
     }
 
     public function verifyAssessment(Request $request){
