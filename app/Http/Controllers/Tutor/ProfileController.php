@@ -194,7 +194,7 @@ class ProfileController extends Controller
 
     }
 
-    public function uploadVideo(Request $request){
+    public function uploadVideo($user_id,Request $request){
 
         ini_set('max_execution_time', 780);
         if($request->hasFile('video')){
@@ -213,7 +213,7 @@ class ProfileController extends Controller
 		    ->export()
 		    ->toDisk('videos')
 		    ->inFormat($lowBitrateFormat)
-		    ->save('kaushik.mp4');
+		    ->save($user_id.'_intro.mp4');
         }else{
             return response()->json([
                 "status_code" => 404,
