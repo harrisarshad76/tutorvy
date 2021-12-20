@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="col-md-2 pr-0">
                                         <label for="">Availability</label>
-                                        <select class="w-100 form-control accSelect2" id="gender" name="gender">
+                                        <select class="w-100 form-control accSelect2" id="availability" name="availability">
                                             <option value="">Any</option>
                                             <option value="">Online</option>
                                             <option value="">Offline</option>
@@ -164,8 +164,8 @@
                                         <label for="">Gender</label>
                                         <select class="w-100 form-control accSelect2" id="gender" name="gender">
                                             <option value="">Any</option>
-                                            <option value="">Male</option>
-                                            <option value="">Female</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
                                         </select>
                                         
                                     </div>
@@ -177,7 +177,7 @@
                                             </a>
                                         </p>
                                         <p class="mb-0">
-                                            <a href="#">
+                                            <a href="#" id="resetSearch">
                                                 <i class="fa fa-refresh" aria-hidden="true"></i> Reset Search
                                             </a>
                                         </p>
