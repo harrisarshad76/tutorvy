@@ -71,22 +71,43 @@
                                                     <ul class="dropdown-menu classdrop classdrop1 ">
                                                         <li>
                                                             @if(Auth::user()->role == 2)
-                                                            <a tabindex="-1" class="" href="{{route('tutor.profileView',[Auth::user()->id])}}">
-                                                                Profile
+                                                            
+                                                            <a tabindex="-1" class="" href="{{route('tutor.dashboard',[Auth::user()->id])}}">
+                                                                <i class="pr-1 fa fa-home" aria-hidden="true"></i>  Dashboard
                                                             </a>
+                                                            
                                                             @elseif(Auth::user()->role == 3)
+                                                   
+                                                            <a tabindex="-1" class="" href="{{route('student.dashboard',[Auth::user()->id])}}">
+                                                                <i class="pr-1 fa fa-home" aria-hidden="true"></i> Dashboard
+                                                            </a>
+                                                            @else
+                                                            <a tabindex="-1" class="" href="{{route('admin.dashboard',[Auth::user()->id])}}">
+                                                                <i class="pr-1 fa fa-home" aria-hidden="true"></i> Dashboard
+                                                            </a>
+                                                            @endif
+                                                        </li>
+                                                        <li>
+                                                            @if(Auth::user()->role == 2)
+                                                            
+                                                            <a tabindex="-1" class="" href="{{route('tutor.profileView',[Auth::user()->id])}}">
+                                                            <i class="pr-1 fa fa-user" aria-hidden="true"></i> Profile
+                                                            </a>
+                                                            
+                                                            @elseif(Auth::user()->role == 3)
+                                                   
                                                             <a tabindex="-1" class="" href="{{route('student.profileView',[Auth::user()->id])}}">
-                                                                Profile
+                                                                <i class="pr-1 fa fa-user" aria-hidden="true"></i> Profile
                                                             </a>
                                                             @else
                                                             <a tabindex="-1" class="" href="{{url('role')}}">
-                                                                Profile
+                                                                <i class="pr-1 fa fa-user" aria-hidden="true"></i> Profile
                                                             </a>
                                                             @endif
                                                         </li>
                                                         <li>
                                                             <a tabindex="-1" class="" href="#">
-                                                                Help
+                                                                <i class="pr-1 fa fa-info-circle" aria-hidden="true"></i> Help
                                                             </a>
                                                         </li>
                                                         <li>
@@ -94,7 +115,7 @@
                                                                 @csrf
                                                             </form>
                                                             <a tabindex="-1" href="javascript:void(0)" onclick="event.preventDefault();  document.getElementById('form').submit();">
-                                                                Signout
+                                                            <i class="pr-1 fa fa-sign-out" aria-hidden="true"></i> Signout
                                                             </a>
                                                         </li>
                                                     </ul>
