@@ -22,10 +22,10 @@ use App\Models\Booking;
 use App\Models\subjectPlans;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
-use FFMpeg;
+// use FFMpeg;
 
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\X264;
+// use FFMpeg\Coordinate\Dimension;
+// use FFMpeg\Format\Video\X264;
 
 class ProfileController extends Controller
 {
@@ -194,22 +194,27 @@ class ProfileController extends Controller
 
     }
 
+<<<<<<< HEAD
     public function uploadVideo($user_id,Request $request){
+=======
+    // public function uploadVideo($user_id ,Request $request){
+>>>>>>> b27b1f50f89858f0309940a6bf6575e6e40f003e
 
-        ini_set('max_execution_time', 780);
-        if($request->hasFile('video')){
-            $file = $request->file('video');                                       //get file from request 
-            $arrayFileName = explode(".", $file->getClientOriginalName());         
+    //     ini_set('max_execution_time', 780);
+    //     if($request){
+    //         $file = $request->video;                                       //get file from request 
+    //         $arrayFileName = explode(".", file($file)->getClientOriginalName());         
                                                                                            
-            $filename =  $file->getClientOriginalName();            //to get existing name  of file
-            $storage_path_full = '/'.$filename;                            //to make path
-            $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
-            //to save the file in your public folder
+    //         $filename =  $file->getClientOriginalName();            //to get existing name  of file
+    //         $storage_path_full = '/'.$filename;                            //to make path
+    //         $localVideo =  Storage::disk('public')->put('tutor/videos/'.$storage_path_full, file_get_contents($file));      
+    //         //to save the file in your public folder
 
-            $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
-		    FFMpeg::fromDisk('videos')
-			->open($filename)
+    //         $lowBitrateFormat = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(387);
+	// 	    FFMpeg::fromDisk('videos')
+	// 		->open($filename)
             
+<<<<<<< HEAD
 		    ->export()
 		    ->toDisk('videos')
 		    ->inFormat($lowBitrateFormat)
@@ -233,8 +238,33 @@ class ProfileController extends Controller
     public function uploadPic(Request $request){
 
         if($request->hasFile('filepond')){
+=======
+	// 	    ->export()
+	// 	    ->toDisk('videos')
+	// 	    ->inFormat($lowBitrateFormat)
+	// 	    ->save('kaushik.mp4');
+    //     }else{
+    //         return response()->json([
+    //             "status_code" => 404,
+    //             "success" => false,
+    //             "message" => "No video attached.",
+    //         ]);
+    //     }
+
+    //     return response()->json([
+    //         "status_code" => 200,
+    //         "success" => true,
+    //         "message" => "Video saved.",
+    //     ]);
+
+    // }
+
+    public function uploadPic($user_id ,  Request $request){
+
+        if($request){
+>>>>>>> b27b1f50f89858f0309940a6bf6575e6e40f003e
             
-            $image = $request->bs64; // your base64 encoded
+            $image = $request->filepond; // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             $random = Str::random(10).".png";
@@ -244,6 +274,13 @@ class ProfileController extends Controller
             Storage::disk('public')->put('profile/'.$imageName, base64_decode($image));
                 // $data['picture'] = 'storage/profile/'.$request->filepond->getClientOriginalName();
                 // $request->filepond->storeAs('profile',$request->filepond->getClientOriginalName(),'public');
+            User::where('id',$user_id)->update($data);
+                return response()->json([
+                    "status_code" => 200,
+                    "success" => true,
+                    "message" => "Image saved.",
+                    "path" => (array_key_exists("picture",$data) ? $data['picture'] : Auth::user()->picture ),
+                ]);
         }else{
             return response()->json([
                 "status_code" => 404,
@@ -252,11 +289,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        return response()->json([
-            "status_code" => 200,
-            "success" => true,
-            "message" => "Image saved.",
-        ]);
+        
 
 
     }

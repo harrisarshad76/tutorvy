@@ -352,7 +352,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::post('/updateprofession/{id}',[ProfileController::class,'updateProfileProfession'])->name('tutor.profile.profession');
     Route::post('/update_verification/{id}',[ProfileController::class,'updateProfileVerfication'])->name('tutor.profile.verfication');
 
-    Route::post('/updatevideo/{id}',[ProfileController::class,'uploadVideo'])->name('tutor.profile.video');
+    // Route::post('/updatevideo/{id}',[ProfileController::class,'uploadVideo'])->name('tutor.profile.video');
     Route::post('/updateprofilepic/{id}',[ProfileController::class,'uploadPic'])->name('tutor.profile.image');
 
 

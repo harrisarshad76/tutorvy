@@ -158,10 +158,10 @@
             background: #fff;
             border: 3px solid #e7e7e7;
             padding: 6px 8px;
-            z-index: 99999;
+            z-index: 2;
             color: #000;
             right: 26px;
-            top: 19%;
+            top: 10%;
         }
         .uploadImg{
             border-radius:100%;
@@ -178,6 +178,14 @@
         {
             font-size:24px !important;
         }
+        .no-decoration{
+            text-decoration:none !important;
+            border:none !important;
+        }
+         .no-decoration:focus,  .no-decoration.focus {
+                outline: 0 !important;
+                box-shadow: 0 0 0 0 !important;
+            }
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -524,7 +532,42 @@
                                         </div>
                                         <div class="row mt-3">
                                             
-                                          
+                                            <div class="col-md-12">
+                                                <label for="exampleName" class="heading-fifth mb-0">Tutor Profile Picture</label>
+
+                                                <div class="avatar-upload ">
+                                                    <div class="avatar-edit">
+                                                        <!-- <input type="hidden" name="bs64" id="bs64">
+                                                        <input type='file' name="filepond" id="imageUpload"
+                                                            accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload"></label> -->
+                                                        <a href="#" class="uploadImg" id="uploadImg"> 
+                                                            <i class="fa fa-pencil"></i> 
+                                                        </a>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        @if (Auth::user()->picture != null)
+                                                            <?php
+                                                                $path = Auth::user()->picture;
+                                                            ?>
+                                                            @if(file_exists( public_path($path) ))
+                                                            <div id="imagePreview"
+                                                                style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                            </div>
+                                                            @else
+                                                            <div id="imagePreview"
+                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                            </div>
+                                                            @endif
+                                                        @else
+                                                            <div id="imagePreview"
+                                                                style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                             <!--<div class="col-md-2"></div>
                                              <div class="col-md-7 mt-2 bg-price mb-3">
                                                 <div class="row mb-3 mt-3">
@@ -1187,194 +1230,173 @@
 
                                 <div class="tab-pane fade chee" id="v-pills-Verification" role="tabpanel"
                                     aria-labelledby="v-pills-Verification-tab">
-
-                                    @if(Auth::user()->status == 2)
-                                        <div class=" bg-success text-white">
-                                            <div class="card-body row">
-                                                <div class="col-md-2 text-center">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    Your Documents are approved from Administrator.
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                    <div class="accordion" id="accordionExample">
                                         <div class="">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p class="heading-fifth">
-                                                            Approved Documents
-                                                        </p>
-                                                    </div>
-                                                    @foreach($user_files as $files)
-                                                        <div class="col-md-6 mt-2 " >
-                                                            <img src="{{asset($files->files)}}" alt="" class="w-100">
+                                            <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left no-decoration" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Identity Verification   
+                                                    </button>
+                                                </h2>
+                                            </div>
+
+                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="heading-third">
+                                                                    Identity Verification
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    @endforeach
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @elseif(Auth::user()->status == 1)
-                                        <div class=" bg-toast infoCard" id="verfication_msg" >
-                                            <div class="card-body row">
-                                                <div class="col-md-2 text-center">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    Your Documents are under process. Please wait for Administrator approval
-                                                </div>
-                                                @foreach($user_files as $files)
-                                                    <div class="col-md-6 mt-2 " >
-                                                            <input type="file" default-data="{{asset($files->files)}}" class="dropify">
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class=" bg-toast infoCard" id="verfication_msg" style="display:none">
-                                            <div class="card-body row">
-                                                <div class="col-md-2 text-center">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    Your Documents are under process. Please wait for Administrator approval
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <form action="{{ route('tutor.profile.verfication', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data" id="tutorVerficationForm">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h1>Verification</h1>
-                                                </div>
-                                            </div>
-                                            <div class=" row mt-3">
-                                                <div class="col-md-6">
-                                                    <label for="exampleText" class="mb-0 heading-fifth">Document Type</label>
-                                                    <select id="selection" name="security"
-                                                        class="form-select form-select-lg mb-3 w-100"
-                                                        aria-label=".form-select-lg example" required>
-                                                        <option value="1" selected>National Identity Card</option>
-                                                        <option value="2">Driving License</option>
-                                                        <option value="3">Passport</option>
-                                                        <option value="4">Police Certification</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="exampleText" class="mb-0 heading-fifth">Document Number</label>
-                                                    <input id="textbox" type="text" name="document_no" placeholder="Document No" required>
-                                                </div>
-                                                <div class="col-md-6 mt-2 passport" >
-                                                    <input type="file" name="passport_pic" class="dropify">
-                                                </div>
-                                                <div class="col-md-6 mt-2 policeCert" >
-                                                    <input type="file" name="policeCert_pic" class="dropify">
-                                                </div>
-
-                                                <div class="col-md-6 mt-2 id">
-                                                    <input type="file" name="id_card_pic" class="dropify">
-                                                </div>
-                                                <div class="col-md-6 mt-2 id">
-                                                    <input type="file" name="id_card_pic2" class="dropify">
-                                                </div>
-                                                <div class="col-md-6 mt-2 license">
-                                                    <input type="file" name="license_pic" class="dropify">
-                                                </div>
-                                                <div class="col-md-6 mt-2 license">
-                                                    <input type="file" name="license_pic2" class="dropify">
-                                                </div>
-                                                <div class="col-md-12 mt-2">
-                                                    <p>
-                                                        <strong>Kindly upload Card photos with white Background</strong>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <button class="schedule-btn" id="verfication_btn" style="width: 180px;float:right;font-size: 14px;" type="submit" name="personal">Save Changes</button>
-                                                    <button type="button" role="button" type="button" id="verfication_loading" disabled class="btn btn-primary mb-4 mr-2"
-                                                        style="width: 180px;float:right; display:none">
-                                                        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    @endif
-                                        <div class="">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p class="heading-third">
-                                                            Identity Verification
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-md-6">
-                                                    <label for="exampleName" class="heading-fifth mb-0">Tutor Profile Picture</label>
-
-                                                        <div class="avatar-upload ">
-                                                            <div class="avatar-edit">
-                                                                <!-- <input type="hidden" name="bs64" id="bs64">
-                                                                <input type='file' name="filepond" id="imageUpload"
-                                                                    accept=".png, .jpg, .jpeg" />
-                                                                <label for="imageUpload"></label> -->
-                                                                <a href="#" class="uploadImg" id="uploadImg"> 
+                                                        <div class="row mt-3">
+                                                        
+                                                            <div class="col-md-5">
+                                                                <!-- <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label> -->
+                                                                <a href="#" class="uploadVideo" id="uploadVideo"> 
                                                                     <i class="fa fa-pencil"></i> 
                                                                 </a>
-                                                            </div>
-                                                            <div class="avatar-preview">
-                                                                @if (Auth::user()->picture != null)
-                                                                    <?php
-                                                                        $path = Auth::user()->picture;
-                                                                    ?>
-                                                                    @if(file_exists( public_path($path) ))
-                                                                    <div id="imagePreview"
-                                                                        style="background-image: url('{{ asset(Auth::user()->picture) }}');">
-                                                                    </div>
-                                                                    @else
-                                                                    <div id="imagePreview"
-                                                                        style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
-                                                                    </div>
-                                                                    @endif
-                                                                @else
-                                                                    <div id="imagePreview"
-                                                                        style="background-image: url({{ asset('assets/images/ico/porfile-main.png') }});">
-                                                                    </div>
-                                                                @endif
+                                                                <video id="video2" height="190" controls="" class="w-100 mt-2">
+                                                                    
+                                                                </video>
+                                                                    <!-- <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                        <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
+                                                                    </video> -->
                                                             </div>
                                                         </div>
-
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <label for="exampleName" class="heading-fifth mb-0">Tutor Introductory Video</label>
-                                                        <a href="#" class="uploadVideo" id="uploadVideo"> 
-                                                            <i class="fa fa-pencil"></i> 
-                                                        </a>
-                                                        <video id="video2" height="190" controls="" class="w-100 mt-2">
-                                                            
-                                                        </video>
-                                                            <!-- <video loop autoplay muted controls class="vid23 w-100 h-100">
-                                                                <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
-                                                            </video> -->
-                                                     
-                                                       
                                                     </div>
                                                 </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-md-12">
-                                                        <button class="schedule-btn" id="verfication_btn" style="width: 180px;float:right;font-size: 14px;" type="submit" name="personal">Save Changes</button>
-                                                        <button type="button" role="button" type="button" id="verfication_loading" disabled class="btn btn-primary mb-4 mr-2"
-                                                            style="width: 180px;float:right; display:none">
-                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
-                                                    </div>
-                                                </div>
-                                                
                                             </div>
                                         </div>
-                                        
+                                        <div class="card">
+                                            <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left collapsed no-decoration" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Document Verification
+                                                </button>
+                                            </h2>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    @if(Auth::user()->status == 2)
+                                                        <div class=" bg-success text-white">
+                                                            <div class="card-body row">
+                                                                <div class="col-md-2 text-center">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    Your Documents are approved from Administrator.
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <p class="heading-fifth">
+                                                                            Approved Documents
+                                                                        </p>
+                                                                    </div>
+                                                                    @foreach($user_files as $files)
+                                                                        <div class="col-md-6 mt-2 " >
+                                                                            <img src="{{asset($files->files)}}" alt="" class="w-100">
+                                                                        </div>
+                                                                    @endforeach
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @elseif(Auth::user()->status == 1)
+                                                        <div class=" bg-toast infoCard" id="verfication_msg" >
+                                                            <div class="card-body row">
+                                                                <div class="col-md-2 text-center">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    Your Documents are under process. Please wait for Administrator approval
+                                                                </div>
+                                                                @foreach($user_files as $files)
+                                                                    <div class="col-md-6 mt-2 " >
+                                                                            <input type="file" default-data="{{asset($files->files)}}" class="dropify">
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class=" bg-toast infoCard" id="verfication_msg" style="display:none">
+                                                            <div class="card-body row">
+                                                                <div class="col-md-2 text-center">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    Your Documents are under process. Please wait for Administrator approval
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <form action="{{ route('tutor.profile.verfication', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data" id="tutorVerficationForm">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <h1>Verification</h1>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" row mt-3">
+                                                                <div class="col-md-6">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Document Type</label>
+                                                                    <select id="selection" name="security"
+                                                                        class="form-select form-select-lg mb-3 w-100"
+                                                                        aria-label=".form-select-lg example" required>
+                                                                        <option value="1" selected>National Identity Card</option>
+                                                                        <option value="2">Driving License</option>
+                                                                        <option value="3">Passport</option>
+                                                                        <option value="4">Police Certification</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="exampleText" class="mb-0 heading-fifth">Document Number</label>
+                                                                    <input id="textbox" type="text" name="document_no" placeholder="Document No" required>
+                                                                </div>
+                                                                <div class="col-md-6 mt-2 passport" >
+                                                                    <input type="file" name="passport_pic" class="dropify">
+                                                                </div>
+                                                                <div class="col-md-6 mt-2 policeCert" >
+                                                                    <input type="file" name="policeCert_pic" class="dropify">
+                                                                </div>
+
+                                                                <div class="col-md-6 mt-2 id">
+                                                                    <input type="file" name="id_card_pic" class="dropify">
+                                                                </div>
+                                                                <div class="col-md-6 mt-2 id">
+                                                                    <input type="file" name="id_card_pic2" class="dropify">
+                                                                </div>
+                                                                <div class="col-md-6 mt-2 license">
+                                                                    <input type="file" name="license_pic" class="dropify">
+                                                                </div>
+                                                                <div class="col-md-6 mt-2 license">
+                                                                    <input type="file" name="license_pic2" class="dropify">
+                                                                </div>
+                                                                <div class="col-md-12 mt-2">
+                                                                    <p>
+                                                                        <strong>Kindly upload Card photos with white Background</strong>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-12">
+                                                                    <button class="schedule-btn" id="verfication_btn" style="width: 180px;float:right;font-size: 14px;" type="submit" name="personal">Save Changes</button>
+                                                                    <button type="button" role="button" type="button" id="verfication_loading" disabled class="btn btn-primary mb-4 mr-2"
+                                                                        style="width: 180px;float:right; display:none">
+                                                                        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1406,12 +1428,16 @@
                                 </a> -->
                                 <div class="preview"></div>
                             </div>
-                            
+                            <input type="hidden" name="bs64" id="bs64" >
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="crop" class="btn schedule-btn">Save</button>
+                    <button type="button" id="crop" class="btn schedule-btn">Crop</button>
+                    <button type="button" id="crop-save" class="btn schedule-btn">Save</button>
+                    <button type="button" role="button" type="button" id="crop_loading" disabled class="btn schedule-btn"
+                                                            style="display:none">
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
                     <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -1452,7 +1478,7 @@
                                             <li>Present your tutoring experience</li>
                                             <li>Invite students to book a trial lesson</li>
                                         </ul>  
-                                        <input id="file-input" type="file" accept="video/*" class="form-control form-file"> 
+                                        <input id="file-input" name="video" type="file" accept="video/*" class="form-control form-file"> 
                                 </div>
                                 
                             </div>
@@ -1460,7 +1486,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn schedule-btn">Save</button>
+                    <button type="button" class="btn schedule-btn" id="uploadVid">Save</button>
+                    <button type="button" role="button" type="button" id="uploadVid_loading" disabled class="btn schedule-btn"
+                                                            style="display:none">
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> Processing </button>
                     <button type="button" class="btn cencel-btn" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -1526,7 +1555,7 @@
                                     </div>
 
                                 </ul>
-                                    <input type="hidden" name="bs64" id="bs64">
+                                   
                                     <input type='file' name="filepond" id="imageUpload"
                                         accept=".png, .jpg, .jpeg" />
                             </div>
@@ -1551,8 +1580,8 @@
 
 
 
-        $(document).ready(function() {
-       
+    $(document).ready(function() {
+        $("#crop-save").hide();
            
             var $modal = $('#sendFileCall');
 
@@ -1591,8 +1620,7 @@
 
             $('#crop').click(function() {
                 console.log("ok");
-                $('#sendFileCall').modal("hide");
-                canvas = cropper.getCroppedCanvas({
+                    canvas = cropper.getCroppedCanvas({
                     width: 400,
                     height: 400
                 });
@@ -1604,9 +1632,78 @@
                     reader.onloadend = function() {
                         var base64data = reader.result;
                         readURL(base64data);
+                        
                     };
                 });
+                $("#crop").hide();
+                $("#crop-save").show();
+                
+              
             });
+            $('#crop-save').click(function() {
+                    console.log("ok");
+                    console.log($("#bs64").val(),'forDat');
+                    var formData = {
+                        filepond : $("#bs64").val()
+                    };
+
+                $.ajax({
+                    
+                    url: "{{ route('tutor.profile.image', [Auth::user()->id]) }}",
+                    type:"POST",
+                    data: formData,
+                    // cache: false,
+                    // contentType: false,
+                    // processData: false,
+                    beforeSend:function(data) {
+                        $("#crop-save").hide();
+                        $("#crop_loading").show();
+                    },
+                    success:function(response){
+                        console.log(response);
+                        if(response.status_code == 200 && response.success == true) {
+                            toastr.success(response.message,{
+                                position: 'top-end',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                            let img_path = response.path;
+                            var origin   = window.location.origin
+
+                            if(img_path != null && img_path != "" ){
+                                $('.profile-img').attr('src',origin + '/'+ img_path );
+                            }else{
+                                $('.profile-img').attr('src', origin + '/assets/images/ico/Square-white.jpg');
+                            }
+                            $('#sendFileCall').modal("hide");
+                        }else{
+                            toastr.error(response.message,{
+                                position: 'top-end',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                    },
+                    complete:function(data) {
+                        $("#crop-save").show();
+                        $("#crop_loading").hide();
+                    },
+                    error:function(e) {
+                        console.log(e);
+                        $("#crop-save").show();
+                        $("#crop_loading").hide();
+                        toastr.error('Something Went Wrong',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            });
+       
             function readURL(input) {
                 console.log(input,"input");
                 $('#imagePreview').css('background-image', 'url(' + input + ')');
@@ -1719,9 +1816,7 @@
                     '</option>';
             }
             document.getElementById('languages-list').innerHTML = option;
-        })();
-
-
+        })(); 
 
         function checkLevel(opt) {
             var level = opt.options[opt.selectedIndex].getAttribute('level');
@@ -1764,185 +1859,185 @@
             $("#edu").submit();
         });
 
-            $('.extra-fields-customer').click(function() {
-                var edu_count = parseInt($("#edu_count").val()) + 1;
-                $("#edu_count").val(edu_count);
+        $('.extra-fields-customer').click(function() {
+            var edu_count = parseInt($("#edu_count").val()) + 1;
+            $("#edu_count").val(edu_count);
 
-                count_field = document.querySelectorAll(".customer_records").length;
+            count_field = document.querySelectorAll(".customer_records").length;
 
-                var html = `<div class=" customer_records mt-5 mb-2" id="record_` + count_field + `">
-                <div class="row">
-                    <div class="input-text col-md-6">
-                        <select name="degree[]" onchange="checkLevel(this)" onchange="checkLevel(this)" class="form-select form-select-lg mb-3">
-                            <option  selected="">Degree</option>
-                            @foreach ($degrees as $degree)
-                                <option value="{{ $degree->id }}">{{ $degree->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="input-text col-md-6">
-                        <select name="major[]" class="form-select form-select-lg mb-3">
-                            <option value="0" selected="">Major</option>
-                            @foreach ($subjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
+            var html = `<div class=" customer_records mt-5 mb-2" id="record_` + count_field + `">
+            <div class="row">
+                <div class="input-text col-md-6">
+                    <select name="degree[]" onchange="checkLevel(this)" onchange="checkLevel(this)" class="form-select form-select-lg mb-3">
+                        <option  selected="">Degree</option>
+                        @foreach ($degrees as $degree)
+                            <option value="{{ $degree->id }}">{{ $degree->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="row mt-3">
-                    <div class="input-text col-md-6 instituteList">
-                    <select name="institute[]" id="institutes_list" class="form-select form-select-lg mb-3"
-                        aria-label=".form-select-lg example">
-                        <option value="Institute">Institute</option>
-                        @foreach ($institutes as $institute)
-                            <option value="{{ $institute->id }}">{{ $institute->name }}
-                            </option>
+
+                <div class="input-text col-md-6">
+                    <select name="major[]" class="form-select form-select-lg mb-3">
+                        <option value="0" selected="">Major</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                         @endforeach
                     </select>
 
-                    </div>
-                    <div class="input-text col-md-6">
-                            <select name="graduate_year[]" id="" class="yearpicker form-select">
-                                                    <option value="2000">2000</option>
-                                                    <option value="2001">2001</option>
-                                                    <option value="2002">2002</option>
-                                                    <option value="2003">2003</option>
-                                                    <option value="2004">2004</option>
-                                                    <option value="2005">2005</option>
-                                                    <option value="2006">2006</option>
-                                                    <option value="2007">2007</option>
-                                                    <option value="2008">2008</option>
-                                                    <option value="2009">2009</option>
-                                                    <option value="2010">2010</option>
-                                                    <option value="2011">2011</option>
-                                                    <option value="2012">2012</option>
-                                                    <option value="2013">2013</option>
-                                                    <option value="2014">2014</option>
-                                                    <option value="2015">2015</option>
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>s
-                                                </select>
-                        <!--<input type="date" name="graduate_year[]" class=" yearpicker form-control" id="grad-yea">-->
-                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="input-text col-md-6 instituteList">
+                <select name="institute[]" id="institutes_list" class="form-select form-select-lg mb-3"
+                    aria-label=".form-select-lg example">
+                    <option value="Institute">Institute</option>
+                    @foreach ($institutes as $institute)
+                        <option value="{{ $institute->id }}">{{ $institute->name }}
+                        </option>
+                    @endforeach
+                </select>
 
                 </div>
-                <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="file" class="dropify" name="upload[]" id="">
+                <div class="input-text col-md-6">
+                        <select name="graduate_year[]" id="" class="yearpicker form-select">
+                                                <option value="2000">2000</option>
+                                                <option value="2001">2001</option>
+                                                <option value="2002">2002</option>
+                                                <option value="2003">2003</option>
+                                                <option value="2004">2004</option>
+                                                <option value="2005">2005</option>
+                                                <option value="2006">2006</option>
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2009">2009</option>
+                                                <option value="2010">2010</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>s
+                                            </select>
+                    <!--<input type="date" name="graduate_year[]" class=" yearpicker form-control" id="grad-yea">-->
                 </div>
-                <div class="col-md-12 mt-3">
-                    <a href="javascript::void(0)" class="removeFields text-danger" onclick="removeFields(` + count_field + `)"> Remove Fields</a>
-                </div>
-                </div>
 
-                </div>`;
-                $('.customer_records_dynamic').append(html);
-                $('.dropify').dropify();
-                $(".form-select").select2();
-                (function() {
-                    "use strict";
-                    var cities = @json($institutes);
+            </div>
+            <div class="row mt-3">
+            <div class="col-md-12">
+                <input type="file" class="dropify" name="upload[]" id="">
+            </div>
+            <div class="col-md-12 mt-3">
+                <a href="javascript::void(0)" class="removeFields text-danger" onclick="removeFields(` + count_field + `)"> Remove Fields</a>
+            </div>
+            </div>
 
-                    $('.bs-autocomplete').each(function() {
-                        var _this = $(this),
-                            _data = _this.data(),
-                            _hidden_field = $('#' + _data.hidden_field_id);
+            </div>`;
+            $('.customer_records_dynamic').append(html);
+            $('.dropify').dropify();
+            $(".form-select").select2();
+            (function() {
+                "use strict";
+                var cities = @json($institutes);
 
-                        _this.after(
-                                '<div class="bs-autocomplete-feedback form-control-feedback"><div class="loader">Loading...</div></div>'
-                            )
-                            .parent('.form-group').addClass('has-feedback');
+                $('.bs-autocomplete').each(function() {
+                    var _this = $(this),
+                        _data = _this.data(),
+                        _hidden_field = $('#' + _data.hidden_field_id);
 
-                        var feedback_icon = _this.next('.bs-autocomplete-feedback');
-                        feedback_icon.hide();
+                    _this.after(
+                            '<div class="bs-autocomplete-feedback form-control-feedback"><div class="loader">Loading...</div></div>'
+                        )
+                        .parent('.form-group').addClass('has-feedback');
 
-                        _this.autocomplete({
-                                minLength: 2,
-                                autoFocus: true,
+                    var feedback_icon = _this.next('.bs-autocomplete-feedback');
+                    feedback_icon.hide();
 
-                                source: function(request, response) {
-                                    var _regexp = new RegExp(request.term, 'i');
-                                    var data = cities.filter(function(item) {
-                                        return item.name.match(_regexp);
-                                    });
-                                    response(data);
-                                },
+                    _this.autocomplete({
+                            minLength: 2,
+                            autoFocus: true,
 
-                                search: function() {
-                                    feedback_icon.show();
-                                    _hidden_field.val('');
-                                },
+                            source: function(request, response) {
+                                var _regexp = new RegExp(request.term, 'i');
+                                var data = cities.filter(function(item) {
+                                    return item.name.match(_regexp);
+                                });
+                                response(data);
+                            },
 
-                                response: function() {
-                                    feedback_icon.hide();
-                                },
+                            search: function() {
+                                feedback_icon.show();
+                                _hidden_field.val('');
+                            },
 
-                                focus: function(event, ui) {
-                                    _this.val(ui.item[_data.item_label]);
-                                    event.preventDefault();
-                                },
+                            response: function() {
+                                feedback_icon.hide();
+                            },
 
-                                select: function(event, ui) {
-                                    _this.val(ui.item[_data.item_label]);
-                                    _hidden_field.val(ui.item[_data.item_id]);
-                                    event.preventDefault();
-                                    $("#inst_id_" + count_field + "").val(ui.item.id)
-                                    console.log(event)
-                                }
-                            })
-                            .data('ui-autocomplete')._renderItem = function(ul, item) {
-                                return $('<li></li>')
-                                    .data("item.autocomplete", item)
-                                    .append('<a>' + item[_data.item_label] + '</a>')
-                                    .appendTo(ul);
-                            };
-                        // end autocomplete
-                    });
-                })();
-            });
-            $("#selection").on('change', function(){
-                var ter=$(this).val();
-                if(ter == 3){
-                    $(".passport").css("display","block");
-                    $(".passport").attr("required", "true");
-                    $(".id").css("display","none");
-                    $(".license").css("display","none");
-                     $(".policeCert").css("display","none");
+                            focus: function(event, ui) {
+                                _this.val(ui.item[_data.item_label]);
+                                event.preventDefault();
+                            },
 
-                }
-                else if(ter == 1){
-                    $(".passport").css("display","none");
-                    $(".id").attr("required" , "true");
-                    $(".id").css("display","block");
-                    $(".license").css("display","none");
-                    $(".policeCert").css("display","none");
-
-                    }
-                else if(ter == 2){
-                $(".passport").css("display","none");
-                $(".license").attr("required" , "true");
-                $(".id").css("display","none");
-                $(".license").css("display","block");
-                $(".policeCert").css("display","none");
-
-
-                }
-                else if(ter == 4){
-                $(".passport").css("display","none");
-                $(".policeCert").attr("required" , "true");
+                            select: function(event, ui) {
+                                _this.val(ui.item[_data.item_label]);
+                                _hidden_field.val(ui.item[_data.item_id]);
+                                event.preventDefault();
+                                $("#inst_id_" + count_field + "").val(ui.item.id)
+                                console.log(event)
+                            }
+                        })
+                        .data('ui-autocomplete')._renderItem = function(ul, item) {
+                            return $('<li></li>')
+                                .data("item.autocomplete", item)
+                                .append('<a>' + item[_data.item_label] + '</a>')
+                                .appendTo(ul);
+                        };
+                    // end autocomplete
+                });
+            })();
+        });
+        $("#selection").on('change', function(){
+            var ter=$(this).val();
+            if(ter == 3){
+                $(".passport").css("display","block");
+                $(".passport").attr("required", "true");
                 $(".id").css("display","none");
                 $(".license").css("display","none");
-                $(".policeCert").css("display","block");
+                    $(".policeCert").css("display","none");
+
+            }
+            else if(ter == 1){
+                $(".passport").css("display","none");
+                $(".id").attr("required" , "true");
+                $(".id").css("display","block");
+                $(".license").css("display","none");
+                $(".policeCert").css("display","none");
 
                 }
-            });
+            else if(ter == 2){
+            $(".passport").css("display","none");
+            $(".license").attr("required" , "true");
+            $(".id").css("display","none");
+            $(".license").css("display","block");
+            $(".policeCert").css("display","none");
+
+
+            }
+            else if(ter == 4){
+            $(".passport").css("display","none");
+            $(".policeCert").attr("required" , "true");
+            $(".id").css("display","none");
+            $(".license").css("display","none");
+            $(".policeCert").css("display","block");
+
+            }
+        });
     </script>
 @endsection
