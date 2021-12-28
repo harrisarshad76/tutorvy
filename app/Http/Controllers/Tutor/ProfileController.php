@@ -194,11 +194,7 @@ class ProfileController extends Controller
 
     }
 
-<<<<<<< HEAD
-    public function uploadVideo($user_id,Request $request){
-=======
     // public function uploadVideo($user_id ,Request $request){
->>>>>>> b27b1f50f89858f0309940a6bf6575e6e40f003e
 
     //     ini_set('max_execution_time', 780);
     //     if($request){
@@ -214,31 +210,6 @@ class ProfileController extends Controller
 	// 	    FFMpeg::fromDisk('videos')
 	// 		->open($filename)
             
-<<<<<<< HEAD
-		    ->export()
-		    ->toDisk('videos')
-		    ->inFormat($lowBitrateFormat)
-		    ->save($user_id.'_intro.mp4');
-        }else{
-            return response()->json([
-                "status_code" => 404,
-                "success" => false,
-                "message" => "No video attached.",
-            ]);
-        }
-
-        return response()->json([
-            "status_code" => 200,
-            "success" => true,
-            "message" => "Video saved.",
-        ]);
-
-    }
-
-    public function uploadPic(Request $request){
-
-        if($request->hasFile('filepond')){
-=======
 	// 	    ->export()
 	// 	    ->toDisk('videos')
 	// 	    ->inFormat($lowBitrateFormat)
@@ -262,7 +233,6 @@ class ProfileController extends Controller
     public function uploadPic($user_id ,  Request $request){
 
         if($request){
->>>>>>> b27b1f50f89858f0309940a6bf6575e6e40f003e
             
             $image = $request->filepond; // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
