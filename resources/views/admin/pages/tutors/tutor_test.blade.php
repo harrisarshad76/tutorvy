@@ -5,7 +5,7 @@
 @endphp
 <div class="container-fluid pb-4">
             <h1 class="mt-5">
-               <a href="{{ route('admin.tutorRequest',[$test->user_id,$test->id]) }}"> < </a> Tutor test </h1>
+               <a href="{{ route('admin.tutorRequest',[$test->user_id,$test->id]) }}"> < </a> {{$subject->name}} </h1>
         </div>
         <div class="container-fluid  pb-5">
             <div class="row">
@@ -13,52 +13,40 @@
                     <div class=" bg-white pl-1 pr-1">
                         <div class="pt-3 ">
                             <h3>
-                                Write down 3 questions and their awnsers
+                                Tutor plans for this Subject are: 
                             </h3>
                             <hr />
                         </div>
-                        <div class="container-fluid pb-4">
+                        <div class="container-fluid pb-4 ">
                             <div class="row">
-                                <div class="col-md-8 bg-dark-blue">
-                                    <div class="mt-4 pb-4">
-                                        <span class="notification-text3">Question 1</span>
-                                        <p class="heading-forth mt-2">{{ $test->question_1 }}</p>
-                                        <span class="notification-text2">
-                                            {{ $test->answer_1 }}
-                                        </span>
-                                    </div>
+                                <div class="col-md-8 pt-4 pb-2 bg-dark-blue">
+                                    @if(sizeof($plans) != 0 )
+                                        @foreach($plans as $plans)
+                                    
+                                
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul>
+                                                        <li>{{$plans->experty_title}}</li>
+                                                    </ul>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul>
+                                                        <li> ${{$plans->rate}} per hour</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                
+                                        
+                                    
+                                        @endforeach
+                                    @else
+                                        <p>No plans Added Yet</p>
+                                    @endif
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
-                        </div>
-                        <div class="container-fluid pb-4">
-                            <div class="row ">
-                                <div class="col-md-8 bg-dark-blue">
-                                    <div class="mt-4 pb-4">
-                                        <span class="notification-text3">Question 2</span>
-                                        <p class="heading-forth mt-2">{{ $test->question_2 }}</p>
-                                        <span class="notification-text2">
-                                            {{ $test->answer_2 }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                        <div class="container-fluid">
-                            <div class=" row ">
-                            <div class="col-md-8 bg-dark-blue">
-                                <div class="mt-4 pb-4">
-                                    <span class="notification-text3">Question 3</span>
-                                    <p class="heading-forth mt-2">{{ $test->question_3 }}</p>
-                                    <span class="notification-text2">
-                                        {{ $test->answer_3 }}
-                                    </span>
-                                </div>
-                            </div>
-                    
-                            <div class="col-md-4"></div>
-
                         </div>
                         <div class="btn-test  col-md-8  mt-3 pb-5" style="text-align: right;">
                             

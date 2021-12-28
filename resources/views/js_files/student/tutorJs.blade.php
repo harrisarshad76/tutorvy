@@ -17,17 +17,17 @@ $(document).ready(function() {
 let tutors = '';
 let profile_interest_tutors;
 
-(function() {
-    var user_language_code = "{{ Auth::user()->language ?? 'en-US' }}";
-    var option = '';
-    option += '<option value="" selected disabled>Select Language</option>';
-    for (var language_code in languages_list) {
-        var selected = (language_code == user_language_code) ? ' selected' : '';
-        option += '<option value="' + language_code + '"' + selected + '>' + languages_list[language_code] +
-            '</option>';
-    }
-    document.getElementById('languages-list').innerHTML = option;
-})();
+// (function() {
+//     var user_language_code = "{{ Auth::user()->language ?? 'en-US' }}";
+//     var option = '';
+//     option += '<option value="" selected disabled>Select Language</option>';
+//     for (var language_code in languages_list) {
+//         var selected = (language_code == user_language_code) ? ' selected' : '';
+//         option += '<option value="' + language_code + '"' + selected + '>' + languages_list[language_code] +
+//             '</option>';
+//     }
+//     document.getElementById('languages-list').innerHTML = option;
+// })();
 
 $('#subjects-list').on("change", function(e) {
 
@@ -80,6 +80,28 @@ $('input[type=radio][name=rating_filter]').change(function() {
 });
 
 
+$('#gender').on("change", function(e) {
+
+let subject = $("#subjects-list").val();
+let lang = $("#languages-list").val();
+let rating = $("input[name='rating_filter']:checked").val();
+let gender = $("#gender").val();
+let price = $("#range").val();
+let location = $("#location").val();
+
+search_tutors(price,subject,lang,rating,location ,gender);
+
+});
+
+$("#resetSearch").click(function(){
+    let subject = $("#subjects-list").val("");
+    let lang = $("#languages-list").val("");
+    let rating = $("input[name='rating_filter']:checked").val("");
+    let gender = $("#gender").val("");
+    let price = $("#range").val("");
+    let location = $("#location").val("");
+    search_tutors(price,subject,lang,rating,location ,gender);
+})
 // $("#range").change(function() {
 
 //     let price = $("#range").val();
@@ -165,6 +187,7 @@ $('input[type=radio][name=gender]').change(function() {
 
 function search_tutors(price,subject,lang,rating,location, gender){
 
+      
     $.ajax({
         url: "{{ route('student.tutor.filter') }}",
         type: "POST",

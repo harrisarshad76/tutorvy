@@ -272,12 +272,16 @@
 
                                                     <div class="avatar-upload my-4">
                                                         <div class="avatar-edit">
-                                                            <input type="hidden" name="bs64" id="bs64">
-                                                            <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                            <label for="imageUpload" id="imgUplo"></label>
-                                                            <!-- <a href="#" id="imageUplo">
-                                                                <i class="fa fa-pencil"></i>
-                                                            </a> -->
+                                                            <span id="check"> 
+                                                                 <input type="hidden" name="bs64" id="bs64">
+                                                                <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                                <label for="imageUpload" id="imgUplo"></label>
+                                                            </span>
+                                                           
+                                                            <a href="#" id="imageUplo">
+                                                                <i class="fa fa-question" aria-hidden="true"></i>
+
+                                                            </a>
                                                         </div>
                                                         <div class="avatar-preview">
                                                             @if (Auth::user()->picture != null)
@@ -613,7 +617,53 @@
             </div>
         </div>
     </div> -->
+    <div class="modal fade" id="newFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Image Before Upload</h5>
+                    <button type="button" class="close showCheck" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row"  id="infoImg" >
+                        <div class="  col-md-12 mt-2 mb-3">
+                            <div class="bg-price p-4">
+                                <div class="d-flex mb-3 mt-3">
+                                    <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
+                                    <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
+                                    <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
+                                </div>
+                                <h3>Tips for an amazing photo</h3>
+                                <ul class="conListing pl-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <li>Smile and look at the camera</li>
+                                            <li>Frame your head and shoulders</li>
+                                            <li>Your photo is centered and upright</li>
+                                            <li>Use neutral lighting and background</li>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <li>Your face and eyes are fully visible (except for religious reasons)</li>
+                                            <li>Avoid logos or contact information</li>
+                                            <li>You are the only person in the photo</li>
+                                        </div>
+                                    </div>
 
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn schedule-btn showCheck pl-5 pr-5" data-dismiss="modal" > Okay </button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @section('scripts')
@@ -632,9 +682,12 @@
                 endYear: 2050,
             });
            
-
+            $("#check").hide();
         });
-
+        $(".showCheck").click(function(){
+            $("#check").show();
+            $("#imageUplo").hide();
+        })
         $("#country_selector").countrySelect({
             defaultCountry: "{{ Auth::user()->country_short ?? '' }}",
             preferredCountries: ['ca', 'gb', 'us', 'pk']
@@ -662,9 +715,9 @@
             document.getElementById('languages-list').innerHTML = option;
         })();
 
-        // $("#imageUplo").click(function(){
-        //     $("#modal").modal("show");
-        // });
+        $("#imageUplo").click(function(){
+            $("#newFileCall").modal("show");
+        });
 
         function checkLevel(opt) {
             var level = opt.options[opt.selectedIndex].getAttribute('level');
