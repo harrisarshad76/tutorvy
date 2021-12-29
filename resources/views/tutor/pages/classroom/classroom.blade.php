@@ -457,10 +457,21 @@ height:25px;
  <section>
 
  <!--  -->
+    @if($class->type == NULL)
     <input type="hidden" id="class_room_id" value="{{$class->id}}">
     <input type="hidden" id="class_date" value="{{$booking->class_date}}">
     <input type="hidden" id="class_time" value="{{$booking->class_time}}">
     <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
+    <input type="hidden" id="class_tutor_name" value="{{$booking->tutor->first_name}} {{$booking->tutor->last_name}}">
+
+    @else
+    <input type="hidden" id="class_room_id" value="{{$class->id}}">
+    <input type="hidden" id="class_date" value="{{$course->class->class_date}}">
+    <input type="hidden" id="class_time" value="{{$course->class->class_time}}">
+    <input type="hidden" id="class_total_duration" value="1">
+    <input type="hidden" id="class_tutor_name" value="{{$course->tutor_name}}">
+
+    @endif
 <!-- <div class="overlayCam container-fluid">
     <div class="row text-center text-white">
         <div class="col-md-12">
@@ -557,9 +568,11 @@ height:25px;
                                         <a class="nav-item nav-link" id="nav-codeEditor-tab" data-toggle="tab" href="#nav-codeEditor" role="tab" aria-controls="nav-codeEditor" aria-selected="false">
                                             Code Editor
                                         </a>
+                                        @if($class->type != NULL)
                                         <a class="nav-item nav-link" id="nav-participants-tab" data-toggle="tab" href="#nav-participants" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Participants
                                         </a>
+                                        @endif
                                         <!-- <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Google Docs
                                         </a> -->
@@ -728,17 +741,20 @@ height:25px;
 
                                     <div class="container-fluid partDiv">
                                         <div class="row mt-5">
+
                                             <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                            <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
+                                                <div id="other-videos" class="rounded" playsinline autoplay></div>
+
+                                                <!-- <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                </a> -->
                                             </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <!-- <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                                             <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
                                             <p>Student Name</p>
                                                 <a href="#" class="muteIcon text-success">
@@ -886,7 +902,7 @@ height:25px;
                                             <a href="#" class="vidIcon">
                                                     <i class="fa fa-video-camera" aria-hidden="true"></i>
                                             </a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <!-- end -->
@@ -939,7 +955,9 @@ height:25px;
                     <div class="row mt-3 mb-3">
                         <div class="col-md-12 h-200">
                             <video id="main-video" class="rounded" playsinline autoplay></video>
+                            @if($class->type == NULL)
                             <div id="other-videos" class="rounded" playsinline autoplay></div>
+                            @endif
                             <div class="col-md-12 mt-2 mb-2 vid-location vid-btn text-left">
                                 <!-- <button class="btn-danger btn h-35 w-100 pb-0 pt-0 ">End Call</button> -->
                                 <!-- <a href="#" class="btn-outline-danger rounded-circle endBtn ">
@@ -1280,11 +1298,12 @@ window.onload = function() {
 
 console.log(connection , "connection");
 var roomid = '{{$class->classroom_id}}';
-var fullName = '{{$booking->tutor->first_name}} {{$booking->tutor->last_name}}';
+var fullName = $('#class_tutor_name').val();
 var deadline = '00:05:00'; 
 var resced = '00:15:00'; 
-var class_duration = {{$booking->duration}};
-var class_id = {{$booking->id}};
+var class_duration = $('#class_total_duration').val();
+var class_id = $('#class_room_id').val();
+var type = '{{$class->type}}';
 // var class_duration = 20;
 console.log(connection , "connection");
 
@@ -1497,7 +1516,11 @@ connection.socketMessageEvent = 'canvas-dashboard-demo';
 // https://www.rtcmulticonnection.org/docs/maxParticipantsAllowed/
 // connection.maxParticipantsAllowed = 1000;
 // set value 2 for one-to-one connection
-connection.maxParticipantsAllowed = 2;
+if(type == null){
+    connection.maxParticipantsAllowed = 2;
+}else{
+    connection.maxParticipantsAllowed = 100
+}
 
 // here goes canvas designer
 var designer = new CanvasDesigner();
