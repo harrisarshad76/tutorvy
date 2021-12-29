@@ -7,6 +7,7 @@ use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\General\NotifyController;
 use App\Models\Booking;
 use App\Models\Classroom;
+use App\Models\CourseClass;
 use App\Models\User;
 use App\Models\TutorSlots;
 use App\Models\Activitylogs;
@@ -74,10 +75,10 @@ class BookingController extends Controller
 
         $completed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(5)->get();
         $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4,6])->get();
-
+        
         $commission = DB::table("sys_settings")->first();
         $defaultPay = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('default',1)->first();
-
+        
         return view('student.pages.booking.index',compact('confirmed','pending','completed','cancelled','all','commission','defaultPay'));
     }
 

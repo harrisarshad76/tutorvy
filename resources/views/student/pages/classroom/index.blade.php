@@ -318,13 +318,38 @@
                                                     <th scope="col">Tutor</th>
                                                     <th scope="col">Subject</th>
                                                     <th scope="col">Plan</th>
-                                                    <th scope="col">Days</th>
-                                                    <th scope="col">Nearest Time</th>
+                                                    <th scope="col">Class Time</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($courses_enrolled as $class)
+                                                    <td class="pt-4">
+                                                        {{ $class->detail->tutor_name}}
+                                                    </td>
+                                                    <td class="pt-4">{{$class->detail->subject_name}}</td>
+                                                    <td class="pt-4">
+                                                        @if($class->enClass->class_plan == 1 )
+                                                            Basic
+                                                        @elseif($class->enClass->class_plan == 2)
+                                                            Standard
+                                                        @else
+                                                            Advanced
+                                                        @endif
+                                                    </td>
+                                                    <td class="pt-4">
+                                                        Pending
+                                                    </td>
+                                                    <td class="pt-4">
+                                                        Pending
+                                                    </td>
+                                                    
+                                                    <td class="pt-4">
+                                                        <a onclick="joinClass(`{{$class->classroom->classroom_id}}`)" class="schedule-btn"> Join Class </a>
+                                                    </td>
+
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

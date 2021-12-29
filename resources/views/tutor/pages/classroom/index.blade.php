@@ -25,7 +25,6 @@
                             <div class="col-md-11 pl-0">
                                <small>
                                    Every Details about your classes will be published here along with schedules for meetings <a href="#">Learn More</a>
-
                                </small> 
                                <a href="#" class="cross"  onclick="hideCard()"> 
                                     <i class="fa fa-times" aria-hidden="true"></i>
@@ -233,16 +232,41 @@
                                         <thead>
                                             <tr
                                                 style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
-                                                <th scope="col">Tutor</th>
+                                                <th scope="col">Course Title</th>
                                                 <th scope="col">Subject</th>
                                                 <th scope="col">Plan</th>
-                                                <th scope="col">Days</th>
-                                                <th scope="col">Nearest Time</th>
+                                                <th scope="col">Class Time</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($courses_enrolled as $class)
+                                            <td class="pt-4">
+                                                    {{ $class->title}}
+                                                </td>
+                                                <td class="pt-4">{{$class->subject_name}}</td>
+                                                <td class="pt-4">
+                                                    @if($class->enClass->class_plan == 1 )
+                                                        Basic
+                                                    @elseif($class->enClass->class_plan == 2)
+                                                        Standard
+                                                    @else
+                                                        Advanced
+                                                    @endif
+                                                </td>
+                                                <td class="pt-4">
+                                                    Pending
+                                                </td>
+                                                <td class="pt-4">
+                                                    Pending
+                                                </td>
+                                                
+                                                <td class="pt-4">
+                                                    <a href="{{route('tutor.start_class',[$class->classroom->classroom_id])}}"  class="schedule-btn"> Start Call </a>
+                                                </td>
+
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

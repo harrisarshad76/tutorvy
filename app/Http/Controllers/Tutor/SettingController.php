@@ -22,7 +22,9 @@ use App\Models\Wallet;
 use App\Models\TutorSlots;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
-
+use App\Models\CourseClass;
+use App\Models\CourseEnrollment;
+use App\Models\Course;
 class SettingController extends Controller
 {
     /**
@@ -317,12 +319,20 @@ class SettingController extends Controller
     public function start_class($class_room_id){
 
         $class = Classroom::where('classroom_id',$class_room_id)->first();
-        $booking = Booking::where('id',$class->booking_id)->first();
-
+        $course = '';
+        $booking = '';
+        $cs_en = '';
+        if($class->type == 'course_class'){
+            $course = Course::where('id',$class->course_id)->first();
+            $cs_en = CourseClass::where('id',$class->course_class_id)->first();
+            $course->class = $cs_en;
+        }else{
+            $booking = Booking::where('id',$class->booking_id)->first();
+        }
         // $class = Classroom::with('booking')->where('classroom_id',$class_room_id)->first();
         $user = User::where('id',Auth::user()->id)->first();
         // dd($class);
-        return view('tutor.pages.classroom.classroom',compact('class','user','booking'));
+        return view('tutor.pages.classroom.classroom',compact('class','user','booking','course'));
 
     }
 

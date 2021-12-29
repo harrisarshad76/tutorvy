@@ -17,9 +17,9 @@ class CreateClassroomTable extends Migration
             $table->id();
             $table->integer('booking_id')->nullable();
             $table->integer('course_id')->nullable();
+            $table->integer('course_class_id')->nullable();
             $table->string('classroom_id')->nullable();
             $table->string('type')->nullable();
-
             $table->timestamps();
         });
     }

@@ -59,6 +59,7 @@ class CourseClassses extends Command
                     $class_room = new Classroom();
                     $class_room->type = 'course_class';
                     $class_room->course_id = $course->id;
+                    $class_room->course_class_id = $class->id;
                     $class_room->classroom_id = $classroom_id;
                     $class_room->save();
                 }
