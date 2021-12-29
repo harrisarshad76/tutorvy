@@ -42,10 +42,10 @@
                                 <span class="counter-text bg-primary"> {{count($classes)}} </span>
                             </a>
                             <a class="nav-item nav-link " id="nav-course-tab" data-toggle="tab" href="#nav-course"
-                                    role="tab" aria-controls="nav-course" aria-selected="true">
-                                    Course Classes
-                                    <span class="counter-text bg-primary"> 5 </span>
-                                </a>
+                                role="tab" aria-controls="nav-course" aria-selected="true">
+                                Course Classes
+                                <span class="counter-text bg-primary"> 5 </span>
+                            </a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                 href="#nav-profile" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">

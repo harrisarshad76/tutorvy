@@ -65,6 +65,7 @@ class ClassController extends Controller
         return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes','courses_enrolled'));
     }
 
+
     public function saveClassLogs(Request $request) {
 
         ClassroomLogs::create([

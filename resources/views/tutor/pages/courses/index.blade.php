@@ -187,6 +187,17 @@
     border-radius:9px;
 }
 
+.view-button {
+    background-color: #A7E1C7;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px #A7E1C7;
+    color: #3ABD83;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
 .learning-button {
     background-color: #cedef5;
     padding: 10px;
@@ -400,9 +411,14 @@
                                                 <p>Seats Left</p>
                                             </span>
                                     </div>
-                                    <div class="col-md-12 text-center learning-button mt-4">
-                                        <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="no-decor">
+                                    <div class="col-md-6 text-center  mt-4">
+                                        <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="pl-4 pr-4 no-decor learning-button">
                                             Edit Course
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 text-center  mt-4">
+                                        <a href="{{ route('tutor.course.courseView',[$course->id]) }}" class="pl-4 pr-4 no-decor view-button">
+                                            View More
                                         </a>
                                     </div>
                                 </div>
@@ -466,9 +482,14 @@
                                                 <p>Seats Left</p>
                                             </span>
                                     </div>
-                                    <div class="col-md-12 text-center learning-button mt-4">
-                                        <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="no-decor">
+                                    <div class="col-md-6 text-center mt-4">
+                                        <a href="{{ route('tutor.course.edit',[$course->id]) }}" class="pl-4 pr-4 no-decor learning-button">
                                             Edit Course
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 text-center mt-4">
+                                        <a href="{{ route('tutor.course.courseView',[$course->id]) }}" class="pl-4 pr-4 no-decor view-button ">
+                                            View More
                                         </a>
                                     </div>
                                 </div>

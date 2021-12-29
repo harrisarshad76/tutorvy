@@ -560,9 +560,6 @@ height:25px;
                                         <a class="nav-item nav-link" id="nav-participants-tab" data-toggle="tab" href="#nav-participants" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Participants
                                         </a>
-                                        <!-- <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
-                                            Google Docs
-                                        </a> -->
                                         <!-- <a class="nav-item nav-link" id="nav-fileShare-tab" data-toggle="tab" href="#nav-fileShare" role="tab" aria-controls="nav-fileShare" aria-selected="false">
                                             File Sharing
                                         </a> -->
@@ -601,337 +598,307 @@ height:25px;
                                             </div>
                                             <!-- -->
                                         </div>
-                                    </div>
-                                    <!-- end -->
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-calculator" role="tabpanel" aria-labelledby="nav-calculator-tab">
-                                    <div class="container-fluid ">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <form action="" class="mt-5">
-                                                    <table class="w-100">
-                                                        <tr>
-                                                            <input id="display" name="display" value="0" size="28" maxlength="25">
-                                                        </tr>
-                                                        <tr>
-                                                            <div class="mt-3 mb-2 ">
-                                                                <!-- <a href="Deg" class="p-5 text-dark ">DEG</a>
-                                                                <a href="F-E" class="p-5 text-dark ">F-E</a> -->
-                                                            </div>
-                                                        </tr>
-                                                        <!-- <tr >
-                                                            <div class="mt-3 mb-2 text-dark">
-                                                                <a href="MC" class="p-5 text-dark">MC</a>
-                                                                <a href="MR" class="p-5 text-dark">MR</a>
-                                                                <a href="M+" class="p-5 text-dark">M+</a>
-                                                                <a href="M-" class="p-5 text-dark">M-</a>
-                                                                <a href="MS" class="p-5 text-dark">Ms</a>
-                                                            </div>
-                                                        
-                                                        </tr> -->
-                                                        <tr>
-                                                            <td>
-                                                            <input type="button" class="btnMath" name="btnMath" value="Trignometry" >
-                                                            </td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="f Functions "></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="button" class="btnOpps" name="btnOpps" value="cos" onclick="if(checkNum(this.form.display.value)) { cos(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="Pi" onclick="addChar(this.form.display,'3.14159265359')"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="%" onclick=" percent(this.form.display)"></td>
-                                                            <td><input type="button" class="btnTop" name="btnTop" value="AC" onclick="deleteChar(this.form.display)"></td>
-                                                            <td><input type="button" class="btnTop" name="btnTop" value="C" onclick="this.form.display.value=  0 "></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="sin" onclick="if(checkNum(this.form.display.value)) { sin(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="x&#50;" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="10x" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="exp" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="mod" onclick="addChar(this.form.display, 'mod')" ></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="tan" onclick="if(checkNum(this.form.display.value)) { tan(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="(" onclick="addChar(this.form.display,'(')"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value=")" onclick="addChar(this.form.display,')')"></td>
-                                                            
-                                                            <td><input type="button" class="btnOpps" name="btnOpps" value="&radic;" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="/" onclick="addChar(this.form.display, '/')"></td>
-                                                        <tr>
-                                                        <td><input type="button" class="btnOpps" name="btnOpps" value="ln" onclick="if(checkNum(this.form.display.value)) { ln(this.form) }"></td>
-
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="7" onclick="addChar(this.form.display, '7')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="9" onclick="addChar(this.form.display, '9')"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="X" onclick="addChar(this.form.display, '*')"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="button" class="btnOpps" name="btnOpps" value="Xy" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="4" onclick="addChar(this.form.display, '4')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="5" onclick="addChar(this.form.display, '5')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="6" onclick="addChar(this.form.display, '6')"></td>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="-" onclick="addChar(this.form.display, '-')"></td>
-                                                        </tr>
-                                                        <tr>
-                                                        <td><input type="button" class="btnOpps" name="btnOpps" value="10x" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
-                                                        <td><input type="button" class="btnNum" name="btnNum" value="1" onclick="addChar(this.form.display, '1')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="2" onclick="addChar(this.form.display, '2')"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="3" onclick="addChar(this.form.display, '3')"></td>
-                                                        
-                                                        
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="+" onclick="addChar(this.form.display, '+')"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="button" class="btnMath" name="btnMath" value="ln" onclick="if(checkNum(this.form.display.value)) { ln(this.form) }"></td>
-                                                            <td><input type="button" class="btnMath btnNum" name="btnMath" value="+/-" onclick="changeSign(this.form.display)"></td>
-                                                            <td><input type="button" class="btnNum" name="btnNum" value="0" onclick="addChar(this.form.display, '0')"></td>
-                                                            <td><input type="button" class="btnMath btnNum" name="btnMath" value="&#46;" onclick="addChar(this.form.display, '&#46;')"></td>
-                                                            <td><input type="button"  class="btnTop equal" name="btnTop" value="=" onclick="if(checkNum(this.form.display.value)) { compute(this.form) }"></td>
-                                                        </tr>
-                                                    </table>
-                                                </form>
-                                            </div>
                                         </div>
                                         <!-- end -->
                                     </div>
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-textEditor" role="tabpanel" aria-labelledby="nav-textEditor-tab">
+                                    <div class="tab-pane tab-border-none fade" id="nav-calculator" role="tabpanel" aria-labelledby="nav-calculator-tab">
+                                        <div class="container-fluid ">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <form action="" class="mt-5">
+                                                        <table class="w-100">
+                                                            <tr>
+                                                                <input id="display" name="display" value="0" size="28" maxlength="25">
+                                                            </tr>
+                                                            <tr>
+                                                                <div class="mt-3 mb-2 ">
+                                                                    <!-- <a href="Deg" class="p-5 text-dark ">DEG</a>
+                                                                    <a href="F-E" class="p-5 text-dark ">F-E</a> -->
+                                                                </div>
+                                                            </tr>
+                                                            <!-- <tr >
+                                                                <div class="mt-3 mb-2 text-dark">
+                                                                    <a href="MC" class="p-5 text-dark">MC</a>
+                                                                    <a href="MR" class="p-5 text-dark">MR</a>
+                                                                    <a href="M+" class="p-5 text-dark">M+</a>
+                                                                    <a href="M-" class="p-5 text-dark">M-</a>
+                                                                    <a href="MS" class="p-5 text-dark">Ms</a>
+                                                                </div>
+                                                            
+                                                            </tr> -->
+                                                            <tr>
+                                                                <td>
+                                                                <input type="button" class="btnMath" name="btnMath" value="Trignometry" >
+                                                                </td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="f Functions "></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="button" class="btnOpps" name="btnOpps" value="cos" onclick="if(checkNum(this.form.display.value)) { cos(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="Pi" onclick="addChar(this.form.display,'3.14159265359')"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="%" onclick=" percent(this.form.display)"></td>
+                                                                <td><input type="button" class="btnTop" name="btnTop" value="AC" onclick="deleteChar(this.form.display)"></td>
+                                                                <td><input type="button" class="btnTop" name="btnTop" value="C" onclick="this.form.display.value=  0 "></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="sin" onclick="if(checkNum(this.form.display.value)) { sin(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="x&#50;" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="10x" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="exp" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="mod" onclick="addChar(this.form.display, 'mod')" ></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="tan" onclick="if(checkNum(this.form.display.value)) { tan(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="(" onclick="addChar(this.form.display,'(')"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value=")" onclick="addChar(this.form.display,')')"></td>
+                                                                
+                                                                <td><input type="button" class="btnOpps" name="btnOpps" value="&radic;" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="/" onclick="addChar(this.form.display, '/')"></td>
+                                                            <tr>
+                                                            <td><input type="button" class="btnOpps" name="btnOpps" value="ln" onclick="if(checkNum(this.form.display.value)) { ln(this.form) }"></td>
+
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="7" onclick="addChar(this.form.display, '7')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="9" onclick="addChar(this.form.display, '9')"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="X" onclick="addChar(this.form.display, '*')"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="button" class="btnOpps" name="btnOpps" value="Xy" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="4" onclick="addChar(this.form.display, '4')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="5" onclick="addChar(this.form.display, '5')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="6" onclick="addChar(this.form.display, '6')"></td>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="-" onclick="addChar(this.form.display, '-')"></td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><input type="button" class="btnOpps" name="btnOpps" value="10x" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
+                                                            <td><input type="button" class="btnNum" name="btnNum" value="1" onclick="addChar(this.form.display, '1')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="2" onclick="addChar(this.form.display, '2')"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="3" onclick="addChar(this.form.display, '3')"></td>
+                                                            
+                                                            
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="+" onclick="addChar(this.form.display, '+')"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="button" class="btnMath" name="btnMath" value="ln" onclick="if(checkNum(this.form.display.value)) { ln(this.form) }"></td>
+                                                                <td><input type="button" class="btnMath btnNum" name="btnMath" value="+/-" onclick="changeSign(this.form.display)"></td>
+                                                                <td><input type="button" class="btnNum" name="btnNum" value="0" onclick="addChar(this.form.display, '0')"></td>
+                                                                <td><input type="button" class="btnMath btnNum" name="btnMath" value="&#46;" onclick="addChar(this.form.display, '&#46;')"></td>
+                                                                <td><input type="button"  class="btnTop equal" name="btnTop" value="=" onclick="if(checkNum(this.form.display.value)) { compute(this.form) }"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- end -->
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane tab-border-none fade" id="nav-textEditor" role="tabpanel" aria-labelledby="nav-textEditor-tab">
+
+                                            <div class="container-fluid ">
+
+                                                <div class="row mt-5">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <textarea name="content" id="editor" placeholder="">
+                                                        &lt;p&gt;Add your text here&lt;/p&gt;
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end -->
+                                    </div>
+                                    <div class="tab-pane tab-border-none fade" id="nav-codeEditor" role="tabpanel" aria-labelledby="nav-codeEditor-tab">
 
                                         <div class="container-fluid ">
 
-                                            <div class="row mt-5">
-                                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <textarea name="content" id="editor" placeholder="">
-                                                    &lt;p&gt;Add your text here&lt;/p&gt;
-                                                    </textarea>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
+                                                    <div id="editor2">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- end -->
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-codeEditor" role="tabpanel" aria-labelledby="nav-codeEditor-tab">
-
-                                    <div class="container-fluid ">
-
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
-                                                <div id="editor2">
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <!-- end -->
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-participants" role="tabpanel" aria-labelledby="nav-participants-tab">
+                                    <div class="tab-pane tab-border-none fade" id="nav-participants" role="tabpanel" aria-labelledby="nav-participants-tab">
 
-                                    <div class="container-fluid partDiv">
-                                        <div class="row mt-5">
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                            <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div><div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
-                                            <p>Student Name</p>
-                                                <a href="#" class="muteIcon text-success">
-                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="vidIcon">
-                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                            </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end -->
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-googleDocs" role="tabpanel" aria-labelledby="nav-googleDocs-tab">
-
-                                    <div class="container-fluid ">
-
+                                        <div class="container-fluid partDiv">
                                             <div class="row mt-5">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
-                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/docs.png')}}" alt="" >
-                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
-                                                    <button class="mt-2 schedule-btn">
-                                                        Launch Google Docs <i class="fa fa-arrow-right"></i>
-                                                    </button>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                   <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
-                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/sheets.png')}}" alt="" >
-                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
-                                                    <button class="mt-2 schedule-btn">
-                                                        Launch Google Sheets <i class="fa fa-arrow-right"></i>
-                                                    </button>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 text-center  ">
-                                                    <img class="mt-2 w-50" src="{{asset('assets/images/ico/slides.png')}}" alt="" >
-                                                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur amet molestiae.</p>
-                                                    <button class="mt-2 schedule-btn">
-                                                        Launch Google Slides <i class="fa fa-arrow-right"></i>
-                                                    </button>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div><div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
+                                                </div>
+                                                <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                                   <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                                   <p>Student Name</p>
+                                                    <a href="#" class="muteIcon text-success">
+                                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                   </a>
+                                                   <a href="#" class="vidIcon">
+                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                   </a>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <!-- end -->
                                     </div>
-                                    <!-- end -->
-                                </div>
-                                <div class="tab-pane tab-border-none fade" id="nav-fileShare" role="tabpanel" aria-labelledby="nav-fileShare-tab">
-                                    <div class="container-fluid ">
+                                    <div class="tab-pane tab-border-none fade" id="nav-fileShare" role="tabpanel" aria-labelledby="nav-fileShare-tab">
+                                        <div class="container-fluid ">
 
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -2485,6 +2452,12 @@ function endclass(){
 
 }
 
+$(".muteIcon").click(function(){
+    $(this).toggleClass("text-success");
+})
+$(".vidIcon").click(function(){
+    $(this).toggleClass("text-success");
+})
 </script>
 
 
