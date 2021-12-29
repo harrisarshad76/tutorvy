@@ -332,6 +332,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
 
     //Course CRUD
     Route::get('/course',[TutorCourseController::class,'index'])->name('tutor.course');
+    Route::get('/course/{id}/course-view',[TutorCourseController::class,'courseView'])->name('tutor.course.courseView');
     Route::get('/addcourse', [TutorCourseController::class,'create'])->name('tutor.addcourse');
 
     Route::post('/srtorecourse', [TutorCourseController::class,'store'])->name('tutor.storecourse');
@@ -340,7 +341,7 @@ Route::group(['prefix' => '/tutor','middleware' => ['auth','tutor']],function ()
     Route::post('/course/{id}/update', [TutorCourseController::class,'update'])->name('tutor.course.update');
 
     Route::get('/courseClass',[TutorCourseController::class,'start_course_class'])->name('tutor.start_course_class');
-    
+
     //Profile Routes
     Route::get('/profile',[ProfileController::class,'index'])->name('tutor.profile');
     Route::get('/profile-view/{id}',[ProfileController::class,'profile'])->name('tutor.profileView');

@@ -557,6 +557,9 @@ height:25px;
                                         <a class="nav-item nav-link" id="nav-codeEditor-tab" data-toggle="tab" href="#nav-codeEditor" role="tab" aria-controls="nav-codeEditor" aria-selected="false">
                                             Code Editor
                                         </a>
+                                        <a class="nav-item nav-link" id="nav-participants-tab" data-toggle="tab" href="#nav-participants" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
+                                            Participants
+                                        </a>
                                         <!-- <a class="nav-item nav-link" id="nav-googleDocs-tab" data-toggle="tab" href="#nav-googleDocs" role="tab" aria-controls="nav-googleDocs" aria-selected="false">
                                             Google Docs
                                         </a> -->
@@ -716,6 +719,173 @@ height:25px;
                                             <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
                                                 <div id="editor2">
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end -->
+                                </div>
+                                <div class="tab-pane tab-border-none fade" id="nav-participants" role="tabpanel" aria-labelledby="nav-participants-tab">
+
+                                    <div class="container-fluid partDiv">
+                                        <div class="row mt-5">
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                            <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div><div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
+                                            </div>
+                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                                            <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                            <p>Student Name</p>
+                                                <a href="#" class="muteIcon text-success">
+                                                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="vidIcon">
+                                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                            </a>
                                             </div>
                                         </div>
                                     </div>
