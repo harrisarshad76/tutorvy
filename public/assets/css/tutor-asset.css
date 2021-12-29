@@ -3333,3 +3333,11 @@ select#paymentMethod option[value="others"] {
 .dataTables_filter label {
     font-weight: 700 !important;
 }
+
+th {
+    border-top: 1px solid #dddddd !important;
+    border-bottom: 1px solid #dddddd !important;
+}
+
+
+/*Data table Style*/
