@@ -118,6 +118,11 @@
                                     All Classes
                                     <span class="counter-text bg-primary"> {{ count($classes) }} </span>
                                 </a>
+                                <a class="nav-item nav-link " id="nav-course-tab" data-toggle="tab" href="#nav-course"
+                                    role="tab" aria-controls="nav-course" aria-selected="true">
+                                    Course Classes
+                                    <span class="counter-text bg-primary"> 5 </span>
+                                </a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                     role="tab" aria-controls="nav-profile" aria-selected="false">
                                     Delivered Classes
@@ -297,6 +302,29 @@
                                                         </td>
                                                     </tr>
                                                 @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane tab-border-none fade" id="nav-course" role="tabpanel"
+                                aria-labelledby="nav-course-tab">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table table-bordered ">
+                                            <thead>
+                                                <tr
+                                                    style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
+                                                    <th scope="col">Tutor</th>
+                                                    <th scope="col">Subject</th>
+                                                    <th scope="col">Plan</th>
+                                                    <th scope="col">Days</th>
+                                                    <th scope="col">Nearest Time</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                             </tbody>
                                         </table>
                                     </div>

@@ -241,7 +241,7 @@
                                                                 @if($course->enrolled != null && $course->enrolled != '[]' && $course->enrolled != '' )
                                                                     @foreach($course->enrolled as $en)
                                                                         @if($en->plan == 1)
-                                                                            <span style="display:block ;" class="bg-color-apporve3"> Enrolled</span>
+                                                                            <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
                                                                         @else
                                                                             <div class="col-md-12 ">
                                                                                 <button class="schedule-btn w-100 mt-4"

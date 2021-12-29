@@ -2584,6 +2584,15 @@ select#paymentMethod option[value="others"] {
     text-align: center;
 }
 
+.bg-color-apporve4 {
+    background-color: #A7E1C7;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
 .bg-bookings {
     background: #FBFBFB;
     border-radius: 12px;

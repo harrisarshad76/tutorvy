@@ -344,7 +344,7 @@ width:22px;
                                                                 Start Learning
                                                             </a>
                                                         @else
-                                                            <span style="display:block ;" class="bg-color-apporve3"> Enrolled</span>
+                                                            <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
                                                         @endif
                                                         
                                                     </div>
