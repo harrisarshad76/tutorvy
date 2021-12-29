@@ -299,6 +299,12 @@ width:22px;
                     </p>
                     <div class="row mb-5">
                         @foreach ($tutor->course as $course)
+                            <?php $enrolled = false; ?>
+                            @foreach($myenrollements as $enrolled)
+                                @if($course->id == $enrolled->course_id)
+                                    <?php $enrolled = true; ?>
+                                @endif
+                            @endforeach
                             @if($course->status == 1 )
                                 <div class="col-md-4">
                                     <div class="card">
@@ -333,9 +339,14 @@ width:22px;
                                                                     {{$course->title}}
                                                             </span>
                                                         </div>
-                                                        <a href="{{route('course.enroll',[$course->id])}}" class="mt-3 w-100 schedule-btn mb-3 text-center no-decor">
-                                                            Start Learning
-                                                        </a>
+                                                        @if($enrolled == false)
+                                                            <a href="{{route('course.enroll',[$course->id])}}" class="mt-3 w-100 schedule-btn mb-3 text-center no-decor">
+                                                                Start Learning
+                                                            </a>
+                                                        @else
+                                                            <span style="display:block ;" class="bg-color-apporve3"> Enrolled</span>
+                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </div>

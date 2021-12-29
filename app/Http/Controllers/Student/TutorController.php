@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\General\Teach;
 use App\Models\Admin\Subject;
 use App\Models\Userdetail;
+use App\Models\CourseEnrollment;
 use App\Models\General\ViewTutorData;
 use DB;
 use App\Models\Booking;
@@ -134,8 +135,10 @@ class TutorController extends Controller
     public function show ($id)
     {
         $tutor = User::with(['education','professional','teach','course'])->find($id);
+
+        $myenrollements = CourseEnrollment::where('user_id',\Auth::user()->id)->get();
         $delivered_classes = Booking::where('booked_tutor',$id)->where('status',5)->count();
-        return view('student.pages.tutor.profile',compact('tutor','delivered_classes'));
+        return view('student.pages.tutor.profile',compact('tutor','delivered_classes','myenrollements'));
     }
 
 }

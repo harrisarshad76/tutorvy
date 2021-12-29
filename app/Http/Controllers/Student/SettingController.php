@@ -347,9 +347,9 @@ class SettingController extends Controller
     }
     public function courseDetails($id){
 
-        $course = Course::with('outline')->where('status',1)->where('id',$id)->first();
+        $course = Course::with(['outline','enrolled'])->where('status',1)->where('id',$id)->first();
         $commission = DB::table("sys_settings")->first();
-
+        
         $basic_comm = $commission->commission / 100 * $course->basic_price;
         // Basic Classes
         $basic_classes = array();
