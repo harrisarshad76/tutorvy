@@ -211,7 +211,7 @@
                                                     {{$delivered_count}}
                                                 </p>
                                                 <p class="class-booking mt-4">
-                                                    Delivered classes
+                                                    Completed classes
                                                 </p>
                                             </div>
                                             <div class="iconside">
@@ -235,7 +235,7 @@
                                             </div>
                                             <div class="iconside">
                                                 <img class="card-ico1" src="{{asset('assets/images/ico/red-ico.png')}}"
-                                                    alt="red-ico">
+                                                    alt="red-ico" style="width:31px;height:26px;">
                                             </div>
                                         </div>
                                     </a>

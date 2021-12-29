@@ -114,6 +114,36 @@
 }
 
 
+/*Google Sign in button Customization*/
+
+.abcRioButtonContentWrapper {
+    background: #DF615C;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #DF615C;
+}
+
+.abcRioButtonContentWrapper:hover {
+    color: #DF615C;
+    border-color: #DF615C;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.abcRioButtonLightBlue {
+    background-color: transparent !important;
+}
+
+.abcRioButton {
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0%) !important;
+    background-color: transparent !important;
+}
+
+
+/*Google Sign in button Customization*/
+
+
 /* sroll bar */
 
 
