@@ -378,9 +378,8 @@ class CourseController extends Controller
         for($i = 0 ;$i < sizeof($request->basic_days) ; $i++){
             for($d = 0 ; $d < sizeof($days) ; $d++){
                 if($days[$d]['id'] == $request->basic_days[$i]){
+                    
                     $date = Carbon::parse($start_date);
-                  
-                       
                     // If $date is Monday, return $date. Otherwise, add days until next Monday.
                     $date = $date->is($days[$d]['day']) == 1 ? $date : $date->next($days[$d]['day']);
                     $dd = $date;
@@ -433,9 +432,7 @@ class CourseController extends Controller
                                 $courseclass->save();
                             }
                         }
-
                     }
-
                 }
             }
         }
