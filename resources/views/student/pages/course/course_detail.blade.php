@@ -113,11 +113,16 @@
                                             <p class="heading-fifth heading-fifth-0">
                                                 Next batch is starting from <br />
                                                 <span class="paragraph-text-1">
-                                                    25 April, 2021
+                                                <?php 
+                                            $date= strtotime($course->start_date);
+                                            $date = date('d M,Y', $date);
+                                        ?>
+                                        {{$date}}
                                                 </span>
                                             </p>
                                         </div>
                                     </div>
+                                    
                                     <h3 class="mt-4">About course</h3>
                                     <p class="paragraph-text-2 mt-2 pb-4">
                                         {{ $course->about }}</p>
@@ -233,13 +238,20 @@
                                                                         ${{ $course->basic_price ?? 0 }}
                                                                     </div>
                                                                 </div>
-                                                                    <div class="col-md-12 ">
-                                                                        <button class="schedule-btn w-100 mt-4"
-                                                                            data-toggle="modal" data-target="#payModel"
-                                                                            onclick="pay_now({{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy
-                                                                            Now</button>
-                                                                    </div>
-                                                              
+                                                                @if($course->enrolled != null && $course->enrolled != '[]' && $course->enrolled != '' )
+                                                                    @foreach($course->enrolled as $en)
+                                                                        @if($en->plan == 1)
+                                                                            <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
+                                                                        @else
+                                                                            <div class="col-md-12 ">
+                                                                                <button class="schedule-btn w-100 mt-4"
+                                                                                    data-toggle="modal" data-target="#payModel"
+                                                                                    onclick="pay_now({{ $course->id }},{{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy Now
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -570,7 +582,7 @@
                                                                         <div class="col-md-12 ">
                                                                             <button class="schedule-btn w-100 mt-4"
                                                                                 data-toggle="modal" data-target="#payModel"
-                                                                                onclick="pay_now({{ $course->standard_duration }},{{ $course->standard_class_start_time }},{{ $course->standard_class_end_time }},{{ $course->standard_price }},{{ $standard_comm }},2)">Buy
+                                                                                onclick="pay_now({{ $course->id }},{{ $course->standard_duration }},{{ $course->standard_class_start_time }},{{ $course->standard_class_end_time }},{{ $course->standard_price }},{{ $standard_comm }},2)">Buy
                                                                                 Now</button>
                                                                         </div>
                                                                     </div>
@@ -903,7 +915,7 @@
                                                                         <div class="col-md-12 ">
                                                                             <button class="schedule-btn w-100 mt-4"
                                                                                 data-toggle="modal" data-target="#payModel"
-                                                                                onclick="pay_now({{ $course->advance_duration }},{{ $course->advance_class_start_time }},{{ $course->advance_class_end_time }},{{ $course->advance_price }},{{ $advance_comm }},3)">Buy
+                                                                                onclick="pay_now({{ $course->id }},{{ $course->advance_duration }},{{ $course->advance_class_start_time }},{{ $course->advance_class_end_time }},{{ $course->advance_price }},{{ $advance_comm }},3)">Buy
                                                                                 Now</button>
                                                                         </div>
                                                                     </div>
@@ -1258,34 +1270,10 @@
                                 <h3>Payment Method</h3>
                             </div>
                             <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img src="{{ asset('assets/images/payment-icon/paypal2.png') }}"
-                                                class="w-50" alt="">
-
-                                            <span class="round">
-                                                <input id="checkbox1" name="paytype" onclick="paymentMethod(this.value)"
-                                                    class="radio-custom" value="paypal" type="radio" {{$defaultPay == null ? '' : ($defaultPay->method == 'paypal' ? 'checked' : '') }}>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="paypal-button-container"></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img src="{{ asset('assets/images/payment-icon/skrill.png') }}"
-                                                class="w-50" alt="">
-
-                                            <span class="round">
-                                                <input id="checkbox2" name="paytype" onclick="paymentMethod(this.value)"
-                                                    value="skrill" type="radio" {{$defaultPay == null ? '' : ($defaultPay->method == 'skrill' ? 'checked' : '') }}>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -1302,7 +1290,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 text-right mt-3" id="show_pay_btn">
+                            <!-- <div class="col-md-12 text-right mt-3" id="show_pay_btn">
 
                                 <form action="{{route('student.course.payment',[$course->id])}}" id="payment" method="post" target="_blank">
 
@@ -1314,7 +1302,7 @@
                                     <input type="submit" class="btn btn-primary" value="Pay now">
 
                                 </form>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="mt-4 mb-2" style="text-align: right;">
@@ -1329,13 +1317,18 @@
 @section('scripts')
 
 <script>
-    function pay_now(duration, time, time_end, price, comm,plan) {
+    function pay_now(course_id , duration, time, time_end, price, comm,plan) {
 
         $("#class_time").html(duration + " Weeks")
         $("#price").html("$" + price)
         $("#commission").html("$" + comm)
         let total = comm + price
+        let price_calcualtion = comm;
+
         $("#total_price").html("$" + total)
+
+        let total_price = parseFloat(total);
+        total_price = total_price.toString()
 
         var amount = "<input type='hidden' name='amount' value='" + total + "' />";
         $("#payment #amount").html(amount);
@@ -1387,6 +1380,104 @@
                 $("#courseTime").append(html);
         }
 
+        $("#paypal-button-container").html('');
+        paypal.Button.render({
+                    // selection for sandbox or production
+                    env: 'sandbox', // sandbox | production
+                    // PayPal Client IDs, these are the example defaults - replace with your own
+                    client: {
+                        sandbox: "{{ Config::get('paypal')['sandbox']['client_id'] }}",
+                        production: '<insert production client id>'
+                    },
+                    // Show the buyer a 'Pay Now' button in the checkout flow
+                    commit: true,
+                    // payment() is called when the button is clicked
+                    payment: function(data, actions) {
+                        // Make a call to the REST api to create the payment
+                        return actions.payment.create({
+                            transactions: [{
+                                amount: {
+                                    total: total_price,
+                                    currency: 'USD'
+                                },
+                                description: 'Deposit Money',
+                                payment_options: {
+                                    allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+                                },
+                            }]
+                        });
+                        
+                    },
+                    onAuthorize: function(data, actions) {
+                        // Make a call to the REST api to execute the payment
+                        return actions.payment.execute().then(function() {
+                            // If the transaction is successful on Paypal, you can then Post to a script to run actions on your site like emailing the user etc
+                            return actions.request.post("{{route('student.payment-success')}}", {
+                                _token: "{{csrf_token()}}",
+                                paymentID: data.paymentID,
+                                payerID: data.payerID,
+                                amount: price,
+                                method: 'paypal',
+                                type_id:course_id,
+                                type:'course_booking',
+                                plan:plan,
+                                service_fee:price_calcualtion
+                            }).then(function(response) {
+                                if(response.status == 200) {
+                                    toastr.success(response.message,{
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                    window.location.href = "{{ route('student.courses') }}";
+
+                                } else if(response.status == 400) {
+                                        toastr.error(response.message,{
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+
+                                }
+
+                            });
+                        });
+
+                    },
+                    onCancel: function(data, actions) {
+                        // Show an alert if user cancels
+                        // window.alert('Canceled by user');
+                        toastr.error('Payment Cancelled!',{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    },
+                    onError: function(err) {
+                        // Show an alert with error
+                        // window.alert('Error: ' + err);
+                        toastr.error('Error: ' +err,{
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    },
+                    style: {
+                        // layout:  'vertical',
+                        size:    'small',
+                        color:   'white',
+                        shape:   'rect',
+                        label:   'paypal',
+                        tagline: 'false',
+                        height:     45
+                    }
+
+
+                }, '#paypal-button-container');
 
     }
 

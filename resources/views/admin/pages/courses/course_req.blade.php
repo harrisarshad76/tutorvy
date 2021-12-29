@@ -76,7 +76,11 @@
                                 <p class="heading-fifth heading-fifth-0">
                                     Next batch is starting from <br />
                                     <span class="paragraph-text-1">
-                                        25 April, 2021
+                                    <?php 
+                                            $date= strtotime($course->start_date);
+                                            $date = date('d M,Y', $date);
+                                        ?>
+                                        {{$date}}
                                     </span>
                                 </p>
                             </div>
@@ -113,7 +117,7 @@
                                                 <span class="progress-bar"></span>
                                             </span>
                                             <div class="progress-value">
-                                                <span>5</span>
+                                                <span>{{$course->seats}}</span>
                                                 <span>Seats Left</span>
                                             </div>
                                         </div>

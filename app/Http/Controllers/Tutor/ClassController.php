@@ -16,6 +16,9 @@ use App\Models\ClassroomLogs;
 use DateTime;
 use DateTimeZone;
 use Carbon\Carbon;
+use App\Models\CourseClass;
+use App\Models\CourseEnrollment;
+use App\Models\Course;
 
 class ClassController extends Controller
 {
@@ -48,8 +51,20 @@ class ClassController extends Controller
         ->where('booked_tutor',Auth::user()->id)
         ->whereIn('status',[5])->get();
 
-        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes'));
+
+        // $courses_enrolled = CourseEnrollment::where('user_id',\Auth::user()->id)->get();
+        $courses_enrolled = Course::where('user_id',\Auth::user()->id)->where('status',1)->get();
+
+        foreach($courses_enrolled as $course){
+            $class = CourseClass::where('course_id',$course->id)->where('class_status','!=',2)->orderBy('class_date','asc')->first();
+            $classroom = Classroom::where('course_class_id',$class->id)->first();
+            $course->classroom = $classroom;
+            $course->enClass = $class;
+        }
+
+        return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes','courses_enrolled'));
     }
+
 
     public function saveClassLogs(Request $request) {
 

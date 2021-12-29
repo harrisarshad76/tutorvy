@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\General\ClassTable;
-
+use App\Models\CourseClass;
 
 class SettingController extends Controller
 {
@@ -127,9 +127,20 @@ class SettingController extends Controller
 
     public function join_class($class_room_id){
         $class = Classroom::where('classroom_id',$class_room_id)->first();
-        $booking = Booking::where('id',$class->booking_id)->first();
+
+        $course = '';
+        $booking = '';
+        $cs_en = '';
+        if($class->type == 'course_class'){
+            $course = Course::where('id',$class->course_id)->first();
+            $cs_en = CourseClass::where('id',$class->course_class_id)->first();
+            $course->class = $cs_en;
+        }else{
+            $booking = Booking::where('id',$class->booking_id)->first();
+        }
+
         $user = User::where('id',\Auth::user()->id)->first();
-        return view('student.pages.classroom.classroom',compact('class','user','booking'));
+        return view('student.pages.classroom.classroom',compact('class','user','booking','course'));
     }
 
     public function change_password(Request $request) {
@@ -347,9 +358,9 @@ class SettingController extends Controller
     }
     public function courseDetails($id){
 
-        $course = Course::with('outline')->where('status',1)->where('id',$id)->first();
+        $course = Course::with(['outline','enrolled'])->where('status',1)->where('id',$id)->first();
         $commission = DB::table("sys_settings")->first();
-
+        
         $basic_comm = $commission->commission / 100 * $course->basic_price;
         // Basic Classes
         $basic_classes = array();

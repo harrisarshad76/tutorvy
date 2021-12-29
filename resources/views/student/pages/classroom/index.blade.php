@@ -118,6 +118,11 @@
                                     All Classes
                                     <span class="counter-text bg-primary"> {{ count($classes) }} </span>
                                 </a>
+                                <a class="nav-item nav-link " id="nav-course-tab" data-toggle="tab" href="#nav-course"
+                                    role="tab" aria-controls="nav-course" aria-selected="true">
+                                    Course Classes
+                                    <span class="counter-text bg-primary"> 5 </span>
+                                </a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                     role="tab" aria-controls="nav-profile" aria-selected="false">
                                     Delivered Classes
@@ -297,6 +302,54 @@
                                                         </td>
                                                     </tr>
                                                 @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane tab-border-none fade" id="nav-course" role="tabpanel"
+                                aria-labelledby="nav-course-tab">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table table-bordered ">
+                                            <thead>
+                                                <tr
+                                                    style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
+                                                    <th scope="col">Tutor</th>
+                                                    <th scope="col">Subject</th>
+                                                    <th scope="col">Plan</th>
+                                                    <th scope="col">Class Time</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($courses_enrolled as $class)
+                                                    <td class="pt-4">
+                                                        {{ $class->detail->tutor_name}}
+                                                    </td>
+                                                    <td class="pt-4">{{$class->detail->subject_name}}</td>
+                                                    <td class="pt-4">
+                                                        @if($class->enClass->class_plan == 1 )
+                                                            Basic
+                                                        @elseif($class->enClass->class_plan == 2)
+                                                            Standard
+                                                        @else
+                                                            Advanced
+                                                        @endif
+                                                    </td>
+                                                    <td class="pt-4">
+                                                        Pending
+                                                    </td>
+                                                    <td class="pt-4">
+                                                        Pending
+                                                    </td>
+                                                    
+                                                    <td class="pt-4">
+                                                        <a onclick="joinClass(`{{$class->classroom->classroom_id}}`)" class="schedule-btn"> Join Class </a>
+                                                    </td>
+
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

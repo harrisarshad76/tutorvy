@@ -7,6 +7,7 @@ use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\General\NotifyController;
 use App\Models\Booking;
 use App\Models\Classroom;
+use App\Models\CourseClass;
 use App\Models\User;
 use App\Models\TutorSlots;
 use App\Models\Activitylogs;
@@ -74,10 +75,10 @@ class BookingController extends Controller
 
         $completed = Booking::with('tutor')->where('user_id',Auth::user()->id)->status(5)->get();
         $cancelled = Booking::with('tutor')->where('user_id',Auth::user()->id)->whereIn('status',[3,4,6])->get();
-
+        
         $commission = DB::table("sys_settings")->first();
         $defaultPay = DB::table('payment_methods')->where('user_id',Auth::user()->id)->where('default',1)->first();
-
+        
         return view('student.pages.booking.index',compact('confirmed','pending','completed','cancelled','all','commission','defaultPay'));
     }
 
@@ -883,6 +884,7 @@ class BookingController extends Controller
             $booking = '';
             $subject = '';
             $course = '';
+            $message = '';
             if($request->type == 'booking_class'){
                 $booking = Booking::where('id',$request->type_id)->first();
                 if($booking != null){
@@ -891,8 +893,19 @@ class BookingController extends Controller
                     $booking->service_fee =  $request->service_fee;
                     $booking->save();
                 }
-            }else if($request->type == 'course_enrollment'){
+            }else if($request->type == 'course_booking'){
+                $course = Course::where('id',$request->type_id)->first();
 
+                CourseEnrollment::create([
+                    'user_id' => Auth::user()->id,
+                    'course_id' => $course->id,
+                    'plan' => $request->plan,
+                    'price' => $request->amount,
+                    'service_fee' => $request->service_fee,
+                    'status' => 1
+                ]);
+                $course->seats = $course->seats - 1;
+                $course->save();
             }
             Payments::create([
                 'user_id' => Auth::user()->id,
@@ -905,22 +918,24 @@ class BookingController extends Controller
                 'service_fee' => $request->service_fee,
                 'method'  => $request->method
             ]);
+            if($request->type == 'booking_class'){
+                $classroom_id = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                    mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                    mt_rand( 0, 0xffff ),
+                    mt_rand( 0, 0x0C2f ) | 0x4000,
+                    mt_rand( 0, 0x3fff ) | 0x8000,
+                    mt_rand( 0, 0x2Aff ), mt_rand( 0, 0xffD3 ), mt_rand( 0, 0xff4B )
+                );
 
-            $classroom_id = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-                mt_rand( 0, 0xffff ),
-                mt_rand( 0, 0x0C2f ) | 0x4000,
-                mt_rand( 0, 0x3fff ) | 0x8000,
-                mt_rand( 0, 0x2Aff ), mt_rand( 0, 0xffD3 ), mt_rand( 0, 0xff4B )
-            );
+                Classroom::create([
+                    'booking_id' => $booking->id ?? null,
+                    'classroom_id' => $classroom_id
+                ]);
 
-            Classroom::create([
-                'booking_id' => $booking->id ?? null,
-                'classroom_id' => $classroom_id
-            ]);
-
-           
-
+                $message = 'Payment processed. Booking approved now u can join class on scheduled time.';
+            }else{
+                $message = 'Payment processed. Course Enrolled now u can join class on scheduled time.';
+            }
 
             $id = Auth::user()->id;
             $name = Auth::user()->first_name . ' ' . Auth::user()->last_name;
@@ -931,29 +946,40 @@ class BookingController extends Controller
             $admin = User::where('role',1)->first();
 
             $notification = new NotifyController();
+            $slug = '';
+            $desc = '';
+            if($booking != null){
+                $slug =  URL::to('/') . '/tutor/booking-detail/' . $booking->id ;
+                $desc =  $name . ' Paid for Class of ' . $subject->name ;
+                $admin_slug =  URL::to('/') . '/admin/booking-detail/' . $booking->id ;
+            }elseif($course != null){
+                $slug =  URL::to('/') . '/tutor/course-detail/' . $course->id ;
+                $desc =  $name . ' Paid for Course of ' . $course->title ;
+                $admin_slug =  URL::to('/') . '/admin/course-detail/' . $course->id ;
+            }
             // $slug = ($booking != null) ? URL::to('/') . '/tutor/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
-            $slug =  URL::to('/') . '/tutor/booking-detail/' . $booking->id ;
+            // $slug =  URL::to('/') . '/tutor/booking-detail/' . $booking->id ;
 
             $type = ($booking != null) ? 'booking_confirmed' : 'course_enrlled';
             $title = ($booking != null) ? 'Booking Confirmed' : 'Course Enrolled';
             $icon = 'fas fa-tag';
             $class = 'btn-success';
             // $desc = ($booking != null) ? $name . ' Paid for Class of ' . $subject->name : $name.' Paid for Course of '. $course->title;
-            $desc =  $name . ' Paid for Class of ' . $subject->name ;
+            // $desc =  $name . ' Paid for Class of ' . $subject->name ;
 
             $pic = Auth::User()->picture;
             $notification->GeneralNotifi($booking->booked_tutor ?? $course->user_id,$slug,$type,$title,$icon,$class,$desc,$pic);
 
             // send to admin
             // $admin_slug = ($booking != null) ? URL::to('/') . '/admin/booking-detail/' . $booking->id : URL::to('/') . '/tutor/course-detail/' . $course->id;
-            $admin_slug =  URL::to('/') . '/admin/booking-detail/' . $booking->id ;
+            // $admin_slug =  URL::to('/') . '/admin/booking-detail/' . $booking->id ;
 
             $notification->GeneralNotifi($admin->id,$admin_slug,$type,$title,$icon,$class,$desc,$pic);
 
 
             return response()->json([
                 'status'=>'200',
-                'message' => "Payment processed. Booking approved now u can join class on scheduled time."
+                'message' => $message,
             ]);
         }
         catch(Exception $e){

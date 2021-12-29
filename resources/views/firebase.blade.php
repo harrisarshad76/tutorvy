@@ -32,7 +32,6 @@ messaging.onMessage((payload) => {
     var unread_msg_count = payload.data.unread_msg_count;
     var rec_msg_count = payload.data.rec_msg_count;
 
-
     var slug = payload.data.slug;
     var type = payload.data.type;
     var pic = payload.data.pic;

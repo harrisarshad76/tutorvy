@@ -2584,6 +2584,15 @@ select#paymentMethod option[value="others"] {
     text-align: center;
 }
 
+.bg-color-apporve4 {
+    background-color: #A7E1C7;
+    border-radius: 4px;
+    padding: 3px 12px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
 .bg-bookings {
     background: #FBFBFB;
     border-radius: 12px;
@@ -3259,3 +3268,61 @@ select#paymentMethod option[value="others"] {
 
 
 /*right side scroll only*/
+
+
+/*Course Class*/
+
+
+/*Course Participants*/
+
+.partDiv {
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.partDiv::-webkit-scrollbar {
+    display: none;
+}
+
+.partThumb {
+    /* border: 1px solid red; */
+    border-radius: 9px;
+}
+
+.partImg {
+    height: 200px;
+    width: 100%;
+}
+
+.muteIcon {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #fff;
+}
+
+.vidIcon {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    color: #fff;
+}
+
+.muteIcon .fa,
+.vidIcon .fa {
+    font-size: 18px;
+}
+
+
+/*Course Participants*/
+
+
+/*Course Class*/

@@ -730,12 +730,27 @@ height:25px;
 @section('content')
  <!-- top Fixed navbar End -->
  <section>
+   
+    @if($class->type == NULL)
     <input type="hidden" id="class_room_id" value="{{$class->id}}">
     <input type="hidden" id="class_date" value="{{$booking->class_date}}">
     <input type="hidden" id="class_time" value="{{$booking->class_time}}">
     <input type="hidden" id="class_total_duration" value="{{$booking->duration}}">
+    <input type="hidden" id="class_user_name" value="{{$user->first_name}} {{$user->last_name}}">
+    <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
+    <input type="hidden" id="class_end_time" value="{{$booking->class_booked_till}}">
 
-     <input type="hidden" id="sbooking_id" value="{{$class->booking_id}}">
+
+    @else
+    <input type="hidden" id="class_room_id" value="{{$class->id}}">
+    <input type="hidden" id="class_date" value="{{$course->class->class_date}}">
+    <input type="hidden" id="class_time" value="{{$course->class->class_time}}">
+    <input type="hidden" id="class_total_duration" value="1">
+    <input type="hidden" id="class_user_name" value="{{\Auth::user()->first_name}} {{\Auth::user()->last_name}}">
+    <input type="hidden" id="class_end_time" value="{{$course->class->class_end_time}}">
+
+    @endif
+
 <!-- <div class="overlayCam container-fluid">
     <div class="row text-center text-white">
         <div class="col-md-12">
@@ -1782,12 +1797,15 @@ window.onload = function() {
     xhr.send( JSON.stringify({"format": "urls"}) );
     }
     var roomid = '{{$class->classroom_id}}';
-    var fullName = '{{$user->first_name}} {{$user->last_name}}';
+    var fullName = $('#class_user_name').val();
     var timer = new Timer();
     var deadline = '00:05:00'; 
     var resced = '00:15:00'; 
-    var class_duration = '{{$booking->duration}} ';
-    var class_end_time = '{{$booking->class_booked_till}} ';
+    var class_duration = $('#class_total_duration').val();
+    var class_id = $('#class_room_id').val();
+    var type = '{{$class->type}}';
+    var class_end_time = $('#class_end_time').val();
+
 
     var todays = new Date();
     var times = todays.getHours() + ":" + todays.getMinutes() + ":" + todays.getSeconds();

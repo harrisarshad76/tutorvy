@@ -28,10 +28,10 @@ class CourseController extends Controller
     public function index()
     {
         if(Auth::user()->role == 1):
-            $approved_courses = Course::whereIn('status',[0,2])->get();
+            $approved_courses = Course::whereIn('status',[1,3])->get();
             $requested_courses = Course::where('status',0)->get();
         else:
-            $approved_courses = Course::whereIn('status',[0,2])->where('assign_to',Auth::id())->get();
+            $approved_courses = Course::whereIn('status',[1,3])->where('assign_to',Auth::id())->get();
             $requested_courses = Course::where('status',0)->where('assign_to',Auth::id())->get();
         endif;
 

@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends('tutor.layouts.app')
+<link rel="stylesheet" href="{{ asset('assets/css/courseView.css') }}">
 <style>
      .circlechart {
             float: left;
@@ -37,6 +38,14 @@
         .card{
             height:auto !important;
         }
+        .stuList{
+            max-height:387px;
+            overflow-x:hidden;
+            overflow-y:auto;
+        }
+        .stuList::-webkit-scrollbar{
+            display: none;
+        }
 </style>
 @section('content')
  <!--section start  -->
@@ -44,7 +53,7 @@
             <a href="">
                 <a href="./report.html">
                     <h1 class="heading-first mt-5">
-                        < Course </h1>
+                         Course Detail </h1>
                 </a>
             </a>
         </div>
@@ -67,9 +76,9 @@
 
                         @endif
                         <div class="row pb-3 border-bottom mt-1">
-                            <div class="col-md-6">
-                                <p class="heading-fifth heading-fifth-0">
-                                    Next batch is starting from <br />
+                            <div class="col-md-12">
+                                <p class="heading-fifth heading-fifth-0 mt-4">
+                                    Next batch is starting from
                                     <span class="paragraph-text-1">
                                         <?php 
                                             $date= strtotime($course->start_date);
@@ -79,20 +88,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-center mt-2">
-                                <!-- <div id="wrappers">
-
-                                    <div id="demo">
-                                        <div class="circlechart" data-percentage="55">Seats left</div>
-                                    </div>
-                                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                                        crossorigin="anonymous"></script>
-                                    <script src="progresscircle.js"></script>
-                                    <script>
-                                        $('.circlechart').circlechart(); // Initialization
-                                    </script>
-                                </div> -->
+                            <!-- <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-center mt-2">
                                 <div class="progress blue mb-1 mt-4">
                                             <span class="progress-left">
                                                 <span class="progress-bar"></span>
@@ -106,87 +102,299 @@
                                             </div>
                                         </div>
                                         <small class="leftText">Seats Left</small>
-                            </div>
+                            </div> -->
                         </div>
                         <h3 class="mt-4">About course</h3>
-                        <p class="paragraph-text-2 mt-2 pb-4">
-                        {{$course->about}}</p>
-                          <div class="row bg-std-reviews container-center pb-3">
-                            <div class="col-md-6">
-                                <div class="container">
-                                    <div class="row mt-3">
-                                        <div class="col-md-4">
-                                            <img src="{{asset('admin/assets/img/ico/profile-boy.png')}}" alt="image-boy">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <span class="heading-forth ">Harram Laraib</span>
-                                            <p class="paragraph-text ">Student</p>
-                                        </div>
-                                    </div>
+                        <p class="paragraph-text-2 mt-2 mb-0">
+                            {{$course->about}}
+                        </p>
+                        
+                    </div>
+
+                    <div class="row container-center pb-3">
+                        <div class="col-md-8 mt-4">
+                            <h3>Enrolled Students</h3>
+                        </div>
+                        <div class="col-md-4 mt-4 text-right">
+                            <h3> 53 </h3>
+                        </div>
+                    </div>
+                    <div class="row stuList">
+                        
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <span class="view-date mt-3">02 March 2021</span>
-                            </div>
-                            <div class="container-fluid mt-3">
-                                <div class="star-fa1 ml-3 mt-0">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="paragraph-text1">4.0</span>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
                                 </div>
-                                <p class="paragraph-texts mt-2 ml-3">
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at0 its lyout. The
-                                    of using Lorem Ipsum is that it has more-or-less normal distribution of letters.
-                                </p>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
                             </div>
-                            <!-- tutor reply -->
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-11 pt-3 bg-white">
-                                        <div class="container-fluid">
-                                            <span class="heading-fifth">Tutor replied</span>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <img src="{{asset('admin/assets/img/ico/profile-boy.png')}}" alt="image"
-                                                                    class="img-round">
-                                                            </div>
-                                                            <div class="col-md-8 pl-4">
-                                                                <span class="heading-forth">Ali Raza</span>
-                                                                <p class="paragraph-text">Tutor</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <span class="view-date mt-3 mr-3">02 March 2021</span>
-                                                </div>
-                                                <div class="container mt-2">
-                                                    <div class="star-fa1 ml-3 mt-0">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="paragraph-text1">4.0</span>
-                                                    </div>
-                                                    <p class="paragraph-texts col-md-12 mt-2">
-                                                        Thank you for your reply
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                            <img src="http://127.0.0.1:8000/storage/profile/nPLFusrMCq.png" class=" profile-img" alt="" style="height:70px; width:70px;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8 pl-0 pt-1">
+                                    <a href="#">
+                                        <p class=" mb-0 text-dark">  <b>  Azad Chaiwala  </b> </p>
+                                    </a>
+                                    <p class=" mb-0">  Plan: Standard </p>
+
+                                    <p class="mb-0"> <small><img src="http://127.0.0.1:8000/assets/images/ico/location-pro.png" alt="" class=""> Barcelona ,  Pakistan (‫پاکستان‬‎)</small> </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                       
                 </div>
                 <div class="col-md-7">
                     <div class="container-fluid bg-color  pt-4">

@@ -68,7 +68,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="cencel-btn w-auto decoration-none mr-2" href="{{route('student.course-details',[$course->id])}}">
+                                    <a class="cencel-btn w-auto decoration-none mr-2" href="{{route('student.course-details',[$course->course_id])}}">
                                         View Details
                                     </a>
                                     <button class="schedule-btn w-auto">
