@@ -20,9 +20,10 @@ class Classroom extends Model
         'booking_id',
         'course_id',
         'classroom_id',
-
+        'course_class_id',
+        'type'
     ];
-
+    
     public function booking()
     {
         return $this->belongsTo(Booking::class);

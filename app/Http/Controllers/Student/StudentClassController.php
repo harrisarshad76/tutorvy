@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Admin\sys_settings;
-
-
+use App\Models\CourseClass;
+use App\Models\CourseEnrollment;
+use App\Models\Course;
 
 class StudentClassController extends Controller
 {
@@ -31,11 +32,21 @@ class StudentClassController extends Controller
             $class->actual_booking_time =  date("H:i", strtotime($date));
         }
 
-
         $user = User::where('id',Auth::user()->id)->first();
         // return $classes;
         $booked_classes = Booking::with('user')->where('user_id',Auth::user()->id)->where('status',5)->get();
-        return view('student.pages.classroom.index',compact('classes','user','booked_classes'));
+        $courses_enrolled = CourseEnrollment::where('user_id',\Auth::user()->id)->get();
+
+        foreach($courses_enrolled as $course){
+            $detail = Course::where('id',$course->course_id)->first();
+            $class = CourseClass::where('course_id',$course->course_id)->where('class_status','!=',2)->orderBy('class_date','asc')->first();
+            $classroom = Classroom::where('course_class_id',$class->id)->first();
+            $course->classroom = $classroom;
+            $course->enClass = $class;
+            $course->detail = $detail;
+        }
+        // return $courses_enrolled;
+        return view('student.pages.classroom.index',compact('classes','user','booked_classes','courses_enrolled'));
     }
 
     public function saveReview(Request $request) {
