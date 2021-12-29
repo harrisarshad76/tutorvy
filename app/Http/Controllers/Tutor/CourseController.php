@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\General\GeneralController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Booking;
 use App\Models\Course;
 use App\Models\CourseClass;
 use App\Models\Classroom;
@@ -15,6 +16,7 @@ use App\Models\Activitylogs;
 use App\Models\CourseOutline;
 use App\Models\General\ClassTable;
 use Illuminate\Support\Facades\URL;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 
 class CourseController extends Controller
@@ -570,5 +572,15 @@ class CourseController extends Controller
         }
     }
 
+    public function start_course_class(){
+        $class_room_id = 'd0f2c93f-1026-444a-b80a-16e65e0dec15';
+        $class = Classroom::where('classroom_id',$class_room_id)->first();
+        $booking = Booking::where('id',$class->booking_id)->first();
+
+        // $class = Classroom::with('booking')->where('classroom_id',$class_room_id)->first();
+        $user = User::where('id',Auth::user()->id)->first();
+        // dd($class);
+        return view('tutor.pages.courses.courseClassroom',compact('class','user','booking'));
+    }
 
 }
