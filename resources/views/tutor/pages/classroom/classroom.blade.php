@@ -1728,8 +1728,8 @@ connection.onstream = function(event) {
             var otherVideos = document.querySelector('#other-videos');
             var vvhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                 `+event.mediaElement+`
-            </div>
-            `;
+            </div>`;
+            console.log(event.mediaElement);
             otherVideos.appendChild(vvhtml);
         }
     }
