@@ -238,9 +238,9 @@
                                                                         ${{ $course->basic_price ?? 0 }}
                                                                     </div>
                                                                 </div>
-                                                                @if($course->enrolled != null && $course->enrolled != '[]' && $course->enrolled != '' )
+                                                                @if($course_enrollment != null && $course_enrollment != '[]' && $course_enrollment != '' )
                                                                     @foreach($course->enrolled as $en)
-                                                                        @if($en->plan == 1)
+                                                                        @if($course_enrollment->plan == 1)
                                                                             <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
                                                                         @else
                                                                             <div class="col-md-12 ">
