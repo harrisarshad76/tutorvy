@@ -53,18 +53,6 @@
     position:absolute;
     top:0;
 }
-#other-videos2 {
-    position: relative;
-}
-
-#other-videos2 video {
-    width: 100%;
-    margin: 0;
-    border: none;
-    padding: 0;
-    border-radius: 3px;
-  
-}
 
 
 /* Call Video Student End*/
@@ -752,7 +740,7 @@ height:25px;
                                 <div class="tab-pane tab-border-none fade" id="nav-participants" role="tabpanel" aria-labelledby="nav-participants-tab">
 
                                     <div class="container-fluid partDiv">
-                                        <div class="row mt-5" id="other-videos2">
+                                        <div class="row mt-5" id="other-videos">
 
                                             <!--<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
 
@@ -1603,10 +1591,10 @@ connection.onUserStatusChanged = function(event) {
 
         }
         else{
-            if ($('#other-videos2').contents().length == 0){
-                let vhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                <video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video> </div>`;
-                $("#other-videos2").append(vhtml);
+            if ($('#other-videos').contents().length == 0){
+                let vhtml = `<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                <video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video></div>`;
+                $("#other-videos").append(vhtml);
                 $("#main-video").css("width","85%");
             }
         }
