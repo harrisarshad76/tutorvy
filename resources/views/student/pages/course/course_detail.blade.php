@@ -239,18 +239,16 @@
                                                                     </div>
                                                                 </div>
                                                                 @if($course_enrollment != null && $course_enrollment != '[]' && $course_enrollment != '' )
-                                                                    @foreach($course->enrolled as $en)
-                                                                        @if($course_enrollment->plan == 1)
-                                                                            <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
-                                                                        @else
-                                                                            <div class="col-md-12 ">
-                                                                                <button class="schedule-btn w-100 mt-4"
-                                                                                    data-toggle="modal" data-target="#payModel"
-                                                                                    onclick="pay_now({{ $course->id }},{{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy Now
-                                                                                </button>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endforeach
+                                                                    @if($course_enrollment->plan == 1)
+                                                                        <span style="display:block ;" class="bg-color-apporve4"> Enrolled</span>
+                                                                    @else
+                                                                        <div class="col-md-12 ">
+                                                                            <button class="schedule-btn w-100 mt-4"
+                                                                                data-toggle="modal" data-target="#payModel"
+                                                                                onclick="pay_now({{ $course->id }},{{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy Now
+                                                                            </button>
+                                                                        </div>
+                                                                    @endif
                                                                 @else    
                                                                     <div class="col-md-12 ">
                                                                         <button class="schedule-btn w-100 mt-4"
