@@ -1730,11 +1730,9 @@ connection.onstream = function(event) {
             var vvhtml = '<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >' + video + '</div>';
            
             $("#other-videos").append(event.mediaElement);
-            $("#other-videos").find("video").addClass("col-md-3");
-            console.log(event.mediaElement, "console");
-            console.log(otherVideos, "otherViodeo");
-            console.log(vvhtml, "vvHtml");
-            console.log(video, "video");
+            $("#other-videos").find("video").addClass("col-md-3 p-3");
+            $("#other-videos").find("video").css("position","relative");
+            
             // otherVideos.appendChild(vvhtml);
         }
     }
