@@ -251,6 +251,13 @@
                                                                             </div>
                                                                         @endif
                                                                     @endforeach
+                                                                @else    
+                                                                    <div class="col-md-12 ">
+                                                                        <button class="schedule-btn w-100 mt-4"
+                                                                            data-toggle="modal" data-target="#payModel"
+                                                                            onclick="pay_now({{ $course->id }},{{ $course->basic_duration }},{{ $course->basic_class_start_time }},{{ $course->basic_class_end_time }},{{ $course->basic_price }},{{ $basic_comm }},1)">Buy Now
+                                                                        </button>
+                                                                    </div>
                                                                 @endif
                                                             </div>
                                                         </div>
