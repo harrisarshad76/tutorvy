@@ -1729,7 +1729,7 @@ connection.onstream = function(event) {
             var vvhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                 `+event.mediaElement+`
             </div>`;
-            console.log(event.mediaElement);
+            console.log(event.mediaElement, "console");
             otherVideos.appendChild(vvhtml);
         }
     }
