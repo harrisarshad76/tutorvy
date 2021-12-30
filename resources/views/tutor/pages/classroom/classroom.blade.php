@@ -1583,9 +1583,12 @@ connection.onUserStatusChanged = function(event) {
         //     toastr.success(getFullName(pid) + " Joined the class.");
         // }
             if ($('#other-videos').contents().length == 0){
-            let vhtml = `<video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video>`;
-            $("#other-videos").append(vhtml);
-            $("#main-video").css("width","30%");
+                let vhtml = `<video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video>`;
+                $("#other-videos").append(vhtml);
+                $("#main-video").css("width","30%");
+            }
+            else{
+                
             }
        
     });
