@@ -742,18 +742,17 @@ height:25px;
                                     <div class="container-fluid partDiv">
                                         <div class="row mt-5">
 
-                                            <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                                                <div id="other-videos" class="rounded" playsinline autoplay></div>
+                                            <!--<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
 
-                                                <!-- <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
+                                               <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
                                                 <p>Student Name</p>
                                                 <a href="#" class="muteIcon text-success">
                                                         <i class="fa fa-microphone" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="#" class="vidIcon">
                                                         <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                                </a> -->
-                                            </div>
+                                                </a> 
+                                            </div>-->
                                             <!-- <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                                             <img src="{{asset('assets/images/ico/Mute-video.png')}}" class="partImg" alt="">
                                             <p>Student Name</p>
@@ -1583,11 +1582,23 @@ connection.onUserStatusChanged = function(event) {
         // if(fullName != getFullName(pid)){
         //     toastr.success(getFullName(pid) + " Joined the class.");
         // }
-        if ($('#other-videos').contents().length == 0){
+        if(type == null){
+            if ($('#other-videos').contents().length == 0){
             let vhtml = `<video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video>`;
             $("#other-videos").append(vhtml);
             $("#main-video").css("width","30%");
+            }
+
         }
+        else{
+            if ($('#other-videos').contents().length == 0){
+                let vhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                <video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video> </div>`;
+                $("#other-videos").append(vhtml);
+                $("#main-video").css("width","30%");
+            }
+        }
+       
     });
 
     if (!names.length) {

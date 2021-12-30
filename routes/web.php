@@ -586,8 +586,10 @@ Route::get('/tutor-profile/{id}',[FrontTutorController::class,'profileTutor'])->
 
 // Blog
 Route::get('/blog',[GeneralController::class,'blog'])->name('blog');
+
 Route::get('/career',[GeneralController::class,'career'])->name('career');
 Route::get('/knowledge',[GeneralController::class,'knowledge'])->name('knowledge');
+Route::get('/privacy-policy',[GeneralController::class,'privacyPolicy'])->name('privacy-policy');
 /*
 |--------------------------------------------------------------------------
 | Ajax Calls Routes
