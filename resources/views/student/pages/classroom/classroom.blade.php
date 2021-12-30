@@ -2167,7 +2167,8 @@ connection.onopen = function(event) {
 
         // toastr.success(checkConnectionSeq+" Tutor refreshes the window");
         setInterval(function(){ 
-            // location.reload(); }, 5000);
+            // location.reload(); 
+            }, 5000);
         
         $(".tech_weck").removeClass("tech_weck-none");
         $(".callDiv").css("display","none !important");
