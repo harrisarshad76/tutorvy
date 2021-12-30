@@ -53,6 +53,18 @@
     position:absolute;
     top:0;
 }
+#other-videos2 {
+    position: relative;
+}
+
+#other-videos2 video {
+    width: 100%;
+    margin: 0;
+    border: none;
+    padding: 0;
+    border-radius: 3px;
+  
+}
 
 
 /* Call Video Student End*/
@@ -740,7 +752,7 @@ height:25px;
                                 <div class="tab-pane tab-border-none fade" id="nav-participants" role="tabpanel" aria-labelledby="nav-participants-tab">
 
                                     <div class="container-fluid partDiv">
-                                        <div class="row mt-5">
+                                        <div class="row mt-5" id="other-videos2">
 
                                             <!--<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
 
@@ -955,7 +967,7 @@ height:25px;
                         <div class="col-md-12 h-200">
                             <video id="main-video" class="rounded" playsinline autoplay></video>
                             @if($class->type == NULL)
-                            <div id="other-videos" class="rounded" playsinline autoplay></div>
+                                <div id="other-videos" class="rounded" playsinline autoplay></div>
                             @endif
                             <div class="col-md-12 mt-2 mb-2 vid-location vid-btn text-left">
                                 <!-- <button class="btn-danger btn h-35 w-100 pb-0 pt-0 ">End Call</button> -->
@@ -1591,11 +1603,11 @@ connection.onUserStatusChanged = function(event) {
 
         }
         else{
-            if ($('#other-videos').contents().length == 0){
+            if ($('#other-videos2').contents().length == 0){
                 let vhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                 <video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video> </div>`;
-                $("#other-videos").append(vhtml);
-                $("#main-video").css("width","30%");
+                $("#other-videos2").append(vhtml);
+                $("#main-video").css("width","85%");
             }
         }
        
