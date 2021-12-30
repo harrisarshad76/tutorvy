@@ -1582,22 +1582,11 @@ connection.onUserStatusChanged = function(event) {
         // if(fullName != getFullName(pid)){
         //     toastr.success(getFullName(pid) + " Joined the class.");
         // }
-        if(type == null){
             if ($('#other-videos').contents().length == 0){
             let vhtml = `<video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video>`;
             $("#other-videos").append(vhtml);
             $("#main-video").css("width","30%");
             }
-
-        }
-        else{
-            if ($('#other-videos').contents().length == 0){
-                let vhtml = `<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                <video poster="{{asset('assets/images/ico/Mute-video.png')}}"></video></div>`;
-                $("#other-videos").append(vhtml);
-                $("#main-video").css("width","85%");
-            }
-        }
        
     });
 
@@ -1726,10 +1715,23 @@ connection.onstream = function(event) {
         $('#main-video2').show();
     } 
     else {
-        event.mediaElement.controls = false;
-        $("#main-video").css("width","30%");
-        var otherVideos = document.querySelector('#other-videos');
-        otherVideos.appendChild(event.mediaElement);
+        if(type == null){
+            event.mediaElement.controls = false;
+            $("#main-video").css("width","30%");
+            var otherVideos = document.querySelector('#other-videos');
+            otherVideos.appendChild(event.mediaElement);
+        }
+        else{
+
+            event.mediaElement.controls = false;
+            $("#main-video").css("width","85%");
+            var otherVideos = document.querySelector('#other-videos');
+            var vvhtml = ` <div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
+                `+event.mediaElement+`
+            </div>
+            `;
+            otherVideos.appendChild(vvhtml);
+        }
     }
     // connection.onUserStatusChanged(event);
 };
@@ -2183,7 +2185,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
         // video.setAttribute('data-streamid', event.streamid);
         saveClassLogs();
         connection.socket.on('disconnect', function() {
-            location.reload();
+            // location.reload();
         });
     });
     
