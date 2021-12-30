@@ -1727,7 +1727,7 @@ connection.onstream = function(event) {
             $("#main-video").css("width","85%");
             var otherVideos = document.querySelector('#other-videos');
             var vvhtml = `<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
-                <h1>Hun g</h1>
+                `+event.mediaElement+`
             </div>`;
             $("#other-videos").append(vvhtml);
             console.log(event.mediaElement, "console");
