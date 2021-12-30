@@ -359,6 +359,8 @@ class SettingController extends Controller
     public function courseDetails($id){
 
         $course = Course::with(['outline','enrolled'])->where('status',1)->where('id',$id)->first();
+        $course_enrollment = CourseEnrollment::where('course_id',$course->id)->where('user_id',Auth::user()->id)->first();
+
         $commission = DB::table("sys_settings")->first();
         
         $basic_comm = $commission->commission / 100 * $course->basic_price;
@@ -436,7 +438,7 @@ class SettingController extends Controller
         // ddd($defaultPay);
         $course->advance_classes = $advance_classes;
         // return $course;
-        return view('student.pages.course.course_detail',compact('course','basic_comm','standard_comm','advance_comm','commission','defaultPay'));
+        return view('student.pages.course.course_detail',compact('course_enrollment','course','basic_comm','standard_comm','advance_comm','commission','defaultPay'));
     }
 
 
