@@ -1729,10 +1729,11 @@ connection.onstream = function(event) {
             var vvhtml = `<div class="col-md-3 col-sm-12 col-xs-12 text-center partThumb" >
                 <h1>Hun g</h1>
             </div>`;
+            $("#other-videos").append(vvhtml);
             console.log(event.mediaElement, "console");
             console.log(otherVideos, "otherViodeo");
             console.log(vvhtml, "vvHtml");
-            otherVideos.appendChild(vvhtml);
+            // otherVideos.appendChild(vvhtml);
         }
     }
     // connection.onUserStatusChanged(event);
