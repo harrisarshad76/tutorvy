@@ -1730,6 +1730,8 @@ connection.onstream = function(event) {
                 `+event.mediaElement+`
             </div>`;
             console.log(event.mediaElement, "console");
+            console.log(otherVideos, "otherViodeo");
+            console.log(vvhtml, "vvHtml");
             otherVideos.appendChild(vvhtml);
         }
     }
