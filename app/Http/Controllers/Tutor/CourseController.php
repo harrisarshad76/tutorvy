@@ -189,9 +189,9 @@ class CourseController extends Controller
         $courselevel->save();
 
         $request->id = $courselevel->id;
-        $this->basicOutline($request);
-        $this->standardOutline($request);
-        $this->advanceOutline($request);
+        // $this->basicOutline($request);
+        // $this->standardOutline($request);
+        // $this->advanceOutline($request);
         // return dd($request->all());
         $this->basicCourseClasses($request);
         $this->standardCourseClasses($request);

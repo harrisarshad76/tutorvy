@@ -102,7 +102,7 @@
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Schedule Classes</label>
                             <div class="input-options">
-                                <select class="js-multiSelect p-5" id="basic_day" name="basic_days[]" multiple="multiple">
+                                <select class="js-multiSelect p-5" id="basic_day" name="basic_days[]" multiple="multiple" required>
                                     <option value="1" >Monday</option>
                                     <option value="2">Tuesday</option>
                                     <option value="3">Wednesday</option>
@@ -116,7 +116,7 @@
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Course Duration</label>
                             <div class="input-options ">
-                                <select name="basic_duration" style="padding:8px;">
+                                <select name="basic_duration" style="padding:8px;" required>
                                     <option disabled selected required>Course Duration</option>
                                     <option value="1">1 week</option>
                                     <option value="2">2 week</option>
