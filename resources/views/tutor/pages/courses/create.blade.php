@@ -99,24 +99,11 @@
             <div class="col-md-12   mb-1">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="" class="form-label heading-forth"> Schedule Classes</label>
-                            <div class="input-options">
-                                <select class="js-multiSelect p-5" id="basic_day" name="basic_days[]" multiple="multiple">
-                                    <option value="1" >Monday</option>
-                                    <option value="2">Tuesday</option>
-                                    <option value="3">Wednesday</option>
-                                    <option value="4">Thursday</option>
-                                    <option value="5">Friday</option>
-                                    <option value="6">Saturday</option>
-                                    <option value="7">Sunday</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Course Duration</label>
                             <div class="input-options ">
-                                <select name="basic_duration" style="padding:8px;">
+                                <select name="basic_duration" id="basic_duration" style="padding:8px;">
                                     <option disabled selected required>Course Duration</option>
                                     <option value="1">1 week</option>
                                     <option value="2">2 week</option>
@@ -132,6 +119,9 @@
                             <div class="input-options ">
                                 <input type="number" name="basic_price" class="form-control" placeholder="Add course price">
                             </div>
+                        </div>
+                        <div class="col-md-12 pl-0" id="week_schedule">
+
                         </div>
                         <div class="col-md-12">
                             <div class=" mt-2 row" id="extraFields"></div>
@@ -253,7 +243,33 @@ $("#thumbnail").change(
         return false;
     }
 }
-)
+);
+$("#basic_duration").change(function(){
+ let val = $(this).val();
+ $("#week_schedule").html("");
+ let hhtml = "";
+    for(var i =1; i<= val; i++) {
+        hhtml =`<div class="col-md-4 mt-3">
+                    <h3>Select  week `+i+` Days </h3>
+                    <div class='input-options'>
+                        <select class="select2" id="basic_days_`+i+`" name="basic_days[`+i+`]" multiple>
+                                <option value="1" >Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                                <option value="7">Sunday</option>
+                        </select>
+                    </div>
+                </div>`;
+        $("#week_schedule").append(hhtml);
+        $('.select2').select2(); 
+    }     
+})
+// $("#basic_days_1").on("click",function(e){
+//     alert($(this).val());
+// })
 </script>
 @endsection
 
