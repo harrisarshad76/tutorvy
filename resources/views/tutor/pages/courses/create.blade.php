@@ -252,7 +252,7 @@ $("#basic_duration").change(function(){
         hhtml =`<div class="col-md-4 mt-3">
                     <h3>Select  week `+i+` Days </h3>
                     <div class='input-options'>
-                        <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required>
+                        <select class="js-multiSelect p-5" id="" name="basic_days[]" multiple="multiple" required>
                                 <option value="1" >Monday</option>
                                 <option value="2">Tuesday</option>
                                 <option value="3">Wednesday</option>
@@ -267,9 +267,7 @@ $("#basic_duration").change(function(){
         $('.js-multiSelect').select2(); 
     }     
 })
-$("#basic_days_1").on("click",function(e){
-    alert($(this).val());
-})
+
 </script>
 @endsection
 
