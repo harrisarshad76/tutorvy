@@ -88,27 +88,34 @@ $("#basic_day").on("select2:select", function(e) {
     }
 
     let html = "";
-    html += `<div id="bas_` + value + `">
-                <span class="heading-forth"> ` + text + `</span>
-                <div class="input-serachs mt-2">
-                    <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
-                </div>
-                <div class="input-serachs mt-2 mb-2">
-                    <input type="txt" name="basic_class_overview[` + value + `]" placeholder="Write Class Overview" required />
-                </div>
-                <span class="heading-forth"> Timing</span>
-                <div class="input-options ">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
-                            onfocus="(this.type='time')">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+    html += `<div class="col-md-3 " id="bas_` + value + `">
+                <div class="m-1 bg-price p-3">
+                    <span class="heading-forth"> ` + text + `</span>
+                    <div class="input-serachs mt-2">
+                        <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
+                    </div>
+                    <div class="input-serachs mt-2 mb-2">
+                        
+
+                        <textarea class="form-control texteara-s"
+                            name="basic_class_overview[` + value + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                        
+                    </div>
+                    <span class="heading-forth"> Timing</span>
+                    <div class="input-options ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
                                 onfocus="(this.type='time')">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                    onfocus="(this.type='time')">
+                            </div>
                         </div>
                     </div>
                 </div>
+               
             </div>`;
 
     $("#extraFields").append(html);
