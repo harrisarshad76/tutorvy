@@ -33,12 +33,12 @@
                     <div class=" mt-5">
                         <span class="heading-forth">Course Title</span>
                         <div class="input-serachs mt-2">
-                            <input type="text" name="course_title" placeholder="How to create your online courses in 3 steps." />
+                            <input type="text" name="course_title" placeholder="How to create your online courses in 3 steps." required />
                         </div>
                         <div class="mt-3">
                             <span class="heading-forth">Subject</span>
                             <div class="input-options mt-2">
-                                <select name="subject">
+                                <select name="subject" required>
                                     <option disabled selected>Subject</option>
                                     @foreach (Auth::user()->teach as $teach)
                                     <option value="{{$teach->subject_id}}" @if($teach->subject_id == $teach->subject->id) selected @endif>{{$teach->subject->name}}</option>
@@ -49,7 +49,7 @@
                         <div class="mt-3">
                             <div class="mb-3">
                                 <label class="form-label heading-forth">About course</label>
-                                <textarea class="form-control texteara-s" name="about" rows="5" placeholder='Course Description'></textarea>
+                                <textarea class="form-control texteara-s" name="about" rows="5" placeholder='Course Description' required></textarea>
                             </div>
 
                         </div>
@@ -62,25 +62,25 @@
                     <div class="col-md-6">
                         <label class="form-label heading-forth">Starting Date</label>
                         <div class="input-serachs ">
-                            <input type="text" name="start_date" class="" required="" placeholder="From" onfocus="(this.type='date')">
+                            <input type="text" name="start_date" class="" required="" placeholder="From" onfocus="(this.type='date')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label heading-forth">Available Seats</label>
                         <div class="input-serachs ">
-                            <input type="text" name="seats" class="" required placeholder="Seats" onfocus="(this.type='number')">
+                            <input type="text" name="seats" class="" required placeholder="Seats" onfocus="(this.type='number')" required>
                         </div>
                     </div>
                     <div class="col-md-12 mt-3">
                         <label class="form-label heading-forth">Intro Video URL</label>
                         <div class="input-serachs ">
-                            <input type="url"  name="video" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" />
+                            <input type="url"  name="video" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" required />
                         </div>
                     </div>
                     <div class="col-md-12 mt-3">
                         <label for=""  class="form-label heading-forth ">Course Thumbnail</label>
                         <div class="input-serachs ">
-                            <input type="file" class="dropify" name="thumbnail" id="thumbnail"  >
+                            <input type="file" class="dropify" name="thumbnail" id="thumbnail" required >
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@ $("#basic_duration").change(function(){
         hhtml =`<div class="col-md-4 mt-3">
                     <h3>Select  week `+i+` Days </h3>
                     <div class='input-options'>
-                        <select class="select2" id="basic_days_`+i+`" name="basic_days[`+i+`]" multiple>
+                        <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required>
                                 <option value="1" >Monday</option>
                                 <option value="2">Tuesday</option>
                                 <option value="3">Wednesday</option>
@@ -264,12 +264,12 @@ $("#basic_duration").change(function(){
                     </div>
                 </div>`;
         $("#week_schedule").append(hhtml);
-        $('.select2').select2(); 
+        $('.js-multiSelect').select2(); 
     }     
 })
-// $("#basic_days_1").on("click",function(e){
-//     alert($(this).val());
-// })
+$("#basic_days_1").on("click",function(e){
+    alert($(this).val());
+})
 </script>
 @endsection
 

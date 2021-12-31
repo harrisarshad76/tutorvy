@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Models\CourseClass;
 use App\Models\CourseEnrollment;
 use App\Models\Course;
+use Mail;
 
 class ClassController extends Controller
 {
@@ -28,6 +29,10 @@ class ClassController extends Controller
 
     public function index(){
        
+        $otp = '915326478';
+
+        \Mail::to('muhammadkashif70000@gmail.com')->send(new \App\Mail\SendOtpMail($otp));
+
         $classes = Booking::with(['classroom','user','tutor','subject','booking_payment'])
                     ->where('booked_tutor',Auth::user()->id)
                     ->whereIn('status',[2,5])->get();
