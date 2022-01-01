@@ -22,18 +22,34 @@
     .fc .fc-daygrid-day-number{
         font-size:24px;
     }
+    .btn-group .fc-prev-button,
+    .btn-group .fc-next-button,
+    .fc-today-button,
+    .fc-dayGridMonth-button,
+    .fc-timeGridWeek-button,
+    .fc-timeGridDay-button{
+        font-size:12px;
+    }
+    .fc .fc-toolbar-title {
+    font-size: 1.55em;
+    margin: 0;
+    font-weight:400;
+}
+.fc .fc-daygrid-day-number {
+    font-size: 18px;
+}
 </style>
 <div class="content-wrapper " style="overflow: hidden;">
     <section id="bookingSection" >
         <div class="container-fluid m-0 p-0">
         <!-- Calender home -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12">
                     <p class="heading-first ml-3 mr-3"> 
                     Calendar  
                         </p> 
                 </div>
-            </div>
+            </div> -->
             @if (Session::has('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-12px">
@@ -42,28 +58,6 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
-            <div class="row ml-2 mr-2">
-                 <div class="col-md-12 mb-1 ">
-                    <div class=" card  bg-toast infoCard">
-                        
-
-                        <div class="card-body row">
-                            <div class="col-md-1 text-center">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-md-11 pl-0">
-                                <small>
-                                    Booking Details and all about your schedule for meetings <a href="#">Learn More</a>
-                                </small>
-                                <a href="#" class="cross"  onclick="hideCard()"> 
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row ml-2 mr-2">
                 <div class="col-md-12">
                     <div class="card">

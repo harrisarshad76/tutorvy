@@ -121,12 +121,12 @@
                             </div>
                         </div>
                         <div class="col-md-12 pl-0" id="week_schedule">
-
                         </div>
                         <div class="col-md-12">
                             <div class=" mt-2 row" id="extraFields"></div>
 
                         </div>
+                        
                         <div class="col-md-2">
                             <div class="mt-3 row">
                                 <div class="col-md-1 ">
@@ -157,6 +157,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-3">
                             <div class="mt-3 row">
                                 <div class="col-md-1">
@@ -252,8 +253,8 @@ $("#basic_duration").change(function(){
         hhtml =`<div class="col-md-4 mt-3">
                     <h3>Select  week `+i+` Days </h3>
                     <div class='input-options'>
-                        <select class="js-multiSelect p-5" id="" name="basic_days[]" multiple="multiple" required>
-                                <option value="1" >Monday</option>
+                        <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required onChange="check(`+i+`)">
+                                <option value="1" selected >Monday</option>
                                 <option value="2">Tuesday</option>
                                 <option value="3">Wednesday</option>
                                 <option value="4">Thursday</option>
@@ -267,6 +268,78 @@ $("#basic_duration").change(function(){
         $('.js-multiSelect').select2(); 
     }     
 })
+
+function check(id){
+ var n = 'basic_day_'+id;
+ console.log(n,"n");
+ 
+ let value = $("#"+n).val()
+ if(value.length !== 0){
+     
+     var recentSelection = value[value.length-1];
+     console.log('All selected cars: '+ value);
+     console.log('Recently selected car: '+ recentSelection);
+  }
+ 
+ switch(value) {
+    case "1":
+        text = "Monday";
+        break;
+    case "2":
+        text = "Tuesday";
+        break;
+    case "3":
+        text = "Wednesday";
+        break;
+    case "4":
+        text = "Thursday";
+        break;
+    case "5":
+        text = "Friday";
+        break;
+    case "6":
+        text = "Satureday";
+        break;
+    case "7":
+        text = "Sunday";
+        break;
+    default:
+        text = "---";
+    }
+
+    let html = "";
+    html += `<div class="col-md-3 " id="bas_` + value + `">
+                <div class="m-1 bg-price p-3">
+                    <span class="heading-forth"> ` + text + `</span>
+                    <div class="input-serachs mt-2">
+                        <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
+                    </div>
+                    <div class="input-serachs mt-2 mb-2">
+                        
+
+                        <textarea class="form-control texteara-s"
+                            name="basic_class_overview[` + value + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                        
+                    </div>
+                    <span class="heading-forth"> Timing</span>
+                    <div class="input-options ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                onfocus="(this.type='time')">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                    onfocus="(this.type='time')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>`;
+
+    $("#extraFields").append(html);
+}
 
 </script>
 @endsection
