@@ -93,6 +93,8 @@
                                                             <th scope="col">
                                                                 Topic
                                                             </th>
+                                                            <th scope="col">Date
+                                                            </th>
                                                             <th scope="col">Time
                                                             </th>
 
@@ -114,7 +116,9 @@
                                                                 @endphp    
                                                             <tr>
                                                                 <td class="pt-4">
-                                                                    {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                        {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    </a>
                                                                 </td>
                                                                 <td class="pt-4">
                                                                     {{$booking->subject->name}}
@@ -123,14 +127,17 @@
                                                                     {{$booking->topic}}
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    {{$date }} , {{$booking->class_tm}} to {{$booking->class_end_tm}}
+                                                                    {{$date }}
+                                                                </td>
+                                                                <td class="pt-4">
+                                                                    {{$booking->class_tm}} to {{$booking->class_end_tm}}
                                                                 </td>
 
                                                                 <td class="pt-4">
                                                                     &nbsp;{{$booking->duration}} Hour(s)
                                                                 </td>
                                                                 <td class="pt-4">
-                                                                    &nbsp;${{$booking->price}}
+                                                                    &nbsp;${{$booking->price}}.00
                                                                 </td>
                                                                 <td class="pt-4">
                                                                     @if($booking->status == 1)
@@ -164,23 +171,36 @@
                                                                     @endif
                                                                 </td>
 
-                                                                <td style="text-align: center;">
+                                                                <td class="pt-4" style="text-align: center;width:186px;">
                                                                         @if($booking->status == 1 )
                                                                             <button  onclick="pay_now({{$booking->id}})" id="pay_now_btn_{{$booking->id}}" type="button" role="button" class="cencel-btn mr-2"> Pay Now </button>
                                                                             <button type="button" id="pay_now_loader_{{$booking->id}}" style="display:none" disabled role="button" class="btn btn-primary btn-sm"> Processing </button>
-                                                                        @endif
+                                                                        @else
                                                                         <a href="{{route('student.booking-detail',[$booking->id])}}">
                                                                             <button class="schedule-btn" type="button">
                                                                                 View details
                                                                             </button>
                                                                         </a>
+                                                                        @endif
                                                                 </td>
                                                             </tr>
                                                             @endforeach
                                                         @else
 
-                                                                <td>No Booking Found</td>
-
+                                                                <tr>
+                                                                    <td scope="col-3">No Booking Found</td>
+                                                                    <td scope="col"></td>
+                                                                    <td scope="col"></td>
+                                                                    <td scope="col"></td>
+                                                                    <td scope="col"></td>
+                                                                    <td scope="col"></td>
+                                                                    <td scope="col">
+                                                                        
+                                                                    </td>
+                                                                    <!-- <td scope="col">Review</td> -->
+                                                                    <!-- <td scope="col"></td> -->
+                                                                    <td scope="col"></td>
+                                                                </tr>   
                                                         @endif
                                                     </tbody>
                                                 </table>
@@ -206,8 +226,6 @@
                                                             <th scope="col">
                                                                 Status
                                                             </th>
-                                                            <!-- <th scope="col">Review</th> -->
-                                                            <!-- <th scope="col"></th> -->
                                                             <th scope="col" style="width:119px;"></th>
                                                         </tr>
                                                     </thead>
@@ -220,7 +238,9 @@
                                                                 @endphp
                                                                 <tr>
                                                                     <td class="pt-4">
-                                                                    {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                        <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                            {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                        </a>
                                                                     </td>
                                                                     <td class="pt-4">
                                                                         {{$booking->subject->name}}
@@ -271,8 +291,18 @@
                                                                 </tr>
                                                             @endforeach
                                                         @else
-
+                                                        <tr>
                                                             <td>No Booking Found</td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col">
+                                                                
+                                                            </td>
+                                                            <td scope="col"></td>
+                                                        </tr>   
 
                                                     @endif
 
@@ -299,8 +329,6 @@
                                                             <th scope="col">
                                                                 Status
                                                             </th>
-                                                            <!-- <th scope="col">Review</th> -->
-                                                            <!-- <th scope="col"></th> -->
                                                             <th scope="col" style="width:214px;"></th>
                                                         </tr>
                                                     </thead>
@@ -313,7 +341,9 @@
                                                             @endphp
                                                             <tr>
                                                                 <td class="pt-4">
-                                                                {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                        {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    </a>
                                                                 </td>
                                                                 <td class="pt-4">
                                                                     {{$booking->subject->name}}
@@ -366,8 +396,18 @@
                                                             </tr>
                                                         @endforeach
                                                     @else
-
+                                                        <tr>
                                                             <td>No Booking Found</td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col">
+                                                                
+                                                            </td>
+                                                            <td scope="col"></td>
+                                                        </tr>
 
                                                     @endif
 
@@ -394,7 +434,6 @@
                                                         <th scope="col">
                                                                 Status
                                                             </th>
-                                                        <!-- <th scope="col"></th> -->
                                                         <th scope="col"></th>
                                                     </tr>
                                                 </thead>
@@ -406,8 +445,10 @@
                                                                 $date = date("D, d-M-y", strtotime($date))
                                                             @endphp
                                                             <tr>
-                                                                <td class="pt-4">
-                                                                {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                <td class="pt-4"> 
+                                                                    <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                        {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    </a>
                                                                 </td>
                                                                 <td class="pt-4">
                                                                     {{$booking->subject->name}}
@@ -466,7 +507,18 @@
                                                         @endforeach
                                                     @else
 
+                                                        <tr>
                                                             <td>No Booking Found</td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col">
+                                                                
+                                                            </td>
+                                                            <td scope="col"></td>
+                                                        </tr>   
 
                                                     @endif
                                                 </tbody>
@@ -491,7 +543,6 @@
                                                     <th scope="col">
                                                             Status
                                                         </th>
-                                                    <!-- <th scope="col"></th> -->
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
@@ -504,7 +555,9 @@
                                                         @endphp
                                                         <tr>
                                                             <td class="pt-4">
-                                                            {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                        {{$booking->tutor->first_name}} {{$booking->tutor->last_name}}
+                                                                    </a>
                                                             </td>
                                                             <td class="pt-4">
                                                                 {{$booking->subject->name}}
@@ -562,7 +615,17 @@
                                                     @endforeach
                                                 @else
 
-                                                        <td>No Booking Found</td>
+                                                <tr>
+                                                            <td >No Booking Found</td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col">
+                                                            </td>
+                                                            <td scope="col"></td>
+                                                        </tr>   
 
                                                 @endif
                                             </tbody>
@@ -726,5 +789,7 @@
 
 @section('scripts')
     @include('js_files.student.bookingJs')
+
+   
 @endsection
 

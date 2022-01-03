@@ -123,6 +123,11 @@
                                     Course Classes
                                     <span class="counter-text bg-primary"> 5 </span>
                                 </a>
+                                <a class="nav-item nav-link " id="nav-upClass-tab" data-toggle="tab" href="#nav-upClass"
+                                    role="tab" aria-controls="nav-upClass" aria-selected="true">
+                                    Upcoming Classes
+                                    <span class="counter-text bg-info"> 3 </span>
+                                </a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                     role="tab" aria-controls="nav-profile" aria-selected="false">
                                     Delivered Classes
@@ -158,8 +163,10 @@
                                                         @endphp
                                                         <tr>
                                                             <td class="pt-3">
-                                                                {{ $class->tutor->first_name }}
-                                                                {{ $class->tutor->last_name }}
+                                                                    <a href="{{route('student.tutor.show',[$booking->tutor->id])}}">
+                                                                        {{ $class->tutor->first_name }}
+                                                                        {{ $class->tutor->last_name }}
+                                                                    </a>
                                                             </td>
                                                             <td class="pt-3">
                                                                 {{ $class != null ? $class->subject->name : '---' }}
@@ -206,7 +213,7 @@
                                                             </td>
                                                             @else
                                                             <td class="pt-3">
-                                                                ---
+                                                                {{$class->is_reviewed}}.0 <i class="fa fa-start text-yellow"></i> 
                                                             </td>
                                                             @endif
                                                             
@@ -254,8 +261,87 @@
                                                     @foreach ($booked_classes as $class)
                                                         <tr>
                                                             <td class="pt-3">
-                                                                {{ $class->tutor->first_name }}
-                                                                {{ $class->tutor->last_name }}
+                                                                    <a href="{{route('student.tutor.show',[$class->tutor->id])}}">
+                                                                        {{ $class->tutor->first_name }}
+                                                                        {{ $class->tutor->last_name }}
+                                                                    </a>
+                                                            </td>
+                                                            <td class="pt-3">
+                                                                {{ $class != null ? $class->subject->name : '---' }}
+                                                            </td>
+                                                            <td class="pt-3">
+                                                                {{ $class != null ? $class->topic : '---' }}
+                                                            </td>
+                                                            <td class="pt-3">
+                                                                {{ $class->class_time }}
+                                                                {{ date('g:i a', strtotime("$class->class_time UTC")) }}
+                                                            </td>
+
+                                                            <td class="pt-3">
+                                                                {{ $class->duration }} Hour(s)
+                                                            </td>
+                                                            <td class="pt-3">
+                                                                @if ($class->status == 5)
+                                                                    <span class="bg-color-apporve3"> Delivered </span>
+                                                                @endif
+                                                            </td>
+
+
+                                                            <td style="text-align: center;padding-top:14px;">
+                                                                @if ($class->status == 5 && $class->is_reviewed == 0)
+                                                                    <a type="button"
+                                                                        onclick="showReviewModal('{{ $class->booking_id }}')"
+                                                                        class="cencel-btn">
+                                                                        Review Now
+                                                                    </a>
+                                                                @else 
+                                                                    <a class="schedule-btn"  href="{{route('student.booking-detail',[$class->id])}}">
+                                                                            View Details
+                                                                        </a>
+                                                                @endif
+                                                               
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td>
+                                                            No Class Found
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane tab-border-none fade" id="nav-upClass" role="tabpanel"
+                                aria-labelledby="nav-upClass-tab">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table table-bordered ">
+                                            <thead>
+                                                <tr
+                                                    style="font-family: Poppins;font-size: 14px;color: #00132D; border-top: 1px solid #D6DBE2;border-bottom: 1px solid #D6DBE2;">
+                                                    <th scope="col">Tutor</th>
+                                                    <th scope="col">Subjects</th>
+                                                    <th scope="col">Topic</th>
+                                                    <th scope="col">Time</th>
+                                                    <th scope="col">Duration</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($booked_classes != null && $booked_classes != [] && $booked_classes != '')
+                                                    @foreach ($booked_classes as $class)
+                                                        <tr>
+                                                            <td class="pt-3">
+                                                                    <a href="{{route('student.tutor.show',[$class->tutor->id])}}">
+                                                                        {{ $class->tutor->first_name }}
+                                                                        {{ $class->tutor->last_name }}
+                                                                    </a>
                                                             </td>
                                                             <td class="pt-3">
                                                                 {{ $class != null ? $class->subject->name : '---' }}

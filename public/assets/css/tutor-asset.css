@@ -3339,5 +3339,19 @@ th {
     border-bottom: 1px solid #dddddd !important;
 }
 
+.paginate_button.current {
+    background: #1173FF !important;
+    border-radius: 4px !important;
+    color: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #1173FF !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #1173FF !important;
+}
+
 
 /*Data table Style*/

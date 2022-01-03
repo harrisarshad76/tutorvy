@@ -99,24 +99,11 @@
             <div class="col-md-12   mb-1">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="" class="form-label heading-forth"> Schedule Classes</label>
-                            <div class="input-options">
-                                <select class="js-multiSelect p-5" id="basic_day" name="basic_days[]" multiple="multiple" required>
-                                    <option value="1">Monday</option>
-                                    <option value="2">Tuesday</option>
-                                    <option value="3">Wednesday</option>
-                                    <option value="4">Thursday</option>
-                                    <option value="5">Friday</option>
-                                    <option value="6">Saturday</option>
-                                    <option value="7">Sunday</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Course Duration</label>
                             <div class="input-options ">
-                                <select name="basic_duration" style="padding:8px;" required>
+                                <select name="basic_duration" id="basic_duration" style="padding:8px;">
                                     <option disabled selected required>Course Duration</option>
                                     <option value="1">1 week</option>
                                     <option value="2">2 week</option>
@@ -133,10 +120,13 @@
                                 <input type="number" name="basic_price" class="form-control" placeholder="Add course price">
                             </div>
                         </div>
+                        <div class="col-md-12 pl-0" id="week_schedule">
+                        </div>
                         <div class="col-md-12">
                             <div class=" mt-2 row" id="extraFields"></div>
 
                         </div>
+                        
                         <div class="col-md-2">
                             <div class="mt-3 row">
                                 <div class="col-md-1 ">
@@ -167,6 +157,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-3">
                             <div class="mt-3 row">
                                 <div class="col-md-1">
@@ -253,7 +244,103 @@ $("#thumbnail").change(
         return false;
     }
 }
-)
+);
+$("#basic_duration").change(function(){
+ let val = $(this).val();
+ $("#week_schedule").html("");
+ let hhtml = "";
+    for(var i =1; i<= val; i++) {
+        hhtml =`<div class="col-md-4 mt-3">
+                    <h3>Select  week `+i+` Days </h3>
+                    <div class='input-options'>
+                        <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required onChange="check(`+i+`)">
+                                <option value="1" selected >Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                                <option value="7">Sunday</option>
+                        </select>
+                    </div>
+                </div>`;
+        $("#week_schedule").append(hhtml);
+        $('.js-multiSelect').select2(); 
+    }     
+})
+
+function check(id){
+ var n = 'basic_day_'+id;
+ console.log(n,"n");
+ 
+ let value = $("#"+n).val()
+ if(value.length !== 0){
+     
+     var recentSelection = value[value.length-1];
+     console.log('All selected cars: '+ value);
+     console.log('Recently selected car: '+ recentSelection);
+  }
+ 
+ switch(value) {
+    case "1":
+        text = "Monday";
+        break;
+    case "2":
+        text = "Tuesday";
+        break;
+    case "3":
+        text = "Wednesday";
+        break;
+    case "4":
+        text = "Thursday";
+        break;
+    case "5":
+        text = "Friday";
+        break;
+    case "6":
+        text = "Satureday";
+        break;
+    case "7":
+        text = "Sunday";
+        break;
+    default:
+        text = "---";
+    }
+
+    let html = "";
+    html += `<div class="col-md-3 " id="bas_` + value + `">
+                <div class="m-1 bg-price p-3">
+                    <span class="heading-forth"> ` + text + `</span>
+                    <div class="input-serachs mt-2">
+                        <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
+                    </div>
+                    <div class="input-serachs mt-2 mb-2">
+                        
+
+                        <textarea class="form-control texteara-s"
+                            name="basic_class_overview[` + value + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                        
+                    </div>
+                    <span class="heading-forth"> Timing</span>
+                    <div class="input-options ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                onfocus="(this.type='time')">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                    onfocus="(this.type='time')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>`;
+
+    $("#extraFields").append(html);
+}
+
 </script>
 @endsection
 

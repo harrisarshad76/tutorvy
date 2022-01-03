@@ -70,6 +70,9 @@
         .sidenav-toggle:hover{
             background:none;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                color: #fff !important;
+            }
     </style>
 </head>
 
@@ -206,9 +209,18 @@
         // iGuider Initialization
 
       
+        
 
-
-        $('.table').DataTable();
+        $('.table').DataTable({
+            "language": {
+                "paginate": {
+                "previous": " ",
+                "next": " ",
+                }
+            }
+        });
+        $('.previous').html(`<img src="{{asset('assets/images/ico/arrow-left-1.png')}}">`);
+        $('.next').html(`<img src="{{asset('assets/images/ico/arrow-right-1.png')}}">`);
         get_all_notifications();
         $(".mk").hide();
         $(".vc").hide();
