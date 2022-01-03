@@ -4,14 +4,14 @@
     <div class="content-wrapper " style="overflow: hidden;">
         <section id="homesection">
             <div class="container-fluid m-0 p-0">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <p class="heading-first mr-3 ml-3">
                             Wallet
                         </p>
                     </div>
 
-                </div>
+                </div> -->
                 @if (Session::has('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"
@@ -41,12 +41,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <p class="heading-third ">
                             My wallet
                         </p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6 text-right">
+                        <button class="schedule-btn btn"  onclick="addBalance()">
+                            + Add balance
+                        </button>
+                    </div>
+                    <div class="col-md-4">
                         <div class="card mt-0">
                             <div class="card-body">
                                 <img src="../assets/images/ico/dollars.png" style="width: 45px;">
@@ -57,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card mt-0">
                             <div class="card-body">
                                 <img src="../assets/images/ico/doollarss.png" style="width: 45px;">
@@ -68,25 +73,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card mt-0">
                             <div class="card-body">
                                 <img src="../assets/images/ico/dollars.png" style="width: 45px;">
                                 <div class="">
                                     <p class=" heading-fifth mt-3" style="line-height: 0;">Pending balance</p>
                                     <p class="heading-first mb-0"> $0</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mt-0">
-                            <div class="card-body">
-                                <img src="../assets/images/ico/dollars.png" style="width: 45px;">
-                                <div class="">
-                                    <p class=" heading-fifth mt-3" style="line-height: 0;">
-                                        <a type="button" onclick="addBalance()" data-target=""> + Add balance</a>
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -108,31 +101,26 @@
                                 <table id="tblCustomers" class="table table-bordered" style="width: 100%;">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Reciept Id</th>
                                             <th scope="col">Tutor</th>
-                                            <th scope="col">Subject</th>
-                                            <th scope="col">Topic</th>
-                                            <th scope="col">Time</th>
+                                            <th scope="col">Class</th>
                                             <th scope="col">Duration</th>
                                             <th scope="col">Payment Status</th>
                                             <th scope="col">Amount</th>
-                                            <th scope="col" style="visibility: hidden;">adasdasd </th>
+                                            <th scope="col" >Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                    </tbody>
                                     @foreach ($payment as $paid)
                                         <tr>
+                                            <td class="pt-4">{{ $paid->tutor->id }}</td>
                                             <td class="pt-4">{{ $paid->tutor->first_name }}
                                                 {{ $paid->tutor->last_name }} </td>
-                                            <td class="pt-4">{{ $paid->subject->name }}</td>
                                             @if ($paid->topic == null)
                                                 <td class="pt-4"> --- </td>
                                             @else
                                                 <td class="pt-4">{{ $paid->topic }}</td>
                                             @endif
-                                            <td class="pt-4">{{ $paid->class_time }} - {{ $paid->class_date }}
-                                            </td>
                                             <td class="pt-4">{{ $paid->duration }} hour</td>
                                             <td class="pt-4 ">
                                                 @if ($paid->status == '1')
@@ -144,11 +132,14 @@
                                             <td class="pt-4">
                                                 ${{ $paid->price }}
                                             </td>
-                                            <td class="pt-4 pr-3"><a href="../payment/paymentdetail.html"> <button
-                                                        class="schedule-btn w-100 ">
-                                                        View details</button></a></td>
+                                            <td class="pt-4 pr-3">
+                                                <button class="schedule-btn w-100 ">
+                                                        View Reciept</button>
+                                            </td>
                                         </tr>
                                     @endforeach
+                                    </tbody>
+                                 
                                 </table>
                             </div>
                         </div>

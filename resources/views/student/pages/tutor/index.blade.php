@@ -172,12 +172,12 @@
                                     <div class="col-md-2 text-right">
                                         <label for="" class="mb-1 no-opacity">Availability</label>
                                         <p class="mb-0">
-                                            <a href="#">
+                                            <a href="#" class="text-dark">
                                                 <i class="fa fa-sliders"></i> Advance Search
                                             </a>
                                         </p>
                                         <p class="mb-0">
-                                            <a href="#" id="resetSearch">
+                                            <a href="#" id="resetSearch" class="text-dark">
                                                 <i class="fa fa-refresh" aria-hidden="true"></i> Reset Search
                                             </a>
                                         </p>
@@ -208,10 +208,10 @@
                     <div class="row">
                         
                         <div class="col-md-9 row pr-0 " id="number-booking">
-                            <h3  class="mb-0 col-md-6 mt-4">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
-                            <div class="text-right col-md-6 pt-4 pr-0">
-                                <label for=""> <b> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort:  </b> </label>
-                                <select class="pl-2 pr-2 ml-2" id="sort">
+                            <h3  class="mb-0 col-md-9 mt-4 pt-3">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
+                            <div class="col-md-3 pt-4 pr-0">
+                                <!-- <label for=""> <b> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> </b> </label> -->
+                                <select class="form-select" id="sort">
                                     <option value="">Sort by Availability</option>
                                     <option value="">Sort by Date</option>
                                     <option value="">Sort by Price</option>
@@ -258,7 +258,7 @@
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-md-3 pr-0">
-                                                                    <div class="topImage">
+                                                                    <!-- <div class="topImage">
                                                                             @if($tutor->rank == 1)
                                                                                 <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">New</span></p>
                                                                             @elseif($tutor->rank == 2)
@@ -268,7 +268,7 @@
                                                                                 @else
                                                                                 <p class="mb-0 pt-1 pb-1 text-center bg-success"> <span class="text-white bold ">No Badge Yet</span></p>
                                                                             @endif
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="imgPart">
                                                                         <img src="{{asset($tutor->picture)}}" class="w-100" alt="">
                                                                     </div>
@@ -296,9 +296,9 @@
 
                                                                                 </div> -->
                                                                                 <div class="col-md-6 col-6  pr-0">
-                                                                                    <a href="{{route('student.tutor.show',[$tutor->id])}}" class="decoration-none"><h3 class="mb-0">{{$tutor->first_name}} {{$tutor->last_name}}</h3></a>
+                                                                                    <a href="{{route('student.tutor.show',[$tutor->id])}}" class="decoration-none"><h3 class="mb-0 text-capitalize">{{$tutor->first_name}} {{$tutor->last_name}}</h3></a>
                                                                                     <!-- <p class="mb-0"><img src="../assets/images/ico/red-icon.png" alt="" class="">  {{$tutor->designation ?? '---'}}</p> -->
-                                                                                    <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">{{ $tutor->city != NULL ? $tutor->city.' , ' : '---' }} {{ $tutor->country != NULL ? $tutor->country: '---' }}</p>
+                                                                                    <p class="mb-0"><img src="../assets/images/ico/location-pro.png" alt="" class="">{{ $tutor->city != NULL ? $tutor->city.' ,  ' : '---' }}   {{  $tutor->country != NULL ? $tutor->country: ' ---' }}</p>
                                                                                 </div>
                                                                                 <div class="col-md-6 col-12 text-right">
                                                                                     <p class="mb-0">
@@ -333,14 +333,8 @@
                                                                                         <i class="fa fa-star text-yellow"></i>
                                                                                         <i class="fa fa-star text-yellow"></i>  5.0
                                                                                         @else
-                                                                                        <i class="fa fa-star "></i>
-                                                                                        <i class="fa fa-star "></i>
-                                                                                        <i class="fa fa-star "></i>
-                                                                                        <i class="fa fa-star "></i>
-                                                                                        <i class="fa fa-star "></i>  0.0
+                                                                                        <small class="text-primary">New <img src="{{asset('assets/images/ico/bluebadge.png')}}" alt="" style="width:11% !important"></small>
                                                                                         @endif
-
-                                                                                        <small class="text-grey">(0 reviews)</small>
                                                                                     </p>
                                                                                     <!-- <p class="mb-0">
                                                                                         <small>
@@ -442,13 +436,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 pl-0 cardRight" id="{{$tutor->id}}-A">
+                                                <!-- <div class="col-md-3 pl-0 cardRight" id="{{$tutor->id}}-A">  show on hover-->
+                                                <div class="col-md-3 pl-0 " id="">
                                                     <div class="card">
                                                         <div class="card-body div-center">
                                                             <div>
-                                                                <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                <video controls class="vid23 w-100 h-100" poster="{{asset('assets/images/ico/Mute-video.png')}}">
                                                                     <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
                                                                 </video>
+
                                                                 <a href="{{route('student.tutor.show',[$tutor->id])}}" class="text-center no-decoration schedule-btn w-100 mt-2" >
                                                                         &nbsp; View Profile &nbsp;
                                                                 </a>
