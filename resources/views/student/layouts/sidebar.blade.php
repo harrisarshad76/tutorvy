@@ -137,9 +137,9 @@
                      Support
                  </a>
              </li>
-             <li class="btn  w-100">
+             <li class="btn  w-100" data-target="el-wallet">
                 <a href="{{route('student.wallet')}}">
-                    <img src="{{asset('assets/images/ico/payment-ico.png')}}" class=" mr-2">
+                    <img src="{{asset('assets/images/ico/payment-ico.png')}}" class=" mr-2" >
                     Wallet
                 </a>
              </li>

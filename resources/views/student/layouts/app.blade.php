@@ -36,7 +36,7 @@
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- iGuider Plugin -->
     <link rel="stylesheet" href="{{ asset('assets/css/iGuider.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-material.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/material/iGuider-theme-neon.css') }}">
     <!-- iGuider Plugin -->
 
     <!-- Cropper Plugin -->
@@ -73,6 +73,9 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
                 color: #fff !important;
             }
+            .g-modal-size {
+    color: #fff;
+    width: 610px;}
     </style>
 </head>
 
@@ -128,7 +131,7 @@
 
             <!-- iGuider Plugin -->
             <script src="{{ asset('assets/js/jquery.iGuider.js') }}"></script>
-            <script src="{{ asset('assets/material/iGuider-theme-material.js') }}"></script>    
+            <script src="{{ asset('assets/material/iGuider-theme-neon.js') }}"></script>    
 
             <!-- iGuider Plugin -->
 
@@ -159,11 +162,15 @@
         // iGuider Initialization
 
         $('.start-tour').on('click',function(){
+            var ter = `<iframe width="560" height="315" src="https://www.youtube.com/embed/G6W5wbPqzPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             iGuider({
+                
                 tourTitle:'continue.enable',
                 'intro': {
-                    'title': 'Welcome To Tutorvy',
-                    'content': 'Dashboard ',
+                    // 'title': 'Welcome To Tutorvy',
+                    // 'content': 'Dashboard ',
+                    'title': 'Watch Our Video to See How It Works!',
+                    'content': ter,
                     'overlayOpacity': '0.4'
                 },
                 continue:{
@@ -182,25 +189,29 @@
                     'endText': 'End of time'
                 },
                 steps:[{
-                    title:'Set Your Porifile',
-                    content:'Here you can setup your profile',   
+                    title:'Manage Your Profile',
+                    content:'You can edit and view your personal information by clicking on your name.',   
                     target:'el-profile'
                 },{
-                    title:'Booking Tour',
-                    content:'Booking Tour Description',   
+                    title:'Manage Class Bookings',
+                    content:'In this tab you will see all data related to your class bookings. You can view, reschedule, cancel your classes.',   
                     target:'el-booking'
                 },{
-                    title:'Classroom Tour',
-                    content:'Classroom Tour Description',   
+                    title:'Classroom',
+                    content:'Our digital classroom will help to make learning and teaching process easy. You can access your ongoing class from here',   
                     target:'el-classroom'
                 },{
-                    title:'Courses Tour',
-                    content:'Courses Tour Description',   
+                    title:'Courses',
+                    content:'Manage the courses you enrolled, track your performance.',   
                     target:'el-courses'
                 },{
-                    title:'Find Affordable Online Tutor',
-                    content:'find a tutor near you at affordable prices',   
+                    title:'Find Your Tutor',
+                    content:'You can find the best tutor according to your needs. In this section you can search any tutor by using our advance search filters.',   
                     target:'el-findtutor'
+                },{
+                    title:'Manage Your Billing',
+                    content:'Wallet section contains all details of your billing related things. You can view all transaction here which you made on tutorvy.',   
+                    target:'el-wallet'
                 }]
 
             });

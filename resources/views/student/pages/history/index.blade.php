@@ -1,5 +1,10 @@
 @extends('student.layouts.app')
-
+<style>
+     table.dataTable tbody th,
+    table.dataTable tbody td {
+        padding: 8px 18px !important;
+    }
+</style>
 @section('content')
 
     <div class="content-wrapper " style="overflow: hidden;">
@@ -52,9 +57,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3 class="heading-third">
+                        <!-- <h3 class="heading-third">
                             All tickets
-                        </h3>
+                        </h3> -->
                     </div>
                     <div class="col-md-6 text-right">
                         <a data-toggle="modal" href="#supportModal" style="text-decoration:none;"
@@ -70,6 +75,7 @@
                                     <th scope="col">Subject </th>
                                     <th scope="col">Category </th>
                                     <th scope="col">Date </th>
+                                    <!-- <th scope="col">Time </th> -->
                                     <th scope="col">Answered by </th>
                                     <th scope="col">Status</th>
                                     <th scope="col"></th>
@@ -111,7 +117,7 @@
                                             </td>
                                             <td>
                                                 <a href="{{ url('student/ticket') }}/{{ $ticket->ticket_no }}"
-                                                    class="btn schedule-btn">View</a>
+                                                    class="btn schedule-btn w-100 mt-0">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
