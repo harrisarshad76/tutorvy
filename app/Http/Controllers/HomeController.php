@@ -13,7 +13,20 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
+    }
+
+    public function mail(){
+
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+       
+        \Mail::to('muhammadkashif70000@gmail.com')->send(new \App\Mail\MyTestMail($details));
+       
+        dd("Email is Sent.");
+
     }
 
     /**
