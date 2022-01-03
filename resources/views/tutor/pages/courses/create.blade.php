@@ -120,12 +120,9 @@
                                 <input type="number" name="basic_price" class="form-control" placeholder="Add course price">
                             </div>
                         </div>
-                        <div class="col-md-12 pl-0" id="week_schedule">
+                        <div class="col-md-12  " id="week_schedule">
                         </div>
-                        <div class="col-md-12">
-                            <div class=" mt-2 row" id="extraFields"></div>
-
-                        </div>
+                        
                         
                         <div class="col-md-2">
                             <div class="mt-3 row">
@@ -246,23 +243,67 @@ $("#thumbnail").change(
 }
 );
 $("#basic_duration").change(function(){
+    
  let val = $(this).val();
  $("#week_schedule").html("");
  let hhtml = "";
     for(var i =1; i<= val; i++) {
-        hhtml =`<div class="col-md-4 mt-3">
-                    <h3>Select  week `+i+` Days </h3>
-                    <div class='input-options'>
-                        <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required onChange="check(`+i+`)">
-                                <option value="1" selected >Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                                <option value="7">Sunday</option>
-                        </select>
+        // hhtml =`<div class="col-md-4 mt-3">
+        //             <h3>Select  week `+i+` Days </h3>
+        //             <div class='input-options'>
+        //                 <select class="js-multiSelect p-5" id="basic_day_`+i+`" name="basic_days[]" multiple="multiple" required onChange="check(`+i+`)">
+        //                         <option value="1"  >Monday</option>
+        //                         <option value="2">Tuesday</option>
+        //                         <option value="3">Wednesday</option>
+        //                         <option value="4">Thursday</option>
+        //                         <option value="5">Friday</option>
+        //                         <option value="6">Saturday</option>
+        //                         <option value="7">Sunday</option>
+        //                 </select>
+        //             </div>
+        //         </div>
+        //         <div class="col-md-12 mt-2 mb-2">
+        //             <div class="row" id="extraFields_`+i+`"></div>
+        //         </div>`;
+
+        hhtml = `<div class="d-flex mt-3 mb-2">
+                    <div class="">
+                        <label class="" for=""><b> Week `+i+` : </b></label>
                     </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('monday_`+i+`',`+i+`,'monday')" class="custom-control-input" name="monday_`+i+`" id="monday_`+i+`">
+                        <label class="custom-control-label" for="monday_`+i+`">Monday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('tuesday_`+i+`',`+i+`,'tuesday')" class="custom-control-input" name="tuesday_`+i+`" id="tuesday_`+i+`">
+                        <label class="custom-control-label" for="tuesday_`+i+`">Tuesday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('wednesday_`+i+`',`+i+`,'wednesday')" class="custom-control-input" name="wednesday_`+i+`" id="wednesday_`+i+`">
+                        <label class="custom-control-label" for="wednesday_`+i+`">Wednesday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('thursday_`+i+`',`+i+`,'thursday')" class="custom-control-input" name="thursday_`+i+`" id="thursday_`+i+`">
+                        <label class="custom-control-label" for="thursday_`+i+`">Thursday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('friday_`+i+`',`+i+`,'friday')" class="custom-control-input" name="friday_`+i+`" id="friday_`+i+`">
+                        <label class="custom-control-label" for="friday_`+i+`">Friday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('saturday_`+i+`',`+i+`,'saturday')" class="custom-control-input" name="saturday_`+i+`" id="saturday_`+i+`">
+                        <label class="custom-control-label" for="saturday_`+i+`">Saturday</label>
+                    </div>
+                    <div class="ml-4 custom-control custom-switch">
+                        <input type="checkbox" onclick="aleeert('sunday_`+i+`',`+i+`,'sunday')" class="custom-control-input" name="sunday_`+i+`" id="sunday_`+i+`">
+                        <label class="custom-control-label" for="sunday_`+i+`">Sunday</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class=" mt-2 row" id="extraFields_`+i+`">
+
+                    </div>
+
                 </div>`;
         $("#week_schedule").append(hhtml);
         $('.js-multiSelect').select2(); 
@@ -270,75 +311,144 @@ $("#basic_duration").change(function(){
 })
 
 function check(id){
- var n = 'basic_day_'+id;
- console.log(n,"n");
- 
- let value = $("#"+n).val()
- if(value.length !== 0){
-     
-     var recentSelection = value[value.length-1];
-     console.log('All selected cars: '+ value);
-     console.log('Recently selected car: '+ recentSelection);
-  }
- 
- switch(value) {
-    case "1":
-        text = "Monday";
-        break;
-    case "2":
-        text = "Tuesday";
-        break;
-    case "3":
-        text = "Wednesday";
-        break;
-    case "4":
-        text = "Thursday";
-        break;
-    case "5":
-        text = "Friday";
-        break;
-    case "6":
-        text = "Satureday";
-        break;
-    case "7":
-        text = "Sunday";
-        break;
-    default:
-        text = "---";
-    }
-
+    let text = "";
     let html = "";
-    html += `<div class="col-md-3 " id="bas_` + value + `">
-                <div class="m-1 bg-price p-3">
-                    <span class="heading-forth"> ` + text + `</span>
-                    <div class="input-serachs mt-2">
-                        <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
-                    </div>
-                    <div class="input-serachs mt-2 mb-2">
-                        
+    var n = 'basic_day_'+id;
+    console.log(n,"n");
+    let value = $("#"+n).val()
+    // switch(value) {
+    //     case 1:
+    //         text = "Monday";
+    //         break;
+    //     case 2:
+    //         text = "Tuesday";
+    //         break;
+    //     case 3:
+    //         text = "Wednesday";
+    //         break;
+    //     case 4:
+    //         text = "Thursday";
+    //         break;
+    //     case 5:
+    //         text = "Friday";
+    //         break;
+    //     case 6:
+    //         text = "Satureday";
+    //         break;
+    //     case 7:
+    //         text = "Sunday";
+    //         break;
+    //     default:
+    //         text = "---";
+    // }
+    if(value != ""){
 
-                        <textarea class="form-control texteara-s"
-                            name="basic_class_overview[` + value + `]" rows="6" placeholder="Write Class Overview" required></textarea>
-                        
-                    </div>
-                    <span class="heading-forth"> Timing</span>
-                    <div class="input-options ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
-                                onfocus="(this.type='time')">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+        html += `<div class="col-md-3 " id="bas_` + value + `">
+                    <div class="m-1 bg-price p-3">
+                        <span class="heading-forth"> ` + text + `</span>
+                        <div class="input-serachs mt-2">
+                            <input type="txt" name="basic_class_title[` + value + `]" placeholder="Write Class Title" required />
+                        </div>
+                        <div class="input-serachs mt-2 mb-2">
+                            
+
+                            <textarea class="form-control texteara-s"
+                                name="basic_class_overview[` + value + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                            
+                        </div>
+                        <span class="heading-forth"> Timing</span>
+                        <div class="input-options ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_start_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
                                     onfocus="(this.type='time')">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_end_time[` + value + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                        onfocus="(this.type='time')">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-               
-            </div>`;
+                
+                </div>`;
 
-    $("#extraFields").append(html);
+        $("#extraFields_"+id).append(html);
+    }
+else{
+  $("#extraFields_"+id).find(".col-md-3").remove();
+}
+   
+}
+
+function aleeert(id,i,day){
+
+    var html2="";
+    var text ="";
+   
+    $("#"+id).toggleClass("checked");
+
+    if($("#"+id).hasClass("checked")){
+        
+        switch(day) {
+            case 'monday':
+                text = "Monday";
+                break;
+            case "tuesday":
+                text = "Tuesday";
+                break;
+            case "wednesday":
+                text = "Wednesday";
+                break;
+            case 'thursday':
+                text = "Thursday";
+                break;
+            case 'friday':
+                text = "Friday";
+                break;
+            case 'saturday':
+                text = "Saturday";
+                break;
+            case 'sunday':
+                text = "Sunday";
+                break;
+            default:
+                text = "---";
+        }
+        html2 += `<div class="col-md-3 pl-0" id="bas_` + id + `">
+                    <div class="m-1 bg-price p-3">
+                        <span class="heading-forth"> `+text+`</span>
+                        <div class="input-serachs mt-2">
+                            <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
+                        </div>
+                        <div class="input-serachs mt-2 mb-2">
+                            
+
+                            <textarea class="form-control texteara-s"
+                                name="basic_class_overview[` + i + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                            
+                        </div>
+                        <span class="heading-forth"> Timing</span>
+                        <div class="input-options ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_start_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                    onfocus="(this.type='time')">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_end_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                        onfocus="(this.type='time')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>`;
+        $("#extraFields_"+i).append(html2);
+    }
+    else{
+        $("#extraFields_"+i).find("#bas_"+id).remove();
+    }
 }
 
 </script>

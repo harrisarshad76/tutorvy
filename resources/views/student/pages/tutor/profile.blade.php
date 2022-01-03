@@ -15,7 +15,7 @@ width:22px;
 <link rel="stylesheet" href="{{asset('assets/css/profile.css')}}">
 <div class="content-wrapper " style="overflow: hidden;">
     <div class="container-fluid">
-        <p class="heading-first ml-3 mr-3">
+        <p class="heading-first ml-3 mr-3 mb-0">
             Profile
         </p>
         <div class="row">
@@ -38,12 +38,12 @@ width:22px;
                             <img src="{{asset ('assets/images/ico/Square-white.jpg')}}" alt="profile-image" class="profile-card-img" >
                         @endif
                      
-                        <p class="heading-third mt-3">
-                           {{$tutor->full_name}}
+                        <p class="heading-third mt-3 text-capitalize">
+                            {{$tutor->full_name}}
                            <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="bottom" title="This user is verified by the tutorvy authorities due to his sustained and appreciatable performance in the field" aria-hidden="true" viewBox="0 0 14 14"  role="img" style="width:16px;vertical-align: text-top;">
                            <path fill="#1273FE" d="M13.72 7.03c.45-.56.34-1.39-.24-1.82l-.55-.41c-.34-.25-.53-.66-.51-1.08l.03-.68c.03-.72-.53-1.32-1.25-1.33h-.68c-.42 0-.81-.22-1.05-.57L9.11.57c-.39-.6-1.2-.75-1.79-.33l-.55.4c-.34.24-.79.3-1.18.15L4.95.55c-.67-.25-1.41.11-1.64.79l-.21.65c-.14.4-.46.71-.87.82l-.65.18C.89 3.19.5 3.92.71 4.6l.21.65c.13.41.04.85-.22 1.18l-.42.54c-.45.56-.34 1.39.24 1.81l.55.41c.34.25.53.66.51 1.08l-.03.68c-.03.72.54 1.32 1.25 1.33h.68c.42 0 .81.22 1.05.57l.37.57c.39.6 1.21.75 1.79.33l.55-.4c.34-.25.78-.31 1.18-.16l.64.24c.67.25 1.41-.1 1.64-.79l.21-.65c.13-.4.45-.71.86-.82l.65-.17c.69-.19 1.09-.92.87-1.61l-.21-.65c-.13-.4-.05-.85.22-1.18l.42-.53zM6.06 9.84L3.5 7.27l1.23-1.23 1.33 1.33 3.21-3.21L10.5 5.4 6.06 9.84z"></path></svg>
                         </p>
-                        <p class="profile-tutor mt-0" style="">
+                        <p class="profile-tutor mt-0 text-capitalize" style="">
                             {{$tutor->tagline}}
                         </p>
                         <!-- <button class="schedule-btn w-100 mt-3" onclick="location.href = '#';">
@@ -99,25 +99,25 @@ width:22px;
                                     <span class="paragraph-text1">4.0</span>
                                 </p>
                                 @else
-                                <p class="name-text1 paragraph-text1 mb-0">
+                                <!-- <p class="name-text1 paragraph-text1 mb-0">
                                     <span class="fa fa-star "></span>
                                     <span class="fa fa-star "></span>
                                     <span class="fa fa-star "></span>
                                     <span class="fa fa-star "></span>
                                     <span class="fa fa-star "></span>
                                     <span class="paragraph-text1">0.0</span>
-                                </p>
+                                </p> -->
                                 @endif
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
-                        <div class="row mt-3">
-                            <div class="col-md-3">
+                <div class="container-fluid mt-3   profile-header">
+                        <div class="row ">
+                            <div class="col-md-2">
                                 <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <p class="profile-tutor">
                                     Subjects
                                 </p>
@@ -158,7 +158,7 @@ width:22px;
                         </div> --}}
 
                     </div>
-                    <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
+                    <div class="container-fluid mt-3   profile-header">
                         <p class="heading-forth">
                             Education
                         </p>
@@ -167,13 +167,10 @@ width:22px;
                         <p class="profile-tutor mt-3 ">
                             {{$edu->degree->name}} {{$edu->subject->name}} {{ $edu->c_year }}
                         </p>
-                        <p class="paragraph-text " style="">
-                        
-                        </p>
                         @endforeach
 
                     </div>
-                    <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
+                    <div class="container-fluid mt-3  profile-header">
                         <p class="heading-forth">
                             Experience
                         </p>
