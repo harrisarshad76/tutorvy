@@ -39,7 +39,7 @@
                     </div>
                 @endif
                 <div class="row bg-white ml-2 mr-2">
-                    <div class="col-md-12 mb-3 ">
+                    <!-- <div class="col-md-12 mb-3 ">
                         <div class=" card  bg-toast infoCard">
                             <div class="card-body row">
                                 <div class="col-md-1 text-center">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <!-- <h3 class="heading-third">
                             All tickets

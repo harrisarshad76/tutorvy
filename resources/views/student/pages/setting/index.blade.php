@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 mb-1 ">
+                    <!-- <div class="col-md-12 mb-1 ">
                         <div class=" card  bg-toast infoCard">
 
 
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-body">
@@ -187,7 +187,7 @@
                                                     </div>
                                                     <small>New Password</small>
                                                     <div class="form-group pass_show">
-                                                        <input type="text" name="new_password" class="form-control"
+                                                        <input type="text" name="new_password" id="new_password" class="form-control"
                                                             placeholder="***********">
                                                         @error('new_password')
                                                             <span class="small text-danger">{{ $message }}</span>
@@ -204,9 +204,34 @@
                                                     </div>
 
                                                     <div class="float-right">
-                                                        <button type="submit" class="schedule-btn">Save changes</button>
+                                                        <button type="submit" class="schedule-btn" id="RegPass">Save changes</button>
                                                     </div>
                                                 </form>
+                                            </div>
+                                            
+                                            <div class="col-md-6 mt-3">
+                                                <div id="passTech">
+                                                    <!-- Field should have at least: -->
+                                                    <div class="row mt-3">
+                                                        <div class="col-md-12">
+                                                            <ul>
+                                                                <li id="capital_letter"><i class="fa fa-times"></i>
+                                                                    One uppercase letter</li>
+                                                                <li id="lower_letter"><i class="fa fa-times"></i> One
+                                                                    lowercase letter</li>
+                                                                <li id="numeric"><i class="fa fa-times"></i> One
+                                                                    numeric value</li>
+                                                                <li id="special_character"><i
+                                                                        class="fa fa-times"></i> One special
+                                                                    character</li>
+                                                                <li id="min_character"><i class="fa fa-times"></i> 8
+                                                                    characters</li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -342,7 +367,24 @@
         </div>
     </section>
 
-    <script>
+
+@endsection
+@section('scripts')
+
+
+
+<script>
+    $(document).ready(function(){
+        $("#passTech").hide();
+        
+        $("#new_password").focus(function(e) {
+            $("#passTech").show("slow");
+        });
+
+        $("#new_password").focusout(function(e) {
+            $("#passTech").hide("slow");
+        });
+    })
         function defaultMethod(value)
         {
             $.ajax({
@@ -364,8 +406,108 @@
 
         }
 
-    </script>
 
+        $("#new_password").keyup(function(e) {
+            
+            var capital_leters = new RegExp('[A-Z]');
+            var lower_leters = new RegExp('[a-z]');
+            var numeric = new RegExp('[0-9]');
+            var password = $(this).val();
+
+            if (password.match(capital_leters)) {
+                $("#capital_letter").css('color', 'green');
+                $("#capital_letter").find(".fa").removeClass("fa-times");
+                $("#capital_letter").find(".fa").addClass("fa-check");
+                $('#RegPass').removeAttr('disabled','disabled');
+            } else {
+                $("#capital_letter").css('color', 'red');
+                $("#capital_letter").find(".fa").removeClass("fa-check");
+                $("#capital_letter").find(".fa").addClass("fa-times");
+                var attr = $('#RegPass').attr('disabled','disabled');;
+
+                if (typeof attr !== 'undefined' && attr !== false) {
+                    $('#RegPass').removeAttr('disabled','disabled');
+                } else {
+                    $('#RegPass').attr('onsubmit', 'return false');
+                }
+            }
+
+            if (password.match(lower_leters)) {
+                $("#lower_letter").css('color', 'green');
+                $("#lower_letter").find(".fa").removeClass("fa-times");
+                $("#lower_letter").find(".fa").addClass("fa-check");
+                $('#RegPass').removeAttr('disabled','disabled');
+            } else {
+                $("#lower_letter").css('color', 'red');
+                $("#lower_letter").find(".fa").addClass("fa-times");
+                $("#lower_letter").find(".fa").removeClass("fa-check");
+                var attr = $('#RegPass').attr('disabled','disabled');;
+
+                if (typeof attr !== 'undefined' && attr !== false) {
+                    $('#RegPass').removeAttr('disabled','disabled');
+                } else {
+                    $('#RegPass').attr('onsubmit', 'return false');
+                }
+            }
+
+            if (password.match(numeric)) {
+                $("#numeric").css('color', 'green');
+                $("#numeric").find(".fa").removeClass("fa-times");
+                $("#numeric").find(".fa").addClass("fa-check");
+                $('#RegPass').removeAttr('disabled','disabled');
+            } else {
+                $("#numeric").css('color', 'red');
+                $("#numeric").find(".fa").addClass("fa-times");
+                $("#numeric").find(".fa").removeClass("fa-check");
+                var attr = $('#RegPass').attr('disabled','disabled');;
+
+                if (typeof attr !== 'undefined' && attr !== false) {
+                    $('#RegPass').removeAttr('disabled','disabled');
+                } else {
+                    $('#RegPass').attr('onsubmit', 'return false');
+                }
+            }
+
+            if (password.length > 8) {
+                $("#min_character").css('color', 'green');
+                $("#min_character").find(".fa").removeClass("fa-times");
+                $("#min_character").find(".fa").addClass("fa-check");
+                $('#RegPass').removeAttr('disabled','disabled');
+            } else {
+                $("#min_character").css('color', 'red');
+                $("#min_character").find(".fa").addClass("fa-times");
+                $("#min_character").find(".fa").removeClass("fa-check");
+                var attr = $('#RegPass').attr('disabled','disabled');;
+
+                if (typeof attr !== 'undefined' && attr !== false) {
+                    $('#RegPass').removeAttr('disabled','disabled');
+                } else {
+                    $('#RegPass').attr('onsubmit', 'return false');
+                }
+            }
+
+            var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+            if (format.test(password)) {
+                $("#special_character").css('color', 'green');
+                $("#special_character").find(".fa").removeClass("fa-times");
+                $("#special_character").find(".fa").addClass("fa-check");
+                $('#RegPass').removeAttr('disabled','disabled');
+            } else {
+                $("#special_character").css('color', 'red');
+                $("#special_character").find(".fa").addClass("fa-times");
+                $("#special_character").find(".fa").removeClass("fa-check");
+                var attr = $('#RegPass').attr('disabled','disabled');;
+
+                if (typeof attr !== 'undefined' && attr !== false) {
+                    $('#RegPass').removeAttr('disabled','disabled');
+                } else {
+                    $('#RegPass').attr('onsubmit', 'return false');
+                }
+            }
+
+        });
+    </script>
 
 
 @endsection
