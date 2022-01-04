@@ -104,6 +104,11 @@
         font-family: 'Poppins';
         border-radius: 4px;
         text-decoration: none;
+        min-width: 168px;
+    }
+    
+    table .cencel-btn {
+        min-width: 16px;
     }
     
     .cencel-btn:focus {
@@ -160,6 +165,11 @@
         font-family: 'Poppins';
         border-radius: 4px;
         text-decoration: none;
+        min-width: 168px;
+    }
+    
+    table .schedule-btn {
+        min-width: 16px;
     }
     
     .schedule-btn:focus {
