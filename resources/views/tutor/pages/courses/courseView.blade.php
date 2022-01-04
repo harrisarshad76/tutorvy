@@ -461,7 +461,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <span class="heading-fifth" style="font-weight: 600;">Timing</span>
-                                                    <p class="paragraph-text-2 mt-1">{{ $course->basic_duration != null ? $course->basic_duration : 0 }} weeks ({{ $course->course_basic_days != null ? $course->course_basic_days : '---' }})</p>
+                                                    <p class="paragraph-text-2 mt-1">{{ $course->basic_duration != null ? $course->basic_duration : 0 }} weeks </p>
                                                 </div>
                                             </div>
                                             <div class="row ">
@@ -485,8 +485,8 @@
                                                                 <tr class="wordBreak">
                                                                     <td class="pt-4">
                                                                         <div class="w-150">
-                                                                            <span>{{date("g:i a", strtotime("$class->st_time UTC"))}} </span>
-                                                                            <p class="mt-5">{{date("g:i a", strtotime("$class->et_time UTC"))}}</p>
+                                                                            <span>{{date("g:i a", strtotime("$class->class_time UTC"))}} </span>
+                                                                            <p class="mt-5">{{date("g:i a", strtotime("$class->class_end_time UTC"))}}</p>
                                                                         </div>
                                                                     </td>
 
@@ -494,14 +494,12 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                                <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                            
                                                                         </div>
                                                                     </td>
                                                                     @else
@@ -512,32 +510,28 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                           
                                                                         </div>
                                                                     </td>
                                                                     @else
                                                                     <td class="pt-4 pb-0">---</td>
                                                                     @endif
-
+                                
                                                                     @if($class->day == 3)
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                           
                                                                         </div>
                                                                     </td>
                                                                     @else
@@ -548,14 +542,12 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                          
                                                                         </div>
                                                                     </td>
                                                                     @else
@@ -566,14 +558,12 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                          
                                                                         </div>
                                                                     </td>
                                                                     @else
@@ -584,14 +574,12 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                            
                                                                         </div>
                                                                     </td>
                                                                     @else
@@ -602,14 +590,12 @@
                                                                     <td class="m-0 p-0 pt-4">
                                                                         <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
                                                                             <span class="heading-fifth">
-                                                                            {{$class->title}}
+                                                                            {{$class->class_title}}
                                                                             </span>
                                                                             <p class="paragraph-text-1 mb-1">
-                                                                            <small>{{date("g:i a", strtotime("$class->st_time UTC"))}}</small>
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
                                                                             </p>
-                                                                            <p class="paragraph-text">
-                                                                            {{$class->overview}}
-                                                                            </p>
+                                                                       
                                                                         </div>
                                                                     </td>
                                                                     @else

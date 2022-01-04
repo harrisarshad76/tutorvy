@@ -53,6 +53,8 @@ use App\Models\Chat;
 |--------------------------------------------------------------------------
 |
 */
+
+
 Route::get('/admins',[AdminLogin::class,'index']);
 Route::post('admin/login',[AdminLogin::class,'login'])->name('admin.login');
 Route::get('admin/logout',[AdminLogin::class,'logout'])->name('admin.logout');
@@ -607,5 +609,7 @@ Route::post('/checkEmail',[GeneralController::class,'isEmailTaken'])->name('avai
 |
 */
 
+Route::get('/mails', [App\Http\Controllers\HomeController::class, 'mail']); 
+    
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

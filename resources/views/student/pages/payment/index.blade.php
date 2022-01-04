@@ -22,7 +22,7 @@
                     </div>
                 @endif
                 <div class="row ml-2 mr-2 ">
-                    <div class="col-md-12 mb-3 ">
+                    <!-- <div class="col-md-12 mb-3 ">
                         <div class=" card mt-0 bg-toast infoCard">
                             <div class="card-body row">
                                 <div class="col-md-1 text-center">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <p class="heading-third ">
                             My wallet

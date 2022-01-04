@@ -11,6 +11,26 @@
         text-decoration:none;
         color:#00132D ;
     }
+    #Dushman{
+        position: absolute;
+        background: #007bff;
+        color: #fff;
+        border: 1px solid #007bff;
+        padding: 6px 25px;
+        border-radius: 9px;
+        z-index: 9;
+        left: 16px;
+        top: 24px;
+        display:none;
+    }
+#toro{
+    font-size:16px;
+    color:#00132D;
+    padding-left:5px;
+}
+#toro:hover{
+    color:#007bff;
+}
 </style>
   <!--section start  -->
 
@@ -62,7 +82,7 @@
                     <div class="col-md-6">
                         <label class="form-label heading-forth">Starting Date</label>
                         <div class="input-serachs ">
-                            <input type="text" name="start_date" class="" required="" placeholder="From" onfocus="(this.type='date')" required>
+                            <input type="text" name="start_date" id="strt_date" class="" required="" placeholder="From" onfocus="(this.type='date')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -101,9 +121,14 @@
                     <div class="row">
                        
                         <div class="col-md-4">
-                            <label for="" class="form-label heading-forth"> Course Duration</label>
+                            <label for="" class="form-label heading-forth"> Course Duration <a href="#"  id="toro"  class="pull-right">
+                                <i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+                            </label>
+                            <small id="Dushman">
+                                This will only be enabled if Starting Date is given
+                            </small> 
                             <div class="input-options ">
-                                <select name="basic_duration" id="basic_duration" style="padding:8px;">
+                                <select name="basic_duration" id="basic_duration" disabled="disabled" style="padding:8px;">
                                     <option disabled selected required>Course Duration</option>
                                     <option value="1">1 week</option>
                                     <option value="2">2 week</option>
@@ -114,6 +139,7 @@
                                 </select>
                             </div>
                         </div>
+                           
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Price</label>
                             <div class="input-options ">
@@ -194,6 +220,15 @@
 @section('js')
 @include('js_files.tutor.course')
 <script type="text/javascript">
+
+$("#strt_date").change(function(){
+    if($("#strt_date").val() != "" && $("#strt_date").val() != "[]" && $("#strt_date").val() != null){
+        $("#basic_duration").removeAttr('disabled','disabled');
+    }
+    else{
+        $("#basic_duration").attr('disabled','disabled');
+    }
+});
 $("#thumbnail").change(
     function () {
     //Get reference of FileUpload.
@@ -271,31 +306,31 @@ $("#basic_duration").change(function(){
                         <label class="" for=""><b> Week `+i+` : </b></label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('monday_`+i+`',`+i+`,'monday')" class="custom-control-input" name="monday_`+i+`" id="monday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('monday_`+i+`',`+i+`,'monday',1)" class="custom-control-input" name="monday_`+i+`" id="monday_`+i+`">
                         <label class="custom-control-label" for="monday_`+i+`">Monday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('tuesday_`+i+`',`+i+`,'tuesday')" class="custom-control-input" name="tuesday_`+i+`" id="tuesday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('tuesday_`+i+`',`+i+`,'tuesday',2)" class="custom-control-input" name="tuesday_`+i+`" id="tuesday_`+i+`">
                         <label class="custom-control-label" for="tuesday_`+i+`">Tuesday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('wednesday_`+i+`',`+i+`,'wednesday')" class="custom-control-input" name="wednesday_`+i+`" id="wednesday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('wednesday_`+i+`',`+i+`,'wednesday',3)" class="custom-control-input" name="wednesday_`+i+`" id="wednesday_`+i+`">
                         <label class="custom-control-label" for="wednesday_`+i+`">Wednesday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('thursday_`+i+`',`+i+`,'thursday')" class="custom-control-input" name="thursday_`+i+`" id="thursday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('thursday_`+i+`',`+i+`,'thursday',4)" class="custom-control-input" name="thursday_`+i+`" id="thursday_`+i+`">
                         <label class="custom-control-label" for="thursday_`+i+`">Thursday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('friday_`+i+`',`+i+`,'friday')" class="custom-control-input" name="friday_`+i+`" id="friday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('friday_`+i+`',`+i+`,'friday',5)" class="custom-control-input" name="friday_`+i+`" id="friday_`+i+`">
                         <label class="custom-control-label" for="friday_`+i+`">Friday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('saturday_`+i+`',`+i+`,'saturday')" class="custom-control-input" name="saturday_`+i+`" id="saturday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('saturday_`+i+`',`+i+`,'saturday',6)" class="custom-control-input" name="saturday_`+i+`" id="saturday_`+i+`">
                         <label class="custom-control-label" for="saturday_`+i+`">Saturday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('sunday_`+i+`',`+i+`,'sunday')" class="custom-control-input" name="sunday_`+i+`" id="sunday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('sunday_`+i+`',`+i+`,'sunday',7)" class="custom-control-input" name="sunday_`+i+`" id="sunday_`+i+`">
                         <label class="custom-control-label" for="sunday_`+i+`">Sunday</label>
                     </div>
                 </div>
@@ -381,7 +416,7 @@ else{
    
 }
 
-function aleeert(id,i,day){
+function aleeert(id,i,day,day_id){
 
     var html2="";
     var text ="";
@@ -417,26 +452,37 @@ function aleeert(id,i,day){
         }
         html2 += `<div class="col-md-3 pl-0" id="bas_` + id + `">
                     <div class="m-1 bg-price p-3">
-                        <span class="heading-forth"> `+text+`</span>
+                        <div class="row">
+                            <div class="col-md-5 pt-2">
+                                <span class="heading-forth "> `+text+`</span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-serachs ">
+                                    <input type="date" name="basic_class_date[` + i + `][`+day_id+`]" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
+                                </div>
+                            </div>
+
+                        </div>
+                        
                         <div class="input-serachs mt-2">
-                            <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
+                            <input type="txt" name="basic_class_title[` + i + `][`+day_id+`]" placeholder="Write Class Title" required />
                         </div>
                         <div class="input-serachs mt-2 mb-2">
                             
 
                             <textarea class="form-control texteara-s"
-                                name="basic_class_overview[` + i + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                                name="basic_class_overview[` + i + `][`+day_id+`]" rows="6" placeholder="Write Class Overview" required></textarea>
                             
                         </div>
                         <span class="heading-forth"> Timing</span>
                         <div class="input-options ">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" name="basic_class_start_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                    <input type="text" name="basic_class_start_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
                                     onfocus="(this.type='time')">
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="basic_class_end_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                    <input type="text" name="basic_class_end_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
                                         onfocus="(this.type='time')">
                                 </div>
                             </div>
@@ -445,11 +491,31 @@ function aleeert(id,i,day){
                 
                 </div>`;
         $("#extraFields_"+i).append(html2);
+        var tuna = $("#strt_date").val();
+        $(".dateCourse")[0].setAttribute('min', tuna);
     }
     else{
         $("#extraFields_"+i).find("#bas_"+id).remove();
     }
 }
+
+$("#toro").mouseenter(function(){
+
+    $("#Dushman").css("display","block");
+    var ter = $("#strt_date").val();
+    if(ter == "" || ter == "[]" || ter == null){
+        $("#strt_date").focus();
+    }
+    else{
+        $("#basic_duration").focus();
+    }
+})
+$("#toro").mouseleave(function(){
+    
+    $("#Dushman").css("display","none");
+    
+})
+
 
 </script>
 @endsection

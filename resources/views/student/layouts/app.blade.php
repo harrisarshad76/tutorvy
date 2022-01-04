@@ -71,11 +71,12 @@
             background:none;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-                color: #fff !important;
-            }
-            .g-modal-size {
-    color: #fff;
-    width: 610px;}
+            color: #fff !important;
+        }
+        .g-modal-size {
+            color: #fff;
+            width: 610px;
+        }
     </style>
 </head>
 

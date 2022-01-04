@@ -78,7 +78,7 @@
         <div class="container-fluid m-0 p-0">
             <p class="heading-first ml-3 mr-3">Find a Tutor</p>
             <div class="row bg-white ml-2 mr-2 ">
-                <div class="col-md-12 mb-1 ">
+                <!-- <div class="col-md-12 mb-1 ">
                     <div class=" card  bg-toast infoCard">
 
 
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3">
                     <div class="">
                         <div class="card-body">
