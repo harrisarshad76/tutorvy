@@ -52,6 +52,11 @@
     color: #1173FF;
     font-family: 'Poppins';
     border-radius: 4px;
+    min-width: 168px;
+}
+
+table .cencel-btn {
+    min-width: 16px;
 }
 
 .cencel-btn:focus {
@@ -1473,6 +1478,11 @@ h3 {
     font-weight: 400;
     font-family: 'Poppins';
     border-radius: 4px;
+    min-width: 168px;
+}
+
+table .schedule-btn {
+    min-width: 16px;
 }
 
 .schedule-btn:focus {

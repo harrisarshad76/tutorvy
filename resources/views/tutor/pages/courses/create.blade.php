@@ -13,9 +13,9 @@
     }
     #Dushman{
         position: absolute;
-        background: red;
+        background: #007bff;
         color: #fff;
-        border: 1px solid red;
+        border: 1px solid #007bff;
         padding: 6px 25px;
         border-radius: 9px;
         z-index: 9;
@@ -23,8 +23,14 @@
         top: 24px;
         display:none;
     }
-
-
+#toro{
+    font-size:16px;
+    color:#00132D;
+    padding-left:5px;
+}
+#toro:hover{
+    color:#007bff;
+}
 </style>
   <!--section start  -->
 
@@ -119,7 +125,7 @@
                                 <i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
                             </label>
                             <small id="Dushman">
-                                This will only be enabled if start course date value is given
+                                This will only be enabled if Starting Date is given
                             </small> 
                             <div class="input-options ">
                                 <select name="basic_duration" id="basic_duration" disabled="disabled" style="padding:8px;">
@@ -493,6 +499,22 @@ function aleeert(id,i,day,day_id){
     }
 }
 
+$("#toro").mouseenter(function(){
+
+    $("#Dushman").css("display","block");
+    var ter = $("#strt_date").val();
+    if(ter == "" || ter == "[]" || ter == null){
+        $("#strt_date").focus();
+    }
+    else{
+        $("#basic_duration").focus();
+    }
+})
+$("#toro").mouseleave(function(){
+    
+    $("#Dushman").css("display","none");
+    
+})
 
 
 </script>

@@ -23,15 +23,12 @@
             <form action="{{route('tutor.course.update',[$course->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row container-bg ml-1 mr-1 pt-3 pb-3">
-                    <div class="col-md-12">
-                        <h3 class="pt-2 pl-3">
-                            Course details
-                        </h3>
-                    </div>
                     <div class="col-md-7">
                         <div class="container-fluid mt-3">
-                          
-                            <div class=" mt-3">
+                            <h3>
+                                Course details
+                            </h3>
+                            <div class=" mt-5">
                                 <span class="heading-forth">Course Title</span>
                                 <div class="input-serachs mt-2">
                                     <input type="search" name="course_title" value="{{$course->title}}" placeholder="How to create your online courses in 3 steps." />
@@ -50,44 +47,53 @@
                                 <div class="mt-3">
                                     <div class="mb-3">
                                         <label class="form-label heading-forth">About course</label>
-                                        <textarea class="form-control texteara-s" name="about" rows="5">{{$course->about}}</textarea>
+                                        <textarea class="form-control texteara-s" name="about" rows="7">{{$course->about}}</textarea>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5 mt-3">
+                    <div class="col-md-5 mt-5">
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="form-label heading-forth">Starting Date</label>
-                                <div class="input-serachs ">
-                                    <input type="text" name="start_date" id="strt_date" class="" required="" value="{{date('m/d/Y',strtotime($course->start_date))}}" onfocus="(this.type='date')">
+                                <div class="mt-3">
+                                    <div class="mb-3">
+                                        <label class="form-label heading-forth">Starting Date</label>
+                                        <input type="text" name="start_date" class="form-control texteara-s mt-2 pt-2 mb-2" required="" value="{{date('m/d/Y',strtotime($course->start_date))}}" onfocus="(this.type='date')">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label heading-forth">Available Seats</label>
-                                <div class="input-serachs ">
-                                    <input type="text" name="seats" class="" required value="{{$course->seats}}" placeholder="Seats" onfocus="(this.type='number')">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <label class="form-label heading-forth">Intro Video URL</label>
-                                <div class="input-serachs ">
-                                    <input type="url"  name="video" data-default-file="{{asset($course->video)}}" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" required />
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <label for=""  class="form-label heading-forth ">Course Thumbnail</label>
-                                <div class="input-serachs ">
-                                    <input type="file" class="dropify" name="thumbnail" id="thumbnail" data-default-file="{{asset($course->thumbnail)}}"  >
+                                <div class="mt-3">
+                                    <div class="mb-3">
+                                        <label class="form-label heading-forth">Available Seats</label>
+                                        <input type="text" name="seats" class="form-control texteara-s mt-2 pt-2 mb-2" required value="{{$course->seats}}" placeholder="Seats" onfocus="(this.type='number')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="mt-4">
+                            <div style="padding-top:11px;">
+                                    <!-- <label for="" class="pt-2 ">Intro Video</label>
+                                    <input type="file" class="dropify" name="video" id="video" > -->
+                                <span class="heading-forth">Intro Video URL</span>
+                                <div class="input-serachs mt-2">
+                                    <input type="url"  name="video" data-default-file="{{asset($course->video)}}" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" />
+                                </div>
+                            </div>
+                            <div class="bg-edit mt-4 text-center">
+                                <label for=""  class="pt-2 ">Course Thumbnail</label>
+                                    <input type="file" class="dropify" name="thumbnail" id="thumbnail"  data-default-file="{{asset($course->thumbnail)}}">
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <div class="container-fluid">
+                </div>
+                <div class="container-fluid mt-3">
+                    <div class="row">
+                        <div class="col-md-7">
                             <h3 class="">Course levels</h3>
                             <p class="paragraph-text">
                                 There are many variations of passages of Lorem Ipsum available, but the majority have
@@ -96,210 +102,86 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-5"></div>
-                    <div class="col-md-12   mb-1">
-                        <div class="container-fluid">
-                            <div class="row">
-                            
-                                <div class="col-md-4">
-                                    <label for="" class="form-label heading-forth"> Course Duration 
-                                    </label>
-                                    <div class="input-options ">
-                                        <select name="basic_duration" id="basic_duration" disabled="disabled" style="padding:8px;">
-                                            <option disabled selected>Course duration</option>
-                                            <option @if($course->basic_duration == 1) selected @endif value="1">1 week</option>
-                                            <option @if($course->basic_duration == 2) selected @endif value="2">2 week</option>
-                                            <option @if($course->basic_duration == 3) selected @endif value="3">3 week</option>
-                                            <option @if($course->basic_duration == 4) selected @endif value="4">4 week</option>
-                                            <option @if($course->basic_duration == 5) selected @endif value="5">5 week</option>
-                                            <option @if($course->basic_duration == 6) selected @endif value="6">6 week</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label heading-forth"> Price</label>
-                                    <div class="input-options ">
-                                            <input type="number" name="basic_price" class="form-control" value="{{$course->basic_price}}" placeholder="Add course price">
-                                    </div>
-                                </div>
-                                <div class="col-md-12  " id="week_schedule">
-                                    <?php
-                                     $round = $course->basic_duration;
-                                     for($i = 1;$i<=$round;$i++){
-
-                                   
-                                    ?>
-                                    <div class="d-flex mt-3 mb-2">
-                                        <div class="">
-                                            <label class="" for=""><b> Week {{$i}} : </b></label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('monday_{{$i}}',{{$i}},'monday')" class="custom-control-input" name="monday_{{$i}}" id="monday_{{$i}}">
-                                            <label class="custom-control-label" for="monday_{{$i}}">Monday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('tuesday_{{$i}}',{{$i}},'tuesday')" class="custom-control-input" name="tuesday_{{$i}}" id="tuesday_{{$i}}">
-                                            <label class="custom-control-label" for="tuesday_{{$i}}">Tuesday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('wednesday_{{$i}}',{{$i}},'wednesday')" class="custom-control-input" name="wednesday_{{$i}}" id="wednesday_{{$i}}">
-                                            <label class="custom-control-label" for="wednesday_{{$i}}">Wednesday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('thursday_{{$i}}',{{$i}},'thursday')" class="custom-control-input" name="thursday_{{$i}}" id="thursday_{{$i}}">
-                                            <label class="custom-control-label" for="thursday_{{$i}}">Thursday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('friday_{{$i}}',{{$i}},'friday')" class="custom-control-input" name="friday_{{$i}}" id="friday_{{$i}}">
-                                            <label class="custom-control-label" for="friday_{{$i}}">Friday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('saturday_{{$i}}',{{$i}},'saturday')" class="custom-control-input" name="saturday_{{$i}}" id="saturday_{{$i}}">
-                                            <label class="custom-control-label" for="saturday_{{$i}}">Saturday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('sunday_{{$i}}',{{$i}},'sunday')" class="custom-control-input" name="sunday_{{$i}}" id="sunday_{{$i}}">
-                                            <label class="custom-control-label" for="sunday_{{$i}}">Sunday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <div class=" mt-2 row" id="extraFields_{{$i}}">
-
-                                            <div class="col-md-3 pl-0" id="bas_monday_{{$i}}">
-                                                <div class="m-1 bg-price p-3">
-                                                    <div class="row">
-                                                        <div class="col-md-5 pt-2">
-                                                            <span class="heading-forth "> Monday</span>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <div class="input-serachs ">
-                                                                <input type="date" name="" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')" min="2022-01-13">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    
-                                                    <div class="input-serachs mt-2">
-                                                        <input type="txt" name="basic_class_title[1]" placeholder="Write Class Title" required="">
-                                                    </div>
-                                                    <div class="input-serachs mt-2 mb-2">
-                                                        
-
-                                                        <textarea class="form-control texteara-s" name="basic_class_overview[1]" rows="6" placeholder="Write Class Overview" required=""></textarea>
-                                                        
-                                                    </div>
-                                                    <span class="heading-forth"> Timing</span>
-                                                    <div class="input-options ">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="basic_class_start_time[1]" class="form-control texteara-s mt-2 pt-2 mb-2" required="" placeholder="From" onfocus="(this.type='time')">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="basic_class_end_time[1]" class="form-control texteara-s mt-2 pt-2 mb-2" required="" placeholder="To" onfocus="(this.type='time')">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <?php
-                                   }
-
-                                   
-                                    ?>
-
-                                </div>
-                                
-                                
-                                <div class="col-md-2">
-                                    <div class="mt-3 row">
-                                        <div class="col-md-1 ">
-                                            <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_home_work != null) checked @endif  name="basic_home_work" id=""> </span>
-                                        </div>
-                                        <div class="col-md-10 m-0 p-0 pl-2">
-                                            <span class="paragraph-text"> Home work</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mt-3 row">
-                                        <div class="col-md-1">
-                                            <span class="checkbox-edit"> <input type="checkbox"  @if($course->basic_quiz != null) checked @endif name="basic_quiz" id=""> </span>
-                                        </div>
-                                        <div class="col-md-10 m-0 p-0 pl-2">
-                                            <span class="paragraph-text"> Quiz</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mt-3 row">
-                                        <div class="col-md-1">
-                                            <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_final != null) checked @endif   name="basic_final" id=""> </span>
-                                        </div>
-                                        <div class="col-md-10 m-0 p-0 pl-2">
-                                            <span class="paragraph-text"> Final test</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="mt-3 row">
-                                        <div class="col-md-1">
-                                            <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_one_one != null) checked @endif name="basic_one_one" id=""> </span>
-                                        </div>
-                                        <div class="col-md-10 m-0 p-0 pl-2">
-                                            <span class="paragraph-text"> One to one session with tutor</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mt-3 row">
-                                        <div class="col-md-1">
-                                            <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_note != null) checked @endif name="basic_note" id=""> </span>
-                                        </div>
-                                        <div class="col-md-10 m-0 p-0 pl-2">
-                                            <span class="paragraph-text"> Note</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="text-right mt-4 mb-4">
-                            <input type="submit" class="btn-general pt-3 pb-3" value="Submit course" />
-                        </div>
-                    </div>
                 </div>
-                        
                 <div class="container-fluid mt-3 pb-5">
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-4 border-right mb-1">
+
+                                <div class="text-center heading-forth">
+                                    Basic
+                                </div>
                                 <div class="adddivs-1" id="basicNew">
                                     @forelse ($course->outline->where('level',1) as $i=>$basic)
-                                        <div class="input-serachs mt-2">
-                                            <input type="search" name="basic_title[]" value="{{$basic->title}}" placeholder="Write course outline" />
-                                        </div>
-                                        <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
-                                        name="basic_explain[]" rows="6">{{$basic->explain}}</textarea>
+                                    <div class="input-serachs mt-2">
+                                        <input type="search" name="basic_title[]" value="{{$basic->title}}" placeholder="Write course outline" />
+                                    </div>
+                                    <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
+                                    name="basic_explain[]" rows="6">{{$basic->explain}}</textarea>
                                     @empty
-                                        <div class="input-serachs mt-2">
-                                            <input type="search" name="basic_title[1]" value="Title" placeholder="Write course outline" />
-                                        </div>
-                                        <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
-                                        name="basic_explain[1]" rows="6">Explain</textarea>
+                                    <div class="input-serachs mt-2">
+                                        <input type="search" name="basic_title[1]" value="Title" placeholder="Write course outline" />
+                                    </div>
+                                    <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
+                                    name="basic_explain[1]" rows="6">Explain</textarea>
                                     @endforelse
                                 </div>
                                 <div class="text-center basicMore paid-text-1 btn w-100 mt-3 buttonAdd-1">
-                                    <a href="#basicNew"> + Add more </a>
+                                <a href="#basicNew"> + Add more </a>
                                 </div>
 
                                 <div class="w-100 border-bottom">&nbsp;</div>
+
+                                <div class="mt-3 row">
+                                    <div class="col-md-1 ">
+                                        <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_home_work != null) checked @endif  name="basic_home_work" id=""> </span>
+                                    </div>
+                                    <div class="col-md-11 m-0 p-0 pl-2">
+                                        <span class="paragraph-text"> Home work</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 row">
+                                    <div class="col-md-1">
+                                        <span class="checkbox-edit"> <input type="checkbox"  @if($course->basic_quiz != null) checked @endif name="basic_quiz" id=""> </span>
+                                    </div>
+                                    <div class="col-md-11 m-0 p-0 pl-2">
+                                        <span class="paragraph-text"> Quiz</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 row">
+                                    <div class="col-md-1">
+                                        <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_final != null) checked @endif   name="basic_final" id=""> </span>
+                                    </div>
+                                    <div class="col-md-11 m-0 p-0 pl-2">
+                                        <span class="paragraph-text"> Final test</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 row">
+                                    <div class="col-md-1">
+                                        <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_one_one != null) checked @endif name="basic_one_one" id=""> </span>
+                                    </div>
+                                    <div class="col-md-11 m-0 p-0 pl-2">
+                                        <span class="paragraph-text"> One to one session with tutor</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 row">
+                                    <div class="col-md-1">
+                                        <span class="checkbox-edit"> <input type="checkbox" @if($course->basic_note != null) checked @endif name="basic_note" id=""> </span>
+                                    </div>
+                                    <div class="col-md-11 m-0 p-0 pl-2">
+                                        <span class="paragraph-text"> Note</span>
+                                    </div>
+                                </div>
+                                <div class="input-options mt-3">
+                                    <select name="basic_duration">
+                                        <option disabled selected>Course duration</option>
+                                        <option @if($course->basic_duration == 1) selected @endif value="1">1 week</option>
+                                        <option @if($course->basic_duration == 2) selected @endif value="2">2 week</option>
+                                        <option @if($course->basic_duration == 3) selected @endif value="3">3 week</option>
+                                        <option @if($course->basic_duration == 4) selected @endif value="4">4 week</option>
+                                        <option @if($course->basic_duration == 5) selected @endif value="5">5 week</option>
+                                        <option @if($course->basic_duration == 6) selected @endif value="6">6 week</option>
+                                    </select>
+                                </div>
 
                                 <h3 class="mt-3 pb-2">
                                     Timing 
@@ -344,11 +226,17 @@
                                 @endif
                                 <div class=" mt-2" id="extraFields"></div>
 
+                                <h3 class="mt-3 pb-2">
+                                    Price
+                                </h3>
+                                <div class="input-options mt-2">
+                                    <input type="number" name="basic_price" class="form-control" value="{{$course->basic_price}}" placeholder="Add course price">
+                                </div>
 
 
                         </div>
 
-                        <!-- <div class="col-md-4 border-right mb-1">
+                        <div class="col-md-4 border-right mb-1">
 
                             <div class="text-center heading-forth">
                                 standard
@@ -622,7 +510,7 @@
                                     <input type="number" name="advance_price" class="form-control" value="{{$course->advance_price}}" placeholder="Add course price">
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
 
@@ -680,11 +568,6 @@
 
         $('#advNew').append(html);
     });
-
-
-$(document).ready(function(){
-    
-})
 
 </script>
 @endsection
