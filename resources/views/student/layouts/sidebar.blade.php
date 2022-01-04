@@ -83,7 +83,7 @@
                  </a>
              </li>
              <li class="btn mt-3">
-                 <a href="{{route('knowledge')}}">
+                 <a href="help.tutorvy.com">
                      <img class="knowledge-sid mr-2" src="{{asset('assets/images/ico/setting-ico.png')}}" alt="setting-ico">
                      <span class="knowledge-show mt-3">
                          Knowledge Base
@@ -149,8 +149,8 @@
                      Settings
                  </a>
              </li>
-             <li class="btn @if(\Request::path() === 'student/knowledge')  @endif w-100">
-                 <a href="{{route('knowledge')}}">
+             <li class="btn w-100">  
+                 <a href="www.help.tutorvy.com">
                      <img src="{{asset('assets/images/ico/book-ico.png')}}" alt="setting-ico" class=" mr-2">
                      Knowledge Base
                  </a>

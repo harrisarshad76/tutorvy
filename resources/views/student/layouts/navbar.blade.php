@@ -147,8 +147,13 @@
                         <ul class="dropdown-menu classdrop " style="padding-bottom: 5px;padding-top: 5px;"
                             role="menu" aria-labelledby="imageDropdown">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="{{route('tutor.profile')}}">
+                                <a role="menuitem" tabindex="-1" href="{{route('student.profileView',[Auth::user()->id])}}">
                                     Profile
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="{{route('student.profile')}}">
+                                    Edit Profile
                                 </a>
                             </li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
@@ -270,6 +275,11 @@
                         <li>
                             <a tabindex="-1" class="" href="{{route('student.profileView',[Auth::user()->id])}}">
                                 Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" class="" href="{{route('student.profile')}}">
+                                Edit Profile
                             </a>
                         </li>
                         <li>

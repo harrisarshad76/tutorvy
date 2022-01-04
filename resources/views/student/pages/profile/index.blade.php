@@ -190,6 +190,19 @@
             border-radius:100%;
             margin-right:12px;
         }
+        .tik {
+                height:730px;
+                overflow-x:hidden;
+                overflow-y:auto;
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+        .tik::-webkit-scrollbar {
+            display: none;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+          
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -223,7 +236,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 tik">
                         <!-- <div class="row">
                             <div class="col-md-12 mb-1 ">
                                 <div class=" card  bg-toast infoCard">
@@ -246,7 +259,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="card">
+                        <div class="card mb-5">
                             <div class="card-body">
                                 <div class="tab-content" id="v-pills-tabContent chang_photo">
 
