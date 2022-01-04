@@ -11,6 +11,12 @@ width:22px;
     .no-decor:hover{
         text-decoration:none;
     }
+    .dataTables_info{
+        display:none;
+    }
+    .dataTables_paginate{
+        display:none;
+    }
 </style>
 <link rel="stylesheet" href="{{asset('assets/css/profile.css')}}">
 <div class="content-wrapper " style="overflow: hidden;">
@@ -112,78 +118,89 @@ width:22px;
                     </div>
                 </div>
                 <div class="card">
-                <div class="container-fluid mt-3   profile-header">
-                        <div class="row ">
-                            <div class="col-md-2">
-                                <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
-                            </div>
-                            <div class="col-md-10">
-                                <p class="profile-tutor">
-                                    Subjects
-                                </p>
-                                @foreach ($tutor->teach as $i => $teach)
-                                <p class="paragraph-text mb-0">
-                                    {{$teach->subject->name}}
-                                    @if(($loop->count-1) > $i){{","}}@endif
-                                </p>
-                                @endforeach
+                    <div class="card-body">
+                        <div class="container-fluid   profile-header">
+                            <div class="row ">
+                                <div class="col-md-2">
+                                    <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="profile-tutor">
+                                        Subjects
+                                    </p>
+                                    @foreach ($tutor->teach as $i => $teach)
+                                    <p class="paragraph-text mb-0">
+                                        {{$teach->subject->name}}
+                                        @if(($loop->count-1) > $i){{","}}@endif
+                                    </p>
+                                    @endforeach
 
+                                </div>
                             </div>
+                            {{-- <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="profile-tutor">
+                                        Subjects
+                                    </p>
+                                    <p class="paragraph-text" style="line-height: 0;">
+                                        Physics, Chemistry
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="profile-tutor">
+                                        Subjects
+                                    </p>
+                                    <p class="paragraph-text" style="line-height: 0;">
+                                        Physics, Chemistry
+                                    </p>
+                                </div>
+                            </div> --}}
+
                         </div>
-                        {{-- <div class="row mt-3">
-                            <div class="col-md-3">
-                                <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
-                            </div>
-                            <div class="col-md-9">
-                                <p class="profile-tutor">
-                                    Subjects
-                                </p>
-                                <p class="paragraph-text" style="line-height: 0;">
-                                    Physics, Chemistry
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-3">
-                                <img src="{{asset('assets/images/ico/red-icons.png')}}" alt="blue-ico">
-                            </div>
-                            <div class="col-md-9">
-                                <p class="profile-tutor">
-                                    Subjects
-                                </p>
-                                <p class="paragraph-text" style="line-height: 0;">
-                                    Physics, Chemistry
-                                </p>
-                            </div>
-                        </div> --}}
-
                     </div>
-                    <div class="container-fluid mt-3   profile-header">
-                        <p class="heading-forth">
-                            Education
-                        </p>
-                        <div style="border-bottom: 1px solid #D6DBE2;"></div>
-                        @foreach ($tutor->education as $edu)
-                        <p class="profile-tutor mt-3 ">
-                            {{$edu->degree->name}} {{$edu->subject->name}} {{ $edu->c_year }}
-                        </p>
-                        @endforeach
-
+                    
+                        
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-fluid mt-3   profile-header">
+                            <p class="heading-forth">
+                                <i class="fa fa-book pr-3 pl-2"></i>  Education
+                            </p>
+                            <div style="border-bottom: 1px solid #D6DBE2;"></div>
+                            @foreach ($tutor->education as $edu)
+                            <p class="profile-tutor mt-3 ">
+                                {{$edu->degree->name}} {{$edu->subject->name}} {{ $edu->c_year }}
+                            </p>
+                            @endforeach
+                        </div>  
                     </div>
-                    <div class="container-fluid mt-3  profile-header">
-                        <p class="heading-forth">
-                            Experience
-                        </p>
-                        <div style="border-bottom: 1px solid #D6DBE2;"></div>
-                        @foreach ($tutor->professional as $pro)
-                        <p class="profile-tutor mt-3 ">
-                            {{$pro->designation}} at {{$pro->organization}}
-                        </p>
-                        <p class="paragraph-text " style="">
-                            {{date('d M, Y',strtotime($pro->start_date))}} - {{date('d M, Y',strtotime($pro->end_date))}}
-                        </p>
-                        @endforeach
-                    </div>      
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-fluid mt-3  profile-header">
+                            <p class="heading-forth">
+                            <i class="fa fa-briefcase pr-3 pl-2" ></i> Experience
+                            </p>
+                            <div style="border-bottom: 1px solid #D6DBE2;"></div>
+                            @foreach ($tutor->professional as $pro)
+                            <p class="profile-tutor mt-3 ">
+                                {{$pro->designation}} at {{$pro->organization}}
+                            </p>
+                            <p class="paragraph-text " style="">
+                                {{date('d M, Y',strtotime($pro->start_date))}} - {{date('d M, Y',strtotime($pro->end_date))}}
+                            </p>
+                            @endforeach
+                        </div>  
+                    </div>
                 </div>
                 
             </div>
@@ -210,7 +227,7 @@ width:22px;
                                             <img src="{{asset('assets/images/ico/blue-clock.png')}}" alt="blue-clock">
                                         </div>
                                         <span class="heading-third ml-3">
-                                        ${{$tutor->hourly_rate != null ? $tutor->hourly_rate : 0}} <br />
+                                        ${{$tutor->hourly_rate != null ? $tutor->hourly_rate : 0}}.00 <br />
                                             <span class="heading-sixths">Per hour rate</span>
                                         </span>
                                     </div>
@@ -223,7 +240,7 @@ width:22px;
                                         </div>
                                         <span class="heading-third ml-3">
                                             9am-5pm <br />
-                                            <span class="heading-sixths ml-1">Availability</span>
+                                            <span class="heading-sixths ml-1">{{$tutor->time_zone ? "Timezone: {$tutor->time_zone}" : "availability"}}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -294,15 +311,16 @@ width:22px;
                     <p class="heading-second pt-3  mb-0">
                         Courses
                     </p>
-                    <div class="row mb-5">
-                        @foreach ($tutor->course as $course)
-                            <?php $enrolled = false; ?>
-                            @foreach($myenrollements as $enrolled)
-                                @if($course->id == $enrolled->course_id)
-                                    <?php $enrolled = true; ?>
-                                @endif
-                            @endforeach
-                            @if($course->status == 1 )
+                    
+                    <div class="row mb-3">
+                        @if($courses != "" && $courses != "[]" && $courses != null)
+                            @foreach ($courses as $course)
+                                <?php $enrolled = false; ?>
+                                @foreach($myenrollements as $enrolled)
+                                    @if($course->id == $enrolled->course_id)
+                                        <?php $enrolled = true; ?>
+                                    @endif
+                                @endforeach
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -350,47 +368,56 @@ width:22px;
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
-
+                            @endforeach
+                        @else
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        
+                                        <h6>Tutor hasn not added any course yet</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
                     </div>
-
-                    {{--
-                    <div class="row mt-5">
-                        <span class="heading-second">Student reviews</span>
-                        <div class="container">
+                    <p class="heading-second pt-3  mb-0">
+                        Student Reviews
+                    </p>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="mt-3 d-flex">
-                                    <div>
-                                        <img src="{{asset('assets/images/ico/profile-boy.png')}}" alt="profile-header">
-                                    </div>
-                                    <span class="ml-3 heading-forth1">Smith John <br />
-                                        <span class="notification-text4">
-                                            Student
+                                <div class="col-md-12">
+                                    <div class="mt-3 d-flex">
+                                        <div>
+                                            <img src="{{asset('assets/images/ico/profile-boy.png')}}" alt="profile-header">
+                                        </div>
+                                        <span class="ml-3 heading-forth1">Smith John <br />
+                                            <span class="notification-text4">
+                                                Student
+                                            </span>
                                         </span>
+                                    </div>
+                                    <div class="star-icos">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked ml-1"></span>
+                                        <span class="fa fa-star checked ml-1"></span>
+                                        <span class="fa fa-star checked ml-1"></span>
+                                        <span class="perfile-text ml-1">4.0</span>
+                                    </div>
+                                    <span class="notification-text6">
+                                        <br />
+                                        It is a long established fact that a reader will be distracted by the readable
+                                        content of a page when looking at its
+                                        lyout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                                        distribution of letters, as opposed to using
+                                        Content here content making it look like readable English.
                                     </span>
                                 </div>
                             </div>
-                            <div class="star-icos">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked ml-1"></span>
-                                <span class="fa fa-star checked ml-1"></span>
-                                <span class="fa fa-star checked ml-1"></span>
-                                <span class="perfile-text ml-1">4.0</span>
-                            </div>
-                            <span class="notification-text6">
-                                <br />
-                                It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its
-                                lyout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                                distribution of letters, as opposed to using
-                                Content here content making it look like readable English.
-                            </span>
                         </div>
-                    </div> --}}
-
-
+                    </div>
+                </div>
             </div>
         </div>
     </div>

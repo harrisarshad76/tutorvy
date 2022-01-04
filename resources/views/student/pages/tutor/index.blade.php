@@ -208,10 +208,10 @@
                     <div class="row">
                         
                         <div class="col-md-9 row pr-0 " id="number-booking">
-                            <h3  class="mb-0 col-md-6 mt-4">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
-                            <div class="text-right col-md-6 pt-4 pr-0">
-                                <label for=""> <b> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> </b> </label>
-                                <select class="pl-2 pr-2 ml-2" id="sort">
+                            <h3  class="mb-0 col-md-9 mt-4 pt-3">  {{ sizeof($available_tutors) }}  Tutors Available</h3>
+                            <div class="col-md-3 pt-4 pr-0">
+                                <!-- <label for=""> <b> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> </b> </label> -->
+                                <select class="form-select" id="sort">
                                     <option value="">Sort by Availability</option>
                                     <option value="">Sort by Date</option>
                                     <option value="">Sort by Price</option>
@@ -436,13 +436,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 pl-0 cardRight" id="{{$tutor->id}}-A">
+                                                <!-- <div class="col-md-3 pl-0 cardRight" id="{{$tutor->id}}-A">  show on hover-->
+                                                <div class="col-md-3 pl-0 " id="">
                                                     <div class="card">
                                                         <div class="card-body div-center">
                                                             <div>
-                                                                <video loop autoplay muted controls class="vid23 w-100 h-100">
+                                                                <video controls class="vid23 w-100 h-100" poster="{{asset('assets/images/ico/Mute-video.png')}}">
                                                                     <source src="{{asset('storage/profile/loki2.mp4')}}" type="video/mp4">
                                                                 </video>
+
                                                                 <a href="{{route('student.tutor.show',[$tutor->id])}}" class="text-center no-decoration schedule-btn w-100 mt-2" >
                                                                         &nbsp; View Profile &nbsp;
                                                                 </a>

@@ -66,7 +66,7 @@
                                         aria-controls="v-pills-Security" aria-selected="false">Security</a>
                                     <a class="nav-link" id="v-pills-Payment-tab" data-toggle="pill"
                                         href="#v-pills-Payment" role="tab" aria-controls="v-pills-Payment"
-                                        aria-selected="false">Payment</a>
+                                        aria-selected="false">Billing</a>
                                 </div>
                             </div>
                         </div>
@@ -145,9 +145,9 @@
                                     <div class="tab-pane fade {{ session()->has('key') ? '' : 'active show' }} chee"
                                         id="v-pills-Security" role="tabpanel" aria-labelledby="v-pills-Security-tab">
                                         <div class="row">
-                                            <div class="col-md-12 mb-4">
+                                            <!-- <div class="col-md-12 mb-4">
                                                 <h3>Security</h3>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-6">
                                                 @if (session()->has('error'))
@@ -173,7 +173,7 @@
                                             <div class="col-md-12 font-light">
                                                 Change password
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 mt-3">
                                                 <form action="{{ url('/student/change-password') }}" method="POST">
                                                     @csrf
                                                     <small>Current Password</small>
