@@ -114,6 +114,7 @@
                                 </select>
                             </div>
                         </div>
+                           
                         <div class="col-md-4">
                             <label for="" class="form-label heading-forth"> Price</label>
                             <div class="input-options ">
@@ -271,31 +272,31 @@ $("#basic_duration").change(function(){
                         <label class="" for=""><b> Week `+i+` : </b></label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('monday_`+i+`',`+i+`,'monday')" class="custom-control-input" name="monday_`+i+`" id="monday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('monday_`+i+`',`+i+`,'monday',1)" class="custom-control-input" name="monday_`+i+`" id="monday_`+i+`">
                         <label class="custom-control-label" for="monday_`+i+`">Monday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('tuesday_`+i+`',`+i+`,'tuesday')" class="custom-control-input" name="tuesday_`+i+`" id="tuesday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('tuesday_`+i+`',`+i+`,'tuesday',2)" class="custom-control-input" name="tuesday_`+i+`" id="tuesday_`+i+`">
                         <label class="custom-control-label" for="tuesday_`+i+`">Tuesday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('wednesday_`+i+`',`+i+`,'wednesday')" class="custom-control-input" name="wednesday_`+i+`" id="wednesday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('wednesday_`+i+`',`+i+`,'wednesday',3)" class="custom-control-input" name="wednesday_`+i+`" id="wednesday_`+i+`">
                         <label class="custom-control-label" for="wednesday_`+i+`">Wednesday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('thursday_`+i+`',`+i+`,'thursday')" class="custom-control-input" name="thursday_`+i+`" id="thursday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('thursday_`+i+`',`+i+`,'thursday',4)" class="custom-control-input" name="thursday_`+i+`" id="thursday_`+i+`">
                         <label class="custom-control-label" for="thursday_`+i+`">Thursday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('friday_`+i+`',`+i+`,'friday')" class="custom-control-input" name="friday_`+i+`" id="friday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('friday_`+i+`',`+i+`,'friday',5)" class="custom-control-input" name="friday_`+i+`" id="friday_`+i+`">
                         <label class="custom-control-label" for="friday_`+i+`">Friday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('saturday_`+i+`',`+i+`,'saturday')" class="custom-control-input" name="saturday_`+i+`" id="saturday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('saturday_`+i+`',`+i+`,'saturday',6)" class="custom-control-input" name="saturday_`+i+`" id="saturday_`+i+`">
                         <label class="custom-control-label" for="saturday_`+i+`">Saturday</label>
                     </div>
                     <div class="ml-4 custom-control custom-switch">
-                        <input type="checkbox" onclick="aleeert('sunday_`+i+`',`+i+`,'sunday')" class="custom-control-input" name="sunday_`+i+`" id="sunday_`+i+`">
+                        <input type="checkbox" onclick="aleeert('sunday_`+i+`',`+i+`,'sunday',7)" class="custom-control-input" name="sunday_`+i+`" id="sunday_`+i+`">
                         <label class="custom-control-label" for="sunday_`+i+`">Sunday</label>
                     </div>
                 </div>
@@ -381,7 +382,7 @@ else{
    
 }
 
-function aleeert(id,i,day){
+function aleeert(id,i,day,day_id){
 
     var html2="";
     var text ="";
@@ -419,24 +420,24 @@ function aleeert(id,i,day){
                     <div class="m-1 bg-price p-3">
                         <span class="heading-forth"> `+text+`</span>
                         <div class="input-serachs mt-2">
-                            <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
+                            <input type="txt" name="basic_class_title[` + i + `][`+day_id+`]" placeholder="Write Class Title" required />
                         </div>
                         <div class="input-serachs mt-2 mb-2">
                             
 
                             <textarea class="form-control texteara-s"
-                                name="basic_class_overview[` + i + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                                name="basic_class_overview[` + i + `][`+day_id+`]" rows="6" placeholder="Write Class Overview" required></textarea>
                             
                         </div>
                         <span class="heading-forth"> Timing</span>
                         <div class="input-options ">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" name="basic_class_start_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                    <input type="text" name="basic_class_start_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
                                     onfocus="(this.type='time')">
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="basic_class_end_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                    <input type="text" name="basic_class_end_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
                                         onfocus="(this.type='time')">
                                 </div>
                             </div>
@@ -445,6 +446,7 @@ function aleeert(id,i,day){
                 
                 </div>`;
         $("#extraFields_"+i).append(html2);
+
     }
     else{
         $("#extraFields_"+i).find("#bas_"+id).remove();

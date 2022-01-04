@@ -124,7 +124,6 @@ class CourseController extends Controller
 
     public function store(Request $request) {
 
-        // return ($request);
 
         // if($request->hasFile('video')){
         //     $video_path = "storage/course/video/".$request->video->getClientOriginalName();
@@ -186,16 +185,18 @@ class CourseController extends Controller
         $courselevel->advance_class_end_time   = json_encode($request->advance_class_end_time);
         $courselevel->advance_price      = $request->advance_price;
 
-        $courselevel->save();
+        // $courselevel->save();
 
-        $request->id = $courselevel->id;
+        // $request->id = $courselevel->id;
         // $this->basicOutline($request);
         // $this->standardOutline($request);
         // $this->advanceOutline($request);
         // return dd($request->all());
-        $this->basicCourseClasses($request);
-        $this->standardCourseClasses($request);
-        $this->advanceCourseClasses($request);
+
+        $this->basicCourseClasses($request);exit;
+        // $this->standardCourseClasses($request);
+        // $this->advanceCourseClasses($request);
+        return ($request);
         
 
         // activity logs
@@ -444,75 +445,80 @@ class CourseController extends Controller
 
     private function basicCourseClasses($request){
 
+        // dd($request->basic_class_start_time);exit;
         $start_date = $request->start_date;
+        $weeks = $request->basic_duration;
         $days = $this->days;
-        $bs_st_tt = json_encode($request->basic_class_start_time);
-        $bs_st_tt = json_decode($bs_st_tt,true);
-        $bs_end_tt = json_encode($request->basic_class_end_time);
-        $bs_end_tt = json_decode($bs_end_tt,true);
+
+        $class_titles = $request->basic_class_title;
+        $class_overviews = $request->basic_class_overview;
+        // $class_titles = json_decode($request->basic_class_title);
+        $bs_st_tt = $request->basic_class_start_time;
+        $bs_end_tt = $request->basic_class_end_time;
         // return $bs_st_tt;
-        for($i = 0 ;$i < sizeof($request->basic_days) ; $i++){
-            for($d = 0 ; $d < sizeof($days) ; $d++){
-                if($days[$d]['id'] == $request->basic_days[$i]){
-                    
-                    $date = Carbon::parse($start_date);
-                    // If $date is Monday, return $date. Otherwise, add days until next Monday.
-                    $date = $date->is($days[$d]['day']) == 1 ? $date : $date->next($days[$d]['day']);
-                    $dd = $date;
-                    if($date->isPast()){
+        $date = Carbon::parse($start_date);
 
-                    }else{
-                        $class = CourseClass::where('class_date',$date)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->basic_days[$i]])->where('class_end_time',$bs_end_tt[$request->basic_days[$i]])->first();
-                        if($class){
-                            $class->course_id = $request->id;
-                            $class->class_date = $date;
-                            $class->class_plan = 1;
-                            $class->class_time = $bs_st_tt[$request->basic_days[$i]];
-                            $class->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                            $class->class_status = 0;
-                            $class->save();
-                        }else{
-                            $courseclass = new CourseClass();
-                            $courseclass->course_id = $request->id;
-                            $courseclass->class_date = $date;
-                            $courseclass->class_plan = 1;
-                            $courseclass->class_time = $bs_st_tt[$request->basic_days[$i]];
-                            $courseclass->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                            $courseclass->class_status = 0;
-                            $courseclass->save();
-                        }
-                    }
-                    
-                    for($w = 1 ; $w < $request->basic_duration ; $w++){
-                        $dd = $dd->addDays(7);
-                        if($date->isPast()){
+        for($i = 1 ; $i <= $weeks ; $i++){
+            $sdate = $date;
+            $lessons_titles = $class_titles[$i];
+            $lessons_overviews = $class_overviews[$i];
+            $lessons_st_time = $bs_st_tt[$i];
+            $lessons_ed_time = $bs_end_tt[$i];
+            $ccc = 1;
+            for($c = 1 ;$ccc <= sizeof($lessons_titles);$c++){
+                // dd($lessons_titles[$c]);exit;
+                
+                for($d = 0 ; $d < sizeof($days) ; $d++){
+                    if($days[$d]['id'] == $c){
+                        echo $days[$d]['day'];
 
-                        }else{
-                            $class = CourseClass::where('class_date',$dd)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->basic_days[$i]])->where('class_end_time',$bs_end_tt[$request->basic_days[$i]])->first();
-                            if($class){
-                                $class->course_id = $request->id;
-                                $class->class_date = $dd;
-                                $class->class_plan = 1;
-                                $class->class_time = $bs_st_tt[$request->basic_days[$i]];
-                                $class->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                                $class->class_status = 0;
-                                $class->save();
+                        if(array_key_exists($c,$lessons_titles)){
+                            echo $days[$d]['id'];
+                            $ccc++;
+                            print_r($lessons_titles[$c]);
+                            // If $date is Monday, return $date. Otherwise, add days until next Monday.
+                            $sdate = $sdate->is($days[$d]['day']) == 1 ? $sdate : $sdate->next($days[$d]['day']);
+                            
+                            // echo $days[$d]['day'];
+
+                            $dd = $sdate;
+                            if($date->isPast()){
+                                
+
                             }else{
-                                $courseclass = new CourseClass();
-                                $courseclass->course_id = $request->id;
-                                $courseclass->class_date = $dd;
-                                $courseclass->class_plan = 1;
-                                $courseclass->class_time = $bs_st_tt[$request->basic_days[$i]];
-                                $courseclass->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                                $courseclass->class_status = 0;
-                                $courseclass->save();
+                                
+                                $class = CourseClass::where('class_date',$sdate)->where('course_id',$request->id)->where('class_time',$lessons_st_time[$c])->where('class_end_time',$lessons_ed_time[$c])->first();
+                                if($class){
+                                    $class->course_id = $request->id;
+                                    $class->class_date = $sdate;
+                                    $class->class_plan = 1;
+                                    $class->class_time = $lessons_st_time[$c];
+                                    $class->class_end_time = $lessons_ed_time[$c];
+                                    $class->class_status = 0;
+                                    $class->class_title = $lessons_titles[$c];
+                                    $class->class_overview = $lessons_overviews[$c];
+                                    $class->save();
+                                }else{
+                                    $courseclass = new CourseClass();
+                                    $courseclass->course_id = $request->id;
+                                    $courseclass->class_date = $sdate;
+                                    $courseclass->class_plan = 1;
+                                    $courseclass->class_time = $lessons_st_time[$c];
+                                    $courseclass->class_end_time = $lessons_ed_time[$c];
+                                    $courseclass->class_status = 0;
+                                    $courseclass->class_title = $lessons_titles[$c];
+                                    $courseclass->class_overview = $lessons_overviews[$c];
+                                    $courseclass->save();
+                                }
                             }
                         }
                     }
                 }
+                echo $sdate;
             }
+            // $date = $sdate->addDays(7);
         }
-
+      
         return ;
     }
 
