@@ -29,10 +29,7 @@ class ClassController extends Controller
 
     public function index(){
        
-        $otp = '915326478';
-
-        \Mail::to('muhammadkashif70000@gmail.com')->send(new \App\Mail\SendOtpMail($otp));
-
+   
         $classes = Booking::with(['classroom','user','tutor','subject','booking_payment'])
                     ->where('booked_tutor',Auth::user()->id)
                     ->whereIn('status',[2,5])->get();
@@ -62,11 +59,13 @@ class ClassController extends Controller
 
         foreach($courses_enrolled as $course){
             $class = CourseClass::where('course_id',$course->id)->where('class_status','!=',2)->orderBy('class_date','asc')->first();
-            $classroom = Classroom::where('course_class_id',$class->id)->first();
-            $course->classroom = $classroom;
-            $course->enClass = $class;
+            if($class){
+                $classroom = Classroom::where('course_class_id',$class->id)->first();
+                $course->classroom = $classroom;
+                $course->enClass = $class;
+            }
+            
         }
-
         return view('tutor.pages.classroom.index',compact('classes','user','delivered_classess','deli_classes','courses_enrolled'));
     }
 

@@ -452,7 +452,7 @@ function aleeert(id,i,day,day_id){
                             </div>
                             <div class="col-md-7">
                                 <div class="input-serachs ">
-                                    <input type="date" name="" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
+                                    <input type="date" name="basic_class_date[` + i + `][`+day_id+`]" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
                                 </div>
                             </div>
 
