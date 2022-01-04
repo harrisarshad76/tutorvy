@@ -11,6 +11,20 @@
         text-decoration:none;
         color:#00132D ;
     }
+    #Dushman{
+        position: absolute;
+        background: red;
+        color: #fff;
+        border: 1px solid red;
+        padding: 6px 25px;
+        border-radius: 9px;
+        z-index: 9;
+        left: 16px;
+        top: 24px;
+        display:none;
+    }
+
+
 </style>
   <!--section start  -->
 
@@ -62,7 +76,7 @@
                     <div class="col-md-6">
                         <label class="form-label heading-forth">Starting Date</label>
                         <div class="input-serachs ">
-                            <input type="text" name="start_date" class="" required="" placeholder="From" onfocus="(this.type='date')" required>
+                            <input type="text" name="start_date" id="strt_date" class="" required="" placeholder="From" onfocus="(this.type='date')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -101,9 +115,14 @@
                     <div class="row">
                        
                         <div class="col-md-4">
-                            <label for="" class="form-label heading-forth"> Course Duration</label>
+                            <label for="" class="form-label heading-forth"> Course Duration <a href="#"  id="toro"  class="pull-right">
+                                <i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+                            </label>
+                            <small id="Dushman">
+                                This will only be enabled if start course date value is given
+                            </small> 
                             <div class="input-options ">
-                                <select name="basic_duration" id="basic_duration" style="padding:8px;">
+                                <select name="basic_duration" id="basic_duration" disabled="disabled" style="padding:8px;">
                                     <option disabled selected required>Course Duration</option>
                                     <option value="1">1 week</option>
                                     <option value="2">2 week</option>
@@ -194,6 +213,15 @@
 @section('js')
 @include('js_files.tutor.course')
 <script type="text/javascript">
+
+$("#strt_date").change(function(){
+    if($("#strt_date").val() != "" && $("#strt_date").val() != "[]" && $("#strt_date").val() != null){
+        $("#basic_duration").removeAttr('disabled','disabled');
+    }
+    else{
+        $("#basic_duration").attr('disabled','disabled');
+    }
+});
 $("#thumbnail").change(
     function () {
     //Get reference of FileUpload.
@@ -381,6 +409,7 @@ else{
    
 }
 
+
 function aleeert(id,i,day){
 
     var html2="";
@@ -417,7 +446,18 @@ function aleeert(id,i,day){
         }
         html2 += `<div class="col-md-3 pl-0" id="bas_` + id + `">
                     <div class="m-1 bg-price p-3">
-                        <span class="heading-forth"> `+text+`</span>
+                        <div class="row">
+                            <div class="col-md-5 pt-2">
+                                <span class="heading-forth "> `+text+`</span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-serachs ">
+                                    <input type="date" name="" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
+                                </div>
+                            </div>
+
+                        </div>
+                        
                         <div class="input-serachs mt-2">
                             <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
                         </div>
@@ -445,11 +485,15 @@ function aleeert(id,i,day){
                 
                 </div>`;
         $("#extraFields_"+i).append(html2);
+        var tuna = $("#strt_date").val();
+        $(".dateCourse")[0].setAttribute('min', tuna);
     }
     else{
         $("#extraFields_"+i).find("#bas_"+id).remove();
     }
 }
+
+
 
 </script>
 @endsection

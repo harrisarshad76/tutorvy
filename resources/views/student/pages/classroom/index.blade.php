@@ -91,7 +91,7 @@
                     </div>
                 </div> -->
                 <div class="row bg-white ml-2 mr-2">
-                    <div class="col-md-12 mb-1 ">
+                    <!-- <div class="col-md-12 mb-1 ">
                         <div class=" card  bg-toast infoCard">
 
 
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12 mt-3">
                         <nav>
                             <div class="nav nav-stwich" id="nav-tab" role="tablist">

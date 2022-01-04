@@ -171,7 +171,7 @@
         <div class="container-fluid">
             <p class="heading-first ml-4 ">Inbox</p>
             <div class="row mb-3">
-                <div class="col-md-12 mb-1 ">
+                <!-- <div class="col-md-12 mb-1 ">
                     <div class=" card  bg-toast infoCard">
                         <div class="card-body row">
                             <div class="col-md-1 text-center">
@@ -189,7 +189,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3" style="background-color: #F2F3F4;">
                     <div class="box-main pt-3 pb-3">
                         <div class="input-box">

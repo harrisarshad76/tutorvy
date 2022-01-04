@@ -1687,4 +1687,8 @@
         border-top: 1px solid #dddddd !important;
         border-bottom: 1px solid #dddddd !important;
     }
+    
+    .dataTables_info {
+        display: none;
+    }
     /*Data table Style*/
