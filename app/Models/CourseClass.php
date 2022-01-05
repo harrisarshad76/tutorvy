@@ -22,7 +22,8 @@ class CourseClass extends Model
         'class_end_time',
         'class_status',
         'class_title',
-        'class_overview'
+        'class_overview',
+        'class_week'
     ];
 
 }
