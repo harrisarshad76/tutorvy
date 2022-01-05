@@ -125,55 +125,62 @@
                                 <div class="col-md-12  " id="week_schedule">
                                     <?php
                                      $round = $course->basic_duration;
-                                     for($i = 1;$i<=$round;$i++){
-
+                                     for($i = 1;$i<=$round;$i++){ ?>
+                                        <div class="d-flex mt-3 mb-2">
+                                            <div class="">
+                                                <label class="" for=""><b> Week {{$i}} : </b></label>
+                                            </div>
+                                       <?php $classes = $course->basic_classes;
+                                        foreach($classes as $class){
+                                            
                                    
                                     ?>
-                                    <div class="d-flex mt-3 mb-2">
-                                        <div class="">
-                                            <label class="" for=""><b> Week {{$i}} : </b></label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('monday_{{$i}}',{{$i}},'monday')" class="custom-control-input" name="monday_{{$i}}" id="monday_{{$i}}">
-                                            <label class="custom-control-label" for="monday_{{$i}}">Monday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('tuesday_{{$i}}',{{$i}},'tuesday')" class="custom-control-input" name="tuesday_{{$i}}" id="tuesday_{{$i}}">
-                                            <label class="custom-control-label" for="tuesday_{{$i}}">Tuesday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('wednesday_{{$i}}',{{$i}},'wednesday')" class="custom-control-input" name="wednesday_{{$i}}" id="wednesday_{{$i}}">
-                                            <label class="custom-control-label" for="wednesday_{{$i}}">Wednesday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('thursday_{{$i}}',{{$i}},'thursday')" class="custom-control-input" name="thursday_{{$i}}" id="thursday_{{$i}}">
-                                            <label class="custom-control-label" for="thursday_{{$i}}">Thursday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('friday_{{$i}}',{{$i}},'friday')" class="custom-control-input" name="friday_{{$i}}" id="friday_{{$i}}">
-                                            <label class="custom-control-label" for="friday_{{$i}}">Friday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('saturday_{{$i}}',{{$i}},'saturday')" class="custom-control-input" name="saturday_{{$i}}" id="saturday_{{$i}}">
-                                            <label class="custom-control-label" for="saturday_{{$i}}">Saturday</label>
-                                        </div>
-                                        <div class="ml-4 custom-control custom-switch">
-                                            <input type="checkbox" onclick="aleeert('sunday_{{$i}}',{{$i}},'sunday')" class="custom-control-input" name="sunday_{{$i}}" id="sunday_{{$i}}">
-                                            <label class="custom-control-label" for="sunday_{{$i}}">Sunday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
+                                        @if()
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('monday_{{$i}}',{{$i}},'monday')" class="custom-control-input" name="monday_{{$i}}" id="monday_{{$i}}">
+                                                <label class="custom-control-label" for="monday_{{$i}}">Monday</label>
+                                            </div>
+                                            
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('tuesday_{{$i}}',{{$i}},'tuesday')" class="custom-control-input" name="tuesday_{{$i}}" id="tuesday_{{$i}}">
+                                                <label class="custom-control-label" for="tuesday_{{$i}}">Tuesday</label>
+                                            </div>
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('wednesday_{{$i}}',{{$i}},'wednesday')" class="custom-control-input" name="wednesday_{{$i}}" id="wednesday_{{$i}}">
+                                                <label class="custom-control-label" for="wednesday_{{$i}}">Wednesday</label>
+                                            </div>
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('thursday_{{$i}}',{{$i}},'thursday')" class="custom-control-input" name="thursday_{{$i}}" id="thursday_{{$i}}">
+                                                <label class="custom-control-label" for="thursday_{{$i}}">Thursday</label>
+                                            </div>
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('friday_{{$i}}',{{$i}},'friday')" class="custom-control-input" name="friday_{{$i}}" id="friday_{{$i}}">
+                                                <label class="custom-control-label" for="friday_{{$i}}">Friday</label>
+                                            </div>
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('saturday_{{$i}}',{{$i}},'saturday')" class="custom-control-input" name="saturday_{{$i}}" id="saturday_{{$i}}">
+                                                <label class="custom-control-label" for="saturday_{{$i}}">Saturday</label>
+                                            </div>
+                                            <div class="ml-4 custom-control custom-switch">
+                                                <input type="checkbox" onclick="aleeert('sunday_{{$i}}',{{$i}},'sunday')" class="custom-control-input" name="sunday_{{$i}}" id="sunday_{{$i}}">
+                                                <label class="custom-control-label" for="sunday_{{$i}}">Sunday</label>
+                                            </div>
+                                        @endif
+                                    
+                                    
+                                    <!-- <div class="col-md-12">
 
                                         <div class=" mt-2 row" id="extraFields_{{$i}}">
  
                                          
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                     <?php
-                                   }
-
+                                   } ?>
+                                   </div>
+                               <?php }
                                    
                                     ?>
 

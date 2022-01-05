@@ -205,28 +205,7 @@ class CourseController extends Controller
         }
         $course->basic_classes = $classes;
 
-        // $basic_classes = array();
-
-        // $cr_bs_dys = json_decode($course->basic_days);
-        // $cr_bs_clt = json_decode($course->basic_class_title,true);
-        // $cr_bs_clo = json_decode($course->basic_class_overview,true);
-        // $cr_bs_cst = json_decode($course->basic_class_start_time,true);
-        // $cr_bs_cet = json_decode($course->basic_class_end_time,true);
-
-
-
-        // for($i = 0 ; $i < sizeof($cr_bs_dys) ; $i++){
-        //     $class = new ClassTable();
-        //     $class->day = $cr_bs_dys[$i];
-        //     $class->st_time = $cr_bs_cst != null ? $cr_bs_cst[$cr_bs_dys[$i]] : '';
-        //     $class->et_time = $cr_bs_cet != null ? $cr_bs_cet[$cr_bs_dys[$i]] : '';
-        //     $class->title = $cr_bs_clt != null ?  $cr_bs_clt[$cr_bs_dys[$i]] : '';
-        //     $class->overview = $cr_bs_clo != null ? $cr_bs_clo[$cr_bs_dys[$i]] : '';
-
-        //     array_push($basic_classes,$class);
-        // }
-        // $course->basic_classes = $basic_classes;
-        
+        // return $course;
         return view('tutor.pages.courses.edit',compact('course'));
     }
 
@@ -445,6 +424,8 @@ class CourseController extends Controller
                                     $class->class_status = 0;
                                     $class->class_title = $lessons_titles[$c];
                                     $class->class_overview = $lessons_overviews[$c];
+                                    $class->class_week = $i;
+
                                     $class->save();
                                 }else{
                                     $courseclass = new CourseClass();
@@ -456,6 +437,8 @@ class CourseController extends Controller
                                     $courseclass->class_status = 0;
                                     $courseclass->class_title = $lessons_titles[$c];
                                     $courseclass->class_overview = $lessons_overviews[$c];
+                                    $courseclass->class_week = $i;
+
                                     $courseclass->save();
                                 }
                             // }

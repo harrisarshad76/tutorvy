@@ -129,71 +129,40 @@ class CourseController extends Controller
         $course = Course::with('outline')->find($id);
         $basic_classes = array();
 
-        $cr_bs_dys = json_decode($course->basic_days);
-        $cr_bs_clt = json_decode($course->basic_class_title,true);
-        $cr_bs_clo = json_decode($course->basic_class_overview,true);
-        $cr_bs_cst = json_decode($course->basic_class_start_time,true);
-        $cr_bs_cet = json_decode($course->basic_class_end_time,true);
+        $basic_classes = array();
 
-        for($i = 0 ; $i < sizeof($cr_bs_dys) ; $i++){
-            $class = new ClassTable();
-            $class->day = $cr_bs_dys[$i];
-            $class->st_time = $cr_bs_cst != null ? $cr_bs_cst[$cr_bs_dys[$i]] : '';
-            $class->et_time = $cr_bs_cet != null ? $cr_bs_cet[$cr_bs_dys[$i]] : '';
-            $class->title = $cr_bs_clt != null ?  $cr_bs_clt[$cr_bs_dys[$i]] : '';
-            $class->overview = $cr_bs_clo != null ? $cr_bs_clo[$cr_bs_dys[$i]] : '';
+        $cr_bs_duration = $course->basic_duration;
+        $class_titles = json_decode($course->basic_class_title,true);
+        $class_overviews = json_decode($course->basic_class_overview,true);
+        $bs_st_tt = json_decode($course->basic_class_start_time,true);
+        $bs_end_tt = json_decode($course->basic_class_end_time,true);
+        $bs_date = json_decode($course->basic_class_date,true);
 
-            array_push($basic_classes,$class);
-        }
+        $classes = CourseClass::where('course_id',$id)->get();
 
-        $course->basic_classes = $basic_classes;
-        // Standard Classes
-        $standard_classes = array();
-
-        $cr_std_dys = json_decode($course->standard_days);
-        $cr_std_clt = json_decode($course->standard_class_title,true);
-        $cr_std_clo = json_decode($course->standard_class_overview,true);
-        $cr_std_cst = json_decode($course->standard_class_start_time,true);
-        $cr_std_cet = json_decode($course->standard_class_end_time,true);
-        if( $cr_std_dys != "" || $cr_std_dys != 0 ){
-
-            for($i = 0 ; $i < sizeof($cr_std_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_std_dys[$i];
-                $class->st_time =  $cr_std_cst != null ? $cr_std_cst[$cr_std_dys[$i]] : '';
-                $class->et_time =  $cr_std_cet != null ? $cr_std_cet[$cr_std_dys[$i]] : '';
-                $class->title = $cr_std_clt != null ?  $cr_std_clt[$cr_std_dys[$i]] : '';
-                $class->overview =  $cr_std_clo != null ? $cr_std_clo[$cr_std_dys[$i]] : '';
-
-                array_push($standard_classes,$class);
+        foreach($classes as $class){
+            $input = $class->class_date;
+            $date = strtotime($input);
+            $date = date('l', $date);
+            if($date == 'Monday'){
+                $date = 1;
+            }elseif($date == 'Tuesday'){
+                $date = 2;
+            }elseif($date == 'Wednesday'){
+                $date = 3;
+            }elseif($date == 'Thursday'){
+                $date = 4;
+            }elseif($date == 'Friday'){
+                $date = 5;
+            }elseif($date == 'Satureday'){
+                $date = 6;
+            }elseif($date == 'Sunday'){
+                $date = 7;
             }
-
-
+            $class->day = $date;
         }
-        $course->standard_classes = $standard_classes;
-        // Advance Classes
-        $advance_classes = array();
-
-        $cr_ad_dys = json_decode($course->advance_days);
-        $cr_ad_clt = json_decode($course->advance_class_title,true);
-        $cr_ad_clo = json_decode($course->advance_class_overview,true);
-        $cr_ad_cst = json_decode($course->advance_class_start_time,true);
-        $cr_ad_cet = json_decode($course->advance_class_end_time,true);
-
-        if( $cr_ad_dys != "" || $cr_ad_dys != 0 ){
-            for($i = 0 ; $i < sizeof($cr_ad_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_ad_dys[$i];
-                $class->ad_time =  $cr_ad_cst != null ? $cr_ad_cst[$cr_ad_dys[$i]] : '';
-                $class->et_time =  $cr_ad_cet != null ? $cr_ad_cet[$cr_ad_dys[$i]] : '';
-                $class->title = $cr_ad_clt != null ?  $cr_ad_clt[$cr_ad_dys[$i]] : '';
-                $class->overview =  $cr_ad_clo != null ? $cr_ad_clo[$cr_ad_dys[$i]] : '';
-
-                array_push($advance_classes,$class);
-            }
-        }
-
-        $course->advance_classes = $advance_classes;
+        $course->basic_classes = $classes;
+        
         return view('admin.pages.courses.course_edit',compact('course'));
     }
 
