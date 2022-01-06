@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Admin\Subject;
 use App\Models\Admin\SubjectCategory;
 use App\Models\Course;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -94,6 +95,41 @@ class SubjectController extends Controller
 
 
     }
+
+
+    public function status(Request $request)
+    {
+        try{
+            $subject = Subject::where('id',$request->id)->update([
+                'status' => $request->status
+            ]);
+
+            $message = '';
+
+            if($subject == 1){
+                if($request->status == 1){
+                    $message = 'Subject Enabled Successfully!';
+                }else{
+                    $message = 'Subject Disabled Successfully!';
+                }
+            }
+
+            return response()->json([
+                'status'=>'200',
+                'message' => $message,
+            ]);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'400',
+                'message' => $e->getMessage()
+            ]);
+        }
+
+
+    }
+
+
 
 
 }

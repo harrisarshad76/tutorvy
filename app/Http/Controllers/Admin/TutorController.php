@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Models\Activitylogs;
+use App\Models\Admin\SubjectCategory;
+use App\Models\General\Degree;
+use App\Models\General\Institute;
 use App\Models\Wallet;
 
 class TutorController extends Controller
@@ -44,8 +47,7 @@ class TutorController extends Controller
             ->where('users.role',2)
             ->whereIn('users.status', [0, 1, 2])
             ->paginate(15);
-        
-        // dd($new_requests);
+
 
         return view('admin.pages.tutors.index',compact('new_requests','approved_tutors','staff_members'));
     }
@@ -69,6 +71,20 @@ class TutorController extends Controller
         $requested_courses = Course::where('user_id',$id)->where('status',0)->get();
 
         return view('admin.pages.tutors.profile',compact('tutor','total_pending_payments','total_classes','approved_courses','requested_courses'));
+    }
+
+    public function editProfile($id){
+
+        $subjects = Subject::all();
+        $degrees = Degree::all();
+        $institutes = Institute::all();
+        $subject_cat = SubjectCategory::all();
+        $tutor = User::where('role',2)->where('id',$id)->first();
+
+        $user_files = DB::table("user_files")->where('user_id',$tutor->id)->where('type',$tutor->type)->get()->toArray();
+
+        return view('admin.pages.tutors.edit',compact('subjects','degrees','institutes','subject_cat','tutor','user_files'));
+
     }
 
     public function all_tutor_req(){
@@ -99,7 +115,7 @@ class TutorController extends Controller
     }
 
     public function tutorRequest($id,$assess_id = null){
-  
+
         $tutor = User::where('id',$id)->where('role',2)->first();
         $tutor_assessment =  Assessment::where('id',$assess_id)->first();
 

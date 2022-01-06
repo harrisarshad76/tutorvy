@@ -31,14 +31,14 @@
                                 </a>
                             </div>
                             <div class="col-md-4 text-center">
-                                <a href="edit-student.html">
+                                <a href="{{route('admin.studentProfile.edit',[$student->id])}}">
                                     <img src="{{ asset('/admin/assets/img/ico/edit-icon.png') }}" alt="image" />
                                 </a>
                             </div>
 
                             <div class="col-md-4 text-center">
-                                <label class="switch" style="position: relative;left: -10px;top:5px;width: 60px;">
-                                    <input type="checkbox">
+                                <label class="switch" style="position: relative;left: -10px;width: 60px;">
+                                    <input type="checkbox" class="s_status" val_id="{{$student->id}}" val_st="{{$student->id}}" {{ ($student->status == 1) ? 'checked' : ''}}>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -147,7 +147,7 @@
                                 <div class="col-md-10">
                                     <p class="paragraph-text01 mb-0 mt-1">Language</p>
                                     <p class="heading-forth ml-1">
-                                        {{ $student->language }}
+                                        {{ $student->language ?? '---' }}
                                     </p>
                                     </p>
                                 </div>
@@ -161,7 +161,7 @@
                                 <div class="col-md-10">
                                     <p class="paragraph-text01 mb-0 mt-1">Location</p>
                                     <p class="heading-forth ml-1">
-                                        {{ $student->city }}, {{ $student->country }}
+                                       {{$student->address}}
                                     </p>
                                     </p>
                                 </div>
@@ -220,7 +220,7 @@
                                                 <img src="{{ asset('/admin/assets/img/ico/location.svg') }}"
                                                     alt="icon" />
                                                 <span
-                                                    class="paragraph-text-1 ml-1">{{ App\Models\User::find($fav->tutor_id)->city }}</span>
+                                                    class="paragraph-text-1 ml-1">{{ (App\Models\User::find($fav->tutor_id)->address) ?? 'N/A' }}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -549,6 +549,91 @@
         });
 
     }
+
+    $(".s_status").click(function(){
+        var id = $(this).attr("val_id");
+        var st = $(this).attr("val_st");
+        let reason = null;
+
+        if(st == 3){
+            reason = $('#c_reject_reason').val();
+        }
+        if($(this).is(':checked')){
+        st = 1;
+        // alert(st);
+        $.ajax({
+            url: "{{route('admin.studentStatus')}}",
+            type:"POST",
+            data:{
+                id:id,
+                status:st,
+                reason:reason
+            },
+            success:function(response){
+                // console.log(response);
+                if(response.status == 200) {
+
+                toastr.success(response.message,{
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
+                setInterval(function(){
+                    window.location.reload();
+                    }, 1500);
+                }
+
+            },
+            error:function(e) {
+                toastr.error('Something went wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+
+        }
+        else{
+        st=0;
+        $.ajax({
+            url: "{{route('admin.studentStatus')}}",
+            type:"POST",
+            data:{
+                id:id,
+                status:st,
+                reason:reason
+            },
+            success:function(response){
+                // console.log(response);
+                if(response.status == 200) {
+
+                toastr.success(response.message,{
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
+                setInterval(function(){
+                    window.location.reload();
+                    }, 1500);
+
+                }
+            },
+            error:function(e) {
+                toastr.error('Something went wrong',{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+
+        }
+    })
     //filter
     $(document).ready(function() {
         $("#search").on("keyup", function() {

@@ -65,7 +65,8 @@ class CreateCoursesTable extends Migration
             $table->string('advance_class_end_time')->nullable();
 
             $table->string('advance_price')->nullable();
-            $table->string('status')->comment('0-disabled,1-enabled&approved,2-rejected	')->default(0);
+            $table->string('status')->comment('0-pending,1-approved,2-rejected')->default(0);
+            $table->string('visibility_status')->comment('0-disabled,1-enabled')->default(0);
             $table->integer('assign_to')->nullable();
             $table->text('reject_note')->nullable();
             $table->timestamps();

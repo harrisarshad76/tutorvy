@@ -33,7 +33,7 @@
             <!-- <div class="col-md-4">
                 <a href="">
                         View all students
-                
+
                 </a>
             </div> -->
 
@@ -121,6 +121,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{-- {{dd($students)}} --}}
                                         @foreach($students as $student)
                                             <tr>
                                                 <td class="pt-4 alex-name-2">
@@ -136,7 +137,12 @@
                                                 <td class="pt-4">{{$student->course->count()}}</td>
                                                 <td class="pt-4">{{$student->support->count()}}</td>
                                                 <td class="pt-4">
+                                                    @if ($student->status_text == 'Pending')
                                                     <span class="pending-text-1">{{$student->status_text}}</span>
+                                                    @elseif($student->status_text == 'Approved')
+                                                    <span class="pending-text-1">{{$student->status_text}}</span>
+                                                    @endif
+                                                    {{-- <span class="pending-text-1">{{$student->status_text}}</span> --}}
                                                 </td>
                                                 <td class="pt-4">
                                                     <a type="button" onclick="deleteStudent({{$student->id}})">
@@ -148,7 +154,6 @@
                                                     </a> -->
                                                     <label class="switch" style="position: relative;left: -10px;width: 60px;">
                                                         <input type="checkbox" class="s_status" val_id="{{$student->id}}" val_st="{{$student->status}}" {{ ($student->status == 1) ? 'checked' : ''}}>
-                                                        <!-- <input type="checkbox" class="s_status" val_id="{{$student->id}}" val_st="{{$student->status}} "  {{ ($student->status == 1) ? 'checked' : ''}} -->
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -167,40 +172,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <div class="col-md-12">
-                                <nav aria-label="Page navigation" class="mt-4">
-                                    <ul class="pagination bg-white pagination-example-1">
-                                        <li class="page-item">
-                                            <a class="page-link" href="{{$students->previousPageUrl()}}" tabindex="-1">
-                                                <img src="{{ asset('/admin/assets/img/ico/arrow-left-1.png')}}" alt="image" />
-                                            </a>
-                                        </li>
-                                        @if($students->onFirstPage())
-                                            <li class="page-item"><a class="page-link" href="{{$students->url(1)}}" style="display:none;">1</a></li>
-                                        @else
-                                        <li class="page-item"><a class="page-link" href="{{$students->url(1)}}">1</a></li>
-                                            @endif
-                                        <li class="page-item"><a class="page-link page-link-1" href="#">{{$students->currentPage()}}</a></li>
 
-                                        @if($students->hasPages())
-                                            <li class="page-item"><a class="page-link " href="#">.....</a></li>
-
-                                            <li class="page-item"><a class="page-link" href="{{$students->url($students->lastPage())}}"> {{$students->lastPage()}} </a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="{{$students->nextPageUrl()}}">
-                                                    <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
-                                                </a>
-                                            </li>
-                                            @else
-                                            <li class="page-item">
-                                                <a class="page-link" href="{{$students->nextPageUrl()}}">
-                                                    <img src="{{ asset('/admin/assets/img/ico/arrow-right-1.png')}}" alt="image" />
-                                                </a>
-                                            </li>
-                                            @endif
-                                    </ul>
-                                </nav>
-                            </div> -->
                         </div>
                     </div>
                 </div>
