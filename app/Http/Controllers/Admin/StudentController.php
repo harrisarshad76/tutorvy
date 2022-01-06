@@ -16,6 +16,10 @@ use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\FavTutors;
 use App\Models\Payments;
+use App\Models\Admin\Subject;
+use App\Models\Admin\SubjectCategory;
+use App\Models\General\Degree;
+use App\Models\General\Institute;
 
 class StudentController extends Controller
 {
@@ -31,9 +35,10 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = User::where('role',3)->paginate(15);
+        $students = User::where('role',3)->get();
         $staff_members = User::whereNotIn('role', [1,2,3])->get();
-        
+
+
         return view('admin.pages.students.index',compact('students','staff_members'));
     }
 
@@ -57,6 +62,22 @@ class StudentController extends Controller
         return view('admin.pages.students.profile',compact('student','tickets','courseEnrolled','classroom','tickets','payments','staff_members'));
 
     }
+
+    public function editProfile($id)
+    {
+
+        $subjects = Subject::all();
+        $degrees = Degree::all();
+        $institutes = Institute::all();
+        $subject_cat = SubjectCategory::all();
+        $student = User::with('favtutor')->where('role',3)->where('id',$id)->first();
+
+        $user_files = DB::table("user_files")->where('user_id',$student->id)->where('type',$student->type)->get()->toArray();
+
+        return view('admin.pages.students.edit',compact('subjects','degrees','institutes','subject_cat','student','user_files'));
+
+    }
+
     public function studentStatus(Request $request){
 
         $student = User::where('id',$request->id)->first();

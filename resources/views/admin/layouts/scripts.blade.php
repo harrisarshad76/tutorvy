@@ -28,6 +28,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-storage.js"></script>
     <!-- <script src="{{asset('assets/firebase/index.js').'?ver='.rand()}}"></script> -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('assets/js/countrySelect.js')}}"></script>
 
     @include('firebase');
 

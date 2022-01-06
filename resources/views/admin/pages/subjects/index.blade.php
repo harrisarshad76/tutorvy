@@ -116,7 +116,7 @@ svg:not(:root) {
                                             <th scope="col">Tutors</th>
                                             <th scope="col">Stduents</th>
                                             <th scope="col">Courses</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -152,12 +152,12 @@ svg:not(:root) {
                                                                 src="{{ asset('/admin/assets/img/ico/edit-icon.svg')}}" alt="a"
                                                                 class="mr-2 cursor-1">
                                                         </div>
-                                                        <!-- <div class="col-md-2">
+                                                        <div class="col-md-2">
                                                             <label class="switch">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" id="status_{{$subject->id}}" onchange="endisable({{$subject->id}})" {{$subject->status == 1 ? 'checked' : ''}} name="endisable">
                                                                 <span class="slider round"></span>
                                                             </label>
-                                                        </div> -->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -351,6 +351,5 @@ svg:not(:root) {
 @endsection
 <!-- Extra js to perfome function using ajax. -->
 @section('js')
-
-@include('js_files.admin.subjectjs')
+    @include('js_files.admin.subjectjs')
 @endsection

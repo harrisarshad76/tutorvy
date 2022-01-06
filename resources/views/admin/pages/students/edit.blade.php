@@ -1,4 +1,5 @@
-@extends('student.layouts.app')
+@extends('admin.layouts.app')
+
 <link href="{{ asset('assets/css/registration.css') }}" rel="stylesheet">
 <style>
     .card {
@@ -127,22 +128,24 @@
     .license {
         display: none;
     }
-    #imageUplo{
+
+    #imageUplo {
         display: inline-block;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 0;
-    border-radius: 100%;
-    background: #FFFFFF;
-    border: 1px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 12%);
-    cursor: pointer;
-    font-weight: normal;
-    transition: all .2s ease-in-out;
-    padding: 8px 17px;
-    padding-left: 10px;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 0;
+        border-radius: 100%;
+        background: #FFFFFF;
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 12%);
+        cursor: pointer;
+        font-weight: normal;
+        transition: all .2s ease-in-out;
+        padding: 8px 17px;
+        padding-left: 10px;
     }
-    #imageUplo i{
+
+    #imageUplo i {
         color: #757575;
     }
 
@@ -159,37 +162,42 @@
     .imag img {
         max-width: 100%;
     } */
-    #imageUpload{
+    #imageUpload {
         height: 55px;
-    margin-bottom: 20px;
+        margin-bottom: 20px;
     }
 
     .preview {
-            overflow: hidden;
-            margin: 10px;
-            border-radius:100%;
-            width: 192px;
-            height: 192px;
-            border-radius: 100%;
-            border: 6px solid #F8F8F8;
-            box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
+        overflow: hidden;
+        margin: 10px;
+        border-radius: 100%;
+        width: 192px;
+        height: 192px;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
 
-        }
-        .conListing{
-            list-style-type: disc;
-        }
-        .conListing li{
-           font-size:0.9rem;
-        }
-        .conListing li::marker{
-            color:#1173FF ;
-        }
-        .demoImg{
-            width:70px;
-            height:70px;
-            border-radius:100%;
-            margin-right:12px;
-        }
+    }
+
+    .conListing {
+        list-style-type: disc;
+    }
+
+    .conListing li {
+        font-size: 0.9rem;
+    }
+
+    .conListing li::marker {
+        color: #1173FF;
+    }
+
+    .demoImg {
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        margin-right: 12px;
+    }
+
 </style>
 
 <link rel="stylesheet" href="{{ asset('assets/css/yearpicker.css') }}" />
@@ -217,35 +225,14 @@
                                         href="#v-pills-Education" role="tab" aria-controls="v-pills-Education"
                                         aria-selected="false">Education</a>
                                     <!-- <a class="nav-link" id="v-pills-Verification-tab" data-toggle="pill" href="#v-pills-Verification"
-                                        role="tab" aria-controls="v-pills-Verification" aria-selected="false">Verification</a> -->
+                                            role="tab" aria-controls="v-pills-Verification" aria-selected="false">Verification</a> -->
 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-12 mb-1 ">
-                                <div class=" card  bg-toast infoCard">
 
-
-                                    <div class="card-body row">
-                                        <div class="col-md-1 text-center">
-                                            <i class="fa fa-info" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="col-md-11 pl-0">
-                                            <small>
-                                                Keep updating your profile to get verified and attract more students by
-                                                other unvarified tutors. <a href="#">Learn More</a>
-                                            </small>
-                                            <a href="#" class="cross" onclick="hideCard()">
-                                                <i class="fa fa-times" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content" id="v-pills-tabContent chang_photo">
@@ -264,7 +251,7 @@
                                         <form action="{{ route('student.profile.update') }}" method="Post"
                                             enctype="multipart/form-data" id="personal">
                                             <div class="row">
-                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="user_id" value="{{ $student->id }}">
                                                 <div class="col-md-12">
                                                     <h1>Change Photo</h1>
                                                 </div>
@@ -273,8 +260,9 @@
                                                     <div class="avatar-upload my-4">
                                                         <div class="avatar-edit">
                                                             <span id="check">
-                                                                 <input type="hidden" name="bs64" id="bs64">
-                                                                <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                                <input type="hidden" name="bs64" id="bs64">
+                                                                <input type='file' name="filepond" id="imageUpload"
+                                                                    accept=".png, .jpg, .jpeg" />
                                                                 <label for="imageUpload" id="imgUplo"></label>
                                                             </span>
 
@@ -284,13 +272,12 @@
                                                             </a>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            @if (Auth::user()->picture != null)
-                                                                <?php
-                                                                    $path = Auth::user()->picture;
-                                                                ?>
-                                                                @if(file_exists( public_path($path) ))
+                                                            @if ($student->picture != null)
+                                                                @php $path = $student->picture; @endphp
+
+                                                                @if (file_exists(public_path($path)))
                                                                     <div id="imagePreview"
-                                                                        style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                                        style="background-image: url('{{ asset($student->picture) }}');">
                                                                     </div>
                                                                 @else
                                                                     <div id="imagePreview"
@@ -306,36 +293,12 @@
                                                     </div>
 
                                                 </div>
-                                                <!-- <div class="col-md-2"></div>
-                                                <div class="col-md-7 mt-2 bg-price mb-3">
-                                                    <div class="row mb-3 mt-3">
-                                                        <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
-                                                        <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
-                                                        <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
-                                                    </div>
-                                                    <h3>Tips for an amazing photo</h3>
-                                                    <ul class="conListing pl-3">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <li>Smile and look at the camera</li>
-                                                                <li>Frame your head and shoulders</li>
-                                                                <li>Your photo is centered and upright</li>
-                                                                <li>Use neutral lighting and background</li>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <li>Your face and eyes are fully visible (except for religious reasons)</li>
-                                                                <li>Avoid logos or contact information</li>
-                                                                <li>You are the only person in the photo</li>
-                                                            </div>
-                                                        </div>
 
-                                                    </ul>
-                                                </div> -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="exampleName">First Name</label>
                                                         <input type="text" name="first_name" class="form-control"
-                                                            value="{{ Auth::user()->first_name }}" id="exampleName"
+                                                            value="{{ $student->first_name }}" id="exampleName"
                                                             aria-describedby="emailHelp" required="required"
                                                             placeholder="First Name" style="text-transform: capitalize;">
                                                     </div>
@@ -344,7 +307,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleName">Last Name</label>
                                                         <input type="text" name="last_name" class="form-control"
-                                                            value="{{ Auth::user()->last_name }}" id="exampleName"
+                                                            value="{{ $student->last_name }}" id="exampleName"
                                                             aria-describedby="emailHelp" required="required"
                                                             placeholder="Last Name" style="text-transform: capitalize;">
                                                     </div>
@@ -360,7 +323,7 @@
                                                     <select class="form-select form-select-lg w-100" id="day" name="day"
                                                         required="required">
                                                         @for ($i = 0; $i <= 31; $i++)
-                                                            <option value="{{ $i }}" @if (Auth::user()->day == $i) selected @endif>
+                                                            <option value="{{ $i }}" @if ($student->day == $i) selected @endif>
                                                                 {{ $i }}</option>
                                                         @endfor
                                                     </select>
@@ -369,18 +332,18 @@
                                                 <div class="col-md-4">
                                                     <select class="form-select form-select-lg w-100" name="month"
                                                         aria-label=".form-select-lg example" required="required">
-                                                        <option value="Jan" @if (Auth::user()->month == 'Jan') selected @endif>January</option>
-                                                        <option value="Feb" @if (Auth::user()->month == 'Feb') selected @endif>February</option>
-                                                        <option value="Mar" @if (Auth::user()->month == 'Mar') selected @endif>March</option>
-                                                        <option value="Apr" @if (Auth::user()->month == 'Apr') selected @endif>April</option>
-                                                        <option value="May" @if (Auth::user()->month == 'May') selected @endif>May</option>
-                                                        <option value="Jun" @if (Auth::user()->month == 'Jun') selected @endif>June</option>
-                                                        <option value="Jul" @if (Auth::user()->month == 'Jul') selected @endif>July</option>
-                                                        <option value="Aug" @if (Auth::user()->month == 'Aug') selected @endif>August</option>
-                                                        <option value="Sep" @if (Auth::user()->month == 'Sep') selected @endif>September</option>
-                                                        <option value="Oct" @if (Auth::user()->month == 'Oct') selected @endif>October</option>
-                                                        <option value="Nov" @if (Auth::user()->month == 'Nov') selected @endif>November</option>
-                                                        <option value="Dec" @if (Auth::user()->month == 'Dec') selected @endif>December</option>
+                                                        <option value="Jan" @if ($student->month == 'Jan') selected @endif>January</option>
+                                                        <option value="Feb" @if ($student->month == 'Feb') selected @endif>February</option>
+                                                        <option value="Mar" @if ($student->month == 'Mar') selected @endif>March</option>
+                                                        <option value="Apr" @if ($student->month == 'Apr') selected @endif>April</option>
+                                                        <option value="May" @if ($student->month == 'May') selected @endif>May</option>
+                                                        <option value="Jun" @if ($student->month == 'Jun') selected @endif>June</option>
+                                                        <option value="Jul" @if ($student->month == 'Jul') selected @endif>July</option>
+                                                        <option value="Aug" @if ($student->month == 'Aug') selected @endif>August</option>
+                                                        <option value="Sep" @if ($student->month == 'Sep') selected @endif>September</option>
+                                                        <option value="Oct" @if ($student->month == 'Oct') selected @endif>October</option>
+                                                        <option value="Nov" @if ($student->month == 'Nov') selected @endif>November</option>
+                                                        <option value="Dec" @if ($student->month == 'Dec') selected @endif>December</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -392,7 +355,7 @@
 
                                                 <div class="col-md-12 my-3">
                                                     <input id="phone" name="phone" type="tel"
-                                                        value="{{ Auth::user()->phone ?? '' }}" required="required"
+                                                        value="{{ $student->phone ?? '' }}" required="required"
                                                         placeholder="+1425632****">
 
                                                 </div>
@@ -403,14 +366,14 @@
                                                 <div class="input-text col-md-6">
 
                                                     <input id="myInput" type="" name="city" placeholder="City"
-                                                        value="{{ Auth::user()->city ?? '' }}" required="required">
+                                                        value="{{ $student->city ?? '' }}" required="required">
 
                                                 </div>
                                                 <div class="input-text col-md-6 w-100">
 
                                                     <input id="country_selector" name="country" onchange="university()"
                                                         type="" required="required">
-                                                    <input id="country_short" value="{{ Auth::user()->country_short }}"
+                                                    <input id="country_short" value="{{ $student->country_short }}"
                                                         name="country_short" type="" hidden>
                                                     <label for="country_selector" style="display:none;">Select a country
                                                         here...</label>
@@ -431,11 +394,10 @@
                                                                 aria-label=".form-select-lg example" name="gender"
                                                                 required="required">
                                                                 <option value="" selected disabled>Gender</option>
-                                                                <option value="male" @if (Auth::user()->gender == 'male') selected @endif>Male</option>
-                                                                <option value="female" @if (Auth::user()->gender == 'female') selected @endif>Female
+                                                                <option value="male" @if ($student->gender == 'male') selected @endif>Male</option>
+                                                                <option value="female" @if ($student->gender == 'female') selected @endif>Female
                                                                 </option>
-                                                                <!-- <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other
-                                                                </option> -->
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -446,16 +408,18 @@
                                                     <div class="form-group">
                                                         <label for="exampleText">About</label>
                                                         <!-- <textarea class="form-control" name="bio"
-                                                            id="exampleFormControlTextarea1" rows="5"
-                                                            placeholder="Write about yourself..."
-                                                            required="required">{{ Auth::user()->bio ?? '' }}</textarea> -->
+                                                                id="exampleFormControlTextarea1" rows="5"
+                                                                placeholder="Write about yourself..."
+                                                                required="required">{{ $student->bio ?? '' }}</textarea> -->
                                                         <textarea class="form-control" name="bio" id="aboutTextarea"
-                                                        rows="5"
-                                                        placeholder="Write about yourself..." required="required" minlength="100" maxlength="200" onkeyup="countChars(this);">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                            rows="5" placeholder="Write about yourself..."
+                                                            required="required" minlength="100" maxlength="200"
+                                                            onkeyup="countChars(this);">{{ $student->bio ?? '' }}</textarea>
                                                         <?php
-                                                            $length = strlen(Auth::user()->bio);
+                                                        $length = strlen($student->bio);
                                                         ?>
-                                                        <span class="badge bg-d300 pull-right"><span id="changeAble">{{$length}}</span>/200</span>
+                                                        <span class="badge bg-d300 pull-right"><span
+                                                                id="changeAble">{{ $length }}</span>/200</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mt-3">
@@ -477,7 +441,7 @@
                                         aria-labelledby="v-pills-Education-tab">
                                         <form action="{{ route('student.education.update') }}" method="Post"
                                             enctype="multipart/form-data" id="studentEducationForm">
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="user_id" value="{{ $student->id }}">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h1>Education</h1>
@@ -491,19 +455,19 @@
                                                         class="form-select form-select-lg mb-3 w-100">
                                                         <option value="" disabled selected>Which grade you are in?</option>
                                                         <option value="1"
-                                                            {{ Auth::user()->experty_level == 1 ? 'selected' : '' }}>Pre
+                                                            {{ $student->experty_level == 1 ? 'selected' : '' }}>Pre
                                                             Elementary School</option>
                                                         <option value="2"
-                                                            {{ Auth::user()->experty_level == 2 ? 'selected' : '' }}>
+                                                            {{ $student->experty_level == 2 ? 'selected' : '' }}>
                                                             Elementary School</option>
                                                         <option value="3"
-                                                            {{ Auth::user()->experty_level == 3 ? 'selected' : '' }}>
+                                                            {{ $student->experty_level == 3 ? 'selected' : '' }}>
                                                             Secondary School</option>
                                                         <option value="4"
-                                                            {{ Auth::user()->experty_level == 4 ? 'selected' : '' }}>High
+                                                            {{ $student->experty_level == 4 ? 'selected' : '' }}>High
                                                             School</option>
                                                         <option value="5"
-                                                            {{ Auth::user()->experty_level == 5 ? 'selected' : '' }}> Post
+                                                            {{ $student->experty_level == 5 ? 'selected' : '' }}> Post
                                                             Secondary</option>
 
                                                     </select>
@@ -515,11 +479,12 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <select name="std_subj"
-                                                                class="form-select form-select-lg mb-3 w-100" id="main_ssub">
+                                                                class="form-select form-select-lg mb-3 w-100"
+                                                                id="main_ssub">
                                                                 <option value="" disabled selected>Main Subject</option>
                                                                 @foreach ($subject_cat as $subject)
                                                                     <option value="{{ $subject->id }}"
-                                                                        {{ Auth::user()->std_subj == $subject->id ? 'selected' : '' }}>
+                                                                        {{ $student->std_subj == $subject->id ? 'selected' : '' }}>
                                                                         {{ $subject->name }}</option>
                                                                 @endforeach
 
@@ -527,12 +492,13 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="std_learn"
-                                                                class="form-select form-select-lg  mb-3 w-100" id="sub-ssub">
+                                                                class="form-select form-select-lg  mb-3 w-100"
+                                                                id="sub-ssub">
                                                                 <option value="" disabled selected>Sub-Subject</option>
 
                                                                 @foreach ($subjects as $subject)
                                                                     <option value="{{ $subject->id }}"
-                                                                        {{ Auth::user()->std_learn == $subject->id ? 'selected' : '' }}>
+                                                                        {{ $student->std_learn == $subject->id ? 'selected' : '' }}>
                                                                         {{ $subject->name }}</option>
                                                                 @endforeach
 
@@ -565,8 +531,9 @@
             </div>
         </div>
     </section>
-   <!-- Send File Modal -->
-   <div class="modal fade" id="sendFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Send File Modal -->
+    <div class="modal fade" id="sendFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -579,7 +546,7 @@
                     <div class="img-container">
                         <div class="row">
                             <div class="col-md-8">
-                                <img src="" id="sample_image" class="w-100"/>
+                                <img src="" id="sample_image" class="w-100" />
                             </div>
                             <div class="col-md-4">
                                 <div class="preview"></div>
@@ -594,30 +561,9 @@
             </div>
         </div>
     </div>
-    <!-- <div class="modal fade " id="sendFileCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Share File</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type='file' name="filepond" id="imageUpload" accept=".png, .jpg, .jpeg" />
-                    <div class="imag">
-                        <img  src="" id="cropper" class="w-100">
-                    </div>
-                    <div>
-                        <button class="btn schedule-btn">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="modal fade" id="newFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="newFileCall" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -627,13 +573,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row"  id="infoImg" >
+                    <div class="row" id="infoImg">
                         <div class="  col-md-12 mt-2 mb-3">
                             <div class="bg-price p-4">
                                 <div class="d-flex mb-3 mt-3">
-                                    <img src="{{asset('assets/images/demo/img-1.png')}}" alt="" class="demoImg">
-                                    <img src="{{asset('assets/images/demo/img-2.png')}}" alt="" class="demoImg">
-                                    <img src="{{asset('assets/images/demo/img-3.png')}}" alt="" class="demoImg">
+                                    <img src="{{ asset('assets/images/demo/img-1.png') }}" alt="" class="demoImg">
+                                    <img src="{{ asset('assets/images/demo/img-2.png') }}" alt="" class="demoImg">
+                                    <img src="{{ asset('assets/images/demo/img-3.png') }}" alt="" class="demoImg">
                                 </div>
                                 <h3>Tips for an amazing photo</h3>
                                 <ul class="conListing pl-3">
@@ -658,7 +604,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn schedule-btn showCheck pl-5 pr-5" data-dismiss="modal" > Okay </button>
+                    <button type="button" class="btn schedule-btn showCheck pl-5 pr-5" data-dismiss="modal"> Okay </button>
 
                 </div>
             </div>
@@ -667,6 +613,7 @@
 
 @endsection
 @section('scripts')
+
     <script src="{{ asset('assets/js/intlTelInput.js') }}"></script>
     <script src="{{ asset('assets/js/registration.js') }}"></script>
     <script src="{{ asset('assets/js/languages.js') }}"></script>
@@ -674,22 +621,23 @@
     <script src="{{ asset('assets/js/googleapi.js') }}"></script>
     <script src="{{ asset('assets/js/countrySelect.js') }}"></script>
     @include('js_files.student.profileJs')
+
     <script>
         $(document).ready(function() {
             $("#year").yearpicker({
-                year: {{ Auth::user()->year ?? '1990' }},
+                year: {{ $student->year ?? '1990' }},
                 startYear: 1950,
                 endYear: 2050,
             });
 
             $("#check").hide();
         });
-        $(".showCheck").click(function(){
+        $(".showCheck").click(function() {
             $("#check").show();
             $("#imageUplo").hide();
         })
         $("#country_selector").countrySelect({
-            defaultCountry: "{{ Auth::user()->country_short ?? '' }}",
+            defaultCountry: "{{ $student->country_short ?? '' }}",
             preferredCountries: ['ca', 'gb', 'us', 'pk']
         });
 
@@ -704,7 +652,7 @@
         });
         // var languages_list = {...};
         (function() {
-            var user_language_code = "{{ Auth::user()->language ?? 'en-US' }}";
+            var user_language_code = "{{ $student->language ?? 'en-US' }}";
             var option = '';
             option += '<option value="" selected disabled>Select Language</option>';
             for (var language_code in languages_list) {
@@ -715,7 +663,7 @@
             document.getElementById('languages-list').innerHTML = option;
         })();
 
-        $("#imageUplo").click(function(){
+        $("#imageUplo").click(function() {
             $("#newFileCall").modal("show");
         });
 
@@ -740,7 +688,6 @@
         }
 
         function readURL(input) {
-            console.log(input,"input");
             $('#imagePreview').css('background-image', 'url(' + input + ')');
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650);
@@ -868,34 +815,35 @@
             })();
         });
 
-        $("#main_ssub").change(function(){
+        $("#main_ssub").change(function() {
             var conceptName = $('#main_ssub').find(":selected").val();
 
             getSubSub(conceptName);
 
         })
-        function getSubSub(id){
+
+        function getSubSub(id) {
 
             $.ajax({
-                url: "{{route('student.subSubject')}}",
-                type:"GET",
+                url: "{{ route('student.subSubject') }}",
+                type: "GET",
                 data: {
-                    id:id,
+                    id: id,
                 },
-                success:function(response){
-                    console.log(response.data.length,'response');
+                success: function(response) {
+                    console.log(response.data.length, 'response');
                     $("#sub-ssub").html('');
-                    for(var i=0; i<=response.data.length; i++){
+                    for (var i = 0; i <= response.data.length; i++) {
 
-                        var html = `<option value="`+response.data[i].id+`">
-                            `+response.data[i].name+`
+                        var html = `<option value="` + response.data[i].id + `">
+                            ` + response.data[i].name + `
                         </option>`;
 
                         $("#sub-ssub").append(html);
                     }
                 },
-                error:function(e) {
-                    toastr.error('Something went wrong',{
+                error: function(e) {
+                    toastr.error('Something went wrong', {
                         position: 'top-end',
                         icon: 'error',
                         showConfirmButton: false,
@@ -906,62 +854,62 @@
         }
     </script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        var $modal = $('#sendFileCall');
+            var $modal = $('#sendFileCall');
 
-        var image = document.getElementById('sample_image');
+            var image = document.getElementById('sample_image');
 
-        var cropper;
+            var cropper;
 
-        $('#imageUpload').change(function(event) {
-            var files = event.target.files;
+            $('#imageUpload').change(function(event) {
+                var files = event.target.files;
 
-            var done = function(url) {
-                image.src = url;
+                var done = function(url) {
+                    image.src = url;
 
-                $modal.modal('show');
-            };
-
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function(event) {
-                    done(reader.result);
+                    $modal.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
-        });
 
-        $modal.on('shown.bs.modal', function() {
-            cropper = new Cropper(image, {
-                aspectRatio: 1,
-                viewMode: 3,
-                preview: '.preview'
-            });
-        }).on('hidden.bs.modal', function() {
-            cropper.destroy();
-            cropper = null;
-        });
-
-        $('#crop').click(function() {
-            console.log("ok");
-            $('#sendFileCall').modal("hide");
-            canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function(event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
             });
 
-            canvas.toBlob(function(blob) {
-                url = URL.createObjectURL(blob);
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function() {
-                    var base64data = reader.result;
-                    readURL(base64data);
-                };
+            $modal.on('shown.bs.modal', function() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    preview: '.preview'
+                });
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
             });
-        });
 
-    });
-</script>
+            $('#crop').click(function() {
+                console.log("ok");
+                $('#sendFileCall').modal("hide");
+                canvas = cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400
+                });
+
+                canvas.toBlob(function(blob) {
+                    url = URL.createObjectURL(blob);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var base64data = reader.result;
+                        readURL(base64data);
+                    };
+                });
+            });
+
+        });
+    </script>
 @endsection

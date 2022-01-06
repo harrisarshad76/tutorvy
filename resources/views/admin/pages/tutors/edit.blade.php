@@ -1,4 +1,4 @@
-@extends('tutor.layouts.app')
+@extends('admin.layouts.app')
 <link href="{{ asset('assets/css/registration.css') }}" rel="stylesheet">
 <style>
     .card {
@@ -211,269 +211,6 @@
 <link rel="stylesheet" href="{{ asset('assets/css/countrySelect.css') }}">
 
 @section('content')
-    <!-- <div class="container">
-                    <p class="heading-first ml-3 mr-3">
-                        Profile
-                    </p>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="container-fluid pb-3 profile-header">
-                                <div class="img-profile text-center pt-3">
-                                    <span style="position: absolute;right: 25px;">
-                                        <img src="../assets/images/ico/yellow-rank.png" alt="yellow">
-                                    </span>
-                                    <img src="../assets/images/ico/porfile-main.png" alt="profile-image" class="w-50">
-                                    <p class="heading-third mt-3">
-                                        Danish jaffery
-                                    </p>
-                                    <p class="profile-tutor mt-0" style="line-height: 0;">
-                                        Tutor
-                                    </p>
-                                    <button class="schedule-btn w-100 mt-3">
-                                        Book class
-                                    </button>
-                                    <button class="cencel-btn w-100 mt-3">
-                                        Send massage
-                                    </button>
-                                    <div class="star-icos">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="perfile-text ml-1">4.0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
-                                <div class="row mt-3">
-                                    <div class="col-md-3">
-                                        <img src="../assets/images/ico/red-icons.png" alt="blue-ico">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p class="profile-tutor">
-                                            Professional
-                                        </p>
-                                        <p class="paragraph-text" style="line-height: 0;">
-                                            Physics, Chemistry
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-3">
-                                        <img src="../assets/images/ico/red-icons.png" alt="blue-ico">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p class="profile-tutor">
-                                            Subjects
-                                        </p>
-                                        <p class="paragraph-text" style="line-height: 0;">
-                                            Physics, Chemistry
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-3">
-                                        <img src="../assets/images/ico/red-icons.png" alt="blue-ico">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p class="profile-tutor">
-                                            Subjects
-                                        </p>
-                                        <p class="paragraph-text" style="line-height: 0;">
-                                            Physics, Chemistry
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
-                                <p class="heading-forth">
-                                    Education
-                                </p>
-                                <div style="border-bottom: 1px solid #D6DBE2;"></div>
-                                <p class="profile-tutor mt-3 ">
-                                    BSC Chemistry 2014
-                                </p>
-                                <p class="paragraph-text pt-0" style="line-height: 0;">
-                                    University of Punjab Lahore
-                                </p>
-                            </div>
-                            <div class="container-fluid mt-3 pt-3 pb-3 mb-3 profile-header">
-                                <p class="heading-forth">
-                                    Experience
-                                </p>
-                                <div style="border-bottom: 1px solid #D6DBE2;"></div>
-                                <p class="profile-tutor mt-3 ">
-                                    BSC Chemistry 2014
-                                </p>
-                                <p class="paragraph-text pt-0" style="line-height: 0;">
-                                    University of Punjab Lahore
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="container profile-header pt-4 pb-4">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="d-flex">
-                                            <div class="">
-                                                <img src="../assets/images/ico/blue-icos.png" alt="blue">
-                                            </div>
-                                            <span class="heading-third ml-3">
-                                                16 <br />
-                                                <span class="heading-sixths">Total classes</span>
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-3 m-0 p-0">
-                                        <div class="d-flex">
-                                            <div class="">
-                                                <img src="../assets/images/ico/blue-clock.png" alt="blue-clock">
-                                            </div>
-                                            <span class="heading-third ml-3">
-                                                50$ <br />
-                                                <span class="heading-sixths">Per hour rate</span>
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-3 m-0 p-0">
-                                        <div class="d-flex  ">
-                                            <div class="">
-                                                <img src="../assets/images/ico/red-clock.png" alt="red">
-                                            </div>
-                                            <span class="heading-third ml-3">
-                                                9am-5pm <br />
-                                                <span class="heading-sixths ml-1">Availability</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 m-0 p-0">
-                                        <div class="d-flex">
-                                            <div class="">
-                                                <img src="../assets/images/ico/blue-icos.png" alt="blue+">
-                                            </div>
-                                            <span class="heading-third ml-3">
-                                                100% <br />
-                                                <span class="heading-sixths">Response time</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container mt-3 pt-4 pb-4 profile-header">
-                                <div class="row">
-                                    <p class="heading-second ml-3 ">About tutor</p>
-                                    <span class="about-text ml-3">
-                                        It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at
-                                        its lyout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                                        distribution of letters, as opposed
-                                        to using 'Content here, content ere', making it look like readable English. Many
-                                        desktop publishing packages and
-                                        web page editors now use Lorem Ipsum as their default model text, and a search for
-                                        'lorem ipsum' will uncover
-                                        many web sites still in their infancy.
-                                    </span>
-                                </div>
-                            </div>
-                            <p class="heading-second pt-3 pb-3">
-                                Courses
-                            </p>
-                            <div class="container pt-4 pb-4 profile-header">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <img src="../assets/images/ico/course.png" alt="Avatar" style="width:100%">
-                                            <div class="container mt-3">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <span class="che-text">
-                                                            chemistry
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <span class="dolar-text ml-5">
-                                                            $99
-                                                        </span>
-                                                    </div>
-                                                    <span class="heading-forth ml-3 mt-3">
-                                                        How to create your online
-                                                        courses in 3 steps.
-                                                    </span>
-                                                </div>
-                                                <button class="mt-3 w-100 schedule-btn1">Start learning</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <img src="../assets/images/ico/NoPath.png" alt="Avatar" style="width:100%">
-                                            <div class="container mt-3">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <span class="che-text">
-                                                            chemistry
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <span class="dolar-text ml-5">
-                                                            $99
-                                                        </span>
-                                                    </div>
-                                                    <span class="heading-forth ml-3 mt-3">
-                                                        How to create your online
-                                                        courses in 3 steps.
-                                                    </span>
-                                                </div>
-                                                <button class="mt-3 w-100 schedule-btn1">Start learning</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="add-new">
-                                            <img src="../assets/images/ico/add-new.png" alt="add-new">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container pt-4 pb-4 mt-4 profile-header">
-                                <span class="heading-second">Student reviews</span>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="mt-3 d-flex">
-                                            <div>
-                                                <img src="../assets/images/ico/profile-boy.png" alt="profile-header">
-                                            </div>
-                                            <span class="ml-3 heading-forth1">Smith John <br />
-                                                <span class="notification-text4">
-                                                    Student
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="star-icos">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="fa fa-star checked ml-1"></span>
-                                        <span class="perfile-text ml-1">4.0</span>
-                                    </div>
-                                    <span class="notification-text6">
-                                        <br />
-                                        It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its
-                                        lyout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                                        distribution of letters, as opposed to using
-                                        Content here content making it look like readable English.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
     <section>
         <div class="content-wrapper " style="overflow: hidden;">
             <div class="container-fluid">
@@ -545,9 +282,9 @@
                                                 {{ Session::get('message') }}
                                             </div>
                                         @endif
-                                        <form action="{{ route('tutor.profile.update', [Auth::user()->id]) }}"
+                                        <form action="{{ route('tutor.profile.update', [$tutor->id]) }}"
                                             method="Post" enctype="multipart/form-data" id="personal">
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="user_id" value="{{ $tutor->id }}">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h1>Personal Information</h1>
@@ -571,13 +308,13 @@
                                                             </a>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            @if (Auth::user()->picture != null)
+                                                            @if ($tutor->picture != null)
                                                                 <?php
-                                                                $path = Auth::user()->picture;
+                                                                $path = $tutor->picture;
                                                                 ?>
                                                                 @if (file_exists(public_path($path)))
                                                                     <div id="imagePreview"
-                                                                        style="background-image: url('{{ asset(Auth::user()->picture) }}');">
+                                                                        style="background-image: url('{{ asset($tutor->picture) }}');">
                                                                     </div>
                                                                 @else
                                                                     <div id="imagePreview"
@@ -623,7 +360,7 @@
                                                         <label for="exampleName" class="heading-fifth mb-0">First
                                                             Name</label>
                                                         <input type="text" name="first_name" class="form-control"
-                                                            value="{{ Auth::user()->first_name }}" id="exampleName"
+                                                            value="{{ $tutor->first_name }}" id="exampleName"
                                                             aria-describedby="emailHelp" required="required"
                                                             placeholder="First Name" style="text-transform: capitalize;">
                                                     </div>
@@ -633,7 +370,7 @@
                                                         <label for="exampleName" class="heading-fifth mb-0">Last
                                                             Name</label>
                                                         <input type="text" name="last_name" class="form-control"
-                                                            value="{{ Auth::user()->last_name }}" id="exampleName"
+                                                            value="{{ $tutor->last_name }}" id="exampleName"
                                                             aria-describedby="emailHelp" required="required"
                                                             placeholder="Last Name" style="text-transform: capitalize;">
                                                     </div>
@@ -644,7 +381,7 @@
                                                         <label for="exampleName" class="heading-fifth mb-0">Tutor
                                                             Tagline</label>
                                                         <input type="text" name="tagline" class="form-control"
-                                                            value="{{ Auth::user()->tagline }}" id="exampleName"
+                                                            value="{{ $tutor->tagline }}" id="exampleName"
                                                             aria-describedby="emailHelp" required="required"
                                                             placeholder="Tutor Tagline" style="text-transform: capitalize;">
                                                     </div>
@@ -661,7 +398,7 @@
                                                     <select class="form-select form-select-lg" id="day" name="day"
                                                         requried>
                                                         @for ($i = 0; $i <= 31; $i++)
-                                                            <option value="{{ $i }}" @if (Auth::user()->day == $i) selected @endif>
+                                                            <option value="{{ $i }}" @if ($tutor->day == $i) selected @endif>
                                                                 {{ $i }}</option>
                                                         @endfor
                                                     </select>
@@ -670,18 +407,18 @@
                                                 <div class="col-md-4">
                                                     <select class="form-select form-select-lg" name="month"
                                                         aria-label=".form-select-lg example" required="required">
-                                                        <option value="Jan" @if (Auth::user()->month == 'Jan') selected @endif>January</option>
-                                                        <option value="Feb" @if (Auth::user()->month == 'Feb') selected @endif>February</option>
-                                                        <option value="Mar" @if (Auth::user()->month == 'Mar') selected @endif>March</option>
-                                                        <option value="Apr" @if (Auth::user()->month == 'Apr') selected @endif>April</option>
-                                                        <option value="May" @if (Auth::user()->month == 'May') selected @endif>May</option>
-                                                        <option value="Jun" @if (Auth::user()->month == 'Jun') selected @endif>June</option>
-                                                        <option value="Jul" @if (Auth::user()->month == 'Jul') selected @endif>July</option>
-                                                        <option value="Aug" @if (Auth::user()->month == 'Aug') selected @endif>August</option>
-                                                        <option value="Sep" @if (Auth::user()->month == 'Sep') selected @endif>September</option>
-                                                        <option value="Oct" @if (Auth::user()->month == 'Oct') selected @endif>October</option>
-                                                        <option value="Nov" @if (Auth::user()->month == 'Nov') selected @endif>November</option>
-                                                        <option value="Dec" @if (Auth::user()->month == 'Dec') selected @endif>December</option>
+                                                        <option value="Jan" @if ($tutor->month == 'Jan') selected @endif>January</option>
+                                                        <option value="Feb" @if ($tutor->month == 'Feb') selected @endif>February</option>
+                                                        <option value="Mar" @if ($tutor->month == 'Mar') selected @endif>March</option>
+                                                        <option value="Apr" @if ($tutor->month == 'Apr') selected @endif>April</option>
+                                                        <option value="May" @if ($tutor->month == 'May') selected @endif>May</option>
+                                                        <option value="Jun" @if ($tutor->month == 'Jun') selected @endif>June</option>
+                                                        <option value="Jul" @if ($tutor->month == 'Jul') selected @endif>July</option>
+                                                        <option value="Aug" @if ($tutor->month == 'Aug') selected @endif>August</option>
+                                                        <option value="Sep" @if ($tutor->month == 'Sep') selected @endif>September</option>
+                                                        <option value="Oct" @if ($tutor->month == 'Oct') selected @endif>October</option>
+                                                        <option value="Nov" @if ($tutor->month == 'Nov') selected @endif>November</option>
+                                                        <option value="Dec" @if ($tutor->month == 'Dec') selected @endif>December</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -696,7 +433,7 @@
                                                         Number</label>
 
                                                     <input id="phone" name="phone" type="tel"
-                                                        value="{{ Auth::user()->phone ?? '' }}" required="required"
+                                                        value="{{ $tutor->phone ?? '' }}" required="required"
                                                         placeholder="+92*******">
 
                                                 </div>
@@ -708,7 +445,7 @@
                                                     <label for="exampleName" class="heading-fifth mb-0">City</label>
 
                                                     <input id="myInput" type="" name="city" placeholder="City"
-                                                        value="{{ Auth::user()->city ?? '' }}" required="required">
+                                                        value="{{ $tutor->city ?? '' }}" required="required">
 
                                                 </div>
                                                 <div class=" col-md-6 w-100">
@@ -716,7 +453,7 @@
 
                                                     <input id="country_selector" name="country" onchange="university()"
                                                         type="" required="required" placeholder="Country">
-                                                    <input id="country_short" value="{{ Auth::user()->country_short }}"
+                                                    <input id="country_short" value="{{ $tutor->country_short }}"
                                                         name="country_short" type="" hidden>
                                                     <label for="country_selector" style="display:none;">Select a country
                                                         here...</label>
@@ -728,13 +465,13 @@
                                                             <select id="selection" name="security" onchange="changeplh()"
                                                                 class="form-select form-select-lg mb-3 "
                                                                 aria-label=".form-select-lg example">
-                                                                <option value="1" @if (Auth::user()->type == 1) selected @endif>ID card number</option>
-                                                                <option value="2" @if (Auth::user()->type == 2) selected @endif>Social security number</option>
+                                                                <option value="1" @if ($tutor->type == 1) selected @endif>ID card number</option>
+                                                                <option value="2" @if ($tutor->type == 2) selected @endif>Social security number</option>
                                                             </select>
                                                         </div>
                                                         <div class="input-text col-md-6">
-                                                            <input id="textbox" type="number" @if (Auth::user()->type == 1) name="cnic" @else name="security" @endif class="form-control" placeholder="ID card number"
-                                                                value="{{ Auth::user()->cnic_security ?? '' }}">
+                                                            <input id="textbox" type="number" @if ($tutor->type == 1) name="cnic" @else name="security" @endif class="form-control" placeholder="ID card number"
+                                                                value="{{ $tutor->cnic_security ?? '' }}">
                                                         </div>
                                                     </div>
                                                 </div> -->
@@ -758,10 +495,10 @@
                                                                 aria-label=".form-select-lg example" name="gender"
                                                                 required="required">
                                                                 <option value="" selected disabled>Gender</option>
-                                                                <option value="male" @if (Auth::user()->gender == 'male') selected @endif>Male</option>
-                                                                <option value="female" @if (Auth::user()->gender == 'female') selected @endif>Female
+                                                                <option value="male" @if ($tutor->gender == 'male') selected @endif>Male</option>
+                                                                <option value="female" @if ($tutor->gender == 'female') selected @endif>Female
                                                                 </option>
-                                                                <!-- <option value="other" @if (Auth::user()->gender == 'other') selected @endif>Other</option> -->
+                                                                <!-- <option value="other" @if ($tutor->gender == 'other') selected @endif>Other</option> -->
                                                             </select>
                                                         </div>
                                                     </div>
@@ -797,9 +534,9 @@
                                                         <textarea class="form-control" name="bio" id="aboutTextarea"
                                                             rows="5" placeholder="Write about yourself..."
                                                             required="required" minlength="100" maxlength="200"
-                                                            onkeyup="countChars(this);">{{ Auth::user()->bio ?? '' }}</textarea>
+                                                            onkeyup="countChars(this);">{{ $tutor->bio ?? '' }}</textarea>
                                                         <?php
-                                                        $length = strlen(Auth::user()->bio);
+                                                        $length = strlen($tutor->bio);
                                                         ?>
                                                         <span class="badge bg-d300 pull-right"><span
                                                                 id="changeAble">{{ $length }}</span>/200</span>
@@ -823,7 +560,7 @@
 
                                     <div class="tab-pane fade chee" id="v-pills-Education" role="tabpanel"
                                         aria-labelledby="v-pills-Education-tab">
-                                        <form action="{{ route('tutor.profile.edu', [Auth::user()->id]) }}" method="POST"
+                                        <form action="{{ route('tutor.profile.edu', [$tutor->id]) }}" method="POST"
                                             enctype="multipart/form-data" id="tutorEduDocsForm">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -832,7 +569,7 @@
                                             </div>
 
 
-                                            @if (count(Auth::user()->education) == 0)
+                                            @if (count($tutor->education) == 0)
 
                                                 <div class="row mt-3">
                                                     <div class="col-md-6">
@@ -924,9 +661,9 @@
                                                     </div>
                                                 </div>
 
-                                            @elseif( count(Auth::user()->education) > 0)
+                                            @elseif( count($tutor->education) > 0)
 
-                                                @foreach (Auth::user()->education as $edu)
+                                                @foreach ($tutor->education as $edu)
 
                                                     <div class="row mt-3">
                                                         <div class=" col-md-4">
@@ -1063,14 +800,14 @@
 
                                     <div class="tab-pane fade chee" id="v-pills-Professional" role="tabpanel"
                                         aria-labelledby="v-pills-Professional-tab">
-                                        <form action="{{ route('tutor.profile.profession', [Auth::user()->id]) }}"
+                                        <form action="{{ route('tutor.profile.profession', [$tutor->id]) }}"
                                             method="POST" enctype="multipart/form-data" id="tutorProfessionForm">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h1>Professional</h1>
                                                 </div>
                                             </div>
-                                            @if (count(Auth::user()->professional) == 0)
+                                            @if (count($tutor->professional) == 0)
                                                 <div class="row mt-3">
                                                     <div class="col-md-12">
                                                         <div class="element">
@@ -1185,8 +922,8 @@
                                                 </div>
 
 
-                                            @elseif(count(Auth::user()->professional) > 0)
-                                                @foreach (Auth::user()->professional as $profession)
+                                            @elseif(count($tutor->professional) > 0)
+                                                @foreach ($tutor->professional as $profession)
                                                     <div class="row mt-3">
                                                         <div class="col-md-12">
                                                             <div class="element">
@@ -1395,7 +1132,7 @@
                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                                     data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        @if (Auth::user()->status == 2)
+                                                        @if ($tutor->status == 2)
                                                             <div class=" bg-success text-white">
                                                                 <div class="card-body row">
                                                                     <div class="col-md-2 text-center">
@@ -1425,7 +1162,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @elseif(Auth::user()->status == 1)
+                                                        @elseif($tutor->status == 1)
                                                             <div class=" bg-toast infoCard" id="verfication_msg">
                                                                 <div class="card-body row">
                                                                     <div class="col-md-2 text-center">
@@ -1458,7 +1195,7 @@
                                                                 </div>
                                                             </div>
                                                             <form
-                                                                action="{{ route('tutor.profile.verfication', [Auth::user()->id]) }}"
+                                                                action="{{ route('tutor.profile.verfication', [$tutor->id]) }}"
                                                                 method="POST" enctype="multipart/form-data"
                                                                 id="tutorVerficationForm">
                                                                 <div class="row">
@@ -1721,12 +1458,10 @@
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/intlTelInput.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/registration.js') }}"></script> -->
     <script src="{{ asset('assets/js/languages.js') }}"></script>
     <script src="{{ asset('assets/js/yearpicker.js') }}"></script>
     <script src="{{ asset('assets/js/googleapi.js') }}"></script>
     <script src="{{ asset('assets/js/countrySelect.js') }}"></script>
-    @include('js_files.tutor.profileJs')
     <script>
         $(document).ready(function() {
             $("#crop-save").hide();
@@ -1797,7 +1532,7 @@
 
                 $.ajax({
 
-                    url: "{{ route('tutor.profile.image', [Auth::user()->id]) }}",
+                    url: "{{ route('tutor.profile.image', [$tutor->id]) }}",
                     type: "POST",
                     data: formData,
                     // cache: false,
@@ -1877,7 +1612,7 @@
             $(".Cwork").hide();
 
             $("#year").yearpicker({
-                year: {{ Auth::user()->year ?? '1990' }},
+                year: {{ $tutor->year ?? '1990' }},
                 startYear: 1950,
                 endYear: 2050,
             });
@@ -1890,17 +1625,7 @@
         })
         $("#working").change(function() {
             var checkBox = document.getElementById("working");
-            // if(checkBox.checked == true){
-            //     $("#kinEnd").attr("type","text");
-            //     $("#kinEnd").val("Currently Working");
-            //     $("#kinEnd").attr("disabled","disabled");
-            // }
-            // else{
-            //     $("#kinEnd").attr("type","date");
-            //     $("#kinEnd").removeAttr("disabled","disabled");
-            //     $("#kinEnd").val("Currently Working");
 
-            // }
             if (checkBox.checked == true) {
                 $("#proEnd").hide();
                 $(".Cwork").show();
@@ -1921,7 +1646,7 @@
             }
         })
         $("#country_selector").countrySelect({
-            defaultCountry: "{{ Auth::user()->country_short ?? '' }}",
+            defaultCountry: "{{ $tutor->country_short ?? '' }}",
             preferredCountries: ['ca', 'gb', 'us', 'pk']
         });
 
@@ -1953,7 +1678,7 @@
         });
         // var languages_list = {...};
         (function() {
-            var user_language_code = "{{ Auth::user()->language ?? 'en-US' }}";
+            var user_language_code = "{{ $tutor->language ?? 'en-US' }}";
             var option = '';
             option += '<option disabled selected>Select Language</option>';
             for (var language_code in languages_list) {
@@ -1983,23 +1708,6 @@
             var val = opt.options[opt.selectedIndex].innerHTML;
             $("#lang").val(val)
         }
-
-        // function readURL(input) {
-        //     if (input.files && input.files[0]) {
-        //         var reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-        //             $('#imagePreview').hide();
-        //             $('#imagePreview').fadeIn(650);
-
-        //             $('.profile-img').attr('src',e.target.result);
-        //         }
-        //         reader.readAsDataURL(input.files[0]);
-        //     }
-
-        // }
-
-
 
         $("#edu2").click(function() {
             $("#edu").submit();
@@ -2183,4 +1891,6 @@
             }
         });
     </script>
+    @include('js_files.tutor.profileJs')
+
 @endsection

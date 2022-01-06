@@ -132,4 +132,57 @@ function delSubject(id) {
         });
     })
 }
+
+function endisable(id){
+    var satus = 0;
+
+    if ($("#status_"+id).is(":checked")) {
+            status = 1; //  verfied/enabled
+    } else {
+            status = 0; // Disabled
+    }
+
+    console.log(status)
+
+    $.ajax({
+        url: "/admin/subject/status",
+        type: "POST",
+        data: {
+            _token:"{{csrf_token()}}",
+            id: id,
+            status: status,
+        },
+        success: function(response) {
+            // console.log(response);
+            if (response.status == 200) {
+               toastr.success(response.message,{
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
+            }
+
+            else if (response.status == 400) {
+                toastr.error(response.message,{
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+
+        },
+        error:function(e) {
+            toastr.error('Something went wrong',{
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            });
+          }
+    });
+
+
+}
 </script>

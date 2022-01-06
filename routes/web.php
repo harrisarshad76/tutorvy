@@ -65,6 +65,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/tutor',[TutorController::class,'index'])->name('admin.tutor');
     Route::get('/tutor/profile/{id}',[TutorController::class,'profile'])->name('admin.tutorProfile');
+    Route::get('/tutor/profile/{id}/edit',[TutorController::class,'editProfile'])->name('admin.tutorProfile.edit');
     Route::get('/tutor/{id}/subjects/',[TutorController::class,'subjects'])->name('admin.tutorSubjects');
 
     Route::post('/tutor-plans',[TutorController::class,'showTutorPlans'])->name('admin.tutor.plans');
@@ -92,6 +93,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
 
     Route::get('/student',[StudentController::class,'index'])->name('admin.student');
     Route::get('/student/profile/{id}',[StudentController::class,'profile'])->name('admin.studentProfile');
+    Route::get('/student/profile/{id}/edit',[StudentController::class,'editProfile'])->name('admin.studentProfile.edit');
     Route::post('student/change-student-status',[StudentController::class,'studentStatus'])->name('admin.studentStatus');
     Route::post('student/delete-student',[StudentController::class,'deleteStudent'])->name('admin.deleteStudent');
     Route::post('assignStudent',[StudentController::class,'assignStudent'])->name('admin.assign.student');
@@ -118,6 +120,7 @@ Route::group(['prefix' => '/admin','middleware' => ['auth','admin']],function ()
     Route::post('/subject/insert-subject',[SubjectController::class,'insertSubject'])->name('admin.insertSubject');
     Route::post('/subject/update-subject',[SubjectController::class,'updateSubject'])->name('admin.updateSubject');
     Route::post('/subject/delete-subject',[SubjectController::class,'deleteSubject'])->name('admin.deleteSubject');
+    Route::post('/subject/status',[SubjectController::class,'status'])->name('admin.status');
 
 
 

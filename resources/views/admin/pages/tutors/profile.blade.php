@@ -135,7 +135,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <a href="setting.html">
+                                        <a href="{{route('admin.tutorProfile.edit',[$tutor->id])}}">
                                             <img src="{{asset('admin/assets/img/ico/edit-icon.png')}}" alt="image" />
                                         </a>
                                     </div>
