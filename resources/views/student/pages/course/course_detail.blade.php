@@ -333,152 +333,128 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <!-- classes table time and topics -->
-                                                                    @foreach ($course->basic_classes as $class)
-                                                                        <tr class="wordBreak">
-                                                                            <td class="pt-4">
-                                                                                <div class="w-150">
-                                                                                    <span>{{ date('g:i a', strtotime("$class->st_time UTC")) }}
-                                                                                    </span>
-                                                                                    <p class="mt-5">
-                                                                                        {{ date('g:i a', strtotime("$class->et_time UTC")) }}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </td>
+                                                                    @foreach($course->basic_classes as $class)
+                                                                    <tr class="wordBreak">
+                                                                        <td class="pt-4">
+                                                                            <div class="w-150">
+                                                                                <span>{{date("g:i a", strtotime("$class->class_time UTC"))}} </span>
+                                                                                <p class="mt-5">{{date("g:i a", strtotime("$class->class_end_time UTC"))}}</p>
+                                                                            </div>
+                                                                        </td>
 
-                                                                            @if ($class->day == 1)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
+                                                                    @if($class->day == 1)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                                <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                            
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
 
-                                                                            @if ($class->day == 2)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
+                                                                    @if($class->day == 2)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                           
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
+                                
+                                                                    @if($class->day == 3)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                           
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
 
-                                                                            @if ($class->day == 3)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
+                                                                    @if($class->day == 4)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                          
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
 
-                                                                            @if ($class->day == 4)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
+                                                                    @if($class->day == 5)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                          
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
 
-                                                                            @if ($class->day == 5)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve1 pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
+                                                                    @if($class->day == 6)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                            
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
 
-                                                                            @if ($class->day == 6)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve3 pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
-
-                                                                            @if ($class->day == 7)
-                                                                                <td class="m-0 p-0 pt-4">
-                                                                                    <div
-                                                                                        class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
-                                                                                        <span class="heading-fifth">
-                                                                                            {{ $class->title }}
-                                                                                        </span>
-                                                                                        <p class="paragraph-text-1 mb-1">
-                                                                                            <small>{{ date('g:i a', strtotime("$class->st_time UTC")) }}</small>
-                                                                                        </p>
-                                                                                        <p class="paragraph-text">
-                                                                                            {{ $class->overview }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            @else
-                                                                                <td class="pt-4 pb-0">---</td>
-                                                                            @endif
-                                                                        </tr>
-                                                                    @endforeach
+                                                                    @if($class->day == 7)
+                                                                    <td class="m-0 p-0 pt-4">
+                                                                        <div class="bg-color-apporve pl-2 pr-3 m-0 p-0 w-150">
+                                                                            <span class="heading-fifth">
+                                                                            {{$class->class_title}}
+                                                                            </span>
+                                                                            <p class="paragraph-text-1 mb-1">
+                                                                            <small>{{$class->class_date }} {{date("g:i a", strtotime("$class->class_time UTC"))}}</small>
+                                                                            </p>
+                                                                       
+                                                                        </div>
+                                                                    </td>
+                                                                    @else
+                                                                    <td class="pt-4 pb-0">---</td>
+                                                                    @endif
+                                                                </tr>
+                                                                @endforeach
 
                                                                 </tbody>
                                                             </table>

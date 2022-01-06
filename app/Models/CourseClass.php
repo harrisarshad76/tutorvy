@@ -20,7 +20,10 @@ class CourseClass extends Model
         'class_date', 
         'class_time',
         'class_end_time',
-        'class_status'
+        'class_status',
+        'class_title',
+        'class_overview',
+        'class_week'
     ];
 
 }

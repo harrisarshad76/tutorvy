@@ -45,74 +45,32 @@ class CourseController extends Controller
     public function courseView($id)
     {
         $course = Course::with('outline')->find($id);
-        $basic_classes = array();
+        // Basic Classes
 
-        $cr_bs_dys = json_decode($course->basic_days);
-        $cr_bs_clt = json_decode($course->basic_class_title,true);
-        $cr_bs_clo = json_decode($course->basic_class_overview,true);
-        $cr_bs_cst = json_decode($course->basic_class_start_time,true);
-        $cr_bs_cet = json_decode($course->basic_class_end_time,true);
+        $classes = CourseClass::where('course_id',$id)->get();
 
-
-
-        for($i = 0 ; $i < sizeof($cr_bs_dys) ; $i++){
-            $class = new ClassTable();
-            $class->day = $cr_bs_dys[$i];
-            $class->st_time = $cr_bs_cst != null ? $cr_bs_cst[$cr_bs_dys[$i]] : '';
-            $class->et_time = $cr_bs_cet != null ? $cr_bs_cet[$cr_bs_dys[$i]] : '';
-            $class->title = $cr_bs_clt != null ?  $cr_bs_clt[$cr_bs_dys[$i]] : '';
-            $class->overview = $cr_bs_clo != null ? $cr_bs_clo[$cr_bs_dys[$i]] : '';
-
-            array_push($basic_classes,$class);
-        }
-        $course->basic_classes = $basic_classes;
-        // Standard Classes
-        $standard_classes = array();
-
-        $cr_std_dys = json_decode($course->standard_days);
-        $cr_std_clt = json_decode($course->standard_class_title,true);
-        $cr_std_clo = json_decode($course->standard_class_overview,true);
-        $cr_std_cst = json_decode($course->standard_class_start_time,true);
-        $cr_std_cet = json_decode($course->standard_class_end_time,true);
-        if( $cr_std_dys != "" || $cr_std_dys != 0 ){
-
-            for($i = 0 ; $i < sizeof($cr_std_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_std_dys[$i];
-                $class->st_time =  $cr_std_cst != null ? $cr_std_cst[$cr_std_dys[$i]] : '';
-                $class->et_time =  $cr_std_cet != null ? $cr_std_cet[$cr_std_dys[$i]] : '';
-                $class->title = $cr_std_clt != null ?  $cr_std_clt[$cr_std_dys[$i]] : '';
-                $class->overview =  $cr_std_clo != null ? $cr_std_clo[$cr_std_dys[$i]] : '';
-
-                array_push($standard_classes,$class);
+        foreach($classes as $class){
+            $input = $class->class_date;
+            $date = strtotime($input);
+            $date = date('l', $date);
+            if($date == 'Monday'){
+                $date = 1;
+            }elseif($date == 'Tuesday'){
+                $date = 2;
+            }elseif($date == 'Wednesday'){
+                $date = 3;
+            }elseif($date == 'Thursday'){
+                $date = 4;
+            }elseif($date == 'Friday'){
+                $date = 5;
+            }elseif($date == 'Satureday'){
+                $date = 6;
+            }elseif($date == 'Sunday'){
+                $date = 7;
             }
-
-
+            $class->day = $date;
         }
-        $course->standard_classes = $standard_classes;
-        // Advance Classes
-        $advance_classes = array();
-
-        $cr_ad_dys = json_decode($course->advance_days);
-        $cr_ad_clt = json_decode($course->advance_class_title,true);
-        $cr_ad_clo = json_decode($course->advance_class_overview,true);
-        $cr_ad_cst = json_decode($course->advance_class_start_time,true);
-        $cr_ad_cet = json_decode($course->advance_class_end_time,true);
-
-        if( $cr_ad_dys != "" || $cr_ad_dys != 0 ){
-            for($i = 0 ; $i < sizeof($cr_ad_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_ad_dys[$i];
-                $class->ad_time =  $cr_ad_cst != null ? $cr_ad_cst[$cr_ad_dys[$i]] : '';
-                $class->et_time =  $cr_ad_cet != null ? $cr_ad_cet[$cr_ad_dys[$i]] : '';
-                $class->title = $cr_ad_clt != null ?  $cr_ad_clt[$cr_ad_dys[$i]] : '';
-                $class->overview =  $cr_ad_clo != null ? $cr_ad_clo[$cr_ad_dys[$i]] : '';
-
-                array_push($advance_classes,$class);
-            }
-        }
-
-        $course->advance_classes = $advance_classes;
+        $course->basic_classes = $classes;
         return view('tutor.pages.courses.courseView',compact('course'));
     }
 
@@ -124,7 +82,6 @@ class CourseController extends Controller
 
     public function store(Request $request) {
 
-        // return ($request);
 
         // if($request->hasFile('video')){
         //     $video_path = "storage/course/video/".$request->video->getClientOriginalName();
@@ -193,9 +150,11 @@ class CourseController extends Controller
         // $this->standardOutline($request);
         // $this->advanceOutline($request);
         // return dd($request->all());
+
         $this->basicCourseClasses($request);
-        $this->standardCourseClasses($request);
-        $this->advanceCourseClasses($request);
+        // $this->standardCourseClasses($request);
+        // $this->advanceCourseClasses($request);
+   
         
 
         // activity logs
@@ -211,74 +170,42 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::with('outline')->find($id);
+
         $basic_classes = array();
 
-        $cr_bs_dys = json_decode($course->basic_days);
-        $cr_bs_clt = json_decode($course->basic_class_title,true);
-        $cr_bs_clo = json_decode($course->basic_class_overview,true);
-        $cr_bs_cst = json_decode($course->basic_class_start_time,true);
-        $cr_bs_cet = json_decode($course->basic_class_end_time,true);
+        $cr_bs_duration = $course->basic_duration;
+        $class_titles = json_decode($course->basic_class_title,true);
+        $class_overviews = json_decode($course->basic_class_overview,true);
+        $bs_st_tt = json_decode($course->basic_class_start_time,true);
+        $bs_end_tt = json_decode($course->basic_class_end_time,true);
+        $bs_date = json_decode($course->basic_class_date,true);
 
+        $classes = CourseClass::where('course_id',$id)->get();
 
-
-        for($i = 0 ; $i < sizeof($cr_bs_dys) ; $i++){
-            $class = new ClassTable();
-            $class->day = $cr_bs_dys[$i];
-            $class->st_time = $cr_bs_cst != null ? $cr_bs_cst[$cr_bs_dys[$i]] : '';
-            $class->et_time = $cr_bs_cet != null ? $cr_bs_cet[$cr_bs_dys[$i]] : '';
-            $class->title = $cr_bs_clt != null ?  $cr_bs_clt[$cr_bs_dys[$i]] : '';
-            $class->overview = $cr_bs_clo != null ? $cr_bs_clo[$cr_bs_dys[$i]] : '';
-
-            array_push($basic_classes,$class);
-        }
-        $course->basic_classes = $basic_classes;
-        // Standard Classes
-        $standard_classes = array();
-
-        $cr_std_dys = json_decode($course->standard_days);
-        $cr_std_clt = json_decode($course->standard_class_title,true);
-        $cr_std_clo = json_decode($course->standard_class_overview,true);
-        $cr_std_cst = json_decode($course->standard_class_start_time,true);
-        $cr_std_cet = json_decode($course->standard_class_end_time,true);
-        if( $cr_std_dys != "" || $cr_std_dys != 0 ){
-
-            for($i = 0 ; $i < sizeof($cr_std_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_std_dys[$i];
-                $class->st_time =  $cr_std_cst != null ? $cr_std_cst[$cr_std_dys[$i]] : '';
-                $class->et_time =  $cr_std_cet != null ? $cr_std_cet[$cr_std_dys[$i]] : '';
-                $class->title = $cr_std_clt != null ?  $cr_std_clt[$cr_std_dys[$i]] : '';
-                $class->overview =  $cr_std_clo != null ? $cr_std_clo[$cr_std_dys[$i]] : '';
-
-                array_push($standard_classes,$class);
+        foreach($classes as $class){
+            $input = $class->class_date;
+            $date = strtotime($input);
+            $date = date('l', $date);
+            if($date == 'Monday'){
+                $date = 1;
+            }elseif($date == 'Tuesday'){
+                $date = 2;
+            }elseif($date == 'Wednesday'){
+                $date = 3;
+            }elseif($date == 'Thursday'){
+                $date = 4;
+            }elseif($date == 'Friday'){
+                $date = 5;
+            }elseif($date == 'Satureday'){
+                $date = 6;
+            }elseif($date == 'Sunday'){
+                $date = 7;
             }
-
-
+            $class->day = $date;
         }
-        $course->standard_classes = $standard_classes;
-        // Advance Classes
-        $advance_classes = array();
+        $course->basic_classes = $classes;
 
-        $cr_ad_dys = json_decode($course->advance_days);
-        $cr_ad_clt = json_decode($course->advance_class_title,true);
-        $cr_ad_clo = json_decode($course->advance_class_overview,true);
-        $cr_ad_cst = json_decode($course->advance_class_start_time,true);
-        $cr_ad_cet = json_decode($course->advance_class_end_time,true);
-
-        if( $cr_ad_dys != "" || $cr_ad_dys != 0 ){
-            for($i = 0 ; $i < sizeof($cr_ad_dys) ; $i++){
-                $class = new ClassTable();
-                $class->day = $cr_ad_dys[$i];
-                $class->ad_time =  $cr_ad_cst != null ? $cr_ad_cst[$cr_ad_dys[$i]] : '';
-                $class->et_time =  $cr_ad_cet != null ? $cr_ad_cet[$cr_ad_dys[$i]] : '';
-                $class->title = $cr_ad_clt != null ?  $cr_ad_clt[$cr_ad_dys[$i]] : '';
-                $class->overview =  $cr_ad_clo != null ? $cr_ad_clo[$cr_ad_dys[$i]] : '';
-
-                array_push($advance_classes,$class);
-            }
-        }
-
-        $course->advance_classes = $advance_classes;
+        // return $course;
         return view('tutor.pages.courses.edit',compact('course'));
     }
 
@@ -444,172 +371,87 @@ class CourseController extends Controller
 
     private function basicCourseClasses($request){
 
+        // dd($request->basic_class_date);exit;
         $start_date = $request->start_date;
+        $weeks = $request->basic_duration;
         $days = $this->days;
-        $bs_st_tt = json_encode($request->basic_class_start_time);
-        $bs_st_tt = json_decode($bs_st_tt,true);
-        $bs_end_tt = json_encode($request->basic_class_end_time);
-        $bs_end_tt = json_decode($bs_end_tt,true);
-        // return $bs_st_tt;
-        for($i = 0 ;$i < sizeof($request->basic_days) ; $i++){
-            for($d = 0 ; $d < sizeof($days) ; $d++){
-                if($days[$d]['id'] == $request->basic_days[$i]){
-                    
-                    $date = Carbon::parse($start_date);
-                    // If $date is Monday, return $date. Otherwise, add days until next Monday.
-                    $date = $date->is($days[$d]['day']) == 1 ? $date : $date->next($days[$d]['day']);
-                    $dd = $date;
-                    if($date->isPast()){
 
-                    }else{
-                        $class = CourseClass::where('class_date',$date)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->basic_days[$i]])->where('class_end_time',$bs_end_tt[$request->basic_days[$i]])->first();
-                        if($class){
-                            $class->course_id = $request->id;
-                            $class->class_date = $date;
-                            $class->class_plan = 1;
-                            $class->class_time = $bs_st_tt[$request->basic_days[$i]];
-                            $class->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                            $class->class_status = 0;
-                            $class->save();
-                        }else{
-                            $courseclass = new CourseClass();
-                            $courseclass->course_id = $request->id;
-                            $courseclass->class_date = $date;
-                            $courseclass->class_plan = 1;
-                            $courseclass->class_time = $bs_st_tt[$request->basic_days[$i]];
-                            $courseclass->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                            $courseclass->class_status = 0;
-                            $courseclass->save();
-                        }
-                    }
-                    
-                    for($w = 1 ; $w < $request->basic_duration ; $w++){
-                        $dd = $dd->addDays(7);
-                        if($date->isPast()){
+        $class_titles = $request->basic_class_title;
+        $class_overviews = $request->basic_class_overview;
+        // $class_titles = json_decode($request->basic_class_title);
+        $bs_st_tt = $request->basic_class_start_time;
+        $bs_end_tt = $request->basic_class_end_time;
+        $bs_date = $request->basic_class_date;
 
-                        }else{
-                            $class = CourseClass::where('class_date',$dd)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->basic_days[$i]])->where('class_end_time',$bs_end_tt[$request->basic_days[$i]])->first();
-                            if($class){
-                                $class->course_id = $request->id;
-                                $class->class_date = $dd;
-                                $class->class_plan = 1;
-                                $class->class_time = $bs_st_tt[$request->basic_days[$i]];
-                                $class->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                                $class->class_status = 0;
-                                $class->save();
-                            }else{
-                                $courseclass = new CourseClass();
-                                $courseclass->course_id = $request->id;
-                                $courseclass->class_date = $dd;
-                                $courseclass->class_plan = 1;
-                                $courseclass->class_time = $bs_st_tt[$request->basic_days[$i]];
-                                $courseclass->class_end_time = $bs_end_tt[$request->basic_days[$i]];
-                                $courseclass->class_status = 0;
-                                $courseclass->save();
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        for($i = 1 ; $i <= $weeks ; $i++){
+            
+            $lessons_titles = $class_titles[$i];
+            $lessons_overviews = $class_overviews[$i];
+            $lessons_st_time = $bs_st_tt[$i];
+            $lessons_ed_time = $bs_end_tt[$i];
+            $lessons_date = $bs_date[$i];
 
-        return ;
-    }
-
-    private function standardCourseClasses($request){
-
-        $start_date = $request->start_date;
-        $days = $this->days;
-        $bs_st_tt = json_encode($request->standard_class_start_time);
-        $bs_st_tt = json_decode($bs_st_tt,true);
-        $bs_end_tt = json_encode($request->standard_class_end_time);
-        $bs_end_tt = json_decode($bs_end_tt,true);
-       
-        if($request->standard_days != '' && !empty($request->standard_days)){
-            for($i = 0 ;$i < sizeof($request->standard_days) ; $i++){
+            $ccc = 1;
+            for($c = 1 ;$ccc <= sizeof($lessons_titles);$c++){
+                // dd($lessons_titles[$c]);exit;
+                
                 for($d = 0 ; $d < sizeof($days) ; $d++){
-                    if($days[$d]['id'] == $request->standard_days[$i]){
-                        $date = Carbon::parse($start_date);
-                        // If $date is Monday, return $date. Otherwise, add days until next Monday.
-                        $date = $date->is($days[$d]['day']) == 1 ? $date : $date->next($days[$d]['day']);
-    
-                        $class = CourseClass::where('class_date',$date)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->standard_days[$i]])->where('class_end_time',$bs_end_tt[$request->standard_days[$i]])->first();
-                        if($class){
-                            $class->course_id = $request->id;
-                            $class->class_date = $date;
-                            $class->class_plan = 2;
-                            $class->class_time = $bs_st_tt[$request->standard_days[$i]];
-                            $class->class_end_time = $bs_end_tt[$request->standard_days[$i]];
-                            $class->class_status = 0;
-                            $class->save();
-                        }else{
-                            $courseclass = new CourseClass();
-                            $courseclass->course_id = $request->id;
-                            $courseclass->class_date = $date;
-                            $courseclass->class_plan = 2;
-                            $courseclass->class_time = $bs_st_tt[$request->standard_days[$i]];
-                            $courseclass->class_end_time = $bs_end_tt[$request->standard_days[$i]];
-                            $courseclass->class_status = 0;
-                            $courseclass->save();
+                    if($days[$d]['id'] == $c){
+                        // echo $days[$d]['day'];
+
+                        if(array_key_exists($c,$lessons_titles)){
+                            // echo $days[$d]['id'];
+                            $ccc++;
+                            // print_r($lessons_titles[$c]);
+                            // If $date is Monday, return $date. Otherwise, add days until next Monday.
+                            //$sdate = $sdate->is($days[$d]['day']) == 1 ? $sdate : $sdate->next($days[$d]['day']);
+                            
+                            // echo $days[$d]['day'];
+
+                            // $dd = $sdate;
+                            // if($date->isPast()){
+                                
+
+                            // }else{
+                                
+                                $class = CourseClass::where('class_date',$lessons_date[$c])->where('course_id',$request->id)->where('class_time',$lessons_st_time[$c])->where('class_end_time',$lessons_ed_time[$c])->first();
+                                if($class){
+                                    $class->course_id = $request->id;
+                                    $class->class_date = $lessons_date[$c];
+                                    $class->class_plan = 1;
+                                    $class->class_time = $lessons_st_time[$c];
+                                    $class->class_end_time = $lessons_ed_time[$c];
+                                    $class->class_status = 0;
+                                    $class->class_title = $lessons_titles[$c];
+                                    $class->class_overview = $lessons_overviews[$c];
+                                    $class->class_week = $i;
+
+                                    $class->save();
+                                }else{
+                                    $courseclass = new CourseClass();
+                                    $courseclass->course_id = $request->id;
+                                    $courseclass->class_date = $lessons_date[$c];
+                                    $courseclass->class_plan = 1;
+                                    $courseclass->class_time = $lessons_st_time[$c];
+                                    $courseclass->class_end_time = $lessons_ed_time[$c];
+                                    $courseclass->class_status = 0;
+                                    $courseclass->class_title = $lessons_titles[$c];
+                                    $courseclass->class_overview = $lessons_overviews[$c];
+                                    $courseclass->class_week = $i;
+
+                                    $courseclass->save();
+                                }
+                            // }
                         }
-                        
-    
                     }
                 }
+                // echo $sdate;
             }
+            // $date = $sdate->addDays(7);
         }
-        
-
+      
         return ;
     }
-
-    private function advanceCourseClasses($request){
-
-        $start_date = $request->start_date;
-        $days = $this->days;
-        $bs_st_tt = json_encode($request->advance_class_start_time);
-        $bs_st_tt = json_decode($bs_st_tt,true);
-        $bs_end_tt = json_encode($request->advance_class_end_time);
-        $bs_end_tt = json_decode($bs_end_tt,true);
-       
-        if($request->advance_days != '' && !empty($request->advance_days)){
-            for($i = 0 ;$i < sizeof($request->advance_days) ; $i++){
-                for($d = 0 ; $d < sizeof($days) ; $d++){
-                    if($days[$d]['id'] == $request->advance_days[$i]){
-                        $date = Carbon::parse($start_date);
-                        // If $date is Monday, return $date. Otherwise, add days until next Monday.
-                        $date = $date->is($days[$d]['day']) == 3 ? $date : $date->next($days[$d]['day']);
-    
-                        $class = CourseClass::where('class_date',$date)->where('course_id',$request->id)->where('class_time',$bs_st_tt[$request->advance_days[$i]])->where('class_end_time',$bs_end_tt[$request->advance_days[$i]])->first();
-                        if($class){
-                            $class->course_id = $request->id;
-                            $class->class_date = $date;
-                            $class->class_plan = 3;
-                            $class->class_time = $bs_st_tt[$request->advance_days[$i]];
-                            $class->class_end_time = $bs_end_tt[$request->advance_days[$i]];
-                            $class->class_status = 0;
-                            $class->save();
-                        }else{
-                            $courseclass = new CourseClass();
-                            $courseclass->course_id = $request->id;
-                            $courseclass->class_date = $date;
-                            $courseclass->class_plan = 1;
-                            $courseclass->class_time = $bs_st_tt[$request->advance_days[$i]];
-                            $courseclass->class_end_time = $bs_end_tt[$request->advance_days[$i]];
-                            $courseclass->class_status = 0;
-                            $courseclass->save();
-                        }
-                        
-    
-                    }
-                }
-            }
-        }
-        
-
-        return ;
-    }
-
 
     private function basicOutline($request){
         foreach($request->basic_title as $i => $data){

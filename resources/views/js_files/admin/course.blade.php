@@ -155,12 +155,7 @@ function deleteCourse(id){
   });
 }
 function changeCourseStatus(id,st){
-  if($(this).is(':checked')){
-    alert("CHecked");
-  }
-  else{
-    alert("UnCHecked");
-  }
+ 
 //  alert(id);
 //  alert(st);
     let reason = null;
