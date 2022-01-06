@@ -75,7 +75,7 @@
                             <div class="col-md-12 mt-3">
                                 <label class="form-label heading-forth">Intro Video URL</label>
                                 <div class="input-serachs ">
-                                    <input type="url"  name="video" data-default-file="{{asset($course->video)}}" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" required />
+                                    <input type="url"  name="video" data-default-file="{{asset($course->video)}}" value="{{$course->video}}" placeholder="https://www.youtube.com/channel/UCTv6Gbid3HeUSYyLtV5sFOw/videos" required />
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
@@ -105,7 +105,7 @@
                                     <label for="" class="form-label heading-forth"> Course Duration 
                                     </label>
                                     <div class="input-options ">
-                                        <select name="basic_duration" id="basic_duration" disabled="disabled" style="padding:8px;">
+                                        <select name="basic_duration" id="basic_duration" readonly style="padding:8px;">
                                             <option disabled selected>Course duration</option>
                                             <option @if($course->basic_duration == 1) selected @endif value="1">1 week</option>
                                             <option @if($course->basic_duration == 2) selected @endif value="2">2 week</option>
@@ -125,62 +125,55 @@
                                 <div class="col-md-12  " id="week_schedule">
                                     <?php
                                      $round = $course->basic_duration;
-                                     for($i = 1;$i<=$round;$i++){ ?>
-                                        <div class="d-flex mt-3 mb-2">
-                                            <div class="">
-                                                <label class="" for=""><b> Week {{$i}} : </b></label>
-                                            </div>
-                                       <?php $classes = $course->basic_classes;
-                                        foreach($classes as $class){
-                                            
+                                     for($i = 1;$i<=$round;$i++){
+
                                    
                                     ?>
-                                        @if()
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('monday_{{$i}}',{{$i}},'monday')" class="custom-control-input" name="monday_{{$i}}" id="monday_{{$i}}">
-                                                <label class="custom-control-label" for="monday_{{$i}}">Monday</label>
-                                            </div>
-                                            
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('tuesday_{{$i}}',{{$i}},'tuesday')" class="custom-control-input" name="tuesday_{{$i}}" id="tuesday_{{$i}}">
-                                                <label class="custom-control-label" for="tuesday_{{$i}}">Tuesday</label>
-                                            </div>
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('wednesday_{{$i}}',{{$i}},'wednesday')" class="custom-control-input" name="wednesday_{{$i}}" id="wednesday_{{$i}}">
-                                                <label class="custom-control-label" for="wednesday_{{$i}}">Wednesday</label>
-                                            </div>
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('thursday_{{$i}}',{{$i}},'thursday')" class="custom-control-input" name="thursday_{{$i}}" id="thursday_{{$i}}">
-                                                <label class="custom-control-label" for="thursday_{{$i}}">Thursday</label>
-                                            </div>
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('friday_{{$i}}',{{$i}},'friday')" class="custom-control-input" name="friday_{{$i}}" id="friday_{{$i}}">
-                                                <label class="custom-control-label" for="friday_{{$i}}">Friday</label>
-                                            </div>
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('saturday_{{$i}}',{{$i}},'saturday')" class="custom-control-input" name="saturday_{{$i}}" id="saturday_{{$i}}">
-                                                <label class="custom-control-label" for="saturday_{{$i}}">Saturday</label>
-                                            </div>
-                                            <div class="ml-4 custom-control custom-switch">
-                                                <input type="checkbox" onclick="aleeert('sunday_{{$i}}',{{$i}},'sunday')" class="custom-control-input" name="sunday_{{$i}}" id="sunday_{{$i}}">
-                                                <label class="custom-control-label" for="sunday_{{$i}}">Sunday</label>
-                                            </div>
-                                        @endif
-                                    
-                                    
-                                    <!-- <div class="col-md-12">
+                                    <div class="d-flex mt-3 mb-2">
+                                        <div class="">
+                                            <label class="" for=""><b> Week {{$i}} : </b></label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('monday_{{$i}}',{{$i}},'monday',1)" class="custom-control-input" name="monday_{{$i}}" id="monday_{{$i}}">
+                                            <label class="custom-control-label" for="monday_{{$i}}">Monday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('tuesday_{{$i}}',{{$i}},'tuesday',2)" class="custom-control-input" name="tuesday_{{$i}}" id="tuesday_{{$i}}">
+                                            <label class="custom-control-label" for="tuesday_{{$i}}">Tuesday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('wednesday_{{$i}}',{{$i}},'wednesday',3)" class="custom-control-input" name="wednesday_{{$i}}" id="wednesday_{{$i}}">
+                                            <label class="custom-control-label" for="wednesday_{{$i}}">Wednesday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('thursday_{{$i}}',{{$i}},'thursday',4)" class="custom-control-input" name="thursday_{{$i}}" id="thursday_{{$i}}">
+                                            <label class="custom-control-label" for="thursday_{{$i}}">Thursday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('friday_{{$i}}',{{$i}},'friday',5)" class="custom-control-input" name="friday_{{$i}}" id="friday_{{$i}}">
+                                            <label class="custom-control-label" for="friday_{{$i}}">Friday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('saturday_{{$i}}',{{$i}},'saturday',6)" class="custom-control-input" name="saturday_{{$i}}" id="saturday_{{$i}}">
+                                            <label class="custom-control-label" for="saturday_{{$i}}">Saturday</label>
+                                        </div>
+                                        <div class="ml-4 custom-control custom-switch">
+                                            <input type="checkbox" onclick="aleeert('sunday_{{$i}}',{{$i}},'sunday',7)" class="custom-control-input" name="sunday_{{$i}}" id="sunday_{{$i}}">
+                                            <label class="custom-control-label" for="sunday_{{$i}}">Sunday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
 
                                         <div class=" mt-2 row" id="extraFields_{{$i}}">
  
                                          
                                         </div>
 
-                                    </div> -->
+                                    </div>
 
                                     <?php
-                                   } ?>
-                                   </div>
-                               <?php }
+                                   }
+
                                    
                                     ?>
 
@@ -336,7 +329,11 @@
 <script>
    
 
+    var course = {!! $course !!} ;
 
+    let classes = course.basic_classes; 
+    console.log(classes)       
+    getClasses();          
     var counter = {{$course->outline->count() - 2}};
     var counter2 = 1;
     var counter3 = 1;
@@ -351,33 +348,99 @@
 
         $('#basicNew').append(html);
     });
-    $(".standardMore").click(function() {
-        counter2++;
-        var html = ` <div class="adddivs-1" id="rec_` + counter2 + `">
-                    <div class="input-serachs mt-2">
-                        <input type="search" name="standard_title[` + counter2 + `]"  placeholder="Write course outline" />
+  
+
+    function getClasses(){
+        var html2="";
+        var text ="";
+        var text1 ="";
+
+        for(var i = 0 ; i < classes.length ; i++){
+            
+            switch(classes[i].day) {
+            case 1:
+                text = "Monday";
+                text1 = "monday";
+
+                break;
+            case 2:
+                text = "Tuesday";
+                text1 = "tuesday";
+
+                break;
+            case 3:
+                text = "Wednesday";
+                text1 = "wednesday";
+
+                break;
+            case 4:
+                text = "Thursday";
+                text1 = "thursday";
+
+                break;
+            case 5:
+                text = "Friday";
+                text1 = "friday";
+
+                break;
+            case 6:
+                text = "Saturday";
+                text1 = "saturday";
+
+                break;
+            case 7:
+                text = "Sunday";
+                text1 = "sunday";
+
+                break;
+            default:
+                text = "---";
+                text1 = "---";
+
+        }
+        $('#'+text1+`_`+classes[i].class_week).prop("checked", true)
+        html2 = `<div class="col-md-3 pl-0" id="bas_` + text1 + `_`+classes[i].class_week+`">
+                    <div class="m-1 bg-price p-3">
+                        <div class="row">
+                            <div class="col-md-5 pt-2">
+                                <span class="heading-forth "> `+text+`</span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-serachs ">
+                                    <input type="date" name="basic_class_date[` + classes[i].class_week + `][`+classes[i].day+`]" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')" value="`+classes[i].class_date+`">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-serachs mt-2">
+                            <input type="txt" name="basic_class_title[` + classes[i].class_week + `][`+classes[i].day+`]" placeholder="Write Class Title" required value="`+classes[i].class_title+`" />
+                        </div>
+                        <div class="input-serachs mt-2 mb-2">
+                            <textarea class="form-control texteara-s"
+                                name="basic_class_overview[` + classes[i].class_week + `][`+classes[i].day+`]" rows="6" placeholder="Write Class Overview" required>`+classes[i].class_overview+`</textarea>
+                        </div>
+                        <span class="heading-forth"> Timing</span>
+                        <div class="input-options ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_start_time[` + classes[i].class_week + `][`+classes[i].day+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                    onfocus="(this.type='time')" value="`+classes[i].class_time+`">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="basic_class_end_time[` + classes[i].class_week + `][`+classes[i].day+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                        onfocus="(this.type='time')" value="`+classes[i].class_end_time+`">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
-                    name="standard_explain[` + counter2 + `]" rows="6">Explaine</textarea>
-                </div>`
+                </div>`;
+                
+                $("#extraFields_"+classes[i].class_week).append(html2);
 
-        $('#standardNew').append(html);
-    });
-    $(".advMore").click(function() {
-        counter3++;
-        var html = ` <div class="adddivs-1" id="rec_` + counter3 + `">
-                    <div class="input-serachs mt-2">
-                        <input type="search" name="advance_title[` + counter3 + `]"  placeholder="Write course outline" />
-                    </div>
-                    <textarea class="form-control texteara-s mt-2 pt-2 mb-2"
-                    name="advance_explain[` + counter3 + `]" rows="6">Explaine</textarea>
-                </div>`
-
-        $('#advNew').append(html);
-    });
-
-
-    function aleeert(id,i,day){
+        }
+        
+    }
+    
+    function aleeert(id,i,day,day_id){
 
 var html2="";
 var text ="";
@@ -419,37 +482,31 @@ if($("#"+id).hasClass("checked")){
                         </div>
                         <div class="col-md-7">
                             <div class="input-serachs ">
-                                <input type="date" name="" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
+                                <input type="date" name="basic_class_date[` + i + `][`+day_id+`]" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
                             </div>
                         </div>
-
                     </div>
-                    
                     <div class="input-serachs mt-2">
-                        <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
+                        <input type="txt" name="basic_class_title[` + i + `][`+day_id+`]" placeholder="Write Class Title" required />
                     </div>
                     <div class="input-serachs mt-2 mb-2">
-                        
-
                         <textarea class="form-control texteara-s"
-                            name="basic_class_overview[` + i + `]" rows="6" placeholder="Write Class Overview" required></textarea>
-                        
+                            name="basic_class_overview[` + i + `][`+day_id+`]" rows="6" placeholder="Write Class Overview" required></textarea>
                     </div>
                     <span class="heading-forth"> Timing</span>
                     <div class="input-options ">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" name="basic_class_start_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+                                <input type="text" name="basic_class_start_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
                                 onfocus="(this.type='time')">
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="basic_class_end_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+                                <input type="text" name="basic_class_end_time[` + i + `][`+day_id+`]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
                                     onfocus="(this.type='time')">
                             </div>
                         </div>
                     </div>
                 </div>
-            
             </div>`;
     $("#extraFields_"+i).append(html2);
     var tuna = $("#strt_date").val();
@@ -459,6 +516,90 @@ else{
     $("#extraFields_"+i).find("#bas_"+id).remove();
 }
 }
+    // function aleeert(id,i,day){
+
+    //     var html2="";
+    //     var text ="";
+
+    //     $("#"+id).toggleClass("checked");
+
+    //     if($("#"+id).hasClass("checked")){
+            
+    //         switch(day) {
+    //             case 'monday':
+    //                 text = "Monday";
+    //                 break;
+    //             case "tuesday":
+    //                 text = "Tuesday";
+    //                 break;
+    //             case "wednesday":
+    //                 text = "Wednesday";
+    //                 break;
+    //             case 'thursday':
+    //                 text = "Thursday";
+    //                 break;
+    //             case 'friday':
+    //                 text = "Friday";
+    //                 break;
+    //             case 'saturday':
+    //                 text = "Saturday";
+    //                 break;
+    //             case 'sunday':
+    //                 text = "Sunday";
+    //                 break;
+    //             default:
+    //                 text = "---";
+    //         }
+    //         html2 += `<div class="col-md-3 pl-0" id="bas_` + id + `">
+    //                     <div class="m-1 bg-price p-3">
+    //                         <div class="row">
+    //                             <div class="col-md-5 pt-2">
+    //                                 <span class="heading-forth "> `+text+`</span>
+    //                             </div>
+    //                             <div class="col-md-7">
+    //                                 <div class="input-serachs ">
+    //                                     <input type="date" name="" class="dateCourse" required="" placeholder="From" onfocus="(this.type='date')">
+    //                                 </div>
+    //                             </div>
+
+    //                         </div>
+                            
+    //                         <div class="input-serachs mt-2">
+    //                             <input type="txt" name="basic_class_title[` + i + `]" placeholder="Write Class Title" required />
+    //                         </div>
+    //                         <div class="input-serachs mt-2 mb-2">
+                                
+
+    //                             <textarea class="form-control texteara-s"
+    //                                 name="basic_class_overview[` + i + `]" rows="6" placeholder="Write Class Overview" required></textarea>
+                                
+    //                         </div>
+    //                         <span class="heading-forth"> Timing</span>
+    //                         <div class="input-options ">
+    //                             <div class="row">
+    //                                 <div class="col-md-6">
+    //                                     <input type="text" name="basic_class_start_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required  placeholder="From"
+    //                                     onfocus="(this.type='time')">
+    //                                 </div>
+    //                                 <div class="col-md-6">
+    //                                     <input type="text" name="basic_class_end_time[` + i + `]" class="form-control texteara-s mt-2 pt-2 mb-2" required placeholder="To"
+    //                                         onfocus="(this.type='time')">
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+                    
+    //                 </div>`;
+    //         $("#extraFields_"+i).append(html2);
+    //         var tuna = $("#strt_date").val();
+    //         $(".dateCourse")[0].setAttribute('min', tuna);
+    //     }
+    //     else{
+    //         $("#extraFields_"+i).find("#bas_"+id).remove();
+    //     }
+    // }
+
+
 
 </script>
 @endsection

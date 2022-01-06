@@ -79,7 +79,7 @@
                                 </button>
                             </div>
                         @endif
-                        <div class=" card  bg-toast infoCard">
+                        <!-- <div class=" card  bg-toast infoCard">
 
                             <div class="card-body row">
                                 <div class="col-md-1 text-center">
@@ -96,7 +96,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-md-3">
                         <div class="card">

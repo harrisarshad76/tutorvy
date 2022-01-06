@@ -68,7 +68,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12 mb-1 ">
                             <div class=" card  bg-toast infoCard">
                                 <div class="card-body row">
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                </div>
+                </div> -->
                 @if (Auth::user()->teach)
                     <p class="heading-third mb-0">My Subjects</p>
                     <div class="row">

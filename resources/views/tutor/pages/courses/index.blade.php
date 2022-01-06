@@ -268,8 +268,8 @@
                         </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 mb-1 ">
+            <!-- <div class="row">
+                    <div class="col-md-12 mb-1 ">
                         <div class=" card  bg-toast infoCard">
 
 
@@ -289,7 +289,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+            </div> -->
 
             <div class=" profile-header">
                 @if ($pen_course->count() != 0)

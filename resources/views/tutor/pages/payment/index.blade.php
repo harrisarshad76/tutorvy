@@ -13,7 +13,7 @@
 
         <p class="heading-third mb-0">My wallet</p>
         <div class="row">
-            <div class="col-md-12 mb-1 ">
+            <!-- <div class="col-md-12 mb-1 ">
                 <div class=" card  bg-toast infoCard">
 
 
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-3 ">
                 <div class="card">
                     <div class="card-body pt-1 pb-1">
